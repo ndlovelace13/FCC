@@ -12,14 +12,19 @@ public class Timer : MonoBehaviour
 
     //speed stuff
     [SerializeField] int speedInterval = 15;
-    [SerializeField] float maxInterval = 0.5f;
+    [SerializeField] float maxInterval = 0.4f;
     [SerializeField] float minInterval = 0.25f;
+
+    float maxSpeed;
+    float minSpeed;
 
     public TMP_Text timerText;
     void Start()
     {
-        PlayerPrefs.SetFloat("maxSpeed", 2f);
-        PlayerPrefs.SetFloat("minSpeed", 1f);
+        GameControl.PlayerData.firstRun = false;
+        maxSpeed = GameControl.PlayerData.maxSpeed;
+        minSpeed = GameControl.PlayerData.minSpeed;
+        GameControl.PlayerData.ResetRun();
         StartCoroutine(SpeedUp());
     }
 
@@ -31,8 +36,8 @@ public class Timer : MonoBehaviour
 
         timerText.text = String.Format("{0:00}:{1:00}", min, sec);
 
-        PlayerPrefs.SetInt("min", min);
-        PlayerPrefs.SetInt("sec", sec);
+        GameControl.PlayerData.min = min;
+        GameControl.PlayerData.sec = sec;
     }
 
     IEnumerator SpeedUp()
@@ -40,8 +45,12 @@ public class Timer : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(speedInterval);
-            PlayerPrefs.SetFloat("maxSpeed", PlayerPrefs.GetFloat("maxSpeed") + maxInterval);
-            PlayerPrefs.SetFloat("minSpeed", PlayerPrefs.GetFloat("minSpeed") + minInterval);
+            maxSpeed += maxInterval;
+            GameControl.PlayerData.currentMax = maxSpeed;
+            minSpeed += minInterval;
+            GameControl.PlayerData.currentMin = minSpeed;
+            //PlayerPrefs.SetFloat("maxSpeed", PlayerPrefs.GetFloat("maxSpeed") + maxInterval);
+            //PlayerPrefs.SetFloat("minSpeed", PlayerPrefs.GetFloat("minSpeed") + minInterval);
         }
     }
 }

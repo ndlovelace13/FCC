@@ -11,10 +11,17 @@ public class PlayerMovement : MonoBehaviour
     private float craftingSlow = 0.5f;
     float moveHorizontal;
     float moveVertical;
+
+    bool leftTested = false;
+    bool rightTested = false;
+    bool upTested = false;
+    bool downTested = false;
     // Start is called before the first frame update
     void Start()
     {
         //rigid = GetComponent<Rigidbody2D>();
+        speed = GameControl.PlayerData.playerSpeed;
+        craftingSlow = GameControl.PlayerData.craftingSlow;
     }
 
     // Update is called once per frame
@@ -27,7 +34,43 @@ public class PlayerMovement : MonoBehaviour
         {
             moveHorizontal *= moveLimiter;
             moveVertical *= moveLimiter;
-        }  
+        }
+        
+        if (GameControl.PlayerData.tutorialState == 1)
+        {
+            if (!leftTested)
+            {
+                if (moveHorizontal < 0)
+                {
+                    leftTested = true;
+                    GameControl.PlayerData.inputsTested++;
+                }
+            }
+            if (!rightTested)
+            {
+                if (moveHorizontal > 0)
+                {
+                    rightTested = true;
+                    GameControl.PlayerData.inputsTested++;
+                }
+            }
+            if (!downTested)
+            {
+                if (moveVertical < 0)
+                {
+                    downTested = true;
+                    GameControl.PlayerData.inputsTested++;
+                }
+            }
+            if (!upTested)
+            {
+                if (moveVertical > 0)
+                {
+                    upTested = true;
+                    GameControl.PlayerData.inputsTested++;
+                }
+            }
+        }
     }
 
     private void FixedUpdate()

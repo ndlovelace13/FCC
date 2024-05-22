@@ -13,6 +13,7 @@ public class StartScreenTransition : MonoBehaviour
         //set playerprefs here for use throughout the game
         if (PlayerPrefs.GetInt("firstRun") == 0)
         {
+            PlayerPrefs.SetFloat("balance", 0);
             PlayerPrefs.SetFloat("uncommon", 0.2f);
             PlayerPrefs.SetInt("highScore", 0);
             PlayerPrefs.SetInt("highMin", 0);
@@ -56,7 +57,7 @@ public class StartScreenTransition : MonoBehaviour
     {
         if (canTransition)
         {
-            if (PlayerPrefs.GetInt("firstRun") == 0)
+            if (GameControl.PlayerData.firstRun)
             {
                 SceneManager.LoadScene("Description");
             }
@@ -72,6 +73,6 @@ public class StartScreenTransition : MonoBehaviour
 
     public void ControlsTransition()
     {
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("Controls");
     }
 }

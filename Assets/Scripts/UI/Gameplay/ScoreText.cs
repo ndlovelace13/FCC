@@ -9,13 +9,13 @@ public class ScoreText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.SetInt("totalScore", 0);
+        //PlayerPrefs.SetInt("totalScore", 0);
         //scoreText = GetComponent<TextMeshPro>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Score: " + PlayerPrefs.GetInt("totalScore");
+        scoreText.text = "Score: " + GameControl.PlayerData.score;
     }
 }

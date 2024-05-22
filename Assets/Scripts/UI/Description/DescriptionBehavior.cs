@@ -51,7 +51,7 @@ public class DescriptionBehavior : MonoBehaviour
             }
             else
             {
-                if (PlayerPrefs.GetInt("firstRun") == 0)
+                if (GameControl.PlayerData.firstRun)
                 {
                     SceneManager.LoadScene("Tutorial");
                 }

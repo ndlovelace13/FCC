@@ -25,10 +25,10 @@ public class FinalScoreText : MonoBehaviour
 
     private void SetResults()
     {
-        text = "Final Score: " + PlayerPrefs.GetInt("totalScore");
+        text = "Final Score: " + GameControl.PlayerData.score;
         if (highScoreSet)
             text += " - NEW BEST!";
-        text += "\nFinal Time: " + String.Format("{0:00}:{1:00}", PlayerPrefs.GetInt("min"), PlayerPrefs.GetInt("sec"));
+        text += "\nFinal Time: " + String.Format("{0:00}:{1:00}", GameControl.PlayerData.min, GameControl.PlayerData.sec);
         if (highTimeSet)
             text += " - NEW BEST!";
         finalScore.text = text;
@@ -37,18 +37,18 @@ public class FinalScoreText : MonoBehaviour
     private void HighScore()
     {
         //checking if most recent score is better than the previous high score;
-        int currentHighScore = PlayerPrefs.GetInt("highScore");
-        if (currentHighScore < PlayerPrefs.GetInt("totalScore"))
+        int currentHighScore = GameControl.PlayerData.highScore;
+        if (currentHighScore < GameControl.PlayerData.score)
         {
-            PlayerPrefs.SetInt("highScore", PlayerPrefs.GetInt("totalScore"));
+            GameControl.PlayerData.highScore = GameControl.PlayerData.score;
             highScoreSet = true;
         }
-        int currentBestMin = PlayerPrefs.GetInt("highMin");
-        int currentBestSec = PlayerPrefs.GetInt("highSec");
-        if ((currentBestSec <= PlayerPrefs.GetInt("sec") && currentBestMin <= PlayerPrefs.GetInt("min")) || currentBestMin < PlayerPrefs.GetInt("min"))
+        int currentBestMin = GameControl.PlayerData.highMin;
+        int currentBestSec = GameControl.PlayerData.highSec;
+        if ((currentBestSec < GameControl.PlayerData.sec && currentBestMin <= GameControl.PlayerData.min) || currentBestMin < GameControl.PlayerData.min)
         {
-            PlayerPrefs.SetInt("highMin", PlayerPrefs.GetInt("min"));
-            PlayerPrefs.SetInt("highSec", PlayerPrefs.GetInt("sec"));
+            GameControl.PlayerData.highMin = GameControl.PlayerData.min;
+            GameControl.PlayerData.highSec = GameControl.PlayerData.sec;
             highTimeSet = true;
         }
     }

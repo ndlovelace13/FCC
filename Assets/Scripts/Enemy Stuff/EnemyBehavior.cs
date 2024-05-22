@@ -346,8 +346,8 @@ public class EnemyBehavior : MonoBehaviour
             particle.GetComponent<Animator>().SetInteger("augment", 0);
         }
         //assign a random speed
-        maxSpeed = PlayerPrefs.GetFloat("maxSpeed");
-        minSpeed = PlayerPrefs.GetFloat("minSpeed");
+        maxSpeed = GameControl.PlayerData.currentMax;
+        minSpeed = GameControl.PlayerData.currentMin;
         backupSpeed = Random.Range(minSpeed, maxSpeed);
         //begin the gradual speed up routine
         StartCoroutine(GradualSpeedUp());
@@ -356,8 +356,9 @@ public class EnemyBehavior : MonoBehaviour
     private void Deactivate()
     {
         scoreNotif.GetComponent<ScoreNotification>().newFeed("Enemy Defeated | +" + destructScore);
-        int currentScore = PlayerPrefs.GetInt("totalScore");
-        PlayerPrefs.SetInt("totalScore", currentScore + destructScore);
+        //int currentScore = PlayerPrefs.GetInt("totalScore");
+        //PlayerPrefs.SetInt("totalScore", currentScore + destructScore);
+        GameControl.PlayerData.score += destructScore;
         isBurning = false;
         isFrozen = false;
         isSlowed = false;

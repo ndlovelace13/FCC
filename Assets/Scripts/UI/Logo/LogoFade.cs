@@ -12,7 +12,7 @@ public class LogoFade : MonoBehaviour
     float currentAlpha = 0f;
     void Start()
     {
-        PlayerPrefs.SetInt("firstRun", 0);
+        //PlayerPrefs.SetInt("firstRun", 0);
         logoImage = logo.GetComponent<Image>();
         StartCoroutine(LogoControl());
     }

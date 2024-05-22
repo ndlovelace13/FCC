@@ -50,6 +50,8 @@ public class CrownConstruction : MonoBehaviour
     {
         if (gameObject.GetComponent<FlowerHarvest>().docketLoaded == true && Input.GetKeyDown(KeyCode.E) && !skillCheckActive && !constructionReady && !crownHeld)
         {
+            if (GameControl.PlayerData.tutorialState == 4)
+                GameControl.PlayerData.crownConstructionStarted = true;
             Debug.Log("trolling");
             ConstructionSkillCheck();
             gameObject.GetComponent<FlowerHarvest>().docketLoaded = false;
@@ -59,8 +61,10 @@ public class CrownConstruction : MonoBehaviour
             int crownScore = Construction();
             constructionReady = false;
             Debug.Log(crownScore);
-            int currentScore = PlayerPrefs.GetInt("totalScore");
-            PlayerPrefs.SetInt("totalScore", currentScore + crownScore);
+            //int currentScore = PlayerPrefs.GetInt("totalScore");
+            //PlayerPrefs.SetInt("totalScore", currentScore + crownScore);
+            if (!GameControl.PlayerData.tutorialActive)
+                GameControl.PlayerData.score += crownScore;
             crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement);
             scoreNotif.GetComponent<ScoreNotification>().newFeed("Crown Construction | +" + crownScore);
             finalCrown.GetComponent<SpriteRenderer>().enabled = true;
@@ -73,10 +77,12 @@ public class CrownConstruction : MonoBehaviour
         }
         if (skillCheckActive)
         {
-            skillChecking();
+            if (GameControl.PlayerData.tutorialState != 4)
+                skillChecking();
         }
     }
 
+    //move this to gamecontrol when adding more flowers - link each flower's strings to the flowerStats object
     void DictionaryInit()
     {
         outsideText = new Dictionary<string, string>() {
@@ -154,19 +160,19 @@ public class CrownConstruction : MonoBehaviour
             switch (name)
             {
                 case "InputW(Clone)":
-                    if (Input.GetKeyDown(KeyCode.W))
+                    if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                         inputPressed = true;
                     break;
                 case "InputA(Clone)":
-                    if (Input.GetKeyDown(KeyCode.A))
+                    if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
                         inputPressed = true;
                     break;
                 case "InputS(Clone)":
-                    if (Input.GetKeyDown(KeyCode.S))
+                    if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
                         inputPressed = true;
                     break;
                 case "InputD(Clone)":
-                    if (Input.GetKeyDown(KeyCode.D))
+                    if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
                         inputPressed = true;
                     break;
             }

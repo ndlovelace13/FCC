@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 
-public class TutorialBehavior : MonoBehaviour
+public class ControlsBehavior : MonoBehaviour
 {
     bool canTransition;
     // Start is called before the first frame update
@@ -30,18 +30,17 @@ public class TutorialBehavior : MonoBehaviour
             {
                 SceneManager.LoadScene("TitleScreen");
             }
-            else if (e.isKey)
+            /*else if (e.isKey)
             {
-                if (PlayerPrefs.GetInt("firstRun") == 0)
+                if (GameControl.PlayerData.firstRun)
                 {
-                    PlayerPrefs.SetInt("firstRun", 1);
                     SceneManager.LoadScene("Gameplay");
                 }
                 else
                 {
                     SceneManager.LoadScene("TitleScreen");
                 }
-            }
+            }*/
         }
     }
 

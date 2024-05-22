@@ -22,6 +22,8 @@ TagManager:
   - poisonPool
   - aoe
   - lightningPool
+  - upgrade
+  - upgradeSlots
   layers:
   - Default
   - TransparentFX

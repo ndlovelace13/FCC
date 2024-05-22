@@ -71,7 +71,7 @@ public class FlowerCalc : MonoBehaviour
 
     void Start()
     {
-        uncommonRarity = PlayerPrefs.GetFloat("uncommon");
+        uncommonRarity = GameControl.PlayerData.uncommon;
         totalWidth = (int)background.size.x;
         totalHeight = (int)background.size.y;
         flowerInfo = InitialCalc();
