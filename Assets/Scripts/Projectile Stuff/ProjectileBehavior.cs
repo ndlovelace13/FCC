@@ -108,7 +108,9 @@ public class ProjectileBehavior : MonoBehaviour
         {
             switch (aug)
             {
-                case 1: fire = true; flamesPool = GameObject.FindGameObjectWithTag("flamePool"); break;
+                case 1: fire = true; flamesPool = GameObject.FindGameObjectWithTag("flamePool");
+                    if (GameControl.PlayerData.tutorialActive)
+                        GameControl.PlayerData.redCrown = true; break;
                 case 2: ice = true; break;
                 case 3: poison = true; poisonPool = GameObject.FindGameObjectWithTag("poisonPool"); break;
                 case 4: electric = true; break;

@@ -23,17 +23,21 @@ public class CrownThrowing : MonoBehaviour
         if (crownHeld)
         {
             finalCrown.transform.position = gameObject.transform.position;
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if ((GameControl.PlayerData.tutorialState >= 6 && GameControl.PlayerData.tutorialActive) || !GameControl.PlayerData.tutorialActive)
             {
-                crownHeld = false;
-                finalCrown.GetComponent<CrownAttack>().CrownActive();
-                gameObject.GetComponent<CrownConstruction>().CrownThrown();
-                StartCoroutine(CrownThrow());
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    crownHeld = false;
+                    finalCrown.GetComponent<CrownAttack>().CrownActive();
+                    gameObject.GetComponent<CrownConstruction>().CrownThrown();
+                    StartCoroutine(CrownThrow());
+                }
             }
         }
         
     }
 
+    //redo for precision throw mechanic
     IEnumerator CrownThrow()
     {
         float time = 0;
@@ -68,6 +72,8 @@ public class CrownThrowing : MonoBehaviour
         finalCrown = finishedCrown;
         finalCrown.transform.localScale = Vector3.one * 0.6f;
         crownHeld = true;
+        if (GameControl.PlayerData.tutorialState == 5)
+            GameControl.PlayerData.crownComplete = true;
         /*Transform[] children = finalCrown.GetComponentsInChildren<Transform>();
         foreach (Transform child in children)
         {

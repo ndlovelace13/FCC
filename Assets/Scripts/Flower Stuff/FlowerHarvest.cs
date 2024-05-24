@@ -11,11 +11,12 @@ public class FlowerHarvest : MonoBehaviour
     [SerializeField] GameObject docket;
     GameObject flowerPool;
     Transform crown;
-    public bool docketLoaded = false;
+    public bool docketLoaded = true;
     public bool crownHeld = false;
     // Start is called before the first frame update
     void Start()
     {
+        //crown = GameObject.FindWithTag("finalCrown").transform;
         flowerPool = GameObject.FindGameObjectWithTag("flowerPool");
     }
 
@@ -24,7 +25,13 @@ public class FlowerHarvest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            SingleFire();
+            if (GameControl.PlayerData.tutorialActive)
+            {
+                if (GameControl.PlayerData.tutorialState == 3)
+                    SingleFire();
+            }
+            else
+                SingleFire();
         }
     }
 
@@ -53,12 +60,18 @@ public class FlowerHarvest : MonoBehaviour
                             newHead.transform.parent = crown;
                             newHead.GetComponent<FlowerStats>().position = slotPos;
                             slots[slotPos].tag = "slotFull";
+                            if (GameControl.PlayerData.tutorialState == 2)
+                                GameControl.PlayerData.flowerHarvested = true;
                         }
                     }
                 }
-                //Destroy(flower);
-                flowerPool.GetComponent<VisibleFlowers>().FlowerHarvested(flower);
-                PlayerPrefs.SetInt("flowerCount", PlayerPrefs.GetInt("flowerCount") - 1);
+                if (GameControl.PlayerData.tutorialActive)
+                    Destroy(flower);
+                else
+                {
+                    flowerPool.GetComponent<VisibleFlowers>().FlowerHarvested(flower);
+                    //PlayerPrefs.SetInt("flowerCount", PlayerPrefs.GetInt("flowerCount") - 1);
+                }
             }
         }
     }
@@ -74,6 +87,10 @@ public class FlowerHarvest : MonoBehaviour
             GameObject tossedFlower = lastFlower();
             Debug.Log(tossedFlower.GetComponent<FlowerStats>().type);
             crown.GetComponent<CrownAttack>().SingleFire(tossedFlower);
+            if (GameControl.PlayerData.tutorialState == 3)
+            {
+                GameControl.PlayerData.singleTossed = true;
+            }
         }
     }
 

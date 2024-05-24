@@ -12,9 +12,13 @@ public class DescriptionBehavior : MonoBehaviour
     int counter = 0;
     float cooldown = 0f;
     bool ready = true;
+    bool skip = false;
+    bool skipReady = true;
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = true;
+        GameControl.PlayerData.descriptionVisited = true;
         foreach(GameObject go in textFlow)
         {
             if (go.GetComponent<TMP_Text>() != null)
@@ -31,7 +35,15 @@ public class DescriptionBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.anyKey && !ready && skipReady)
+        {
+            skip = true;
+            StartCoroutine(SkipReset());
+        }
+        else
+        {
+            skip = false;
+        }
     }
 
     void OnGUI()
@@ -51,7 +63,7 @@ public class DescriptionBehavior : MonoBehaviour
             }
             else
             {
-                if (PlayerPrefs.GetInt("firstRun") == 0)
+                if (!GameControl.PlayerData.descriptionfromMenu)
                 {
                     SceneManager.LoadScene("Tutorial");
                 }
@@ -69,15 +81,49 @@ public class DescriptionBehavior : MonoBehaviour
         {
             yield return new WaitForSeconds(0.01f);
             if (textFlow[index].GetComponent<TMP_Text>() != null)
-                textFlow[index].GetComponent<TMP_Text>().alpha = i * 0.01f;
+            {
+                if (skip)
+                {
+                    skip = false;
+                    textFlow[index].GetComponent<TMP_Text>().alpha = 1;
+                    break;
+                }
+                else
+                {
+                    textFlow[index].GetComponent<TMP_Text>().alpha = i * 0.01f;
+                }
+            }
             else
             {
-                Image image = textFlow[index].GetComponent<Image>();
-                image.color = new Color(image.color.r, image.color.g, image.color.b, i * 0.01f);
+                if (skip)
+                {
+                    skip = false;
+                    Image image = textFlow[index].GetComponent<Image>();
+                    image.color = new Color(image.color.r, image.color.g, image.color.b, 1f);
+                    break;
+                }
+                else
+                {
+                    Image image = textFlow[index].GetComponent<Image>();
+                    image.color = new Color(image.color.r, image.color.g, image.color.b, i * 0.01f);
+                }
             }
         }
+        yield return new WaitForSeconds(0.2f);
         ready = true;
         yield return null;
+    }
+
+    IEnumerator SkipReset()
+    {
+        skipReady = false;
+        yield return new WaitForSeconds(0.25f);
+        skipReady = true;
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("TitleScreen");
     }
 
 

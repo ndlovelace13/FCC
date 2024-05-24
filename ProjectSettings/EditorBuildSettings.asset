@@ -16,6 +16,9 @@ EditorBuildSettings:
     guid: cc429411be9bc6a4cb6f8ecfd2e1221c
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
+    guid: a8b7bd355c4de97499fcbfea8799806b
+  - enabled: 1
+    path: Assets/Scenes/Controls.unity
     guid: 4e780e514336dd24c8e7774ba8e76f71
   - enabled: 1
     path: Assets/Scenes/Gameplay.unity
@@ -23,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: 1cfd5ccefac11e64ca228bfeb1c35705
+  - enabled: 1
+    path: Assets/Scenes/Catalog.unity
+    guid: 68f399df18530604a8c7089c73b7999c
   m_configObjects: {}

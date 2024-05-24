@@ -65,6 +65,13 @@ public class CrownAttack : MonoBehaviour
     public void CrownArmed()
     {
         crownArmed = true;
+        StartCoroutine(Detonate());
+    }
+
+    IEnumerator Detonate()
+    {
+        yield return new WaitForSeconds(3);
+        CrownAttacking();
     }
 
     public void CrownAttacking()
@@ -203,6 +210,10 @@ public class CrownAttack : MonoBehaviour
 
     void CrownDestroy()
     {
+        if (GameControl.PlayerData.tutorialState == 6)
+            GameControl.PlayerData.crownThrown = true;
+        if (GameControl.PlayerData.tutorialState == 7 && augment1 == 0)
+            GameControl.PlayerData.fireReset = true;
         Destroy(crown);
     }
 }

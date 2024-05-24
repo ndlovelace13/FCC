@@ -558,8 +558,8 @@ MonoBehaviour:
   - {fileID: 1763395153752645396, guid: 1ad15960e7418c04ea2676e1a5f86b9e, type: 3}
   - {fileID: 1041404910582092706, guid: 794fd2f7449bfa2418a569cfdda21226, type: 3}
   - {fileID: 855672738485339640, guid: 421caa7c5ae7d5b48b0a340c3a0afdca, type: 3}
-  scoreNotif: {fileID: 0}
-  crownNotif: {fileID: 0}
+  scoreNotif: {fileID: 1411956487124004505, guid: 67dd13c15a87f9641b3428867b40b2d8, type: 3}
+  crownNotif: {fileID: 2181380995929158010, guid: a7496a85adbaad44b8dfbeb32c6363d8, type: 3}
   constructionInProgress: 0
   constructionReady: 0
   skillCheckActive: 0
