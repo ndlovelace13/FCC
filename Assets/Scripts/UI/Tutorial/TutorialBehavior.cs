@@ -77,7 +77,7 @@ public class TutorialBehavior : MonoBehaviour
         "They just better hope they don't stand too close hehe",
         "That wraps up your training - you can put Flower Crown Crafter Certification on your resume now",
         "I'll see you at the party - oh, you won't see me though",
-        "One last thing, don't let the children touch you - I hate paperwork",
+        "One last thing, don't make direct contact with the... children - I hate paperwork",
         "Let us get to work (when I say us, I mean you of course)!"
     };
 
@@ -246,9 +246,6 @@ public class TutorialBehavior : MonoBehaviour
         if (GameControl.PlayerData.tutorialState > 1)
         {
             player.GetComponent<FlowerHarvest>().enabled = true;
-        }
-        if (GameControl.PlayerData.tutorialState > 3)
-        {
             player.GetComponent<CrownConstruction>().enabled = true;
         }
         if (GameControl.PlayerData.tutorialState > 4)

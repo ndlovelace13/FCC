@@ -11,11 +11,12 @@ public class FlowerHarvest : MonoBehaviour
     [SerializeField] GameObject docket;
     GameObject flowerPool;
     Transform crown;
-    public bool docketLoaded = false;
+    public bool docketLoaded = true;
     public bool crownHeld = false;
     // Start is called before the first frame update
     void Start()
     {
+        //crown = GameObject.FindWithTag("finalCrown").transform;
         flowerPool = GameObject.FindGameObjectWithTag("flowerPool");
     }
 

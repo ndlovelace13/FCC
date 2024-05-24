@@ -654,8 +654,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedInterval: 15
-  maxInterval: 0.5
-  minInterval: 0.25
   timerText: {fileID: 604391451}
 --- !u!222 &604391453
 CanvasRenderer:
@@ -1893,6 +1891,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1421561218}
   - {fileID: 1643018429}
+  - {fileID: 1824308848}
   - {fileID: 440086838}
   - {fileID: 304612978}
   - {fileID: 785457083}
@@ -1905,7 +1904,6 @@ SceneRoots:
   - {fileID: 609318416}
   - {fileID: 1855247950}
   - {fileID: 473644578}
-  - {fileID: 1824308848}
   - {fileID: 808248086688013130}
   - {fileID: 7174202958303088636}
   - {fileID: 700796774}

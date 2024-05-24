@@ -70,7 +70,7 @@ public class CrownAttack : MonoBehaviour
 
     IEnumerator Detonate()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         CrownAttacking();
     }
 
