@@ -26,7 +26,7 @@ public class EnemyBehavior : MonoBehaviour
     float backupSpeed;
     bool backupUsed = false;
     float speedCooldown = 10f;
-    float speedIncrement = 0.95f;
+    float speedIncrement = 0.925f;
     bool speedUp;
 
     [SerializeField] GameObject notif;

@@ -15,7 +15,14 @@ public class GameControl : MonoBehaviour
     public bool speaking = false;
     public bool dialogueComplete = false;
 
+    public bool descriptionVisited = false;
+    public bool descriptionfromMenu = false;
+
     public int tutorialState = 0;
+    public bool tutorialSkip = false;
+
+    public bool firstCatalog = true;
+    public bool purchaseMade = false;
 
     //tutorial conditions
     public int inputsTested = 0;
@@ -24,6 +31,8 @@ public class GameControl : MonoBehaviour
     public bool crownConstructionStarted = false;
     public bool crownComplete = false;
     public bool crownThrown = false;
+    public bool redCrown = false;
+    public bool fireReset = false;
 
     //flower probabilities
     public float uncommon = 0.05f;
@@ -48,10 +57,13 @@ public class GameControl : MonoBehaviour
     //upgrades
     [SerializeField] GameObject upgradeObj;
     public Dictionary<string, float> upgradeDict;
+    [SerializeField] Sprite[] icons;
 
     public List<Upgrade> upgrades;
 
     //enemy related variables
+    public float maxInterval = 0.35f;
+    public float minInterval = 0.2f;
     public float maxSpeed = 2f;
     public float currentMax;
     public float minSpeed = 1f;
@@ -82,19 +94,19 @@ public class GameControl : MonoBehaviour
         //uncommon rarity
         GameObject newUpgrade = Instantiate(upgradeObj);
         newUpgrade.transform.SetParent(transform);
-        newUpgrade.GetComponent<Upgrade>().SetValues("uncommon", 1f, 1.5f, 15, 0.025f, "Better Seeds", "Increased Chance of Encountering Uncommon Flowers");
+        newUpgrade.GetComponent<Upgrade>().SetValues("uncommon", 1f, 1.5f, 15, 0.025f, "Better Seeds", "Increased Chance of Encountering Uncommon Flowers", "%", icons[0]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
 
         //playerSpeed
         newUpgrade = Instantiate(upgradeObj);
         newUpgrade.transform.SetParent(transform);
-        newUpgrade.GetComponent<Upgrade>().SetValues("playerSpeed", 3f, 1.75f, 10, 0.5f, "Faster Shoes", "Incrases Player Movement Speed");
+        newUpgrade.GetComponent<Upgrade>().SetValues("playerSpeed", 3f, 1.75f, 10, 0.5f, "Faster Shoes", "Incrases Player Movement Speed", " m/s", icons[1]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
 
         //crownSlow
         newUpgrade = Instantiate(upgradeObj);
         newUpgrade.transform.SetParent(transform);
-        newUpgrade.GetComponent<Upgrade>().SetValues("craftingSlow", 5f, 2f, 5, -0.05f, "Skilled Hands", "Decreases Slow Effect when Crafting a crown");
+        newUpgrade.GetComponent<Upgrade>().SetValues("craftingSlow", 5f, 2f, 5, -0.05f, "Skilled Hands", "Decreases Slow Effect when Crafting a crown", "% speed", icons[2]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
     }
 

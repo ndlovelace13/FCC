@@ -28,7 +28,7 @@ public class ControlsBehavior : MonoBehaviour
             Event e = Event.current;
             if (e.keyCode == KeyCode.Escape)
             {
-                SceneManager.LoadScene("TitleScreen");
+                Return();
             }
             /*else if (e.isKey)
             {
@@ -48,5 +48,10 @@ public class ControlsBehavior : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         canTransition = true;
+    }
+
+    public void Return()
+    {
+        SceneManager.LoadScene("TitleScreen");
     }
 }

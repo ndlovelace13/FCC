@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialBehavior : MonoBehaviour
 {
     [SerializeField] GameObject speech;
     [SerializeField] GameObject phone;
+    [SerializeField] GameObject popUp;
     [SerializeField] TMP_Text objective;
     [SerializeField] GameObject player;
     [SerializeField] GameObject firstFlower;
     [SerializeField] GameObject firstCrown;
+    [SerializeField] GameObject fireCrown;
+    GameObject fireInstance;
     string[] text1 = 
     {
         "So you wanted a little practice before getting tossed into the hellho --- um, I mean birthday party?",
@@ -22,7 +26,7 @@ public class TutorialBehavior : MonoBehaviour
     string[] text2 =
     {
         "Phew, got a bit nervous there for a second. Thought I may have to go back to the drawing board and hire a professional...",
-        "Now that I know you can move, let's into the business of flowers",
+        "Now that I know you can move, let's get into the business of flowers",
         "You see that flower in front of you? Pick it up. Please."
     };
     string[] text3 =
@@ -56,6 +60,26 @@ public class TutorialBehavior : MonoBehaviour
         "Throwing a crown will distract the children, allowing you to work towards creating your next crown",
         "Give it a try!"
     };
+    string[] text7 =
+    {
+        "Easy enough, huh? Don't mind the side-effects of the crown, those projectiles are harmless - to humans",
+        "There's a lot that goes into the... \"effectiveness\" of a flower crown - be creative and experiment",
+        "Never know what may happen when symmetry and rarity meet",
+        "Speaking of, I've noticed a couple of, let's say, non-traditional flowers popping up at the venue",
+        "For example, that red one right in front of you - try crafting a crown with it",
+        "Remember, symmetry is key"
+    };
+    string[] text8 =
+    {
+        "Woah, flammable flowers?? Incredible",
+        "Be on the lookout for new and interesting types of flowers - wouldn't want to leave nature's unique creations unacknowledged",
+        "I'm sure the children will LOVE to see what crowns you come up with ",
+        "They just better hope they don't stand too close hehe",
+        "That wraps up your training - you can put Flower Crown Crafter Certification on your resume now",
+        "I'll see you at the party - oh, you won't see me though",
+        "One last thing, don't let the children touch you - I hate paperwork",
+        "Let us get to work (when I say us, I mean you of course)!"
+    };
 
     List<string[]> tutorialText;
     string[] objectiveText =
@@ -66,20 +90,16 @@ public class TutorialBehavior : MonoBehaviour
         "Use the mouse to aim and click the right mouse button to fire a single flower",
         "Pick up five flowers and press E to craft your first flower crown",
         "Follow the input queues to finish crafting your first crown", 
-        "Use the mouse to aim and click the left mouse button to toss your first crown"
+        "Use the mouse to aim and click the left mouse button to toss your first crown",
+        "Create and throw a crown with the unnatural flower in its center"
     };
     bool conditionMet = true;
     // Start is called before the first frame update
     void Start()
     {
         PlayerDisable();
-        firstFlower.SetActive(false);
-        tutorialText = new List<string[]> { text1, text2, text3, text4, text5, text6 };
-        //tutorialText.Add(text1);
-        //tutorialText.Add(text2);
-        //tutorialText.Add(text3);
-        GameControl.PlayerData.tutorialActive = true;
-        speech.GetComponent<TextAdvancement>().setDialogue(tutorialText[GameControl.PlayerData.tutorialState]);
+        phone.SetActive(false);
+        speech.SetActive(false);
     }
 
     // Update is called once per frame
@@ -87,6 +107,14 @@ public class TutorialBehavior : MonoBehaviour
     {
         if (GameControl.PlayerData.dialogueComplete && speech.activeSelf)
             TutorialAdvance();
+        if (GameControl.PlayerData.tutorialState == 7 && GameControl.PlayerData.fireReset == true)
+        {
+            GameControl.PlayerData.fireReset = false;
+            GameObject newInstance = Instantiate(fireCrown, player.transform);
+            Destroy(fireInstance);
+            fireInstance = newInstance;
+            fireInstance.SetActive(true);
+        }
     }
 
     public void TutorialAdvance()
@@ -94,8 +122,24 @@ public class TutorialBehavior : MonoBehaviour
         conditionMet = false;
         speech.SetActive(false);
         phone.SetActive(false);
-        GameControl.PlayerData.tutorialState++;
-        StartCoroutine(objectiveUpdate());
+        if (GameControl.PlayerData.tutorialState != 7)
+        {
+            GameControl.PlayerData.tutorialState++;
+            StartCoroutine(objectiveUpdate());
+        }
+        else
+        {
+            StartCoroutine(beginGameplay());
+        }
+    }
+
+    IEnumerator beginGameplay()
+    {
+        //animation of some sort here
+        yield return null;
+        GameControl.PlayerData.tutorialActive = false;
+        GameControl.PlayerData.tutorialState = 0;
+        SceneManager.LoadScene("Gameplay");
     }
 
     IEnumerator checkCondition()
@@ -147,6 +191,13 @@ public class TutorialBehavior : MonoBehaviour
                         break;
                     }
                     break;
+                case 7:
+                    if (GameControl.PlayerData.redCrown == true)
+                    {
+                        conditionMet = true;
+                        break;
+                    }
+                    break;
                 default: Debug.Log("unhandled state"); conditionMet = true; break;
             }
         }
@@ -167,7 +218,8 @@ public class TutorialBehavior : MonoBehaviour
     {
         objective.color = Color.green;
         yield return new WaitForSeconds(1);
-        objective.text = "";
+        objective.color = Color.white;
+        objective.text = "Press Space to advance/skip dialogue";
         PlayerDisable();
         speech.SetActive(true);
         speech.GetComponent<TextAdvancement>().setDialogue(tutorialText[GameControl.PlayerData.tutorialState]);
@@ -177,6 +229,7 @@ public class TutorialBehavior : MonoBehaviour
 
     public void PlayerDisable()
     {
+        player.GetComponentInChildren<Animator>().SetBool("isMoving", false);
         player.GetComponent<PlayerMovement>().enabled = false;
         player.GetComponent<FlowerHarvest>().enabled = false;
         player.GetComponent<CrownThrowing>().enabled = false;
@@ -216,5 +269,31 @@ public class TutorialBehavior : MonoBehaviour
             firstCrown.SetActive(true);
             firstCrown.transform.position = player.transform.position;
         }
+        if (GameControl.PlayerData.tutorialState == 6)
+        {
+            fireInstance = Instantiate(fireCrown, player.transform);
+            fireInstance.SetActive(true);
+        }
+    }
+
+    public void TutorialSkip()
+    {
+        GameControl.PlayerData.tutorialActive = false;
+        GameControl.PlayerData.tutorialSkip = true;
+        SceneManager.LoadScene("Gameplay");
+    }
+
+    public void TutorialContinue()
+    {
+        popUp.SetActive(false);
+        tutorialText = new List<string[]> { text1, text2, text3, text4, text5, text6, text7, text8 };
+        //tutorialText.Add(text1);
+        //tutorialText.Add(text2);
+        //tutorialText.Add(text3);
+        GameControl.PlayerData.tutorialActive = true;
+        objective.text = "Press Space to advance/skip dialogue";
+        phone.SetActive(true);
+        speech.SetActive(true);
+        speech.GetComponent<TextAdvancement>().setDialogue(tutorialText[GameControl.PlayerData.tutorialState]);
     }
 }

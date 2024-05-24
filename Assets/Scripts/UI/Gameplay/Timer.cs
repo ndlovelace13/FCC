@@ -12,8 +12,6 @@ public class Timer : MonoBehaviour
 
     //speed stuff
     [SerializeField] int speedInterval = 15;
-    [SerializeField] float maxInterval = 0.4f;
-    [SerializeField] float minInterval = 0.25f;
 
     float maxSpeed;
     float minSpeed;
@@ -45,9 +43,9 @@ public class Timer : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(speedInterval);
-            maxSpeed += maxInterval;
+            maxSpeed += GameControl.PlayerData.maxInterval;
             GameControl.PlayerData.currentMax = maxSpeed;
-            minSpeed += minInterval;
+            minSpeed += GameControl.PlayerData.minInterval;
             GameControl.PlayerData.currentMin = minSpeed;
             //PlayerPrefs.SetFloat("maxSpeed", PlayerPrefs.GetFloat("maxSpeed") + maxInterval);
             //PlayerPrefs.SetFloat("minSpeed", PlayerPrefs.GetFloat("minSpeed") + minInterval);

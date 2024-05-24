@@ -57,10 +57,12 @@ public class StartScreenTransition : MonoBehaviour
     {
         if (canTransition)
         {
-            if (GameControl.PlayerData.firstRun)
+            if (!GameControl.PlayerData.descriptionVisited)
             {
                 SceneManager.LoadScene("Description");
             }
+            else if (GameControl.PlayerData.firstRun)
+                SceneManager.LoadScene("Tutorial");
             else
                 SceneManager.LoadScene("Gameplay");
         }
@@ -68,6 +70,7 @@ public class StartScreenTransition : MonoBehaviour
     
     public void DescriptionTransition()
     {
+        GameControl.PlayerData.descriptionfromMenu = true;
         SceneManager.LoadScene("Description");
     }
 

@@ -153,6 +153,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstRun: 1
+  tutorialActive: 0
+  speaking: 0
+  dialogueComplete: 0
+  descriptionVisited: 0
+  descriptionfromMenu: 0
+  tutorialState: 0
+  tutorialSkip: 0
+  inputsTested: 0
+  flowerHarvested: 0
+  singleTossed: 0
+  crownConstructionStarted: 0
+  crownComplete: 0
+  crownThrown: 0
+  redCrown: 0
+  fireReset: 0
   uncommon: 0
   highScore: 0
   highMin: 0
@@ -165,6 +180,10 @@ MonoBehaviour:
   craftingSlow: 0.5
   throwDist: 0
   upgradeObj: {fileID: 8343937570677949578, guid: a347e37e23979d546bb4818ddf485b45, type: 3}
+  icons:
+  - {fileID: 21300000, guid: 4b7ae610f6a87f04e8a00c2f25a8ab5e, type: 3}
+  - {fileID: 21300000, guid: 39904e9e45e0fdd448a7fd297e811bce, type: 3}
+  - {fileID: 21300000, guid: b33f0d6aea0ed78458427b2feb3f2538, type: 3}
   upgrades: []
   maxSpeed: 2
   currentMax: 0

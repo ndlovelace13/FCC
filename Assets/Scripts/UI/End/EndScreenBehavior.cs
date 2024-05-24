@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class EndScreenBehavior : MonoBehaviour
 {
     [SerializeField] TMP_Text balanceInfo;
+    float scoreBonus;
+    float timeBonus;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,7 @@ public class EndScreenBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        balanceInfo.text = "PAYOUT\n" + "Profit: +" + string.Format("{0:C}", GameControl.PlayerData.score / 100f) + "\nBalance: " + string.Format("{0:C}", GameControl.PlayerData.balance);
+        balanceInfo.text = "PAYOUT\n" + "Score Bonus: +" + string.Format("{0:C}", scoreBonus) + "\nTime Bonus: +" + string.Format("{0:C}", timeBonus) + "\nBalance: " + string.Format("{0:C}", GameControl.PlayerData.balance);
     }
 
     void OnGUI()
@@ -50,9 +52,10 @@ public class EndScreenBehavior : MonoBehaviour
     IEnumerator BalanceUpdate()
     {
         float oldBalance = GameControl.PlayerData.balance;
-        float newScore = GameControl.PlayerData.score;
-        newScore /= 100;
-        GameControl.PlayerData.balance += newScore;
+        scoreBonus = GameControl.PlayerData.score / 100f;
+        timeBonus = GameControl.PlayerData.min * 60 + GameControl.PlayerData.sec;
+        timeBonus /= 100f;
+        GameControl.PlayerData.balance += scoreBonus + timeBonus;
         yield return null;
     }
 

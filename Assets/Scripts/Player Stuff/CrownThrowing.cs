@@ -23,7 +23,7 @@ public class CrownThrowing : MonoBehaviour
         if (crownHeld)
         {
             finalCrown.transform.position = gameObject.transform.position;
-            if (GameControl.PlayerData.tutorialState >= 6)
+            if ((GameControl.PlayerData.tutorialState >= 6 && GameControl.PlayerData.tutorialActive) || !GameControl.PlayerData.tutorialActive)
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
@@ -65,8 +65,6 @@ public class CrownThrowing : MonoBehaviour
         }
         finalCrown.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         finalCrown.GetComponent<CrownAttack>().CrownArmed();
-        if (GameControl.PlayerData.tutorialState == 6)
-            GameControl.PlayerData.crownThrown = true;
     }
 
     public void CompletedCrown(GameObject finishedCrown)

@@ -10,9 +10,14 @@ public class Upgrade : MonoBehaviour
     [SerializeField]
     public string title, description;
 
+    public Sprite icon;
+
+    //need to give a sprite as well
+
     string upgradeKey;
+    public string unit;
     public float currentValue;
-    float upgradeAmount;
+    public float upgradeAmount;
     public float basePrice;
     public float currentPrice;
     float priceInflation;
@@ -25,7 +30,7 @@ public class Upgrade : MonoBehaviour
         currentValue = GameControl.PlayerData.upgradeDict[upgradeKey];
     }
 
-    public void SetValues(string key, float priceBase, float inflation, int maximumUpgrades, float increaseAmount, string title, string description)
+    public void SetValues(string key, float priceBase, float inflation, int maximumUpgrades, float increaseAmount, string title, string description, string units, Sprite newIcon)
     {
         upgradeKey = key;
         basePrice = priceBase;
@@ -34,12 +39,15 @@ public class Upgrade : MonoBehaviour
         upgradeAmount = increaseAmount;
         this.title = title;
         this.description = description;
+        unit = units;
+        icon = newIcon;
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentValue = GameControl.PlayerData.upgradeDict[upgradeKey];
+        if (upgradeKey != null)
+            currentValue = GameControl.PlayerData.upgradeDict[upgradeKey];
     }
 
     public void Purchase()
@@ -50,6 +58,7 @@ public class Upgrade : MonoBehaviour
         GameControl.PlayerData.upgradeDict[upgradeKey] = currentValue + upgradeAmount;
         timesUpgraded++;
         GameControl.PlayerData.UpgradeApply();
+        GameControl.PlayerData.purchaseMade = true;
         StartCoroutine(PriceUp());
     }
 

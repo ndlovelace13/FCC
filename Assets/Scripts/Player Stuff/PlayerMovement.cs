@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed;
     public Rigidbody2D rigid;
+    private Animator animator;
     private float moveLimiter = 0.7f;
     private float craftingSlow = 0.5f;
     float moveHorizontal;
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         //rigid = GetComponent<Rigidbody2D>();
         speed = GameControl.PlayerData.playerSpeed;
         craftingSlow = GameControl.PlayerData.craftingSlow;
@@ -34,8 +36,17 @@ public class PlayerMovement : MonoBehaviour
         {
             moveHorizontal *= moveLimiter;
             moveVertical *= moveLimiter;
+            animator.SetBool("isMoving", true);
         }
-        
+        else if (moveHorizontal == 0 && moveVertical == 0)
+        {
+            animator.SetBool("isMoving", false);
+        }
+        else
+        {
+            animator.SetBool("isMoving", true);
+        }
+
         if (GameControl.PlayerData.tutorialState == 1)
         {
             if (!leftTested)

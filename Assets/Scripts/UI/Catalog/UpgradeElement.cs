@@ -10,6 +10,7 @@ public class UpgradeElement : MonoBehaviour
     TMP_Text title, description, current, cost;
     [SerializeField]
     Button purchaseButton;
+    [SerializeField] Image icon;
     Upgrade currentUpgrade;
 
     bool upgradeSet = false;
@@ -31,7 +32,7 @@ public class UpgradeElement : MonoBehaviour
             }
 
             //set current and cost text to reflect the variables
-            current.text = "Current Value: " + currentUpgrade.currentValue;
+            current.text = "Current Value: " + currentUpgrade.currentValue + " +" + currentUpgrade.upgradeAmount + currentUpgrade.unit;
             cost.text = "Upgrade Cost: " + string.Format("{0:C}", currentUpgrade.currentPrice);
             //Debug.Log(currentUpgrade);
         }
@@ -45,5 +46,6 @@ public class UpgradeElement : MonoBehaviour
         title.text = currentUpgrade.title;
         description.text = currentUpgrade.description;
         upgradeSet = true;
+        icon.sprite = currentUpgrade.icon;
     }
 }
