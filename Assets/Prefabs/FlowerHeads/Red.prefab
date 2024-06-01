@@ -103,7 +103,8 @@ MonoBehaviour:
   basePoints: 3
   damage: 15
   range: 5
-  projCount: 0
+  projCount: 6
+  projRange: 8
   pointsTiers: 03000000040000000500000007000000
   damageTiers: 0f000000120000001400000016000000
   rangeTiers: 0500000006000000080000000a000000
@@ -121,6 +122,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e5992e68d1e740479972dfff05bd457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 0}
   type: red
   position: 0

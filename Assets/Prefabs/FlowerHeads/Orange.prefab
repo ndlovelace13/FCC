@@ -100,13 +100,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rarity: 0
   type: orange
-  basePoints: 2
-  damage: 12
-  range: 3
+  basePoints: 1
+  damage: 10
+  range: 2
   projCount: 4
+  projRange: 5
   pointsTiers: 01000000020000000300000004000000
   damageTiers: 0a0000000c0000000f00000012000000
-  rangeTiers: 02000000030000000400000005000000
+  rangeTiers: 03000000040000000500000006000000
   projTiers: 04000000040000000500000005000000
   position: 0
 --- !u!114 &-6711531654050972239
@@ -121,6 +122,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e5992e68d1e740479972dfff05bd457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 0}
   type: orange
   position: 0

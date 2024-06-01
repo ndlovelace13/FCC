@@ -535,6 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a562ef6467d98d84eaf376c2559a4940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  landingZone: {fileID: 9002422812626871194, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
   crownHeld: 0
   sizeMod: 1.3
   throwTime: 1.5

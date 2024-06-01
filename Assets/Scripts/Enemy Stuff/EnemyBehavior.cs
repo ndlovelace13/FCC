@@ -334,7 +334,7 @@ public class EnemyBehavior : MonoBehaviour
     public void Activate()
     {
         //initialize variables
-        health = maxHealth;
+        health = GameControl.PlayerData.currentHealth;
         isActive = true;
         GetComponent<SpriteRenderer>().color = Color.white;
         if (particles == null)
@@ -383,7 +383,10 @@ public class EnemyBehavior : MonoBehaviour
         while (isActive)
         {
             yield return new WaitForSeconds(speedCooldown);
-            SpeedUp(speedIncrement);
+            if (backupSpeed < GameControl.PlayerData.playerSpeed + 1)
+            {
+                SpeedUp(speedIncrement);
+            }
         }
     }
 

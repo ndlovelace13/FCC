@@ -70,6 +70,7 @@ public class GameControl : MonoBehaviour
     public Dictionary<string, int> affinityAmounts;
     public Sprite[] affinityTiers;
     public int[] affinityThresholds = { 10, 25, 40 };
+    public int[] tierScores = { 50, 100, 200 };
 
     //upgradable stats
     public float playerSpeed = 5f;
@@ -91,6 +92,9 @@ public class GameControl : MonoBehaviour
     public float currentMax;
     public float minSpeed = 1f;
     public float currentMin;
+    public int maxHealth = 50;
+    public int currentHealth;
+    public int healthInterval = 10;
 
     private void Awake()
     {
@@ -155,6 +159,12 @@ public class GameControl : MonoBehaviour
         score = 0;
         currentMax = maxSpeed;
         currentMin = minSpeed;
+        currentHealth = maxHealth;
+        
+        foreach(var flowerStat in flowerStats)
+        {
+            flowerStatsDict[flowerStat.type].UpdateAffinity(0);
+        }
     }
 
     public void UpgradeApply()

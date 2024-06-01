@@ -30,6 +30,8 @@ TagManager:
   - affinitySlot
   - affinityTier
   - affinityFlower
+  - crosshair
+  - landingZone
   layers:
   - Default
   - TransparentFX

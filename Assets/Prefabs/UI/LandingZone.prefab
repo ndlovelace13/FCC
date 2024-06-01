@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1606340863985191559
+--- !u!1 &9002422812626871194
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6247682276290337585}
-  - component: {fileID: 4070853554562464396}
-  - component: {fileID: 2662045514845989443}
-  - component: {fileID: 8380903609990722994}
+  - component: {fileID: 3653592785072477724}
+  - component: {fileID: 5222435656550647977}
+  - component: {fileID: 5221077815646113208}
+  - component: {fileID: 8908788063171450590}
   m_Layer: 0
-  m_Name: Green
-  m_TagString: FlowerHead
+  m_Name: LandingZone
+  m_TagString: landingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6247682276290337585
+--- !u!4 &3653592785072477724
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606340863985191559}
+  m_GameObject: {fileID: 9002422812626871194}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 0.44800004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.99312, y: 110.67668, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4070853554562464396
+--- !u!212 &5222435656550647977
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606340863985191559}
+  m_GameObject: {fileID: 9002422812626871194}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -72,55 +72,44 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1825740317
-  m_SortingLayer: 1
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 30507de357bfc244e9c1503eaa2bb95f, type: 3}
-  m_Color: {r: 0.55093986, g: 0.9528302, b: 0.15730685, a: 1}
+  m_SortingLayerID: -139382901
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 0b20dc2e4845e034c899d2fcbb50db2a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.8828125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2662045514845989443
+--- !u!114 &5221077815646113208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606340863985191559}
+  m_GameObject: {fileID: 9002422812626871194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25d7919e192a9f04c8ce47b35a9e5245, type: 3}
+  m_Script: {fileID: 11500000, guid: 21f4fb73e3432904c99c9340ee277c57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rarity: 1
-  type: green
-  basePoints: 3
-  damage: 15
-  range: 5
-  projCount: 6
-  projRange: 8
-  pointsTiers: 03000000040000000500000007000000
-  damageTiers: 0f000000120000001400000016000000
-  rangeTiers: 0500000006000000080000000a000000
-  projTiers: 06000000060000000700000008000000
-  position: 0
---- !u!114 &8380903609990722994
+  sizeModifier: 1.25
+  loopTime: 0.75
+  looping: 1
+--- !u!114 &8908788063171450590
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606340863985191559}
+  m_GameObject: {fileID: 9002422812626871194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e5992e68d1e740479972dfff05bd457, type: 3}
+  m_Script: {fileID: 11500000, guid: 3845d4254341d8c489525e7f5a23702d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: green
-  position: 0

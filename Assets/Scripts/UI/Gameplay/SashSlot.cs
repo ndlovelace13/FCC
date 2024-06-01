@@ -7,6 +7,7 @@ public class SashSlot : MonoBehaviour
 {
     [SerializeField] Image flower;
     [SerializeField] Image tier;
+    [SerializeField] GameObject scoreNotif;
     public int currentTier = 0;
     string currentType = "null";
     FlowerStats currentStats = null;
@@ -14,6 +15,7 @@ public class SashSlot : MonoBehaviour
     void Start()
     {
         GetComponent<Image>().color = Color.clear;
+        scoreNotif = GameObject.FindWithTag("scoreAnnounce");
         BaseTier();
     }
 
@@ -49,6 +51,7 @@ public class SashSlot : MonoBehaviour
 
     public void tierUp()
     {
+        scoreNotif.GetComponent<ScoreNotification>().newFeed("Affinity Tier Increased | +" + GameControl.PlayerData.tierScores[currentTier]);
         currentTier++;
         tier.sprite = GameControl.PlayerData.affinityTiers[currentTier];
         tier.color = Color.white;

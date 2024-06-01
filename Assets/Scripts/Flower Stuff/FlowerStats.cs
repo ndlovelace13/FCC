@@ -11,6 +11,7 @@ public class FlowerStats : MonoBehaviour
     public int damage;
     public int range;
     public int projCount;
+    public int projRange;
 
     [SerializeField]
     int[] pointsTiers = new int[4];

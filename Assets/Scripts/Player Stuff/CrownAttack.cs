@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CrownAttack : MonoBehaviour
@@ -16,6 +17,7 @@ public class CrownAttack : MonoBehaviour
     int augment1;
     int augment2;
     int augment3;
+    int projCount;
 
     string projType;
     public bool crownActive = false;
@@ -47,7 +49,7 @@ public class CrownAttack : MonoBehaviour
         }
     }
 
-    public void SetProjStats(float r, int d, string type, int aug1, int aug2, int aug3)
+    public void SetProjStats(float r, int d, string type, int aug1, int aug2, int aug3, int numProjs)
     {
         range = r;
         damage = d;
@@ -55,6 +57,7 @@ public class CrownAttack : MonoBehaviour
         augment1 = aug1;
         augment2 = aug2;
         augment3 = aug3;
+        projCount = numProjs;
     }
 
     public void CrownActive()
@@ -81,7 +84,14 @@ public class CrownAttack : MonoBehaviour
         float angle;
         Debug.Log(projType);
         lastCrown = crown.transform;
-        switch (projType)
+        angle = 0f;
+        float difference = Mathf.PI * 2 / projCount;
+        for (int i = 0; i < projCount; i++)
+        {
+            StartCoroutine(ProjSpawn(angle));
+            angle += difference;
+        }
+        /*switch (projType)
         {
             case "white":
                 angle = 0f;
@@ -156,7 +166,8 @@ public class CrownAttack : MonoBehaviour
                 proj.SetActive(true);
                 break;
 
-        }
+        }*/
+
         Invoke("CrownDestroy", 0);
     }
 
@@ -195,7 +206,7 @@ public class CrownAttack : MonoBehaviour
         angleRadians += Mathf.PI / 2;
         Debug.Log("radians: " + angleRadians);
         //set the params based on the flower being thrown
-        range = flower.GetComponent<FlowerStats>().range;
+        range = flower.GetComponent<FlowerStats>().projRange;
         damage = flower.GetComponent<FlowerStats>().damage;
         string type = flower.GetComponent<FlowerStats>().type;
         augment1 = player.GetComponent<CrownConstruction>().augmentCheck(type);

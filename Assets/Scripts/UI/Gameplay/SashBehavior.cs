@@ -32,25 +32,28 @@ public class SashBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && slots > 0)
+        if (player.GetComponent<CrownThrowing>().crownHeld == false)
         {
-            StartCoroutine(AssignSlot(0));
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && slots > 1)
-        {
-            StartCoroutine(AssignSlot(1));
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && slots > 2)
-        {
-            StartCoroutine((AssignSlot(2)));
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4) && slots > 3)
-        {
-            StartCoroutine((AssignSlot(3)));
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5) && slots > 4)
-        {
-            StartCoroutine((AssignSlot(4)));
+            if (Input.GetKeyDown(KeyCode.Alpha1) && slots > 0)
+            {
+                StartCoroutine(AssignSlot(0));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2) && slots > 1)
+            {
+                StartCoroutine(AssignSlot(1));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3) && slots > 2)
+            {
+                StartCoroutine((AssignSlot(2)));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4) && slots > 3)
+            {
+                StartCoroutine((AssignSlot(3)));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5) && slots > 4)
+            {
+                StartCoroutine((AssignSlot(4)));
+            }
         }
     }
 

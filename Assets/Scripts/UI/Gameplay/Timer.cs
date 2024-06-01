@@ -44,10 +44,19 @@ public class Timer : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(speedInterval);
-            maxSpeed += GameControl.PlayerData.maxInterval;
-            GameControl.PlayerData.currentMax = maxSpeed;
-            minSpeed += GameControl.PlayerData.minInterval;
-            GameControl.PlayerData.currentMin = minSpeed;
+            if (GameControl.PlayerData.playerSpeed + 1 > maxSpeed)
+            {
+                maxSpeed += GameControl.PlayerData.maxInterval;
+                GameControl.PlayerData.currentMax = maxSpeed;
+                minSpeed += GameControl.PlayerData.minInterval;
+                GameControl.PlayerData.currentMin = minSpeed;
+            }
+            else
+            {
+                Debug.Log("maxSpeed reached");
+                GameControl.PlayerData.currentHealth += GameControl.PlayerData.healthInterval;
+            }
+            
             //PlayerPrefs.SetFloat("maxSpeed", PlayerPrefs.GetFloat("maxSpeed") + maxInterval);
             //PlayerPrefs.SetFloat("minSpeed", PlayerPrefs.GetFloat("minSpeed") + minInterval);
         }

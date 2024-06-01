@@ -59,6 +59,7 @@ public class FlowerHarvest : MonoBehaviour
                             newHead.transform.localScale = new Vector3(1f, 1f, 1f);
                             newHead.transform.parent = crown;
                             newHead.GetComponent<FlowerBehavior>().position = slotPos;
+                            Debug.Log("slot Position assigned: " + slotPos);
 
                             //check for discovery
                             string type = head.GetComponent<FlowerStats>().type;

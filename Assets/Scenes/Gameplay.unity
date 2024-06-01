@@ -328,6 +328,10 @@ PrefabInstance:
       propertyPath: flowerUIPool
       value: 
       objectReference: {fileID: 1524052771}
+    - target: {fileID: 1377547105940834894, guid: 71b95ea6acbca4c46a6b5b90faf14728, type: 3}
+      propertyPath: landingZone
+      value: 
+      objectReference: {fileID: 2008071005}
     - target: {fileID: 2861173018192084170, guid: 71b95ea6acbca4c46a6b5b90faf14728, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1749,6 +1753,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2008071005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9002422812626871194, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
+  m_PrefabInstance: {fileID: 8481954401232756112}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &711372420150068178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2065,6 +2074,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f82e4a73acd2834ebb5f8d2af25ffe3, type: 3}
+--- !u!1001 &8481954401232756112
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3653592785072477724, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.99312
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653592785072477724, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 110.67668
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653592785072477724, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653592785072477724, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653592785072477724, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653592785072477724, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653592785072477724, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653592785072477724, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653592785072477724, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653592785072477724, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9002422812626871194, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
+      propertyPath: m_Name
+      value: LandingZone
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2087,3 +2153,4 @@ SceneRoots:
   - {fileID: 808248086688013130}
   - {fileID: 7174202958303088636}
   - {fileID: 700796774}
+  - {fileID: 8481954401232756112}

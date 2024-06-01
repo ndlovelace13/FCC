@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class DescriptionBehavior : MonoBehaviour
 {
     [SerializeField] GameObject[] textFlow;
+    [SerializeField] GameObject spaceText;
     int counter = 0;
     float cooldown = 0f;
     bool ready = true;
@@ -44,6 +45,8 @@ public class DescriptionBehavior : MonoBehaviour
         {
             skip = false;
         }
+        if (counter == textFlow.Length)
+            spaceText.GetComponent<TMP_Text>().text = "Press space to continue";
     }
 
     void OnGUI()
