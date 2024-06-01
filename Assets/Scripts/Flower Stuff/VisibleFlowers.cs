@@ -163,6 +163,9 @@ public class VisibleFlowers : MonoBehaviour
                 head.SetActive(true);
                 head.transform.position = flower.getPosition() + new Vector2(-0.061f, 0.44f);
                 head.transform.parent = newFlower.transform;
+                
+                //apply uncommon particle if uncommon
+                //newFlower.GetComponentInChildren<Animator>().SetInteger("rarity", flower.getRarity());
             }
             else
             {

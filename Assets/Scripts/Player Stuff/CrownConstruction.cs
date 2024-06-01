@@ -35,6 +35,9 @@ public class CrownConstruction : MonoBehaviour
     int aug3 = 0;
 
     public string crownAnnouncement;
+
+    [SerializeField] GameObject flowerUIPool;
+    int skillCheckCounter = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -140,6 +143,7 @@ public class CrownConstruction : MonoBehaviour
     {
         foreach (Transform t in slots)
         {
+            skillCheckCounter = 0;
             int inputRand = Random.Range(0, 4);
             GameObject newInput = Instantiate(inputs[inputRand], t.position + new Vector3(0, 1.5f), Quaternion.identity);
             chosenInputs.Add(newInput);
@@ -178,9 +182,16 @@ public class CrownConstruction : MonoBehaviour
             }
             if (inputPressed)
             {
+                inputPressed = false;
+                //start the flower lerp
+                if (flowerUIPool)
+                {
+                    Debug.Log("currentCounter: " + skillCheckCounter);
+                    StartCoroutine(flowerLerpBegin(skillCheckCounter));
+                }
+                skillCheckCounter++;
                 chosenInputs.Remove(currentInput);
                 Destroy(currentInput);
-                inputPressed = false;
             }
         }
         else
@@ -193,6 +204,45 @@ public class CrownConstruction : MonoBehaviour
         
     }
 
+    IEnumerator flowerLerpBegin(int pos)
+    {
+        Debug.Log("startingFlowerLerp");
+        yield return null;
+        GameObject newUIFlower = flowerUIPool.GetComponent<ObjectPool>().GetPooledObject();
+        newUIFlower.SetActive(true);
+        if (newUIFlower == null)
+        { Debug.Log("suck it bitch"); }
+        //get the flower type that associates with the current transform
+        List<FlowerStats> flowerStats = flowerSlots();
+        newUIFlower.GetComponent<CraftingLerp>().Activate(flowerStats[pos].type);
+    }
+
+    private List<FlowerStats> flowerSlots()
+    {
+        Transform[] flowers = docket.GetComponentsInChildren<Transform>();
+        flowers = flowers.Where(child => child.tag == "FlowerHead").ToArray();
+        List<FlowerStats> flowerStats = new List<FlowerStats>();
+        for (int i = 0; i < flowers.Length; i++)
+        {
+            flowerStats.Add(GameControl.PlayerData.flowerStatsDict[flowers[i].GetComponent<FlowerBehavior>().type]);
+            //flowerStats.Add(flowers[i].gameObject.GetComponent<FlowerStats>());
+        }
+        return flowerStats;
+    }
+
+    private List<FlowerBehavior> flowerPositions()
+    {
+        Transform[] flowers = docket.GetComponentsInChildren<Transform>();
+        flowers = flowers.Where(child => child.tag == "FlowerHead").ToArray();
+        List<FlowerBehavior> flowerStats = new List<FlowerBehavior>();
+        for (int i = 0; i < flowers.Length; i++)
+        {
+            //flowerStats.Add(GameControl.PlayerData.flowerStatsDict[flowers[i].GetComponent<FlowerBehavior>().type]);
+            flowerStats.Add(flowers[i].gameObject.GetComponent<FlowerBehavior>());
+        }
+        return flowerStats;
+    }
+
     int Construction()
     {
         //reset variables
@@ -201,14 +251,9 @@ public class CrownConstruction : MonoBehaviour
         aug1 = 0;
         aug2 = 0;
         aug3 = 0;
-        Transform[] flowers = docket.GetComponentsInChildren<Transform>();
-        flowers = flowers.Where(child => child.tag == "FlowerHead").ToArray();
-        List<FlowerStats> flowerStats = new List<FlowerStats>();
+        List<FlowerStats> flowerStats = flowerSlots();
+        List<FlowerBehavior> flowerPos = flowerPositions();
         List<int> dupePositions = new List<int>();
-        for (int i = 0; i < flowers.Length; i++)
-        {
-            flowerStats.Add(flowers[i].gameObject.GetComponent<FlowerStats>());
-        }
         range = flowerStats[0].range + flowerStats[4].range;
         damage = flowerStats[1].damage + flowerStats[3].damage;
         projType = flowerStats[2].type;
@@ -218,14 +263,14 @@ public class CrownConstruction : MonoBehaviour
         while (flowerStats.Count > 0)
         {
             string currentType = flowerStats[0].type;
-            dupePositions.Add(flowerStats[0].position);
+            dupePositions.Add(flowerPos[0].position);
             for (int j = 1; j < flowerStats.Count; j++)
             {
                 if (currentType.Equals(flowerStats[j].type))
                 {
                     //Debug.Log(flowerStats[j].position);
                     //Debug.Log(flowerStats[j].type);
-                    dupePositions.Add(flowerStats[j].position);
+                    dupePositions.Add(flowerPos[j].position);
                 }
             }
             /*foreach (int pos in dupePositions)

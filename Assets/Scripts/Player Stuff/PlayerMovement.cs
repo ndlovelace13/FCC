@@ -10,8 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private float moveLimiter = 0.7f;
     private float craftingSlow = 0.5f;
-    float moveHorizontal;
-    float moveVertical;
+    Vector2 movement;
 
     bool leftTested = false;
     bool rightTested = false;
@@ -29,29 +28,24 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveHorizontal = Input.GetAxis("Horizontal");
-        moveVertical = Input.GetAxis("Vertical");
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+        movement.Normalize();
 
-        if (moveHorizontal != 0 && moveVertical != 0)
+        if (movement != Vector2.zero)
         {
-            moveHorizontal *= moveLimiter;
-            moveVertical *= moveLimiter;
             animator.SetBool("isMoving", true);
         }
-        else if (moveHorizontal == 0 && moveVertical == 0)
+        else if (movement == Vector2.zero)
         {
             animator.SetBool("isMoving", false);
-        }
-        else
-        {
-            animator.SetBool("isMoving", true);
         }
 
         if (GameControl.PlayerData.tutorialState == 1)
         {
             if (!leftTested)
             {
-                if (moveHorizontal < 0)
+                if (movement.x < 0)
                 {
                     leftTested = true;
                     GameControl.PlayerData.inputsTested++;
@@ -59,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!rightTested)
             {
-                if (moveHorizontal > 0)
+                if (movement.x > 0)
                 {
                     rightTested = true;
                     GameControl.PlayerData.inputsTested++;
@@ -67,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!downTested)
             {
-                if (moveVertical < 0)
+                if (movement.y < 0)
                 {
                     downTested = true;
                     GameControl.PlayerData.inputsTested++;
@@ -75,18 +69,21 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!upTested)
             {
-                if (moveVertical > 0)
+                if (movement.y > 0)
                 {
                     upTested = true;
                     GameControl.PlayerData.inputsTested++;
                 }
             }
         }
+
+        rigid.velocity = movement * speed;
     }
 
     private void FixedUpdate()
     {
-        rigid.velocity = new Vector2(moveHorizontal * speed, moveVertical * speed);
+        //gameObject.transform.position += new Vector3(moveHorizontal * speed, moveVertical * speed) * Time.deltaTime;
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)

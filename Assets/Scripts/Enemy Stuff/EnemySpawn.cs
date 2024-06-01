@@ -2,16 +2,25 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class EnemySpawn : MonoBehaviour
 {
     public Camera cam;
     public GameObject Player;
     public float spawnDelay = 2f;
+    List<GameObject> enemies = new List<GameObject>();
+    static float xDiff;
+    static float yDiff;
+    static Vector3 pos;
+    static Vector3 negPos;
     // Start is called before the first frame update
     void Start()
     {
+        cam = Camera.main;
         StartCoroutine(spawnTimer());
+        StartCoroutine(PosUpdate());
+        StartCoroutine(VisibleCheck());
     }
 
     IEnumerator spawnTimer()
@@ -39,17 +48,10 @@ public class EnemySpawn : MonoBehaviour
         
     }
 
-    IEnumerator Spawn(GameObject newEnemy)
+    private Vector3 newSpawn()
     {
-        if (newEnemy == null)
-            yield return null;
-        //calculations for the screen corners
-        Vector3 screenCorner = new Vector3(Screen.width, Screen.height);
-        Vector3 pos = cam.ScreenToWorldPoint(screenCorner);
-        Vector3 oppScreenCorner = new Vector3(0, 0);
-        Vector3 negPos = cam.ScreenToWorldPoint(oppScreenCorner);
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        float moveHorizontal = Input.GetAxisRaw("Horizontal");
+        float moveVertical = Input.GetAxisRaw("Vertical");
         float spawnX = 0;
         float spawnY = 0;
         float spawnOffset = Mathf.Abs(pos.x - Player.transform.position.x);
@@ -79,9 +81,58 @@ public class EnemySpawn : MonoBehaviour
                 spawnY = Random.Range(negPos.y - spawnOffset, negPos.y);
         }
         Vector3 spawnPos = new Vector3(spawnX, spawnY);
+        return spawnPos;
+    }
+
+    IEnumerator Spawn(GameObject newEnemy)
+    {
+        
         newEnemy.SetActive(true);
-        newEnemy.transform.position = spawnPos;
+        newEnemy.transform.position = newSpawn();
         newEnemy.GetComponent<EnemyBehavior>().Activate();
+        if (!enemies.Contains(newEnemy))
+            enemies.Add(newEnemy);
         yield return null;
+    }
+
+    IEnumerator VisibleCheck()
+    {
+        while (true)
+        {
+            yield return new WaitForEndOfFrame();
+            foreach (var enemy in enemies)
+            {
+                if (enemy.GetComponent<EnemyBehavior>().isActive && !isVisible(enemy))
+                    StartCoroutine(Respawn(enemy));
+            }
+        }
+    }
+
+    IEnumerator Respawn(GameObject movedEnemy)
+    {
+        yield return null;
+        Debug.Log("enemy moved");
+        movedEnemy.transform.position = newSpawn();
+    }
+
+    private static bool isVisible(GameObject enemy)
+    {
+        Vector2 enemyPos = enemy.transform.position;
+        //Debug.Log(flowerPos);
+        return enemyPos.x < (pos.x + xDiff) && enemyPos.x >= (negPos.x - xDiff) && enemyPos.y > (negPos.y - yDiff) && enemyPos.y <= (pos.y + yDiff);
+    }
+
+    IEnumerator PosUpdate()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            pos = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
+            negPos = cam.ScreenToWorldPoint(new Vector3(0, 0));
+            xDiff = Mathf.Abs(pos.x - negPos.x) / 2;
+            yDiff = Mathf.Abs(pos.y - negPos.y) / 2;
+
+            //Debug.Log(pos + " " + negPos);
+        }
     }
 }

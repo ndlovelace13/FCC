@@ -160,6 +160,9 @@ MonoBehaviour:
   descriptionfromMenu: 0
   tutorialState: 0
   tutorialSkip: 0
+  discoveryDisplay: 1
+  firstCatalog: 1
+  purchaseMade: 0
   inputsTested: 0
   flowerHarvested: 0
   singleTossed: 0
@@ -169,6 +172,34 @@ MonoBehaviour:
   redCrown: 0
   fireReset: 0
   uncommon: 0
+  undiscovered: 0.05
+  commonPool:
+  - pink
+  - white
+  - orange
+  discoveredUncommon: []
+  undiscoveredUncommon:
+  - red
+  - blue
+  - yellow
+  - green
+  flowerSprites:
+  - {fileID: 21300000, guid: 557a8034be4b0e94c9b568719bdaf23f, type: 3}
+  - {fileID: 21300000, guid: 5fcc3b31d90d1f448b6d8b2249d14587, type: 3}
+  - {fileID: 21300000, guid: 4ae993c47b4e3564da7c5527f0cdb069, type: 3}
+  - {fileID: 21300000, guid: f9e2b15952effba4dbb31925b069d5b9, type: 3}
+  - {fileID: 21300000, guid: 035710b6dbc5c4841a2de9809bf352c7, type: 3}
+  - {fileID: 21300000, guid: 30507de357bfc244e9c1503eaa2bb95f, type: 3}
+  - {fileID: 21300000, guid: 9a8206c22581b4c4789f2ff197abaa5f, type: 3}
+  flowers:
+  - {fileID: 7262396329031763444, guid: ffeb57f7923994c439f2b7e14236b3ba, type: 3}
+  - {fileID: 2043813655405953477, guid: 02f42b7acc18a5b4a8c8fd4982515757, type: 3}
+  - {fileID: 8622628893360374769, guid: 9b52621d997523145aedb6c7a0c92dc5, type: 3}
+  - {fileID: 1936280616163390971, guid: 4e090549cef32db4b87065320b84ed7c, type: 3}
+  - {fileID: 2150074092532121676, guid: ea69b50fc7a58904aaf49a569cdb23c5, type: 3}
+  - {fileID: 1606340863985191559, guid: 1c80d2aae43248243984d84406911312, type: 3}
+  - {fileID: 7956063438138374131, guid: cb42ffb11bea89f45bb146cdb2a46a24, type: 3}
+  flowerStats: []
   highScore: 0
   highMin: 0
   highSec: 0
@@ -176,6 +207,16 @@ MonoBehaviour:
   min: 0
   sec: 0
   score: 0
+  sashSlots: 3
+  sashTypes: []
+  sash: {fileID: 0}
+  currentAffinities: []
+  affinityTiers:
+  - {fileID: -49030958, guid: 510a0c744d29c0f49b9181881d402ffb, type: 3}
+  - {fileID: 21300000, guid: 0c79e7362a124b94f9e8cfaea4b81038, type: 3}
+  - {fileID: 21300000, guid: 5075cc4fc40e22a4ea206bf4c4d98967, type: 3}
+  - {fileID: 21300000, guid: 97c42a4cfba987e4a9303f56006dec2c, type: 3}
+  affinityThresholds: 0a0000001900000028000000
   playerSpeed: 5
   craftingSlow: 0.5
   throwDist: 0
@@ -185,6 +226,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 39904e9e45e0fdd448a7fd297e811bce, type: 3}
   - {fileID: 21300000, guid: b33f0d6aea0ed78458427b2feb3f2538, type: 3}
   upgrades: []
+  maxInterval: 0.35
+  minInterval: 0.2
   maxSpeed: 2
   currentMax: 0
   minSpeed: 1
@@ -770,6 +813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sizeModifier: 1.2
   loopTime: 3
+  looping: 1
 --- !u!1 &1065684193
 GameObject:
   m_ObjectHideFlags: 0

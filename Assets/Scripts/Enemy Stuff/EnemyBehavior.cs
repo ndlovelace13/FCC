@@ -13,7 +13,7 @@ public class EnemyBehavior : MonoBehaviour
     TMP_Text scoreNotif;
     [SerializeField] int maxHealth;
 
-    bool isActive;
+    public bool isActive;
 
     Transform player;
     Transform crown;

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3987757321039237703}
   - component: {fileID: 6457588432295113722}
   - component: {fileID: -154023871553117273}
+  - component: {fileID: -6711531654050972239}
   m_Layer: 0
   m_Name: Orange
   m_TagString: FlowerHead
@@ -99,7 +100,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rarity: 0
   type: orange
-  basePoints: 1
-  damage: 10
-  range: 2
+  basePoints: 2
+  damage: 12
+  range: 3
+  projCount: 4
+  pointsTiers: 01000000020000000300000004000000
+  damageTiers: 0a0000000c0000000f00000012000000
+  rangeTiers: 02000000030000000400000005000000
+  projTiers: 04000000040000000500000005000000
+  position: 0
+--- !u!114 &-6711531654050972239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8622628893360374769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e5992e68d1e740479972dfff05bd457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  type: orange
   position: 0

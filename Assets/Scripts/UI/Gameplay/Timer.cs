@@ -20,6 +20,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
         GameControl.PlayerData.firstRun = false;
+        GameControl.PlayerData.discoveryDisplay = true;
         maxSpeed = GameControl.PlayerData.maxSpeed;
         minSpeed = GameControl.PlayerData.minSpeed;
         GameControl.PlayerData.ResetRun();

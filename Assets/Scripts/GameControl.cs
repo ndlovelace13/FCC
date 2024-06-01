@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameControl : MonoBehaviour
 {
@@ -20,6 +22,7 @@ public class GameControl : MonoBehaviour
 
     public int tutorialState = 0;
     public bool tutorialSkip = false;
+    public bool discoveryDisplay = true;
 
     public bool firstCatalog = true;
     public bool purchaseMade = false;
@@ -36,6 +39,17 @@ public class GameControl : MonoBehaviour
 
     //flower probabilities
     public float uncommon = 0.05f;
+    public float undiscovered = 0.05f;
+
+    [SerializeField] public List<string> commonPool;
+    [SerializeField] public List<string> discoveredUncommon;
+    [SerializeField] public List<string> undiscoveredUncommon;
+
+    //flower stuff
+    [SerializeField] public Sprite[] flowerSprites;
+    [SerializeField] public GameObject[] flowers;
+    public FlowerStats[] flowerStats;
+    public Dictionary<string, FlowerStats> flowerStatsDict;
 
     //player stats
     public int highScore = 0;
@@ -47,6 +61,15 @@ public class GameControl : MonoBehaviour
     public int min = 0;
     public int sec = 0;
     public int score = 0;
+
+    //affinity sash
+    public int sashSlots = 3;
+    public List<string> sashTypes;
+    public GameObject sash;
+    public GameObject[] currentAffinities;
+    public Dictionary<string, int> affinityAmounts;
+    public Sprite[] affinityTiers;
+    public int[] affinityThresholds = { 10, 25, 40 };
 
     //upgradable stats
     public float playerSpeed = 5f;
@@ -78,6 +101,21 @@ public class GameControl : MonoBehaviour
         }
         UpgradeInit();
         UpgradeApply();
+        SetFlowers();
+    }
+
+    private void SetFlowers()
+    {
+        flowerStatsDict = new Dictionary<string, FlowerStats>();
+        flowerStats = new FlowerStats[flowers.Length];
+        for (int i = 0; i < flowers.Length; i++)
+        {
+            flowerStats[i] = flowers[i].GetComponent<FlowerStats>();
+            flowerStatsDict.Add(flowerStats[i].type, flowerStats[i]);
+            flowerStatsDict[flowerStats[i].type].UpdateAffinity(0);
+        }
+
+        //TO DO: get sprites from within flowerStats instead of a separate array
     }
 
     private void UpgradeInit()
@@ -124,5 +162,77 @@ public class GameControl : MonoBehaviour
         uncommon = upgradeDict["uncommon"];
         playerSpeed = upgradeDict["playerSpeed"];
         craftingSlow = upgradeDict["craftingSlow"];
+    }
+
+    public void FlowerDiscovery(string type)
+    {
+        //make an announcement to the crown announcement
+        if (discoveryDisplay)
+        {
+            GameObject announce = GameObject.FindWithTag("mainAnnounce");
+            announce.GetComponent<ScoreNotification>().newFeed("New Flower Discovered!");
+        }
+        //need to change this once rare flowers are added
+        undiscoveredUncommon.Remove(type);
+        discoveredUncommon.Add(type);
+        //this is where to initialize entry in the almanac/mastery shit
+    }
+
+    public Sprite SpriteAssign(string type)
+    {
+        Sprite returnedSprite = flowerSprites[0];
+        switch (type)
+        {
+            case "pink":
+                returnedSprite = flowerSprites[0];
+                break;
+            case "white":
+                returnedSprite = flowerSprites[1];
+                break;
+            case "orange":
+                returnedSprite = flowerSprites[2];
+                break;
+            case "red":
+                returnedSprite = flowerSprites[3];
+                break;
+            case "blue":
+                returnedSprite = flowerSprites[4];
+                break;
+            case "green":
+                returnedSprite = flowerSprites[5];
+                break;
+            case "yellow":
+                returnedSprite = flowerSprites[6];
+                break;
+            case "default": Debug.Log("unhandled exception"); break;
+        }
+        return returnedSprite;
+    }
+
+    public void SashInit()
+    {
+        sashTypes = new List<string>();
+        affinityAmounts = new Dictionary<string, int>();
+        for (int i = 0; i < sashSlots; i++)
+        {
+            //placeholder needed here
+            sashTypes.Add("null");
+            affinityAmounts.Add("slot" + i, 0);
+        }
+        sash = GameObject.FindWithTag("sash");
+        //don't do this yet
+        currentAffinities = new GameObject[sashSlots];
+    }
+
+    public void affinityIncrease(string type)
+    {
+        affinityAmounts[type] += 1;
+        Debug.Log("current " + type + " affinity: " + affinityAmounts[type]);
+        //check whether move to the next affinity
+        GameObject currentAffinity = currentAffinities[sashTypes.IndexOf(type)];
+        if (affinityAmounts[type] >= affinityThresholds[currentAffinity.GetComponent<SashSlot>().currentTier])
+        {
+            currentAffinity.GetComponent<SashSlot>().tierUp();
+        }
     }
 }
