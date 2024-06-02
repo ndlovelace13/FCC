@@ -24,6 +24,14 @@ TagManager:
   - lightningPool
   - upgrade
   - upgradeSlots
+  - mainAnnounce
+  - mostUsed
+  - sash
+  - affinitySlot
+  - affinityTier
+  - affinityFlower
+  - crosshair
+  - landingZone
   layers:
   - Default
   - TransparentFX

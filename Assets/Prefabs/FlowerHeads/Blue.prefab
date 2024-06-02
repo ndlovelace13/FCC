@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6712755510441398778}
   - component: {fileID: 3738785673100472391}
   - component: {fileID: 5230913870038766735}
+  - component: {fileID: 7221637201816986290}
   m_Layer: 0
   m_Name: Blue
   m_TagString: FlowerHead
@@ -102,4 +103,24 @@ MonoBehaviour:
   basePoints: 3
   damage: 15
   range: 5
+  projCount: 6
+  projRange: 8
+  pointsTiers: 03000000040000000500000007000000
+  damageTiers: 0f000000120000001400000016000000
+  rangeTiers: 0500000006000000080000000a000000
+  projTiers: 06000000060000000700000008000000
+  position: 0
+--- !u!114 &7221637201816986290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2150074092532121676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e5992e68d1e740479972dfff05bd457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: blue
   position: 0

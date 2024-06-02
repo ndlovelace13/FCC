@@ -8,13 +8,15 @@ public class FlowerData
     string type;
     bool activated;
     GameObject flower;
+    int rarity;
 
-    public FlowerData(Vector2 newPos, string newType)
+    public FlowerData(Vector2 newPos, string newType, int raritySelect)
     {
         position = newPos;
         type = newType;
         activated = false;
         flower = null;
+        rarity = raritySelect;
     }
 
     public Vector2 getPosition()
@@ -50,6 +52,17 @@ public class FlowerData
     {
         flower = newFlower;
     }
+
+    public int getRarity()
+    {
+        //Debug.Log("Rarity is : " + rarity);
+        return rarity;
+    }
+
+    public void setRarity(int newRarity)
+    {
+        rarity = newRarity;
+    }
 }
 
 public class FlowerCalc : MonoBehaviour
@@ -64,14 +77,28 @@ public class FlowerCalc : MonoBehaviour
 
     //rarity shit
     static float uncommonRarity;
-    string[] Flowers;
-    [SerializeField] string[] common;
-    [SerializeField] string[] uncommon;
+    float undiscoveredRarity;
+    List<string> Flowers;
+    [SerializeField] List<string> common;
+    [SerializeField] List<string> uncommon;
+    List<string> undiscovered;
+    int raritySelection;
     // Start is called before the first frame update
 
     void Start()
     {
+        //grab everything from GameControl when gameplay begins
+        if (GameControl.PlayerData.tutorialSkip && GameControl.PlayerData.discoveredUncommon.Count == 0)
+        {
+            GameControl.PlayerData.discoveryDisplay = false;
+            GameControl.PlayerData.FlowerDiscovery("red");
+        }
+        GameControl.PlayerData.discoveryDisplay = true;
         uncommonRarity = GameControl.PlayerData.uncommon;
+        common = GameControl.PlayerData.commonPool;
+        uncommon = GameControl.PlayerData.discoveredUncommon;
+        undiscovered = GameControl.PlayerData.undiscoveredUncommon;
+        undiscoveredRarity = GameControl.PlayerData.undiscovered;
         totalWidth = (int)background.size.x;
         totalHeight = (int)background.size.y;
         flowerInfo = InitialCalc();
@@ -101,7 +128,7 @@ public class FlowerCalc : MonoBehaviour
                     //Debug.Log("current Height:" + currentHeight + "\ncurrent Width:" + currentWidth);
                     string flowerType = FlowerChoice();
                     //random color gen needs to happen here
-                    FlowerData data = new FlowerData(new Vector2(currentWidth, currentHeight), flowerType);
+                    FlowerData data = new FlowerData(new Vector2(currentWidth, currentHeight), flowerType, raritySelection);
                     flowers.Add(data);
                     //Debug.Log("This is the current num:" + flowers);
                 }
@@ -119,16 +146,32 @@ public class FlowerCalc : MonoBehaviour
         //rarity calculations, 0.3f chance for uncommon, 0.7f chance for common at this stage
         float rarityChoice = Random.Range(0f, 1f);
         if (rarityChoice > uncommonRarity)
+        {
             Flowers = common;
+            raritySelection = 0;
+        }
         else
-            Flowers = uncommon;
+        {
+            rarityChoice = Random.Range(0f, 1f);
+            raritySelection = 1;
+            if (rarityChoice > undiscoveredRarity)
+            {
+                Flowers = uncommon;
+            }
+            else if (undiscovered.Count == 0)
+            {
+                Flowers = uncommon;
+            }
+            else
+                Flowers = undiscovered;
+        }
         //selection of a flower from the given list and spawning
-        int flowerChoice = Random.Range(0, Flowers.Length);
+        int flowerChoice = Random.Range(0, Flowers.Count);
         return Flowers[flowerChoice];
     }
 
     private int RandIncrement()
     {
-        return Random.Range(3, 15);
+        return Random.Range(5, 15);
     }
 }

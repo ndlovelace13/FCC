@@ -33,8 +33,13 @@ public class CrownConstruction : MonoBehaviour
     int aug1 = 0;
     int aug2 = 0;
     int aug3 = 0;
+    int numProjs = 0;
+    int projRange = 0;
 
     public string crownAnnouncement;
+
+    [SerializeField] GameObject flowerUIPool;
+    int skillCheckCounter = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -69,8 +74,8 @@ public class CrownConstruction : MonoBehaviour
             scoreNotif.GetComponent<ScoreNotification>().newFeed("Crown Construction | +" + crownScore);
             finalCrown.GetComponent<SpriteRenderer>().enabled = true;
             finalCrown.transform.parent = null;
-            gameObject.GetComponent<CrownThrowing>().CompletedCrown(finalCrown);
-            finalCrown.GetComponent<CrownAttack>().SetProjStats(range, damage, projType, aug1, aug2, aug3);
+            gameObject.GetComponent<CrownThrowing>().CompletedCrown(finalCrown, range);
+            finalCrown.GetComponent<CrownAttack>().SetProjStats(projRange, damage, projType, aug1, aug2, aug3, numProjs);
             //Instantiation of new crown
             CrownReplace();
             crownHeld = true;
@@ -140,6 +145,7 @@ public class CrownConstruction : MonoBehaviour
     {
         foreach (Transform t in slots)
         {
+            skillCheckCounter = 0;
             int inputRand = Random.Range(0, 4);
             GameObject newInput = Instantiate(inputs[inputRand], t.position + new Vector3(0, 1.5f), Quaternion.identity);
             chosenInputs.Add(newInput);
@@ -178,9 +184,16 @@ public class CrownConstruction : MonoBehaviour
             }
             if (inputPressed)
             {
+                inputPressed = false;
+                //start the flower lerp
+                if (flowerUIPool)
+                {
+                    Debug.Log("currentCounter: " + skillCheckCounter);
+                    StartCoroutine(flowerLerpBegin(skillCheckCounter));
+                }
+                skillCheckCounter++;
                 chosenInputs.Remove(currentInput);
                 Destroy(currentInput);
-                inputPressed = false;
             }
         }
         else
@@ -193,6 +206,45 @@ public class CrownConstruction : MonoBehaviour
         
     }
 
+    IEnumerator flowerLerpBegin(int pos)
+    {
+        Debug.Log("startingFlowerLerp");
+        yield return null;
+        GameObject newUIFlower = flowerUIPool.GetComponent<ObjectPool>().GetPooledObject();
+        newUIFlower.SetActive(true);
+        if (newUIFlower == null)
+        { Debug.Log("suck it bitch"); }
+        //get the flower type that associates with the current transform
+        Transform[] flowers = docket.GetComponentsInChildren<Transform>();
+        flowers = flowers.Where(child => child.tag == "FlowerHead").ToArray();
+        List<FlowerStats> flowerStats = flowerSlots(flowers);
+        newUIFlower.GetComponent<CraftingLerp>().Activate(flowerStats[pos].type);
+    }
+
+    private List<FlowerStats> flowerSlots(Transform[] flowers)
+    {
+        List<FlowerStats> flowerStats = new List<FlowerStats>();
+        for (int i = 0; i < flowers.Length; i++)
+        {
+            flowerStats.Add(GameControl.PlayerData.flowerStatsDict[flowers[i].GetComponent<FlowerBehavior>().type]);
+            //flowerStats.Add(flowers[i].gameObject.GetComponent<FlowerStats>());
+        }
+        return flowerStats;
+    }
+
+    private List<FlowerBehavior> flowerPositions(Transform[] flowers)
+    {
+        
+        List<FlowerBehavior> flowerStats = new List<FlowerBehavior>();
+        for (int i = 0; i < flowers.Length; i++)
+        {
+            //flowerStats.Add(GameControl.PlayerData.flowerStatsDict[flowers[i].GetComponent<FlowerBehavior>().type]);
+            flowerStats.Add(flowers[i].gameObject.GetComponent<FlowerBehavior>());
+            Debug.Log(flowerStats[i] + " added");
+        }
+        return flowerStats;
+    }
+
     int Construction()
     {
         //reset variables
@@ -203,29 +255,30 @@ public class CrownConstruction : MonoBehaviour
         aug3 = 0;
         Transform[] flowers = docket.GetComponentsInChildren<Transform>();
         flowers = flowers.Where(child => child.tag == "FlowerHead").ToArray();
-        List<FlowerStats> flowerStats = new List<FlowerStats>();
+        List<FlowerStats> flowerStats = flowerSlots(flowers);
+        List<FlowerBehavior> flowerPos = flowerPositions(flowers);
         List<int> dupePositions = new List<int>();
-        for (int i = 0; i < flowers.Length; i++)
-        {
-            flowerStats.Add(flowers[i].gameObject.GetComponent<FlowerStats>());
-        }
+
+        projRange = flowerStats[2].projRange;
         range = flowerStats[0].range + flowerStats[4].range;
         damage = flowerStats[1].damage + flowerStats[3].damage;
         projType = flowerStats[2].type;
         aug1 = augmentCheck(projType);
+        numProjs = flowerStats[2].projCount;
         
         //check the first, remove as necessary
         while (flowerStats.Count > 0)
         {
-            string currentType = flowerStats[0].type;
-            dupePositions.Add(flowerStats[0].position);
-            for (int j = 1; j < flowerStats.Count; j++)
+            string currentType = flowerPos[0].type;
+            Debug.Log(currentType);
+            dupePositions.Add(flowerPos[0].position);
+            for (int j = 1; j < flowerPos.Count; j++)
             {
-                if (currentType.Equals(flowerStats[j].type))
+                if (currentType.Equals(flowerPos[j].type))
                 {
                     //Debug.Log(flowerStats[j].position);
                     //Debug.Log(flowerStats[j].type);
-                    dupePositions.Add(flowerStats[j].position);
+                    dupePositions.Add(flowerPos[j].position);
                 }
             }
             /*foreach (int pos in dupePositions)
@@ -253,6 +306,7 @@ public class CrownConstruction : MonoBehaviour
                     }
                     else
                     {
+                        Debug.Log(dupePositions[0] + " " + dupePositions[1]);
                         crownScore += flowerStats[0].basePoints * 2 * 2;
                     }
                     break;
@@ -288,8 +342,8 @@ public class CrownConstruction : MonoBehaviour
                         //8x the quad's base points
                         crownScore += flowerStats[0].basePoints * 4 * 8;
                         //5x the middle's base points
-                        crownScore += flowerStats[2].basePoints * 5;
-                        flowerStats.RemoveAt(2);
+                        //crownScore += flowerStats[2].basePoints * 5;
+                        //flowerStats.RemoveAt(2);
                         aug2 = augmentCheck(currentType);
                         aug3 = augmentCheck(currentType);
                         crownAnnouncement = fourText[currentType];
@@ -315,11 +369,33 @@ public class CrownConstruction : MonoBehaviour
             }
 
             //remove duplicates that have already been evaluated from the list
-            for (int k = flowerStats.Count - 1; k > -1; k--)
+            for (int i = dupePositions.Count - 1; i > -1; i--)
+            {
+                Debug.Log("removing " + dupePositions[i]);
+                int index = 0;
+                for (int k = flowerPos.Count - 1; k > -1; k--)
+                {
+                    if (flowerPos[k].position == dupePositions[i])
+                    {
+                        index = k;
+                        Debug.Log("current index" + index);
+                        break;
+                    }
+                }
+                Debug.Log("flowerStats size" + flowerStats.Count);
+                flowerStats.Remove(flowerStats[index]);
+                flowerPos.Remove(flowerPos[index]);
+            }
+            /*for (int k = flowerStats.Count - 1; k > -1; k--)
             {
                 if (flowerStats[k].type == currentType)
+                {
+                    
                     flowerStats.Remove(flowerStats[k]);
-            }
+                    flowerPos.Remove(flowerPos[k]);
+                }
+                    
+            }*/
             //reset dupePositions
             dupePositions.Clear();
             //if (crownAnnouncement != "")

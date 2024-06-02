@@ -58,7 +58,12 @@ public class FlowerHarvest : MonoBehaviour
                             newHead.GetComponent<SpriteRenderer>().sortingOrder = 2;
                             newHead.transform.localScale = new Vector3(1f, 1f, 1f);
                             newHead.transform.parent = crown;
-                            newHead.GetComponent<FlowerStats>().position = slotPos;
+                            newHead.GetComponent<FlowerBehavior>().position = slotPos;
+                            Debug.Log("slot Position assigned: " + slotPos);
+
+                            //check for discovery
+                            string type = head.GetComponent<FlowerStats>().type;
+                            StartCoroutine(DiscoveryCheck(type));
                             slots[slotPos].tag = "slotFull";
                             if (GameControl.PlayerData.tutorialState == 2)
                                 GameControl.PlayerData.flowerHarvested = true;
@@ -92,6 +97,15 @@ public class FlowerHarvest : MonoBehaviour
                 GameControl.PlayerData.singleTossed = true;
             }
         }
+    }
+
+    IEnumerator DiscoveryCheck(string type)
+    {
+        if (GameControl.PlayerData.undiscoveredUncommon.Contains(type))
+        {
+            GameControl.PlayerData.FlowerDiscovery(type);
+        }
+        yield return null;
     }
 
     public void crownReset()
@@ -136,7 +150,7 @@ public class FlowerHarvest : MonoBehaviour
         return -1;
     }
 
-    private GameObject lastFlower()
+    public GameObject lastFlower()
     {
         int slotPos = lastSlot();
         Transform[] currentFlowers = crown.GetComponentsInChildren<Transform>();

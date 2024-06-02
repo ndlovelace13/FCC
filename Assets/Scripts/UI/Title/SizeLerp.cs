@@ -6,10 +6,15 @@ public class SizeLerp : MonoBehaviour
 {
     [SerializeField] float sizeModifier;
     [SerializeField] float loopTime;
+    [SerializeField] bool looping = false;
+    bool lerping = false;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SizeLerping());
+        if (looping)
+        {
+            Execute();
+        }
     }
 
     // Update is called once per frame
@@ -18,9 +23,17 @@ public class SizeLerp : MonoBehaviour
         
     }
 
+    public void Execute()
+    {
+        //need a better solution for satisfying feedback without infinite growth
+        if (!lerping)
+            StartCoroutine(SizeLerping());
+    }
+
     IEnumerator SizeLerping()
     {
-        while (true)
+        lerping = true;
+        do
         {
             float time = 0;
             Vector2 originalScale = transform.localScale;
@@ -40,6 +53,7 @@ public class SizeLerp : MonoBehaviour
                 time += Time.deltaTime;
                 yield return null;
             }
-        }
+        } while (looping);
+        lerping = false;
     }
 }

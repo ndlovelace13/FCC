@@ -535,6 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a562ef6467d98d84eaf376c2559a4940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  landingZone: {fileID: 9002422812626871194, guid: ec2115f01a1c66543bcbf3372d682297, type: 3}
   crownHeld: 0
   sizeMod: 1.3
   throwTime: 1.5
@@ -564,6 +565,7 @@ MonoBehaviour:
   constructionReady: 0
   skillCheckActive: 0
   crownAnnouncement: 
+  flowerUIPool: {fileID: 0}
 --- !u!114 &4837902552858879597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,8 +646,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.052069247, y: -0.18893754}
-  m_Size: {x: 0.82062876, y: 2.9025505}
+  m_Offset: {x: 0.070562005, y: -0.14732885}
+  m_Size: {x: 0.709672, y: 2.5604348}
   m_Direction: 0
 --- !u!114 &4456646677202703912
 MonoBehaviour:

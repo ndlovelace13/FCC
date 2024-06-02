@@ -187,6 +187,7 @@ public class ProjectileBehavior : MonoBehaviour
         ResetAugs();
         startingPos = Vector3.zero;
         gameObject.SetActive(false);
+        Debug.Log("reached");
     }
 
     private void ResetAugs()
