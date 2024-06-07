@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isMoving", true);
         }
-        else if (movement == Vector2.zero)
+        else
         {
             animator.SetBool("isMoving", false);
         }

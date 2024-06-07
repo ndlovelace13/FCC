@@ -10,6 +10,9 @@ public class GameControl : MonoBehaviour
     public static GameControl PlayerData;
 
     //all variable declarations
+
+    //testing crawd
+    public bool testing = false;
     
     //game state stuff
     public bool firstRun = true;
@@ -75,6 +78,7 @@ public class GameControl : MonoBehaviour
     //upgradable stats
     public float playerSpeed = 5f;
     public float craftingSlow = 0.5f;
+    public float pickupDist = 5f;
     //implement with precision throw mechanic
     public float throwDist;
 
@@ -84,6 +88,9 @@ public class GameControl : MonoBehaviour
     [SerializeField] Sprite[] icons;
 
     public List<Upgrade> upgrades;
+
+    //essence progression
+    public int essenceCount = 0;
 
     //enemy related variables
     public float maxInterval = 0.35f;
@@ -213,6 +220,9 @@ public class GameControl : MonoBehaviour
                 break;
             case "yellow":
                 returnedSprite = flowerSprites[6];
+                break;
+            case "dandy":
+                returnedSprite = flowerSprites[7];
                 break;
             case "default": Debug.Log("unhandled exception"); break;
         }

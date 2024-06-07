@@ -32,6 +32,7 @@ TagManager:
   - affinityFlower
   - crosshair
   - landingZone
+  - seedPool
   layers:
   - Default
   - TransparentFX

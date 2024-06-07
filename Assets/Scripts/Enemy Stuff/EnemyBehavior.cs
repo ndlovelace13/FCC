@@ -28,6 +28,8 @@ public class EnemyBehavior : MonoBehaviour
     float speedCooldown = 10f;
     float speedIncrement = 0.925f;
     bool speedUp;
+    bool surprised = false;
+    float surpriseTime = 1f;
 
     [SerializeField] GameObject notif;
 
@@ -64,6 +66,10 @@ public class EnemyBehavior : MonoBehaviour
     //Particles
     List<GameObject> particles;
 
+    //Seed Stuff
+    float seedProb = 0.4f;
+    GameObject seedPool;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +79,7 @@ public class EnemyBehavior : MonoBehaviour
         //moveSpeed = maxSpeed;
         scoreNotif = GameObject.FindGameObjectWithTag("scoreAnnounce").GetComponent<TMP_Text>();
         lightningPool = GameObject.FindGameObjectWithTag("lightningPool");
+        seedPool = GameObject.FindGameObjectWithTag("seedPool");
     }
 
     // Update is called once per frame
@@ -93,9 +100,11 @@ public class EnemyBehavior : MonoBehaviour
             }
             else
             {
+                if (target == crown)
+                    StartCoroutine(Surprised(surpriseTime));
                 target = player.transform;
             }
-            if (!isFrozen)
+            if (!isFrozen && !surprised)
                 moveSpeed = backupSpeed;
             //movement
             Vector2 direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
@@ -105,6 +114,21 @@ public class EnemyBehavior : MonoBehaviour
             {
                 Deactivate();
             }
+        }
+    }
+
+    IEnumerator Surprised(float surpriseTime)
+    {
+        if (!surprised)
+        {
+            Debug.Log("This mf surprised");
+            //GetComponent<SpriteRenderer>().color = Color.blue;
+            //backupSpeed = moveSpeed;
+            surprised = true;
+            moveSpeed = 0f;
+            yield return new WaitForSeconds(surpriseTime);
+            //moveSpeed = backupSpeed;
+            surprised = false;
         }
     }
 
@@ -349,6 +373,7 @@ public class EnemyBehavior : MonoBehaviour
         maxSpeed = GameControl.PlayerData.currentMax;
         minSpeed = GameControl.PlayerData.currentMin;
         backupSpeed = Random.Range(minSpeed, maxSpeed);
+        GetComponent<Animator>().speed = backupSpeed * 0.5f;
         //begin the gradual speed up routine
         StartCoroutine(GradualSpeedUp());
     }
@@ -365,6 +390,12 @@ public class EnemyBehavior : MonoBehaviour
         isPoisoned = false;
         isElectrified = false;
         isActive = false;
+        if (Random.Range(0f, 1f) < seedProb)
+        {
+            GameObject newSeed = seedPool.GetComponent<ObjectPool>().GetPooledObject();
+            newSeed.SetActive(true);
+            newSeed.transform.localPosition = transform.localPosition;
+        }
         gameObject.SetActive(false);
     }
 
@@ -386,6 +417,7 @@ public class EnemyBehavior : MonoBehaviour
             if (backupSpeed < GameControl.PlayerData.playerSpeed + 1)
             {
                 SpeedUp(speedIncrement);
+                GetComponent<Animator>().speed = backupSpeed * 0.5f;
             }
         }
     }

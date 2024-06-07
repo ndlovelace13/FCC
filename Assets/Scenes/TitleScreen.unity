@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300420c45485e27469d46d85a5883b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testing: 1
   firstRun: 1
   tutorialActive: 0
   speaking: 0
@@ -183,6 +184,7 @@ MonoBehaviour:
   - blue
   - yellow
   - green
+  - dandy
   flowerSprites:
   - {fileID: 21300000, guid: 557a8034be4b0e94c9b568719bdaf23f, type: 3}
   - {fileID: 21300000, guid: 5fcc3b31d90d1f448b6d8b2249d14587, type: 3}
@@ -191,6 +193,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 035710b6dbc5c4841a2de9809bf352c7, type: 3}
   - {fileID: 21300000, guid: 30507de357bfc244e9c1503eaa2bb95f, type: 3}
   - {fileID: 21300000, guid: 9a8206c22581b4c4789f2ff197abaa5f, type: 3}
+  - {fileID: 21300000, guid: a76642f6009ad2d4bafdf1e8efe41d5b, type: 3}
   flowers:
   - {fileID: 7262396329031763444, guid: ffeb57f7923994c439f2b7e14236b3ba, type: 3}
   - {fileID: 2043813655405953477, guid: 02f42b7acc18a5b4a8c8fd4982515757, type: 3}
@@ -199,6 +202,7 @@ MonoBehaviour:
   - {fileID: 2150074092532121676, guid: ea69b50fc7a58904aaf49a569cdb23c5, type: 3}
   - {fileID: 1606340863985191559, guid: 1c80d2aae43248243984d84406911312, type: 3}
   - {fileID: 7956063438138374131, guid: cb42ffb11bea89f45bb146cdb2a46a24, type: 3}
+  - {fileID: 7956063438138374131, guid: 245f079010862a240802ee13f9b0b7b9, type: 3}
   flowerStats: []
   highScore: 0
   highMin: 0
@@ -217,6 +221,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5075cc4fc40e22a4ea206bf4c4d98967, type: 3}
   - {fileID: 21300000, guid: 97c42a4cfba987e4a9303f56006dec2c, type: 3}
   affinityThresholds: 0a0000001900000028000000
+  tierScores: 3200000064000000c8000000
   playerSpeed: 5
   craftingSlow: 0.5
   throwDist: 0
@@ -232,6 +237,9 @@ MonoBehaviour:
   currentMax: 0
   minSpeed: 1
   currentMin: 0
+  maxHealth: 50
+  currentHealth: 0
+  healthInterval: 10
 --- !u!4 &271687010
 Transform:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Upgrade : MonoBehaviour
 {
@@ -46,7 +47,7 @@ public class Upgrade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (upgradeKey != null)
+        if (upgradeKey != null && SceneManager.GetActiveScene().name == "Catalog")
             currentValue = GameControl.PlayerData.upgradeDict[upgradeKey];
     }
 

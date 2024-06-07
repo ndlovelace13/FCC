@@ -93,6 +93,13 @@ public class FlowerCalc : MonoBehaviour
             GameControl.PlayerData.discoveryDisplay = false;
             GameControl.PlayerData.FlowerDiscovery("red");
         }
+        //for testing newly added flowers
+        if (GameControl.PlayerData.testing)
+        {
+            GameControl.PlayerData.uncommon = 0.5f;
+            GameControl.PlayerData.discoveryDisplay = false;
+            GameControl.PlayerData.FlowerDiscovery("dandy");
+        }
         GameControl.PlayerData.discoveryDisplay = true;
         uncommonRarity = GameControl.PlayerData.uncommon;
         common = GameControl.PlayerData.commonPool;

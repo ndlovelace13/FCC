@@ -21,6 +21,7 @@ public class VisibleFlowers : MonoBehaviour
     GameObject greenPool;
     GameObject redPool;
     GameObject yellowPool;
+    GameObject dandyPool;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,7 @@ public class VisibleFlowers : MonoBehaviour
                 case "GreenPool": greenPool = pool; break;
                 case "RedPool": redPool = pool; break;
                 case "YellowPool": yellowPool = pool; break;
+                case "DandyPool": dandyPool = pool; break;
             }
         }
     }
@@ -221,6 +223,7 @@ public class VisibleFlowers : MonoBehaviour
             case "yellow": headReturn = yellowPool.GetComponent<ObjectPool>().GetPooledObject(); break;
             case "green": headReturn = greenPool.GetComponent<ObjectPool>().GetPooledObject(); break;
             case "blue": headReturn = bluePool.GetComponent<ObjectPool>().GetPooledObject(); break;
+            case "dandy": headReturn = dandyPool.GetComponent<ObjectPool>().GetPooledObject(); break;   
         }
         return headReturn;
     }

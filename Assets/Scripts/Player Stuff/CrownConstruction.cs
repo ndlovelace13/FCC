@@ -38,6 +38,8 @@ public class CrownConstruction : MonoBehaviour
 
     public string crownAnnouncement;
 
+    int craftAnimChoice = 1;
+
     [SerializeField] GameObject flowerUIPool;
     int skillCheckCounter = 0;
     // Start is called before the first frame update
@@ -60,9 +62,12 @@ public class CrownConstruction : MonoBehaviour
             Debug.Log("trolling");
             ConstructionSkillCheck();
             gameObject.GetComponent<FlowerHarvest>().docketLoaded = false;
+            GetComponentInChildren<Animator>().SetBool("isMoving", false);
+            GetComponentInChildren<Animator>().SetBool("isCrafting", true);
         }
         if (constructionReady == true)
         {
+            GetComponentInChildren<Animator>().SetBool("isCrafting", false);
             int crownScore = Construction();
             constructionReady = false;
             Debug.Log(crownScore);
@@ -94,10 +99,11 @@ public class CrownConstruction : MonoBehaviour
             {"white", "Pale "},
             {"orange", "Tawny "},
             {"pink", "Flushed "},
-            {"red", "Chilled "},
+            {"red", "Blazing "},
             {"yellow", "Charged "},
             {"green", "Poisonous "},
-            {"blue", "Chilled "}
+            {"blue", "Chilled "},
+            {"dandy", "Scattering "}
         };
         insideText = new Dictionary<string, string>() {
             {"white", "Blank "},
@@ -106,7 +112,8 @@ public class CrownConstruction : MonoBehaviour
             {"red", "Burning "},
             {"yellow", "Volatile "},
             {"green", "Noxious "},
-            {"blue", "Frigid "}
+            {"blue", "Frigid "},
+            {"dandy", "Dispersing "}
         };
         primaryText = new Dictionary<string, string>() {
             {"white", "Pasty "},
@@ -115,7 +122,8 @@ public class CrownConstruction : MonoBehaviour
             {"red", "Fiery "},
             {"yellow", "Electric "},
             {"green", "Toxic "},
-            {"blue", "Frozen "}
+            {"blue", "Frozen "},
+            {"dandy", "Splitting "}
         };
         fourText = new Dictionary<string, string>() {
             {"white", "Colorless "},
@@ -124,7 +132,8 @@ public class CrownConstruction : MonoBehaviour
             {"red", "Scorching "},
             {"yellow", "Voltaic "},
             {"green", "Lethal "},
-            {"blue", "Arctic "}
+            {"blue", "Arctic "},
+            {"dandy", "Disintegrating "}
         };
     }
 
@@ -185,12 +194,8 @@ public class CrownConstruction : MonoBehaviour
             if (inputPressed)
             {
                 inputPressed = false;
+                StartCoroutine(CraftDirection());
                 //start the flower lerp
-                if (flowerUIPool)
-                {
-                    Debug.Log("currentCounter: " + skillCheckCounter);
-                    StartCoroutine(flowerLerpBegin(skillCheckCounter));
-                }
                 skillCheckCounter++;
                 chosenInputs.Remove(currentInput);
                 Destroy(currentInput);
@@ -206,19 +211,33 @@ public class CrownConstruction : MonoBehaviour
         
     }
 
+    IEnumerator CraftDirection()
+    {
+        GetComponentInChildren<Animator>().SetInteger("CraftDirection", craftAnimChoice);
+        if (flowerUIPool)
+        {
+            Debug.Log("currentCounter: " + skillCheckCounter);
+            StartCoroutine(flowerLerpBegin(skillCheckCounter));
+        }
+        if (craftAnimChoice == 1)
+            craftAnimChoice = 2;
+        else
+            craftAnimChoice = 1;
+        yield return new WaitForSeconds(0.1f);
+        GetComponentInChildren<Animator>().SetInteger("CraftDirection", 0);
+    }
+
     IEnumerator flowerLerpBegin(int pos)
     {
         Debug.Log("startingFlowerLerp");
         yield return null;
         GameObject newUIFlower = flowerUIPool.GetComponent<ObjectPool>().GetPooledObject();
         newUIFlower.SetActive(true);
-        if (newUIFlower == null)
-        { Debug.Log("suck it bitch"); }
         //get the flower type that associates with the current transform
         Transform[] flowers = docket.GetComponentsInChildren<Transform>();
         flowers = flowers.Where(child => child.tag == "FlowerHead").ToArray();
         List<FlowerStats> flowerStats = flowerSlots(flowers);
-        newUIFlower.GetComponent<CraftingLerp>().Activate(flowerStats[pos].type);
+        newUIFlower.GetComponent<CraftingLerp>().Activate(flowerStats[pos].type, craftAnimChoice);
     }
 
     private List<FlowerStats> flowerSlots(Transform[] flowers)
@@ -415,6 +434,7 @@ public class CrownConstruction : MonoBehaviour
             case "blue": return 2;
             case "green": return 3;
             case "yellow": return 4;
+            case "dandy": return 5;
             default: return 0;
         }    
     }

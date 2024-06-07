@@ -21,6 +21,7 @@ public class ProjectileBehavior : MonoBehaviour
     [SerializeField] int augment1;
     [SerializeField] int augment2;
     [SerializeField] int augment3;
+    int[] augs;
     Vector3 startingPos = Vector3.zero;
 
     bool fire;
@@ -36,6 +37,13 @@ public class ProjectileBehavior : MonoBehaviour
 
     bool electric;
 
+    bool splitting;
+    int splitCount = 3;
+    float splitAngle = Mathf.PI / 6f;
+    public bool miniDandy = false;
+
+    [SerializeField] GameObject projPool;
+
     //Sprites
     GameObject spriteTrans;
 
@@ -44,6 +52,8 @@ public class ProjectileBehavior : MonoBehaviour
     [SerializeField] Sprite iceSprite;
     [SerializeField] Sprite poisonSprite;
     [SerializeField] Sprite electricSprite;
+    [SerializeField] Sprite bigDandySprite;
+    [SerializeField] Sprite smallDandySprite;
 
     //Particles
     List<GameObject> particles;
@@ -51,6 +61,7 @@ public class ProjectileBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        projPool = GameObject.FindWithTag("projectilePool");
         //spriteTrans = transform.GetChild(0).gameObject;
         //Debug.Log(spriteTrans.name);
     }
@@ -91,6 +102,8 @@ public class ProjectileBehavior : MonoBehaviour
         {
             if (fire)
                 FlamesSpawn();
+            if (splitting)
+                Split();
             ObjectDeactivate();
         }
         /*if (gameObject.activeSelf)
@@ -102,11 +115,11 @@ public class ProjectileBehavior : MonoBehaviour
     private void Augmentation()
     {
         //apply augmentation effects that don't concern enemy collision here
-        int[] augs = getAugments();
+        augs = getAugments();
         setParticles(augs);
-        foreach (int aug in augs)
+        for (int i = 0; i < augs.Length; i++)
         {
-            switch (aug)
+            switch (augs[i])
             {
                 case 1: fire = true; flamesPool = GameObject.FindGameObjectWithTag("flamePool");
                     if (GameControl.PlayerData.tutorialActive)
@@ -114,6 +127,7 @@ public class ProjectileBehavior : MonoBehaviour
                 case 2: ice = true; break;
                 case 3: poison = true; poisonPool = GameObject.FindGameObjectWithTag("poisonPool"); break;
                 case 4: electric = true; break;
+                case 5: splitting = true; augs[i] = 0; break;
                 default: break;
             }
         }
@@ -121,8 +135,8 @@ public class ProjectileBehavior : MonoBehaviour
 
     public int[] getAugments()
     {
-        int[] augs = { augment1, augment2, augment3 };
-        return augs;
+        int[] allAugs = { augment1, augment2, augment3 };
+        return allAugs;
     }
 
     private void getParticles()
@@ -157,10 +171,26 @@ public class ProjectileBehavior : MonoBehaviour
             case 2: currentSprite = iceSprite; break;
             case 3: currentSprite = poisonSprite; break;
             case 4: currentSprite = electricSprite; break;
+            case 5: currentSprite = bigDandySprite; break;
             default: currentSprite = defaultSprite; break;
         }
+        if (miniDandy)
+            currentSprite = smallDandySprite;
+        miniDandy = false;
         spriteTrans.GetComponent<SpriteRenderer>().sprite = currentSprite;
     }
+
+    public void Split()
+    {
+        Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+        float angleRadians = Mathf.Atan2(vel.x, vel.y);
+        float startingAngle = angleRadians - splitAngle;
+        for (int i = 0; i < splitCount; i++)
+        {
+            StartCoroutine(ProjSpawn(startingAngle));
+            startingAngle += splitAngle;
+        }
+    }    
 
     public void FlamesSpawn()
     {
@@ -199,8 +229,37 @@ public class ProjectileBehavior : MonoBehaviour
         ice = false;
         poison = false;
         electric = false;
+        splitting = false;
         setParticles(getAugments());
-    }    
+        transform.localScale = Vector3.one;
+    }
+
+    IEnumerator ProjSpawn(float angle)
+    {
+        Vector2 projDir = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle));
+        projDir.Normalize();
+        GameObject proj = projPool.GetComponent<ObjectPool>().GetPooledObject();
+        if (proj == null)
+            Debug.Log("get fucked");
+        //Debug.Log(proj.transform.position);
+        //Debug.Log(crown.transform.position);
+        //proj.transform.rotation = new Quaternion(angle);
+        proj.transform.position = transform.position;
+
+        //rotating towards direction of movement
+        proj.SetActive(true);
+        if (spriteTrans.GetComponent<SpriteRenderer>().sprite == bigDandySprite)
+        {
+            proj.GetComponent<ProjectileBehavior>().miniDandy = true;
+        }
+        else
+        {
+            proj.transform.localScale = Vector3.one / splitCount;
+        }
+        proj.GetComponent<ProjectileBehavior>().SetProps(range / splitCount, damage / splitCount, augs[0], augs[1], augs[2], projDir);
+        proj.GetComponent<Rigidbody2D>().velocity = projDir * speed;
+        yield return null;
+    }
 }
 
     
