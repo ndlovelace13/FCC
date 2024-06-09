@@ -19,6 +19,7 @@ public class EssenceBehavior : MonoBehaviour
         if (!pickingUp)
         {
             Vector2 currentDist = player.transform.localPosition - transform.position;
+            Debug.Log(currentDist.magnitude);
             if (currentDist.magnitude < GameControl.PlayerData.pickupDist)
             {
                 pickingUp = true;
@@ -45,8 +46,8 @@ public class EssenceBehavior : MonoBehaviour
         while (time < 1f)
         {
             transform.localPosition = Vector2.Lerp(transform.localPosition, player.transform.localPosition, time);
-            //if ((current - goal).magnitude < 0.01f)
-              //  break;
+            if ((transform.localPosition - player.transform.localPosition).magnitude < 0.05f)
+                break;
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }

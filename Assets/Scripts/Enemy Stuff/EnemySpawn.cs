@@ -16,6 +16,11 @@ public class EnemySpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    public void enemyBegin()
+    {
         cam = Camera.main;
         StartCoroutine(spawnTimer());
         StartCoroutine(PosUpdate());

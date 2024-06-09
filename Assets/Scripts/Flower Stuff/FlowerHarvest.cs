@@ -41,7 +41,7 @@ public class FlowerHarvest : MonoBehaviour
         if (collision.gameObject.tag == "flower")
         {
            // Debug.Log("2 Levels");
-            if (Input.GetKey(KeyCode.Space) && !docketLoaded)
+            if (Input.GetKey(KeyCode.Space) && !docketLoaded && !GameControl.PlayerData.loading)
             {
                 GameObject flower = collision.gameObject;
                 foreach (Transform t in flower.transform)

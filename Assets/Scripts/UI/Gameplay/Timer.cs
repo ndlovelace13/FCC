@@ -16,22 +16,36 @@ public class Timer : MonoBehaviour
     float maxSpeed;
     float minSpeed;
 
+    float startTime = 0f;
+    float currentTime = 0f;
+
+    bool timerStarted = false;
+
     public TMP_Text timerText;
     void Start()
+    {
+        timerStarted = false;
+    }
+
+    public void TimerStart()
     {
         GameControl.PlayerData.firstRun = false;
         GameControl.PlayerData.discoveryDisplay = true;
         maxSpeed = GameControl.PlayerData.maxSpeed;
         minSpeed = GameControl.PlayerData.minSpeed;
-        GameControl.PlayerData.ResetRun();
+        startTime = Time.timeSinceLevelLoad;
+        timerStarted = true;
         StartCoroutine(SpeedUp());
     }
 
     // Update is called once per frame
     void Update()
     {
-        sec = (int) Time.timeSinceLevelLoad % 60;
-        min = (int) Time.timeSinceLevelLoad / 60;
+        if (timerStarted)
+            currentTime = Time.timeSinceLevelLoad - startTime;
+
+        sec = (int) currentTime % 60;
+        min = (int) currentTime / 60;
 
         timerText.text = String.Format("{0:00}:{1:00}", min, sec);
 

@@ -103,8 +103,9 @@ MonoBehaviour:
   basePoints: 3
   damage: 15
   range: 5
-  projCount: 6
+  projCount: 4
   projRange: 8
+  headSprite: {fileID: 21300000, guid: a76642f6009ad2d4bafdf1e8efe41d5b, type: 3}
   pointsTiers: 03000000040000000500000007000000
   damageTiers: 0f000000120000001500000018000000
   rangeTiers: 0500000006000000080000000a000000

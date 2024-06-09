@@ -22,6 +22,7 @@ public class SashBehavior : MonoBehaviour
         {
             GameObject newSlot = Instantiate(slotPrefab);
             newSlot.transform.parent = gameObject.transform;
+            newSlot.transform.GetComponent<RectTransform>().localPosition = Vector3.zero;
             slotObjects.Add(newSlot);
             slotObjects[i].GetComponent<SashSlot>().SpriteApply(slotDefaults[i]);
             GameControl.PlayerData.currentAffinities[i] = newSlot;

@@ -390,6 +390,7 @@ public class EnemyBehavior : MonoBehaviour
         isPoisoned = false;
         isElectrified = false;
         isActive = false;
+        surprised = false;
         if (Random.Range(0f, 1f) < seedProb)
         {
             GameObject newSeed = seedPool.GetComponent<ObjectPool>().GetPooledObject();

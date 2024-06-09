@@ -164,6 +164,7 @@ MonoBehaviour:
   discoveryDisplay: 1
   firstCatalog: 1
   purchaseMade: 0
+  loading: 0
   inputsTested: 0
   flowerHarvested: 0
   singleTossed: 0
@@ -174,6 +175,7 @@ MonoBehaviour:
   fireReset: 0
   uncommon: 0
   undiscovered: 0.05
+  allDiscovered: []
   commonPool:
   - pink
   - white
@@ -204,6 +206,7 @@ MonoBehaviour:
   - {fileID: 7956063438138374131, guid: cb42ffb11bea89f45bb146cdb2a46a24, type: 3}
   - {fileID: 7956063438138374131, guid: 245f079010862a240802ee13f9b0b7b9, type: 3}
   flowerStats: []
+  flowerPool: {fileID: 3829620497689640212, guid: 5d8333c12bfc0254fa6de0b00c142da2, type: 3}
   highScore: 0
   highMin: 0
   highSec: 0
@@ -211,8 +214,10 @@ MonoBehaviour:
   min: 0
   sec: 0
   score: 0
+  sashActivate: 0
   sashSlots: 3
   sashTypes: []
+  sashPrefab: {fileID: 1836163706850146220, guid: f88615226da414d46b48d49bf89dbb03, type: 3}
   sash: {fileID: 0}
   currentAffinities: []
   affinityTiers:
@@ -224,6 +229,7 @@ MonoBehaviour:
   tierScores: 3200000064000000c8000000
   playerSpeed: 5
   craftingSlow: 0.5
+  pickupDist: 5
   throwDist: 0
   upgradeObj: {fileID: 8343937570677949578, guid: a347e37e23979d546bb4818ddf485b45, type: 3}
   icons:
@@ -231,6 +237,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 39904e9e45e0fdd448a7fd297e811bce, type: 3}
   - {fileID: 21300000, guid: b33f0d6aea0ed78458427b2feb3f2538, type: 3}
   upgrades: []
+  essenceCount: 0
   maxInterval: 0.35
   minInterval: 0.2
   maxSpeed: 2

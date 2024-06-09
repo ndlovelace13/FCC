@@ -100,6 +100,22 @@ public class FlowerCalc : MonoBehaviour
             GameControl.PlayerData.discoveryDisplay = false;
             GameControl.PlayerData.FlowerDiscovery("dandy");
         }
+        GameControl.PlayerData.ResetRun();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void PreroundCalc()
+    {
+        StartCoroutine(Calculating());   
+    }
+
+    IEnumerator Calculating()
+    {
         GameControl.PlayerData.discoveryDisplay = true;
         uncommonRarity = GameControl.PlayerData.uncommon;
         common = GameControl.PlayerData.commonPool;
@@ -111,12 +127,7 @@ public class FlowerCalc : MonoBehaviour
         flowerInfo = InitialCalc();
         Debug.Log(flowerInfo.Count);
         visibleFlowerHandler.GetComponent<VisibleFlowers>().FlowerEstablish(flowerInfo);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        yield return null;
     }
 
     private List<FlowerData> InitialCalc()
@@ -161,16 +172,7 @@ public class FlowerCalc : MonoBehaviour
         {
             rarityChoice = Random.Range(0f, 1f);
             raritySelection = 1;
-            if (rarityChoice > undiscoveredRarity)
-            {
-                Flowers = uncommon;
-            }
-            else if (undiscovered.Count == 0)
-            {
-                Flowers = uncommon;
-            }
-            else
-                Flowers = undiscovered;
+            Flowers = uncommon;
         }
         //selection of a flower from the given list and spawning
         int flowerChoice = Random.Range(0, Flowers.Count);

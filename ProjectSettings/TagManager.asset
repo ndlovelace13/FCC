@@ -33,6 +33,7 @@ TagManager:
   - crosshair
   - landingZone
   - seedPool
+  - timer
   layers:
   - Default
   - TransparentFX
