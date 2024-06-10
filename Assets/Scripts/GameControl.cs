@@ -10,6 +10,9 @@ public class GameControl : MonoBehaviour
     public static GameControl PlayerData;
 
     //all variable declarations
+
+    //testing crawd
+    public bool testing = false;
     
     //game state stuff
     public bool firstRun = true;
@@ -27,6 +30,15 @@ public class GameControl : MonoBehaviour
     public bool firstCatalog = true;
     public bool purchaseMade = false;
 
+    public bool firstResearch = true;
+    public bool donationMade = false;
+
+    public bool balanceUpdated = false;
+
+    public bool loading = false;
+
+    public GameObject tutorialHandler;
+
     //tutorial conditions
     public int inputsTested = 0;
     public bool flowerHarvested = false;
@@ -41,6 +53,7 @@ public class GameControl : MonoBehaviour
     public float uncommon = 0.05f;
     public float undiscovered = 0.05f;
 
+    [SerializeField] public List<string> allDiscovered;
     [SerializeField] public List<string> commonPool;
     [SerializeField] public List<string> discoveredUncommon;
     [SerializeField] public List<string> undiscoveredUncommon;
@@ -50,6 +63,8 @@ public class GameControl : MonoBehaviour
     [SerializeField] public GameObject[] flowers;
     public FlowerStats[] flowerStats;
     public Dictionary<string, FlowerStats> flowerStatsDict;
+    public GameObject flowerPool;
+    public Dictionary<string, ObjectPool> flowerPoolDict;
 
     //player stats
     public int highScore = 0;
@@ -63,8 +78,11 @@ public class GameControl : MonoBehaviour
     public int score = 0;
 
     //affinity sash
+    public bool sashActivated = false;
+    public bool sashActive = false;
     public int sashSlots = 3;
     public List<string> sashTypes;
+    [SerializeField] GameObject sashPrefab;
     public GameObject sash;
     public GameObject[] currentAffinities;
     public Dictionary<string, int> affinityAmounts;
@@ -75,6 +93,7 @@ public class GameControl : MonoBehaviour
     //upgradable stats
     public float playerSpeed = 5f;
     public float craftingSlow = 0.5f;
+    public float pickupDist = 1f;
     //implement with precision throw mechanic
     public float throwDist;
 
@@ -84,6 +103,13 @@ public class GameControl : MonoBehaviour
     [SerializeField] Sprite[] icons;
 
     public List<Upgrade> upgrades;
+
+    //essence progression
+    public int essenceCount = 0;
+
+    //research
+    [SerializeField] GameObject ResearchPrefab;
+    public List<Research> researchItems;
 
     //enemy related variables
     public float maxInterval = 0.35f;
@@ -104,19 +130,33 @@ public class GameControl : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         UpgradeInit();
+        ResearchInit();
         UpgradeApply();
         SetFlowers();
     }
 
     private void SetFlowers()
     {
+        //establish all flower arrays and lists
+        flowerSprites = new Sprite[flowers.Length];
         flowerStatsDict = new Dictionary<string, FlowerStats>();
+        flowerPoolDict = new Dictionary<string, ObjectPool>();
         flowerStats = new FlowerStats[flowers.Length];
         for (int i = 0; i < flowers.Length; i++)
         {
+            //add flowerStats to the array
             flowerStats[i] = flowers[i].GetComponent<FlowerStats>();
+            //establish an associated flowerPool and store in the flowerStats - create once up front instead of each gameplay loop
+            GameObject newPool = Instantiate(flowerPool);
+            newPool.transform.SetParent(transform);
+            newPool.GetComponent<ObjectPool>().Establish(flowers[i], 50);
+            flowerPoolDict.Add(flowerStats[i].type, newPool.GetComponent<ObjectPool>());
+            //store in dictionary for easy access based on type
             flowerStatsDict.Add(flowerStats[i].type, flowerStats[i]);
+            //reset the affinity levels
             flowerStatsDict[flowerStats[i].type].UpdateAffinity(0);
+            //store sprite in array for easy access - MAY WANT TO REMOVE THIS FOR CLEANLINESS LATER
+            flowerSprites[i] = flowerStats[i].headSprite;
         }
 
         //TO DO: get sprites from within flowerStats instead of a separate array
@@ -152,18 +192,85 @@ public class GameControl : MonoBehaviour
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
     }
 
+    private void ResearchInit()
+    {
+        researchItems = new List<Research>();
+        GameObject newResearch = Instantiate(ResearchPrefab);
+        newResearch.transform.parent = transform;
+        researchItems.Add(newResearch.GetComponent<UncommonSeedResearch>());
+        researchItems.Add(newResearch.GetComponent<SashResearch>());
+        /*UncommonSeedResearch newResearch = new UncommonSeedResearch();
+        researchItems.Add(newResearch);
+
+        SashResearch sashResearch = new SashResearch();
+        researchItems.Add(sashResearch);*/
+    }
+
     public void ResetRun()
     {
+        loading = true;
         min = 0;
         sec = 0;
         score = 0;
         currentMax = maxSpeed;
         currentMin = minSpeed;
         currentHealth = maxHealth;
-        
+        balanceUpdated = false;
+        sash = GameObject.FindWithTag("sash");
+        tutorialHandler = GameObject.FindWithTag("tutorialHandler");
+        if (!sashActive)
+        {
+            sash.SetActive(false);
+        }
+        DiscoveredPooling();
+        GameObject.FindWithTag("flowerPool").GetComponent<FlowerCalc>().PreroundCalc();
         foreach(var flowerStat in flowerStats)
         {
             flowerStatsDict[flowerStat.type].UpdateAffinity(0);
+        }
+        //NewUnlocks();
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().IntroMove();
+    }
+
+    public void FinishIntro()
+    {
+        //Other pre-round stuff here
+        loading = false;
+        GameObject.FindWithTag("timer").GetComponent<Timer>().TimerStart();
+        GameObject.FindWithTag("enemyPool").GetComponent<EnemySpawn>().enemyBegin();
+        GameObject announce = GameObject.FindWithTag("mainAnnounce");
+        announce.GetComponent<ScoreNotification>().newFeed("Start Crafting!");
+    }
+
+    public void NewUnlocks()
+    {
+        if (sashActive)
+        {
+            //delivery anim??? - find a different way to activate
+            sash.SetActive(true); //fuck with the transform so that it isn't off screen
+            SashInit();
+        }
+        if (sashActivated)
+        {
+            tutorialHandler.GetComponent<InRoundTutorial>().SashIntro();
+            sashActivated = false;
+        }
+        else
+        {
+            FinishIntro();
+        }
+    }
+
+    public void DiscoveredPooling()
+    {
+        //TO DO - combine into one list of all discovered
+        foreach(var flower in commonPool)
+        {
+            flowerPoolDict[flower].Pooling();
+        }
+        foreach (var flower in discoveredUncommon)
+        {
+            flowerPoolDict[flower].Pooling();
         }
     }
 
@@ -177,21 +284,23 @@ public class GameControl : MonoBehaviour
     public void FlowerDiscovery(string type)
     {
         //make an announcement to the crown announcement
-        if (discoveryDisplay)
+        /*if (discoveryDisplay)
         {
             GameObject announce = GameObject.FindWithTag("mainAnnounce");
             announce.GetComponent<ScoreNotification>().newFeed("New Flower Discovered!");
-        }
+        }*/
         //need to change this once rare flowers are added
         undiscoveredUncommon.Remove(type);
         discoveredUncommon.Add(type);
         //this is where to initialize entry in the almanac/mastery shit
     }
 
+    //TO DO - switch this to take a flower object instead?
     public Sprite SpriteAssign(string type)
     {
         Sprite returnedSprite = flowerSprites[0];
-        switch (type)
+        returnedSprite = flowerStatsDict[type].headSprite;
+        /*switch (type)
         {
             case "pink":
                 returnedSprite = flowerSprites[0];
@@ -214,24 +323,30 @@ public class GameControl : MonoBehaviour
             case "yellow":
                 returnedSprite = flowerSprites[6];
                 break;
+            case "dandy":
+                returnedSprite = flowerSprites[7];
+                break;
             case "default": Debug.Log("unhandled exception"); break;
-        }
+        }*/
         return returnedSprite;
     }
 
     public void SashInit()
     {
-        sashTypes = new List<string>();
-        affinityAmounts = new Dictionary<string, int>();
-        for (int i = 0; i < sashSlots; i++)
+        if (sashActive)
         {
-            //placeholder needed here
-            sashTypes.Add("null");
-            affinityAmounts.Add("slot" + i, 0);
+            sashTypes = new List<string>();
+            affinityAmounts = new Dictionary<string, int>();
+            for (int i = 0; i < sashSlots; i++)
+            {
+                //placeholder needed here
+                sashTypes.Add("null");
+                affinityAmounts.Add("slot" + i, 0);
+            }
+            //don't do this yet
+            currentAffinities = new GameObject[sashSlots];
+            sash.GetComponent<SashBehavior>().slotInit();
         }
-        sash = GameObject.FindWithTag("sash");
-        //don't do this yet
-        currentAffinities = new GameObject[sashSlots];
     }
 
     public void affinityIncrease(string type)

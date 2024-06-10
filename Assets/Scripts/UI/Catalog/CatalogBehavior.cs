@@ -85,8 +85,8 @@ public class CatalogBehavior : MonoBehaviour
         speech.GetComponent<TextAdvancement>().setDialogue(currentLine);
     }
 
-    public void StartGame()
+    public void ReturnToEnd()
     {
-        SceneManager.LoadScene("Gameplay");
+        SceneManager.LoadScene("EndScreen");
     }
 }

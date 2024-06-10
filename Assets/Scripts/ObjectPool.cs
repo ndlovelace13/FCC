@@ -4,14 +4,34 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    [SerializeField] GameObject objectToPool;
+    [SerializeField] public GameObject objectToPool;
     public List<GameObject> pooledObjects;
     public int amountToPool;
     public int activeObjects;
     bool objectActivated;
+    public bool autoPool = false;
     // Start is called before the first frame update
 
     void Start()
+    {
+        if (autoPool)
+        {
+            PoolRoutine();
+        }
+    }
+
+    public void Establish(GameObject obj, int amount)
+    {
+        objectToPool = obj;
+        amountToPool = amount;
+    }
+
+    public void Pooling()
+    {
+        PoolRoutine();
+    }
+
+    private void PoolRoutine()
     {
         pooledObjects = new List<GameObject>();
         GameObject tmp;
@@ -29,7 +49,7 @@ public class ObjectPool : MonoBehaviour
         ///THIS MIGHT BREAK THE ENEMY SPAWN
         for(int i = 0; i < amountToPool; i++)
         {
-            //Debug.Log("at least I tried");
+            //Debug.Log(objectToPool + " " + pooledObjects.Count);
             if (!pooledObjects[i].activeInHierarchy)
             {
                 //Debug.Log("why" + i);

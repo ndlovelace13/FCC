@@ -13,6 +13,9 @@ public class FlowerStats : MonoBehaviour
     public int projCount;
     public int projRange;
 
+    public Sprite headSprite;
+    public GameObject pool;
+
     [SerializeField]
     int[] pointsTiers = new int[4];
     [SerializeField]

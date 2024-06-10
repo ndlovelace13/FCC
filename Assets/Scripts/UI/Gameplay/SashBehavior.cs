@@ -14,14 +14,19 @@ public class SashBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    public void slotInit()
+    {
         slotObjects = new List<GameObject>();
-        GameControl.PlayerData.SashInit();
         //slotObjects = GameObject.FindGameObjectsWithTag("affinitySlot");
         slots = GameControl.PlayerData.sashSlots;
         for (int i = 0; i < slots; i++)
         {
             GameObject newSlot = Instantiate(slotPrefab);
             newSlot.transform.parent = gameObject.transform;
+            newSlot.transform.GetComponent<RectTransform>().localPosition = Vector3.zero;
             slotObjects.Add(newSlot);
             slotObjects[i].GetComponent<SashSlot>().SpriteApply(slotDefaults[i]);
             GameControl.PlayerData.currentAffinities[i] = newSlot;
@@ -32,7 +37,7 @@ public class SashBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<CrownThrowing>().crownHeld == false)
+        if (player.GetComponent<CrownThrowing>().crownHeld == false && GameControl.PlayerData.loading == false)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1) && slots > 0)
             {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -21,6 +22,7 @@ public class VisibleFlowers : MonoBehaviour
     GameObject greenPool;
     GameObject redPool;
     GameObject yellowPool;
+    GameObject dandyPool;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,7 @@ public class VisibleFlowers : MonoBehaviour
         StartCoroutine(PosUpdate());
 
         //assigning pools
+        /*
         GameObject[] pools = GameObject.FindGameObjectsWithTag("headPool");
         foreach (GameObject pool in pools)
         {
@@ -42,8 +45,9 @@ public class VisibleFlowers : MonoBehaviour
                 case "GreenPool": greenPool = pool; break;
                 case "RedPool": redPool = pool; break;
                 case "YellowPool": yellowPool = pool; break;
+                case "DandyPool": dandyPool = pool; break;
             }
-        }
+        }*/
     }
 
     // Update is called once per frame
@@ -100,23 +104,26 @@ public class VisibleFlowers : MonoBehaviour
         while (true)
         {
             yield return new WaitForEndOfFrame();
-            foreach (var flower in flowerInfo)
+            if (flowerInfo != null)
             {
-                if (isVisible(flower) && flower.getFlower() == null)
+                foreach (var flower in flowerInfo)
                 {
-                    StartCoroutine(VisibleApply(flower));
+                    if (isVisible(flower) && flower.getFlower() == null)
+                    {
+                        StartCoroutine(VisibleApply(flower));
+                    }
+                    else if (isVisible(flower) == false && flower.getFlower() != null)
+                    {
+                        StartCoroutine(VisibleRemove(flower));
+                    }
+                    //else
+                    //{
+                    //    Debug.Log(isVisible(flower) + " " + flower.isActivated());
+                    //}
+                    //Debug.Log("current num of visibleFlowers: " + visibleFlowers.Count);
                 }
-                else if (isVisible(flower) == false && flower.getFlower() != null)
-                {
-                    StartCoroutine(VisibleRemove(flower));
-                }
-                //else
-                //{
-                //    Debug.Log(isVisible(flower) + " " + flower.isActivated());
-                //}
-                //Debug.Log("current num of visibleFlowers: " + visibleFlowers.Count);
+                //StartCoroutine(VisibleApplication());
             }
-            //StartCoroutine(VisibleApplication());
         }
     }
 
@@ -179,7 +186,16 @@ public class VisibleFlowers : MonoBehaviour
         yield return null;
         if (visibleFlowers.Contains(flower))
         {
-            GameObject head = flower.getFlower().transform.GetChild(1).gameObject;
+            Transform[] children = flower.getFlower().transform.GetComponentsInChildren<Transform>();
+            GameObject head = null;
+            foreach (Transform child in children)
+            {
+                if (child.tag == "FlowerHead")
+                {
+                    head = child.gameObject;
+                    break;
+                }
+            }
             head.transform.parent = null;
             head.SetActive(false);
             flower.getFlower().SetActive(false);
@@ -212,7 +228,12 @@ public class VisibleFlowers : MonoBehaviour
     private GameObject headReturn(string type)
     {
         GameObject headReturn = null;
-        switch (type)
+        headReturn = GameControl.PlayerData.flowerPoolDict[type].GetPooledObject();
+        if (headReturn == null)
+        {
+            Debug.Log(type + " is broken");
+        }
+        /*switch (type)
         {
             case "white": headReturn = whitePool.GetComponent<ObjectPool>().GetPooledObject(); break;
             case "pink": headReturn = pinkPool.GetComponent<ObjectPool>().GetPooledObject(); break;
@@ -221,7 +242,8 @@ public class VisibleFlowers : MonoBehaviour
             case "yellow": headReturn = yellowPool.GetComponent<ObjectPool>().GetPooledObject(); break;
             case "green": headReturn = greenPool.GetComponent<ObjectPool>().GetPooledObject(); break;
             case "blue": headReturn = bluePool.GetComponent<ObjectPool>().GetPooledObject(); break;
-        }
+            case "dandy": headReturn = dandyPool.GetComponent<ObjectPool>().GetPooledObject(); break;   
+        }*/
         return headReturn;
     }
 }

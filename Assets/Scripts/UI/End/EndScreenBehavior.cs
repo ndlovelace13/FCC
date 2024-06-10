@@ -13,16 +13,20 @@ public class EndScreenBehavior : MonoBehaviour
     void Start()
     {
         Cursor.visible = true;
-        StartCoroutine(BalanceUpdate());
+        if (!GameControl.PlayerData.balanceUpdated)
+            StartCoroutine(BalanceUpdate());
     }
 
     // Update is called once per frame
     void Update()
     {
-        balanceInfo.text = "PAYOUT\n" + "Score Bonus: +" + string.Format("{0:C}", scoreBonus) + "\nTime Bonus: +" + string.Format("{0:C}", timeBonus) + "\nBalance: " + string.Format("{0:C}", GameControl.PlayerData.balance);
+        balanceInfo.text = "PAYOUT\n" + "Score Bonus: +" + string.Format("{0:C}", scoreBonus) + 
+            "\nTime Bonus: +" + string.Format("{0:C}", timeBonus) + 
+            "\nBalance: " + string.Format("{0:C}", GameControl.PlayerData.balance) + 
+            "\n\nEssence Seeds: " + GameControl.PlayerData.essenceCount;
     }
 
-    void OnGUI()
+    /*void OnGUI()
     {
         Event e = Event.current;
         if (e.keyCode == KeyCode.Escape)
@@ -37,7 +41,7 @@ public class EndScreenBehavior : MonoBehaviour
         {
             SceneManager.LoadScene("TitleScreen");
         }
-    }
+    }*/
 
     public void LinkToForm()
     {
@@ -49,6 +53,21 @@ public class EndScreenBehavior : MonoBehaviour
         SceneManager.LoadScene("Catalog");
     }
 
+    public void ResearchLoad()
+    {
+        SceneManager.LoadScene("Research");
+    }
+
+    public void MenuLoad()
+    {
+        SceneManager.LoadScene("TitleScreen");
+    }
+
+    public void NextShift()
+    {
+        SceneManager.LoadScene("Gameplay");
+    }
+
     IEnumerator BalanceUpdate()
     {
         float oldBalance = GameControl.PlayerData.balance;
@@ -56,6 +75,7 @@ public class EndScreenBehavior : MonoBehaviour
         timeBonus = GameControl.PlayerData.min * 60 + GameControl.PlayerData.sec;
         timeBonus /= 100f;
         GameControl.PlayerData.balance += scoreBonus + timeBonus;
+        GameControl.PlayerData.balanceUpdated = true;
         yield return null;
     }
 

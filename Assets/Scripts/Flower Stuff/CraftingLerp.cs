@@ -25,7 +25,7 @@ public class CraftingLerp : MonoBehaviour
         
     }
 
-    public void Activate(string type)
+    public void Activate(string type, int startSide)
     {
         gameObject.SetActive(true);
         player = GameObject.FindWithTag("Player");
@@ -33,7 +33,14 @@ public class CraftingLerp : MonoBehaviour
         mainCanvas = GameObject.FindWithTag("mainCanvas");
         transform.SetParent(mainCanvas.transform);
         thisTrans = GetComponent<RectTransform>();
-        startPos = new Vector2(0f, 0f);
+        if (startSide == 1)
+        {
+            startPos = new Vector2(50f, 50f);
+        }
+        else
+        {
+            startPos = new Vector2(-50f, 50f);
+        }
         thisTrans.anchoredPosition = startPos;
         //transform.localScale = 100f * transform.localScale;
         GetComponentInChildren<Image>().sprite = GameControl.PlayerData.SpriteAssign(type);
