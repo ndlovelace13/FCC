@@ -34,6 +34,7 @@ TagManager:
   - landingZone
   - seedPool
   - timer
+  - tutorialHandler
   layers:
   - Default
   - TransparentFX

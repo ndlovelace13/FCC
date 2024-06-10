@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300420c45485e27469d46d85a5883b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testing: 1
+  testing: 0
   firstRun: 1
   tutorialActive: 0
   speaking: 0
@@ -164,7 +164,11 @@ MonoBehaviour:
   discoveryDisplay: 1
   firstCatalog: 1
   purchaseMade: 0
+  firstResearch: 1
+  donationMade: 0
+  balanceUpdated: 0
   loading: 0
+  tutorialHandler: {fileID: 0}
   inputsTested: 0
   flowerHarvested: 0
   singleTossed: 0
@@ -214,7 +218,8 @@ MonoBehaviour:
   min: 0
   sec: 0
   score: 0
-  sashActivate: 0
+  sashActivated: 0
+  sashActive: 0
   sashSlots: 3
   sashTypes: []
   sashPrefab: {fileID: 1836163706850146220, guid: f88615226da414d46b48d49bf89dbb03, type: 3}
@@ -238,6 +243,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b33f0d6aea0ed78458427b2feb3f2538, type: 3}
   upgrades: []
   essenceCount: 0
+  ResearchPrefab: {fileID: 5122733356647096448, guid: 51f36e36923db974da9666aa476680d7, type: 3}
+  researchItems: []
   maxInterval: 0.35
   minInterval: 0.2
   maxSpeed: 2

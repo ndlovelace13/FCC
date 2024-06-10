@@ -93,7 +93,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 screenEdge = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, 0));
         screenEdge += new Vector3(0, 20);
         transform.position = screenEdge;
+        Debug.Log("player placed");
         float time = 0f;
+        animator = GetComponentInChildren<Animator>();
         while (time < 3f)
         {
             animator.SetBool("isMoving", true);
@@ -101,10 +103,11 @@ public class PlayerMovement : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        Debug.Log("player done moving");
         animator.SetBool("isMoving", false);
         Camera.main.transform.parent = transform;
         Debug.Log("ending intro");
-        GameControl.PlayerData.FinishIntro();
+        GameControl.PlayerData.NewUnlocks();
     }
 
     private void FixedUpdate()

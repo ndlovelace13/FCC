@@ -7,19 +7,21 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CatalogBehavior : MonoBehaviour
+public class ResearchBehavior : MonoBehaviour
 {
-    [SerializeField] GameObject[] upgradeSlots;
-    [SerializeField] GameObject upgradeElem;
+    [SerializeField] GameObject[] donateSlots;
+    [SerializeField] GameObject donateElem;
     // Start is called before the first frame update
 
     [SerializeField] TMP_Text balance;
 
+    bool newLineReady = true;
+
     [SerializeField] GameObject speech;
     string[] currentLine = new string[1];
-    string firstLine = "This is the catalog, your one stop shop for improvements of all sorts. Give me a call when you want to order something - you're welcome for the express shipping";
-    string[] introLines = {"Yes? What'll it be?", "You always call at the BEST times - what is it?", "Time to spend that hard earned cash?", "You again, shouldn't you be making crowns or something?"};
-    string[] purchaseLines = { "Anything else?", "Hope it helps", "Good choice, you needed that one", "On the way", "They tell me the catalog is expanding sometime soon, I'll believe it when I see it" };
+    string firstLine = "Here you'll find a list of active research drives! The R&D team is always looking to provide you with new tech, based on essence seeds dropped from enemies on the job";
+    string[] introLines = { "Got Seeds?", "Our top scientists would be thrilled by your donations", "I don't know how it works, do I sound like a scientist?", "This is way beyond my understanding" };
+    string[] donateLines = { "Yeah, science!", "R&D is cooking up something special JUST for you!", "Who's a helpful crown maker? You are, you are!", "Can't wait to see those skinwalker faces when they see THIS", "Check in every week for new donation opportunities!" };
     void Start()
     {
         //GameObject catalogSlots = GameObject.FindWithTag("upgradeSlots");
@@ -27,7 +29,7 @@ public class CatalogBehavior : MonoBehaviour
         /*upgradeSlots = GetComponentsInChildren<RectTransform>();
         upgradeSlots = upgradeSlots.Where(child => child.tag == "upgrade").ToArray();
         upgradeSlots[0].gameObject.GetComponent<Upgrade>().SetValues("uncommon", 3f, 1.25f, 10, 0.02f);*/
-        foreach (Upgrade upgrade in GameControl.PlayerData.upgrades)
+        /*foreach (Upgrade upgrade in GameControl.PlayerData.upgrades)
         {
             //GameObject newUpgrade = Instantiate(upgradeElem);
             //newUpgrade.GetComponent<UpgradeElement>().setUpgrade(upgrade);
@@ -38,26 +40,27 @@ public class CatalogBehavior : MonoBehaviour
             newUpgrade.tag = "slotFull";
             newUpgrade.GetComponent<UpgradeElement>().setUpgrade(upgrade);
             //newUpgrade.transform.position = upgradeSlots[available].position;
-        }
+        }*/
         IntroLineAssign();
     }
 
     // Update is called once per frame
     void Update()
     {
-        balance.text = "Current Balance: " + string.Format("{0:C}", GameControl.PlayerData.balance);
+        balance.text = "Essence Seeds: " + GameControl.PlayerData.essenceCount;
         if (GameControl.PlayerData.purchaseMade)
         {
+            if (newLineReady)
+                PurchaseLineAssign();
             GameControl.PlayerData.purchaseMade = false;
-            PurchaseLineAssign();
         }
     }
 
     private int nextSlot()
     {
-        for (int i = 0; i < upgradeSlots.Length; i++)
+        for (int i = 0; i < donateSlots.Length; i++)
         {
-            if (upgradeSlots[i].tag == "slotEmpty")
+            if (donateSlots[i].tag == "slotEmpty")
             {
                 return i;
             }
@@ -67,15 +70,23 @@ public class CatalogBehavior : MonoBehaviour
 
     private void PurchaseLineAssign()
     {
-        currentLine[0] = purchaseLines[Random.Range(0, purchaseLines.Length)];
+        newLineReady = false;
+        StartCoroutine(NewLineReset());
+        currentLine[0] = donateLines[Random.Range(0, donateLines.Length)];
         speech.GetComponent<TextAdvancement>().setDialogue(currentLine);
+    }
+
+    IEnumerator NewLineReset()
+    {
+        yield return new WaitForSeconds(5);
+        newLineReady = true;
     }
 
     private void IntroLineAssign()
     {
-        if (GameControl.PlayerData.firstCatalog)
+        if (GameControl.PlayerData.firstResearch)
         {
-            GameControl.PlayerData.firstCatalog = false;
+            GameControl.PlayerData.firstResearch = false;
             currentLine[0] = firstLine;
         }
         else

@@ -186,7 +186,16 @@ public class VisibleFlowers : MonoBehaviour
         yield return null;
         if (visibleFlowers.Contains(flower))
         {
-            GameObject head = flower.getFlower().transform.GetChild(1).gameObject;
+            Transform[] children = flower.getFlower().transform.GetComponentsInChildren<Transform>();
+            GameObject head = null;
+            foreach (Transform child in children)
+            {
+                if (child.tag == "FlowerHead")
+                {
+                    head = child.gameObject;
+                    break;
+                }
+            }
             head.transform.parent = null;
             head.SetActive(false);
             flower.getFlower().SetActive(false);

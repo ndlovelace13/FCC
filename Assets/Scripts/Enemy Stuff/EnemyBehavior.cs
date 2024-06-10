@@ -42,7 +42,7 @@ public class EnemyBehavior : MonoBehaviour
     //2 ICE
     bool isFrozen = false;
     bool isSlowed = false;
-    float freezeTime = 1f;
+    float freezeTime = 3f;
     float slowTime = 2f;
     float slowAmount = 0.5f;
 

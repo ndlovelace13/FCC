@@ -313,7 +313,7 @@ public class CrownConstruction : MonoBehaviour
                     if ((dupePositions.Contains(0) && dupePositions.Contains(4)) || (dupePositions.Contains(1) && dupePositions.Contains(3)))
                     {
                         Debug.Log("Symmetric");
-                        crownScore += flowerStats[0].basePoints * 2 * 3;
+                        crownScore += flowerStats[0].basePoints * 2 * 4;
                         if (dupePositions.Contains(0))
                             crownAnnouncement += outsideText[currentType];
                         else
@@ -359,7 +359,7 @@ public class CrownConstruction : MonoBehaviour
                     {
                         Debug.Log("Symmetric");
                         //8x the quad's base points
-                        crownScore += flowerStats[0].basePoints * 4 * 8;
+                        crownScore += flowerStats[0].basePoints * 4 * 4;
                         //5x the middle's base points
                         //crownScore += flowerStats[2].basePoints * 5;
                         //flowerStats.RemoveAt(2);
@@ -370,13 +370,13 @@ public class CrownConstruction : MonoBehaviour
                     //non-symmetrical
                     else
                     {
-                        crownScore += flowerStats[0].basePoints * 4 * 5;
+                        crownScore += flowerStats[0].basePoints * 4 * 3;
                     }
                     break;
                 //fiver found
                 case 5:
                     Debug.Log("Fiver");
-                    crownScore += flowerStats[0].basePoints * 5 * 10;
+                    crownScore += flowerStats[0].basePoints * 5 * 5;
                     aug2 = augmentCheck(currentType);
                     aug3 = augmentCheck(currentType);
                     crownAnnouncement += fourText[currentType];

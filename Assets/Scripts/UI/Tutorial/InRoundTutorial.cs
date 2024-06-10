@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class InRoundTutorial : MonoBehaviour
 {
-    string[] text1 =
+    [SerializeField] GameObject speech;
+    [SerializeField] GameObject phone;
+    string[] sashText =
     {
         "Finally decided to purchase the floral sash, huh? About time...",
         "R&D's been hard at work producing a tool to help you increase your power on the job, thanks to the essence seeds you contributed",
@@ -20,9 +22,29 @@ public class InRoundTutorial : MonoBehaviour
         
     }
 
+    public void SashIntro()
+    {
+        TutorialContinue(sashText);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameControl.PlayerData.dialogueComplete && speech.activeSelf)
+        {
+            Debug.Log("teehee");
+            speech.SetActive(false);
+            phone.SetActive(false);
+            GameControl.PlayerData.FinishIntro();
+        }
+    }
+
+    public void TutorialContinue(string[] currentText)
+    {
+        //set score text to be this during tutorial
+        //objective.text = "Press Space to advance/skip dialogue";
+        phone.SetActive(true);
+        speech.SetActive(true);
+        speech.GetComponent<TextAdvancement>().setDialogue(currentText);
     }
 }

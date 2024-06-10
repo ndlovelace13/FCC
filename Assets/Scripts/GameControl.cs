@@ -30,7 +30,14 @@ public class GameControl : MonoBehaviour
     public bool firstCatalog = true;
     public bool purchaseMade = false;
 
+    public bool firstResearch = true;
+    public bool donationMade = false;
+
+    public bool balanceUpdated = false;
+
     public bool loading = false;
+
+    public GameObject tutorialHandler;
 
     //tutorial conditions
     public int inputsTested = 0;
@@ -100,6 +107,10 @@ public class GameControl : MonoBehaviour
     //essence progression
     public int essenceCount = 0;
 
+    //research
+    [SerializeField] GameObject ResearchPrefab;
+    public List<Research> researchItems;
+
     //enemy related variables
     public float maxInterval = 0.35f;
     public float minInterval = 0.2f;
@@ -119,6 +130,7 @@ public class GameControl : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         UpgradeInit();
+        ResearchInit();
         UpgradeApply();
         SetFlowers();
     }
@@ -180,6 +192,20 @@ public class GameControl : MonoBehaviour
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
     }
 
+    private void ResearchInit()
+    {
+        researchItems = new List<Research>();
+        GameObject newResearch = Instantiate(ResearchPrefab);
+        newResearch.transform.parent = transform;
+        researchItems.Add(newResearch.GetComponent<UncommonSeedResearch>());
+        researchItems.Add(newResearch.GetComponent<SashResearch>());
+        /*UncommonSeedResearch newResearch = new UncommonSeedResearch();
+        researchItems.Add(newResearch);
+
+        SashResearch sashResearch = new SashResearch();
+        researchItems.Add(sashResearch);*/
+    }
+
     public void ResetRun()
     {
         loading = true;
@@ -189,19 +215,26 @@ public class GameControl : MonoBehaviour
         currentMax = maxSpeed;
         currentMin = minSpeed;
         currentHealth = maxHealth;
+        balanceUpdated = false;
+        sash = GameObject.FindWithTag("sash");
+        tutorialHandler = GameObject.FindWithTag("tutorialHandler");
+        if (!sashActive)
+        {
+            sash.SetActive(false);
+        }
         DiscoveredPooling();
         GameObject.FindWithTag("flowerPool").GetComponent<FlowerCalc>().PreroundCalc();
         foreach(var flowerStat in flowerStats)
         {
             flowerStatsDict[flowerStat.type].UpdateAffinity(0);
         }
+        //NewUnlocks();
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().IntroMove();
     }
 
     public void FinishIntro()
     {
         //Other pre-round stuff here
-        NewUnlocks();
         loading = false;
         GameObject.FindWithTag("timer").GetComponent<Timer>().TimerStart();
         GameObject.FindWithTag("enemyPool").GetComponent<EnemySpawn>().enemyBegin();
@@ -211,14 +244,20 @@ public class GameControl : MonoBehaviour
 
     public void NewUnlocks()
     {
-        if (sashActivated)
+        if (sashActive)
         {
             //delivery anim??? - find a different way to activate
-            sash = Instantiate(sashPrefab); //fuck with the transform so that it isn't off screen
-            sash.transform.parent = GameObject.FindWithTag("mainCanvas").transform;
-            sashActive = true;
+            sash.SetActive(true); //fuck with the transform so that it isn't off screen
+            SashInit();
+        }
+        if (sashActivated)
+        {
+            tutorialHandler.GetComponent<InRoundTutorial>().SashIntro();
             sashActivated = false;
-            //sash tutorial
+        }
+        else
+        {
+            FinishIntro();
         }
     }
 
@@ -245,11 +284,11 @@ public class GameControl : MonoBehaviour
     public void FlowerDiscovery(string type)
     {
         //make an announcement to the crown announcement
-        if (discoveryDisplay)
+        /*if (discoveryDisplay)
         {
             GameObject announce = GameObject.FindWithTag("mainAnnounce");
             announce.GetComponent<ScoreNotification>().newFeed("New Flower Discovered!");
-        }
+        }*/
         //need to change this once rare flowers are added
         undiscoveredUncommon.Remove(type);
         discoveredUncommon.Add(type);
@@ -304,9 +343,9 @@ public class GameControl : MonoBehaviour
                 sashTypes.Add("null");
                 affinityAmounts.Add("slot" + i, 0);
             }
-            sash = GameObject.FindWithTag("sash");
             //don't do this yet
             currentAffinities = new GameObject[sashSlots];
+            sash.GetComponent<SashBehavior>().slotInit();
         }
     }
 

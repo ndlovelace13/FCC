@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class DonationItemBehavior : MonoBehaviour
+{
+    [SerializeField] TMP_Text title;
+    [SerializeField] TMP_Text description;
+    [SerializeField] Image image;
+    [SerializeField] TMP_Text goalText;
+    [SerializeField] Button donationButton;
+
+    [SerializeField] Research currentResearch;
+    [SerializeField] int index;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        currentResearch = GameControl.PlayerData.researchItems[index];
+        donationButton.onClick.RemoveAllListeners();
+        donationButton.onClick.AddListener(Donate);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (GameControl.PlayerData.essenceCount == 0 || currentResearch.maxResearchTimes == currentResearch.currentResearchTimes)
+            donationButton.interactable = false;
+        goalText.text = "Seeds Required for Goal: " + (currentResearch.requiredSeeds - currentResearch.currentSeeds);
+    }
+
+    public void Donate()
+    {
+        Debug.Log("Donated once");
+        GameControl.PlayerData.essenceCount--;
+        currentResearch.currentSeeds++;
+        if (currentResearch.requiredSeeds == currentResearch.currentSeeds)
+            currentResearch.ResearchAction();
+        GameControl.PlayerData.donationMade = true;
+    }
+}
