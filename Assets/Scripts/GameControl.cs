@@ -110,6 +110,7 @@ public class GameControl : MonoBehaviour
     //research
     [SerializeField] GameObject ResearchPrefab;
     public List<Research> researchItems;
+    [SerializeField] GameObject UnlockPrefab;
 
     //enemy related variables
     public float maxInterval = 0.35f;
@@ -197,6 +198,8 @@ public class GameControl : MonoBehaviour
         researchItems = new List<Research>();
         GameObject newResearch = Instantiate(ResearchPrefab);
         newResearch.transform.parent = transform;
+        //newResearch.GetComponent<UncommonSeedResearch>().unlockPrefab = UnlockPrefab;
+        //newResearch.GetComponent<SashResearch>().unlockPrefab = UnlockPre
         researchItems.Add(newResearch.GetComponent<UncommonSeedResearch>());
         researchItems.Add(newResearch.GetComponent<SashResearch>());
         /*UncommonSeedResearch newResearch = new UncommonSeedResearch();

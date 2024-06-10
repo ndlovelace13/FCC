@@ -106,7 +106,7 @@ public class CrownConstruction : MonoBehaviour
             {"dandy", "Scattering "}
         };
         insideText = new Dictionary<string, string>() {
-            {"white", "Blank "},
+            {"white", "Whitish "},
             {"orange", "Peachy "},
             {"pink", "Salmon "},
             {"red", "Burning "},
