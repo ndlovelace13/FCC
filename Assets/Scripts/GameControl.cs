@@ -139,7 +139,6 @@ public class GameControl : MonoBehaviour
     private void SetFlowers()
     {
         //establish all flower arrays and lists
-        flowerSprites = new Sprite[flowers.Length];
         flowerStatsDict = new Dictionary<string, FlowerStats>();
         flowerPoolDict = new Dictionary<string, ObjectPool>();
         flowerStats = new FlowerStats[flowers.Length];
@@ -157,7 +156,6 @@ public class GameControl : MonoBehaviour
             //reset the affinity levels
             flowerStatsDict[flowerStats[i].type].UpdateAffinity(0);
             //store sprite in array for easy access - MAY WANT TO REMOVE THIS FOR CLEANLINESS LATER
-            flowerSprites[i] = flowerStats[i].headSprite;
         }
 
         //TO DO: get sprites from within flowerStats instead of a separate array
@@ -301,7 +299,7 @@ public class GameControl : MonoBehaviour
     //TO DO - switch this to take a flower object instead?
     public Sprite SpriteAssign(string type)
     {
-        Sprite returnedSprite = flowerSprites[0];
+        Sprite returnedSprite;
         returnedSprite = flowerStatsDict[type].headSprite;
         /*switch (type)
         {

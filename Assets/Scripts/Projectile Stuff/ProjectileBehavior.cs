@@ -165,6 +165,7 @@ public class ProjectileBehavior : MonoBehaviour
     {
         //apply sprites instead here
         Sprite currentSprite;
+        //FlowerStats stats = GameControl.PlayerData.flowerStatsDict[type];
         switch (type)
         {
             case 1: currentSprite = fireSprite; break;

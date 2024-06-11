@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6247682276290337585}
   - component: {fileID: 4070853554562464396}
-  - component: {fileID: 2662045514845989443}
   - component: {fileID: 8380903609990722994}
+  - component: {fileID: 358341209870185651}
   m_Layer: 0
   m_Name: Green
   m_TagString: FlowerHead
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 30507de357bfc244e9c1503eaa2bb95f, type: 3}
-  m_Color: {r: 0.55093986, g: 0.9528302, b: 0.15730685, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -86,31 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2662045514845989443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606340863985191559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25d7919e192a9f04c8ce47b35a9e5245, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rarity: 1
-  type: green
-  basePoints: 3
-  damage: 15
-  range: 5
-  projCount: 6
-  projRange: 8
-  headSprite: {fileID: 21300000, guid: 30507de357bfc244e9c1503eaa2bb95f, type: 3}
-  pointsTiers: 03000000040000000500000007000000
-  damageTiers: 0f000000120000001400000016000000
-  rangeTiers: 0500000006000000080000000a000000
-  projTiers: 06000000060000000700000008000000
-  position: 0
 --- !u!114 &8380903609990722994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,3 +100,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: green
   position: 0
+--- !u!114 &358341209870185651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606340863985191559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57671ffb6020d654db54751367b09a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rarity: 1
+  type: green
+  basePoints: 3
+  damage: 15
+  range: 15
+  projCount: 6
+  projRange: 8
+  headSprite: {fileID: 21300000, guid: 30507de357bfc244e9c1503eaa2bb95f, type: 3}
+  projSprite: {fileID: 21300000, guid: 43743c914446f5a41898ec367b20ba3d, type: 3}
+  pool: {fileID: 0}
+  pointsTiers: 03000000040000000500000007000000
+  damageTiers: 0f000000120000001400000016000000
+  rangeTiers: 0f000000120000001400000016000000
+  projTiers: 06000000060000000700000008000000
+  aug: 3
+  primaryText: 'Toxic '
+  insideText: 'Noxious '
+  outsideText: 'Poisonous '
+  fourText: 'Lethal '
+  fiveText: 'Caustic '

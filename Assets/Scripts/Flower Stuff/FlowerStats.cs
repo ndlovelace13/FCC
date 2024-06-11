@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlowerStats : MonoBehaviour
+public abstract class FlowerStats : MonoBehaviour
 {
     [SerializeField] public int rarity;
     [SerializeField] public string type;
@@ -14,6 +14,7 @@ public class FlowerStats : MonoBehaviour
     public int projRange;
 
     public Sprite headSprite;
+    public Sprite projSprite;
     public GameObject pool;
 
     [SerializeField]
@@ -24,7 +25,10 @@ public class FlowerStats : MonoBehaviour
     int[] rangeTiers = new int[4];
     [SerializeField]
     int[] projTiers = new int[4];
-    [SerializeField] public int position;
+
+    [SerializeField] public int aug;
+
+    [SerializeField] public string primaryText, insideText, outsideText, fourText, fiveText;
     //associated projectile script
     //associated augment script
     // Start is called before the first frame update
@@ -45,5 +49,10 @@ public class FlowerStats : MonoBehaviour
         damage = damageTiers[tier];
         range = rangeTiers[tier];
         projCount = projTiers[tier];
+    }
+
+    public virtual void applyAug()
+    {
+
     }
 }

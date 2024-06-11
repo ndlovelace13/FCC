@@ -80,7 +80,6 @@ public class CrownAttack : MonoBehaviour
     public void CrownAttacking()
     {
         //Debug.Log("why");
-        GameObject proj;
         float angle;
         Debug.Log(projType);
         lastCrown = crown.transform;
@@ -206,10 +205,10 @@ public class CrownAttack : MonoBehaviour
         angleRadians += Mathf.PI / 2;
         Debug.Log("radians: " + angleRadians);
         //set the params based on the flower being thrown
-        range = flower.GetComponent<FlowerStats>().projRange;
-        damage = flower.GetComponent<FlowerStats>().damage;
-        string type = flower.GetComponent<FlowerStats>().type;
-        augment1 = player.GetComponent<CrownConstruction>().augmentCheck(type);
+        range = GameControl.PlayerData.flowerStatsDict[flower.GetComponent<FlowerBehavior>().type].projRange;
+        damage = GameControl.PlayerData.flowerStatsDict[flower.GetComponent<FlowerBehavior>().type].damage;
+        string type = flower.GetComponent<FlowerBehavior>().type;
+        augment1 = GameControl.PlayerData.flowerStatsDict[flower.GetComponent<FlowerBehavior>().type].aug;
         Debug.Log("Type: " + type + " Augment: " + augment1);
         augment2 = 0;
         augment3 = 0;
