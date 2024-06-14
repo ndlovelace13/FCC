@@ -5,10 +5,11 @@ using static UnityEngine.ParticleSystem;
 
 public class AoeBehavior : MonoBehaviour
 {
-    int[] augments;
+    string[] augments;
     float activeTime = 2;
     List<GameObject> particles;
-    int particleIgnore = -1;
+    //what does this do????
+    string particleIgnore = "";
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,7 @@ public class AoeBehavior : MonoBehaviour
         
     }
 
-    public void Activate(int[] augs, float time, int partIgnore)
+    public void Activate(string[] augs, float time, string partIgnore)
     {
         augments = augs;
         activeTime = time;
@@ -45,24 +46,29 @@ public class AoeBehavior : MonoBehaviour
         }
     }
 
-    public void setParticles(int[] augs)
+    public void setParticles(string[] augs)
     {
         for (int i = 0; i < augs.Length; i++)
         {
             //Debug.Log("current aug: " + augs[i]);
-            if (augs[i] != particleIgnore)
-                particles[i].GetComponent<Animator>().SetInteger("augment", augs[i]);
+            if (augs[i] != "" && augs[i] != particleIgnore && augs[i] != null)
+            {
+                FlowerStats currentStats = GameControl.PlayerData.flowerStatsDict[augs[i]];
+                particles[i].GetComponent<Animator>().SetInteger("augment", currentStats.aug);
+            }
             else
+            {
                 particles[i].GetComponent<Animator>().SetInteger("augment", 0);
+            }
         }
     }
 
-    public int[] getAugments() { return augments; }
+    public string[] getAugments() { return augments; }
 
     IEnumerator Deactivate()
     {
         yield return new WaitForSeconds(activeTime);
-        particleIgnore = -1;
+        particleIgnore = "";
         gameObject.SetActive(false);
     }
 }

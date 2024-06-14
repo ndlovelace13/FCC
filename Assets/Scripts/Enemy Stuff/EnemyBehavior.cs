@@ -20,7 +20,7 @@ public class EnemyBehavior : MonoBehaviour
     Transform target;
 
     //SPEED SHIT
-    float moveSpeed;
+    public float moveSpeed;
     float minSpeed;
     float maxSpeed;
     float backupSpeed;
@@ -33,35 +33,23 @@ public class EnemyBehavior : MonoBehaviour
 
     [SerializeField] GameObject notif;
 
+    public string[] augments;
+
     //1 FIRE
-    bool isBurning = false;
-    int burnDamage = 2;
-    float burnCooldown = 0.5f;
-    float burnTime = 3;
+    public bool isBurning = false;
 
     //2 ICE
-    bool isFrozen = false;
-    bool isSlowed = false;
-    float freezeTime = 3f;
-    float slowTime = 2f;
-    float slowAmount = 0.5f;
-
+    public bool isFrozen = false;
+    public bool isSlowed = false;
+    
     //3 POISON
-    bool isPoisoned = false;
-    int poisonDamage = 1;
-    float poisonCooldown = 0.3f;
-    float poisonTime = 4f;
-    float poisonSlow = 0.7f;
+    public bool isPoisoned = false;
 
     //4 ELECTRIC
     public bool isElectrified = false;
-    int numTargets = 2;
-    float stunAmount = 0.2f;
-    float stunTime = 1f;
-    int electricDamage = 5;
-    bool electricPassed = false;
-    [SerializeField] GameObject lightning;
-    GameObject lightningPool;
+    public bool electricPassed = false;
+
+    public bool wasKilled = false;
 
     //Particles
     List<GameObject> particles;
@@ -78,7 +66,7 @@ public class EnemyBehavior : MonoBehaviour
         target = player;
         //moveSpeed = maxSpeed;
         scoreNotif = GameObject.FindGameObjectWithTag("scoreAnnounce").GetComponent<TMP_Text>();
-        lightningPool = GameObject.FindGameObjectWithTag("lightningPool");
+        //lightningPool = GameObject.FindGameObjectWithTag("lightningPool");
         seedPool = GameObject.FindGameObjectWithTag("seedPool");
     }
 
@@ -114,6 +102,16 @@ public class EnemyBehavior : MonoBehaviour
             {
                 Deactivate();
             }
+
+            //visual layer in reference to player
+            if (player.localPosition.y < transform.localPosition.y)
+            {
+                GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().sortingOrder = 2;
+            }
         }
     }
 
@@ -134,192 +132,36 @@ public class EnemyBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        augments = new string[3];
         //Debug.Log("collision happening");
         if (other.gameObject.tag == "projectile")
         {
             DealDamage(other.gameObject.GetComponent<ProjectileBehavior>().damage, Color.white);
-            int[] augments = other.gameObject.GetComponent<ProjectileBehavior>().getAugments();
+            augments = other.gameObject.GetComponent<ProjectileBehavior>().getAugments();
             AugmentApplication(augments);
             other.gameObject.GetComponent<ProjectileBehavior>().ObjectDeactivate();
         }
         else if (other.gameObject.tag == "aoe")
         {
-            int[] augments = other.gameObject.GetComponent<AoeBehavior>().getAugments();
+            augments = other.gameObject.GetComponent<AoeBehavior>().getAugments();
             AugmentApplication(augments);
         }
     }
 
-    private void AugmentApplication(int[] augs)
+    public void AugmentApplication(string[] augs)
     {
-        foreach (int aug in augs)
+        foreach (string aug in augs)
         {
-            switch(aug)
+            if (aug != null && aug != "")
             {
-                case 1: StartCoroutine(FireApply()); break; //apply burn
-                case 2: StartCoroutine(FreezeApply()); break; //apply freeze
-                case 3: StartCoroutine(PoisonApply()); break; //apply poison
-                case 4: if (!electricPassed) { StartCoroutine(ElectricApply(numTargets, augs)); } break; //apply electric
+                GameControl.PlayerData.flowerStatsDict[aug].OnEnemyCollision(gameObject);
             }
         }
     }
 
-    IEnumerator FireApply()
+    public GameObject ClosestEnemy(GameObject[] enemies)
     {
-        Debug.Log("This mf burning");
-        isBurning = true;
-        GetComponent<SpriteRenderer>().color = Color.red;
-        StartCoroutine(BurnHandler());
-        yield return null;
-    }
-
-    IEnumerator BurnHandler()
-    {
-        float burnTimer = 0f;
-        GameObject part = nextParticle();
-        setParticle(part, 1);
-        while (burnTimer < burnTime)
-        {
-            Debug.Log("ouch " + health);
-            yield return new WaitForSeconds(burnCooldown);
-            DealDamage(burnDamage, Color.red);
-            burnTimer += burnCooldown;
-        }
-        Debug.Log("Done");
-        isBurning = false;
-        setParticle(part, 0);
-        GetComponent<SpriteRenderer>().color = Color.white;
-    }
-    
-    IEnumerator FreezeApply()
-    {
-        if (!isFrozen)
-        {
-            Debug.Log("This mf frozen");
-            GetComponent<SpriteRenderer>().color = Color.blue;
-            //backupSpeed = moveSpeed;
-            isFrozen = true;
-            moveSpeed = 0f;
-            if (!isBurning)
-            {
-                yield return new WaitForSeconds(freezeTime);
-            }
-            //moveSpeed = backupSpeed;
-            isFrozen = false;
-        }
-        StartCoroutine(SlowApply(slowAmount, slowTime, 2));
-        GetComponent<SpriteRenderer>().color = Color.cyan;
-    }
-
-    IEnumerator SlowApply(float slowEffect, float slowTime, int particle)
-    {
-        GameObject part = nextParticle();
-        setParticle(part, particle);
-        isSlowed = true;
-        /*if (isFrozen)
-        {
-            backupSpeed = backupSpeed * slowEffect;
-            backupUsed = true;
-        }
-        else
-            moveSpeed = moveSpeed * slowEffect;*/
-        SpeedDown(slowEffect);
-        yield return new WaitForSeconds(slowTime);
-        //this might be fucked;
-        /*if (isFrozen || backupUsed)
-        {
-            Debug.Log("BACKUP");
-            backupSpeed = backupSpeed / slowEffect;
-        }
-        else
-            moveSpeed = moveSpeed / slowEffect;*/
-        SpeedUp(slowEffect);
-        isSlowed = false;
-        GetComponent<SpriteRenderer>().color = Color.white;
-        setParticle(part, 0);
-        if (particle == 4)
-            isElectrified = false;
-        /*if (backupUsed)
-        {
-            moveSpeed = backupSpeed;
-            backupUsed = false;
-        }*/
-    }
-
-    IEnumerator PoisonApply()
-    {
-        Debug.Log("This mf poisoned");
-        isPoisoned = true;
-        GetComponent<SpriteRenderer>().color = Color.green;
-        StartCoroutine(PoisonHandler());
-        StartCoroutine(SlowApply(poisonSlow, poisonTime, 3));
-        yield return null;
-    }
-
-    IEnumerator PoisonHandler()
-    {
-        float poisonTimer = 0f;
-        while (poisonTimer < poisonTime)
-        {
-            Debug.Log("ouch " + health);
-            yield return new WaitForSeconds(poisonCooldown);
-            DealDamage(poisonDamage, Color.green);
-            poisonTimer += poisonCooldown;
-        }
-        Debug.Log("Done");
-        isPoisoned = false;
-        GetComponent<SpriteRenderer>().color = Color.white;
-    }
-
-    IEnumerator ElectricApply(int remainingTargets, int[] augs)
-    {
-        Debug.Log("This mf electrified");
-        isElectrified = true;
-        GetComponent<SpriteRenderer>().color = Color.yellow;
-        StartCoroutine(SlowApply(stunAmount, stunTime, 4));
-        if (remainingTargets > 0)
-        {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
-            GameObject closestEnemy = ClosestEnemy(enemies);
-            if (closestEnemy != null)
-            {
-                StartCoroutine(LightningEffect(gameObject, closestEnemy));
-                closestEnemy.GetComponent<EnemyBehavior>().ElectricPass(remainingTargets - 1, augs);
-            }
-            DealDamage(electricDamage, Color.yellow);
-        }
-        //isElectrified = false;
-        yield return null;
-    }
-
-    IEnumerator LightningEffect(GameObject origin, GameObject target)
-    {
-        Vector2 length = target.transform.position - origin.transform.position;
-        float angleRadians = Mathf.Atan2(length.y, -length.x);
-        if (angleRadians < 0)
-            angleRadians += 2 * Mathf.PI;
-        //angleRadians += Mathf.PI / 2;
-        Vector2 direction = new Vector2(Mathf.Sin(angleRadians), Mathf.Cos(angleRadians));
-        GameObject newLightning = lightningPool.GetComponent<ObjectPool>().GetPooledObject();
-        newLightning.transform.position = Vector3.Lerp(origin.transform.position, target.transform.position, 0.5f);
-        newLightning.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
-        //GameObject newLightning = Instantiate(lightning, Vector3.Lerp(origin.transform.position, target.transform.position, 0.5f), Quaternion.LookRotation(Vector3.forward, direction));
-        newLightning.transform.localScale = new Vector2(length.magnitude, newLightning.transform.localScale.y);
-        newLightning.GetComponent<LightningBehavior>().Activate();
-        yield return null;
-        //newLightning.SetActive(false);
-    }
-
-    public void ElectricPass(int remainingTargets, int[] augs)
-    {
-        electricPassed = true;
-        StartCoroutine(ElectricApply(remainingTargets, augs));
-        AugmentApplication(augs);
-        electricPassed = false;
-    }
-
-    private GameObject ClosestEnemy(GameObject[] enemies)
-    {
-        Debug.Log("WHATATT " + enemies.Length);
+        //Debug.Log("WHATATT " + enemies.Length);
         GameObject closestEnemy = null;
         float closestDist = Mathf.Infinity;
         foreach (GameObject potentialTarget in enemies)
@@ -376,6 +218,7 @@ public class EnemyBehavior : MonoBehaviour
         GetComponent<Animator>().speed = backupSpeed * 0.5f;
         //begin the gradual speed up routine
         StartCoroutine(GradualSpeedUp());
+        StartCoroutine(KillReset());
     }
 
     private void Deactivate()
@@ -391,6 +234,7 @@ public class EnemyBehavior : MonoBehaviour
         isElectrified = false;
         isActive = false;
         surprised = false;
+        wasKilled = true;
         if (Random.Range(0f, 1f) < seedProb)
         {
             GameObject newSeed = seedPool.GetComponent<ObjectPool>().GetPooledObject();
@@ -400,12 +244,18 @@ public class EnemyBehavior : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void SpeedUp(float mod)
+    IEnumerator KillReset()
+    {
+        yield return new WaitForSeconds(5);
+        wasKilled = false;
+    }
+
+    public void SpeedUp(float mod)
     {
         backupSpeed = backupSpeed / mod;
     }
 
-    private void SpeedDown(float mod)
+    public void SpeedDown(float mod)
     {
         backupSpeed = backupSpeed * mod;
     }
@@ -451,7 +301,7 @@ public class EnemyBehavior : MonoBehaviour
         }*/
     }
 
-    private GameObject nextParticle()
+    public GameObject nextParticle()
     {
         foreach (var particle in particles)
         {

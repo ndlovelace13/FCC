@@ -14,9 +14,9 @@ public class CrownAttack : MonoBehaviour
     [SerializeField] float speed = 5f;
     float range;
     int damage;
-    int augment1;
-    int augment2;
-    int augment3;
+    string augment1;
+    string augment2;
+    string augment3;
     int projCount;
 
     string projType;
@@ -49,7 +49,7 @@ public class CrownAttack : MonoBehaviour
         }
     }
 
-    public void SetProjStats(float r, int d, string type, int aug1, int aug2, int aug3, int numProjs)
+    public void SetProjStats(float r, int d, string type, string aug1, string aug2, string aug3, int numProjs)
     {
         range = r;
         damage = d;
@@ -204,14 +204,23 @@ public class CrownAttack : MonoBehaviour
             angleRadians += 2 * Mathf.PI;
         angleRadians += Mathf.PI / 2;
         Debug.Log("radians: " + angleRadians);
-        //set the params based on the flower being thrown
-        range = GameControl.PlayerData.flowerStatsDict[flower.GetComponent<FlowerBehavior>().type].projRange;
-        damage = GameControl.PlayerData.flowerStatsDict[flower.GetComponent<FlowerBehavior>().type].damage;
-        string type = flower.GetComponent<FlowerBehavior>().type;
-        augment1 = GameControl.PlayerData.flowerStatsDict[flower.GetComponent<FlowerBehavior>().type].aug;
+        //set the params based on the flower being thrown]
+        string type;
+        //Wild Check
+        if (flower.GetComponent<FlowerBehavior>().type == "wild")
+        {
+            WildStats wild = (WildStats)GameControl.PlayerData.flowerStatsDict["wild"];
+            type = wild.WildTypeRandomize();
+        }
+        else
+            type = flower.GetComponent<FlowerBehavior>().type;
+
+        range = GameControl.PlayerData.flowerStatsDict[type].projRange;
+        damage = GameControl.PlayerData.flowerStatsDict[type].damage;
+        augment1 = type;
         Debug.Log("Type: " + type + " Augment: " + augment1);
-        augment2 = 0;
-        augment3 = 0;
+        augment2 = "";
+        augment3 = "";
         singleFire = true;
         StartCoroutine(ProjSpawn(angleRadians));
         //get that shit outta here
@@ -222,7 +231,7 @@ public class CrownAttack : MonoBehaviour
     {
         if (GameControl.PlayerData.tutorialState == 6)
             GameControl.PlayerData.crownThrown = true;
-        if (GameControl.PlayerData.tutorialState == 7 && augment1 == 0)
+        if (GameControl.PlayerData.tutorialState == 7 && augment1 == "")
             GameControl.PlayerData.fireReset = true;
         Destroy(crown);
     }

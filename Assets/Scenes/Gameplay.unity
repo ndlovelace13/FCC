@@ -921,7 +921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToPool: {fileID: 7462589483989300187, guid: 84895c4dcaf16d44fa826b57c17fdee4, type: 3}
   pooledObjects: []
-  amountToPool: 50
+  amountToPool: 200
   activeObjects: 15
   autoPool: 1
 --- !u!4 &708354557

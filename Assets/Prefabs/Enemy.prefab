@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3276362812338415158}
   - component: {fileID: 1929111512473919845}
   - component: {fileID: 3259970831933619588}
+  - component: {fileID: 8156539619727094662}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: enemy
@@ -102,9 +103,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  isActive: 0
+  moveSpeed: 0
   notif: {fileID: 7155992749287334371, guid: 57602ac8dbb3e3441931b13c9bcfa0b8, type: 3}
+  augments: []
+  isBurning: 0
+  isFrozen: 0
+  isSlowed: 0
+  isPoisoned: 0
   isElectrified: 0
-  lightning: {fileID: 1713123191170323571, guid: 5af7ef43dc7880045950d311aec85d28, type: 3}
+  electricPassed: 0
+  wasKilled: 0
 --- !u!70 &3276362812338415158
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -112,7 +121,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1003814786078272635}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -188,6 +197,41 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!58 &8156539619727094662
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003814786078272635}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.1, y: -0.6}
+  serializedVersion: 2
+  m_Radius: 0.4
 --- !u!1 &2186241190138067228
 GameObject:
   m_ObjectHideFlags: 0

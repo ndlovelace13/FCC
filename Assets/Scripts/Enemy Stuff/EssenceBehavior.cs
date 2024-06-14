@@ -18,7 +18,7 @@ public class EssenceBehavior : MonoBehaviour
         if (!pickingUp)
         {
             Vector2 currentDist = player.transform.localPosition - transform.position;
-            Debug.Log(currentDist.magnitude);
+            //Debug.Log(currentDist.magnitude);
             if (currentDist.magnitude < GameControl.PlayerData.pickupDist)
             {
                 pickingUp = true;

@@ -119,7 +119,7 @@ MonoBehaviour:
   range: 5
   projCount: 6
   projRange: 8
-  headSprite: {fileID: 0}
+  headSprite: {fileID: 21300000, guid: 035710b6dbc5c4841a2de9809bf352c7, type: 3}
   projSprite: {fileID: 21300000, guid: 8f5fdcbb4a5d72a4d826873bf7a91f65, type: 3}
   pool: {fileID: 0}
   pointsTiers: 03000000040000000500000007000000

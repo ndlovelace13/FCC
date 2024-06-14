@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300420c45485e27469d46d85a5883b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testing: 0
+  testing: 1
   firstRun: 1
   tutorialActive: 0
   speaking: 0
@@ -191,6 +191,7 @@ MonoBehaviour:
   - yellow
   - green
   - dandy
+  - wild
   flowerSprites:
   - {fileID: 21300000, guid: 557a8034be4b0e94c9b568719bdaf23f, type: 3}
   - {fileID: 21300000, guid: 5fcc3b31d90d1f448b6d8b2249d14587, type: 3}
@@ -209,6 +210,7 @@ MonoBehaviour:
   - {fileID: 1606340863985191559, guid: 1c80d2aae43248243984d84406911312, type: 3}
   - {fileID: 7956063438138374131, guid: cb42ffb11bea89f45bb146cdb2a46a24, type: 3}
   - {fileID: 7956063438138374131, guid: 245f079010862a240802ee13f9b0b7b9, type: 3}
+  - {fileID: 7956063438138374131, guid: 43c7493a0ee1a0740925bb8214d0a63a, type: 3}
   flowerStats: []
   flowerPool: {fileID: 3829620497689640212, guid: 5d8333c12bfc0254fa6de0b00c142da2, type: 3}
   highScore: 0

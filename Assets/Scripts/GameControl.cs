@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -145,10 +147,14 @@ public class GameControl : MonoBehaviour
         for (int i = 0; i < flowers.Length; i++)
         {
             //add flowerStats to the array
-            flowerStats[i] = flowers[i].GetComponent<FlowerStats>();
+            GameObject newFlower = Instantiate(flowers[i]);
+            newFlower.transform.SetParent(transform);
+            newFlower.GetComponent<SpriteRenderer>().enabled = false;
+            flowerStats[i] = newFlower.GetComponent<FlowerStats>();
             //establish an associated flowerPool and store in the flowerStats - create once up front instead of each gameplay loop
             GameObject newPool = Instantiate(flowerPool);
             newPool.transform.SetParent(transform);
+            flowers[i].GetComponent<SpriteRenderer>().enabled = true;
             newPool.GetComponent<ObjectPool>().Establish(flowers[i], 50);
             flowerPoolDict.Add(flowerStats[i].type, newPool.GetComponent<ObjectPool>());
             //store in dictionary for easy access based on type
@@ -229,6 +235,9 @@ public class GameControl : MonoBehaviour
         {
             flowerStatsDict[flowerStat.type].UpdateAffinity(0);
         }
+        foreach (var flowerStat in flowerStats)
+        {
+        }
         //NewUnlocks();
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().IntroMove();
     }
@@ -265,11 +274,9 @@ public class GameControl : MonoBehaviour
     public void DiscoveredPooling()
     {
         //TO DO - combine into one list of all discovered
-        foreach(var flower in commonPool)
-        {
-            flowerPoolDict[flower].Pooling();
-        }
-        foreach (var flower in discoveredUncommon)
+        allDiscovered = commonPool;
+        allDiscovered = allDiscovered.Union(discoveredUncommon).ToList();
+        foreach(var flower in allDiscovered)
         {
             flowerPoolDict[flower].Pooling();
         }
