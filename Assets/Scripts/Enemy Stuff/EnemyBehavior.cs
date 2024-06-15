@@ -26,7 +26,7 @@ public class EnemyBehavior : MonoBehaviour
     float backupSpeed;
     bool backupUsed = false;
     float speedCooldown = 10f;
-    float speedIncrement = 0.925f;
+    float speedIncrement = 0.9f;
     bool speedUp;
     bool surprised = false;
     float surpriseTime = 1f;
@@ -61,7 +61,7 @@ public class EnemyBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        destructScore = 10;
+        //destructScore = 10;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         target = player;
         //moveSpeed = maxSpeed;
@@ -119,6 +119,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (!surprised)
         {
+            GetComponent<Animator>().SetBool("Surprise", true);
             Debug.Log("This mf surprised");
             //GetComponent<SpriteRenderer>().color = Color.blue;
             //backupSpeed = moveSpeed;
@@ -127,6 +128,7 @@ public class EnemyBehavior : MonoBehaviour
             yield return new WaitForSeconds(surpriseTime);
             //moveSpeed = backupSpeed;
             surprised = false;
+            GetComponent<Animator>().SetBool("Surprise", false);
         }
     }
 
@@ -211,6 +213,7 @@ public class EnemyBehavior : MonoBehaviour
         {
             particle.GetComponent<Animator>().SetInteger("augment", 0);
         }
+        GetComponent<Animator>().SetBool("Surprise", false);
         //assign a random speed
         maxSpeed = GameControl.PlayerData.currentMax;
         minSpeed = GameControl.PlayerData.currentMin;
@@ -223,10 +226,10 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Deactivate()
     {
-        scoreNotif.GetComponent<ScoreNotification>().newFeed("Enemy Defeated | +" + destructScore);
+        scoreNotif.GetComponent<ScoreNotification>().newFeed("Enemy Defeated | +" + GameControl.PlayerData.killScore);
         //int currentScore = PlayerPrefs.GetInt("totalScore");
         //PlayerPrefs.SetInt("totalScore", currentScore + destructScore);
-        GameControl.PlayerData.score += destructScore;
+        GameControl.PlayerData.score += GameControl.PlayerData.killScore;
         isBurning = false;
         isFrozen = false;
         isSlowed = false;
@@ -241,6 +244,7 @@ public class EnemyBehavior : MonoBehaviour
             newSeed.SetActive(true);
             newSeed.transform.localPosition = transform.localPosition;
         }
+        GameControl.PlayerData.activeEnemies--;
         gameObject.SetActive(false);
     }
 
@@ -265,9 +269,12 @@ public class EnemyBehavior : MonoBehaviour
         while (isActive)
         {
             yield return new WaitForSeconds(speedCooldown);
-            if (backupSpeed < GameControl.PlayerData.playerSpeed + 1)
+            if (backupSpeed < GameControl.PlayerData.playerSpeed)
             {
-                SpeedUp(speedIncrement);
+                if (backupSpeed < GameControl.PlayerData.playerSpeed - 2f)
+                    SpeedUp(speedIncrement);
+                else
+                    SpeedUp(speedIncrement + 0.05f);
                 GetComponent<Animator>().speed = backupSpeed * 0.5f;
             }
         }

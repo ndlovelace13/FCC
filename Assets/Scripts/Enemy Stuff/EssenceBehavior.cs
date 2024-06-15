@@ -31,6 +31,7 @@ public class EssenceBehavior : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         pickingUp = false;
+        GetComponent<SizeLerp>().Execute();
     }
 
     IEnumerator StartLerp()

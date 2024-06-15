@@ -78,4 +78,9 @@ public class StartScreenTransition : MonoBehaviour
     {
         SceneManager.LoadScene("Controls");
     }
+
+    public void CreditsTransition()
+    {
+        SceneManager.LoadScene("Credits");
+    }
 }

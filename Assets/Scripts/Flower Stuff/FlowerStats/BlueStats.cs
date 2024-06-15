@@ -30,6 +30,7 @@ public class BlueStats : FlowerStats
     {
         if (!enemy.GetComponent<EnemyBehavior>().isFrozen)
         {
+            enemy.GetComponent<Animator>().SetBool("Surprise", true);
             Debug.Log("This mf frozen");
             enemy.GetComponent<SpriteRenderer>().color = Color.blue;
             //backupSpeed = moveSpeed;
@@ -42,6 +43,7 @@ public class BlueStats : FlowerStats
             //moveSpeed = backupSpeed;
             if (enemy.activeSelf)
                 enemy.GetComponent<EnemyBehavior>().isFrozen = false;
+            enemy.GetComponent<Animator>().SetBool("Surprise", false);
         }
         if (enemy.activeSelf)
         {

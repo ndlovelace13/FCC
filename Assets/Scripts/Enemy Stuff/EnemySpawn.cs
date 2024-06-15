@@ -7,7 +7,7 @@ public class EnemySpawn : MonoBehaviour
 {
     public Camera cam;
     public GameObject Player;
-    public float spawnDelay = 2f;
+    public float spawnDelay = 3f;
     List<GameObject> enemies = new List<GameObject>();
     static float xDiff;
     static float yDiff;
@@ -22,9 +22,12 @@ public class EnemySpawn : MonoBehaviour
     public void enemyBegin()
     {
         cam = Camera.main;
+        GameControl.PlayerData.activeEnemies = 0;
         StartCoroutine(spawnTimer());
         StartCoroutine(PosUpdate());
         StartCoroutine(VisibleCheck());
+        StartCoroutine(CountScale());
+        StartCoroutine(StatsScale());
     }
 
     IEnumerator spawnTimer()
@@ -33,15 +36,21 @@ public class EnemySpawn : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(spawnDelay);
-            GameObject newEnemy = gameObject.GetComponent<ObjectPool>().GetPooledObject();
-            if (newEnemy != null)
+            //check how many enemies are currently active in hierarchy
+            //GameObject[] currentEnemies = GameObject.FindGameObjectsWithTag("enemy");
+            Debug.Log("There are currently " + GameControl.PlayerData.activeEnemies + " enemies in play");
+            if (GameControl.PlayerData.activeEnemies < GameControl.PlayerData.currentMaxEnemies)
             {
-                //Debug.Log("Yall got me fucked up");
-                StartCoroutine(Spawn(newEnemy));
-            }
-            else
-            {
-                Debug.Log("What the fuck is a kilometer");
+                GameObject newEnemy = gameObject.GetComponent<ObjectPool>().GetPooledObject();
+                if (newEnemy != null)
+                {
+                    //Debug.Log("Yall got me fucked up");
+                    StartCoroutine(Spawn(newEnemy));
+                }
+                else
+                {
+                    Debug.Log("What the fuck is a kilometer");
+                }
             }
         }
     }
@@ -96,6 +105,7 @@ public class EnemySpawn : MonoBehaviour
         newEnemy.GetComponent<EnemyBehavior>().Activate();
         if (!enemies.Contains(newEnemy))
             enemies.Add(newEnemy);
+        GameControl.PlayerData.activeEnemies++;
         yield return null;
     }
 
@@ -137,6 +147,33 @@ public class EnemySpawn : MonoBehaviour
             yDiff = Mathf.Abs(pos.y - negPos.y) / 2;
 
             //Debug.Log(pos + " " + negPos);
+        }
+    }
+
+    //handles the scaling of enemy count over time
+    IEnumerator CountScale()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(GameControl.PlayerData.countScaleTime);
+            GameControl.PlayerData.currentMaxEnemies += 4;
+        }
+    }
+
+    //handles the scaling of enemy stats over time
+    IEnumerator StatsScale()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(GameControl.PlayerData.statsScaleTime);
+            if (GameControl.PlayerData.playerSpeed > GameControl.PlayerData.currentMax)
+            {
+                GameControl.PlayerData.currentMax += GameControl.PlayerData.maxInterval;
+                GameControl.PlayerData.currentMin += GameControl.PlayerData.minInterval;
+            }
+            GameControl.PlayerData.currentHealth += GameControl.PlayerData.healthInterval;
+            GameControl.PlayerData.killScore += 2;
+            
         }
     }
 }

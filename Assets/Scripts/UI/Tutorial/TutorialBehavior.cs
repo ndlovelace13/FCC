@@ -87,7 +87,7 @@ public class TutorialBehavior : MonoBehaviour
         "hugh mungus what",
         "Use WASD or the arrow keys to move in all four cardinal directions",
         "Use the spacebar to pick up your first flower",
-        "Use the mouse to aim and click the right mouse button to fire a single flower",
+        "Use the mouse to aim and click the right mouse button or Q to fire a single flower",
         "Pick up five flowers and press E to craft your first flower crown",
         "Follow the input queues to finish crafting your first crown", 
         "Use the mouse to aim and click the left mouse button to toss your first crown",

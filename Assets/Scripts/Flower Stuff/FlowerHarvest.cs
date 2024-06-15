@@ -23,7 +23,7 @@ public class FlowerHarvest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.Q))
         {
             if (GameControl.PlayerData.tutorialActive)
             {
@@ -55,7 +55,7 @@ public class FlowerHarvest : MonoBehaviour
                             //TODO: PUll from the pool instead
                             GameObject newHead = Instantiate(head, slots[slotPos].transform);
                             newHead.GetComponent<SpriteRenderer>().sortingLayerName = "Midground";
-                            newHead.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                            newHead.GetComponent<SpriteRenderer>().sortingOrder = 4;
                             newHead.transform.localScale = new Vector3(1f, 1f, 1f);
                             newHead.transform.parent = crown;
                             newHead.GetComponent<FlowerBehavior>().position = slotPos;

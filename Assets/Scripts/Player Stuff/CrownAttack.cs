@@ -68,6 +68,13 @@ public class CrownAttack : MonoBehaviour
     public void CrownArmed()
     {
         crownArmed = true;
+        GetComponent<SpriteRenderer>().sortingOrder = -1;
+        SpriteRenderer[] flowers = GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer flower in flowers)
+        {
+            if (flower.gameObject.tag != "finalCrown")
+                flower.sortingOrder = 0;
+        }
         StartCoroutine(Detonate());
     }
 
@@ -231,7 +238,7 @@ public class CrownAttack : MonoBehaviour
     {
         if (GameControl.PlayerData.tutorialState == 6)
             GameControl.PlayerData.crownThrown = true;
-        if (GameControl.PlayerData.tutorialState == 7 && augment1 == "")
+        if (GameControl.PlayerData.tutorialState == 7 && augment1 != "red")
             GameControl.PlayerData.fireReset = true;
         Destroy(crown);
     }

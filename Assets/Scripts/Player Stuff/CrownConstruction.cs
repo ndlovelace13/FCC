@@ -254,15 +254,16 @@ public class CrownConstruction : MonoBehaviour
             if (flowerStats[1].type == flowerStats[3].type)
                 inside = flowerStats[1].type;
             else if (wilds[1])
-                outside = flowerStats[3].type;
+                inside = flowerStats[3].type;
             else
-                outside = flowerStats[1].type;
+                inside = flowerStats[1].type;
         }
         if (outside == inside && outside != "")
             four = outside;
         if (four != "" && four == flowerStats[2].type)
             fiver = four;
 
+        //Debug.Log("NAME SHIT: " + fiver + " " + four + " " + outside + " " + inside);
         //apply the name
         if (fiver != "")
             crownAnnouncement += dict[fiver].fiveText;
@@ -271,13 +272,16 @@ public class CrownConstruction : MonoBehaviour
         else
         {
             if (outside != "")
+            {
                 crownAnnouncement += dict[outside].outsideText;
+            }
             if (inside != "")
                 crownAnnouncement += dict[inside].insideText;
         }
         if (fiver == "")
             crownAnnouncement += dict[flowerStats[2].type].primaryText;
         crownAnnouncement += "Crown Constructed!";
+        //Debug.Log("NAME SHIT: " + crownAnnouncement);
         yield return crownAnnouncement;
     }
 
@@ -314,7 +318,7 @@ public class CrownConstruction : MonoBehaviour
 
         projRange = centerStats.projRange;
         range = flowerStats[0].range + flowerStats[4].range;
-        damage = flowerStats[1].damage + flowerStats[3].damage;
+        damage = flowerStats[1].damage + flowerStats[2].damage + flowerStats[3].damage;
         projType = flowerPos[2].type;
         aug1 = flowerPos[2].type;
         numProjs = centerStats.projCount;

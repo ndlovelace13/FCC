@@ -124,6 +124,13 @@ public class GameControl : MonoBehaviour
     public int maxHealth = 50;
     public int currentHealth;
     public int healthInterval = 10;
+    public int startingEnemies = 8;
+    public int currentMaxEnemies;
+    public int activeEnemies = 0;
+    public int killScore = 10;
+
+    public int countScaleTime = 45;
+    public int statsScaleTime = 30;
 
     private void Awake()
     {
@@ -219,9 +226,12 @@ public class GameControl : MonoBehaviour
         min = 0;
         sec = 0;
         score = 0;
+        //enemy reset
         currentMax = maxSpeed;
         currentMin = minSpeed;
         currentHealth = maxHealth;
+        currentMaxEnemies = startingEnemies;
+
         balanceUpdated = false;
         sash = GameObject.FindWithTag("sash");
         tutorialHandler = GameObject.FindWithTag("tutorialHandler");
