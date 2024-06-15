@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Research : MonoBehaviour
 {
+    [SerializeField] public GameObject unlockPrefab;
+    [SerializeField] public Sprite resultImg;
     public int requiredSeeds;
     public int maxResearchTimes;
 

@@ -16,5 +16,7 @@ public class UncommonSeedResearch : Research
         currentResearchTimes++;
         string type = GameControl.PlayerData.undiscoveredUncommon[Random.Range(0, GameControl.PlayerData.undiscoveredUncommon.Count)];
         GameControl.PlayerData.FlowerDiscovery(type);
+        GameObject unlockNotif = Instantiate(unlockPrefab);
+        unlockNotif.GetComponent<UnlockNotif>().BeginNotif(GameControl.PlayerData.SpriteAssign(type), "New Flower Discovered!");
     }
 }

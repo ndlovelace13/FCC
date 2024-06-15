@@ -32,6 +32,7 @@ public class TextAdvancement : MonoBehaviour
 
     public void setDialogue(string[] newDialogue)
     {
+        StopAllCoroutines();
         dialogue = newDialogue;
         GameControl.PlayerData.dialogueComplete = false;
         index = -1;

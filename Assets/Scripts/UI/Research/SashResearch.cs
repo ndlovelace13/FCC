@@ -14,5 +14,7 @@ public class SashResearch : Research
         GameControl.PlayerData.sashActivated = true;
         GameControl.PlayerData.sashActive = true;
         currentResearchTimes++;
+        GameObject unlockNotif = Instantiate(unlockPrefab);
+        unlockNotif.GetComponent<UnlockNotif>().BeginNotif(resultImg, "Affinity Sash Unlocked!");
     }
 }

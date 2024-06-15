@@ -98,7 +98,12 @@ public class FlowerCalc : MonoBehaviour
         {
             GameControl.PlayerData.uncommon = 0.5f;
             GameControl.PlayerData.discoveryDisplay = false;
+            GameControl.PlayerData.FlowerDiscovery("red");
+            GameControl.PlayerData.FlowerDiscovery("blue");
+            GameControl.PlayerData.FlowerDiscovery("green");
+            GameControl.PlayerData.FlowerDiscovery("yellow");
             GameControl.PlayerData.FlowerDiscovery("dandy");
+            GameControl.PlayerData.FlowerDiscovery("wild");
         }
         GameControl.PlayerData.ResetRun();
     }
@@ -136,7 +141,7 @@ public class FlowerCalc : MonoBehaviour
         currentHeight = totalHeight / 2;
         while (currentHeight > -(totalHeight / 2))
         {
-            currentWidth = -totalWidth / 2;
+            currentWidth = -totalWidth / 2 - RandIncrement();
             while (currentWidth < totalWidth / 2)
             {
                 int inc = RandIncrement();
@@ -156,6 +161,7 @@ public class FlowerCalc : MonoBehaviour
             currentHeight -= 2;
         }
         //Debug.Log("This is the count" + flowers.Count);
+        //TO DO - SECOND WAVE OF RANDOMIZATION, random movement within a 1 square grid
         return flowers;
     }
 

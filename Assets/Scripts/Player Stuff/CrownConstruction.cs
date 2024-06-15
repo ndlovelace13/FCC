@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,9 +31,9 @@ public class CrownConstruction : MonoBehaviour
     float range;
     int damage;
     string projType;
-    int aug1 = 0;
-    int aug2 = 0;
-    int aug3 = 0;
+    string aug1 = "";
+    string aug2 = "";
+    string aug3 = "";
     int numProjs = 0;
     int projRange = 0;
 
@@ -45,7 +46,6 @@ public class CrownConstruction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DictionaryInit();
         CrownReplace();
         slots = docket.GetComponentsInChildren<Transform>();
         slots = slots.Where(child => child.tag == "slotEmpty").ToArray();
@@ -92,50 +92,6 @@ public class CrownConstruction : MonoBehaviour
         }
     }
 
-    //move this to gamecontrol when adding more flowers - link each flower's strings to the flowerStats object
-    void DictionaryInit()
-    {
-        outsideText = new Dictionary<string, string>() {
-            {"white", "Pale "},
-            {"orange", "Tawny "},
-            {"pink", "Flushed "},
-            {"red", "Blazing "},
-            {"yellow", "Charged "},
-            {"green", "Poisonous "},
-            {"blue", "Chilled "},
-            {"dandy", "Scattering "}
-        };
-        insideText = new Dictionary<string, string>() {
-            {"white", "Blank "},
-            {"orange", "Peachy "},
-            {"pink", "Salmon "},
-            {"red", "Burning "},
-            {"yellow", "Volatile "},
-            {"green", "Noxious "},
-            {"blue", "Frigid "},
-            {"dandy", "Dispersing "}
-        };
-        primaryText = new Dictionary<string, string>() {
-            {"white", "Pasty "},
-            {"orange", "Orangish "},
-            {"pink", "Rosy "},
-            {"red", "Fiery "},
-            {"yellow", "Electric "},
-            {"green", "Toxic "},
-            {"blue", "Frozen "},
-            {"dandy", "Splitting "}
-        };
-        fourText = new Dictionary<string, string>() {
-            {"white", "Colorless "},
-            {"orange", "Paprika " },
-            {"pink", "Plasticky "},
-            {"red", "Scorching "},
-            {"yellow", "Voltaic "},
-            {"green", "Lethal "},
-            {"blue", "Arctic "},
-            {"dandy", "Disintegrating "}
-        };
-    }
 
     void CrownReplace()
     {
@@ -155,7 +111,7 @@ public class CrownConstruction : MonoBehaviour
         foreach (Transform t in slots)
         {
             skillCheckCounter = 0;
-            int inputRand = Random.Range(0, 4);
+            int inputRand = UnityEngine.Random.Range(0, 4);
             GameObject newInput = Instantiate(inputs[inputRand], t.position + new Vector3(0, 1.5f), Quaternion.identity);
             chosenInputs.Add(newInput);
             Debug.Log(chosenInputs.Count);
@@ -264,26 +220,111 @@ public class CrownConstruction : MonoBehaviour
         return flowerStats;
     }
 
+    IEnumerator CrownName(List<FlowerStats> flowerStats)
+    {
+        bool[] wilds = new bool[5];
+        for (int i = 0; i < flowerStats.Count; i++)
+        {
+            if (flowerStats[i].type == "wild")
+                wilds[i] = true;
+            else
+                wilds[i] = false;
+        }
+
+        Dictionary<string, FlowerStats> dict = GameControl.PlayerData.flowerStatsDict;
+
+        crownAnnouncement = "";
+        string outside = "";
+        string inside = "";
+        string four = "";
+        string fiver = "";
+
+        //check the crown type
+        if (flowerStats[0].type == flowerStats[4].type || wilds[0] || wilds[4])
+        {
+            if (flowerStats[0].type == flowerStats[4].type)
+                outside = flowerStats[0].type;
+            else if (wilds[0])
+                outside = flowerStats[4].type;
+            else
+                outside = flowerStats[0].type;
+        }
+        if (flowerStats[1].type == flowerStats[3].type || wilds[1] || wilds[3])
+        {
+            if (flowerStats[1].type == flowerStats[3].type)
+                inside = flowerStats[1].type;
+            else if (wilds[1])
+                inside = flowerStats[3].type;
+            else
+                inside = flowerStats[1].type;
+        }
+        if (outside == inside && outside != "")
+            four = outside;
+        if (four != "" && four == flowerStats[2].type)
+            fiver = four;
+
+        //Debug.Log("NAME SHIT: " + fiver + " " + four + " " + outside + " " + inside);
+        //apply the name
+        if (fiver != "")
+            crownAnnouncement += dict[fiver].fiveText;
+        else if (four != "")
+            crownAnnouncement += dict[four].fourText;
+        else
+        {
+            if (outside != "")
+            {
+                crownAnnouncement += dict[outside].outsideText;
+            }
+            if (inside != "")
+                crownAnnouncement += dict[inside].insideText;
+        }
+        if (fiver == "")
+            crownAnnouncement += dict[flowerStats[2].type].primaryText;
+        crownAnnouncement += "Crown Constructed!";
+        //Debug.Log("NAME SHIT: " + crownAnnouncement);
+        yield return crownAnnouncement;
+    }
+
     int Construction()
     {
         //reset variables
         int crownScore = 0;
-        crownAnnouncement = "";
-        aug1 = 0;
-        aug2 = 0;
-        aug3 = 0;
+        //crownAnnouncement = "";
+        aug1 = "";
+        aug2 = "";
+        aug3 = "";
         Transform[] flowers = docket.GetComponentsInChildren<Transform>();
         flowers = flowers.Where(child => child.tag == "FlowerHead").ToArray();
         List<FlowerStats> flowerStats = flowerSlots(flowers);
         List<FlowerBehavior> flowerPos = flowerPositions(flowers);
         List<int> dupePositions = new List<int>();
 
-        projRange = flowerStats[2].projRange;
+        //handle the crown naming convention before changing wilds to match the crown - separate function here
+        StartCoroutine(CrownName(flowerStats));
+
+        //wild check for crown construction
+        foreach (var flower in flowerPos)
+        {
+            if (flower.type == "wild")
+            {
+                WildStats wildStats = (WildStats)GameControl.PlayerData.flowerStatsDict["wild"];
+                Tuple<List<FlowerBehavior>, List<FlowerStats>> results = wildStats.WildHandler(flowerPos, flowerStats);
+                flowerPos = results.Item1;
+                flowerStats = results.Item2;
+                break;
+            }
+        }
+        FlowerStats centerStats = flowerStats[2];
+
+        projRange = centerStats.projRange;
         range = flowerStats[0].range + flowerStats[4].range;
-        damage = flowerStats[1].damage + flowerStats[3].damage;
-        projType = flowerStats[2].type;
-        aug1 = augmentCheck(projType);
-        numProjs = flowerStats[2].projCount;
+        damage = flowerStats[1].damage + flowerStats[2].damage + flowerStats[3].damage;
+        projType = flowerPos[2].type;
+        aug1 = flowerPos[2].type;
+        numProjs = centerStats.projCount;
+
+
+        
         
         //check the first, remove as necessary
         while (flowerStats.Count > 0)
@@ -314,14 +355,14 @@ public class CrownConstruction : MonoBehaviour
                     {
                         Debug.Log("Symmetric");
                         crownScore += flowerStats[0].basePoints * 2 * 4;
-                        if (dupePositions.Contains(0))
-                            crownAnnouncement += outsideText[currentType];
+                        /*if (dupePositions.Contains(0))
+                            crownAnnouncement += flowerStats[0].outsideText;
                         else
-                            crownAnnouncement += insideText[currentType];
-                        if (aug2 == 0)
-                            aug2 = augmentCheck(currentType);
+                            crownAnnouncement += flowerStats[0].insideText;*/
+                        if (aug2 == "")
+                            aug2 = flowerPos[0].type;
                         else
-                            aug3 = augmentCheck(currentType);
+                            aug3 = flowerPos[0].type;
                     }
                     else
                     {
@@ -337,14 +378,14 @@ public class CrownConstruction : MonoBehaviour
                     {
                         Debug.Log("Symmetric");
                         crownScore += flowerStats[0].basePoints * 3 * 4;
-                        if (dupePositions.Contains(0))
-                            crownAnnouncement += outsideText[currentType];
+                        /*if (dupePositions.Contains(0))
+                            crownAnnouncement += flowerStats[0].outsideText;
                         else
-                            crownAnnouncement += insideText[currentType];
-                        if (aug2 == 0)
-                            aug2 = augmentCheck(currentType);
+                            crownAnnouncement += flowerStats[0].insideText;*/
+                        if (aug2 == "")
+                            aug2 = flowerPos[0].type;
                         else
-                            aug3 = augmentCheck(currentType);
+                            aug3 = flowerPos[0].type;
                     }
                     else
                     {
@@ -363,9 +404,9 @@ public class CrownConstruction : MonoBehaviour
                         //5x the middle's base points
                         //crownScore += flowerStats[2].basePoints * 5;
                         //flowerStats.RemoveAt(2);
-                        aug2 = augmentCheck(currentType);
-                        aug3 = augmentCheck(currentType);
-                        crownAnnouncement = fourText[currentType];
+                        aug2 = flowerPos[0].type;
+                        aug3 = flowerPos[0].type;
+                        //crownAnnouncement = flowerStats[0].fourText;
                     }
                     //non-symmetrical
                     else
@@ -377,9 +418,10 @@ public class CrownConstruction : MonoBehaviour
                 case 5:
                     Debug.Log("Fiver");
                     crownScore += flowerStats[0].basePoints * 5 * 5;
-                    aug2 = augmentCheck(currentType);
-                    aug3 = augmentCheck(currentType);
-                    crownAnnouncement += fourText[currentType];
+                    aug2 = flowerPos[0].type;
+                    aug3 = flowerPos[0].type;
+                    //crownAnnouncement += flowerStats[0].fiveText;
+                    //fiver = true;
                     break;
                 //single
                 default:
@@ -421,21 +463,8 @@ public class CrownConstruction : MonoBehaviour
             //   crownAnnouncement += " ";
         }
         Debug.Log("gottem");
-        crownAnnouncement += primaryText[projType] + "Crown Constructed!";
+        
         Debug.Log(crownAnnouncement);
         return crownScore;
-    }
-
-    public int augmentCheck(string type)
-    {
-        switch (type)
-        {
-            case "red": return 1;
-            case "blue": return 2;
-            case "green": return 3;
-            case "yellow": return 4;
-            case "dandy": return 5;
-            default: return 0;
-        }    
     }
 }

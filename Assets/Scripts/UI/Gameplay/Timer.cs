@@ -35,7 +35,7 @@ public class Timer : MonoBehaviour
         minSpeed = GameControl.PlayerData.minSpeed;
         startTime = Time.timeSinceLevelLoad;
         timerStarted = true;
-        StartCoroutine(SpeedUp());
+        //StartCoroutine(SpeedUp());
     }
 
     // Update is called once per frame

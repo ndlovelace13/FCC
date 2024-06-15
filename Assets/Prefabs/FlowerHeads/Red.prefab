@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6494731187895313485}
   - component: {fileID: 3813213846306833904}
-  - component: {fileID: -1653701158006803833}
   - component: {fileID: 2761018581081467435}
+  - component: {fileID: 7642685459185627567}
   m_Layer: 0
   m_Name: Red
   m_TagString: FlowerHead
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f9e2b15952effba4dbb31925b069d5b9, type: 3}
-  m_Color: {r: 1, g: 0.010321472, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -86,31 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-1653701158006803833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1936280616163390971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25d7919e192a9f04c8ce47b35a9e5245, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rarity: 1
-  type: red
-  basePoints: 3
-  damage: 15
-  range: 5
-  projCount: 6
-  projRange: 8
-  headSprite: {fileID: 21300000, guid: f9e2b15952effba4dbb31925b069d5b9, type: 3}
-  pointsTiers: 03000000040000000500000007000000
-  damageTiers: 0f000000120000001400000016000000
-  rangeTiers: 0500000006000000080000000a000000
-  projTiers: 06000000060000000700000008000000
-  position: 0
 --- !u!114 &2761018581081467435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,3 +100,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: red
   position: 0
+--- !u!114 &7642685459185627567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936280616163390971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d90be54e24bf74aa9e501b4f0d0670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rarity: 1
+  type: red
+  basePoints: 3
+  damage: 15
+  range: 5
+  projCount: 6
+  projRange: 8
+  headSprite: {fileID: 21300000, guid: f9e2b15952effba4dbb31925b069d5b9, type: 3}
+  projSprite: {fileID: 21300000, guid: 5cf9f8ab7e6486043b11766f651b0dc8, type: 3}
+  pool: {fileID: 0}
+  pointsTiers: 03000000040000000500000007000000
+  damageTiers: 0f000000120000001400000016000000
+  rangeTiers: 0500000006000000080000000a000000
+  projTiers: 06000000060000000700000008000000
+  aug: 1
+  primaryText: 'Fiery '
+  insideText: 'Burning '
+  outsideText: 'Blazing '
+  fourText: 'Scorching '
+  fiveText: 'Razing '
+  flamesPool: {fileID: 0}

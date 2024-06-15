@@ -21,39 +21,16 @@ public class ProjectileBehavior : MonoBehaviour
     [SerializeField] int augment1;
     [SerializeField] int augment2;
     [SerializeField] int augment3;
-    int[] augs;
+    string[] augs = new string[3];
     Vector3 startingPos = Vector3.zero;
 
-    bool fire;
-    [SerializeField] GameObject flamesPool;
-    float flameTime = 2f;
 
-    bool ice;
+    bool arrived = false;
 
-    bool poison;
-    [SerializeField] GameObject poisonPool;
-    float poisonCooldown = 0.5f;
-    float poisonTime = 1f;
-
-    bool electric;
-
-    bool splitting;
-    int splitCount = 3;
-    float splitAngle = Mathf.PI / 6f;
     public bool miniDandy = false;
-
-    [SerializeField] GameObject projPool;
 
     //Sprites
     GameObject spriteTrans;
-
-    [SerializeField] Sprite defaultSprite;
-    [SerializeField] Sprite fireSprite;
-    [SerializeField] Sprite iceSprite;
-    [SerializeField] Sprite poisonSprite;
-    [SerializeField] Sprite electricSprite;
-    [SerializeField] Sprite bigDandySprite;
-    [SerializeField] Sprite smallDandySprite;
 
     //Particles
     List<GameObject> particles;
@@ -61,12 +38,12 @@ public class ProjectileBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        projPool = GameObject.FindWithTag("projectilePool");
+        //projPool = GameObject.FindWithTag("projectilePool");
         //spriteTrans = transform.GetChild(0).gameObject;
         //Debug.Log(spriteTrans.name);
     }
 
-    public void SetProps(float r, int d, int aug1, int aug2, int aug3, Vector2 rotation)
+    public void SetProps(float r, int d, string aug1, string aug2, string aug3, Vector2 rotation)
     {
         if (particles == null)
             getParticles();
@@ -74,20 +51,16 @@ public class ProjectileBehavior : MonoBehaviour
             ResetAugs();
         range = r;
         damage = d;
-        augment1 = aug1;
-        augment2 = aug2;
-        augment3 = aug3;
-        Debug.Log(aug1 + " " + aug2  + " " + aug3);
+        augs = new string[3];
+        augs[0] = aug1;
+        augs[1] = aug2;
+        augs[2] = aug3;
+        Debug.Log("Augments at start: " + augs[0] + " " + augs[1] + " " + augs[2]);
         Augmentation();
         spriteTrans = transform.GetChild(0).gameObject;
         SpriteApply(aug1);
-        if (poison)
-        {
-            StartCoroutine(PoisonSpawn());
-        }
+        ProjBegin();
         spriteTrans.transform.rotation = Quaternion.LookRotation(Vector3.forward, rotation);
-        //GetComponent<Rigidbody2D>().velocity =  * speed;
-        //Debug.Log("velocity be like : " + spriteTrans.transform.rotation);
     }
 
     // Update is called once per frame
@@ -98,13 +71,11 @@ public class ProjectileBehavior : MonoBehaviour
             startingPos = transform.position;
             Debug.Log("starting pos:" + startingPos);
         }
-        if (Mathf.Abs(Vector3.Distance(transform.position, startingPos)) > range)
+        if (Mathf.Abs(Vector3.Distance(transform.position, startingPos)) > range && !arrived)
         {
-            if (fire)
-                FlamesSpawn();
-            if (splitting)
-                Split();
-            ObjectDeactivate();
+
+            arrived = true;
+            ProjArrival();
         }
         /*if (gameObject.activeSelf)
         {
@@ -112,31 +83,41 @@ public class ProjectileBehavior : MonoBehaviour
         }*/
     }
 
-    private void Augmentation()
+    private void ProjBegin()
     {
-        //apply augmentation effects that don't concern enemy collision here
-        augs = getAugments();
-        setParticles(augs);
         for (int i = 0; i < augs.Length; i++)
         {
-            switch (augs[i])
+            if (augs[i] != null && augs[i] != "")
             {
-                case 1: fire = true; flamesPool = GameObject.FindGameObjectWithTag("flamePool");
-                    if (GameControl.PlayerData.tutorialActive)
-                        GameControl.PlayerData.redCrown = true; break;
-                case 2: ice = true; break;
-                case 3: poison = true; poisonPool = GameObject.FindGameObjectWithTag("poisonPool"); break;
-                case 4: electric = true; break;
-                case 5: splitting = true; augs[i] = 0; break;
-                default: break;
+                Debug.Log("calling for " + augs[i]);
+                GameControl.PlayerData.flowerStatsDict[augs[i]].OnProjTravel(gameObject);
             }
         }
     }
 
-    public int[] getAugments()
+    private void ProjArrival()
     {
-        int[] allAugs = { augment1, augment2, augment3 };
-        return allAugs;
+        Debug.Log("Current Augs: " + augs[0] + " " + augs[1] + " " + augs[2]);
+        for (int i = 0; i < augs.Length; i++)
+        {
+            if (augs[i] != null && augs[i] != "")
+            {
+                Debug.Log("calling for " + augs[i]);
+                GameControl.PlayerData.flowerStatsDict[augs[i]].OnProjArrival(gameObject);
+            }
+        }
+        ObjectDeactivate();
+    }
+
+    private void Augmentation()
+    {
+        setParticles(augs);
+    }
+
+    public string[] getAugments()
+    {
+        //int[] allAugs = { augment1, augment2, augment3 };
+        return augs;
     }
 
     private void getParticles()
@@ -152,64 +133,40 @@ public class ProjectileBehavior : MonoBehaviour
         }
     }
 
-    public void setParticles(int[] augs)
+    public void setParticles(string[] augs)
     {
         for (int i = 0; i < augs.Length; i++)
         {
             //Debug.Log("current aug: " + augs[i]);
-            particles[i].GetComponent<Animator>().SetInteger("augment", augs[i]);
+            if (augs[i] != "" && augs[i] != null)
+            {
+                FlowerStats currentStats = GameControl.PlayerData.flowerStatsDict[augs[i]];
+                particles[i].GetComponent<Animator>().SetInteger("augment", currentStats.aug);
+            }
+            else
+            {
+                particles[i].GetComponent<Animator>().SetInteger("augment", 0);
+            }
         }
     }
 
-    private void SpriteApply(int type)
+    private void SpriteApply(string type)
     {
         //apply sprites instead here
         Sprite currentSprite;
-        switch (type)
-        {
-            case 1: currentSprite = fireSprite; break;
-            case 2: currentSprite = iceSprite; break;
-            case 3: currentSprite = poisonSprite; break;
-            case 4: currentSprite = electricSprite; break;
-            case 5: currentSprite = bigDandySprite; break;
-            default: currentSprite = defaultSprite; break;
-        }
         if (miniDandy)
-            currentSprite = smallDandySprite;
+        {
+            DandyStats dandy = (DandyStats)GameControl.PlayerData.flowerStatsDict["dandy"];
+            currentSprite = dandy.miniProjSprite;
+        }
+        else
+        {
+            FlowerStats stats = GameControl.PlayerData.flowerStatsDict[type];
+            currentSprite = stats.projSprite;
+        }
+        
         miniDandy = false;
         spriteTrans.GetComponent<SpriteRenderer>().sprite = currentSprite;
-    }
-
-    public void Split()
-    {
-        Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-        float angleRadians = Mathf.Atan2(vel.x, vel.y);
-        float startingAngle = angleRadians - splitAngle;
-        for (int i = 0; i < splitCount; i++)
-        {
-            StartCoroutine(ProjSpawn(startingAngle));
-            startingAngle += splitAngle;
-        }
-    }    
-
-    public void FlamesSpawn()
-    {
-        GameObject newFlame = flamesPool.GetComponent<ObjectPool>().GetPooledObject();
-        newFlame.SetActive(true);
-        newFlame.transform.position = transform.position;
-        newFlame.GetComponent<AoeBehavior>().Activate(getAugments(), flameTime, 1);
-    }
-
-    IEnumerator PoisonSpawn()
-    {
-        while (poison)
-        {
-            yield return new WaitForSeconds(poisonCooldown);
-            GameObject newCloud = poisonPool.GetComponent<ObjectPool>().GetPooledObject();
-            newCloud.SetActive(true);
-            newCloud.transform.position = transform.position;
-            newCloud.GetComponent<AoeBehavior>().Activate(getAugments(), poisonTime, 3);
-        }
     }
 
     public void ObjectDeactivate()
@@ -222,44 +179,13 @@ public class ProjectileBehavior : MonoBehaviour
 
     private void ResetAugs()
     {
-        augment1 = 0;
-        augment2 = 0;
-        augment3 = 0;
-        fire = false;
-        ice = false;
-        poison = false;
-        electric = false;
-        splitting = false;
-        setParticles(getAugments());
+        augs = new string[3];
+        arrived = false;
+        setParticles(augs);
         transform.localScale = Vector3.one;
     }
 
-    IEnumerator ProjSpawn(float angle)
-    {
-        Vector2 projDir = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle));
-        projDir.Normalize();
-        GameObject proj = projPool.GetComponent<ObjectPool>().GetPooledObject();
-        if (proj == null)
-            Debug.Log("get fucked");
-        //Debug.Log(proj.transform.position);
-        //Debug.Log(crown.transform.position);
-        //proj.transform.rotation = new Quaternion(angle);
-        proj.transform.position = transform.position;
 
-        //rotating towards direction of movement
-        proj.SetActive(true);
-        if (spriteTrans.GetComponent<SpriteRenderer>().sprite == bigDandySprite)
-        {
-            proj.GetComponent<ProjectileBehavior>().miniDandy = true;
-        }
-        else
-        {
-            proj.transform.localScale = Vector3.one / splitCount;
-        }
-        proj.GetComponent<ProjectileBehavior>().SetProps(range / splitCount, damage / splitCount, augs[0], augs[1], augs[2], projDir);
-        proj.GetComponent<Rigidbody2D>().velocity = projDir * speed;
-        yield return null;
-    }
 }
 
     

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3357287182761453125}
   - component: {fileID: 4638092677251401720}
-  - component: {fileID: -6868071546860270881}
   - component: {fileID: 406143116129897093}
+  - component: {fileID: 1645006272031892013}
   m_Layer: 0
   m_Name: Dandy
   m_TagString: FlowerHead
@@ -86,31 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-6868071546860270881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7956063438138374131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25d7919e192a9f04c8ce47b35a9e5245, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rarity: 1
-  type: dandy
-  basePoints: 3
-  damage: 15
-  range: 5
-  projCount: 4
-  projRange: 8
-  headSprite: {fileID: 21300000, guid: a76642f6009ad2d4bafdf1e8efe41d5b, type: 3}
-  pointsTiers: 03000000040000000500000007000000
-  damageTiers: 0f000000120000001500000018000000
-  rangeTiers: 0500000006000000080000000a000000
-  projTiers: 04000000050000000600000007000000
-  position: 0
 --- !u!114 &406143116129897093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,3 +100,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: dandy
   position: 0
+--- !u!114 &1645006272031892013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956063438138374131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f862799e09aeb459b9f31e119c6cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rarity: 1
+  type: dandy
+  basePoints: 3
+  damage: 15
+  range: 5
+  projCount: 4
+  projRange: 6
+  headSprite: {fileID: 21300000, guid: a76642f6009ad2d4bafdf1e8efe41d5b, type: 3}
+  projSprite: {fileID: 21300000, guid: db898662c6fd5d840be152227b6b5564, type: 3}
+  pool: {fileID: 0}
+  pointsTiers: 03000000040000000500000007000000
+  damageTiers: 0f000000120000001500000018000000
+  rangeTiers: 0500000006000000080000000a000000
+  projTiers: 04000000050000000600000007000000
+  aug: 5
+  primaryText: 'Splitting '
+  insideText: 'Dispersing '
+  outsideText: 'Seedy '
+  fourText: 'Scattering '
+  fiveText: 'Disintegrating '
+  miniProjSprite: {fileID: 21300000, guid: cdea3615e4a8afb40bfa9767f735625e, type: 3}
+  miniDandy: 0
