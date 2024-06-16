@@ -37,6 +37,8 @@ public class CrownConstruction : MonoBehaviour
     int numProjs = 0;
     int projRange = 0;
 
+    bool crownDiscovered = false;
+
     public string crownAnnouncement;
 
     int craftAnimChoice = 1;
@@ -75,7 +77,10 @@ public class CrownConstruction : MonoBehaviour
             //PlayerPrefs.SetInt("totalScore", currentScore + crownScore);
             if (!GameControl.PlayerData.tutorialActive)
                 GameControl.PlayerData.score += crownScore;
-            crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement);
+            if (crownDiscovered)
+                crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement, Color.green);
+            else
+                crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement);
             scoreNotif.GetComponent<ScoreNotification>().newFeed("Crown Construction | +" + crownScore);
             finalCrown.GetComponent<SpriteRenderer>().enabled = true;
             finalCrown.transform.parent = null;
@@ -239,6 +244,12 @@ public class CrownConstruction : MonoBehaviour
         string four = "";
         string fiver = "";
 
+        //unlock data
+        int primaryId = flowerStats[2].id;
+        int insideId = -1;
+        int outsideId = -1;
+        string id = "";
+
         //check the crown type
         if (flowerStats[0].type == flowerStats[4].type || wilds[0] || wilds[4])
         {
@@ -248,6 +259,7 @@ public class CrownConstruction : MonoBehaviour
                 outside = flowerStats[4].type;
             else
                 outside = flowerStats[0].type;
+            outsideId = dict[outside].id;
         }
         if (flowerStats[1].type == flowerStats[3].type || wilds[1] || wilds[3])
         {
@@ -257,6 +269,7 @@ public class CrownConstruction : MonoBehaviour
                 inside = flowerStats[3].type;
             else
                 inside = flowerStats[1].type;
+            insideId = dict[inside].id;
         }
         if (outside == inside && outside != "")
             four = outside;
@@ -280,7 +293,22 @@ public class CrownConstruction : MonoBehaviour
         }
         if (fiver == "")
             crownAnnouncement += dict[flowerStats[2].type].primaryText;
-        crownAnnouncement += "Crown Constructed!";
+        crownAnnouncement += "Crown";
+        //check for unlock here
+        id += primaryId.ToString() + insideId.ToString() + outsideId.ToString();
+        Crown constructedCrown = CrownCompletionism.completionTracker.allCrowns[id];
+        if (constructedCrown.IsDiscovered())
+        {
+            constructedCrown.Crafted();
+            crownDiscovered = false;
+        }
+        else
+        {
+            constructedCrown.Discovery(crownAnnouncement);
+            crownDiscovered = true;
+        }
+
+        crownAnnouncement += " Constructed!";
         //Debug.Log("NAME SHIT: " + crownAnnouncement);
         yield return crownAnnouncement;
     }

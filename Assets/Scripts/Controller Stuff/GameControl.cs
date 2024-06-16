@@ -65,6 +65,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] public GameObject[] flowers;
     public FlowerStats[] flowerStats;
     public Dictionary<string, FlowerStats> flowerStatsDict;
+    public string[] flowerTypes;
     public GameObject flowerPool;
     public Dictionary<string, ObjectPool> flowerPoolDict;
 
@@ -138,11 +139,16 @@ public class GameControl : MonoBehaviour
         {
             PlayerData = this;
             DontDestroyOnLoad(gameObject);
+            UpgradeInit();
+            ResearchInit();
+            UpgradeApply();
+            SetFlowers();
+            CrownCompletionism.completionTracker.PermutationEst();
         }
-        UpgradeInit();
-        ResearchInit();
-        UpgradeApply();
-        SetFlowers();
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void SetFlowers()
@@ -151,6 +157,7 @@ public class GameControl : MonoBehaviour
         flowerStatsDict = new Dictionary<string, FlowerStats>();
         flowerPoolDict = new Dictionary<string, ObjectPool>();
         flowerStats = new FlowerStats[flowers.Length];
+        flowerTypes = new string[flowers.Length];
         for (int i = 0; i < flowers.Length; i++)
         {
             //add flowerStats to the array
@@ -168,7 +175,6 @@ public class GameControl : MonoBehaviour
             flowerStatsDict.Add(flowerStats[i].type, flowerStats[i]);
             //reset the affinity levels
             flowerStatsDict[flowerStats[i].type].UpdateAffinity(0);
-            //store sprite in array for easy access - MAY WANT TO REMOVE THIS FOR CLEANLINESS LATER
         }
 
         //TO DO: get sprites from within flowerStats instead of a separate array

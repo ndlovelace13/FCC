@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rarity: 1
   type: red
+  id: 3
   basePoints: 3
   damage: 15
   range: 5

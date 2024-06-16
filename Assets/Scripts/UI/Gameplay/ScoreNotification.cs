@@ -8,10 +8,12 @@ public class ScoreNotification : MonoBehaviour
     public TMP_Text feedText;
     List<string> newNotifs;
     string notifications;
+    Color ogColor;
     // Start is called before the first frame update
     void Start()
     {
         newNotifs = new List<string>();
+        ogColor = feedText.color;
     }
 
     // Update is called once per frame
@@ -28,6 +30,14 @@ public class ScoreNotification : MonoBehaviour
     public void newFeed(string newMessage)
     {
         newNotifs.Add(newMessage);
+        feedText.color = ogColor;
+        StartCoroutine("removeFeed");
+    }
+    
+    public void newFeed(string newMessage, Color newColor)
+    {
+        newNotifs.Add(newMessage);
+        feedText.color = newColor;
         StartCoroutine("removeFeed");
     }
 
