@@ -35,6 +35,7 @@ TagManager:
   - seedPool
   - timer
   - tutorialHandler
+  - mainCompletion
   layers:
   - Default
   - TransparentFX

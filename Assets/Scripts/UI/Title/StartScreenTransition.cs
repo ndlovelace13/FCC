@@ -83,4 +83,9 @@ public class StartScreenTransition : MonoBehaviour
     {
         SceneManager.LoadScene("Credits");
     }
+
+    public void LinkToForm()
+    {
+        Application.OpenURL("https://forms.gle/LkHsuFDq4exfR15r6");
+    }
 }

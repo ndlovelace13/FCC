@@ -5,6 +5,8 @@ using UnityEngine;
 public class Crown
 {
     bool discovered = false;
+    bool discoverable = false;
+    bool statusChanged = false;
 
     //eventually will want to be able to create a replica of these on will, may need to store the pools or the prefabs, we'll cross that bridge later
     /*GameObject CenterFlower;
@@ -41,15 +43,47 @@ public class Crown
         return id;
     }
 
+    public string GetId()
+    {
+        return id;
+    }
+
     public bool IsDiscovered()
     {
         return discovered;
+    }
+
+    public bool Status()
+    {
+        bool status = statusChanged;
+        statusChanged = false;
+        return status;
+    }
+
+    public bool Discoverable()
+    {
+        if (discoverable)
+            return discoverable;
+        string[] includedFlowers = { primary, inside, outside };
+        foreach (string flower in includedFlowers)
+        {
+            if (flower != "" && !GameControl.PlayerData.allDiscovered.Contains(flower))
+            {
+                discoverable = false;
+                return discoverable;
+            }
+        }
+        discoverable = true;
+        statusChanged = true;
+        return discoverable;
     }
 
     public void Discovery(string newTitle)
     {
         title = newTitle;
         discovered = true;
+        statusChanged = true;
+        CrownCompletionism.completionTracker.totalDiscovered++;
         Crafted();
         Debug.Log(title + " discovered!");
     }
@@ -64,6 +98,12 @@ public class Crown
         timesCrafted++;
         Debug.Log("You've crafted it " + timesCrafted + " times");
     }
+
+    public List<string> GetFlowers()
+    {
+        List<string> flowers = new List<string>{ primary, inside, outside };
+        return flowers;
+    }
 }
 
 public class CrownCompletionism : MonoBehaviour
@@ -72,20 +112,16 @@ public class CrownCompletionism : MonoBehaviour
     // Start is called before the first frame update
 
     public Dictionary<string, Crown> allCrowns;
+    public List<Crown> crowns = new List<Crown>();
+
+    public GameObject nodePool;
+    [SerializeField] GameObject nodePrefab;
+
+    public int totalDiscovered = 0;
 
     private void Awake()
     {
-        if (completionTracker == null)
-        {
-            completionTracker = this;
-            GameObject.DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
         
-        allCrowns = new Dictionary<string, Crown>();
     }
     void Start()
     {
@@ -100,6 +136,16 @@ public class CrownCompletionism : MonoBehaviour
 
     public void PermutationEst()
     {
+        if (completionTracker == null)
+        {
+            completionTracker = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        allCrowns = new Dictionary<string, Crown>();
         StartCoroutine(CrownPermutations());
     }
 
@@ -113,26 +159,34 @@ public class CrownCompletionism : MonoBehaviour
             Crown newCrown = new Crown();
             string id = newCrown.SetCrownVals(flower.type, "", "");
             allCrowns.Add(id, newCrown);
+            crowns.Add(newCrown);
             //add the crown with only inside symmetry - for each flower
             foreach (var insideFlower in flowers)
             {
                 newCrown = new Crown();
                 id = newCrown.SetCrownVals(flower.type, insideFlower.type, "");
                 allCrowns.Add(id, newCrown);
-                
+                crowns.Add(newCrown);
+
                 foreach (var outsideFlower in flowers)
                 {
                     //add the crown with only outside symmetry - for each flower
                     newCrown = new Crown();
                     id = newCrown.SetCrownVals(flower.type, "", outsideFlower.type);
                     if (!allCrowns.ContainsKey(id))
+                    {
                         allCrowns.Add(id, newCrown);
+                        crowns.Add(newCrown);
+                    }
 
                     //add the crown with inside and outside symmetry - for each flower
                     newCrown = new Crown();
                     id = newCrown.SetCrownVals(flower.type, insideFlower.type, outsideFlower.type);
                     if (!allCrowns.ContainsKey(id))
+                    {
                         allCrowns.Add(id, newCrown);
+                        crowns.Add(newCrown);
+                    }
                 }
             }
         }
@@ -140,5 +194,14 @@ public class CrownCompletionism : MonoBehaviour
 
         Debug.Log("There are " + allCrowns.Count + " potential crowns");
         yield return null;
+    }
+
+    public void nodePooling()
+    {
+        nodePool = Instantiate(GameControl.PlayerData.flowerPool);
+        nodePool.name = "nodePool";
+        nodePool.transform.parent = transform;
+        nodePool.GetComponent<ObjectPool>().Establish(nodePrefab, allCrowns.Count);
+        nodePool.GetComponent<ObjectPool>().Pooling();
     }
 }

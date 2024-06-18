@@ -143,7 +143,7 @@ public class GameControl : MonoBehaviour
             ResearchInit();
             UpgradeApply();
             SetFlowers();
-            CrownCompletionism.completionTracker.PermutationEst();
+            GameObject.FindWithTag("mainCompletion").GetComponent<CrownCompletionism>().PermutationEst();
         }
         else
         {
