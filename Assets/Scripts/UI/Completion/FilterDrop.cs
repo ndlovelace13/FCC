@@ -32,15 +32,18 @@ public class FilterDrop : MonoBehaviour
 
     private void AssignFlowers()
     {
+        togglePrefab = GetComponentInChildren<Toggle>().gameObject;
         List<string> discovered = GameControl.PlayerData.allDiscovered;
         foreach (var flower in discovered)
         {
             GameObject toggle = Instantiate(togglePrefab);
             toggle.transform.SetParent(transform);
             toggle.GetComponentInChildren<TMP_Text>().text = flower;
+            //toggle.GetComponent<Toggle>().isOn = true;
             options.Add(toggle.GetComponent<Toggle>());
             toggle.SetActive(false);
         }
+        Destroy(togglePrefab);
     }
 
     public void Expand()

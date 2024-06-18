@@ -62,7 +62,7 @@ public class CompletionNodes : MonoBehaviour
             nodes.Add(node.GetComponent<Node>());
         }
     }
-    IEnumerator FlowerSorting(List<string> types)
+    IEnumerator FlowerSorting(List<string> types, List<bool> discovery)
     {
         List<Node> selected = new List<Node>();
         List<Node> tossed = new List<Node>();
@@ -75,18 +75,57 @@ public class CompletionNodes : MonoBehaviour
             {
                 if (contained.Contains(type))
                 {
-                    selected.Add(node);
                     wasSelected = true;
                     break;
                 }
             }
+            bool stillSelected = false;
+            for (int i = 0; i < discovery.Count; i++)
+            {
+            
+                if (!wasSelected || stillSelected)
+                    break;
+                if (discovery[i] == true)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            if (!crown.IsDiscovered() && !crown.Discoverable())
+                                stillSelected = true;
+                            break;
+                        case 1:
+                            if (crown.Discoverable())
+                                stillSelected = true;
+                            break;
+                        case 2:
+                            if (crown.IsDiscovered())
+                                stillSelected = true;
+                            break;
+                    }
+                }
+                
+            }
+            if (stillSelected)
+                wasSelected = true;
+            else
+                wasSelected = false;
+            if (!showAll)
+            {
+                node.SetVisible(wasSelected);
+            }
+            else
+            {
+                node.SetVisible(showAll);
+            }
             if (!wasSelected)
             {
                 tossed.Add(node);
-                node.SetVisible(showAll);
             }
             else
-                wasSelected = false;
+            {
+                selected.Add(node);
+            }
+            wasSelected = false;
         }
         List<Node> all = new List<Node>();
         all = selected.Union(tossed).ToList();
@@ -96,7 +135,11 @@ public class CompletionNodes : MonoBehaviour
             selectedCount = all.Count();
         Debug.Log("Post sorting count: " + all.Count());
         if (selectedNodes != selected)
+        {
             StartCoroutine(NodeMapping(all, 0f));
+            Debug.Log("mapping starts now");
+        }
+            
         selectedNodes = selected;
         yield return null;
     }
@@ -150,11 +193,25 @@ public class CompletionNodes : MonoBehaviour
     public void SortCall()
     {
         Debug.Log("sorting now");
-        List<string> inputs = new List<string>();
-        inputs.Add("pink");
+        //check flower types first
+        List<string> flowerInputs = new List<string>();
+        List<bool> discoveryInputs = new List<bool>();
+        foreach (var toggle in flowerToggles)
+        {
+            if (toggle.isOn)
+            {
+                flowerInputs.Add(toggle.GetComponentInChildren<TMP_Text>().text);
+                Debug.Log(toggle.name);
+            }
+        }
+        //check discovery
+        foreach (var toggle in discoveryToggles)
+        {
+            discoveryInputs.Add(toggle.isOn);
+        }
         //get the selected bool
         showAll = !onlySelected.isOn;
-
-        StartCoroutine(FlowerSorting(inputs));
+        Debug.Log(flowerInputs.Count);
+        StartCoroutine(FlowerSorting(flowerInputs, discoveryInputs));
     }
 }

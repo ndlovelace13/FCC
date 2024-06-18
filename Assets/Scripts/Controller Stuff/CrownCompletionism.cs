@@ -64,6 +64,12 @@ public class Crown
     {
         if (discoverable)
             return discoverable;
+        else if (discovered)
+        {
+            discoverable = false;
+            return discoverable;
+        }
+            
         string[] includedFlowers = { primary, inside, outside };
         foreach (string flower in includedFlowers)
         {
@@ -82,6 +88,7 @@ public class Crown
     {
         title = newTitle;
         discovered = true;
+        discoverable = false;
         statusChanged = true;
         CrownCompletionism.completionTracker.totalDiscovered++;
         Crafted();
