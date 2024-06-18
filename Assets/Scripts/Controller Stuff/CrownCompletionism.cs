@@ -2,6 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum crownType
+{
+    Basic,
+    Advanced,
+    Three,
+    Complete,
+    FullHouse,
+    Four,
+    Fiver
+}
+
 public class Crown
 {
     bool discovered = false;
@@ -19,7 +30,10 @@ public class Crown
     string outside;
     string id = "";
 
+    crownType type;
+
     int timesCrafted = 0;
+    int shiftDiscovered = 0;
 
     public string SetCrownVals(string prim, string ins, string outs)
     {
@@ -40,12 +54,48 @@ public class Crown
             outsideId = flowerDict[outside].id;
         id += primaryId.ToString() + insideId.ToString() + outsideId.ToString();
         //Debug.Log(id);
+        SetType();
         return id;
+    }
+
+    private void SetType()
+    {
+        if (inside.CompareTo("") != 0 && outside.CompareTo("") != 0)
+        {
+            if (primary.CompareTo(inside) == 0 && primary.CompareTo(outside) == 0)
+                type = crownType.Fiver;
+            else if (primary.CompareTo(inside) != 0 && inside.CompareTo(outside) == 0)
+                type = crownType.Four;
+            else if (primary.CompareTo(inside) == 0 || primary.CompareTo(outside) == 0)
+                type = crownType.FullHouse;
+            else
+                type = crownType.Complete;
+        }
+        else
+        {
+            if (primary.CompareTo(inside) == 0 || primary.CompareTo(outside) == 0)
+                type = crownType.Three;
+            else if (outside.CompareTo("") != 0 || inside.CompareTo("") != 0)
+                type = crownType.Advanced;
+            else
+                type = crownType.Basic;
+        }
+        
+    }
+
+    public crownType GetStructure()
+    {
+        return type;
     }
 
     public string GetId()
     {
         return id;
+    }
+
+    public string GetTitle()
+    {
+        return title;
     }
 
     public bool IsDiscovered()
@@ -90,9 +140,15 @@ public class Crown
         discovered = true;
         discoverable = false;
         statusChanged = true;
+        shiftDiscovered = GameControl.PlayerData.shiftCounter;
         CrownCompletionism.completionTracker.totalDiscovered++;
         Crafted();
         Debug.Log(title + " discovered!");
+    }
+
+    public int GetShift()
+    {
+        return shiftDiscovered;
     }
 
     public int GetTimesCrafted()
@@ -125,6 +181,8 @@ public class CrownCompletionism : MonoBehaviour
     [SerializeField] GameObject nodePrefab;
 
     public int totalDiscovered = 0;
+
+    public GameObject infoPopup;
 
     private void Awake()
     {

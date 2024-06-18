@@ -41,6 +41,8 @@ public class GameControl : MonoBehaviour
 
     public GameObject tutorialHandler;
 
+    public int shiftCounter = 0;
+
     //tutorial conditions
     public int inputsTested = 0;
     public bool flowerHarvested = false;
@@ -232,6 +234,7 @@ public class GameControl : MonoBehaviour
         min = 0;
         sec = 0;
         score = 0;
+        shiftCounter++;
         //enemy reset
         currentMax = maxSpeed;
         currentMin = minSpeed;
@@ -316,6 +319,7 @@ public class GameControl : MonoBehaviour
         //need to change this once rare flowers are added
         undiscoveredUncommon.Remove(type);
         discoveredUncommon.Add(type);
+        allDiscovered = allDiscovered.Union(discoveredUncommon).ToList();
         //this is where to initialize entry in the almanac/mastery shit
     }
 

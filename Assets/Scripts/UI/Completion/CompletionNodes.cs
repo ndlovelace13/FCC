@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +27,7 @@ public class CompletionNodes : MonoBehaviour
 
     [SerializeField] Toggle onlySelected;
     bool showAll;
+    int completedCount;
     int selectedCount;
     // Start is called before the first frame update
     void Start()
@@ -35,10 +37,13 @@ public class CompletionNodes : MonoBehaviour
         selectedNodes = new List<Node>();
         CrownCompletionism.completionTracker.nodePooling();
         nodePool = CrownCompletionism.completionTracker.nodePool;
+        CrownCompletionism.completionTracker.infoPopup = GameObject.FindWithTag("CrownInfo");
+        CrownCompletionism.completionTracker.infoPopup.SetActive(false);
         NodeAssign();
         ToggleAssign();
         StartCoroutine(NodeMapping(nodes, 0.005f));
         selectedCount = CrownCompletionism.completionTracker.crowns.Count();
+        completedCount = CrownCompletionism.completionTracker.totalDiscovered;
     }
 
     private void ToggleAssign()
@@ -62,8 +67,9 @@ public class CompletionNodes : MonoBehaviour
             nodes.Add(node.GetComponent<Node>());
         }
     }
-    IEnumerator FlowerSorting(List<string> types, List<bool> discovery)
+    IEnumerator FlowerSorting(List<string> types, List<bool> crownChoices, List<bool> discovery)
     {
+        completedCount = 0;
         List<Node> selected = new List<Node>();
         List<Node> tossed = new List<Node>();
         bool wasSelected = false;
@@ -109,6 +115,38 @@ public class CompletionNodes : MonoBehaviour
                 wasSelected = true;
             else
                 wasSelected = false;
+            stillSelected = false;
+            //check crown types
+            crownType currentStructure = crown.GetStructure();
+            for (int i = 0; i < crownChoices.Count; i++)
+            {
+                if (!wasSelected || stillSelected)
+                    break;
+                if (crownChoices[i] == true)
+                {
+                    switch (i)
+                    {
+                        case 0: if (currentStructure == crownType.Basic)
+                                stillSelected = true; break;
+                        case 1: if (currentStructure == crownType.Advanced)
+                                stillSelected = true; break;
+                        case 2: if (currentStructure == crownType.Three)
+                                stillSelected = true; break;
+                        case 3: if (currentStructure == crownType.Complete)
+                                stillSelected = true; break;
+                        case 4: if (currentStructure == crownType.FullHouse)
+                                stillSelected = true; break;
+                        case 5: if (currentStructure == crownType.Four)
+                                stillSelected = true; break;
+                        case 6: if (currentStructure == crownType.Fiver)
+                                stillSelected = true; break;
+                    }
+                }
+            }
+            if (stillSelected)
+                wasSelected = true;
+            else
+                wasSelected = false;
             if (!showAll)
             {
                 node.SetVisible(wasSelected);
@@ -123,6 +161,8 @@ public class CompletionNodes : MonoBehaviour
             }
             else
             {
+                if (crown.IsDiscovered())
+                    completedCount++;
                 selected.Add(node);
             }
             wasSelected = false;
@@ -174,20 +214,18 @@ public class CompletionNodes : MonoBehaviour
         Vector2 direction = new Vector2(Mathf.Cos(thisAngle), Mathf.Sin(thisAngle));
         Vector3 newLocation = direction * layer * 2;
         if (node.firstTime)
-        {
-            node.InitialNodePlace(newLocation);
-        }
-        else
-        {
-            node.newLocationLerp(newLocation);
-        }
+            node.basePos = newLocation;
+        node.newLocationLerp(newLocation);
         yield return null;
     }
 
     // Update is called once per frame
     void Update()
     {
-        ProgressText.text = CrownCompletionism.completionTracker.totalDiscovered + " of " + selectedCount + " Discovered";
+        if (discoveryToggles[2].isOn)
+            ProgressText.text = completedCount + " of " + selectedCount + " Discovered - " + ((float)completedCount / selectedCount).ToString("0.00%");
+        else
+            ProgressText.text = selectedCount + " of " + CrownCompletionism.completionTracker.allCrowns.Count + " Selected";
     }
 
     public void SortCall()
@@ -195,6 +233,7 @@ public class CompletionNodes : MonoBehaviour
         Debug.Log("sorting now");
         //check flower types first
         List<string> flowerInputs = new List<string>();
+        List<bool> crownInputs = new List<bool>();
         List<bool> discoveryInputs = new List<bool>();
         foreach (var toggle in flowerToggles)
         {
@@ -204,6 +243,11 @@ public class CompletionNodes : MonoBehaviour
                 Debug.Log(toggle.name);
             }
         }
+        //check crown types
+        foreach (var toggle in crownToggles)
+        {
+            crownInputs.Add(toggle.isOn);
+        }
         //check discovery
         foreach (var toggle in discoveryToggles)
         {
@@ -212,6 +256,6 @@ public class CompletionNodes : MonoBehaviour
         //get the selected bool
         showAll = !onlySelected.isOn;
         Debug.Log(flowerInputs.Count);
-        StartCoroutine(FlowerSorting(flowerInputs, discoveryInputs));
+        StartCoroutine(FlowerSorting(flowerInputs, crownInputs, discoveryInputs));
     }
 }

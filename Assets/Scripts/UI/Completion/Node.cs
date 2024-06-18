@@ -30,21 +30,24 @@ public class Node : MonoBehaviour
         crown = newCrown;
     }
     
-    public void InitialNodePlace(Vector3 initPos)
+    IEnumerator InitialNodePlace()
     {
-        //Debug.Log("Initial Node Lerp");
-        transform.localPosition = initPos;
-        basePos = initPos;
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        if (crown.IsDiscovered())
-            spriteRenderer.color = Color.green;
-        else if (crown.Discoverable())
-            spriteRenderer.color = Color.yellow;
+        spriteRenderer.sortingOrder++;
         if (crown.Status())
         {
             GetComponent<SizeLerp>().Execute();
         }
         firstTime = false;
+        yield return null;
+    }
+    IEnumerator ColorSet()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (crown.IsDiscovered())
+            spriteRenderer.color = Color.green;
+        else if (crown.Discoverable())
+            spriteRenderer.color = Color.yellow;
+        yield return null;
     }
 
     public void newLocationLerp(Vector3 newLocation)
@@ -61,6 +64,8 @@ public class Node : MonoBehaviour
 
     IEnumerator Reset()
     {
+        if (firstTime)
+            StartCoroutine(ColorSet());
         float time = 0f;
         Vector3 init = transform.localPosition;
         while (time < 0.5f)
@@ -69,14 +74,17 @@ public class Node : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        if (firstTime)
+            StartCoroutine(InitialNodePlace());
     }
 
     IEnumerator NewLocation(Vector3 newLocation)
     {
         float time = 0f;
+        Vector3 currentPos = transform.localPosition;
         while (time < 0.5f)
         {
-            transform.localPosition = Vector3.Lerp(basePos, newLocation, time / 0.5f);
+            transform.localPosition = Vector3.Lerp(currentPos, newLocation, time / 0.5f);
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
@@ -89,6 +97,7 @@ public class Node : MonoBehaviour
     }
     private void OnMouseExit()
     {
+        CrownCompletionism.completionTracker.infoPopup.SetActive(false);
         StopCoroutine(sizeLerp);
         StartCoroutine(HoverExit());
     }
@@ -102,6 +111,14 @@ public class Node : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        StartCoroutine(InfoDisplay());
+    }
+
+    IEnumerator InfoDisplay()
+    {
+        GameObject info = CrownCompletionism.completionTracker.infoPopup;
+        info.GetComponent<InfoPopup>().CrownChosen(transform.position, crown);
+        yield return null;
     }
 
     IEnumerator HoverExit()

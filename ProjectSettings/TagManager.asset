@@ -36,6 +36,7 @@ TagManager:
   - timer
   - tutorialHandler
   - mainCompletion
+  - CrownInfo
   layers:
   - Default
   - TransparentFX
