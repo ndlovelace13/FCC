@@ -23,7 +23,7 @@ public class Node : MonoBehaviour
 
     public void SetVisible(bool isVisible)
     {
-        GetComponent<SpriteRenderer>().enabled = isVisible;
+        GetComponentInChildren<SpriteRenderer>().enabled = isVisible;
     }
     public void NodeAssignment(Crown newCrown)
     {
@@ -42,7 +42,7 @@ public class Node : MonoBehaviour
     }
     IEnumerator ColorSet()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (crown.IsDiscovered())
             spriteRenderer.color = Color.green;
         else if (crown.Discoverable())
