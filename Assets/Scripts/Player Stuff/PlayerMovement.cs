@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed;
     public Rigidbody2D rigid;
-    private Animator animator;
+    [SerializeField] Animator animator;
     private float craftingSlow = 0.5f;
     Vector2 movement;
 
@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        //animator = transform.GetComponentInChildren<Animator>(true);
         //rigid = GetComponent<Rigidbody2D>();
         speed = GameControl.PlayerData.playerSpeed;
         craftingSlow = GameControl.PlayerData.craftingSlow;
@@ -92,20 +92,21 @@ public class PlayerMovement : MonoBehaviour
         Camera.main.transform.parent = null;
         Vector3 screenEdge = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, 0));
         screenEdge += new Vector3(0, 20);
-        transform.position = screenEdge;
+        transform.parent.transform.position = screenEdge;
         Debug.Log("player placed");
         float time = 0f;
-        animator = GetComponentInChildren<Animator>();
+        Debug.Log(gameObject.name);
+        animator = transform.parent.GetComponentInChildren<Animator>(true);
         while (time < 3f)
         {
             animator.SetBool("isMoving", true);
-            transform.position = Vector2.Lerp(screenEdge, Vector2.zero, time / 3f);
+            transform.parent.transform.position = Vector2.Lerp(screenEdge, Vector2.zero, time / 3f);
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         Debug.Log("player done moving");
         animator.SetBool("isMoving", false);
-        Camera.main.transform.parent = transform;
+        Camera.main.transform.parent = transform.parent;
         Debug.Log("ending intro");
         GameControl.PlayerData.NewUnlocks();
     }
@@ -118,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("what the sigma");
+        Debug.Log("what the sigma");
         if (other.gameObject.tag == "enemy")
         {
             //Debug.Log(other.gameObject.transform.position);

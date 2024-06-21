@@ -41,7 +41,7 @@ public class CompletionNodes : MonoBehaviour
         CrownCompletionism.completionTracker.infoPopup.SetActive(false);
         NodeAssign();
         ToggleAssign();
-        StartCoroutine(NodeMapping(nodes, 0.005f));
+        StartCoroutine(NodeMapping(nodes, 0f));
         selectedCount = CrownCompletionism.completionTracker.crowns.Count();
         completedCount = CrownCompletionism.completionTracker.totalDiscovered;
     }
@@ -186,6 +186,7 @@ public class CompletionNodes : MonoBehaviour
 
     IEnumerator NodeMapping(List<Node> nodeGroup, float delayTime)
     {
+        Debug.Log("nodeGroup Last: " + nodeGroup.Last().gameObject.name);
         int layer = 0;
         int nodesPerLayer = 1;
         int noInLayer = 0;
@@ -200,10 +201,11 @@ public class CompletionNodes : MonoBehaviour
             }
             StartCoroutine(assignLoc(node, layer, nodesPerLayer, noInLayer));
             noInLayer++;
-            finalNode = node;
+            //finalNode = node;
             yield return new WaitForSeconds(delayTime);
         }
         Debug.Log("nodes mapped");
+        finalNode = nodeGroup.Last();
         Camera.main.GetComponent<CompletionCamera>().NodeSet(finalNode);
     }
 

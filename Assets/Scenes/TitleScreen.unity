@@ -238,13 +238,17 @@ MonoBehaviour:
   tierScores: 3200000064000000c8000000
   playerSpeed: 5
   craftingSlow: 0.5
-  pickupDist: 5
-  throwDist: 0
+  pickupDist: 0.5
+  seedChance: 0.25
+  crownMult: 1
   upgradeObj: {fileID: 8343937570677949578, guid: a347e37e23979d546bb4818ddf485b45, type: 3}
   icons:
-  - {fileID: 21300000, guid: 4b7ae610f6a87f04e8a00c2f25a8ab5e, type: 3}
+  - {fileID: 21300000, guid: 80a95511b92732b49aff886fa1cbdfa8, type: 3}
   - {fileID: 21300000, guid: 39904e9e45e0fdd448a7fd297e811bce, type: 3}
   - {fileID: 21300000, guid: b33f0d6aea0ed78458427b2feb3f2538, type: 3}
+  - {fileID: 21300000, guid: a5ac60e0523f66346b99a125e9f19448, type: 3}
+  - {fileID: 21300000, guid: e43ee0bb0a5aba6429c38913d1ad8582, type: 3}
+  - {fileID: 21300000, guid: e78652f24170ee24abfb3ee588fbaba9, type: 3}
   upgrades: []
   essenceCount: 0
   ResearchPrefab: {fileID: 5122733356647096448, guid: 51f36e36923db974da9666aa476680d7, type: 3}
@@ -848,6 +852,7 @@ MonoBehaviour:
   sizeModifier: 1.2
   loopTime: 3
   looping: 1
+  lerping: 0
 --- !u!1 &1065684193
 GameObject:
   m_ObjectHideFlags: 0

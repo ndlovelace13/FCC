@@ -37,6 +37,8 @@ TagManager:
   - tutorialHandler
   - mainCompletion
   - CrownInfo
+  - hats
+  - shadow
   layers:
   - Default
   - TransparentFX

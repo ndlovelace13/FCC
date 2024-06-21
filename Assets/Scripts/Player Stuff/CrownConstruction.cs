@@ -27,6 +27,8 @@ public class CrownConstruction : MonoBehaviour
     bool crownHeld = false;
     public bool skillCheckActive = false;
 
+    FlowerHarvest harvestObj;
+
 
     float range;
     int damage;
@@ -38,6 +40,7 @@ public class CrownConstruction : MonoBehaviour
     int projRange = 0;
 
     bool crownDiscovered = false;
+    int crownDiscoveryScore = 0;
 
     public string crownAnnouncement;
 
@@ -48,6 +51,7 @@ public class CrownConstruction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        harvestObj = gameObject.GetComponentInChildren<FlowerHarvest>();
         CrownReplace();
         slots = docket.GetComponentsInChildren<Transform>();
         slots = slots.Where(child => child.tag == "slotEmpty").ToArray();
@@ -57,30 +61,40 @@ public class CrownConstruction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.GetComponent<FlowerHarvest>().docketLoaded == true && Input.GetKeyDown(KeyCode.E) && !skillCheckActive && !constructionReady && !crownHeld)
+        if (harvestObj.docketLoaded == true && Input.GetKeyDown(KeyCode.E) && !skillCheckActive && !constructionReady && !crownHeld)
         {
             if (GameControl.PlayerData.tutorialState == 4)
                 GameControl.PlayerData.crownConstructionStarted = true;
             Debug.Log("trolling");
             ConstructionSkillCheck();
-            gameObject.GetComponent<FlowerHarvest>().docketLoaded = false;
+            harvestObj.docketLoaded = false;
             GetComponentInChildren<Animator>().SetBool("isMoving", false);
             GetComponentInChildren<Animator>().SetBool("isCrafting", true);
         }
         if (constructionReady == true)
         {
             GetComponentInChildren<Animator>().SetBool("isCrafting", false);
-            int crownScore = Construction();
+            int crownScore = (int) (Construction() * GameControl.PlayerData.crownMult);
             constructionReady = false;
             Debug.Log(crownScore);
             //int currentScore = PlayerPrefs.GetInt("totalScore");
             //PlayerPrefs.SetInt("totalScore", currentScore + crownScore);
             if (!GameControl.PlayerData.tutorialActive)
+            {
                 GameControl.PlayerData.score += crownScore;
+                if (crownDiscovered)
+                {
+                    GameControl.PlayerData.score += crownDiscoveryScore;
+                }
+            }
             if (crownDiscovered)
+            {
                 crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement, Color.green);
+                scoreNotif.GetComponent<ScoreNotification>().newFeed("New Crown Discovered | +" + crownDiscoveryScore);
+            }
             else
                 crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement);
+           
             scoreNotif.GetComponent<ScoreNotification>().newFeed("Crown Construction | +" + crownScore);
             finalCrown.GetComponent<SpriteRenderer>().enabled = true;
             finalCrown.transform.parent = null;
@@ -101,9 +115,11 @@ public class CrownConstruction : MonoBehaviour
     void CrownReplace()
     {
         finalCrown = Instantiate(crownPrefab, docket.transform);
-        finalCrown.GetComponent<SpriteRenderer>().enabled = false;
+        foreach (SpriteRenderer sprite in finalCrown.GetComponentsInChildren<SpriteRenderer>())
+            sprite.enabled = false;
+        //finalCrown.GetComponent<SpriteRenderer>().enabled = false;
         finalCrown.transform.parent = docket.transform;
-        gameObject.GetComponent<FlowerHarvest>().crownReset();
+        harvestObj.crownReset();
     }
 
     public void CrownThrown()
@@ -123,7 +139,7 @@ public class CrownConstruction : MonoBehaviour
             chosenInputs[chosenInputs.Count - 1].transform.parent = docket.transform;
         }
         skillCheckActive = true;
-        gameObject.GetComponent<PlayerMovement>().CraftingSlow();
+        gameObject.GetComponentInChildren<PlayerMovement>().CraftingSlow();
     }
     
     void skillChecking()
@@ -166,7 +182,7 @@ public class CrownConstruction : MonoBehaviour
         {
             Debug.Log("loopBROKE");
             skillCheckActive = false;
-            gameObject.GetComponent<PlayerMovement>().CraftingDone();
+            gameObject.GetComponentInChildren<PlayerMovement>().CraftingDone();
             constructionReady = true;
         }
         
@@ -306,6 +322,11 @@ public class CrownConstruction : MonoBehaviour
         {
             constructedCrown.Discovery(crownAnnouncement);
             crownDiscovered = true;
+            crownDiscoveryScore = 5;
+            if (outsideId != -1)
+                crownDiscoveryScore += 5;
+            if (insideId != -1)
+                crownDiscoveryScore += 5;
         }
 
         crownAnnouncement += " Constructed!";

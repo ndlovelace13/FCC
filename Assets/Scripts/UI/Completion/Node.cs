@@ -92,14 +92,18 @@ public class Node : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        Debug.Log(gameObject.name);
-        sizeLerp = StartCoroutine(HoverEnter());
+        //Debug.Log(gameObject.name);
+        if (spriteRenderer.enabled)
+            sizeLerp = StartCoroutine(HoverEnter());
     }
     private void OnMouseExit()
     {
-        CrownCompletionism.completionTracker.infoPopup.SetActive(false);
-        StopCoroutine(sizeLerp);
-        StartCoroutine(HoverExit());
+        if (spriteRenderer.enabled)
+        {
+            CrownCompletionism.completionTracker.infoPopup.SetActive(false);
+            StopCoroutine(sizeLerp);
+            StartCoroutine(HoverExit());
+        }
     }
 
     IEnumerator HoverEnter()
@@ -117,6 +121,7 @@ public class Node : MonoBehaviour
     IEnumerator InfoDisplay()
     {
         GameObject info = CrownCompletionism.completionTracker.infoPopup;
+        Debug.Log(transform.position);
         info.GetComponent<InfoPopup>().CrownChosen(transform.position, crown);
         yield return null;
     }

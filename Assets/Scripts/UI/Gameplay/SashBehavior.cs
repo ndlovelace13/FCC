@@ -65,7 +65,7 @@ public class SashBehavior : MonoBehaviour
     IEnumerator AssignSlot(int slot)
     {
         yield return null;
-        GameObject lastFlower = player.GetComponent<FlowerHarvest>().lastFlower();
+        GameObject lastFlower = player.GetComponentInChildren<FlowerHarvest>().lastFlower();
         if (lastFlower != null)
         {
             string type = lastFlower.GetComponent<FlowerStats>().type;

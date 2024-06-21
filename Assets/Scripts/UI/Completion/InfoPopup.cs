@@ -41,6 +41,8 @@ public class InfoPopup : MonoBehaviour
         RectTransform rectTransform = GetComponent<RectTransform>();
         Vector2 canvasPos = Camera.main.WorldToViewportPoint(nodePos);
 
+        
+
         //reset the fit thing
         GetComponent<ContentSizeFitter>().enabled = false;
         GetComponent<VerticalLayoutGroup>().enabled = false;
@@ -51,17 +53,27 @@ public class InfoPopup : MonoBehaviour
         Vector3 corner = new Vector3(rectTransform.rect.width, rectTransform.rect.height) / 2f;
         Debug.Log(corner);
         if (canvasPos.x <= 0.5 && canvasPos.y <= 0.5)
-            rectTransform.anchoredPosition = corner;
+        {
+            rectTransform.pivot = Vector2.zero;
+        }
         else if (canvasPos.x > 0.5 && canvasPos.y <= 0.5)
-            rectTransform.anchoredPosition = new Vector2(-corner.x, corner.y);
+        {
+            rectTransform.pivot = new Vector2(1, 0);
+        }
         else if (canvasPos.x <= 0.5 && canvasPos.y > 0.5)
-            rectTransform.anchoredPosition = new Vector2(corner.x, -corner.y);
+        {
+            rectTransform.pivot = new Vector2(0, 1);
+        }
         else
-            rectTransform.anchoredPosition = -corner;
-
+        {
+            rectTransform.pivot = Vector2.one;
+        }
+        Debug.Log("this is the canvasPos" + canvasPos);
+        rectTransform.anchoredPosition = Vector3.zero;
         //anchor to the right spot
         rectTransform.anchorMin = canvasPos;
         rectTransform.anchorMax = canvasPos;
+
         //gameObject.SetActive(true);
     }
 

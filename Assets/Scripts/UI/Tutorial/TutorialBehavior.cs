@@ -230,8 +230,8 @@ public class TutorialBehavior : MonoBehaviour
     public void PlayerDisable()
     {
         player.GetComponentInChildren<Animator>().SetBool("isMoving", false);
-        player.GetComponent<PlayerMovement>().enabled = false;
-        player.GetComponent<FlowerHarvest>().enabled = false;
+        player.GetComponentInChildren<PlayerMovement>().enabled = false;
+        player.GetComponentInChildren<FlowerHarvest>().enabled = false;
         player.GetComponent<CrownThrowing>().enabled = false;
         player.GetComponent<CrownConstruction>().enabled = false;
         player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
@@ -241,11 +241,11 @@ public class TutorialBehavior : MonoBehaviour
     {
         if (GameControl.PlayerData.tutorialState > 0)
         {
-            player.GetComponent<PlayerMovement>().enabled = true;
+            player.GetComponentInChildren<PlayerMovement>().enabled = true;
         }
         if (GameControl.PlayerData.tutorialState > 1)
         {
-            player.GetComponent<FlowerHarvest>().enabled = true;
+            player.GetComponentInChildren<FlowerHarvest>().enabled = true;
             player.GetComponent<CrownConstruction>().enabled = true;
         }
         if (GameControl.PlayerData.tutorialState > 4)
@@ -268,7 +268,8 @@ public class TutorialBehavior : MonoBehaviour
         }
         if (GameControl.PlayerData.tutorialState == 6)
         {
-            fireInstance = Instantiate(fireCrown, player.transform);
+            fireInstance = Instantiate(fireCrown);
+            fireInstance.transform.position = player.transform.position;
             fireInstance.SetActive(true);
         }
     }

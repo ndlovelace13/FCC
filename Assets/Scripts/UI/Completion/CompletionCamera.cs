@@ -44,10 +44,12 @@ public class CompletionCamera : MonoBehaviour
 
     public void NodeSet(Node lastNode)
     {
-        if (lastNode.transform.position.magnitude > maxMag)
+        if (lastNode.basePos.magnitude > maxMag)
         {
             finalNode = lastNode;
-            maxMag = finalNode.transform.position.magnitude;
+            maxMag = finalNode.basePos.magnitude;
+            //Debug.Log("maxMag set to " + maxMag);
+            //Debug.Log(lastNode.transform.position);
         }
         
     }

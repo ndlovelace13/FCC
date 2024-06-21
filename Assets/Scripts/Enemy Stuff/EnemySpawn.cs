@@ -13,6 +13,7 @@ public class EnemySpawn : MonoBehaviour
     static float yDiff;
     static Vector3 pos;
     static Vector3 negPos;
+    ObjectPool hatPool;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class EnemySpawn : MonoBehaviour
     public void enemyBegin()
     {
         cam = Camera.main;
+        hatPool = GameObject.FindWithTag("hats").GetComponent<ObjectPool>();
         GameControl.PlayerData.activeEnemies = 0;
         StartCoroutine(spawnTimer());
         StartCoroutine(PosUpdate());
@@ -103,9 +105,21 @@ public class EnemySpawn : MonoBehaviour
         newEnemy.SetActive(true);
         newEnemy.transform.position = newSpawn();
         newEnemy.GetComponent<EnemyBehavior>().Activate();
+        StartCoroutine(HatAssign(newEnemy));
         if (!enemies.Contains(newEnemy))
             enemies.Add(newEnemy);
         GameControl.PlayerData.activeEnemies++;
+        yield return null;
+    }
+
+    IEnumerator HatAssign(GameObject newEnemy)
+    {
+        GameObject newHat = hatPool.GetPooledObject();
+        newHat.transform.SetParent(newEnemy.transform);
+        newHat.SetActive(true);
+        newHat.transform.position = newEnemy.transform.position;
+        newHat.GetComponent<HatBehavior>().Activate();
+        //newHat.transform.position = newEnemy.transform.position;
         yield return null;
     }
 

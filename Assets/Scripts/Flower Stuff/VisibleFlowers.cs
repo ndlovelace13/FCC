@@ -170,6 +170,7 @@ public class VisibleFlowers : MonoBehaviour
                 head.SetActive(true);
                 head.transform.position = flower.getPosition() + new Vector2(-0.061f, 0.44f);
                 head.transform.parent = newFlower.transform;
+                head.GetComponent<FlowerBehavior>().picked = false;
                 
                 //apply uncommon particle if uncommon
                 //newFlower.GetComponentInChildren<Animator>().SetInteger("rarity", flower.getRarity());
@@ -211,7 +212,7 @@ public class VisibleFlowers : MonoBehaviour
         {
             if (flower == f.getFlower())
             {
-                GameObject head = f.getFlower().transform.GetChild(1).gameObject;
+                GameObject head = f.getFlower().transform.GetChild(2).gameObject;
                 head.transform.parent = null;
                 head.SetActive(false);
                 f.getFlower().SetActive(false);

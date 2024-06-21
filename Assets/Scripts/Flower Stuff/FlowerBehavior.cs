@@ -7,6 +7,7 @@ public class FlowerBehavior : MonoBehaviour
     //public FlowerStats stats;
     public string type;
     public int position = 0;
+    public bool picked = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +18,22 @@ public class FlowerBehavior : MonoBehaviour
     void Update()
     {
         //stats = GameControl.PlayerData.flowerStatsDict[type];
-        Animator animator = transform.parent.GetComponentInChildren<Animator>();
-        if (animator != null)
+        
+        if (!picked)
+        {
+            Animator animator = transform.parent.GetChild(0).GetComponentInChildren<Animator>();
             animator.SetInteger("rarity", GetComponent<FlowerStats>().rarity);
+        }
+            
+    }
+
+    private void OnEnable()
+    {
+        picked = true;
+    }
+
+    private void OnDisable()
+    {
+        picked = true;
     }
 }

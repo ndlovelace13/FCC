@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class EnemyBehavior : MonoBehaviour
@@ -51,6 +52,8 @@ public class EnemyBehavior : MonoBehaviour
 
     public bool wasKilled = false;
 
+    SpriteRenderer[] allSprites;
+
     //Particles
     List<GameObject> particles;
 
@@ -62,7 +65,7 @@ public class EnemyBehavior : MonoBehaviour
     void Start()
     {
         //destructScore = 10;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CapsuleCollider2D>().transform;
         target = player;
         //moveSpeed = maxSpeed;
         scoreNotif = GameObject.FindGameObjectWithTag("scoreAnnounce").GetComponent<TMP_Text>();
@@ -102,15 +105,27 @@ public class EnemyBehavior : MonoBehaviour
             {
                 Deactivate();
             }
-
+            
+            //assign sortingorder to both itself and hat if exists
+            allSprites = GetComponentsInChildren<SpriteRenderer>();
             //visual layer in reference to player
             if (player.localPosition.y < transform.localPosition.y)
             {
-                GetComponent<SpriteRenderer>().sortingOrder = 0;
+                foreach (SpriteRenderer sprite in allSprites)
+                {
+                    if (sprite.sortingLayerName != "Background")
+                        sprite.sortingOrder = 0;
+                }
+                    
+                //GetComponent<SpriteRenderer>().sortingOrder = 0;
             }
             else
             {
-                GetComponent<SpriteRenderer>().sortingOrder = 2;
+                foreach (SpriteRenderer sprite in allSprites)
+                {
+                    if (sprite.sortingLayerName != "Background")
+                        sprite.sortingOrder = 2;
+                }
             }
         }
     }
@@ -132,20 +147,22 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void CollisionCheck(Collider2D other)
     {
         augments = new string[3];
         //Debug.Log("collision happening");
         if (other.gameObject.tag == "projectile")
         {
-            DealDamage(other.gameObject.GetComponent<ProjectileBehavior>().damage, Color.white);
-            augments = other.gameObject.GetComponent<ProjectileBehavior>().getAugments();
+            GameObject otherParent = other.gameObject.transform.parent.gameObject;
+            DealDamage(otherParent.GetComponent<ProjectileBehavior>().damage, Color.white);
+            augments = otherParent.GetComponent<ProjectileBehavior>().getAugments();
             AugmentApplication(augments);
-            other.gameObject.GetComponent<ProjectileBehavior>().ObjectDeactivate();
+            otherParent.GetComponent<ProjectileBehavior>().ObjectDeactivate();
         }
         else if (other.gameObject.tag == "aoe")
         {
-            augments = other.gameObject.GetComponent<AoeBehavior>().getAugments();
+            GameObject otherParent = other.gameObject.transform.parent.gameObject;
+            augments =  otherParent.GetComponent<AoeBehavior>().getAugments();
             AugmentApplication(augments);
         }
     }
@@ -185,6 +202,8 @@ public class EnemyBehavior : MonoBehaviour
     public void DealDamage(int damage, Color color)
     {
         health -= damage;
+        if (health < maxHealth / 2 && GetComponentInChildren<HatBehavior>() != null)
+            GetComponentInChildren<HatBehavior>().HatFall();
         GameObject newNotif = Instantiate(notif, transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), Quaternion.identity);
         newNotif.GetComponent<DamageNotif>().Creation(damage.ToString(), color);
     }
@@ -203,6 +222,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         //initialize variables
         health = GameControl.PlayerData.currentHealth;
+        maxHealth = health;
         isActive = true;
         GetComponent<SpriteRenderer>().color = Color.white;
         if (particles == null)
@@ -222,6 +242,7 @@ public class EnemyBehavior : MonoBehaviour
         //begin the gradual speed up routine
         StartCoroutine(GradualSpeedUp());
         StartCoroutine(KillReset());
+        allSprites = GetComponentsInChildren<SpriteRenderer>();
     }
 
     private void Deactivate()
@@ -238,7 +259,7 @@ public class EnemyBehavior : MonoBehaviour
         isActive = false;
         surprised = false;
         wasKilled = true;
-        if (Random.Range(0f, 1f) < seedProb)
+        if (Random.Range(0f, 1f) < GameControl.PlayerData.seedChance)
         {
             GameObject newSeed = seedPool.GetComponent<ObjectPool>().GetPooledObject();
             newSeed.SetActive(true);
