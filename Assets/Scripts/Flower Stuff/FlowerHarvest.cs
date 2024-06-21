@@ -10,7 +10,7 @@ public class FlowerHarvest : MonoBehaviour
     [SerializeField] GameObject[] slots;
     [SerializeField] GameObject docket;
     GameObject flowerPool;
-    Transform crown;
+    GameObject crown;
     public bool docketLoaded = true;
     public bool crownHeld = false;
     // Start is called before the first frame update
@@ -43,7 +43,9 @@ public class FlowerHarvest : MonoBehaviour
            // Debug.Log("2 Levels");
             if (Input.GetKey(KeyCode.Space) && !docketLoaded && !GameControl.PlayerData.loading)
             {
-                GameObject flower = collision.gameObject;
+                //I'm putting a bullet through my skull
+                GameObject flower = collision.gameObject.transform.parent.gameObject;
+                Debug.Log("This is the thing: " + flower.name);
                 foreach (Transform t in flower.transform)
                 {
                     if (t.CompareTag("FlowerHead"))
@@ -57,7 +59,10 @@ public class FlowerHarvest : MonoBehaviour
                             newHead.GetComponent<SpriteRenderer>().sortingLayerName = "Midground";
                             newHead.GetComponent<SpriteRenderer>().sortingOrder = 4;
                             newHead.transform.localScale = new Vector3(1f, 1f, 1f);
-                            newHead.transform.parent = crown;
+                            newHead.GetComponent<FlowerBehavior>().picked = true;
+                            //newHead.transform.position = slots[slotPos].transform.position;
+                            //Debug.Log("WHAT THE FUCK IS HAPPENING: " + crown.gameObject.name);
+                            newHead.transform.SetParent(crown.transform);
                             newHead.GetComponent<FlowerBehavior>().position = slotPos;
                             Debug.Log("slot Position assigned: " + slotPos);
 
@@ -85,7 +90,7 @@ public class FlowerHarvest : MonoBehaviour
     {
         Debug.Log("Last full slot" + lastSlot());
         int slotPos = lastSlot();
-        if (slotPos != -1 && !gameObject.GetComponent<CrownConstruction>().skillCheckActive && !gameObject.GetComponent<CrownConstruction>().constructionReady)
+        if (slotPos != -1 && !transform.parent.GetComponent<CrownConstruction>().skillCheckActive && !transform.parent.GetComponent<CrownConstruction>().constructionReady)
         {
             docketLoaded = false;
             slots[slotPos].tag = "slotEmpty";
@@ -117,10 +122,10 @@ public class FlowerHarvest : MonoBehaviour
         }
         Transform[] allObjects = docket.GetComponentsInChildren<Transform>();
         allObjects = allObjects.Where(child => child.tag == "finalCrown").ToArray();
-        crown = allObjects[0];
+        crown = allObjects[0].gameObject;
         if (crown)
         {
-            Debug.Log("new crown found");
+            Debug.Log(crown.gameObject.name);
         }
     }
 

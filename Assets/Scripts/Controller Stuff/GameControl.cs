@@ -41,6 +41,8 @@ public class GameControl : MonoBehaviour
 
     public GameObject tutorialHandler;
 
+    public int shiftCounter = 0;
+
     //tutorial conditions
     public int inputsTested = 0;
     public bool flowerHarvested = false;
@@ -65,6 +67,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] public GameObject[] flowers;
     public FlowerStats[] flowerStats;
     public Dictionary<string, FlowerStats> flowerStatsDict;
+    public string[] flowerTypes;
     public GameObject flowerPool;
     public Dictionary<string, ObjectPool> flowerPoolDict;
 
@@ -95,9 +98,11 @@ public class GameControl : MonoBehaviour
     //upgradable stats
     public float playerSpeed = 5f;
     public float craftingSlow = 0.5f;
-    public float pickupDist = 1f;
+    public float pickupDist = 0.5f;
+    public float seedChance = 0.25f;
+    public float crownMult = 1f;
     //implement with precision throw mechanic
-    public float throwDist;
+    //public float throwDist;
 
     //upgrades
     [SerializeField] GameObject upgradeObj;
@@ -138,11 +143,16 @@ public class GameControl : MonoBehaviour
         {
             PlayerData = this;
             DontDestroyOnLoad(gameObject);
+            UpgradeInit();
+            ResearchInit();
+            UpgradeApply();
+            SetFlowers();
+            GameObject.FindWithTag("mainCompletion").GetComponent<CrownCompletionism>().PermutationEst();
         }
-        UpgradeInit();
-        ResearchInit();
-        UpgradeApply();
-        SetFlowers();
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void SetFlowers()
@@ -151,6 +161,7 @@ public class GameControl : MonoBehaviour
         flowerStatsDict = new Dictionary<string, FlowerStats>();
         flowerPoolDict = new Dictionary<string, ObjectPool>();
         flowerStats = new FlowerStats[flowers.Length];
+        flowerTypes = new string[flowers.Length];
         for (int i = 0; i < flowers.Length; i++)
         {
             //add flowerStats to the array
@@ -168,7 +179,6 @@ public class GameControl : MonoBehaviour
             flowerStatsDict.Add(flowerStats[i].type, flowerStats[i]);
             //reset the affinity levels
             flowerStatsDict[flowerStats[i].type].UpdateAffinity(0);
-            //store sprite in array for easy access - MAY WANT TO REMOVE THIS FOR CLEANLINESS LATER
         }
 
         //TO DO: get sprites from within flowerStats instead of a separate array
@@ -181,26 +191,47 @@ public class GameControl : MonoBehaviour
             //check if there is a way to directly influence the value of these variables
             {"uncommon", 0.05f},
             {"playerSpeed", 5f},
-            {"craftingSlow", 0.5f}
+            {"craftingSlow", 0.5f},
+            {"seedChance", 0.4f},
+            {"pickupDist", 1f},
+            {"crownMult", 1f}
         };
         upgrades = new List<Upgrade>();
 
         //uncommon rarity
         GameObject newUpgrade = Instantiate(upgradeObj);
         newUpgrade.transform.SetParent(transform);
-        newUpgrade.GetComponent<Upgrade>().SetValues("uncommon", 1f, 1.5f, 15, 0.025f, "Better Seeds", "Increased Chance of Encountering Uncommon Flowers", "%", icons[0]);
+        newUpgrade.GetComponent<Upgrade>().SetValues("uncommon", 3f, 1.5f, 15, 0.025f, "Enhanced Pollination", "Increased Chance of Encountering Uncommon Flowers", "%", icons[0]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
 
         //playerSpeed
         newUpgrade = Instantiate(upgradeObj);
         newUpgrade.transform.SetParent(transform);
-        newUpgrade.GetComponent<Upgrade>().SetValues("playerSpeed", 3f, 1.75f, 10, 0.5f, "Faster Shoes", "Incrases Player Movement Speed", " m/s", icons[1]);
+        newUpgrade.GetComponent<Upgrade>().SetValues("playerSpeed", 3f, 1.75f, 10, 0.5f, "Faster Shoes", "Increases Player Movement Speed", " m/s", icons[1]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
 
         //crownSlow
         newUpgrade = Instantiate(upgradeObj);
         newUpgrade.transform.SetParent(transform);
         newUpgrade.GetComponent<Upgrade>().SetValues("craftingSlow", 5f, 2f, 5, -0.05f, "Skilled Hands", "Decreases Slow Effect when Crafting a crown", "% speed", icons[2]);
+        upgrades.Add(newUpgrade.GetComponent<Upgrade>());
+
+        //seedChance
+        newUpgrade = Instantiate(upgradeObj);
+        newUpgrade.transform.SetParent(transform);
+        newUpgrade.GetComponent<Upgrade>().SetValues("seedChance", 2f, 1.75f, 10, 0.05f, "Seedier Skinwalkers", "Increased Chance of Essence Seed Drop on Kill", "%", icons[3]);
+        upgrades.Add(newUpgrade.GetComponent<Upgrade>());
+
+        //pickupDist
+        newUpgrade = Instantiate(upgradeObj);
+        newUpgrade.transform.SetParent(transform);
+        newUpgrade.GetComponent<Upgrade>().SetValues("pickupDist", 4f, 1.5f, 10, 0.5f, "Essence Magnet", "Increases Pickup Distance on Essence Seeds", "m", icons[4]);
+        upgrades.Add(newUpgrade.GetComponent<Upgrade>());
+
+        //crownMult
+        newUpgrade = Instantiate(upgradeObj);
+        newUpgrade.transform.SetParent(transform);
+        newUpgrade.GetComponent<Upgrade>().SetValues("crownMult", 10f, 1.75f, 6, 0.25f, "Crown Pay Raise", "Increases the score multiplier on crown creation", "x", icons[5]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
     }
 
@@ -226,6 +257,7 @@ public class GameControl : MonoBehaviour
         min = 0;
         sec = 0;
         score = 0;
+        shiftCounter++;
         //enemy reset
         currentMax = maxSpeed;
         currentMin = minSpeed;
@@ -249,7 +281,7 @@ public class GameControl : MonoBehaviour
         {
         }
         //NewUnlocks();
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().IntroMove();
+        GameObject.FindWithTag("Player").GetComponentInChildren<PlayerMovement>(true).IntroMove();
     }
 
     public void FinishIntro()
@@ -297,6 +329,9 @@ public class GameControl : MonoBehaviour
         uncommon = upgradeDict["uncommon"];
         playerSpeed = upgradeDict["playerSpeed"];
         craftingSlow = upgradeDict["craftingSlow"];
+        seedChance = upgradeDict["seedChance"];
+        pickupDist = upgradeDict["pickupDist"];
+        crownMult = upgradeDict["crownMult"];
     }
 
     public void FlowerDiscovery(string type)
@@ -310,6 +345,7 @@ public class GameControl : MonoBehaviour
         //need to change this once rare flowers are added
         undiscoveredUncommon.Remove(type);
         discoveredUncommon.Add(type);
+        allDiscovered = allDiscovered.Union(discoveredUncommon).ToList();
         //this is where to initialize entry in the almanac/mastery shit
     }
 

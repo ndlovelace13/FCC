@@ -17,7 +17,7 @@ public class EssenceBehavior : MonoBehaviour
     {
         if (!pickingUp)
         {
-            Vector2 currentDist = player.transform.localPosition - transform.position;
+            Vector2 currentDist = player.transform.position - transform.position;
             //Debug.Log(currentDist.magnitude);
             if (currentDist.magnitude < GameControl.PlayerData.pickupDist)
             {
@@ -29,8 +29,9 @@ public class EssenceBehavior : MonoBehaviour
 
     private void OnEnable()
     {
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.FindWithTag("Player").GetComponentInChildren<PlayerMovement>().gameObject;
         pickingUp = false;
+        GetComponent<SizeLerp>().lerping = false;
         GetComponent<SizeLerp>().Execute();
     }
 
@@ -45,8 +46,8 @@ public class EssenceBehavior : MonoBehaviour
         float time = 0f;
         while (time < 1f)
         {
-            transform.localPosition = Vector2.Lerp(transform.localPosition, player.transform.localPosition, time);
-            if ((transform.localPosition - player.transform.localPosition).magnitude < 0.05f)
+            transform.localPosition = Vector2.Lerp(transform.localPosition, player.transform.position, time);
+            if ((transform.localPosition - player.transform.position).magnitude < 0.05f)
                 break;
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();

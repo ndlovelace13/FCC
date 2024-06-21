@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rarity: 1
   type: dandy
+  id: 7
   basePoints: 3
   damage: 15
   range: 5

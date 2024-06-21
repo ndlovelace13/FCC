@@ -6,6 +6,7 @@ public abstract class FlowerStats : MonoBehaviour
 {
     [SerializeField] public int rarity;
     [SerializeField] public string type;
+    public int id;
 
     public int basePoints;
     public int damage;

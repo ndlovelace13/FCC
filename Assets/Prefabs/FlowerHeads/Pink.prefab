@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rarity: 0
   type: pink
+  id: 0
   basePoints: 2
   damage: 7
   range: 2

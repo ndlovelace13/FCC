@@ -52,11 +52,6 @@ public class EndScreenBehavior : MonoBehaviour
         }
     }*/
 
-    public void LinkToForm()
-    {
-        Application.OpenURL("https://forms.gle/LkHsuFDq4exfR15r6");
-    }
-
     public void CatalogLoad()
     {
         SceneManager.LoadScene("Catalog");
@@ -75,6 +70,11 @@ public class EndScreenBehavior : MonoBehaviour
     public void NextShift()
     {
         SceneManager.LoadScene("Gameplay");
+    }
+
+    public void CompletionLoad()
+    {
+        SceneManager.LoadScene("CompletionTracker");
     }
 
     IEnumerator BalanceUpdate()

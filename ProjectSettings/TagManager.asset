@@ -35,6 +35,10 @@ TagManager:
   - seedPool
   - timer
   - tutorialHandler
+  - mainCompletion
+  - CrownInfo
+  - hats
+  - shadow
   layers:
   - Default
   - TransparentFX

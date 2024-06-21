@@ -41,7 +41,7 @@ public class CrownAttack : MonoBehaviour
         
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    public void CollisionCheck(Collider2D collision)
     {
         if (collision.gameObject.tag == "enemy" && crownArmed)
         {
@@ -63,6 +63,12 @@ public class CrownAttack : MonoBehaviour
     public void CrownActive()
     {
         crownActive = true;
+        SpriteRenderer[] children = gameObject.GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer child in children)
+        {
+            if (child.gameObject.tag == "shadow")
+                child.enabled = true;
+        }
     }
 
     public void CrownArmed()
@@ -72,7 +78,7 @@ public class CrownAttack : MonoBehaviour
         SpriteRenderer[] flowers = GetComponentsInChildren<SpriteRenderer>();
         foreach (SpriteRenderer flower in flowers)
         {
-            if (flower.gameObject.tag != "finalCrown")
+            if (flower.gameObject.tag != "finalCrown" && flower.gameObject.tag != "shadow")
                 flower.sortingOrder = 0;
         }
         StartCoroutine(Detonate());
@@ -195,7 +201,7 @@ public class CrownAttack : MonoBehaviour
         //rotating towards direction of movement
         proj.SetActive(true);
         proj.GetComponent<ProjectileBehavior>().SetProps(range, damage, augment1, augment2, augment3, projDir);
-        proj.GetComponent<Rigidbody2D>().velocity = projDir * speed;
+        proj.GetComponentInChildren<Rigidbody2D>().velocity = projDir * speed;
         singleFire = false;
         yield return null;
     }
