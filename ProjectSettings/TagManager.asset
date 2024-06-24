@@ -39,6 +39,7 @@ TagManager:
   - CrownInfo
   - hats
   - shadow
+  - stem
   layers:
   - Default
   - TransparentFX

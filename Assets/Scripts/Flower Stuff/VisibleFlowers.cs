@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -166,6 +167,13 @@ public class VisibleFlowers : MonoBehaviour
                 newFlower.SetActive(true);
                 flower.setFlower(newFlower);
                 newFlower.transform.position = flower.getPosition();
+                //execute the initial growth anim
+                Animator stemAnim = newFlower.GetComponentsInChildren<Animator>().Last();
+                stemAnim.Play("BasicGrow");
+                while (stemAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
                 GameObject head = headReturn(flower.getType());
                 head.SetActive(true);
                 head.transform.position = flower.getPosition() + new Vector2(-0.061f, 0.44f);
@@ -197,8 +205,11 @@ public class VisibleFlowers : MonoBehaviour
                     break;
                 }
             }
-            head.transform.parent = null;
-            head.SetActive(false);
+            if (head != null)
+            {
+                head.transform.parent = null;
+                head.SetActive(false);
+            }
             flower.getFlower().SetActive(false);
             flower.setFlower(null);
             flower.SetActivated(false);

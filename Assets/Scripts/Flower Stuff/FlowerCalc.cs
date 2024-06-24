@@ -99,11 +99,7 @@ public class FlowerCalc : MonoBehaviour
             GameControl.PlayerData.uncommon = 0.5f;
             GameControl.PlayerData.discoveryDisplay = false;
             GameControl.PlayerData.FlowerDiscovery("red");
-            GameControl.PlayerData.FlowerDiscovery("blue");
-            GameControl.PlayerData.FlowerDiscovery("green");
-            GameControl.PlayerData.FlowerDiscovery("yellow");
-            GameControl.PlayerData.FlowerDiscovery("dandy");
-            GameControl.PlayerData.FlowerDiscovery("wild");
+            GameControl.PlayerData.FlowerDiscovery("sunny");
         }
         GameControl.PlayerData.ResetRun();
     }

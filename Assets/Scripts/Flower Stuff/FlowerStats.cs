@@ -68,6 +68,11 @@ public abstract class FlowerStats : MonoBehaviour
 
     }
 
+    public virtual void OnHitboxEnter(GameObject flower)
+    {
+        Debug.Log("Hitbox enter called for " + type);
+    }
+
     protected IEnumerator SlowApply(float slowEffect, float slowTime, int particle, GameObject enemy)
     {
         GameObject part = enemy.GetComponent<EnemyBehavior>().nextParticle();
