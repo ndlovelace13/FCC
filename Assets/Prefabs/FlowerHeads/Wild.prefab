@@ -100,6 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: wild
   position: 0
+  picked: 1
+  growing: 0
+  tier: 0
 --- !u!114 &8920025342897894981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +125,7 @@ MonoBehaviour:
   projRange: 0
   headSprite: {fileID: 21300000, guid: 2eb664c5d314e4a4da89a218f98f39f4, type: 3}
   projSprite: {fileID: 0}
+  stemSprite: {fileID: 21300000, guid: 2351e182e81d46542a43cefa85e8ee95, type: 3}
   pool: {fileID: 0}
   pointsTiers: 00000000000000000000000000000000
   damageTiers: 00000000000000000000000000000000

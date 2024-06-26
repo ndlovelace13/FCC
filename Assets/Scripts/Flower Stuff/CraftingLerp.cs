@@ -78,7 +78,7 @@ public class CraftingLerp : MonoBehaviour
             //Debug.Log("bruh moment" + slots.Count());
             StartCoroutine(sashLerp(lastPos));
             GameControl.PlayerData.affinityIncrease(type);
-            lastPos.GetComponent<SizeLerp>().Execute();
+            lastPos.GetComponent<SizeLerp>().Execute(false);
         }
         else
             gameObject.SetActive(false);

@@ -18,6 +18,7 @@ public class CrownAttack : MonoBehaviour
     string augment2;
     string augment3;
     int projCount;
+    int tier;
 
     string projType;
     public bool crownActive = false;
@@ -49,7 +50,7 @@ public class CrownAttack : MonoBehaviour
         }
     }
 
-    public void SetProjStats(float r, int d, string type, string aug1, string aug2, string aug3, int numProjs)
+    public void SetProjStats(float r, int d, string type, string aug1, string aug2, string aug3, int numProjs, int tier)
     {
         range = r;
         damage = d;
@@ -58,6 +59,7 @@ public class CrownAttack : MonoBehaviour
         augment2 = aug2;
         augment3 = aug3;
         projCount = numProjs;
+        this.tier = tier;
     }
 
     public void CrownActive()
@@ -200,7 +202,7 @@ public class CrownAttack : MonoBehaviour
 
         //rotating towards direction of movement
         proj.SetActive(true);
-        proj.GetComponent<ProjectileBehavior>().SetProps(range, damage, augment1, augment2, augment3, projDir);
+        proj.GetComponent<ProjectileBehavior>().SetProps(range, damage, augment1, augment2, augment3, projDir, tier);
         proj.GetComponentInChildren<Rigidbody2D>().velocity = projDir * speed;
         singleFire = false;
         yield return null;
@@ -218,22 +220,24 @@ public class CrownAttack : MonoBehaviour
         angleRadians += Mathf.PI / 2;
         Debug.Log("radians: " + angleRadians);
         //set the params based on the flower being thrown]
+        FlowerBehavior behavior = flower.GetComponent<FlowerBehavior>();
         string type;
         //Wild Check
-        if (flower.GetComponent<FlowerBehavior>().type == "wild")
+        if (behavior.type == "wild")
         {
             WildStats wild = (WildStats)GameControl.PlayerData.flowerStatsDict["wild"];
             type = wild.WildTypeRandomize();
         }
         else
-            type = flower.GetComponent<FlowerBehavior>().type;
+            type = behavior.type;
 
-        range = GameControl.PlayerData.flowerStatsDict[type].projRange;
-        damage = GameControl.PlayerData.flowerStatsDict[type].damage;
+        range = GameControl.PlayerData.flowerStatsDict[type].GetProjRange(behavior.tier);
+        damage = GameControl.PlayerData.flowerStatsDict[type].GetDamage(behavior.tier);
         augment1 = type;
         Debug.Log("Type: " + type + " Augment: " + augment1);
         augment2 = "";
         augment3 = "";
+        tier = behavior.tier - 1;
         singleFire = true;
         StartCoroutine(ProjSpawn(angleRadians));
         //get that shit outta here

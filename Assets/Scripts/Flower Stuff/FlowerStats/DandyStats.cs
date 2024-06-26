@@ -62,6 +62,7 @@ public class DandyStats : FlowerStats
             proj.transform.localScale = Vector3.one / splitCount;
         }
         string[] augs = original.GetComponent<ProjectileBehavior>().getAugments();
+        int tier = original.GetComponent<ProjectileBehavior>().GetTier();
         for (int i = 0; i < augs.Length; i++)
         {
             if (augs[i] == "dandy")
@@ -71,7 +72,7 @@ public class DandyStats : FlowerStats
             }
         }
         float speed = original.GetComponent<Rigidbody2D>().velocity.magnitude;
-        proj.GetComponent<ProjectileBehavior>().SetProps(range / 2f, damage / splitCount, augs[0], augs[1], augs[2], projDir);
+        proj.GetComponent<ProjectileBehavior>().SetProps(range / 2f, damage / splitCount, augs[0], augs[1], augs[2], projDir, tier);
         proj.GetComponent<Rigidbody2D>().velocity = projDir * speed;
         yield return null;
     }

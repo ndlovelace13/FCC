@@ -35,7 +35,7 @@ public class Node : MonoBehaviour
         spriteRenderer.sortingOrder++;
         if (crown.Status())
         {
-            GetComponent<SizeLerp>().Execute();
+            GetComponent<SizeLerp>().Execute(false);
         }
         firstTime = false;
         yield return null;

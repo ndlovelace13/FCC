@@ -9,6 +9,7 @@ public class FlowerData
     bool activated;
     GameObject flower;
     int rarity;
+    int tier;
 
     public FlowerData(Vector2 newPos, string newType, int raritySelect)
     {
@@ -17,6 +18,7 @@ public class FlowerData
         activated = false;
         flower = null;
         rarity = raritySelect;
+        tier = 1;
     }
 
     public Vector2 getPosition()
@@ -31,6 +33,16 @@ public class FlowerData
     public void setType(string newType)
     {
         type = newType;
+    }
+
+    public int getTier()
+    {
+        return tier;
+    }
+
+    public void setTier(int newTier)
+    {
+        tier = newTier;
     }
 
     public bool isActivated()

@@ -29,8 +29,11 @@ public class EnemyBehavior : MonoBehaviour
     float speedCooldown = 10f;
     float speedIncrement = 0.9f;
     bool speedUp;
-    bool surprised = false;
+
+
+    public bool surprised = false;
     float surpriseTime = 1f;
+    public Vector3 preSurpriseVel;
 
     [SerializeField] GameObject notif;
 
@@ -49,6 +52,9 @@ public class EnemyBehavior : MonoBehaviour
     //4 ELECTRIC
     public bool isElectrified = false;
     public bool electricPassed = false;
+
+    //5 BLINDING
+    public bool isBlinded = false;
 
     public bool wasKilled = false;
 
@@ -98,9 +104,12 @@ public class EnemyBehavior : MonoBehaviour
             if (!isFrozen && !surprised)
                 moveSpeed = backupSpeed;
             //movement
-            Vector2 direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
-            direction.Normalize();
-            gameObject.GetComponent<Rigidbody2D>().velocity = direction * moveSpeed;
+            if (!isBlinded)
+            {
+                Vector2 direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
+                direction.Normalize();
+                gameObject.GetComponent<Rigidbody2D>().velocity = direction * moveSpeed;
+            }
             if (health <= 0)
             {
                 Deactivate();
@@ -134,6 +143,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (!surprised)
         {
+            preSurpriseVel = GetComponentInChildren<Rigidbody2D>().velocity;
             GetComponent<Animator>().SetBool("Surprise", true);
             Debug.Log("This mf surprised");
             //GetComponent<SpriteRenderer>().color = Color.blue;
@@ -144,6 +154,7 @@ public class EnemyBehavior : MonoBehaviour
             //moveSpeed = backupSpeed;
             surprised = false;
             GetComponent<Animator>().SetBool("Surprise", false);
+            GetComponentInChildren<Rigidbody2D>().velocity = preSurpriseVel;
         }
     }
 
@@ -156,24 +167,26 @@ public class EnemyBehavior : MonoBehaviour
             GameObject otherParent = other.gameObject.transform.parent.gameObject;
             DealDamage(otherParent.GetComponent<ProjectileBehavior>().damage, Color.white);
             augments = otherParent.GetComponent<ProjectileBehavior>().getAugments();
-            AugmentApplication(augments);
+            int tier = otherParent.GetComponent<ProjectileBehavior>().GetTier();
+            AugmentApplication(augments, tier);
             otherParent.GetComponent<ProjectileBehavior>().ObjectDeactivate();
         }
         else if (other.gameObject.tag == "aoe")
         {
             GameObject otherParent = other.gameObject.transform.parent.gameObject;
             augments =  otherParent.GetComponent<AoeBehavior>().getAugments();
-            AugmentApplication(augments);
+            int tier = otherParent.GetComponent<AoeBehavior>().GetTier();
+            AugmentApplication(augments, tier);
         }
     }
 
-    public void AugmentApplication(string[] augs)
+    public void AugmentApplication(string[] augs, int tier)
     {
         foreach (string aug in augs)
         {
             if (aug != null && aug != "")
             {
-                GameControl.PlayerData.flowerStatsDict[aug].OnEnemyCollision(gameObject);
+                GameControl.PlayerData.flowerStatsDict[aug].OnEnemyCollision(gameObject, tier);
             }
         }
     }

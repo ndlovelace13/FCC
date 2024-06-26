@@ -36,11 +36,11 @@ public class WildStats : FlowerStats
         int currentWildAffinity = 0;
         if (GameControl.PlayerData.sashActive && GameControl.PlayerData.affinityAmounts.ContainsKey("wild"))
             currentWildAffinity = GameControl.PlayerData.affinityAmounts["wild"];
-        copiedData.basePoints = GameControl.PlayerData.flowerStatsDict[type].pointsTiers[currentWildAffinity];
-        copiedData.projRange = GameControl.PlayerData.flowerStatsDict[type].projRange;
-        copiedData.range = GameControl.PlayerData.flowerStatsDict[type].rangeTiers[currentWildAffinity];
-        copiedData.damage = GameControl.PlayerData.flowerStatsDict[type].damageTiers[currentWildAffinity];
-        copiedData.projCount = GameControl.PlayerData.flowerStatsDict[type].projTiers[currentWildAffinity];
+        copiedData.SetPoints(GameControl.PlayerData.flowerStatsDict[type].pointsTiers[currentWildAffinity]);
+        copiedData.SetProjRange(GameControl.PlayerData.flowerStatsDict[type].GetProjRange(1));
+        copiedData.SetRange(GameControl.PlayerData.flowerStatsDict[type].rangeTiers[currentWildAffinity]);
+        copiedData.SetDamage(GameControl.PlayerData.flowerStatsDict[type].damageTiers[currentWildAffinity]);
+        copiedData.SetProjCount(GameControl.PlayerData.flowerStatsDict[type].projTiers[currentWildAffinity]);
         copiedData.aug = GameControl.PlayerData.flowerStatsDict[type].aug;
         return copiedData;
     }

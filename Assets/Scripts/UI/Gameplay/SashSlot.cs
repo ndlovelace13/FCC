@@ -28,7 +28,7 @@ public class SashSlot : MonoBehaviour
     public void SpriteApply(Sprite newSprite)
     {
         flower.sprite = newSprite;
-        GetComponent<SizeLerp>().Execute();
+        GetComponent<SizeLerp>().Execute(false);
     }
 
     public void NewFlower(string type)
@@ -55,7 +55,7 @@ public class SashSlot : MonoBehaviour
         currentTier++;
         tier.sprite = GameControl.PlayerData.affinityTiers[currentTier];
         tier.color = Color.white;
-        GetComponent<SizeLerp>().Execute();
+        GetComponent<SizeLerp>().Execute(false);
         //update all flowerStats here
         currentStats.UpdateAffinity(currentTier);
         //score bonus for tiering up?

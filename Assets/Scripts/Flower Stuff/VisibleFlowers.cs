@@ -167,6 +167,12 @@ public class VisibleFlowers : MonoBehaviour
                 newFlower.SetActive(true);
                 flower.setFlower(newFlower);
                 newFlower.transform.position = flower.getPosition();
+
+                GameObject head = headReturn(flower.getType());
+                head.transform.SetParent(newFlower.transform);
+                head.transform.position = newFlower.transform.position;
+                head.GetComponent<SpriteRenderer>().enabled = false;
+                head.SetActive(true);
                 //execute the initial growth anim
                 Animator stemAnim = newFlower.GetComponentsInChildren<Animator>().Last();
                 stemAnim.Play("BasicGrow");
@@ -174,11 +180,16 @@ public class VisibleFlowers : MonoBehaviour
                 {
                     yield return new WaitForEndOfFrame();
                 }
-                GameObject head = headReturn(flower.getType());
-                head.SetActive(true);
-                head.transform.position = flower.getPosition() + new Vector2(-0.061f, 0.44f);
-                head.transform.parent = newFlower.transform;
+                head.GetComponent<SpriteRenderer>().enabled = true;
+                //set the head sprite
+                head.GetComponent<SpriteRenderer>().sprite = GameControl.PlayerData.flowerStatsDict[flower.getType()].GetHeadSprite(flower.getTier());
+                //reset the behavior object or pull values from last time
                 head.GetComponent<FlowerBehavior>().picked = false;
+                head.GetComponent<FlowerBehavior>().growing = false;
+                head.GetComponent<FlowerBehavior>().tier = flower.getTier();
+
+                //set the stem and head pos
+                GameControl.PlayerData.flowerStatsDict[flower.getType()].SetStem(head, stemAnim.gameObject);
                 
                 //apply uncommon particle if uncommon
                 //newFlower.GetComponentInChildren<Animator>().SetInteger("rarity", flower.getRarity());
@@ -207,6 +218,7 @@ public class VisibleFlowers : MonoBehaviour
             }
             if (head != null)
             {
+                flower.setTier(head.GetComponent<FlowerBehavior>().tier);
                 head.transform.parent = null;
                 head.SetActive(false);
             }

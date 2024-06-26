@@ -20,9 +20,9 @@ public class BlueStats : FlowerStats
         
     }
 
-    public override void OnEnemyCollision(GameObject enemy)
+    public override void OnEnemyCollision(GameObject enemy, int t)
     {
-        base.OnEnemyCollision(enemy);
+        base.OnEnemyCollision(enemy, t);
         StartCoroutine(FreezeApply(enemy));
     }
 

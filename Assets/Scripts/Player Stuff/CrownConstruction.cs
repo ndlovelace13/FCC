@@ -38,6 +38,7 @@ public class CrownConstruction : MonoBehaviour
     string aug3 = "";
     int numProjs = 0;
     int projRange = 0;
+    int tier;
 
     bool crownDiscovered = false;
     int crownDiscoveryScore = 0;
@@ -99,7 +100,7 @@ public class CrownConstruction : MonoBehaviour
             finalCrown.GetComponent<SpriteRenderer>().enabled = true;
             finalCrown.transform.parent = null;
             gameObject.GetComponent<CrownThrowing>().CompletedCrown(finalCrown, range);
-            finalCrown.GetComponent<CrownAttack>().SetProjStats(projRange, damage, projType, aug1, aug2, aug3, numProjs);
+            finalCrown.GetComponent<CrownAttack>().SetProjStats(projRange, damage, projType, aug1, aug2, aug3, numProjs, tier);
             //Instantiation of new crown
             CrownReplace();
             crownHeld = true;
@@ -133,7 +134,7 @@ public class CrownConstruction : MonoBehaviour
         {
             skillCheckCounter = 0;
             int inputRand = UnityEngine.Random.Range(0, 4);
-            GameObject newInput = Instantiate(inputs[inputRand], t.position + new Vector3(0, 1.5f), Quaternion.identity);
+            GameObject newInput = Instantiate(inputs[inputRand], t.position + new Vector3(0, 2f), Quaternion.identity);
             chosenInputs.Add(newInput);
             Debug.Log(chosenInputs.Count);
             chosenInputs[chosenInputs.Count - 1].transform.parent = docket.transform;
@@ -347,6 +348,7 @@ public class CrownConstruction : MonoBehaviour
         List<FlowerStats> flowerStats = flowerSlots(flowers);
         List<FlowerBehavior> flowerPos = flowerPositions(flowers);
         List<int> dupePositions = new List<int>();
+        tier = 0;
 
         //handle the crown naming convention before changing wilds to match the crown - separate function here
         StartCoroutine(CrownName(flowerStats));
@@ -365,12 +367,14 @@ public class CrownConstruction : MonoBehaviour
         }
         FlowerStats centerStats = flowerStats[2];
 
-        projRange = centerStats.projRange;
-        range = flowerStats[0].range + flowerStats[4].range;
-        damage = flowerStats[1].damage + flowerStats[2].damage + flowerStats[3].damage;
+        projRange = centerStats.GetProjRange(flowerPos[2].tier);
+        range = flowerStats[0].GetRange(flowerPos[0].tier) + flowerStats[4].GetRange(flowerPos[4].tier);
+        damage = flowerStats[1].GetDamage(flowerPos[1].tier) + flowerStats[2].GetDamage(flowerPos[2].tier) + flowerStats[3].GetDamage(flowerPos[3].tier);
         projType = flowerPos[2].type;
         aug1 = flowerPos[2].type;
-        numProjs = centerStats.projCount;
+        numProjs = centerStats.GetProjCount(flowerPos[2].tier);
+        foreach (var flower in flowerPos)
+            tier += flower.tier - 1;
 
 
         
@@ -403,7 +407,7 @@ public class CrownConstruction : MonoBehaviour
                     if ((dupePositions.Contains(0) && dupePositions.Contains(4)) || (dupePositions.Contains(1) && dupePositions.Contains(3)))
                     {
                         Debug.Log("Symmetric");
-                        crownScore += flowerStats[0].basePoints * 2 * 4;
+                        crownScore += flowerStats[0].GetPoints(flowerPos[0].tier) * 2 * 4;
                         /*if (dupePositions.Contains(0))
                             crownAnnouncement += flowerStats[0].outsideText;
                         else
@@ -416,7 +420,7 @@ public class CrownConstruction : MonoBehaviour
                     else
                     {
                         Debug.Log(dupePositions[0] + " " + dupePositions[1]);
-                        crownScore += flowerStats[0].basePoints * 2 * 2;
+                        crownScore += flowerStats[0].GetPoints(flowerPos[0].tier) * 2 * 2;
                     }
                     break;
                 //triple found
@@ -426,7 +430,7 @@ public class CrownConstruction : MonoBehaviour
                     if ((!dupePositions.Contains(1) && !dupePositions.Contains(3)) || (!dupePositions.Contains(0) && !dupePositions.Contains(4)))
                     {
                         Debug.Log("Symmetric");
-                        crownScore += flowerStats[0].basePoints * 3 * 4;
+                        crownScore += flowerStats[0].GetPoints(flowerPos[0].tier) * 3 * 4;
                         /*if (dupePositions.Contains(0))
                             crownAnnouncement += flowerStats[0].outsideText;
                         else
@@ -438,7 +442,7 @@ public class CrownConstruction : MonoBehaviour
                     }
                     else
                     {
-                        crownScore += flowerStats[0].basePoints * 3 * 3;
+                        crownScore += flowerStats[0].GetPoints(flowerPos[0].tier) * 3 * 3;
                     }
                     break;
                 //quad found
@@ -449,7 +453,7 @@ public class CrownConstruction : MonoBehaviour
                     {
                         Debug.Log("Symmetric");
                         //8x the quad's base points
-                        crownScore += flowerStats[0].basePoints * 4 * 4;
+                        crownScore += flowerStats[0].GetPoints(flowerPos[0].tier) * 4 * 4;
                         //5x the middle's base points
                         //crownScore += flowerStats[2].basePoints * 5;
                         //flowerStats.RemoveAt(2);
@@ -460,13 +464,13 @@ public class CrownConstruction : MonoBehaviour
                     //non-symmetrical
                     else
                     {
-                        crownScore += flowerStats[0].basePoints * 4 * 3;
+                        crownScore += flowerStats[0].GetPoints(flowerPos[0].tier) * 4 * 3;
                     }
                     break;
                 //fiver found
                 case 5:
                     Debug.Log("Fiver");
-                    crownScore += flowerStats[0].basePoints * 5 * 5;
+                    crownScore += flowerStats[0].GetPoints(flowerPos[0].tier) * 5 * 5;
                     aug2 = flowerPos[0].type;
                     aug3 = flowerPos[0].type;
                     //crownAnnouncement += flowerStats[0].fiveText;
@@ -474,7 +478,7 @@ public class CrownConstruction : MonoBehaviour
                     break;
                 //single
                 default:
-                    crownScore += flowerStats[0].basePoints;
+                    crownScore += flowerStats[0].GetPoints(flowerPos[0].tier);
                     break;
             }
 

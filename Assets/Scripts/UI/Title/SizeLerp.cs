@@ -13,7 +13,7 @@ public class SizeLerp : MonoBehaviour
     {
         if (looping)
         {
-            Execute();
+            Execute(true);
         }
     }
 
@@ -23,8 +23,9 @@ public class SizeLerp : MonoBehaviour
         
     }
 
-    public void Execute()
+    public void Execute(bool loop)
     {
+        looping = loop;
         //need a better solution for satisfying feedback without infinite growth
         if (!lerping)
             StartCoroutine(SizeLerping());
@@ -55,5 +56,10 @@ public class SizeLerp : MonoBehaviour
             }
         } while (looping);
         lerping = false;
+    }
+
+    public void OnDisable()
+    {
+        looping = false;
     }
 }

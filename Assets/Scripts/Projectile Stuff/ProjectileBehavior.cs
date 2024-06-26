@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public enum augment
@@ -21,6 +22,7 @@ public class ProjectileBehavior : MonoBehaviour
     [SerializeField] int augment1;
     [SerializeField] int augment2;
     [SerializeField] int augment3;
+    int tier = 1;
     string[] augs = new string[3];
     Vector3 startingPos = Vector3.zero;
 
@@ -43,7 +45,7 @@ public class ProjectileBehavior : MonoBehaviour
         //Debug.Log(spriteTrans.name);
     }
 
-    public void SetProps(float r, int d, string aug1, string aug2, string aug3, Vector2 rotation)
+    public void SetProps(float r, int d, string aug1, string aug2, string aug3, Vector2 rotation, int tier)
     {
         if (particles == null)
             getParticles();
@@ -55,6 +57,7 @@ public class ProjectileBehavior : MonoBehaviour
         augs[0] = aug1;
         augs[1] = aug2;
         augs[2] = aug3;
+        this.tier = tier;
         Debug.Log("Augments at start: " + augs[0] + " " + augs[1] + " " + augs[2]);
         Augmentation();
         spriteTrans = transform.GetChild(0).gameObject;
@@ -93,6 +96,11 @@ public class ProjectileBehavior : MonoBehaviour
                 GameControl.PlayerData.flowerStatsDict[augs[i]].OnProjTravel(gameObject);
             }
         }
+    }
+
+    public int GetTier()
+    {
+        return tier;
     }
 
     private void ProjArrival()
