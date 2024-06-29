@@ -1,0 +1,12 @@
+Event	ID	Name			Wwise Object Path	Notes
+	668166534	ResearchUnlock			\Default Work Unit\ResearchUnlock	
+	2834561310	UpgradePurchase			\Default Work Unit\UpgradePurchase	
+	2982833173	ResearchInvest			\Default Work Unit\ResearchInvest	
+	4051332235	ButtonClick			\Default Work Unit\ButtonClick	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	24292098	crownCraft	C:\Users\ndlov\Documents\Game Projects\FlowerCrownChaos\FCC\FCC_WwiseProject\.cache\Mac\SFX\crownCraft_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\crownCraft		441096
+	343197594	collectionBuy	C:\Users\ndlov\Documents\Game Projects\FlowerCrownChaos\FCC\FCC_WwiseProject\.cache\Mac\SFX\collectionBuy_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\collectionBuy		391852
+	566951220	buttonClick	C:\Users\ndlov\Documents\Game Projects\FlowerCrownChaos\FCC\FCC_WwiseProject\.cache\Mac\SFX\buttonClick_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\buttonClick		191776
+	797605621	researchInvest	C:\Users\ndlov\Documents\Game Projects\FlowerCrownChaos\FCC\FCC_WwiseProject\.cache\Mac\SFX\researchInvest_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\researchInvest		280572
+

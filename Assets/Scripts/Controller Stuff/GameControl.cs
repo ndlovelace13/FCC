@@ -38,6 +38,7 @@ public class GameControl : MonoBehaviour
     public bool balanceUpdated = false;
 
     public bool loading = false;
+    public bool gameOver = false;
 
     public GameObject tutorialHandler;
 
@@ -120,22 +121,10 @@ public class GameControl : MonoBehaviour
     [SerializeField] GameObject UnlockPrefab;
 
     //enemy related variables
-    public float maxInterval = 0.35f;
-    public float minInterval = 0.2f;
-    public float maxSpeed = 2f;
-    public float currentMax;
-    public float minSpeed = 1f;
-    public float currentMin;
-    public int maxHealth = 50;
-    public int currentHealth;
-    public int healthInterval = 10;
-    public int startingEnemies = 8;
-    public int currentMaxEnemies;
-    public int activeEnemies = 0;
-    public int killScore = 10;
-
-    public int countScaleTime = 45;
-    public int statsScaleTime = 30;
+    [SerializeField] List<EnemyStats> enemyTypes = new List<EnemyStats>();
+    List<GameObject> enemySpawners = new List<GameObject>();
+    [SerializeField] GameObject enemySpawnPrefab;
+    public int newEnemyTime = 60;
 
     private void Awake()
     {
@@ -157,6 +146,7 @@ public class GameControl : MonoBehaviour
 
     private void SetFlowers()
     {
+        allDiscovered = commonPool;
         //establish all flower arrays and lists
         flowerStatsDict = new Dictionary<string, FlowerStats>();
         flowerPoolDict = new Dictionary<string, ObjectPool>();
@@ -192,7 +182,7 @@ public class GameControl : MonoBehaviour
             {"uncommon", 0.05f},
             {"playerSpeed", 5f},
             {"craftingSlow", 0.5f},
-            {"seedChance", 0.4f},
+            {"seedChance", 0.25f},
             {"pickupDist", 1f},
             {"crownMult", 1f}
         };
@@ -251,18 +241,35 @@ public class GameControl : MonoBehaviour
         researchItems.Add(sashResearch);*/
     }
 
+    private void EnemyInit()
+    {
+        enemySpawners.Clear();
+        foreach (var enemy in enemyTypes)
+        {
+            GameObject newSpawner = Instantiate(enemySpawnPrefab);
+            newSpawner.GetComponent<EnemySpawn>().thisEnemy = enemy;
+            //start the pooling from the prefab in the enemyStats obj
+            newSpawner.GetComponent<ObjectPool>().objectToPool = enemy.enemyPrefab;
+            newSpawner.GetComponent<ObjectPool>().Pooling();
+            enemySpawners.Add(newSpawner);
+            newSpawner.SetActive(false);
+        }
+    }
+
     public void ResetRun()
     {
+        gameOver = false;
         loading = true;
         min = 0;
         sec = 0;
         score = 0;
         shiftCounter++;
         //enemy reset
-        currentMax = maxSpeed;
+        /*currentMax = maxSpeed;
         currentMin = minSpeed;
         currentHealth = maxHealth;
-        currentMaxEnemies = startingEnemies;
+        currentMaxEnemies = startingEnemies;*/
+        EnemyInit();
 
         balanceUpdated = false;
         sash = GameObject.FindWithTag("sash");
@@ -289,7 +296,8 @@ public class GameControl : MonoBehaviour
         //Other pre-round stuff here
         loading = false;
         GameObject.FindWithTag("timer").GetComponent<Timer>().TimerStart();
-        GameObject.FindWithTag("enemyPool").GetComponent<EnemySpawn>().enemyBegin();
+        //start the basic enemy spawning
+        StartCoroutine(EnemySpawning());
         GameObject announce = GameObject.FindWithTag("mainAnnounce");
         announce.GetComponent<ScoreNotification>().newFeed("Start Crafting!");
     }
@@ -316,7 +324,7 @@ public class GameControl : MonoBehaviour
     public void DiscoveredPooling()
     {
         //TO DO - combine into one list of all discovered
-        allDiscovered = commonPool;
+        //allDiscovered = commonPool;
         allDiscovered = allDiscovered.Union(discoveredUncommon).ToList();
         foreach(var flower in allDiscovered)
         {
@@ -413,5 +421,31 @@ public class GameControl : MonoBehaviour
         {
             currentAffinity.GetComponent<SashSlot>().tierUp();
         }
+    }
+
+    IEnumerator EnemySpawning()
+    {
+        int enemyTypeCounter = 0;
+        float time = 0f;
+        do
+        {
+            //break if there aren't anymore enemy types to introduce
+            if (enemyTypeCounter == enemySpawners.Count)
+                yield break;
+            enemySpawners[enemyTypeCounter].SetActive(true);
+            enemySpawners[enemyTypeCounter].GetComponent<EnemySpawn>().enemyBegin();
+            while (time < newEnemyTime)
+            {
+                //break if the shift is complete
+                if (gameOver)
+                    yield break;
+                yield return new WaitForEndOfFrame();
+                time += Time.deltaTime;
+            }
+            time = 0f;
+            enemyTypeCounter++;
+        } while (!gameOver);
+
+        
     }
 }

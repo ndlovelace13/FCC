@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300420c45485e27469d46d85a5883b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testing: 1
+  testing: 0
   firstRun: 1
   tutorialActive: 0
   speaking: 0
@@ -168,6 +168,7 @@ MonoBehaviour:
   donationMade: 0
   balanceUpdated: 0
   loading: 0
+  gameOver: 0
   tutorialHandler: {fileID: 0}
   shiftCounter: 0
   inputsTested: 0
@@ -256,21 +257,11 @@ MonoBehaviour:
   ResearchPrefab: {fileID: 5122733356647096448, guid: 51f36e36923db974da9666aa476680d7, type: 3}
   researchItems: []
   UnlockPrefab: {fileID: 0}
-  maxInterval: 0.35
-  minInterval: 0.2
-  maxSpeed: 2
-  currentMax: 0
-  minSpeed: 1
-  currentMin: 0
-  maxHealth: 50
-  currentHealth: 0
-  healthInterval: 10
-  startingEnemies: 8
-  currentMaxEnemies: 0
-  activeEnemies: 0
-  killScore: 10
-  countScaleTime: 45
-  statsScaleTime: 30
+  enemyTypes:
+  - {fileID: 6648197801844819290, guid: 2330b4c813fa77f4083a6f9b9ccf1806, type: 3}
+  - {fileID: 6760059903058135406, guid: 3969d15c77713874abbdeabf94510183, type: 3}
+  enemySpawnPrefab: {fileID: 5356731414288089438, guid: 230f3e16254910d4abe21bdedad81e84, type: 3}
+  newEnemyTime: 80
 --- !u!4 &271687010
 Transform:
   m_ObjectHideFlags: 0

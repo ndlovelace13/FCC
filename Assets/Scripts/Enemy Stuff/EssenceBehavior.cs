@@ -29,6 +29,7 @@ public class EssenceBehavior : MonoBehaviour
 
     private void OnEnable()
     {
+        transform.localScale = Vector3.one * 0.25f;
         player = GameObject.FindWithTag("Player").GetComponentInChildren<PlayerMovement>().gameObject;
         pickingUp = false;
         GetComponent<SizeLerp>().lerping = false;

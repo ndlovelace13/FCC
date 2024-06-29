@@ -95,7 +95,7 @@ public class CrownConstruction : MonoBehaviour
             }
             else
                 crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement);
-           
+            AkSoundEngine.PostEvent("CraftingDone", gameObject);
             scoreNotif.GetComponent<ScoreNotification>().newFeed("Crown Construction | +" + crownScore);
             finalCrown.GetComponent<SpriteRenderer>().enabled = true;
             finalCrown.transform.parent = null;
@@ -171,6 +171,7 @@ public class CrownConstruction : MonoBehaviour
             }
             if (inputPressed)
             {
+                AkSoundEngine.PostEvent("CraftingInput", gameObject);
                 inputPressed = false;
                 StartCoroutine(CraftDirection());
                 //start the flower lerp

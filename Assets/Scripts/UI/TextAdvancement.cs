@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TextAdvancement : MonoBehaviour
@@ -51,6 +52,7 @@ public class TextAdvancement : MonoBehaviour
 
     public void printNext()
     {
+        //AkSoundEngine.PostEvent("DialogueRandom", gameObject);
         currentLine = nextDialogue();
         if (currentLine == "bruh")
             GameControl.PlayerData.dialogueComplete = true;
@@ -60,6 +62,8 @@ public class TextAdvancement : MonoBehaviour
 
     IEnumerator speech()
     {
+        var talkSound = AkSoundEngine.PostEvent("DialogueStart", gameObject);
+        //AkSoundEngine.Seek(talkSound, Random.Range(0f, 1f), false);
         GameControl.PlayerData.speaking = true;
         speechBubble.text = "";
         for (int i = 0; i < currentLine.Length; i++)
@@ -72,6 +76,7 @@ public class TextAdvancement : MonoBehaviour
                 break;
             }
         }
+        AkSoundEngine.StopPlayingID(talkSound);
         skipText = false;
         GameControl.PlayerData.speaking = false;
         yield return null;

@@ -14,17 +14,35 @@ public class EnemySpawn : MonoBehaviour
     static Vector3 pos;
     static Vector3 negPos;
     ObjectPool hatPool;
+
+    //All enemy related variables
+    [SerializeField] public EnemyStats thisEnemy;
+
+    public float currentMax;
+    public float currentMin;
+    public int currentHealth;
+    public int currentMaxEnemies;
+    public int activeEnemies = 0;
+
+    public int killScore;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentMax = thisEnemy.maxSpeed;
+        currentMin = thisEnemy.minSpeed;
+        currentHealth = thisEnemy.maxHealth;
+        killScore = thisEnemy.killScore;
+        currentMaxEnemies = thisEnemy.startingEnemies;
     }
 
     public void enemyBegin()
     {
         cam = Camera.main;
+        Player = GameObject.FindWithTag("Player");
         hatPool = GameObject.FindWithTag("hats").GetComponent<ObjectPool>();
-        GameControl.PlayerData.activeEnemies = 0;
+        activeEnemies = 0;
         StartCoroutine(spawnTimer());
         StartCoroutine(PosUpdate());
         StartCoroutine(VisibleCheck());
@@ -40,8 +58,8 @@ public class EnemySpawn : MonoBehaviour
             yield return new WaitForSeconds(spawnDelay);
             //check how many enemies are currently active in hierarchy
             //GameObject[] currentEnemies = GameObject.FindGameObjectsWithTag("enemy");
-            Debug.Log("There are currently " + GameControl.PlayerData.activeEnemies + " enemies in play");
-            if (GameControl.PlayerData.activeEnemies < GameControl.PlayerData.currentMaxEnemies)
+            Debug.Log("There are currently " + activeEnemies + " enemies in play");
+            if (activeEnemies < currentMaxEnemies)
             {
                 GameObject newEnemy = gameObject.GetComponent<ObjectPool>().GetPooledObject();
                 if (newEnemy != null)
@@ -104,11 +122,12 @@ public class EnemySpawn : MonoBehaviour
         
         newEnemy.SetActive(true);
         newEnemy.transform.position = newSpawn();
+        newEnemy.GetComponent<EnemyBehavior>().SetObjects(this);
         newEnemy.GetComponent<EnemyBehavior>().Activate();
         StartCoroutine(HatAssign(newEnemy));
         if (!enemies.Contains(newEnemy))
             enemies.Add(newEnemy);
-        GameControl.PlayerData.activeEnemies++;
+        activeEnemies++;
         yield return null;
     }
 
@@ -169,8 +188,8 @@ public class EnemySpawn : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(GameControl.PlayerData.countScaleTime);
-            GameControl.PlayerData.currentMaxEnemies += 4;
+            yield return new WaitForSeconds(thisEnemy.countScaleTime);
+            currentMaxEnemies += thisEnemy.enemyScaleAmt;
         }
     }
 
@@ -179,14 +198,14 @@ public class EnemySpawn : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(GameControl.PlayerData.statsScaleTime);
-            if (GameControl.PlayerData.playerSpeed > GameControl.PlayerData.currentMax)
+            yield return new WaitForSeconds(thisEnemy.statsScaleTime);
+            if (GameControl.PlayerData.playerSpeed > currentMax)
             {
-                GameControl.PlayerData.currentMax += GameControl.PlayerData.maxInterval;
-                GameControl.PlayerData.currentMin += GameControl.PlayerData.minInterval;
+                currentMax += thisEnemy.maxInterval;
+                currentMin += thisEnemy.minInterval;
             }
-            GameControl.PlayerData.currentHealth += GameControl.PlayerData.healthInterval;
-            GameControl.PlayerData.killScore += 2;
+            currentHealth += thisEnemy.healthInterval;
+            killScore += thisEnemy.scoreIncrease;
             
         }
     }

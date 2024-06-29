@@ -13,6 +13,8 @@ public class FlowerHarvest : MonoBehaviour
     GameObject crown;
     public bool docketLoaded = true;
     public bool crownHeld = false;
+
+    [SerializeField] AK.Wwise.Event harvestSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,7 @@ public class FlowerHarvest : MonoBehaviour
                         int slotPos = nextSlot();
                         if (slotPos != -1)
                         {
+                            AkSoundEngine.PostEvent("Flower_Harvest", transform.parent.gameObject);
                             //TODO: PUll from the pool instead
                             GameObject newHead = Instantiate(head, slots[slotPos].transform);
                             newHead.GetComponent<SpriteRenderer>().sortingLayerName = "Midground";
@@ -92,6 +95,7 @@ public class FlowerHarvest : MonoBehaviour
         int slotPos = lastSlot();
         if (slotPos != -1 && !transform.parent.GetComponent<CrownConstruction>().skillCheckActive && !transform.parent.GetComponent<CrownConstruction>().constructionReady)
         {
+            AkSoundEngine.PostEvent("Throw", transform.parent.gameObject);
             docketLoaded = false;
             slots[slotPos].tag = "slotEmpty";
             GameObject tossedFlower = lastFlower();

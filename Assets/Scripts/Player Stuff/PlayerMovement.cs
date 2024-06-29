@@ -119,11 +119,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("what the sigma");
+        //Debug.Log("what the sigma");
         if (other.gameObject.tag == "enemy")
         {
             //Debug.Log(other.gameObject.transform.position);
             //Debug.Log(transform.position);
+            GameControl.PlayerData.gameOver = true;
             SceneManager.LoadScene("EndScreen");
         }
     }

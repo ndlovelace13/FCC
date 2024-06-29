@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{B88385C3-5D44-4C94-B887-2FB7C1F3AC8F}" SchemaVersion="119">
 	<SoundBanks>
-		<WorkUnit Name="Default Work Unit" ID="{B88385C3-5D44-4C94-B887-2FB7C1F3AC8F}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{B88385C3-5D44-4C94-B887-2FB7C1F3AC8F}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="Player" ID="{2BAF42A9-DD15-4CB9-805C-735BB49074B6}">
+					<ObjectInclusionList>
+						<ObjectRef Name="CraftingDone" ID="{93E922B6-5A58-40D5-9F14-9A80FD6DCFE4}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Throw" ID="{52922290-0C94-4836-AEA5-FE88A4146E08}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="CraftingInput" ID="{B36995CF-7556-4D61-8574-C306B9E2A551}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Flower_Harvest" ID="{39F58104-5D72-4FDB-A6E3-AEB6BC1CC232}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="BasicEnemy" ID="{F03C79F6-40E9-4B34-9353-FFF7D4861B6A}">
+					<ObjectInclusionList>
+						<ObjectRef Name="EnemyHit" ID="{C258AA26-FA2D-47FC-904F-0EEA9A81D1B0}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="EnemyKilled" ID="{8AC0AD71-939C-49BC-89F5-F9E43D0933E7}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="EnemySpawn" ID="{51AD3BDC-735A-4C11-8C00-E44FB04FF2C7}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="Button" ID="{B7A9EB3A-41EF-44D3-82F3-E34BBBE6CD34}">
+					<ObjectInclusionList>
+						<ObjectRef Name="ResearchUnlock" ID="{78457351-0FA8-4109-8AAF-98FA6C1311A6}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="ButtonClick" ID="{C13412A2-F169-41D8-A4C1-5C2A85D23A04}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="ResearchInvest" ID="{B54EC935-1299-49AD-B701-811E29628BBC}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="UpgradePurchase" ID="{F20DCFEF-850E-4D70-A2F7-06447C9C26EE}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="Dialogue" ID="{28A9FCBA-C018-4FAE-855C-DC2BC0204747}">
+					<ObjectInclusionList>
+						<ObjectRef Name="DialogueStart" ID="{56D4D4C7-2A9E-4C33-BAAC-6E780B933214}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
 	</SoundBanks>
 </WwiseDocument>

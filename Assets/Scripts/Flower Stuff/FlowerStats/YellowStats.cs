@@ -41,7 +41,12 @@ public class YellowStats : FlowerStats
         StartCoroutine(SlowApply(stunAmount, stunTime, 4, enemy));
         if (remainingTargets > 0)
         {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+            EnemyBehavior[] enemyBehaviors = UnityEngine.Object.FindObjectsOfType<EnemyBehavior>();
+            GameObject[] enemies = new GameObject[enemyBehaviors.Length];
+            for ( int i = 0; i < enemies.Length; i++)
+            {
+                enemies[i] = enemyBehaviors[i].gameObject;
+            }
             GameObject closestEnemy = enemy.GetComponent<EnemyBehavior>().ClosestEnemy(enemies);
             if (closestEnemy != null)
             {

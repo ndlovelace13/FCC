@@ -66,8 +66,64 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: c38583b8445d944cb8872fb7c1f3ac8f
     GuidInternal: 
-    m_lastTime: -8584823418926015912
-    List: []
+    m_lastTime: -8584819911585870686
+    List:
+    - name: BasicEnemy
+      guid: f6793cf0e940344b9353fff7d4861b6a
+      id: 2360806359
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c38583b8445d944cb8872fb7c1f3ac8f
+      - ElementName: BasicEnemy
+        ObjectType: 7
+        guid: f6793cf0e940344b9353fff7d4861b6a
+      Path: SoundBanks\Default Work Unit\BasicEnemy
+    - name: Button
+      guid: 3aeba9b7ef41d34482f3e34bbbe6cd34
+      id: 977454165
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c38583b8445d944cb8872fb7c1f3ac8f
+      - ElementName: Button
+        ObjectType: 7
+        guid: 3aeba9b7ef41d34482f3e34bbbe6cd34
+      Path: SoundBanks\Default Work Unit\Button
+    - name: Dialogue
+      guid: bafca92818c0ae4f855cdc2bc0204747
+      id: 3930136735
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c38583b8445d944cb8872fb7c1f3ac8f
+      - ElementName: Dialogue
+        ObjectType: 7
+        guid: bafca92818c0ae4f855cdc2bc0204747
+      Path: SoundBanks\Default Work Unit\Dialogue
+    - name: Player
+      guid: a942af2b15ddb94c805c735bb49074b6
+      id: 1069431850
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c38583b8445d944cb8872fb7c1f3ac8f
+      - ElementName: Player
+        ObjectType: 7
+        guid: a942af2b15ddb94c805c735bb49074b6
+      Path: SoundBanks\Default Work Unit\Player
   EventWwu:
   - PhysicalPath: Events\Default Work Unit.wwu
     PathAndIcons:
@@ -80,8 +136,246 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 48ed7fdb16f388418594cf5ce384c227
     GuidInternal: 
-    m_lastTime: -8584823418925775916
-    List: []
+    m_lastTime: -8584819911586045676
+    List:
+    - name: ButtonClick
+      guid: a21234c169f1d841a4c15c2a85d23a04
+      id: 4051332235
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: ButtonClick
+        ObjectType: 3
+        guid: a21234c169f1d841a4c15c2a85d23a04
+      Path: Events\Default Work Unit\ButtonClick
+      maxAttenuation: 0
+      maxDuration: 1.0866213
+      minDuration: 1.0866213
+    - name: CraftingDone
+      guid: b622e993585ad5409f149a80fd6dcfe4
+      id: 4264775619
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: CraftingDone
+        ObjectType: 3
+        guid: b622e993585ad5409f149a80fd6dcfe4
+      Path: Events\Default Work Unit\CraftingDone
+      maxAttenuation: 0
+      maxDuration: 2.5
+      minDuration: 2.5
+    - name: CraftingInput
+      guid: cf9569b35675614d8574c306b9e2a551
+      id: 3670604801
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: CraftingInput
+        ObjectType: 3
+        guid: cf9569b35675614d8574c306b9e2a551
+      Path: Events\Default Work Unit\CraftingInput
+      maxAttenuation: 0
+      maxDuration: 3.5688047
+      minDuration: 1.3831481
+    - name: DialogueRandom
+      guid: 5f4138aea435644e87905d12418a8f58
+      id: 4044946174
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: DialogueRandom
+        ObjectType: 3
+        guid: 5f4138aea435644e87905d12418a8f58
+      Path: Events\Default Work Unit\DialogueRandom
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: DialogueStart
+      guid: c7d4d4569e2a334cbaac6e780b933214
+      id: 1791909165
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: DialogueStart
+        ObjectType: 3
+        guid: c7d4d4569e2a334cbaac6e780b933214
+      Path: Events\Default Work Unit\DialogueStart
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: DialogueStop
+      guid: 2ca721cd109b4f4db9e29f2496804dba
+      id: 3304726383
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: DialogueStop
+        ObjectType: 3
+        guid: 2ca721cd109b4f4db9e29f2496804dba
+      Path: Events\Default Work Unit\DialogueStop
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: EnemyHit
+      guid: 26aa58c22dfafc47904f0eea9a81d1b0
+      id: 391172934
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: EnemyHit
+        ObjectType: 3
+        guid: 26aa58c22dfafc47904f0eea9a81d1b0
+      Path: Events\Default Work Unit\EnemyHit
+      maxAttenuation: 0
+      maxDuration: 2.1697958
+      minDuration: 1.2177567
+    - name: EnemyKilled
+      guid: 71adc08a9c93bc4989f5f9e43d0933e7
+      id: 465333688
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: EnemyKilled
+        ObjectType: 3
+        guid: 71adc08a9c93bc4989f5f9e43d0933e7
+      Path: Events\Default Work Unit\EnemyKilled
+      maxAttenuation: 0
+      maxDuration: 3.016738
+      minDuration: 1.693087
+    - name: EnemySpawn
+      guid: dc3bad515a73114c8c00e44fb04ff2c7
+      id: 3453203440
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: EnemySpawn
+        ObjectType: 3
+        guid: dc3bad515a73114c8c00e44fb04ff2c7
+      Path: Events\Default Work Unit\EnemySpawn
+      maxAttenuation: 0
+      maxDuration: 2.3346379
+      minDuration: 1.3102713
+    - name: Flower_Harvest
+      guid: 0481f539725ddb4fa6e3aeb6bc1cc232
+      id: 2696148806
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Flower_Harvest
+        ObjectType: 3
+        guid: 0481f539725ddb4fa6e3aeb6bc1cc232
+      Path: Events\Default Work Unit\Flower_Harvest
+      maxAttenuation: 0
+      maxDuration: 1.1747673
+      minDuration: 0.9324134
+    - name: ResearchInvest
+      guid: 35c94eb59912ad49b701811e29628bbc
+      id: 2982833173
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: ResearchInvest
+        ObjectType: 3
+        guid: 35c94eb59912ad49b701811e29628bbc
+      Path: Events\Default Work Unit\ResearchInvest
+      maxAttenuation: 0
+      maxDuration: 1.7847147
+      minDuration: 1.4165289
+    - name: ResearchUnlock
+      guid: 51734578a80f09418aaf98fa6c1311a6
+      id: 668166534
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: ResearchUnlock
+        ObjectType: 3
+        guid: 51734578a80f09418aaf98fa6c1311a6
+      Path: Events\Default Work Unit\ResearchUnlock
+      maxAttenuation: 0
+      maxDuration: 2.5
+      minDuration: 2.5
+    - name: Throw
+      guid: 90229252940c3648aea5fe88a4146e08
+      id: 745179803
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Throw
+        ObjectType: 3
+        guid: 90229252940c3648aea5fe88a4146e08
+      Path: Events\Default Work Unit\Throw
+      maxAttenuation: 0
+      maxDuration: 1.2445805
+      minDuration: 1.2445805
+    - name: UpgradePurchase
+      guid: efcf0df20e85704da2f706447c9c26ee
+      id: 2834561310
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: UpgradePurchase
+        ObjectType: 3
+        guid: efcf0df20e85704da2f706447c9c26ee
+      Path: Events\Default Work Unit\UpgradePurchase
+      maxAttenuation: 0
+      maxDuration: 2.4928074
+      minDuration: 1.9785426
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -139,7 +433,7 @@ MonoBehaviour:
     m_lastTime: -8584823418925115905
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 0a000000
+  ExpandedWaapiItemIds: 0500000006000000070000000a0000000b0000000c00000010000000150000001600000018000000190000001e0000001f000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0

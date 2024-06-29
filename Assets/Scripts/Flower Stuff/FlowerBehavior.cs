@@ -13,7 +13,8 @@ public class FlowerBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (GameControl.PlayerData.tutorialActive && transform.parent.tag != "finalCrown")
+            picked = false;
     }
 
     // Update is called once per frame

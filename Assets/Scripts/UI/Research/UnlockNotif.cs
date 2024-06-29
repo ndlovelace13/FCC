@@ -31,6 +31,7 @@ public class UnlockNotif : MonoBehaviour
         unlockText.text = text;
         StartCoroutine(BackgroundFade());
         StartCoroutine(LerpUp());
+        AkSoundEngine.PostEvent("ResearchUnlock", gameObject);
     }
 
     IEnumerator BackgroundFade()

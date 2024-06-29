@@ -1,6 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{DB7FED48-F316-4188-8594-CF5CE384C227}" SchemaVersion="119">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{DB7FED48-F316-4188-8594-CF5CE384C227}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{DB7FED48-F316-4188-8594-CF5CE384C227}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Flower_Harvest" ID="{39F58104-5D72-4FDB-A6E3-AEB6BC1CC232}">
+					<ChildrenList>
+						<Action Name="" ID="{B394B1AF-CA90-4DFF-A434-4FCE922169A4}" ShortID="893546907">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="harvest2" ID="{9948713D-50C9-4BA3-92E5-418D4C7CA7D3}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="EnemyHit" ID="{C258AA26-FA2D-47FC-904F-0EEA9A81D1B0}">
+					<ChildrenList>
+						<Action Name="" ID="{46DA9307-432A-435F-A625-2410849E6B36}" ShortID="569234752">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="enemyHit" ID="{55AF042F-3CD1-4BF7-A7EF-7E9396242557}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="EnemyKilled" ID="{8AC0AD71-939C-49BC-89F5-F9E43D0933E7}">
+					<ChildrenList>
+						<Action Name="" ID="{010F4A39-B9CC-423A-9ECD-CC196E54E268}" ShortID="152675254">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="enemyDeath" ID="{2389E5D2-F1FD-438D-9E25-23EB1BA93CAA}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="ButtonClick" ID="{C13412A2-F169-41D8-A4C1-5C2A85D23A04}">
+					<ChildrenList>
+						<Action Name="" ID="{CAABF7BA-4A42-4259-AAFB-5BFEBBEC6822}" ShortID="514127864">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="buttonClick" ID="{2664F2AB-3B30-47FE-961A-BA4234423A7E}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Throw" ID="{52922290-0C94-4836-AEA5-FE88A4146E08}">
+					<ChildrenList>
+						<Action Name="" ID="{D5C823B9-3127-4F67-AF32-42B99F1DAFA2}" ShortID="673975677">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="crownThrow" ID="{EDE9297C-3C49-4C72-868B-352FEB3A596E}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="EnemySpawn" ID="{51AD3BDC-735A-4C11-8C00-E44FB04FF2C7}">
+					<ChildrenList>
+						<Action Name="" ID="{79E25ECB-95D2-438A-88EB-19B5729182FC}" ShortID="809491779">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="enemySpawn" ID="{7CED724A-B15B-40C7-B77C-E6179920101D}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="CraftingInput" ID="{B36995CF-7556-4D61-8574-C306B9E2A551}">
+					<ChildrenList>
+						<Action Name="" ID="{5734A30F-2A45-40AA-AA17-3A78BDD9EC34}" ShortID="264288810">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="crafting" ID="{0A2F7DBC-F506-4597-9B43-08B7EBC8C63D}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="CraftingDone" ID="{93E922B6-5A58-40D5-9F14-9A80FD6DCFE4}">
+					<ChildrenList>
+						<Action Name="" ID="{10B9CD3A-D85C-4FD3-A7AC-2A27BD5F0F9C}" ShortID="525589862">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="crownCraft" ID="{B7060E65-D0CF-4324-A49B-55CDCFB7DCD2}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="ResearchInvest" ID="{B54EC935-1299-49AD-B701-811E29628BBC}">
+					<ChildrenList>
+						<Action Name="" ID="{B34108F9-C911-4296-92D1-C559900F2BF3}" ShortID="940398185">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="researchInvest" ID="{2F0B9364-645E-47B0-8783-C2B347B6D2E6}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="UpgradePurchase" ID="{F20DCFEF-850E-4D70-A2F7-06447C9C26EE}">
+					<ChildrenList>
+						<Action Name="" ID="{C16393B1-F33B-488C-811C-F0CCD96FA33C}" ShortID="555250654">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="collectionBuy" ID="{6FD8CFD8-09F9-407D-AEC8-E92A05705B10}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="ResearchUnlock" ID="{78457351-0FA8-4109-8AAF-98FA6C1311A6}">
+					<ChildrenList>
+						<Action Name="" ID="{C6FC0408-04CA-46E3-89AD-BABEC310CA56}" ShortID="562632756">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="crownCraft" ID="{B7060E65-D0CF-4324-A49B-55CDCFB7DCD2}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="DialogueStart" ID="{56D4D4C7-2A9E-4C33-BAAC-6E780B933214}">
+					<ChildrenList>
+						<Action Name="" ID="{EC5510D0-4B0A-4605-8625-B4DE4016FA3A}" ShortID="274284988">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="flowerGuyTalk" ID="{77A3452B-88CB-41EC-BDD9-207B19F066B6}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{82FC4DDD-6B0D-4E36-9FA5-425724CADBED}" ShortID="1033832430">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="36"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+								<Property Name="SeekPercent" Type="Real64">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{7DB60BA4-0001-4C70-8466-6888D9727018}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="100"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="flowerGuyTalk" ID="{77A3452B-88CB-41EC-BDD9-207B19F066B6}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="DialogueStop" ID="{CD21A72C-9B10-4D4F-B9E2-9F2496804DBA}">
+					<ChildrenList>
+						<Action Name="" ID="{E7B8F453-D921-4E1F-BC18-1D419575D9A4}" ShortID="431910337">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="flowerGuyTalk" ID="{77A3452B-88CB-41EC-BDD9-207B19F066B6}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="DialogueRandom" ID="{AE38415F-35A4-4E64-8790-5D12418A8F58}">
+					<ChildrenList>
+						<Action Name="" ID="{77C0A9FE-526E-4590-8320-110C5E59B341}" ShortID="253643189">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="36"/>
+								<Property Name="SeekPercent" Type="Real64">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{0B9DA5CC-71A1-48BC-B168-515E8A0FD06F}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="100"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="flowerGuyTalk" ID="{77A3452B-88CB-41EC-BDD9-207B19F066B6}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>

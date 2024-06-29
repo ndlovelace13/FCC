@@ -22,6 +22,10 @@ public class HatBehavior : MonoBehaviour
 
     public void Activate()
     {
+        if (transform.parent.localScale.x < 0)
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y);
+        else
+            transform.localScale = new Vector3(0.5f, 0.5f);
         transform.localPosition = startPositionOffset;
         if (startRotationOffset == null)
             startRotationOffset = transform.localRotation;

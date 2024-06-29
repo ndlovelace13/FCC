@@ -34,6 +34,7 @@ public class CrownThrowing : MonoBehaviour
                     finalCrown.GetComponent<CrownAttack>().CrownActive();
                     gameObject.GetComponent<CrownConstruction>().CrownThrown();
                     StartCoroutine(CrownThrow());
+                    AkSoundEngine.PostEvent("Throw", gameObject);
                 }
             }
         }

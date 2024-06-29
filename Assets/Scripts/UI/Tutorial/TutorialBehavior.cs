@@ -110,9 +110,11 @@ public class TutorialBehavior : MonoBehaviour
         if (GameControl.PlayerData.tutorialState == 7 && GameControl.PlayerData.fireReset == true)
         {
             GameControl.PlayerData.fireReset = false;
-            GameObject newInstance = Instantiate(fireCrown, player.transform);
+            GameObject newInstance = Instantiate(fireCrown);
             Destroy(fireInstance);
             fireInstance = newInstance;
+            fireInstance.transform.localPosition = player.transform.localPosition;
+            fireInstance.transform.SetParent(null);
             fireInstance.SetActive(true);
         }
     }
@@ -269,7 +271,8 @@ public class TutorialBehavior : MonoBehaviour
         if (GameControl.PlayerData.tutorialState == 6)
         {
             fireInstance = Instantiate(fireCrown);
-            fireInstance.transform.position = player.transform.position;
+            fireInstance.transform.localPosition = player.transform.localPosition;
+            fireInstance.transform.SetParent(null);
             fireInstance.SetActive(true);
         }
     }

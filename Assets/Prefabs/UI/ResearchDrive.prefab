@@ -1030,6 +1030,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayButton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8685631897130184464, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
+      propertyPath: buttonSound.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b3d20497bb5c1d4ab9c0c73a8ccb89d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

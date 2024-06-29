@@ -11,10 +11,10 @@ public class Timer : MonoBehaviour
     int sec;
 
     //speed stuff
-    [SerializeField] int speedInterval = 15;
+    //[SerializeField] int speedInterval = 15;
 
-    float maxSpeed;
-    float minSpeed;
+    //float maxSpeed;
+    //float minSpeed;
 
     float startTime = 0f;
     float currentTime = 0f;
@@ -31,8 +31,8 @@ public class Timer : MonoBehaviour
     {
         GameControl.PlayerData.firstRun = false;
         GameControl.PlayerData.discoveryDisplay = true;
-        maxSpeed = GameControl.PlayerData.maxSpeed;
-        minSpeed = GameControl.PlayerData.minSpeed;
+        //maxSpeed = GameControl.PlayerData.maxSpeed;
+        //minSpeed = GameControl.PlayerData.minSpeed;
         startTime = Time.timeSinceLevelLoad;
         timerStarted = true;
         //StartCoroutine(SpeedUp());
@@ -53,7 +53,7 @@ public class Timer : MonoBehaviour
         GameControl.PlayerData.sec = sec;
     }
 
-    IEnumerator SpeedUp()
+    /*IEnumerator SpeedUp()
     {
         while (true)
         {
@@ -74,5 +74,5 @@ public class Timer : MonoBehaviour
             //PlayerPrefs.SetFloat("maxSpeed", PlayerPrefs.GetFloat("maxSpeed") + maxInterval);
             //PlayerPrefs.SetFloat("minSpeed", PlayerPrefs.GetFloat("minSpeed") + minInterval);
         }
-    }
+    }*/
 }

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Mac" BasePlatform="Mac" SchemaVersion="16" SoundBankVersion="150">
+	<RootPaths>
+		<ProjectRoot>../..</ProjectRoot>
+		<SourceFilesRoot>../../.cache/Mac</SourceFilesRoot>
+		<SoundBanksRoot>.</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>.</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<SoundBanks>
+		<SoundBank Id="977454165" Type="User" Language="SFX" Hash="{2FF1A1A6-3AA2-8445-A058-777E58FB5C28}">
+			<ShortName>Button</ShortName>
+			<Path>Button.bnk</Path>
+			<Media>
+				<File Id="24292098" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>crownCraft.wav</ShortName>
+					<CachePath>SFX/crownCraft_818F3B66.wem</CachePath>
+				</File>
+				<File Id="343197594" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>collectionBuy.wav</ShortName>
+					<CachePath>SFX/collectionBuy_818F3B66.wem</CachePath>
+				</File>
+				<File Id="566951220" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>buttonClick.wav</ShortName>
+					<CachePath>SFX/buttonClick_818F3B66.wem</CachePath>
+				</File>
+				<File Id="797605621" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>researchInvest.wav</ShortName>
+					<CachePath>SFX/researchInvest_818F3B66.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="4051332235" Name="ButtonClick" DurationType="OneShot" DurationMin="1.0866213" DurationMax="1.0866213">
+					<MediaRefs>
+						<MediaRef Id="566951220"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2982833173" Name="ResearchInvest" DurationType="OneShot" DurationMin="1.4165289" DurationMax="1.7847147">
+					<MediaRefs>
+						<MediaRef Id="797605621"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="668166534" Name="ResearchUnlock" DurationType="OneShot" DurationMin="2.5" DurationMax="2.5">
+					<MediaRefs>
+						<MediaRef Id="24292098"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2834561310" Name="UpgradePurchase" DurationType="OneShot" DurationMin="1.9785426" DurationMax="2.4928074">
+					<MediaRefs>
+						<MediaRef Id="343197594"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+		</SoundBank>
+		<SoundBank Id="1069431850" Type="User" Language="SFX" Hash="{5FEE5649-1A14-BA6D-7D41-F21DF145EBCD}">
+			<ShortName>Player</ShortName>
+			<Path>Player.bnk</Path>
+			<Media>
+				<File Id="24292098" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>crownCraft.wav</ShortName>
+					<CachePath>SFX/crownCraft_818F3B66.wem</CachePath>
+				</File>
+				<File Id="69574967" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>crownThrow.wav</ShortName>
+					<CachePath>SFX/crownThrow_818F3B66.wem</CachePath>
+				</File>
+				<File Id="528063931" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>craft3.wav</ShortName>
+					<CachePath>SFX/craft3_818F3B66.wem</CachePath>
+				</File>
+				<File Id="573708483" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>craft1.wav</ShortName>
+					<CachePath>SFX/craft1_818F3B66.wem</CachePath>
+				</File>
+				<File Id="583231221" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>craft2.wav</ShortName>
+					<CachePath>SFX/craft2_818F3B66.wem</CachePath>
+				</File>
+				<File Id="806856628" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>harvest2.wav</ShortName>
+					<CachePath>SFX/harvest2_818F3B66.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="4264775619" Name="CraftingDone" DurationType="OneShot" DurationMin="2.5" DurationMax="2.5">
+					<MediaRefs>
+						<MediaRef Id="24292098"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3670604801" Name="CraftingInput" DurationType="OneShot" DurationMin="1.3831481" DurationMax="3.5688047">
+					<MediaRefs>
+						<MediaRef Id="528063931"/>
+						<MediaRef Id="573708483"/>
+						<MediaRef Id="583231221"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2696148806" Name="Flower_Harvest" DurationType="OneShot" DurationMin="0.9324134" DurationMax="1.1747673">
+					<MediaRefs>
+						<MediaRef Id="806856628"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="745179803" Name="Throw" DurationType="OneShot" DurationMin="1.2445805" DurationMax="1.2445805">
+					<MediaRefs>
+						<MediaRef Id="69574967"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+		</SoundBank>
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{D326F752-7CA2-0A14-FDB1-63ECE89D0199}">
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+			<Plugins>
+				<AudioDevices>
+					<Plugin Id="2317455096" Name="No_Output" LibName="No Output" LibId="11862023"/>
+					<Plugin Id="3859886410" Name="System" LibName="System" LibId="11403271"/>
+				</AudioDevices>
+			</Plugins>
+			<Busses>
+				<Bus Id="3803692087" Name="Master Audio Bus"/>
+			</Busses>
+		</SoundBank>
+		<SoundBank Id="2360806359" Type="User" Language="SFX" Hash="{6AAAACE0-6F27-2D47-065A-F6D35BA66899}">
+			<ShortName>BasicEnemy</ShortName>
+			<Path>BasicEnemy.bnk</Path>
+			<Media>
+				<File Id="78482138" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>enemyDeath.wav</ShortName>
+					<CachePath>SFX/enemyDeath_818F3B66.wem</CachePath>
+				</File>
+				<File Id="873878954" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>enemyHit.wav</ShortName>
+					<CachePath>SFX/enemyHit_818F3B66.wem</CachePath>
+				</File>
+				<File Id="1031096079" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>enemyLaugh.wav</ShortName>
+					<CachePath>SFX/enemyLaugh_818F3B66.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="391172934" Name="EnemyHit" DurationType="OneShot" DurationMin="1.2177567" DurationMax="2.1697958">
+					<MediaRefs>
+						<MediaRef Id="873878954"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="465333688" Name="EnemyKilled" DurationType="OneShot" DurationMin="1.693087" DurationMax="3.016738">
+					<MediaRefs>
+						<MediaRef Id="78482138"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3453203440" Name="EnemySpawn" DurationType="OneShot" DurationMin="1.3102713" DurationMax="2.3346379">
+					<MediaRefs>
+						<MediaRef Id="1031096079"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+		</SoundBank>
+		<SoundBank Id="3930136735" Type="User" Language="SFX" Hash="{BA308D0C-D7A2-ABB1-3E97-436902B007E3}">
+			<ShortName>Dialogue</ShortName>
+			<Path>Dialogue.bnk</Path>
+			<Media>
+				<File Id="339031925" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>flowerGuyTalk.wav</ShortName>
+					<CachePath>SFX/flowerGuyTalk_FBC78EF0.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="1791909165" Name="DialogueStart" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="339031925"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{5150BA05-87FB-18E3-DF0D-94B76849A1BE}</FileHash>
+</SoundBanksInfo>

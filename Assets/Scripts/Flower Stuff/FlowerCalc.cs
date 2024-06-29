@@ -110,8 +110,11 @@ public class FlowerCalc : MonoBehaviour
         {
             GameControl.PlayerData.uncommon = 0.5f;
             GameControl.PlayerData.discoveryDisplay = false;
-            GameControl.PlayerData.FlowerDiscovery("red");
-            GameControl.PlayerData.FlowerDiscovery("sunny");
+            List<string> strings = new List<string>(GameControl.PlayerData.undiscoveredUncommon);
+            foreach (var flower in strings)
+            {
+                GameControl.PlayerData.FlowerDiscovery(flower);
+            }
         }
         GameControl.PlayerData.ResetRun();
     }

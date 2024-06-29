@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4743415653998564351}
   - component: {fileID: 2966977713507855080}
-  - component: {fileID: -3832093449450832937}
   - component: {fileID: 3276362812338415158}
   - component: {fileID: 3259970831933619588}
   - component: {fileID: 8156539619727094662}
   - component: {fileID: 228346828096061805}
+  - component: {fileID: 1459612083958673078}
+  - component: {fileID: 5783538252221588449}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: BasicEnemy
   m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,30 +92,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-3832093449450832937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003814786078272635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92060aaef6cd4a340853dbfef3550587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 50
-  isActive: 0
-  moveSpeed: 0
-  notif: {fileID: 7155992749287334371, guid: 57602ac8dbb3e3441931b13c9bcfa0b8, type: 3}
-  augments: []
-  isBurning: 0
-  isFrozen: 0
-  isSlowed: 0
-  isPoisoned: 0
-  isElectrified: 0
-  electricPassed: 0
-  wasKilled: 0
 --- !u!70 &3276362812338415158
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -233,6 +210,58 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1459612083958673078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003814786078272635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 321cae161e21ac34bb690286f85618bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  isActive: 0
+  moveSpeed: 0
+  surprised: 0
+  preSurpriseVel: {x: 0, y: 0, z: 0}
+  notif: {fileID: 7155992749287334371, guid: 57602ac8dbb3e3441931b13c9bcfa0b8, type: 3}
+  augments: []
+  isBurning: 0
+  isFrozen: 0
+  isSlowed: 0
+  isPoisoned: 0
+  isElectrified: 0
+  electricPassed: 0
+  isBlinded: 0
+  wasKilled: 0
+--- !u!114 &5783538252221588449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003814786078272635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 5d52dd343cb9ea846beda199dc721183, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &2186241190138067228
 GameObject:
   m_ObjectHideFlags: 0
