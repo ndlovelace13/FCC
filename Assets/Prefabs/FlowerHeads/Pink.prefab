@@ -132,8 +132,10 @@ MonoBehaviour:
   rangeTiers: 02000000030000000400000005000000
   projTiers: 04000000040000000500000005000000
   aug: 0
+  title: Pink Flower
   primaryText: 'Rosy '
   insideText: 'Salmon '
   outsideText: 'Flushed '
   fourText: 'Plastic '
   fiveText: 'Pretty '
+  textColor: {r: 0.89019614, g: 0.41176474, b: 0.6627451, a: 0}

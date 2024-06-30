@@ -30,9 +30,11 @@ public abstract class FlowerStats : MonoBehaviour
 
     [SerializeField] public int aug;
 
+    //Title stuff
+    [SerializeField] public string title;
     [SerializeField] public string primaryText, insideText, outsideText, fourText, fiveText;
-    //associated projectile script
-    //associated augment script
+    [SerializeField] public Color textColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -104,6 +106,49 @@ public abstract class FlowerStats : MonoBehaviour
     public void SetProjCount(int projCount)
     {
         this.projCount = projCount;
+    }
+
+    public string GetColorHex()
+    {
+        return ColorUtility.ToHtmlStringRGB(textColor);
+    }
+
+    public virtual string Colorizer(string input)
+    {
+        string colorText = GetColorHex();
+        string returnString = "<color=#" + colorText + ">";
+        returnString += input + "</color>";
+        return returnString;
+    }
+
+    public string GetTitle()
+    {
+        return Colorizer(title);
+    }
+
+    public string GetPrimaryText()
+    {
+        return Colorizer(primaryText);
+    }
+
+    public string GetInsideText()
+    {
+        return Colorizer(insideText);
+    }
+
+    public string GetOutsideText()
+    {
+        return Colorizer(outsideText);
+    }
+
+    public string GetFourText()
+    {
+        return Colorizer(fourText);
+    }
+
+    public string GetFiveText()
+    {
+        return Colorizer(fiveText);
     }
 
 

@@ -132,8 +132,10 @@ MonoBehaviour:
   rangeTiers: 0500000006000000080000000a000000
   projTiers: 06000000060000000700000008000000
   aug: 2
+  title: Frozen Flower
   primaryText: 'Frozen '
   insideText: 'Frigid '
   outsideText: 'Chilled '
   fourText: 'Arctic '
   fiveText: 'Solid '
+  textColor: {r: 0.22352943, g: 0.7294118, b: 0.9686275, a: 0}

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Quit : MonoBehaviour
 {
+    [SerializeField] GameObject quitPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +17,16 @@ public class Quit : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            Application.Quit();
+            QuitPopup();
+        }
+    }
+
+    public void QuitPopup()
+    {
+        if (Time.timeScale != 0)
+        {
+            Time.timeScale = 0;
+            Instantiate(quitPrefab);
         }
     }
 }

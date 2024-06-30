@@ -19,12 +19,21 @@ public class WildStats : FlowerStats
 
     public string WildTypeRandomize()
     {
-        List<string> noWild = GameControl.PlayerData.allDiscovered;
+        List<string> noWild = new List<string>(GameControl.PlayerData.allDiscovered);
         noWild.Remove("wild");
         int discoveredCount = noWild.Count;
         string newType = noWild[UnityEngine.Random.Range(0, discoveredCount)];
-        Debug.Log("Wild has become " + newType + ", destroyer of worlds");
+        Debug.Log("Wild is become " + newType + ", destroyer of worlds");
         return newType;
+    }
+
+    public override string Colorizer(string input)
+    {
+        Color rando = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+        string colorText = ColorUtility.ToHtmlStringRGB(rando);
+        string returnString = "<color=#" + colorText + ">";
+        returnString += input + "</color>";
+        return returnString;
     }
 
 

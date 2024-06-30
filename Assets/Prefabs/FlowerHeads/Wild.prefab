@@ -132,8 +132,10 @@ MonoBehaviour:
   rangeTiers: 00000000000000000000000000000000
   projTiers: 00000000000000000000000000000000
   aug: 0
+  title: Wildflower
   primaryText: 'Curious '
   insideText: 'Unpredictable '
   outsideText: 'Random '
   fourText: 'Anomolous '
   fiveText: 'Gambler''s '
+  textColor: {r: 0.4156863, g: 0.42352945, b: 0.82745105, a: 0}

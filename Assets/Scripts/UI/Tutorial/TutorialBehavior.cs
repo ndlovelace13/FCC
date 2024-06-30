@@ -9,6 +9,7 @@ public class TutorialBehavior : MonoBehaviour
     [SerializeField] GameObject speech;
     [SerializeField] GameObject phone;
     [SerializeField] GameObject popUp;
+    [SerializeField] GameObject skipPopup;
     [SerializeField] TMP_Text objective;
     [SerializeField] GameObject player;
     [SerializeField] GameObject firstFlower;
@@ -116,6 +117,10 @@ public class TutorialBehavior : MonoBehaviour
             fireInstance.transform.localPosition = player.transform.localPosition;
             fireInstance.transform.SetParent(null);
             fireInstance.SetActive(true);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) && popUp.activeSelf == false)
+        {
+            SkipPopup();
         }
     }
 
@@ -277,8 +282,24 @@ public class TutorialBehavior : MonoBehaviour
         }
     }
 
+    public void SkipPopup()
+    {
+        if (Time.timeScale != 0)
+        {
+            Time.timeScale = 0;
+            skipPopup.SetActive(true);
+        }
+    }
+
+    public void Continue()
+    {
+        Time.timeScale = 1;
+        skipPopup.SetActive(false);
+    }
+
     public void TutorialSkip()
     {
+        Time.timeScale = 1;
         GameControl.PlayerData.tutorialActive = false;
         GameControl.PlayerData.tutorialSkip = true;
         SceneManager.LoadScene("Gameplay");

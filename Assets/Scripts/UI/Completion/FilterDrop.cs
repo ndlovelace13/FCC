@@ -39,7 +39,7 @@ public class FilterDrop : MonoBehaviour
             GameObject toggle = Instantiate(togglePrefab);
             toggle.transform.SetParent(transform);
             toggle.transform.localScale = Vector3.one;
-            toggle.GetComponentInChildren<TMP_Text>().text = flower;
+            toggle.GetComponentInChildren<TMP_Text>().text = GameControl.PlayerData.flowerStatsDict[flower].GetTitle();
             //toggle.GetComponent<Toggle>().isOn = true;
             options.Add(toggle.GetComponent<Toggle>());
             toggle.SetActive(false);

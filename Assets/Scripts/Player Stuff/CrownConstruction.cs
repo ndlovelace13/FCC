@@ -297,20 +297,20 @@ public class CrownConstruction : MonoBehaviour
         //Debug.Log("NAME SHIT: " + fiver + " " + four + " " + outside + " " + inside);
         //apply the name
         if (fiver != "")
-            crownAnnouncement += dict[fiver].fiveText;
+            crownAnnouncement += dict[fiver].GetFiveText();
         else if (four != "")
-            crownAnnouncement += dict[four].fourText;
+            crownAnnouncement += dict[four].GetFourText();
         else
         {
             if (outside != "")
             {
-                crownAnnouncement += dict[outside].outsideText;
+                crownAnnouncement += dict[outside].GetOutsideText();
             }
             if (inside != "")
-                crownAnnouncement += dict[inside].insideText;
+                crownAnnouncement += dict[inside].GetInsideText();
         }
         if (fiver == "")
-            crownAnnouncement += dict[flowerStats[2].type].primaryText;
+            crownAnnouncement += dict[flowerStats[2].type].GetPrimaryText();
         crownAnnouncement += "Crown";
         //check for unlock here
         id += primaryId.ToString() + insideId.ToString() + outsideId.ToString();

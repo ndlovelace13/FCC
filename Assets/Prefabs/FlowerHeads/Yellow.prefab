@@ -132,8 +132,10 @@ MonoBehaviour:
   rangeTiers: 0500000006000000080000000a000000
   projTiers: 06000000060000000700000008000000
   aug: 4
+  title: Electric Flower
   primaryText: 'Electric '
   insideText: 'Volatile '
   outsideText: 'Charged '
   fourText: 'Voltaic '
   fiveText: 'Juiced '
+  textColor: {r: 0.9686275, g: 0.9215687, b: 0.34509805, a: 0}

@@ -132,8 +132,10 @@ MonoBehaviour:
   rangeTiers: 02000000030000000400000005000000
   projTiers: 04000000040000000500000005000000
   aug: 0
+  title: Orange Flower
   primaryText: 'Orangish '
   insideText: 'Peachy '
   outsideText: 'Tawny '
   fourText: 'Paprika '
   fiveText: 'Annoying '
+  textColor: {r: 1, g: 0.3254902, b: 0, a: 0}

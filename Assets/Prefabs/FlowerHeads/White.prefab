@@ -132,8 +132,10 @@ MonoBehaviour:
   rangeTiers: 03000000040000000500000007000000
   projTiers: 04000000050000000500000006000000
   aug: 0
+  title: White Flower
   primaryText: 'Whitish '
   insideText: 'Pasty '
   outsideText: 'Pale '
   fourText: 'Colorless '
   fiveText: 'Blank '
+  textColor: {r: 1, g: 1, b: 1, a: 0}

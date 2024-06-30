@@ -132,9 +132,11 @@ MonoBehaviour:
   rangeTiers: 0500000006000000080000000a000000
   projTiers: 06000000060000000700000008000000
   aug: 1
+  title: Fiery Flower
   primaryText: 'Fiery '
   insideText: 'Burning '
   outsideText: 'Blazing '
   fourText: 'Scorching '
   fiveText: 'Razing '
+  textColor: {r: 1, g: 0.24313727, b: 0.20392159, a: 0}
   flamesPool: {fileID: 0}
