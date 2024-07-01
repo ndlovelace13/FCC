@@ -89,7 +89,7 @@ public class FlowerCalc : MonoBehaviour
 
     //rarity shit
     static float uncommonRarity;
-    float undiscoveredRarity;
+    //float undiscoveredRarity;
     List<string> Flowers;
     [SerializeField] List<string> common;
     [SerializeField] List<string> uncommon;
@@ -100,7 +100,7 @@ public class FlowerCalc : MonoBehaviour
     void Start()
     {
         //grab everything from GameControl when gameplay begins
-        if (GameControl.PlayerData.tutorialSkip && GameControl.PlayerData.discoveredUncommon.Count == 0)
+        if (GameControl.PlayerData.tutorialSkip && GameControl.SaveData.discoveredUncommon.Count == 0)
         {
             GameControl.PlayerData.discoveryDisplay = false;
             GameControl.PlayerData.FlowerDiscovery("red");
@@ -135,9 +135,9 @@ public class FlowerCalc : MonoBehaviour
         GameControl.PlayerData.discoveryDisplay = true;
         uncommonRarity = GameControl.PlayerData.uncommon;
         common = GameControl.PlayerData.commonPool;
-        uncommon = GameControl.PlayerData.discoveredUncommon;
+        uncommon = GameControl.SaveData.discoveredUncommon;
         undiscovered = GameControl.PlayerData.undiscoveredUncommon;
-        undiscoveredRarity = GameControl.PlayerData.undiscovered;
+        //undiscoveredRarity = GameControl.PlayerData.undiscovered;
         totalWidth = (int)background.size.x;
         totalHeight = (int)background.size.y;
         flowerInfo = InitialCalc();

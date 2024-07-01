@@ -16,6 +16,6 @@ public class ScoreText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Score: " + GameControl.PlayerData.score + "\nEssence: " + GameControl.PlayerData.essenceCount;
+        scoreText.text = "Score: " + GameControl.PlayerData.score + "\nEssence: " + GameControl.SaveData.essenceCount;
     }
 }

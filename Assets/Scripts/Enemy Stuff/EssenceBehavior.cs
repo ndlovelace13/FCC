@@ -53,7 +53,7 @@ public class EssenceBehavior : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        GameControl.PlayerData.essenceCount++;
+        GameControl.SaveData.essenceCount++;
         gameObject.SetActive(false);
     }
 }

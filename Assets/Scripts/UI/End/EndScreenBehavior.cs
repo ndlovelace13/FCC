@@ -31,8 +31,8 @@ public class EndScreenBehavior : MonoBehaviour
         if (displayUpdate)
             balanceInfo.text += "Score Bonus: +" + string.Format("{0:C}", scoreBonus) +
             "\nTime Bonus: +" + string.Format("{0:C}", timeBonus);
-        balanceInfo.text += "\nBalance: " + string.Format("{0:C}", GameControl.PlayerData.balance) + 
-            "\n\nEssence Seeds: " + GameControl.PlayerData.essenceCount;
+        balanceInfo.text += "\nBalance: " + string.Format("{0:C}", GameControl.SaveData.balance) + 
+            "\n\nEssence Seeds: " + GameControl.SaveData.essenceCount;
     }
 
     /*void OnGUI()
@@ -79,8 +79,9 @@ public class EndScreenBehavior : MonoBehaviour
 
     IEnumerator BalanceUpdate()
     {
-        GameControl.PlayerData.balance += scoreBonus + timeBonus;
+        GameControl.SaveData.balance += scoreBonus + timeBonus;
         GameControl.PlayerData.balanceUpdated = true;
+        GameControl.SaveHandler.SaveGame();
         yield return null;
     }
 

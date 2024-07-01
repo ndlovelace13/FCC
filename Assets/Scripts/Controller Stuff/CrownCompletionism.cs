@@ -140,7 +140,7 @@ public class Crown
         discovered = true;
         discoverable = false;
         statusChanged = true;
-        shiftDiscovered = GameControl.PlayerData.shiftCounter;
+        shiftDiscovered = GameControl.SaveData.shiftCounter;
         CrownCompletionism.completionTracker.totalDiscovered++;
         Crafted();
         Debug.Log(title + " discovered!");

@@ -21,7 +21,7 @@ public class SashBehavior : MonoBehaviour
     {
         slotObjects = new List<GameObject>();
         //slotObjects = GameObject.FindGameObjectsWithTag("affinitySlot");
-        slots = GameControl.PlayerData.sashSlots;
+        slots = GameControl.SaveData.sashSlots;
         for (int i = 0; i < slots; i++)
         {
             GameObject newSlot = Instantiate(slotPrefab);

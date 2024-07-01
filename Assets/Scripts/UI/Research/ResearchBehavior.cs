@@ -47,7 +47,7 @@ public class ResearchBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        balance.text = "Essence Seeds: " + GameControl.PlayerData.essenceCount;
+        balance.text = "Essence Seeds: " + GameControl.SaveData.essenceCount;
         if (GameControl.PlayerData.donationMade)
         {
             if (newLineReady)
@@ -84,9 +84,9 @@ public class ResearchBehavior : MonoBehaviour
 
     private void IntroLineAssign()
     {
-        if (GameControl.PlayerData.firstResearch)
+        if (GameControl.SaveData.firstResearch)
         {
-            GameControl.PlayerData.firstResearch = false;
+            GameControl.SaveData.firstResearch = false;
             currentLine[0] = firstLine;
         }
         else

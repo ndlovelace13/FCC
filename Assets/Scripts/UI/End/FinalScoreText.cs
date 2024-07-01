@@ -37,18 +37,18 @@ public class FinalScoreText : MonoBehaviour
     private void HighScore()
     {
         //checking if most recent score is better than the previous high score;
-        int currentHighScore = GameControl.PlayerData.highScore;
+        int currentHighScore = GameControl.SaveData.highScore;
         if (currentHighScore < GameControl.PlayerData.score)
         {
-            GameControl.PlayerData.highScore = GameControl.PlayerData.score;
+            GameControl.SaveData.highScore = GameControl.PlayerData.score;
             highScoreSet = true;
         }
-        int currentBestMin = GameControl.PlayerData.highMin;
-        int currentBestSec = GameControl.PlayerData.highSec;
+        int currentBestMin = GameControl.SaveData.highMin;
+        int currentBestSec = GameControl.SaveData.highSec;
         if ((currentBestSec < GameControl.PlayerData.sec && currentBestMin <= GameControl.PlayerData.min) || currentBestMin < GameControl.PlayerData.min)
         {
-            GameControl.PlayerData.highMin = GameControl.PlayerData.min;
-            GameControl.PlayerData.highSec = GameControl.PlayerData.sec;
+            GameControl.SaveData.highMin = GameControl.PlayerData.min;
+            GameControl.SaveData.highSec = GameControl.PlayerData.sec;
             highTimeSet = true;
         }
     }

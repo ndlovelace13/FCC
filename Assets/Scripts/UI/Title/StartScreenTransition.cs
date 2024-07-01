@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class StartScreenTransition : MonoBehaviour
 {
+    [SerializeField] GameObject loadButton;
     bool canTransition;
     // Start is called before the first frame update
     void Start()
     {
         Cursor.visible = true;
-        //set playerprefs here for use throughout the game
+        //set playerprefs here for use throughout the game - lmao how far we've come
         if (PlayerPrefs.GetInt("firstRun") == 0)
         {
             PlayerPrefs.SetFloat("balance", 0);
@@ -19,9 +20,9 @@ public class StartScreenTransition : MonoBehaviour
             PlayerPrefs.SetInt("highMin", 0);
             PlayerPrefs.SetInt("highSec", 0);
         }
-        
         canTransition = false;
         StartCoroutine(TransitionEnabler());
+        loadButton.SetActive(GameControl.SaveHandler.FileFind());
     }
 
     // Update is called once per frame
@@ -49,25 +50,42 @@ public class StartScreenTransition : MonoBehaviour
 
     IEnumerator TransitionEnabler()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
         canTransition = true;
     }
 
-    public void PlayTransition()
+    public void NewPlayTransition()
     {
         if (canTransition)
         {
-            if (!GameControl.PlayerData.descriptionVisited)
+            GameControl.PlayerData.NewGame();
+            if (!GameControl.PlayerData.descriptionVisited && GameControl.SaveData.firstRun)
             {
                 SceneManager.LoadScene("Description");
             }
-            else if (GameControl.PlayerData.firstRun)
+            else if (GameControl.SaveData.firstRun)
                 SceneManager.LoadScene("Tutorial");
             else
                 SceneManager.LoadScene("Gameplay");
         }
     }
-    
+
+    public void LoadPlayTransition()
+    {
+        if (canTransition)
+        {
+            GameControl.PlayerData.LoadGame();
+            if (!GameControl.PlayerData.descriptionVisited && GameControl.SaveData.firstRun)
+            {
+                SceneManager.LoadScene("Description");
+            }
+            else if (GameControl.SaveData.firstRun)
+                SceneManager.LoadScene("Tutorial");
+            else
+                SceneManager.LoadScene("Gameplay");
+        }
+    }
+
     public void DescriptionTransition()
     {
         GameControl.PlayerData.descriptionfromMenu = true;

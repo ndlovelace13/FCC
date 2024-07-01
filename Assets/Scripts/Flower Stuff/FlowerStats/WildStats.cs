@@ -43,7 +43,7 @@ public class WildStats : FlowerStats
     {
         FlowerStats copiedData = original;
         int currentWildAffinity = 0;
-        if (GameControl.PlayerData.sashActive && GameControl.PlayerData.affinityAmounts.ContainsKey("wild"))
+        if (GameControl.SaveData.sashActive && GameControl.PlayerData.affinityAmounts.ContainsKey("wild"))
             currentWildAffinity = GameControl.PlayerData.affinityAmounts["wild"];
         copiedData.SetPoints(GameControl.PlayerData.flowerStatsDict[type].pointsTiers[currentWildAffinity]);
         copiedData.SetProjRange(GameControl.PlayerData.flowerStatsDict[type].GetProjRange(1));
