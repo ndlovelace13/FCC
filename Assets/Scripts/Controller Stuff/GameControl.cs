@@ -18,6 +18,9 @@ public class SaveData
     public bool sashActivated = false;
     public bool sashActive = false;
 
+    //Tool Unlocks
+    public bool catalogUnlocked = true;
+
     //Persistent Counters
     public int shiftCounter = 0;
 
@@ -76,6 +79,7 @@ public class GameControl : MonoBehaviour
     //public bool firstResearch = true;
     public bool donationMade = false;
 
+    public bool shiftJustEnded = true;
     public bool balanceUpdated = false;
 
     public bool loading = false;

@@ -139,6 +139,7 @@ public class PlayerMovement : MonoBehaviour
         //TODO - set the death anim/sprite here
         Time.timeScale = 1f;
         GameControl.PlayerData.gameOver = true;
+        GameControl.PlayerData.shiftJustEnded = true;
         animator.Play("Death");
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(1f);
