@@ -33,7 +33,11 @@ public class SaveData
 
     //Upgrades, Research, Unlocks
     public List<UpgradeEssentials> upgrades;
+    public List<ResearchData> researchData;
     public List<string> discoveredUncommon;
+
+    //Completion Data
+    public List<CrownData> discoveredCrowns;
 }
 
 public class GameControl : MonoBehaviour
@@ -44,6 +48,9 @@ public class GameControl : MonoBehaviour
     //THE IMPORTANT PERSISTENT SAVE DATA
     public static SaveHandler SaveHandler;
     public static SaveData SaveData;
+
+    //Completion Handler
+    public static CrownCompletionism CrownCompletion;
 
     //all variable declarations
 
@@ -167,6 +174,7 @@ public class GameControl : MonoBehaviour
         {
             PlayerData = this;
             SaveHandler = GetComponent<SaveHandler>();
+            CrownCompletion = GetComponent<CrownCompletionism>();
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -182,7 +190,7 @@ public class GameControl : MonoBehaviour
         UpgradeInit();
         UpgradeApply();
         ResearchInit();
-        GameObject.FindWithTag("mainCompletion").GetComponent<CrownCompletionism>().PermutationEst();
+        CrownCompletion.PermutationEst();
     }
 
     public void LoadGame()
@@ -194,7 +202,7 @@ public class GameControl : MonoBehaviour
         UpgradeInit();
         UpgradeApply();
         ResearchInit();
-        GameObject.FindWithTag("mainCompletion").GetComponent<CrownCompletionism>().PermutationEst();
+        CrownCompletion.PermutationEst();
         //Restore the Discovery Stuff
 
     }
@@ -344,15 +352,30 @@ public class GameControl : MonoBehaviour
         researchItems = new List<Research>();
         GameObject newResearch = Instantiate(ResearchPrefab);
         newResearch.transform.parent = transform;
-        //newResearch.GetComponent<UncommonSeedResearch>().unlockPrefab = UnlockPrefab;
-        //newResearch.GetComponent<SashResearch>().unlockPrefab = UnlockPre
+        //Add the elements to the research list in the controller
         researchItems.Add(newResearch.GetComponent<UncommonSeedResearch>());
         researchItems.Add(newResearch.GetComponent<SashResearch>());
-        /*UncommonSeedResearch newResearch = new UncommonSeedResearch();
-        researchItems.Add(newResearch);
 
-        SashResearch sashResearch = new SashResearch();
-        researchItems.Add(sashResearch);*/
+        //update the values according to the save data
+        if (SaveData.researchData == null)
+        {
+            SaveData.researchData = new List<ResearchData>();
+            foreach (Research research in researchItems)
+            {
+                ResearchData newRes = new ResearchData();
+                newRes.SetData(research);
+                SaveData.researchData.Add(newRes);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < researchItems.Count; i++)
+            {
+                researchItems[i].RestoreData(SaveData.researchData[i]);
+            }
+        }
+        
+        
     }
 
     private void EnemyInit()

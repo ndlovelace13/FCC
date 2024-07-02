@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameControl.PlayerData.loading == false && GameControl.PlayerData.gamePaused == false)
+        if (GameControl.PlayerData.loading == false && GameControl.PlayerData.gamePaused == false && GameControl.PlayerData.gameOver == false)
         {
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
@@ -114,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //gameObject.transform.position += new Vector3(moveHorizontal * speed, moveVertical * speed) * Time.deltaTime;
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -124,9 +125,34 @@ public class PlayerMovement : MonoBehaviour
         {
             //Debug.Log(other.gameObject.transform.position);
             //Debug.Log(transform.position);
-            GameControl.PlayerData.gameOver = true;
-            SceneManager.LoadScene("EndScreen");
+            GameOver();
         }
+    }
+
+    public void GameOver()
+    {
+        StartCoroutine(GameOverAnim());
+    }
+
+    IEnumerator GameOverAnim()
+    {
+        //TODO - set the death anim/sprite here
+        Time.timeScale = 1f;
+        GameControl.PlayerData.gameOver = true;
+        animator.Play("Death");
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(1f);
+        float time = 0f;
+        float currentCam = Camera.main.orthographicSize;
+        while (time < 2f)
+        {
+            Camera.main.transform.localPosition = new Vector3(0f, Mathf.Lerp(0f, 0.85f, time / 2f), -10);
+            Camera.main.orthographicSize = Mathf.Lerp(currentCam, 0.5f, time / 2f);
+            time += Time.fixedDeltaTime;
+            yield return new WaitForSecondsRealtime(Time.fixedDeltaTime);
+        }
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Homebase");
     }
 
     public void CraftingSlow()

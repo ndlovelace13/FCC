@@ -134,7 +134,7 @@ public class Node : MonoBehaviour
     {
         if (spriteRenderer.enabled)
         {
-            CrownCompletionism.completionTracker.infoPopup.SetActive(false);
+            GameControl.CrownCompletion.infoPopup.SetActive(false);
             StopCoroutine(sizeLerp);
             StartCoroutine(HoverExit());
         }
@@ -154,7 +154,7 @@ public class Node : MonoBehaviour
 
     IEnumerator InfoDisplay()
     {
-        GameObject info = CrownCompletionism.completionTracker.infoPopup;
+        GameObject info = GameControl.CrownCompletion.infoPopup;
         Debug.Log(transform.position);
         info.GetComponent<InfoPopup>().CrownChosen(transform.position, crown);
         yield return null;

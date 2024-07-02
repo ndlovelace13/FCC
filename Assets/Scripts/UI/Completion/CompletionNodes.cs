@@ -35,15 +35,15 @@ public class CompletionNodes : MonoBehaviour
         //Establish the Node Pool
         nodes = new List<Node>();
         selectedNodes = new List<Node>();
-        CrownCompletionism.completionTracker.nodePooling();
-        nodePool = CrownCompletionism.completionTracker.nodePool;
-        CrownCompletionism.completionTracker.infoPopup = GameObject.FindWithTag("CrownInfo");
-        CrownCompletionism.completionTracker.infoPopup.SetActive(false);
+        GameControl.CrownCompletion.nodePooling();
+        nodePool = GameControl.CrownCompletion.nodePool;
+        GameControl.CrownCompletion.infoPopup = GameObject.FindWithTag("CrownInfo");
+        GameControl.CrownCompletion.infoPopup.SetActive(false);
         NodeAssign();
         ToggleAssign();
         StartCoroutine(NodeMapping(nodes, 0f));
-        selectedCount = CrownCompletionism.completionTracker.crowns.Count();
-        completedCount = CrownCompletionism.completionTracker.totalDiscovered;
+        selectedCount = GameControl.CrownCompletion.allCrowns.Count();
+        completedCount = GameControl.CrownCompletion.totalDiscovered;
     }
 
     private void ToggleAssign()
@@ -58,12 +58,12 @@ public class CompletionNodes : MonoBehaviour
 
     private void NodeAssign()
     {
-        foreach (var crown in CrownCompletionism.completionTracker.crowns)
+        foreach (var crown in GameControl.CrownCompletion.allCrowns)
         {
             GameObject node = nodePool.GetComponent<ObjectPool>().GetPooledObject();
             node.SetActive(true);
-            node.name = crown.GetId();
-            node.GetComponent<Node>().NodeAssignment(crown);
+            node.name = crown.Value.GetId();
+            node.GetComponent<Node>().NodeAssignment(crown.Value);
             nodes.Add(node.GetComponent<Node>());
         }
     }
@@ -227,7 +227,7 @@ public class CompletionNodes : MonoBehaviour
         if (discoveryToggles[2].isOn)
             ProgressText.text = completedCount + " of " + selectedCount + " Discovered - " + ((float)completedCount / selectedCount).ToString("0.00%");
         else
-            ProgressText.text = selectedCount + " of " + CrownCompletionism.completionTracker.allCrowns.Count + " Selected";
+            ProgressText.text = selectedCount + " of " + GameControl.CrownCompletion.allCrowns.Count + " Selected";
     }
 
     public void SortCall()

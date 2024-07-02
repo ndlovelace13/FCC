@@ -314,7 +314,7 @@ public class CrownConstruction : MonoBehaviour
         crownAnnouncement += "Crown";
         //check for unlock here
         id += primaryId.ToString() + insideId.ToString() + outsideId.ToString();
-        Crown constructedCrown = CrownCompletionism.completionTracker.allCrowns[id];
+        Crown constructedCrown = GameControl.CrownCompletion.allCrowns[id];
         if (constructedCrown.IsDiscovered())
         {
             constructedCrown.Crafted();

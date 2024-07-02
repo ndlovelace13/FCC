@@ -34,7 +34,16 @@ public class SaveHandler : MonoBehaviour
         {
             GameControl.SaveData.upgrades[i].SetStats(GameControl.PlayerData.upgrades[i]);
         }
-
+        //RESEARCH UPDATES
+        for (int i = 0; i < GameControl.SaveData.researchData.Count; i++)
+        {
+            GameControl.SaveData.researchData[i].SetData(GameControl.PlayerData.researchItems[i]);
+        }
+        //Print all the currently discovered crowns
+        /*for (int i = 0; i < GameControl.SaveData.discoveredCrowns.Count; i++)
+        {
+            Debug.Log(GameControl.SaveData.discoveredCrowns[i].GetTitle() + " is discovered");
+        }*/
         string savePlayerData = JsonUtility.ToJson(GameControl.SaveData);
         File.WriteAllText(saveFilePath, savePlayerData);
 

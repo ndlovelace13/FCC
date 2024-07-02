@@ -24,9 +24,13 @@ public class ResignHandler : MonoBehaviour
     {
         //take the code from the player end script
         GameControl.PlayerData.gamePaused = false;
-        GameControl.PlayerData.gameOver = true;
+        //Call the GameOver method from the player obj
+        GameObject.FindWithTag("Player").GetComponentInChildren<PlayerMovement>().GameOver();
+        //then kill
+        Destroy(gameObject);
+        /*GameControl.PlayerData.gameOver = true;
         Time.timeScale = 1f;
-        SceneManager.LoadScene("EndScreen");
+        SceneManager.LoadScene("EndScreen");*/
     }
 
     public void Cancel()
