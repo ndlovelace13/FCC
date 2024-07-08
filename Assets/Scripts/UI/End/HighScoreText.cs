@@ -17,6 +17,6 @@ public class HighScoreText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "Best Score: " + GameControl.SaveData.highScore + "\n" + "Best Time: " + String.Format("{0:00}:{1:00}", GameControl.SaveData.highMin, GameControl.SaveData.highSec);
+        //text.text = "Best Score: " + GameControl.SaveData.highScore + "\n" + "Best Time: " + String.Format("{0:00}:{1:00}", GameControl.SaveData.highMin, GameControl.SaveData.highSec);
     }
 }

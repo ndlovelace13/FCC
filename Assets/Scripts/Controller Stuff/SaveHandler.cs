@@ -44,6 +44,10 @@ public class SaveHandler : MonoBehaviour
         {
             Debug.Log(GameControl.SaveData.discoveredCrowns[i].GetTitle() + " is discovered");
         }*/
+        foreach (var shiftReport in GameControl.SaveData.shiftReports)
+        {
+            Debug.Log("Shift Num: " + shiftReport.GetShiftNum() + " " + shiftReport.GetScorePay());
+        }
         string savePlayerData = JsonUtility.ToJson(GameControl.SaveData);
         File.WriteAllText(saveFilePath, savePlayerData);
 

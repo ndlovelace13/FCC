@@ -99,6 +99,6 @@ public class ResearchBehavior : MonoBehaviour
     public void ReturnToEnd()
     {
         GameControl.SaveHandler.SaveGame();
-        SceneManager.LoadScene("EndScreen");
+        SceneManager.LoadScene("Homebase");
     }
 }

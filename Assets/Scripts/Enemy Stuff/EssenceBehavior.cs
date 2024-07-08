@@ -54,6 +54,7 @@ public class EssenceBehavior : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         GameControl.SaveData.essenceCount++;
+        GameControl.PlayerData.shiftSeeds++;
         gameObject.SetActive(false);
     }
 }

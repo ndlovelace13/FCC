@@ -19,6 +19,6 @@ public class CompletionBehavior : MonoBehaviour
 
     public void Return()
     {
-        SceneManager.LoadScene("EndScreen");
+        SceneManager.LoadScene("Homebase");
     }
 }

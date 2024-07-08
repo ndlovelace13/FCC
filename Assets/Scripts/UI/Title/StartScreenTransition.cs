@@ -59,14 +59,15 @@ public class StartScreenTransition : MonoBehaviour
         if (canTransition)
         {
             GameControl.PlayerData.NewGame();
-            if (!GameControl.PlayerData.descriptionVisited && GameControl.SaveData.firstRun)
+            /*if (!GameControl.PlayerData.descriptionVisited && GameControl.SaveData.firstRun)
             {
                 SceneManager.LoadScene("Description");
             }
             else if (GameControl.SaveData.firstRun)
                 SceneManager.LoadScene("Tutorial");
             else
-                SceneManager.LoadScene("Gameplay");
+                SceneManager.LoadScene("Gameplay");*/
+            SceneManager.LoadScene("Homebase");
         }
     }
 
@@ -75,14 +76,13 @@ public class StartScreenTransition : MonoBehaviour
         if (canTransition)
         {
             GameControl.PlayerData.LoadGame();
-            if (!GameControl.PlayerData.descriptionVisited && GameControl.SaveData.firstRun)
+            /*if (!GameControl.PlayerData.descriptionVisited && GameControl.SaveData.firstRun)
             {
                 SceneManager.LoadScene("Description");
             }
             else if (GameControl.SaveData.firstRun)
-                SceneManager.LoadScene("Tutorial");
-            else
-                SceneManager.LoadScene("Gameplay");
+                SceneManager.LoadScene("Tutorial");*/
+            SceneManager.LoadScene("Homebase");
         }
     }
 

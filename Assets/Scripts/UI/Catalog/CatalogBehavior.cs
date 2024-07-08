@@ -87,6 +87,6 @@ public class CatalogBehavior : MonoBehaviour
 
     public void ReturnToEnd()
     {
-        SceneManager.LoadScene("EndScreen");
+        SceneManager.LoadScene("Homebase");
     }
 }

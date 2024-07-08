@@ -83,9 +83,11 @@ public class CrownConstruction : MonoBehaviour
             if (!GameControl.PlayerData.tutorialActive)
             {
                 GameControl.PlayerData.score += crownScore;
+                GameControl.PlayerData.constructionScore += crownScore;
                 if (crownDiscovered)
                 {
                     GameControl.PlayerData.score += crownDiscoveryScore;
+                    GameControl.PlayerData.discoveryScore += crownDiscoveryScore;
                 }
             }
             if (crownDiscovered)

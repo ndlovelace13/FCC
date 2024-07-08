@@ -13,7 +13,7 @@ public class FinalScoreText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        HighScore();
+        //HighScore();
         SetResults();
     }
 
@@ -34,7 +34,7 @@ public class FinalScoreText : MonoBehaviour
         finalScore.text = text;
     }
 
-    private void HighScore()
+    /*private void HighScore()
     {
         //checking if most recent score is better than the previous high score;
         int currentHighScore = GameControl.SaveData.highScore;
@@ -51,5 +51,5 @@ public class FinalScoreText : MonoBehaviour
             GameControl.SaveData.highSec = GameControl.PlayerData.sec;
             highTimeSet = true;
         }
-    }
+    }*/
 }

@@ -41,6 +41,7 @@ TagManager:
   - shadow
   - stem
   - nodeFrame
+  - dialogue
   layers:
   - Default
   - TransparentFX

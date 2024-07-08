@@ -66,12 +66,14 @@ public class FlowerHarvest : MonoBehaviour
                             //newHead.transform.position = slots[slotPos].transform.position;
                             //Debug.Log("WHAT THE FUCK IS HAPPENING: " + crown.gameObject.name);
                             newHead.transform.SetParent(crown.transform);
+
                             newHead.GetComponent<FlowerBehavior>().position = slotPos;
                             Debug.Log("slot Position assigned: " + slotPos);
 
-                            //check for discovery
+                            //update the flowerUse counter
                             string type = head.GetComponent<FlowerStats>().type;
-                            StartCoroutine(DiscoveryCheck(type));
+                            GameControl.PlayerData.flowerUse[type]++;
+                            //StartCoroutine(DiscoveryCheck(type));
                             slots[slotPos].tag = "slotFull";
                             if (GameControl.PlayerData.tutorialState == 2)
                                 GameControl.PlayerData.flowerHarvested = true;

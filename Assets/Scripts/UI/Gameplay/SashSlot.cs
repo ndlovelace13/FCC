@@ -52,6 +52,8 @@ public class SashSlot : MonoBehaviour
     public void tierUp()
     {
         scoreNotif.GetComponent<ScoreNotification>().newFeed("Affinity Tier Increased | +" + GameControl.PlayerData.tierScores[currentTier]);
+        GameControl.PlayerData.score += GameControl.PlayerData.tierScores[currentTier];
+        GameControl.PlayerData.otherScore += GameControl.PlayerData.tierScores[currentTier];
         currentTier++;
         tier.sprite = GameControl.PlayerData.affinityTiers[currentTier];
         tier.color = Color.white;

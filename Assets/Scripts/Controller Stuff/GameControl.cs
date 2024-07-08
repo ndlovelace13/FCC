@@ -18,15 +18,20 @@ public class SaveData
     public bool sashActivated = false;
     public bool sashActive = false;
 
-    //Tool Unlocks
-    public bool catalogUnlocked = true;
+    //Tool Unlocks & Dialogue Stuff
+    public bool catalogUnlocked = false;
+    public bool researchUnlocked = false;
+    public bool completionUnlocked = false;
+    public Queue<string[]> dialogueQueue = new Queue<string[]>();
 
     //Persistent Counters
     public int shiftCounter = 0;
 
-    public int highScore = 0;
+    public float highMoney = 0;
     public int highMin = 0;
     public int highSec = 0;
+    public int highEnemies = 0;
+    public int highSeeds = 0;
 
     public int sashSlots = 3;
 
@@ -41,6 +46,9 @@ public class SaveData
 
     //Completion Data
     public List<CrownData> discoveredCrowns;
+
+    //ShiftReports
+    public List<ShiftReport> shiftReports;
 }
 
 public class GameControl : MonoBehaviour
@@ -79,7 +87,8 @@ public class GameControl : MonoBehaviour
     //public bool firstResearch = true;
     public bool donationMade = false;
 
-    public bool shiftJustEnded = true;
+    public bool shiftJustEnded = false;
+    public bool continuePressed = false;
     public bool balanceUpdated = false;
 
     public bool loading = false;
@@ -118,6 +127,9 @@ public class GameControl : MonoBehaviour
     public GameObject flowerPool;
     public Dictionary<string, ObjectPool> flowerPoolDict;
 
+    //used for keeping track of most used flowers - TODO - could overhaul the sash system to use this metric instead
+    public Dictionary<string, int> flowerUse;
+
     //player stats
     /*public int highScore = 0;
     public int highMin = 0;
@@ -128,6 +140,15 @@ public class GameControl : MonoBehaviour
     public int min = 0;
     public int sec = 0;
     public int score = 0;
+    public int shiftSeeds = 0;
+    public int shiftEnemies = 0;
+
+    //specific score totals
+    public int discoveryScore = 0;
+    public int constructionScore = 0;
+    public int enemyScore = 0;
+    public int otherScore = 0;
+
 
     //affinity sash
     /*public bool sashActivated = false;
@@ -194,7 +215,10 @@ public class GameControl : MonoBehaviour
         UpgradeInit();
         UpgradeApply();
         ResearchInit();
+        //init shiftReports list if one doesn't exist
+        SaveData.shiftReports = new List<ShiftReport>();
         CrownCompletion.PermutationEst();
+        continuePressed = true;
     }
 
     public void LoadGame()
@@ -207,6 +231,7 @@ public class GameControl : MonoBehaviour
         UpgradeApply();
         ResearchInit();
         CrownCompletion.PermutationEst();
+        continuePressed = true;
         //Restore the Discovery Stuff
 
     }
@@ -237,6 +262,9 @@ public class GameControl : MonoBehaviour
             //reset the affinity levels
             flowerStatsDict[flowerStats[i].type].UpdateAffinity(0);
         }
+
+        
+
         if (SaveData.discoveredUncommon == null)
         {
             Debug.Log("flower save data not found");
@@ -251,6 +279,14 @@ public class GameControl : MonoBehaviour
             }
             DiscoveredPooling();
         }
+
+        //init the flowerUse stuff so that it doesn't tweak out if continue is pressed
+        flowerUse = new Dictionary<string, int>();
+        foreach (var flower in allDiscovered)
+        {
+            flowerUse.Add(flower, 0);
+        }
+
         //TO DO: get sprites from within flowerStats instead of a separate array
     }
 
@@ -401,9 +437,19 @@ public class GameControl : MonoBehaviour
     {
         gameOver = false;
         loading = true;
+        //reset the scores
         min = 0;
         sec = 0;
         score = 0;
+        shiftSeeds = 0;
+        shiftEnemies = 0;
+        discoveryScore = 0;
+        constructionScore = 0;
+        enemyScore = 0;
+        otherScore = 0;
+
+        
+
         SaveData.shiftCounter++;
         //enemy reset
         /*currentMax = maxSpeed;
@@ -420,13 +466,18 @@ public class GameControl : MonoBehaviour
             sash.SetActive(false);
         }
         DiscoveredPooling();
+
+        //Reset the flower use counters
+        flowerUse = new Dictionary<string, int>();
+        foreach (var flower in allDiscovered)
+        {
+            flowerUse.Add(flower, 0);
+        }
+        
         GameObject.FindWithTag("flowerPool").GetComponent<FlowerCalc>().PreroundCalc();
         foreach(var flowerStat in flowerStats)
         {
             flowerStatsDict[flowerStat.type].UpdateAffinity(0);
-        }
-        foreach (var flowerStat in flowerStats)
-        {
         }
         //NewUnlocks();
         GameObject.FindWithTag("Player").GetComponentInChildren<PlayerMovement>(true).IntroMove();
