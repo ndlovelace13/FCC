@@ -49,12 +49,51 @@ public class HomebaseCam : MonoBehaviour
     string[] postContract = new string[]
             {
                 "Finally, phew thought you were never going to sign",
-                "Congrats on joining the Anti-Abnormality Action Team, I was going to send a cake but we don't really have the budget",
+                "Congrats on joining the Anti-Anomaly Action Team, I was going to send a cake but we don't really have the budget",
                 "So...I may have fibbed a little in the job description. As you may have guessed by the name, the Anti-Abnormality Action Team doesn't usually handle birthday parties",
                 "The kids you signed up to deal with are a little...off, you'll see what I mean soon enough",
                 "Sending you the coordinates for the party, make sure you put on your big boy pants for your first shift",
                 "Good luck, you're gonna need it"
             };
+
+    string[] catalogUnlock = new string[]
+    {
+        "So...skinwalker children...apologies for the lack of transparency - company rules",
+        "Although, to be fair, if you actually read the terms and conditions, you'd know that this job isn't exactly a cake walk",
+        "Lucky for you, we need all the help we can get - you'll never have to worry about being ready for the next shift",
+        "As a new recruit, I'm not really allowed to say how its possible, only that you'll always wake up here in perfect condition if anything happens out on the job",
+        "Don't think about it too hard, just keep on keeping on and make that paper",
+        "Speaking of, I left you a little present, courtesy of the AAAT - The Catalog",
+        "This booklet gives you access to a wide range of improvements to your working conditions",
+        "Due to budgetary restrictions, you will have to pay for these upgrades yourself - however, we do provide free, instantaneous shipping (you're welcome)",
+        "Just give me a ring whenever you want to order something off The Catalog - trust me, it'll be worth the investment"
+    };
+
+    string[] researchUnlock = new string[]
+    {
+        "Hello, hello, hello, Mr. Rookie!!!",
+        "A little (grumpy) birdy told me you stumbled upon an essence seed out in the field",
+        "Of course, as a newbie to this whole \"skinwalker elimination\" thing, I can't really explain the intricacies of their corpses dropping seeds",
+        "To tell you the truth, we don't really have a clear answer yet either...fascinating specimens, aren't they?",
+        "Thus, as a member of the Anti-Anomaly Action Team's Research and Development division, I implore you to collect as many of those seeds as you can find!",
+        "I've passed along a handy-dandy little booklet of Research Drives that you can donate the seeds you find to!",
+        "It's a win-win situation - my colleagues and I get to dig into the skinwalker species and YOU get to mess around with the cool new things we discover!",
+        "Go ahead, send us those seeds of yours, and we promise to make your job much more interesting",
+        "Oh yeah, the name's Jill Frye, yes the one from the science show...oh, the good old days"
+    };
+
+    string[] completionUnlock = new string[]
+    {
+        "Hello again, new guy",
+        "You've been doing great work out there so far, thanks for keeping those damn things in check - you have no idea how much work you're saving me",
+        "Our data indicates you've already crafted over 20 different flower crowns - I like that dedication to variety",
+        "The geeks in the software division got bored and cooked up an application \"made for completionists\"",
+        "I don't really know what a completionist is, as you know I'm out here trying to prevent societal ruin instead of wasting away on those computer games",
+        "However, you seem to be a crafty sort of guy, so I thought I'd let you try it out",
+        "I left a company tablet in your vehicle preloaded with your current crown discoveries",
+        "They tell me it will automatically update with new discoveries as you work and research new types of flowers",
+        "Be sure to check it out as you continue to discover new flower crown combinations - who knows, it may be more than a fancy checklist"
+    };
 
     //public bool menusReady = false;
     // Start is called before the first frame update
@@ -128,21 +167,23 @@ public class HomebaseCam : MonoBehaviour
         if (GameControl.SaveData.shiftCounter == 1 && !GameControl.SaveData.catalogUnlocked)
         {
             //QUEUE DIALOGUE HERE
+            GameControl.SaveData.dialogueQueue.Enqueue(catalogUnlock);
             GameControl.SaveData.catalogUnlocked = true;
-            GameControl.PlayerData.unlockDone = true;
-        }
-        //unlock completion tracker when the player has crafted 15 different crowns
-        if (GameControl.CrownCompletion.totalDiscovered >= 15 && !GameControl.PlayerData.unlockDone)
-        {
-            //QUEUE DIALOGUE HERE
-            GameControl.SaveData.completionUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
         }
         //unlock research when the player has collected their first essence seed
         if (GameControl.SaveData.highSeeds > 0 && !GameControl.PlayerData.unlockDone)
         {
-            //QUEUE DIALOGUE HERE
+            GameControl.SaveData.dialogueQueue.Enqueue(researchUnlock);
+            phone.GetComponent<PhoneLerp>().callerKnown = false;
             GameControl.SaveData.researchUnlocked = true;
+            GameControl.PlayerData.unlockDone = true;
+        }
+        //unlock completion tracker when the player has crafted 15 different crowns
+        if (GameControl.CrownCompletion.totalDiscovered >= 20 && !GameControl.PlayerData.unlockDone)
+        {
+            GameControl.SaveData.dialogueQueue.Enqueue(completionUnlock);
+            GameControl.SaveData.completionUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
         }
         GameControl.SaveHandler.SaveGame();
