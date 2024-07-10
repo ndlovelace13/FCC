@@ -71,8 +71,11 @@ public class FlowerHarvest : MonoBehaviour
                             Debug.Log("slot Position assigned: " + slotPos);
 
                             //update the flowerUse counter
-                            string type = head.GetComponent<FlowerStats>().type;
-                            GameControl.PlayerData.flowerUse[type]++;
+                            if (!GameControl.PlayerData.tutorialActive)
+                            {
+                                string type = head.GetComponent<FlowerStats>().type;
+                                GameControl.PlayerData.flowerUse[type]++;
+                            }
                             //StartCoroutine(DiscoveryCheck(type));
                             slots[slotPos].tag = "slotFull";
                             if (GameControl.PlayerData.tutorialState == 2)

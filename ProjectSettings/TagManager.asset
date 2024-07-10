@@ -42,6 +42,7 @@ TagManager:
   - stem
   - nodeFrame
   - dialogue
+  - report
   layers:
   - Default
   - TransparentFX

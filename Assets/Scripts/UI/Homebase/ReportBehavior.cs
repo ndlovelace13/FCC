@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 //use this class to store all data about the results of the run
 //add to a list in the saveData so the player can go back and look at run history if they want
@@ -224,6 +225,13 @@ public class ReportBehavior : MonoBehaviour
     [SerializeField] TMP_Text usedCount;
     [SerializeField] GameObject sig;
 
+    //contract stuff
+    [SerializeField] GameObject normalReport;
+    [SerializeField] GameObject contractStuff;
+    [SerializeField] GameObject contractLogo;
+    [SerializeField] GameObject signatureZone;
+    [SerializeField] Sprite contractSig;
+
 
     // Start is called before the first frame update
     void Start()
@@ -248,38 +256,72 @@ public class ReportBehavior : MonoBehaviour
 
     public void InitReport()
     {
-        header.text = "Bank Statement";
-        shiftNum.text = "Yikes, Buddy";
-        constructionText.text = "<align=left>Lawn Mowing - <line-height=0>\n<align=right>+" +
-            string.Format("{0:C}", 75f) + "<line-height=1em>";
-        enemyText.text = "<align=left>Dog Walking - <line-height=0>\n<align=right>+" +
-            string.Format("{0:C}", 30f) + "<line-height=1em>";
-        discoveryText.text = "<align=left>Game Developing - <line-height=0>\n<align=right>+" +
-            string.Format("{0:C}", 5f) + "<line-height=1em>";
-        miscText.text = "<align=left>Substitute Teaching - <line-height=0>\n<align=right>+" +
-            string.Format("{0:C}", 25f) + "<line-height=1em>";
-        timeBonus.text = "<align=left>Public Defending - <line-height=0>\n<align=right>+" +
-            string.Format("{0:C}", 100f) + "<line-height=1em>";
-        profitText.text = "<align=center> Total Profit = <line-height=0>\n<align=right>+" +
-            string.Format("{0:C}", 235f) + "<line-height=1em>";
-        withdrawalsText.text = "<align=center> Withdrawals = <line-height=0>\n<align=right>-" +
-            string.Format("{0:C}", 235f) + "<line-height=1em>";
-        balanceText.text = "<align=center> Final Balance = <line-height=0>\n<align=right>" +
-            string.Format("{0:C}", 0f) + "<line-height=1em>";
+        //pre contract stuff
+        if (!GameControl.SaveData.tutorialComplete)
+        {
+            header.text = "Bank Statement";
+            shiftNum.text = "Yikes, Buddy";
+            constructionText.text = "<align=left>Lawn Mowing - <line-height=0>\n<align=right>+" +
+                string.Format("{0:C}", 75f) + "<line-height=1em>";
+            enemyText.text = "<align=left>Dog Walking - <line-height=0>\n<align=right>+" +
+                string.Format("{0:C}", 30f) + "<line-height=1em>";
+            discoveryText.text = "<align=left>Game Developing - <line-height=0>\n<align=right>+" +
+                string.Format("{0:C}", 5f) + "<line-height=1em>";
+            miscText.text = "<align=left>Substitute Teaching - <line-height=0>\n<align=right>+" +
+                string.Format("{0:C}", 25f) + "<line-height=1em>";
+            timeBonus.text = "<align=left>Public Defending - <line-height=0>\n<align=right>+" +
+                string.Format("{0:C}", 100f) + "<line-height=1em>";
+            profitText.text = "<align=center> Total Profit = <line-height=0>\n<align=right>+" +
+                string.Format("{0:C}", 235f) + "<line-height=1em>";
+            withdrawalsText.text = "<align=center> Withdrawals = <line-height=0>\n<align=right>-" +
+                string.Format("{0:C}", 235f) + "<line-height=1em>";
+            balanceText.text = "<align=center> Final Balance = <line-height=0>\n<align=right>" +
+                string.Format("{0:C}", 0f) + "<line-height=1em>";
 
-        statsHeader.text = "Account Status: BAH";
-        lineBreak.gameObject.SetActive(false);
-        timeSurvived.text = "(Broke as Hell)";
-        timeSurvived.enabled = true;
+            statsHeader.text = "Account Status: BAH";
+            lineBreak.gameObject.SetActive(false);
+            timeSurvived.text = "(Broke as Hell)";
+            timeSurvived.enabled = true;
 
-        //disable everything else
-        moneyEarned.enabled = false;
-        enemiesElim.enabled = false;
-        seedsCollected.enabled = false;
-        usedFlower.enabled = false;
-        usedCount.enabled = false;
-        sig.SetActive(false);
+            //disable everything else
+            moneyEarned.enabled = false;
+            enemiesElim.enabled = false;
+            seedsCollected.enabled = false;
+            usedFlower.enabled = false;
+            usedCount.enabled = false;
+            sig.SetActive(false);
+        }
+        //contract stuff
+        else
+        {
+            normalReport.SetActive(false);
+            contractStuff.SetActive(true);
+            contractLogo.SetActive(true);
+            signatureZone.GetComponent<Button>().interactable = true;
+        }
     }
+
+    public void Signed()
+    {
+        Debug.Log("clicked");
+        GameControl.SaveData.contractSigned = true;
+        signatureZone.GetComponent<Image>().sprite = contractSig;
+        signatureZone.gameObject.GetComponent<Button>().interactable = false;
+        //init the post-signing dialogue here
+    }
+
+    /*IEnumerator SignCheck()
+    {
+        while (true)
+        {
+            Debug.Log("checking");
+            yield return new WaitForEndOfFrame();
+            if (GameControl.SaveData.contractSigned)
+                break;
+        }
+        signatureZone.sprite = contractSig;
+        //init the post-signing dialogue here
+    }*/
 
     public void FillReport()
     {
@@ -336,5 +378,24 @@ public class ReportBehavior : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
+
+    public void PutDown()
+    {
+        StartCoroutine(LerpDown());
+    }
     
+    IEnumerator LerpDown()
+    {
+        float time = 0f;
+        Vector2 startingPos = GetComponent<RectTransform>().position;
+        Vector2 finalPos = new Vector2(startingPos.x, -Screen.height * 1.5f);
+
+        while (time < 1f)
+        {
+            GetComponent<RectTransform>().position = Vector2.Lerp(startingPos, finalPos, time);
+            time += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        gameObject.SetActive(false);
+    }
 }

@@ -18,8 +18,8 @@ public class TutorialBehavior : MonoBehaviour
     GameObject fireInstance;
     string[] text1 = 
     {
-        "So you wanted a little practice before getting tossed into the hellho --- um, I mean birthday party?",
-        "Alright, I guess, practice makes perfect. You're already here, so let's get on with it. Let's make it quick though, I'm not paying you to learn on the job",
+        "So you wanted a little training before getting tossed into the hellho --- um, I mean birthday party?",
+        "Alright, I guess, practice makes perfect. You're already here, so let's get on with it. Let's make it quick though",
         "Ugh, hirees expect so much these days",
         "My apologies for only being present over the phone, unfortunately I have much more pressing matters to attend to. Don't worry, though, I can still monitor your progress - I have my ways",
         "Since this is our first time working together, I'll assume nothing. Show me that you know how to walk first - not much point in moving forward if you're immobile"
@@ -77,9 +77,8 @@ public class TutorialBehavior : MonoBehaviour
         "I'm sure the children will LOVE to see what crowns you come up with ",
         "They just better hope they don't stand too close hehe",
         "That wraps up your training - you can put Flower Crown Crafter Certification on your resume now",
-        "I'll see you at the party - oh, you won't see me though",
         "One last thing, don't make direct contact with the... children - I hate paperwork",
-        "Let us get to work (when I say us, I mean you of course)!"
+        "I'll give you a call to talk through *ugh* contracts shortly"
     };
 
     List<string[]> tutorialText;
@@ -98,6 +97,9 @@ public class TutorialBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //tutorial is completed regardless of if they stick around for it or not
+        GameControl.SaveData.tutorialComplete = true;
+
         PlayerDisable();
         phone.SetActive(false);
         speech.SetActive(false);
@@ -146,7 +148,8 @@ public class TutorialBehavior : MonoBehaviour
         yield return null;
         GameControl.PlayerData.tutorialActive = false;
         GameControl.PlayerData.tutorialState = 0;
-        SceneManager.LoadScene("Gameplay");
+        GameControl.SaveData.tutorialComplete = true;
+        SceneManager.LoadScene("Homebase");
     }
 
     IEnumerator checkCondition()
@@ -302,7 +305,8 @@ public class TutorialBehavior : MonoBehaviour
         Time.timeScale = 1;
         GameControl.PlayerData.tutorialActive = false;
         GameControl.PlayerData.tutorialSkip = true;
-        SceneManager.LoadScene("Gameplay");
+        GameControl.SaveData.tutorialComplete = true;
+        SceneManager.LoadScene("Homebase");
     }
 
     public void TutorialContinue()

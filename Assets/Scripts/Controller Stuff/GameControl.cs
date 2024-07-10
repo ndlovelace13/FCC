@@ -13,10 +13,14 @@ public class SaveData
     //Game States
     public bool firstRun = true;
 
+    public bool tutorialComplete = false;
+
     public bool firstCatalog = true;
     public bool firstResearch = true;
     public bool sashActivated = false;
     public bool sashActive = false;
+
+    public bool contractSigned = false;
 
     //Tool Unlocks & Dialogue Stuff
     public bool catalogUnlocked = false;
@@ -94,6 +98,10 @@ public class GameControl : MonoBehaviour
     public bool loading = false;
     public bool gameOver = false;
     public bool gamePaused = false;
+
+    public bool menusReady = false;
+
+    public bool unlockDone = false;
 
     public GameObject tutorialHandler;
 
@@ -447,6 +455,7 @@ public class GameControl : MonoBehaviour
         constructionScore = 0;
         enemyScore = 0;
         otherScore = 0;
+        unlockDone = false;
 
         
 

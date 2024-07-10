@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PhoneLerp : MonoBehaviour
 {
     public bool inPlace = false;
+    public bool callerKnown = true;
+
+    [SerializeField] Sprite unknownCaller;
+    [SerializeField] Sprite flowerGuy;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +24,11 @@ public class PhoneLerp : MonoBehaviour
 
     public void OnEnable()
     {
+        if (callerKnown)
+            GetComponent<Image>().sprite = flowerGuy;
+        else
+            GetComponent<Image>().sprite = unknownCaller;
+
         inPlace = false;
         StartCoroutine(LerpUp());
     }
