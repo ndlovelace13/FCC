@@ -24,7 +24,10 @@ public class ScoreNotification : MonoBehaviour
         {
             notifications += notif + "\n";
         }
-        feedText.text = notifications;
+        if (!GameControl.PlayerData.gameOver)
+            feedText.text = notifications;
+        else
+            feedText.text = "";
     }
     
     public void newFeed(string newMessage)

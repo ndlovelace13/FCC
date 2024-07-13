@@ -44,7 +44,7 @@ public class Upgrade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentPrice = basePrice;
+        //currentPrice = basePrice;
         currentValue = GameControl.PlayerData.upgradeDict[upgradeKey];
     }
 
@@ -60,6 +60,7 @@ public class Upgrade : MonoBehaviour
     {
         upgradeKey = key;
         basePrice = priceBase;
+        currentPrice = basePrice;
         priceInflation = inflation;
         maxTimesUpgraded = maximumUpgrades;
         upgradeAmount = increaseAmount;

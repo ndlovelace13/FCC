@@ -44,6 +44,7 @@ public class CompletionNodes : MonoBehaviour
         StartCoroutine(NodeMapping(nodes, 0f));
         selectedCount = GameControl.CrownCompletion.allCrowns.Count();
         completedCount = GameControl.CrownCompletion.totalDiscovered;
+        GameControl.SaveData.newDiscoveries = 0;
     }
 
     private void ToggleAssign()
@@ -77,10 +78,13 @@ public class CompletionNodes : MonoBehaviour
         {
             Crown crown = node.crown;
             List<string> contained = crown.GetFlowers();
+            /*foreach (string type in contained)
+                Debug.Log(type);*/
             foreach (var type in types)
             {
                 if (contained.Contains(type))
                 {
+                    //Debug.Log("passed the type check for:" + type);
                     wasSelected = true;
                     break;
                 }
@@ -112,7 +116,10 @@ public class CompletionNodes : MonoBehaviour
                 
             }
             if (stillSelected)
+            {
+                //Debug.Log("Passed the selection test for discovery");
                 wasSelected = true;
+            }
             else
                 wasSelected = false;
             stillSelected = false;
@@ -144,7 +151,11 @@ public class CompletionNodes : MonoBehaviour
                 }
             }
             if (stillSelected)
+            {
                 wasSelected = true;
+                //Debug.Log("was selected overall");
+            }
+                
             else
                 wasSelected = false;
             if (!showAll)
@@ -173,7 +184,7 @@ public class CompletionNodes : MonoBehaviour
             selectedCount = selected.Count();
         else
             selectedCount = all.Count();
-        Debug.Log("Post sorting count: " + all.Count());
+        Debug.Log("Post sorting count: " + selected.Count());
         if (selectedNodes != selected)
         {
             StartCoroutine(NodeMapping(all, 0f));
@@ -241,7 +252,7 @@ public class CompletionNodes : MonoBehaviour
         {
             if (toggle.isOn)
             {
-                flowerInputs.Add(toggle.GetComponentInChildren<TMP_Text>().text);
+                flowerInputs.Add(toggle.GetComponentInChildren<FlowerToggle>().type);
                 Debug.Log(toggle.name);
             }
         }

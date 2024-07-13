@@ -24,6 +24,8 @@ public class CrownAttack : MonoBehaviour
     public bool crownActive = false;
     public bool crownArmed = false;
 
+    public bool attacking = false;
+
     //single fire bool
     bool singleFire = false;
     // Start is called before the first frame update
@@ -46,6 +48,7 @@ public class CrownAttack : MonoBehaviour
     {
         if (collision.gameObject.tag == "enemy" && crownArmed)
         {
+            Debug.Log("triggered from collision");
             CrownAttacking();
         }
     }
@@ -89,22 +92,32 @@ public class CrownAttack : MonoBehaviour
     IEnumerator Detonate()
     {
         yield return new WaitForSeconds(3);
+        Debug.Log("triggered from detonation");
         CrownAttacking();
     }
 
     public void CrownAttacking()
     {
-        //Debug.Log("why");
-        float angle;
-        Debug.Log(projType);
-        lastCrown = crown.transform;
-        angle = 0f;
-        float difference = Mathf.PI * 2 / projCount;
-        for (int i = 0; i < projCount; i++)
+        if (!attacking)
         {
-            StartCoroutine(ProjSpawn(angle));
-            angle += difference;
+            attacking = true;
+            StopAllCoroutines();
+            //Debug.Log("why");
+            float angle;
+            Debug.Log(projType);
+            lastCrown = crown.transform;
+            angle = 0f;
+            float difference = Mathf.PI * 2 / projCount;
+            for (int i = 0; i < projCount; i++)
+            {
+                StartCoroutine(ProjSpawn(angle));
+                angle += difference;
+            }
+            Invoke("CrownDestroy", 0);
         }
+        else
+            Debug.Log("dupe attack cancelled");
+        
         /*switch (projType)
         {
             case "white":
@@ -182,7 +195,7 @@ public class CrownAttack : MonoBehaviour
 
         }*/
 
-        Invoke("CrownDestroy", 0);
+        
     }
 
     IEnumerator ProjSpawn(float angle)
@@ -251,5 +264,6 @@ public class CrownAttack : MonoBehaviour
         if (GameControl.PlayerData.tutorialState == 7 && augment1 != "red")
             GameControl.PlayerData.fireReset = true;
         Destroy(crown);
+        attacking = false;
     }
 }

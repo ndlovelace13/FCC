@@ -84,6 +84,7 @@ public class CrownConstruction : MonoBehaviour
             {
                 GameControl.PlayerData.score += crownScore;
                 GameControl.PlayerData.constructionScore += crownScore;
+                GameControl.PlayerData.shiftCrowns++;
                 if (crownDiscovered)
                 {
                     GameControl.PlayerData.score += crownDiscoveryScore;
@@ -92,6 +93,7 @@ public class CrownConstruction : MonoBehaviour
             }
             if (crownDiscovered)
             {
+                GameControl.SaveData.newDiscoveries++;
                 crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement, Color.green);
                 scoreNotif.GetComponent<ScoreNotification>().newFeed("New Crown Discovered | +" + crownDiscoveryScore);
             }
@@ -321,6 +323,7 @@ public class CrownConstruction : MonoBehaviour
         {
             constructedCrown.Crafted();
             crownDiscovered = false;
+            crownAnnouncement += " Constructed!";
         }
         else
         {
@@ -331,9 +334,10 @@ public class CrownConstruction : MonoBehaviour
                 crownDiscoveryScore += 5;
             if (insideId != -1)
                 crownDiscoveryScore += 5;
+            crownAnnouncement += " Discovered!";
         }
 
-        crownAnnouncement += " Constructed!";
+        
         //Debug.Log("NAME SHIT: " + crownAnnouncement);
         yield return crownAnnouncement;
     }

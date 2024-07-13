@@ -12,6 +12,7 @@ public class HomebaseCam : MonoBehaviour
     [SerializeField] Sprite carMenu;
     [SerializeField] GameObject playerSprite;
     [SerializeField] GameObject report;
+    [SerializeField] GameObject controlPrompt;
     public bool menuActive = false;
 
     //menu options
@@ -23,6 +24,8 @@ public class HomebaseCam : MonoBehaviour
     //Dialogue Stuff
     [SerializeField] GameObject phone;
     [SerializeField] GameObject speechBubble;
+
+    [SerializeField] GameObject quitPopup;
 
     string[] introDialogue = new string[]
             {
@@ -50,7 +53,7 @@ public class HomebaseCam : MonoBehaviour
             {
                 "Finally, phew thought you were never going to sign",
                 "Congrats on joining the Anti-Anomaly Action Team, I was going to send a cake but we don't really have the budget",
-                "So...I may have fibbed a little in the job description. As you may have guessed by the name, the Anti-Abnormality Action Team doesn't usually handle birthday parties",
+                "So...I may have fibbed a little in the job description. As you may have guessed by the name, the Anti-Anomaly Action Team doesn't usually handle birthday parties",
                 "The kids you signed up to deal with are a little...off, you'll see what I mean soon enough",
                 "Sending you the coordinates for the party, make sure you put on your big boy pants for your first shift",
                 "Good luck, you're gonna need it"
@@ -102,7 +105,6 @@ public class HomebaseCam : MonoBehaviour
         mainCam = GetComponent<Camera>();
         if (GameControl.SaveData.firstRun)
         {
-            Debug.Log("still firstRun");
             DialogueQueue();
         }
         if (GameControl.PlayerData.shiftJustEnded || GameControl.PlayerData.continuePressed)
@@ -125,7 +127,18 @@ public class HomebaseCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameObject quitPrefab = GameObject.FindWithTag("quitMenu");
+            if (quitPrefab == null)
+                MainMenuHandler();
+        }
+    }
+
+    public void MainMenuHandler()
+    {
+        Time.timeScale = 0f;
+        Instantiate(quitPopup);
     }
 
     private void DialogueQueue()
@@ -172,7 +185,7 @@ public class HomebaseCam : MonoBehaviour
             GameControl.PlayerData.unlockDone = true;
         }
         //unlock research when the player has collected their first essence seed
-        if (GameControl.SaveData.highSeeds > 0 && !GameControl.PlayerData.unlockDone)
+        if (GameControl.SaveData.highSeeds > 0 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.researchUnlocked)
         {
             GameControl.SaveData.dialogueQueue.Enqueue(researchUnlock);
             phone.GetComponent<PhoneLerp>().callerKnown = false;
@@ -180,7 +193,7 @@ public class HomebaseCam : MonoBehaviour
             GameControl.PlayerData.unlockDone = true;
         }
         //unlock completion tracker when the player has crafted 15 different crowns
-        if (GameControl.CrownCompletion.totalDiscovered >= 20 && !GameControl.PlayerData.unlockDone)
+        if (GameControl.CrownCompletion.totalDiscovered >= 20 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.completionUnlocked)
         {
             GameControl.SaveData.dialogueQueue.Enqueue(completionUnlock);
             GameControl.SaveData.completionUnlocked = true;
@@ -238,6 +251,10 @@ public class HomebaseCam : MonoBehaviour
         carSprite.sprite = carMenu;
         playerSprite.SetActive(false);
         report.SetActive(true);
+        controlPrompt.SetActive(true);
+
+        //reset if no menus are active
+        GameControl.PlayerData.menuActive = false;
 
         Debug.Log("currently " + GameControl.SaveData.dialogueQueue.Count + " in queue");
         if (GameControl.SaveData.dialogueQueue.Count > 0)
@@ -255,7 +272,7 @@ public class HomebaseCam : MonoBehaviour
         //TODO - implement checks for unlocks here
         if (GameControl.SaveData.researchUnlocked)
             research.SetActive(true);
-        if (GameControl.SaveData.completionUnlocked)
+        if (GameControl.SaveData.completionUnlocked || GameControl.PlayerData.testing)
             completionTracker.SetActive(true);
         if (GameControl.SaveData.catalogUnlocked)
             catalog.SetActive(true);

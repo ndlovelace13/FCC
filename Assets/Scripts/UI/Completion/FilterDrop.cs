@@ -37,9 +37,10 @@ public class FilterDrop : MonoBehaviour
         foreach (var flower in discovered)
         {
             GameObject toggle = Instantiate(togglePrefab);
-            toggle.transform.SetParent(transform);
+            toggle.transform.SetParent(transform, true);
             toggle.transform.localScale = Vector3.one;
             toggle.GetComponentInChildren<TMP_Text>().text = GameControl.PlayerData.flowerStatsDict[flower].GetTitle();
+            toggle.GetComponentInChildren<FlowerToggle>().type = flower;
             //toggle.GetComponent<Toggle>().isOn = true;
             options.Add(toggle.GetComponent<Toggle>());
             toggle.SetActive(false);
@@ -58,6 +59,16 @@ public class FilterDrop : MonoBehaviour
         transform.parent.GetComponent<ContentSizeFitter>().enabled = false;
         transform.parent.GetComponent<VerticalLayoutGroup>().enabled = true;
         transform.parent.GetComponent<ContentSizeFitter>().enabled = true;
+
+        foreach (var toggle in options)
+        {
+            //toggle.gameObject.SetActive(true);
+            Vector3 currentPos = toggle.GetComponent<RectTransform>().position;
+            Debug.Log(currentPos);
+            Vector3 anchoredPos = toggle.GetComponent<RectTransform>().anchoredPosition;
+            Debug.Log(anchoredPos);
+            toggle.GetComponent<RectTransform>().localPosition = new Vector3(currentPos.x, currentPos.y, 0);
+        }
     }
 
     public void Shrink()

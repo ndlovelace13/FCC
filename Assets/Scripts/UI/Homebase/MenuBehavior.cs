@@ -15,6 +15,19 @@ public class MenuBehavior : MonoBehaviour
     Coroutine sizeLerp;
     bool chosen = false;
 
+    //og transform
+    [SerializeField] Transform originalPlacement;
+    [SerializeField] Transform finalPlacement;
+    Vector3 startingPos;
+    Quaternion startingRot;
+    Vector3 startingScale;
+
+    //selected transform
+    [SerializeField] float sizeDiff = 2.25f;
+    [SerializeField] float horizontalPlacement = 1 / 3f;
+
+    [SerializeField] GameObject report;
+
     //car key stuff
     public bool keys = false;
     [SerializeField] GameObject locHandler;
@@ -34,7 +47,7 @@ public class MenuBehavior : MonoBehaviour
     private void OnMouseEnter()
     {
         //Grow on hover, maybe add outline
-        if (GameControl.PlayerData.menusReady && !chosen)
+        if (GameControl.PlayerData.menusReady && !GameControl.PlayerData.menuActive)
         {
             sizeLerp = StartCoroutine(HoverEnter());
             menuPopup.text = menuTitle;
@@ -43,7 +56,7 @@ public class MenuBehavior : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (GameControl.PlayerData.menusReady && !chosen)
+        if (GameControl.PlayerData.menusReady && !GameControl.PlayerData.menuActive)
         {
             if (sizeLerp != null)
                 StopCoroutine(sizeLerp);
@@ -80,9 +93,10 @@ public class MenuBehavior : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GameControl.PlayerData.menusReady)
+        if (GameControl.PlayerData.menusReady && !GameControl.PlayerData.menuActive)
         {
             chosen = true;
+            GameControl.PlayerData.menuActive = true;
             //play anim and open to the size of the screen
             StopAllCoroutines();
             StartCoroutine(MenuGrow());
@@ -95,22 +109,29 @@ public class MenuBehavior : MonoBehaviour
     IEnumerator MenuGrow()
     {
         //lower the report
-        GameObject.FindWithTag("report").GetComponent<ReportBehavior>().PutDown();
+        //report = GameObject.FindWithTag("report");
+        report.GetComponent<ReportBehavior>().PutDown();
 
         //push to the front
         GetComponent<SpriteRenderer>().sortingLayerName = "Foreground";
         GetComponent<SpriteRenderer>().sortingOrder = 10;
+        if (GetComponentInChildren<Canvas>())
+        {
+            GetComponentInChildren<Canvas>().sortingLayerName = "Foreground";
+            GetComponentInChildren<Canvas>().sortingOrder = 11;
+        }
+            
 
         //anim handler - establish all the starting and ending vars
-        Vector3 startingPos = transform.position;
-        Vector3 growPos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 3f, Screen.height / 2f, 0f));
+        startingPos = transform.position;
+        Vector3 growPos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * horizontalPlacement, Screen.height / 2f, 0f));
         growPos = new Vector3(growPos.x, growPos.y, 0);
 
-        Quaternion startingRot = transform.localRotation;
+        startingRot = transform.localRotation;
         Quaternion endingRot = Quaternion.identity;
 
-        Vector3 startingSize = transform.localScale;
-        Vector3 endingSize = startingSize * 2.25f;
+        startingScale = transform.localScale;
+        Vector3 endingSize = startingScale * sizeDiff;
 
         float time = 0f;
         while (time < 1f)
@@ -118,11 +139,13 @@ public class MenuBehavior : MonoBehaviour
             //lerp position, rotation, and size at once
             transform.position = Vector3.Lerp(startingPos, growPos, time);
             transform.localRotation = Quaternion.Lerp(startingRot, endingRot, time);
-            transform.localScale = Vector3.Lerp(startingSize, endingSize, time);
+            transform.localScale = Vector3.Lerp(startingScale, endingSize, time);
 
             yield return new WaitForEndOfFrame();
             time += Time.deltaTime;
         }
+        //TODO - save this so that it can go back to that after accessing another menu
+        finalPlacement = transform;
 
         //store the value of the current menu so you can play a closing anim whne navigating back
         //except for the car keys - pop up with a separate menu for these to decide where to go
@@ -135,5 +158,48 @@ public class MenuBehavior : MonoBehaviour
         {
             SceneManager.LoadScene(menuName);
         }
+    }
+
+    public void Nevermind()
+    {
+        StartCoroutine(MenuShrink());
+    }    
+
+    IEnumerator MenuShrink()
+    {
+
+        GetComponent<SpriteRenderer>().sortingLayerName = "Midground";
+        GetComponent<SpriteRenderer>().sortingOrder = 0;
+        if (GetComponentInChildren<Canvas>())
+        {
+            GetComponentInChildren<Canvas>().sortingLayerName = "Midground";
+            GetComponentInChildren<Canvas>().sortingOrder = 2;
+        }
+
+        report.SetActive(true);
+
+        if (keys)
+        {
+            menuPopup.text = "";
+            locHandler.SetActive(false);
+        }
+
+        Vector3 finalPos = transform.position;
+        Quaternion finalRot = transform.rotation;
+        Vector3 finalSize = transform.localScale;
+
+        float time = 0f;
+        while (time < 1f)
+        {
+            //lerp position, rotation, and size at once
+            transform.position = Vector3.Lerp(finalPos, startingPos, time);
+            transform.localRotation = Quaternion.Lerp(finalRot, startingRot, time);
+            transform.localScale = Vector3.Lerp(finalSize, startingSize, time);
+
+            yield return new WaitForEndOfFrame();
+            time += Time.deltaTime;
+        }
+
+        GameControl.PlayerData.menuActive = false;
     }
 }

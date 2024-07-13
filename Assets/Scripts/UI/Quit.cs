@@ -15,9 +15,19 @@ public class Quit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (GameControl.PlayerData == null)
         {
-            QuitPopup();
+            if (GameControl.PlayerData.quitCooldown)
+                StartCoroutine(QuitCooldown());
+            else
+            {
+                if (Input.GetKey(KeyCode.Escape))
+                {
+                    GameObject quitPrefab = GameObject.FindWithTag("quitMenu");
+                    if (Time.timeScale != 0)
+                        QuitPopup();
+                }
+            }
         }
     }
 
@@ -28,5 +38,11 @@ public class Quit : MonoBehaviour
             Time.timeScale = 0;
             Instantiate(quitPrefab);
         }
+    }
+
+    IEnumerator QuitCooldown()
+    {
+        yield return new WaitForSeconds(0.1f);
+        GameControl.PlayerData.quitCooldown = false;
     }
 }

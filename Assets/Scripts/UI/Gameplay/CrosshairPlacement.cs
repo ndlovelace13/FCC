@@ -15,13 +15,18 @@ public class CrosshairPlacement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
-        Vector2 realMousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        /*Vector2 playerPos = player.position;
-        Vector2 direction = realMousePos - playerPos;
-        direction.Normalize();
-        crosshair.position = playerPos + direction * 4;*/
-        crosshair.position = realMousePos;
+        if (!GameControl.PlayerData.gameOver)
+        {
+            Vector3 mousePos = Input.mousePosition;
+            Vector2 realMousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            /*Vector2 playerPos = player.position;
+            Vector2 direction = realMousePos - playerPos;
+            direction.Normalize();
+            crosshair.position = playerPos + direction * 4;*/
+            crosshair.position = realMousePos;
+        }
+        else
+            gameObject.SetActive(false);
 
     }
 }

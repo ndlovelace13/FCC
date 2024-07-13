@@ -36,12 +36,14 @@ public class SaveData
     public int highSec = 0;
     public int highEnemies = 0;
     public int highSeeds = 0;
+    public int highCrowns = 0;
 
     public int sashSlots = 3;
 
     //Balances
     public int essenceCount = 0;
     public float balance = 0f;
+    public int newDiscoveries = 0;
 
     //Upgrades, Research, Unlocks
     public List<UpgradeEssentials> upgrades;
@@ -100,12 +102,15 @@ public class GameControl : MonoBehaviour
     public bool gamePaused = false;
 
     public bool menusReady = false;
+    public bool menuActive = false;
 
     public bool unlockDone = false;
 
+    public bool quitCooldown = false;
+
     public GameObject tutorialHandler;
 
-    //public int shiftCounter = 0;
+    public int currentReportIndex = 0;
 
     //tutorial conditions
     public int inputsTested = 0;
@@ -150,6 +155,7 @@ public class GameControl : MonoBehaviour
     public int score = 0;
     public int shiftSeeds = 0;
     public int shiftEnemies = 0;
+    public int shiftCrowns = 0;
 
     //specific score totals
     public int discoveryScore = 0;
@@ -218,6 +224,7 @@ public class GameControl : MonoBehaviour
 
     public void NewGame()
     {
+        SaveHandler.DeleteSaveFile();
         SaveData = new SaveData();
         SetFlowers();
         UpgradeInit();
@@ -451,6 +458,7 @@ public class GameControl : MonoBehaviour
         score = 0;
         shiftSeeds = 0;
         shiftEnemies = 0;
+        shiftCrowns = 0;
         discoveryScore = 0;
         constructionScore = 0;
         enemyScore = 0;
@@ -552,10 +560,20 @@ public class GameControl : MonoBehaviour
             announce.GetComponent<ScoreNotification>().newFeed("New Flower Discovered!");
         }*/
         //need to change this once rare flowers are added
-        undiscoveredUncommon.Remove(type);
-        SaveData.discoveredUncommon.Add(type);
-        allDiscovered = allDiscovered.Union(SaveData.discoveredUncommon).ToList();
-        SaveHandler.SaveGame();
+        Debug.Log("Flower Discovery called for " + type);
+        if (SaveData.discoveredUncommon.Contains(type))
+            return;
+        else
+        {
+            Debug.Log("Flower discovery went through");
+            undiscoveredUncommon.Remove(type);
+            SaveData.discoveredUncommon.Add(type);
+            allDiscovered = allDiscovered.Union(SaveData.discoveredUncommon).ToList();
+            foreach (var flower in allDiscovered)
+                Debug.Log(flower);
+            SaveHandler.SaveGame();
+        }
+        
         //this is where to initialize entry in the almanac/mastery shit
     }
 
@@ -597,6 +615,7 @@ public class GameControl : MonoBehaviour
 
     public void SashInit()
     {
+        Debug.Log("Sash initialized??? START HERE");
         if (SaveData.sashActive)
         {
             sashTypes = new List<string>();
@@ -609,6 +628,7 @@ public class GameControl : MonoBehaviour
             }
             //don't do this yet
             currentAffinities = new GameObject[SaveData.sashSlots];
+            sash.GetComponent<SashBehavior>().enabled = true;
             sash.GetComponent<SashBehavior>().slotInit();
         }
     }

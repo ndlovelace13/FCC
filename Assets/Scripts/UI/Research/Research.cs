@@ -7,11 +7,13 @@ public class ResearchData
 {
     public int currentResearchTimes;
     public int currentSeeds;
+    public int requiredSeeds;
 
     public void SetData(Research input)
     {
         currentResearchTimes = input.currentResearchTimes;
         currentSeeds = input.currentSeeds;
+        requiredSeeds= input.requiredSeeds;
     }
 }
 
@@ -41,6 +43,7 @@ public abstract class Research : MonoBehaviour
     {
         currentResearchTimes = savedData.currentResearchTimes;
         currentSeeds = savedData.currentSeeds;
+        requiredSeeds = savedData.requiredSeeds;
     }
 
     public virtual void ResearchAction()

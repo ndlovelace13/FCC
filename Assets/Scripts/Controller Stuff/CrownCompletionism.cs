@@ -142,8 +142,8 @@ public class Crown
     {
         bool status = statusChanged;
         statusChanged = false;
-        if (discovered)
-            saveData.statusChanged = true;
+        if (saveData != null)
+            saveData.statusChanged = false;
         return status;
     }
 

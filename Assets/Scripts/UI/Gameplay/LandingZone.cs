@@ -20,7 +20,10 @@ public class LandingZone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameControl.PlayerData.gameOver)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     IEnumerator LocationUpdate()

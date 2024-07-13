@@ -29,6 +29,7 @@ public class ShiftReport
     public int timeMin;
     public int timeSec;
 
+    public int crowns;
     public int enemies;
     public int seedsEarned;
 
@@ -39,6 +40,7 @@ public class ShiftReport
     //HIGH SCORE BOOLS
     public bool highTime = false;
     public bool highMoney = false;
+    public bool highCrowns = false;
     public bool highEnemies = false;
     public bool highSeeds = false;
 
@@ -59,6 +61,7 @@ public class ShiftReport
         seedsEarned = seeds;
         timeMin = GameControl.PlayerData.min;
         timeSec = GameControl.PlayerData.sec;
+        crowns = GameControl.PlayerData.shiftCrowns;
         enemies = GameControl.PlayerData.shiftEnemies;
 
         //most used - TODO Implement different view once the sash is unlocked
@@ -84,6 +87,12 @@ public class ShiftReport
             GameControl.SaveData.highMin = timeMin;
             GameControl.SaveData.highSec = timeSec;
             highTime = true;
+        }
+        //crown check
+        if (GameControl.SaveData.highCrowns < crowns)
+        {
+            GameControl.SaveData.highCrowns = crowns;
+            highCrowns = true;
         }
         //enemy check
         if (GameControl.SaveData.highEnemies < enemies)
@@ -160,6 +169,11 @@ public class ShiftReport
         return timeSec;
     }
 
+    public int GetCrowns()
+    {
+        return crowns;
+    }
+
     public int GetEnemies()
     {
         return enemies;
@@ -184,6 +198,11 @@ public class ShiftReport
     public bool GetHighMoney()
     {
         return highMoney;
+    }
+
+    public bool GetHighCrowns()
+    {
+        return highCrowns;
     }
 
     public bool GetHighEnemies()
@@ -219,6 +238,7 @@ public class ReportBehavior : MonoBehaviour
     [SerializeField] TMP_Text lineBreak;
     [SerializeField] TMP_Text timeSurvived;
     [SerializeField] TMP_Text moneyEarned;
+    [SerializeField] TMP_Text crownsCrafted;
     [SerializeField] TMP_Text enemiesElim;
     [SerializeField] TMP_Text seedsCollected;
     [SerializeField] Image usedFlower;
@@ -232,6 +252,12 @@ public class ReportBehavior : MonoBehaviour
     [SerializeField] GameObject signatureZone;
     [SerializeField] Sprite contractSig;
 
+    //placement
+    Vector2 startingPos;
+    Vector2 finalPos;
+    bool placed = false;
+    bool reportStable = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -242,13 +268,33 @@ public class ReportBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //only take inputs if the report is placed and stable
+        if (reportStable)
+        {
+            //go to the next shift report if it exists
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                if (GameControl.PlayerData.currentReportIndex < GameControl.SaveData.shiftReports.Count - 1)
+                {
+                    StartCoroutine(LerpDown(GameControl.PlayerData.currentReportIndex + 1));
+                }
+            }
+            //go to the previous shift report if it exists
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                if (GameControl.PlayerData.currentReportIndex > 0)
+                {
+                    StartCoroutine(LerpDown(GameControl.PlayerData.currentReportIndex - 1));
+                }
+            }
+        }
         
     }
 
     public void OnEnable()
     {
         if (!GameControl.SaveData.firstRun)
-            FillReport();
+            FillReport(GameControl.SaveData.shiftReports.Count - 1);
         else
             InitReport();
         StartCoroutine(LerpUp());
@@ -286,6 +332,7 @@ public class ReportBehavior : MonoBehaviour
             //disable everything else
             moneyEarned.enabled = false;
             enemiesElim.enabled = false;
+            crownsCrafted .enabled = false;
             seedsCollected.enabled = false;
             usedFlower.enabled = false;
             usedCount.enabled = false;
@@ -323,10 +370,14 @@ public class ReportBehavior : MonoBehaviour
         //init the post-signing dialogue here
     }*/
 
-    public void FillReport()
+    public void FillReport(int reportIndex)
     {
-        ShiftReport currentReport = GameControl.SaveData.shiftReports.Last();
-        currentReport.SetFinalBalance();
+        GameControl.PlayerData.currentReportIndex = reportIndex;
+        ShiftReport currentReport = GameControl.SaveData.shiftReports[reportIndex];
+        if (currentReport == GameControl.SaveData.shiftReports.Last())
+        {
+            currentReport.SetFinalBalance();
+        }
         List<float> scoreBreakdown = currentReport.GetScoreBreakdown();
         //fill in the payout info
         shiftNum.text = "Shift #" + currentReport.GetShiftNum();
@@ -354,6 +405,9 @@ public class ReportBehavior : MonoBehaviour
         moneyEarned.text = "Money Earned: " + string.Format("{0:C}", currentReport.GetTotalProfit());
         if (currentReport.GetHighMoney())
             moneyEarned.text += "<color=\"yellow\"> - New PB!";
+        crownsCrafted.text = "Crowns Crafted: " + currentReport.GetCrowns();
+        if (currentReport.GetHighCrowns())
+            crownsCrafted.text += "<color=\"yellow\"> - New PB!";
         enemiesElim.text = "Skinwalkers Eliminated: " + currentReport.GetEnemies();
         if (currentReport.GetHighEnemies())
             enemiesElim.text += "<color=\"yellow\"> - New PB!";
@@ -367,9 +421,15 @@ public class ReportBehavior : MonoBehaviour
 
     IEnumerator LerpUp()
     {
+        reportStable = false;
         float time = 0f;
-        Vector2 finalPos = GetComponent<RectTransform>().position;
-        Vector2 startingPos = new Vector2(finalPos.x, -Screen.height * 1.5f);
+            
+        if (!placed)
+        {
+            finalPos = GetComponent<RectTransform>().position;
+            startingPos = new Vector2(finalPos.x, -Screen.height * 1.5f);
+            placed = true;
+        }
 
         while (time < 1f)
         {
@@ -377,25 +437,33 @@ public class ReportBehavior : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        reportStable = true;
     }
 
     public void PutDown()
     {
-        StartCoroutine(LerpDown());
+        StartCoroutine(LerpDown(-1));
     }
     
-    IEnumerator LerpDown()
+    IEnumerator LerpDown(int newReport)
     {
+        reportStable = false;
         float time = 0f;
-        Vector2 startingPos = GetComponent<RectTransform>().position;
-        Vector2 finalPos = new Vector2(startingPos.x, -Screen.height * 1.5f);
+        /*Vector2 startingPos = GetComponent<RectTransform>().position;
+        Vector2 finalPos = new Vector2(startingPos.x, -Screen.height * 1.5f);*/
 
         while (time < 1f)
         {
-            GetComponent<RectTransform>().position = Vector2.Lerp(startingPos, finalPos, time);
+            GetComponent<RectTransform>().position = Vector2.Lerp(finalPos, startingPos, time);
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        gameObject.SetActive(false);
+        if (newReport == -1)
+            gameObject.SetActive(false);
+        else
+        {
+            FillReport(newReport);
+            StartCoroutine(LerpUp());
+        }
     }
 }

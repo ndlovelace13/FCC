@@ -45,7 +45,7 @@ public class SizeLerp : MonoBehaviour
             {
                 if (time > loopTime / 2 && !halfwaySwap)
                 {
-                    Debug.Log("goofy activate");
+                    //Debug.Log("goofy activate");
                     originalScale = lerpTarget;
                     lerpTarget = originalScale / sizeModifier;
                     halfwaySwap = true;
@@ -62,4 +62,9 @@ public class SizeLerp : MonoBehaviour
     {
         looping = false;
     }
+
+    /*public void Visited()
+    {
+        looping = false;
+    }*/
 }

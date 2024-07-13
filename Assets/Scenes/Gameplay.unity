@@ -1591,6 +1591,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 304612978}
     m_Modifications:
+    - target: {fileID: 782087509981055114, guid: f88615226da414d46b48d49bf89dbb03, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1836163706850146220, guid: f88615226da414d46b48d49bf89dbb03, type: 3}
       propertyPath: m_Name
       value: affinitySash

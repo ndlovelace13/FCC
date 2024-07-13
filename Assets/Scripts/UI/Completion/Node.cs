@@ -38,7 +38,7 @@ public class Node : MonoBehaviour
         spriteRenderer.sortingOrder++;
         if (crown.Status())
         {
-            GetComponent<SizeLerp>().Execute(false);
+            GetComponent<SizeLerp>().Execute(crown.IsDiscovered());
         }
         firstTime = false;
         yield return null;
@@ -86,6 +86,7 @@ public class Node : MonoBehaviour
 
     public void newLocationLerp(Vector3 newLocation)
     {
+        gameObject.layer = 2;
         if (newLocation == basePos)
         {
             StartCoroutine(Reset());
@@ -108,8 +109,10 @@ public class Node : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        transform.localPosition = basePos;
         if (firstTime)
             StartCoroutine(InitialNodePlace());
+        gameObject.layer = 0;
     }
 
     IEnumerator NewLocation(Vector3 newLocation)
@@ -122,6 +125,8 @@ public class Node : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        transform.localPosition = newLocation;
+        gameObject.layer = 0;
     }
 
     private void OnMouseEnter()
@@ -143,9 +148,11 @@ public class Node : MonoBehaviour
     IEnumerator HoverEnter()
     {
         float time = 0f;
+        GetComponent<SizeLerp>().enabled = false;
+        Vector3 startSize = transform.localScale;
         while (time < 0.25f)
         {
-            transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 2.5f, time / 0.25f);
+            transform.localScale = Vector3.Lerp(startSize, Vector3.one * 2.5f, time / 0.25f);
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }

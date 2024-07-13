@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor.Experimental.RestService;
+using System.Linq;
 using UnityEngine;
 
 public class SaveHandler : MonoBehaviour
@@ -40,10 +40,10 @@ public class SaveHandler : MonoBehaviour
             GameControl.SaveData.researchData[i].SetData(GameControl.PlayerData.researchItems[i]);
         }
         //Print all the currently discovered crowns
-        /*for (int i = 0; i < GameControl.SaveData.discoveredCrowns.Count; i++)
+        for (int i = 0; i < GameControl.SaveData.discoveredCrowns.Count; i++)
         {
-            Debug.Log(GameControl.SaveData.discoveredCrowns[i].GetTitle() + " is discovered");
-        }*/
+            Debug.Log(GameControl.SaveData.discoveredCrowns[i].statusChanged);
+        }
         foreach (var shiftReport in GameControl.SaveData.shiftReports)
         {
             Debug.Log("Shift Num: " + shiftReport.GetShiftNum() + " " + shiftReport.GetScorePay());
@@ -65,6 +65,19 @@ public class SaveHandler : MonoBehaviour
         }
         else
             Debug.Log("There are no save files left to load!");
+    }
+
+    public List<string> LoadFlowers()
+    {
+        List<string> returnedList = new List<string>(GameControl.PlayerData.commonPool);
+        if (File.Exists(saveFilePath))
+        {
+            string loadData = File.ReadAllText(saveFilePath);
+            SaveData tempData = JsonUtility.FromJson<SaveData>(loadData);
+            return returnedList.Union(tempData.discoveredUncommon).ToList();
+        }
+        else
+            return returnedList;
     }
 
     public bool FileFind()

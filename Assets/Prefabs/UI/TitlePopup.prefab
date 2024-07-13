@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1119654389198861768}
   - component: {fileID: -8951026242193124635}
   m_Layer: 5
-  m_Name: QuitPopup
+  m_Name: TitlePopup
   m_TagString: quitMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,7 +362,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Are you sure you want to quit?
+  m_text: '<size=150%>Would you like to return to the title screen?
+
+
+    <size=100%>Your
+    current progress will be saved'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 34be12df329d1324584b09ad170bf1fd, type: 2}
   m_sharedMaterial: {fileID: 8078532019170761467, guid: 34be12df329d1324584b09ad170bf1fd, type: 2}
@@ -673,7 +677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6176573560513345046, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Quit
+      value: MainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 6176573560513345046, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

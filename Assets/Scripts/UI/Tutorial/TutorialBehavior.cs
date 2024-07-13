@@ -278,6 +278,7 @@ public class TutorialBehavior : MonoBehaviour
         }
         if (GameControl.PlayerData.tutorialState == 6)
         {
+            GameControl.PlayerData.FlowerDiscovery("red");
             fireInstance = Instantiate(fireCrown);
             fireInstance.transform.localPosition = player.transform.localPosition;
             fireInstance.transform.SetParent(null);

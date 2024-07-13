@@ -498,6 +498,7 @@ GameObject:
   - component: {fileID: 394218078222584076}
   - component: {fileID: 8938931006307031047}
   - component: {fileID: 1018602555976014721}
+  - component: {fileID: -8521360569479197397}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -689,6 +690,22 @@ MonoBehaviour:
   unloadTriggerList: 958ca0ea
   bankNameInternal: 
   valueGuidInternal: 
+--- !u!114 &-8521360569479197397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443022955973237853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed83c6d7162aaa44c9dcfc15b63c5130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwing: {fileID: 1377547105940834894}
+  construction: {fileID: 1027482110490891573}
+  harvest: {fileID: 1999140354528598399}
+  movement: {fileID: 2622209649626275940}
 --- !u!1 &6490589540602285821
 GameObject:
   m_ObjectHideFlags: 0
