@@ -100,6 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: blue
   position: 0
+  picked: 1
+  growing: 0
+  tier: 0
 --- !u!114 &8660609408836541775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,14 +125,17 @@ MonoBehaviour:
   projRange: 8
   headSprite: {fileID: 21300000, guid: 035710b6dbc5c4841a2de9809bf352c7, type: 3}
   projSprite: {fileID: 21300000, guid: 8f5fdcbb4a5d72a4d826873bf7a91f65, type: 3}
+  stemSprite: {fileID: 21300000, guid: 2351e182e81d46542a43cefa85e8ee95, type: 3}
   pool: {fileID: 0}
   pointsTiers: 03000000040000000500000007000000
   damageTiers: 0f000000120000001400000016000000
   rangeTiers: 0500000006000000080000000a000000
   projTiers: 06000000060000000700000008000000
   aug: 2
+  title: Frozen Flower
   primaryText: 'Frozen '
   insideText: 'Frigid '
   outsideText: 'Chilled '
   fourText: 'Arctic '
   fiveText: 'Solid '
+  textColor: {r: 0.22352943, g: 0.7294118, b: 0.9686275, a: 0}

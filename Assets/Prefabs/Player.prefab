@@ -497,6 +497,8 @@ GameObject:
   - component: {fileID: 3850106713470985190}
   - component: {fileID: 394218078222584076}
   - component: {fileID: 8938931006307031047}
+  - component: {fileID: 1018602555976014721}
+  - component: {fileID: -8521360569479197397}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -663,6 +665,47 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1018602555976014721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443022955973237853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e514a76d61368b446966a6e615b69072, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
+--- !u!114 &-8521360569479197397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443022955973237853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed83c6d7162aaa44c9dcfc15b63c5130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwing: {fileID: 1377547105940834894}
+  construction: {fileID: 1027482110490891573}
+  harvest: {fileID: 1999140354528598399}
+  movement: {fileID: 2622209649626275940}
 --- !u!1 &6490589540602285821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,6 +1114,10 @@ MonoBehaviour:
   docket: {fileID: 1614465288740177146}
   docketLoaded: 0
   crownHeld: 0
+  harvestSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 0d2615e011ce7db40ab18c9b2405e649, type: 2}
 --- !u!114 &2622209649626275940
 MonoBehaviour:
   m_ObjectHideFlags: 0

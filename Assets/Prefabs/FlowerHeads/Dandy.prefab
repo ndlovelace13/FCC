@@ -100,6 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: dandy
   position: 0
+  picked: 1
+  growing: 0
+  tier: 0
 --- !u!114 &1645006272031892013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,16 +125,19 @@ MonoBehaviour:
   projRange: 6
   headSprite: {fileID: 21300000, guid: a76642f6009ad2d4bafdf1e8efe41d5b, type: 3}
   projSprite: {fileID: 21300000, guid: db898662c6fd5d840be152227b6b5564, type: 3}
+  stemSprite: {fileID: 21300000, guid: 2351e182e81d46542a43cefa85e8ee95, type: 3}
   pool: {fileID: 0}
   pointsTiers: 03000000040000000500000007000000
   damageTiers: 0f000000120000001500000018000000
   rangeTiers: 0500000006000000080000000a000000
   projTiers: 04000000050000000600000007000000
-  aug: 5
+  aug: 0
+  title: Dandelion
   primaryText: 'Splitting '
   insideText: 'Dispersing '
   outsideText: 'Seedy '
   fourText: 'Scattering '
   fiveText: 'Disintegrating '
+  textColor: {r: 0.8313726, g: 0.8313726, b: 0.8431373, a: 1}
   miniProjSprite: {fileID: 21300000, guid: cdea3615e4a8afb40bfa9767f735625e, type: 3}
   miniDandy: 0

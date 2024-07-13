@@ -22,18 +22,18 @@ public class YellowStats : FlowerStats
         
     }
 
-    public override void OnEnemyCollision(GameObject enemy)
+    public override void OnEnemyCollision(GameObject enemy, int t)
     {
         if (lightningPool == null)
             lightningPool = GameObject.FindGameObjectWithTag("lightningPool");
         if (!enemy.GetComponent<EnemyBehavior>().electricPassed)
         {
             string[] augs = enemy.GetComponent<EnemyBehavior>().augments;
-            StartCoroutine(ElectricApply(numTargets, augs, enemy));
+            StartCoroutine(ElectricApply(numTargets, augs, enemy, t));
         }
     }
 
-    IEnumerator ElectricApply(int remainingTargets, string[] augs, GameObject enemy)
+    IEnumerator ElectricApply(int remainingTargets, string[] augs, GameObject enemy, int tier)
     {
         Debug.Log("This mf electrified");
         enemy.GetComponent<EnemyBehavior>().isElectrified = true;
@@ -41,12 +41,17 @@ public class YellowStats : FlowerStats
         StartCoroutine(SlowApply(stunAmount, stunTime, 4, enemy));
         if (remainingTargets > 0)
         {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+            EnemyBehavior[] enemyBehaviors = UnityEngine.Object.FindObjectsOfType<EnemyBehavior>();
+            GameObject[] enemies = new GameObject[enemyBehaviors.Length];
+            for ( int i = 0; i < enemies.Length; i++)
+            {
+                enemies[i] = enemyBehaviors[i].gameObject;
+            }
             GameObject closestEnemy = enemy.GetComponent<EnemyBehavior>().ClosestEnemy(enemies);
             if (closestEnemy != null)
             {
                 StartCoroutine(LightningEffect(enemy, closestEnemy));
-                ElectricPass(remainingTargets - 1, augs, closestEnemy);
+                ElectricPass(remainingTargets - 1, augs, closestEnemy, tier);
             }
             enemy.GetComponent<EnemyBehavior>().DealDamage(electricDamage, Color.yellow);
         }
@@ -72,11 +77,11 @@ public class YellowStats : FlowerStats
         //newLightning.SetActive(false);
     }
 
-    public void ElectricPass(int remainingTargets, string[] augs, GameObject nextEnemy)
+    public void ElectricPass(int remainingTargets, string[] augs, GameObject nextEnemy, int tier)
     {
         nextEnemy.GetComponent<EnemyBehavior>().electricPassed = true;
-        StartCoroutine(ElectricApply(remainingTargets, augs, nextEnemy));
-        nextEnemy.GetComponent<EnemyBehavior>().AugmentApplication(augs);
+        StartCoroutine(ElectricApply(remainingTargets, augs, nextEnemy, tier));
+        nextEnemy.GetComponent<EnemyBehavior>().AugmentApplication(augs, tier);
         nextEnemy.GetComponent<EnemyBehavior>().electricPassed = false;
     }
 }

@@ -9,6 +9,7 @@ public class FlowerData
     bool activated;
     GameObject flower;
     int rarity;
+    int tier;
 
     public FlowerData(Vector2 newPos, string newType, int raritySelect)
     {
@@ -17,6 +18,7 @@ public class FlowerData
         activated = false;
         flower = null;
         rarity = raritySelect;
+        tier = 1;
     }
 
     public Vector2 getPosition()
@@ -31,6 +33,16 @@ public class FlowerData
     public void setType(string newType)
     {
         type = newType;
+    }
+
+    public int getTier()
+    {
+        return tier;
+    }
+
+    public void setTier(int newTier)
+    {
+        tier = newTier;
     }
 
     public bool isActivated()
@@ -77,8 +89,8 @@ public class FlowerCalc : MonoBehaviour
 
     //rarity shit
     static float uncommonRarity;
-    float undiscoveredRarity;
-    List<string> Flowers;
+    //float undiscoveredRarity;
+    List<string> Flowers = new List<string>();
     [SerializeField] List<string> common;
     [SerializeField] List<string> uncommon;
     List<string> undiscovered;
@@ -87,23 +99,26 @@ public class FlowerCalc : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Whyyyyy");
         //grab everything from GameControl when gameplay begins
-        if (GameControl.PlayerData.tutorialSkip && GameControl.PlayerData.discoveredUncommon.Count == 0)
+        if (!GameControl.SaveData.discoveredUncommon.Contains("red"))
         {
+            Debug.Log("discoveredUncommon is tweaked");
             GameControl.PlayerData.discoveryDisplay = false;
             GameControl.PlayerData.FlowerDiscovery("red");
         }
+        else
+            Debug.Log("SHRIMGUS " + GameControl.SaveData.discoveredUncommon.Count);
         //for testing newly added flowers
         if (GameControl.PlayerData.testing)
         {
             GameControl.PlayerData.uncommon = 0.5f;
             GameControl.PlayerData.discoveryDisplay = false;
-            GameControl.PlayerData.FlowerDiscovery("red");
-            GameControl.PlayerData.FlowerDiscovery("blue");
-            GameControl.PlayerData.FlowerDiscovery("green");
-            GameControl.PlayerData.FlowerDiscovery("yellow");
-            GameControl.PlayerData.FlowerDiscovery("dandy");
-            GameControl.PlayerData.FlowerDiscovery("wild");
+            List<string> strings = new List<string>(GameControl.PlayerData.undiscoveredUncommon);
+            foreach (var flower in strings)
+            {
+                GameControl.PlayerData.FlowerDiscovery(flower);
+            }
         }
         GameControl.PlayerData.ResetRun();
     }
@@ -124,9 +139,9 @@ public class FlowerCalc : MonoBehaviour
         GameControl.PlayerData.discoveryDisplay = true;
         uncommonRarity = GameControl.PlayerData.uncommon;
         common = GameControl.PlayerData.commonPool;
-        uncommon = GameControl.PlayerData.discoveredUncommon;
+        uncommon = GameControl.SaveData.discoveredUncommon;
         undiscovered = GameControl.PlayerData.undiscoveredUncommon;
-        undiscoveredRarity = GameControl.PlayerData.undiscovered;
+        //undiscoveredRarity = GameControl.PlayerData.undiscovered;
         totalWidth = (int)background.size.x;
         totalHeight = (int)background.size.y;
         flowerInfo = InitialCalc();

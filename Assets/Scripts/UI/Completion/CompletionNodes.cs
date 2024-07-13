@@ -35,15 +35,16 @@ public class CompletionNodes : MonoBehaviour
         //Establish the Node Pool
         nodes = new List<Node>();
         selectedNodes = new List<Node>();
-        CrownCompletionism.completionTracker.nodePooling();
-        nodePool = CrownCompletionism.completionTracker.nodePool;
-        CrownCompletionism.completionTracker.infoPopup = GameObject.FindWithTag("CrownInfo");
-        CrownCompletionism.completionTracker.infoPopup.SetActive(false);
+        GameControl.CrownCompletion.nodePooling();
+        nodePool = GameControl.CrownCompletion.nodePool;
+        GameControl.CrownCompletion.infoPopup = GameObject.FindWithTag("CrownInfo");
+        GameControl.CrownCompletion.infoPopup.SetActive(false);
         NodeAssign();
         ToggleAssign();
         StartCoroutine(NodeMapping(nodes, 0f));
-        selectedCount = CrownCompletionism.completionTracker.crowns.Count();
-        completedCount = CrownCompletionism.completionTracker.totalDiscovered;
+        selectedCount = GameControl.CrownCompletion.allCrowns.Count();
+        completedCount = GameControl.CrownCompletion.totalDiscovered;
+        GameControl.SaveData.newDiscoveries = 0;
     }
 
     private void ToggleAssign()
@@ -58,12 +59,12 @@ public class CompletionNodes : MonoBehaviour
 
     private void NodeAssign()
     {
-        foreach (var crown in CrownCompletionism.completionTracker.crowns)
+        foreach (var crown in GameControl.CrownCompletion.allCrowns)
         {
             GameObject node = nodePool.GetComponent<ObjectPool>().GetPooledObject();
             node.SetActive(true);
-            node.name = crown.GetId();
-            node.GetComponent<Node>().NodeAssignment(crown);
+            node.name = crown.Value.GetId();
+            node.GetComponent<Node>().NodeAssignment(crown.Value);
             nodes.Add(node.GetComponent<Node>());
         }
     }
@@ -77,10 +78,13 @@ public class CompletionNodes : MonoBehaviour
         {
             Crown crown = node.crown;
             List<string> contained = crown.GetFlowers();
+            /*foreach (string type in contained)
+                Debug.Log(type);*/
             foreach (var type in types)
             {
                 if (contained.Contains(type))
                 {
+                    //Debug.Log("passed the type check for:" + type);
                     wasSelected = true;
                     break;
                 }
@@ -112,7 +116,10 @@ public class CompletionNodes : MonoBehaviour
                 
             }
             if (stillSelected)
+            {
+                //Debug.Log("Passed the selection test for discovery");
                 wasSelected = true;
+            }
             else
                 wasSelected = false;
             stillSelected = false;
@@ -144,7 +151,11 @@ public class CompletionNodes : MonoBehaviour
                 }
             }
             if (stillSelected)
+            {
                 wasSelected = true;
+                //Debug.Log("was selected overall");
+            }
+                
             else
                 wasSelected = false;
             if (!showAll)
@@ -173,7 +184,7 @@ public class CompletionNodes : MonoBehaviour
             selectedCount = selected.Count();
         else
             selectedCount = all.Count();
-        Debug.Log("Post sorting count: " + all.Count());
+        Debug.Log("Post sorting count: " + selected.Count());
         if (selectedNodes != selected)
         {
             StartCoroutine(NodeMapping(all, 0f));
@@ -227,7 +238,7 @@ public class CompletionNodes : MonoBehaviour
         if (discoveryToggles[2].isOn)
             ProgressText.text = completedCount + " of " + selectedCount + " Discovered - " + ((float)completedCount / selectedCount).ToString("0.00%");
         else
-            ProgressText.text = selectedCount + " of " + CrownCompletionism.completionTracker.allCrowns.Count + " Selected";
+            ProgressText.text = selectedCount + " of " + GameControl.CrownCompletion.allCrowns.Count + " Selected";
     }
 
     public void SortCall()
@@ -241,7 +252,7 @@ public class CompletionNodes : MonoBehaviour
         {
             if (toggle.isOn)
             {
-                flowerInputs.Add(toggle.GetComponentInChildren<TMP_Text>().text);
+                flowerInputs.Add(toggle.GetComponentInChildren<FlowerToggle>().type);
                 Debug.Log(toggle.name);
             }
         }

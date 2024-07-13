@@ -37,7 +37,7 @@ public class CompletionCamera : MonoBehaviour
         if (cam.orthographicSize <= 5f && Input.mouseScrollDelta.y > 0f)
             cam.orthographicSize = 5f;
         else if (cam.orthographicSize >= 50f && Input.mouseScrollDelta.y < 0f)
-            cam.orthographicSize = 50f;
+            cam.orthographicSize = 75f;
         else
             cam.orthographicSize -= Input.mouseScrollDelta.y;
     }

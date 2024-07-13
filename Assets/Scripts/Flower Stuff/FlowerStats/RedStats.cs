@@ -42,11 +42,12 @@ public class RedStats : FlowerStats
         GameObject newFlame = flamesPool.GetComponent<ObjectPool>().GetPooledObject();
         newFlame.SetActive(true);
         newFlame.transform.position = proj.transform.position;
-        newFlame.GetComponent<AoeBehavior>().Activate(proj.GetComponent<ProjectileBehavior>().getAugments(), flameTime, "red");
+        int tier = proj.GetComponent<ProjectileBehavior>().GetTier();
+        newFlame.GetComponent<AoeBehavior>().Activate(proj.GetComponent<ProjectileBehavior>().getAugments(), flameTime, "red", tier);
         //proj.GetComponent<ProjectileBehavior>().ObjectDeactivate();
     }
 
-    public override void OnEnemyCollision(GameObject enemy)
+    public override void OnEnemyCollision(GameObject enemy, int t)
     {
         enemy.GetComponent<EnemyBehavior>().isBurning = true;
         enemy.GetComponent<SpriteRenderer>().color = Color.red;

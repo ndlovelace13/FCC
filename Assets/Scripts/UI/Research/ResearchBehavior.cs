@@ -19,9 +19,9 @@ public class ResearchBehavior : MonoBehaviour
 
     [SerializeField] GameObject speech;
     string[] currentLine = new string[1];
-    string firstLine = "Here you'll find a list of active research drives! The R&D team is always looking to provide you with new tech, based on essence seeds dropped from enemies on the job";
-    string[] introLines = { "Got Seeds?", "Our top scientists would be thrilled by your donations", "I don't know how it works, do I sound like a scientist?", "This is way beyond my understanding" };
-    string[] donateLines = { "Yeah, science!", "R&D is cooking up something special JUST for you!", "Who's a helpful crown maker? You are, you are!", "Can't wait to see those skinwalker faces when they see THIS", "Check in every week for new research drives! You may rest, but our scientists don't" };
+    string firstLine = "Here you'll find a list of active research drives! The R&D team is always looking to provide you with our new discoveries, free of charge!";
+    string[] introLines = { "Got Seeds?", "Our top scientists (including your's truly) would be thrilled by your donations", "I don't know how it works, do I sound like a scientist? Oh wait, I forgot, yes I am", "Aren't those skinwalkers something else? Just thinking about them gets my heart racing", "A donation a day helps the doctors to stay!" };
+    string[] donateLines = { "Yeah, science!", "We at R&D are cooking up something special JUST for you!", "Who's a helpful crown maker? You are, you are!", "Can't wait to see those skinwalker faces when they see THIS", "Check in every week for new research drives! You may rest, but our scientists don't" };
     void Start()
     {
         //GameObject catalogSlots = GameObject.FindWithTag("upgradeSlots");
@@ -47,7 +47,7 @@ public class ResearchBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        balance.text = "Essence Seeds: " + GameControl.PlayerData.essenceCount;
+        balance.text = "Essence Seeds: " + GameControl.SaveData.essenceCount;
         if (GameControl.PlayerData.donationMade)
         {
             if (newLineReady)
@@ -84,9 +84,9 @@ public class ResearchBehavior : MonoBehaviour
 
     private void IntroLineAssign()
     {
-        if (GameControl.PlayerData.firstResearch)
+        if (GameControl.SaveData.firstResearch)
         {
-            GameControl.PlayerData.firstResearch = false;
+            GameControl.SaveData.firstResearch = false;
             currentLine[0] = firstLine;
         }
         else
@@ -98,6 +98,7 @@ public class ResearchBehavior : MonoBehaviour
 
     public void ReturnToEnd()
     {
-        SceneManager.LoadScene("EndScreen");
+        GameControl.SaveHandler.SaveGame();
+        SceneManager.LoadScene("Homebase");
     }
 }

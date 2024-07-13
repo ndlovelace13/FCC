@@ -19,9 +19,10 @@ public class SashBehavior : MonoBehaviour
 
     public void slotInit()
     {
+        player = GameObject.FindWithTag("Player");
         slotObjects = new List<GameObject>();
         //slotObjects = GameObject.FindGameObjectsWithTag("affinitySlot");
-        slots = GameControl.PlayerData.sashSlots;
+        slots = GameControl.SaveData.sashSlots;
         for (int i = 0; i < slots; i++)
         {
             GameObject newSlot = Instantiate(slotPrefab);
@@ -31,13 +32,12 @@ public class SashBehavior : MonoBehaviour
             slotObjects[i].GetComponent<SashSlot>().SpriteApply(slotDefaults[i]);
             GameControl.PlayerData.currentAffinities[i] = newSlot;
         }
-        player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<CrownThrowing>().crownHeld == false && GameControl.PlayerData.loading == false)
+        if (GameControl.PlayerData.loading == false && player.GetComponent<CrownThrowing>().crownHeld == false)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1) && slots > 0)
             {

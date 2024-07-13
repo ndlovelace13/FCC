@@ -26,7 +26,7 @@ public class UpgradeElement : MonoBehaviour
     {
         if (upgradeSet)
         {
-            if (currentUpgrade.currentPrice > GameControl.PlayerData.balance || currentUpgrade.timesUpgraded == currentUpgrade.maxTimesUpgraded)
+            if (currentUpgrade.currentPrice > GameControl.SaveData.balance || currentUpgrade.timesUpgraded == currentUpgrade.maxTimesUpgraded)
             {
                 purchaseButton.interactable = false;
             }

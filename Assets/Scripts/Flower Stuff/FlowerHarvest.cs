@@ -13,6 +13,8 @@ public class FlowerHarvest : MonoBehaviour
     GameObject crown;
     public bool docketLoaded = true;
     public bool crownHeld = false;
+
+    [SerializeField] AK.Wwise.Event harvestSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,7 @@ public class FlowerHarvest : MonoBehaviour
                         int slotPos = nextSlot();
                         if (slotPos != -1)
                         {
+                            AkSoundEngine.PostEvent("Flower_Harvest", transform.parent.gameObject);
                             //TODO: PUll from the pool instead
                             GameObject newHead = Instantiate(head, slots[slotPos].transform);
                             newHead.GetComponent<SpriteRenderer>().sortingLayerName = "Midground";
@@ -63,12 +66,17 @@ public class FlowerHarvest : MonoBehaviour
                             //newHead.transform.position = slots[slotPos].transform.position;
                             //Debug.Log("WHAT THE FUCK IS HAPPENING: " + crown.gameObject.name);
                             newHead.transform.SetParent(crown.transform);
+
                             newHead.GetComponent<FlowerBehavior>().position = slotPos;
                             Debug.Log("slot Position assigned: " + slotPos);
 
-                            //check for discovery
-                            string type = head.GetComponent<FlowerStats>().type;
-                            StartCoroutine(DiscoveryCheck(type));
+                            //update the flowerUse counter
+                            if (!GameControl.PlayerData.tutorialActive)
+                            {
+                                string type = head.GetComponent<FlowerStats>().type;
+                                GameControl.PlayerData.flowerUse[type]++;
+                            }
+                            //StartCoroutine(DiscoveryCheck(type));
                             slots[slotPos].tag = "slotFull";
                             if (GameControl.PlayerData.tutorialState == 2)
                                 GameControl.PlayerData.flowerHarvested = true;
@@ -92,6 +100,7 @@ public class FlowerHarvest : MonoBehaviour
         int slotPos = lastSlot();
         if (slotPos != -1 && !transform.parent.GetComponent<CrownConstruction>().skillCheckActive && !transform.parent.GetComponent<CrownConstruction>().constructionReady)
         {
+            AkSoundEngine.PostEvent("Throw", transform.parent.gameObject);
             docketLoaded = false;
             slots[slotPos].tag = "slotEmpty";
             GameObject tossedFlower = lastFlower();

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,27 @@ public enum crownType
     FullHouse,
     Four,
     Fiver
+}
+
+[System.Serializable]
+public class CrownData
+{
+    public bool discovered, statusChanged;
+
+    public string id, title;
+
+    public int timesCrafted, shiftDiscovered;
+
+    //call when initial discovery happens
+    public CrownData(Crown discoveredCrown)
+    {
+        discovered = true;
+        statusChanged = true;
+        id = discoveredCrown.GetId();
+        title = discoveredCrown.GetTitle();
+        timesCrafted = 1;
+        shiftDiscovered = discoveredCrown.GetShift();
+    }
 }
 
 public class Crown
@@ -34,6 +56,19 @@ public class Crown
 
     int timesCrafted = 0;
     int shiftDiscovered = 0;
+
+    CrownData saveData;
+
+    public void RestoreData(CrownData saveData)
+    {
+        this.saveData = saveData;
+        //Restore all the important info from the save Data
+        discovered = saveData.discovered;
+        statusChanged = saveData.statusChanged;
+        title = saveData.title;
+        timesCrafted = saveData.timesCrafted;
+        shiftDiscovered = saveData.shiftDiscovered;
+    }
 
     public string SetCrownVals(string prim, string ins, string outs)
     {
@@ -107,6 +142,8 @@ public class Crown
     {
         bool status = statusChanged;
         statusChanged = false;
+        if (saveData != null)
+            saveData.statusChanged = false;
         return status;
     }
 
@@ -140,10 +177,16 @@ public class Crown
         discovered = true;
         discoverable = false;
         statusChanged = true;
-        shiftDiscovered = GameControl.PlayerData.shiftCounter;
-        CrownCompletionism.completionTracker.totalDiscovered++;
+        shiftDiscovered = GameControl.SaveData.shiftCounter;
+        GameControl.CrownCompletion.totalDiscovered++;
         Crafted();
         Debug.Log(title + " discovered!");
+
+        //Create a new crownData obj and add to the save list
+        saveData = new CrownData(this);
+        GameControl.SaveData.discoveredCrowns.Add(saveData);
+        //Debug.Log(GameControl.SaveData.discoveredCrowns[0].GetId());
+        //Debug.Log(GameControl.SaveData.discoveredCrowns[0].GetTitle());
     }
 
     public int GetShift()
@@ -159,6 +202,8 @@ public class Crown
     public void Crafted()
     {
         timesCrafted++;
+        if (timesCrafted > 1)
+            saveData.timesCrafted++;
         Debug.Log("You've crafted it " + timesCrafted + " times");
     }
 
@@ -171,11 +216,11 @@ public class Crown
 
 public class CrownCompletionism : MonoBehaviour
 {
-    public static CrownCompletionism completionTracker;
+    //public static CrownCompletionism completionTracker;
     // Start is called before the first frame update
 
     public Dictionary<string, Crown> allCrowns;
-    public List<Crown> crowns = new List<Crown>();
+    //public List<Crown> crowns = new List<Crown>();
 
     public GameObject nodePool;
     [SerializeField] GameObject nodePrefab;
@@ -201,17 +246,11 @@ public class CrownCompletionism : MonoBehaviour
 
     public void PermutationEst()
     {
-        if (completionTracker == null)
+        if (allCrowns == null)
         {
-            completionTracker = this;
+            allCrowns = new Dictionary<string, Crown>();
+            StartCoroutine(CrownPermutations());
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        allCrowns = new Dictionary<string, Crown>();
-        StartCoroutine(CrownPermutations());
     }
 
     IEnumerator CrownPermutations()
@@ -224,14 +263,14 @@ public class CrownCompletionism : MonoBehaviour
             Crown newCrown = new Crown();
             string id = newCrown.SetCrownVals(flower.type, "", "");
             allCrowns.Add(id, newCrown);
-            crowns.Add(newCrown);
+            //crowns.Add(newCrown);
             //add the crown with only inside symmetry - for each flower
             foreach (var insideFlower in flowers)
             {
                 newCrown = new Crown();
                 id = newCrown.SetCrownVals(flower.type, insideFlower.type, "");
                 allCrowns.Add(id, newCrown);
-                crowns.Add(newCrown);
+                //crowns.Add(newCrown);
 
                 foreach (var outsideFlower in flowers)
                 {
@@ -241,7 +280,7 @@ public class CrownCompletionism : MonoBehaviour
                     if (!allCrowns.ContainsKey(id))
                     {
                         allCrowns.Add(id, newCrown);
-                        crowns.Add(newCrown);
+                        //crowns.Add(newCrown);
                     }
 
                     //add the crown with inside and outside symmetry - for each flower
@@ -250,7 +289,7 @@ public class CrownCompletionism : MonoBehaviour
                     if (!allCrowns.ContainsKey(id))
                     {
                         allCrowns.Add(id, newCrown);
-                        crowns.Add(newCrown);
+                        //crowns.Add(newCrown);
                     }
                 }
             }
@@ -258,6 +297,31 @@ public class CrownCompletionism : MonoBehaviour
   
 
         Debug.Log("There are " + allCrowns.Count + " potential crowns");
+
+        //Call the save data restore routine
+        StartCoroutine(CrownDataRestore());
+        yield return null;
+    }
+
+    IEnumerator CrownDataRestore()
+    {
+        if (GameControl.SaveData.discoveredCrowns == null)
+        {
+            GameControl.SaveData.discoveredCrowns = new List<CrownData>();
+            totalDiscovered = 0;
+        }
+        else
+        {
+            totalDiscovered = GameControl.SaveData.discoveredCrowns.Count;
+            foreach (CrownData saveCrown in GameControl.SaveData.discoveredCrowns)
+            {
+                //Debug.Log(saveCrown.GetId());
+                //Debug.Log(saveCrown.GetTitle());
+                allCrowns[saveCrown.id].RestoreData(saveCrown);
+            }
+            Debug.Log(totalDiscovered + "crowns restored");
+        }
+
         yield return null;
     }
 

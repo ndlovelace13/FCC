@@ -45,7 +45,7 @@ public class CatalogBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        balance.text = "Current Balance: " + string.Format("{0:C}", GameControl.PlayerData.balance);
+        balance.text = "Current Balance: " + string.Format("{0:C}", GameControl.SaveData.balance);
         if (GameControl.PlayerData.purchaseMade)
         {
             GameControl.PlayerData.purchaseMade = false;
@@ -73,9 +73,9 @@ public class CatalogBehavior : MonoBehaviour
 
     private void IntroLineAssign()
     {
-        if (GameControl.PlayerData.firstCatalog)
+        if (GameControl.SaveData.firstCatalog)
         {
-            GameControl.PlayerData.firstCatalog = false;
+            GameControl.SaveData.firstCatalog = false;
             currentLine[0] = firstLine;
         }
         else
@@ -87,6 +87,6 @@ public class CatalogBehavior : MonoBehaviour
 
     public void ReturnToEnd()
     {
-        SceneManager.LoadScene("EndScreen");
+        SceneManager.LoadScene("Homebase");
     }
 }

@@ -2,6 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class ResearchData
+{
+    public int currentResearchTimes;
+    public int currentSeeds;
+    public int requiredSeeds;
+
+    public void SetData(Research input)
+    {
+        currentResearchTimes = input.currentResearchTimes;
+        currentSeeds = input.currentSeeds;
+        requiredSeeds= input.requiredSeeds;
+    }
+}
+
 public abstract class Research : MonoBehaviour
 {
     [SerializeField] public GameObject unlockPrefab;
@@ -22,6 +37,13 @@ public abstract class Research : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void RestoreData(ResearchData savedData)
+    {
+        currentResearchTimes = savedData.currentResearchTimes;
+        currentSeeds = savedData.currentSeeds;
+        requiredSeeds = savedData.requiredSeeds;
     }
 
     public virtual void ResearchAction()

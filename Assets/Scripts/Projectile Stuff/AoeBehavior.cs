@@ -10,6 +10,7 @@ public class AoeBehavior : MonoBehaviour
     List<GameObject> particles;
     //what does this do????
     string particleIgnore = "";
+    int tier;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,15 +23,21 @@ public class AoeBehavior : MonoBehaviour
         
     }
 
-    public void Activate(string[] augs, float time, string partIgnore)
+    public void Activate(string[] augs, float time, string partIgnore, int tier)
     {
         augments = augs;
         activeTime = time;
         particleIgnore = partIgnore;
         if (particles == null)
             getParticles();
+        this.tier = tier;
         setParticles(augments);
         StartCoroutine(Deactivate());
+    }
+
+    public int GetTier()
+    {
+        return tier;
     }
 
     private void getParticles()

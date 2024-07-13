@@ -100,6 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: red
   position: 0
+  picked: 1
+  growing: 0
+  tier: 0
 --- !u!114 &7642685459185627567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,15 +125,18 @@ MonoBehaviour:
   projRange: 8
   headSprite: {fileID: 21300000, guid: f9e2b15952effba4dbb31925b069d5b9, type: 3}
   projSprite: {fileID: 21300000, guid: 5cf9f8ab7e6486043b11766f651b0dc8, type: 3}
+  stemSprite: {fileID: 21300000, guid: 2351e182e81d46542a43cefa85e8ee95, type: 3}
   pool: {fileID: 0}
   pointsTiers: 03000000040000000500000007000000
   damageTiers: 0f000000120000001400000016000000
   rangeTiers: 0500000006000000080000000a000000
   projTiers: 06000000060000000700000008000000
   aug: 1
+  title: Fiery Flower
   primaryText: 'Fiery '
   insideText: 'Burning '
   outsideText: 'Blazing '
   fourText: 'Scorching '
   fiveText: 'Razing '
+  textColor: {r: 1, g: 0.24313727, b: 0.20392159, a: 0}
   flamesPool: {fileID: 0}

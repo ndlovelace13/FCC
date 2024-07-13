@@ -27,9 +27,9 @@ public class GreenStats : FlowerStats
         
     }
 
-    public override void OnEnemyCollision(GameObject enemy)
+    public override void OnEnemyCollision(GameObject enemy, int t)
     {
-        base.OnEnemyCollision(enemy);
+        base.OnEnemyCollision(enemy, t);
         enemy.GetComponent<EnemyBehavior>().isPoisoned = true;
         enemy.GetComponent<SpriteRenderer>().color = Color.green;
         StartCoroutine(PoisonHandler(enemy));
@@ -71,8 +71,9 @@ public class GreenStats : FlowerStats
             GameObject newCloud = poisonPool.GetComponent<ObjectPool>().GetPooledObject();
             newCloud.SetActive(true);
             newCloud.transform.position = proj.transform.position;
+            int tier = proj.GetComponent<ProjectileBehavior>().GetTier();
             string[] augs = proj.GetComponent<ProjectileBehavior>().getAugments();
-            newCloud.GetComponent<AoeBehavior>().Activate(augs, cloudTime, "green");
+            newCloud.GetComponent<AoeBehavior>().Activate(augs, cloudTime, "green", tier);
             yield return new WaitForSeconds(cloudCooldown);
         }
     }

@@ -19,6 +19,7 @@ public class CompletionBehavior : MonoBehaviour
 
     public void Return()
     {
-        SceneManager.LoadScene("EndScreen");
+        GameControl.SaveHandler.SaveGame();
+        SceneManager.LoadScene("Homebase");
     }
 }

@@ -19,12 +19,21 @@ public class WildStats : FlowerStats
 
     public string WildTypeRandomize()
     {
-        List<string> noWild = GameControl.PlayerData.allDiscovered;
+        List<string> noWild = new List<string>(GameControl.PlayerData.allDiscovered);
         noWild.Remove("wild");
         int discoveredCount = noWild.Count;
         string newType = noWild[UnityEngine.Random.Range(0, discoveredCount)];
-        Debug.Log("Wild has become " + newType + ", destroyer of worlds");
+        Debug.Log("Wild is become " + newType + ", destroyer of worlds");
         return newType;
+    }
+
+    public override string Colorizer(string input)
+    {
+        Color rando = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+        string colorText = ColorUtility.ToHtmlStringRGB(rando);
+        string returnString = "<color=#" + colorText + ">";
+        returnString += input + "</color>";
+        return returnString;
     }
 
 
@@ -34,13 +43,13 @@ public class WildStats : FlowerStats
     {
         FlowerStats copiedData = original;
         int currentWildAffinity = 0;
-        if (GameControl.PlayerData.sashActive && GameControl.PlayerData.affinityAmounts.ContainsKey("wild"))
+        if (GameControl.SaveData.sashActive && GameControl.PlayerData.affinityAmounts.ContainsKey("wild"))
             currentWildAffinity = GameControl.PlayerData.affinityAmounts["wild"];
-        copiedData.basePoints = GameControl.PlayerData.flowerStatsDict[type].pointsTiers[currentWildAffinity];
-        copiedData.projRange = GameControl.PlayerData.flowerStatsDict[type].projRange;
-        copiedData.range = GameControl.PlayerData.flowerStatsDict[type].rangeTiers[currentWildAffinity];
-        copiedData.damage = GameControl.PlayerData.flowerStatsDict[type].damageTiers[currentWildAffinity];
-        copiedData.projCount = GameControl.PlayerData.flowerStatsDict[type].projTiers[currentWildAffinity];
+        copiedData.SetPoints(GameControl.PlayerData.flowerStatsDict[type].pointsTiers[currentWildAffinity]);
+        copiedData.SetProjRange(GameControl.PlayerData.flowerStatsDict[type].GetProjRange(1));
+        copiedData.SetRange(GameControl.PlayerData.flowerStatsDict[type].rangeTiers[currentWildAffinity]);
+        copiedData.SetDamage(GameControl.PlayerData.flowerStatsDict[type].damageTiers[currentWildAffinity]);
+        copiedData.SetProjCount(GameControl.PlayerData.flowerStatsDict[type].projTiers[currentWildAffinity]);
         copiedData.aug = GameControl.PlayerData.flowerStatsDict[type].aug;
         return copiedData;
     }

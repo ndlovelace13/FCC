@@ -8,14 +8,15 @@ public abstract class FlowerStats : MonoBehaviour
     [SerializeField] public string type;
     public int id;
 
-    public int basePoints;
-    public int damage;
-    public int range;
-    public int projCount;
-    public int projRange;
+    [SerializeField] protected int basePoints;
+    [SerializeField] protected int damage;
+    [SerializeField] protected int range;
+    [SerializeField] protected int projCount;
+    [SerializeField] protected int projRange;
 
     public Sprite headSprite;
     public Sprite projSprite;
+    public Sprite stemSprite;
     public GameObject pool;
 
     [SerializeField]
@@ -29,9 +30,11 @@ public abstract class FlowerStats : MonoBehaviour
 
     [SerializeField] public int aug;
 
+    //Title stuff
+    [SerializeField] public string title;
     [SerializeField] public string primaryText, insideText, outsideText, fourText, fiveText;
-    //associated projectile script
-    //associated augment script
+    [SerializeField] public Color textColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +46,111 @@ public abstract class FlowerStats : MonoBehaviour
     {
 
     }
+
+    public virtual Sprite GetHeadSprite(int tier)
+    {
+        return headSprite;
+    }
+
+    public virtual void SetStem(GameObject head, GameObject stem)
+    {
+        head.transform.localPosition = new Vector3(-0.061f, 0.44f);
+        stem.GetComponent<SpriteRenderer>().sprite = stemSprite;
+    }
+
+    public virtual int GetProjRange(int tier)
+    {
+        return projRange;
+    }
+    
+    public void SetProjRange(int projRange)
+    {
+        this.projRange = projRange;
+    }
+
+    public virtual int GetRange(int tier)
+    {
+        return range;
+    }
+
+    public void SetRange(int range)
+    {
+        this.range = range;
+    }
+
+    public virtual int GetDamage(int tier)
+    {
+        return damage;
+    }
+
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
+    }
+
+    public virtual int GetPoints(int tier)
+    {
+        return basePoints;
+    }
+
+    public void SetPoints(int points)
+    {
+        this.basePoints = points;
+    }
+
+    public virtual int GetProjCount(int tier)
+    {
+        return projCount;
+    }
+
+    public void SetProjCount(int projCount)
+    {
+        this.projCount = projCount;
+    }
+
+    public string GetColorHex()
+    {
+        return ColorUtility.ToHtmlStringRGB(textColor);
+    }
+
+    public virtual string Colorizer(string input)
+    {
+        string colorText = GetColorHex();
+        string returnString = "<color=#" + colorText + ">";
+        returnString += input + "</color>";
+        return returnString;
+    }
+
+    public string GetTitle()
+    {
+        return Colorizer(title);
+    }
+
+    public string GetPrimaryText()
+    {
+        return Colorizer(primaryText);
+    }
+
+    public string GetInsideText()
+    {
+        return Colorizer(insideText);
+    }
+
+    public string GetOutsideText()
+    {
+        return Colorizer(outsideText);
+    }
+
+    public string GetFourText()
+    {
+        return Colorizer(fourText);
+    }
+
+    public string GetFiveText()
+    {
+        return Colorizer(fiveText);
+    }
+
 
     public void UpdateAffinity(int tier)
     {
@@ -58,7 +166,7 @@ public abstract class FlowerStats : MonoBehaviour
         //proj.GetComponent<ProjectileBehavior>().ObjectDeactivate();
     }
 
-    public virtual void OnEnemyCollision(GameObject enemy)
+    public virtual void OnEnemyCollision(GameObject enemy, int tier)
     {
 
     }
@@ -66,6 +174,11 @@ public abstract class FlowerStats : MonoBehaviour
     public virtual void OnProjTravel(GameObject proj)
     {
 
+    }
+
+    public virtual void OnHitboxEnter(GameObject flower)
+    {
+        Debug.Log("Hitbox enter called for " + type);
     }
 
     protected IEnumerator SlowApply(float slowEffect, float slowTime, int particle, GameObject enemy)

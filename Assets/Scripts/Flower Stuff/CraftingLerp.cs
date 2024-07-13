@@ -22,7 +22,8 @@ public class CraftingLerp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameControl.PlayerData.gameOver)
+            gameObject.SetActive(false);
     }
 
     public void Activate(string type, int startSide)
@@ -69,7 +70,7 @@ public class CraftingLerp : MonoBehaviour
             //Debug.Log(Time.time);
             yield return new WaitForSeconds(0.001f);
         }
-        Debug.Log("laksdjflkasdjflkadsjfl");
+        //Debug.Log("laksdjflkasdjflkadsjfl");
         if (GameControl.PlayerData.sashTypes.Contains(type))
         {
             int index = GameControl.PlayerData.sashTypes.IndexOf(type);
@@ -78,7 +79,7 @@ public class CraftingLerp : MonoBehaviour
             //Debug.Log("bruh moment" + slots.Count());
             StartCoroutine(sashLerp(lastPos));
             GameControl.PlayerData.affinityIncrease(type);
-            lastPos.GetComponent<SizeLerp>().Execute();
+            lastPos.GetComponent<SizeLerp>().Execute(false);
         }
         else
             gameObject.SetActive(false);

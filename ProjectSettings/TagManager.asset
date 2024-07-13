@@ -39,6 +39,11 @@ TagManager:
   - CrownInfo
   - hats
   - shadow
+  - stem
+  - nodeFrame
+  - dialogue
+  - report
+  - quitMenu
   layers:
   - Default
   - TransparentFX

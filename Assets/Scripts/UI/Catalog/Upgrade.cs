@@ -5,6 +5,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public class UpgradeEssentials
+{
+    public float currentValue;
+    public float upgradeAmount;
+    public float currentPrice;
+    public int timesUpgraded;
+
+    public void SetStats(Upgrade upgrade)
+    {
+        currentValue = upgrade.currentValue;
+        upgradeAmount = upgrade.upgradeAmount;
+        currentPrice = upgrade.currentPrice;
+        timesUpgraded = upgrade.timesUpgraded;
+    }
+}
+
 public class Upgrade : MonoBehaviour
 {
     //elements of upgrade UI
@@ -15,7 +32,7 @@ public class Upgrade : MonoBehaviour
 
     //need to give a sprite as well
 
-    string upgradeKey;
+    public string upgradeKey;
     public string unit;
     public float currentValue;
     public float upgradeAmount;
@@ -27,14 +44,23 @@ public class Upgrade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentPrice = basePrice;
+        //currentPrice = basePrice;
         currentValue = GameControl.PlayerData.upgradeDict[upgradeKey];
+    }
+
+    public void SetValues(UpgradeEssentials oldUpgrade)
+    {
+        currentValue = oldUpgrade.currentValue;
+        upgradeAmount = oldUpgrade.upgradeAmount;
+        timesUpgraded = oldUpgrade.timesUpgraded;
+        currentPrice = oldUpgrade.currentPrice;
     }
 
     public void SetValues(string key, float priceBase, float inflation, int maximumUpgrades, float increaseAmount, string title, string description, string units, Sprite newIcon)
     {
         upgradeKey = key;
         basePrice = priceBase;
+        currentPrice = basePrice;
         priceInflation = inflation;
         maxTimesUpgraded = maximumUpgrades;
         upgradeAmount = increaseAmount;
@@ -54,7 +80,7 @@ public class Upgrade : MonoBehaviour
     public void Purchase()
     {
         //PlayerPrefs.SetFloat("balance", PlayerPrefs.GetFloat("balance") - currentPrice);
-        GameControl.PlayerData.balance -= currentPrice;
+        GameControl.SaveData.balance -= currentPrice;
         //PlayerPrefs.SetFloat(upgradeKey, PlayerPrefs.GetFloat(upgradeKey) + upgradeAmount);
         GameControl.PlayerData.upgradeDict[upgradeKey] = currentValue + upgradeAmount;
         timesUpgraded++;
@@ -66,6 +92,7 @@ public class Upgrade : MonoBehaviour
     IEnumerator PriceUp()
     {
         currentPrice = currentPrice * priceInflation;
+        GameControl.SaveHandler.SaveGame();
         yield return null;
     }
 }

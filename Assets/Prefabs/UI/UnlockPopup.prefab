@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 1360440829730041852}
   - component: {fileID: 2521753086742973054}
   - component: {fileID: 8492134509418869243}
+  - component: {fileID: 4138586569449834368}
   m_Layer: 5
   m_Name: UnlockPopup
   m_TagString: Untagged
@@ -307,6 +308,31 @@ MonoBehaviour:
   announceText: {fileID: 4764639236099628713}
   unlockText: {fileID: 9144768757448735044}
   unlockImage: {fileID: 5507090499967423766}
+--- !u!114 &4138586569449834368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155992749287334371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 26c57f9cdae0df64a911cecf5f5b7e47, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &7196520435687573868
 GameObject:
   m_ObjectHideFlags: 0

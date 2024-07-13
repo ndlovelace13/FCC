@@ -126,7 +126,10 @@ public class DescriptionBehavior : MonoBehaviour
 
     public void Menu()
     {
-        SceneManager.LoadScene("TitleScreen");
+        if (GameControl.SaveData.firstRun)
+            SceneManager.LoadScene("Tutorial");
+        else
+            SceneManager.LoadScene("Menu");
     }
 
 

@@ -90,8 +90,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sizeModifier: 2.5
-  loopTime: 0.5
+  loopTime: 1
   looping: 0
+  lerping: 0
 --- !u!58 &-5677102215858692710
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -137,7 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4845357927543976145}
   - component: {fileID: 3637405703014543191}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: NodeSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

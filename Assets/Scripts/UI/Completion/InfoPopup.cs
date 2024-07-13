@@ -102,7 +102,7 @@ public class InfoPopup : MonoBehaviour
             foreach (var flower in flowers)
             {
                 if (GameControl.PlayerData.allDiscovered.Contains(flower))
-                    crownStats.text += " " + flower;
+                    crownStats.text += " " + GameControl.PlayerData.flowerStatsDict[flower].GetTitle();
                 else
                     crownStats.text += " undiscovered";
                 if (flowers.Last() != flower)

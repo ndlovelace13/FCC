@@ -7,30 +7,33 @@ using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-public class EnemyBehavior : MonoBehaviour
+public abstract class EnemyBehavior : MonoBehaviour
 {
-    int health;
-    int destructScore;
+    protected int health;
     TMP_Text scoreNotif;
     [SerializeField] int maxHealth;
 
     public bool isActive;
 
-    Transform player;
-    Transform crown;
-    Transform target;
+    protected Transform player;
+    protected Transform crown;
+    [SerializeField] protected Transform target;
+
+    public EnemySpawn mySpawner;
+    protected EnemyStats myStats;
 
     //SPEED SHIT
     public float moveSpeed;
     float minSpeed;
     float maxSpeed;
-    float backupSpeed;
-    bool backupUsed = false;
+    [SerializeField] protected float backupSpeed;
     float speedCooldown = 10f;
     float speedIncrement = 0.9f;
-    bool speedUp;
-    bool surprised = false;
-    float surpriseTime = 1f;
+
+
+    public bool surprised = false;
+    protected float surpriseTime = 1f;
+    public Vector3 preSurpriseVel;
 
     [SerializeField] GameObject notif;
 
@@ -50,6 +53,9 @@ public class EnemyBehavior : MonoBehaviour
     public bool isElectrified = false;
     public bool electricPassed = false;
 
+    //5 BLINDING
+    public bool isBlinded = false;
+
     public bool wasKilled = false;
 
     SpriteRenderer[] allSprites;
@@ -58,14 +64,13 @@ public class EnemyBehavior : MonoBehaviour
     List<GameObject> particles;
 
     //Seed Stuff
-    float seedProb = 0.4f;
     GameObject seedPool;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         //destructScore = 10;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CapsuleCollider2D>().transform;
+        
         target = player;
         //moveSpeed = maxSpeed;
         scoreNotif = GameObject.FindGameObjectWithTag("scoreAnnounce").GetComponent<TMP_Text>();
@@ -74,38 +79,46 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
-        if (isActive)
+        /*if (isActive)
         {
-            //SPEED UP MAY NEED REWORK
-            GameObject[] crowns = GameObject.FindGameObjectsWithTag("finalCrown");
-            foreach (GameObject obj in crowns)
-            {
-                if (obj.GetComponent<CrownAttack>().crownActive == true)
-                    crown = obj.transform;
-            }
-            if (crown != null)
-            {
-                TargetSwap();
-            }
-            else
-            {
-                if (target == crown)
-                    StartCoroutine(Surprised(surpriseTime));
-                target = player.transform;
-            }
-            if (!isFrozen && !surprised)
-                moveSpeed = backupSpeed;
-            //movement
-            Vector2 direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
-            direction.Normalize();
-            gameObject.GetComponent<Rigidbody2D>().velocity = direction * moveSpeed;
-            if (health <= 0)
-            {
-                Deactivate();
-            }
             
+            
+            
+        }*/
+    }
+
+    public virtual IEnumerator StandardBehavior()
+    {
+        Debug.Log("Standard Behavior is not defined");
+        yield return null;
+    }
+
+    public virtual IEnumerator StateUpdate()
+    {
+        Debug.Log("No states to update");
+        yield return null;
+    }
+
+    public virtual IEnumerator StateReset()
+    {
+        isBurning = false;
+        isFrozen = false;
+        isSlowed = false;
+        isPoisoned = false;
+        isElectrified = false;
+        isActive = false;
+        surprised = false;
+        wasKilled = true;
+        yield return null;
+    }
+
+    IEnumerator SortingAdjust()
+    {
+        while (gameObject.activeSelf)
+        {
+            yield return new WaitForEndOfFrame();
             //assign sortingorder to both itself and hat if exists
             allSprites = GetComponentsInChildren<SpriteRenderer>();
             //visual layer in reference to player
@@ -116,7 +129,7 @@ public class EnemyBehavior : MonoBehaviour
                     if (sprite.sortingLayerName != "Background")
                         sprite.sortingOrder = 0;
                 }
-                    
+
                 //GetComponent<SpriteRenderer>().sortingOrder = 0;
             }
             else
@@ -130,10 +143,11 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    IEnumerator Surprised(float surpriseTime)
+    protected IEnumerator Surprised(float surpriseTime)
     {
         if (!surprised)
         {
+            preSurpriseVel = GetComponentInChildren<Rigidbody2D>().velocity;
             GetComponent<Animator>().SetBool("Surprise", true);
             Debug.Log("This mf surprised");
             //GetComponent<SpriteRenderer>().color = Color.blue;
@@ -144,6 +158,7 @@ public class EnemyBehavior : MonoBehaviour
             //moveSpeed = backupSpeed;
             surprised = false;
             GetComponent<Animator>().SetBool("Surprise", false);
+            GetComponentInChildren<Rigidbody2D>().velocity = preSurpriseVel;
         }
     }
 
@@ -156,24 +171,26 @@ public class EnemyBehavior : MonoBehaviour
             GameObject otherParent = other.gameObject.transform.parent.gameObject;
             DealDamage(otherParent.GetComponent<ProjectileBehavior>().damage, Color.white);
             augments = otherParent.GetComponent<ProjectileBehavior>().getAugments();
-            AugmentApplication(augments);
+            int tier = otherParent.GetComponent<ProjectileBehavior>().GetTier();
+            AugmentApplication(augments, tier);
             otherParent.GetComponent<ProjectileBehavior>().ObjectDeactivate();
         }
         else if (other.gameObject.tag == "aoe")
         {
             GameObject otherParent = other.gameObject.transform.parent.gameObject;
             augments =  otherParent.GetComponent<AoeBehavior>().getAugments();
-            AugmentApplication(augments);
+            int tier = otherParent.GetComponent<AoeBehavior>().GetTier();
+            AugmentApplication(augments, tier);
         }
     }
 
-    public void AugmentApplication(string[] augs)
+    public void AugmentApplication(string[] augs, int tier)
     {
         foreach (string aug in augs)
         {
             if (aug != null && aug != "")
             {
-                GameControl.PlayerData.flowerStatsDict[aug].OnEnemyCollision(gameObject);
+                GameControl.PlayerData.flowerStatsDict[aug].OnEnemyCollision(gameObject, tier);
             }
         }
     }
@@ -201,6 +218,7 @@ public class EnemyBehavior : MonoBehaviour
 
     public void DealDamage(int damage, Color color)
     {
+        AkSoundEngine.PostEvent("EnemyHit", gameObject);
         health -= damage;
         if (health < maxHealth / 2 && GetComponentInChildren<HatBehavior>() != null)
             GetComponentInChildren<HatBehavior>().HatFall();
@@ -208,20 +226,26 @@ public class EnemyBehavior : MonoBehaviour
         newNotif.GetComponent<DamageNotif>().Creation(damage.ToString(), color);
     }
 
-    private void TargetSwap()
+    protected void TargetSwap()
     {
         float playerDist = Vector3.Distance(player.transform.position, gameObject.transform.position);
         float crownDist = Vector3.Distance(crown.transform.position, gameObject.transform.position);
-        if (playerDist > crownDist)
+        if (playerDist > crownDist && crownDist < 10f)
         {
-            target = crown.transform;
+            target = crown;
         }
+    }
+    public void SetObjects(EnemySpawn newSpawner)
+    {
+        mySpawner = newSpawner;
+        myStats = newSpawner.thisEnemy;
     }
 
     public void Activate()
     {
+        AkSoundEngine.PostEvent("EnemySpawn", gameObject);
         //initialize variables
-        health = GameControl.PlayerData.currentHealth;
+        health = mySpawner.currentHealth;
         maxHealth = health;
         isActive = true;
         GetComponent<SpriteRenderer>().color = Color.white;
@@ -235,37 +259,42 @@ public class EnemyBehavior : MonoBehaviour
         }
         GetComponent<Animator>().SetBool("Surprise", false);
         //assign a random speed
-        maxSpeed = GameControl.PlayerData.currentMax;
-        minSpeed = GameControl.PlayerData.currentMin;
+        maxSpeed = mySpawner.currentMax;
+        minSpeed = mySpawner.currentMin;
         backupSpeed = Random.Range(minSpeed, maxSpeed);
+        moveSpeed = backupSpeed;
         GetComponent<Animator>().speed = backupSpeed * 0.5f;
         //begin the gradual speed up routine
         StartCoroutine(GradualSpeedUp());
         StartCoroutine(KillReset());
         allSprites = GetComponentsInChildren<SpriteRenderer>();
+
+        //set the enemy's initial target to be the player
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CapsuleCollider2D>().transform;
+        target = player;
+        //Debug.Log(player.position);
+        StartCoroutine(SortingAdjust());
+        StartCoroutine(StandardBehavior());
+        StartCoroutine(StateUpdate());
     }
 
-    private void Deactivate()
+    protected void Deactivate()
     {
-        scoreNotif.GetComponent<ScoreNotification>().newFeed("Enemy Defeated | +" + GameControl.PlayerData.killScore);
+        StartCoroutine(StateReset());
+        AkSoundEngine.PostEvent("EnemyKilled", gameObject);
+        scoreNotif.GetComponent<ScoreNotification>().newFeed("Enemy Defeated | +" + mySpawner.killScore);
+        GameControl.PlayerData.enemyScore += mySpawner.killScore;
+        GameControl.PlayerData.shiftEnemies++;
         //int currentScore = PlayerPrefs.GetInt("totalScore");
         //PlayerPrefs.SetInt("totalScore", currentScore + destructScore);
-        GameControl.PlayerData.score += GameControl.PlayerData.killScore;
-        isBurning = false;
-        isFrozen = false;
-        isSlowed = false;
-        isPoisoned = false;
-        isElectrified = false;
-        isActive = false;
-        surprised = false;
-        wasKilled = true;
+        GameControl.PlayerData.score += mySpawner.killScore;
         if (Random.Range(0f, 1f) < GameControl.PlayerData.seedChance)
         {
             GameObject newSeed = seedPool.GetComponent<ObjectPool>().GetPooledObject();
             newSeed.SetActive(true);
             newSeed.transform.localPosition = transform.localPosition;
         }
-        GameControl.PlayerData.activeEnemies--;
+        mySpawner.activeEnemies--;
         gameObject.SetActive(false);
     }
 
@@ -301,7 +330,7 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    private void getParticles()
+    protected void getParticles()
     {
         //retrieving all particles
         particles = new List<GameObject>();

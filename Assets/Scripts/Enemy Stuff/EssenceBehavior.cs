@@ -29,10 +29,11 @@ public class EssenceBehavior : MonoBehaviour
 
     private void OnEnable()
     {
+        transform.localScale = Vector3.one * 0.25f;
         player = GameObject.FindWithTag("Player").GetComponentInChildren<PlayerMovement>().gameObject;
         pickingUp = false;
         GetComponent<SizeLerp>().lerping = false;
-        GetComponent<SizeLerp>().Execute();
+        GetComponent<SizeLerp>().Execute(true);
     }
 
     IEnumerator StartLerp()
@@ -52,7 +53,8 @@ public class EssenceBehavior : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        GameControl.PlayerData.essenceCount++;
+        GameControl.SaveData.essenceCount++;
+        GameControl.PlayerData.shiftSeeds++;
         gameObject.SetActive(false);
     }
 }

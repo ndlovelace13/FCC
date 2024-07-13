@@ -38,7 +38,7 @@ public class DonationItemBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameControl.PlayerData.essenceCount == 0 || currentResearch.maxResearchTimes == currentResearch.currentResearchTimes)
+        if (GameControl.SaveData.essenceCount == 0 || currentResearch.maxResearchTimes == currentResearch.currentResearchTimes)
             donationButton.interactable = false;
         goalText.text = "Seeds Required for Goal: " + (currentResearch.requiredSeeds - currentResearch.currentSeeds);
     }
@@ -46,7 +46,7 @@ public class DonationItemBehavior : MonoBehaviour
     public void Donate()
     {
         Debug.Log("Donated once");
-        GameControl.PlayerData.essenceCount--;
+        GameControl.SaveData.essenceCount--;
         currentResearch.currentSeeds++;
         if (currentResearch.requiredSeeds == currentResearch.currentSeeds)
             currentResearch.ResearchAction();
