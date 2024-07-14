@@ -12,6 +12,33 @@ public enum augment
     ELECTRIC
 }
 
+public class Augment
+{
+    string type;
+    int power;
+
+    public Augment(string type)
+    {
+        this.type = type;
+    }
+
+    public string GetAugType()
+    {
+        return type;
+    }
+
+    public int GetAugPower()
+    {
+        return power;
+    }
+
+    public void SetAugPower(int newPower)
+    {
+        power = newPower;
+    }
+
+}
+
 
 public class ProjectileBehavior : MonoBehaviour
 {
@@ -24,6 +51,7 @@ public class ProjectileBehavior : MonoBehaviour
     int tier = 1;
     string[] augs = new string[3];
     Vector3 startingPos = Vector3.zero;
+    public Dictionary<string, int> actualAugs = new Dictionary<string, int>();
 
 
     bool arrived = false;
@@ -116,8 +144,20 @@ public class ProjectileBehavior : MonoBehaviour
         ObjectDeactivate();
     }
 
+    //This is where to make the augment objects
     private void Augmentation()
     {
+        foreach (var aug in augs)
+        {
+            if (aug != null && aug != "")
+            {
+                if (actualAugs.ContainsKey(aug))
+                    actualAugs[aug]++;
+                else
+                    actualAugs.Add(aug, 1);
+            }
+        }
+        //change this eventually to take in the augments with power level instead of just types
         setParticles(augs);
     }
 

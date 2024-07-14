@@ -17,11 +17,6 @@ public class CrownConstruction : MonoBehaviour
     GameObject finalCrown;
     Transform[] slots;
 
-    Dictionary<string, string> outsideText;
-    Dictionary<string, string> insideText;
-    Dictionary<string, string> primaryText;
-    Dictionary<string, string> fourText;
-
     public bool constructionInProgress = false;
     public bool constructionReady = false;
     bool crownHeld = false;
@@ -36,6 +31,7 @@ public class CrownConstruction : MonoBehaviour
     string aug1 = "";
     string aug2 = "";
     string aug3 = "";
+    Dictionary<string, int> actualAugs;
     int numProjs = 0;
     int projRange = 0;
     int tier;
@@ -104,6 +100,9 @@ public class CrownConstruction : MonoBehaviour
             finalCrown.GetComponent<SpriteRenderer>().enabled = true;
             finalCrown.transform.parent = null;
             gameObject.GetComponent<CrownThrowing>().CompletedCrown(finalCrown, range);
+            //TODO - switch hardcoded augments to passing actualAugs dict
+            foreach (var aug in actualAugs)
+                Debug.Log("Augment " + aug.Key + " " + aug.Value);
             finalCrown.GetComponent<CrownAttack>().SetProjStats(projRange, damage, projType, aug1, aug2, aug3, numProjs, tier);
             //Instantiation of new crown
             CrownReplace();
@@ -350,6 +349,7 @@ public class CrownConstruction : MonoBehaviour
         aug1 = "";
         aug2 = "";
         aug3 = "";
+        actualAugs = new Dictionary<string, int>();
         Transform[] flowers = docket.GetComponentsInChildren<Transform>();
         flowers = flowers.Where(child => child.tag == "FlowerHead").ToArray();
         List<FlowerStats> flowerStats = flowerSlots(flowers);
@@ -378,10 +378,15 @@ public class CrownConstruction : MonoBehaviour
         range = flowerStats[0].GetRange(flowerPos[0].tier) + flowerStats[4].GetRange(flowerPos[4].tier);
         damage = flowerStats[1].GetDamage(flowerPos[1].tier) + flowerStats[2].GetDamage(flowerPos[2].tier) + flowerStats[3].GetDamage(flowerPos[3].tier);
         projType = flowerPos[2].type;
+        //remove the basic augs eventually
         aug1 = flowerPos[2].type;
+        AugPowerCheck(aug1);
         numProjs = centerStats.GetProjCount(flowerPos[2].tier);
         foreach (var flower in flowerPos)
-            tier += flower.tier - 1;
+        {
+            if (flower.tier > 1)
+                tier += flower.tier;
+        }
 
 
         
@@ -423,6 +428,7 @@ public class CrownConstruction : MonoBehaviour
                             aug2 = flowerPos[0].type;
                         else
                             aug3 = flowerPos[0].type;
+                        AugPowerCheck(flowerPos[0].type);
                     }
                     else
                     {
@@ -446,6 +452,7 @@ public class CrownConstruction : MonoBehaviour
                             aug2 = flowerPos[0].type;
                         else
                             aug3 = flowerPos[0].type;
+                        AugPowerCheck(flowerPos[0].type);
                     }
                     else
                     {
@@ -466,6 +473,8 @@ public class CrownConstruction : MonoBehaviour
                         //flowerStats.RemoveAt(2);
                         aug2 = flowerPos[0].type;
                         aug3 = flowerPos[0].type;
+                        AugPowerCheck(flowerPos[0].type);
+                        AugPowerCheck(flowerPos[0].type);
                         //crownAnnouncement = flowerStats[0].fourText;
                     }
                     //non-symmetrical
@@ -480,6 +489,8 @@ public class CrownConstruction : MonoBehaviour
                     crownScore += flowerStats[0].GetPoints(flowerPos[0].tier) * 5 * 5;
                     aug2 = flowerPos[0].type;
                     aug3 = flowerPos[0].type;
+                    AugPowerCheck(flowerPos[0].type);
+                    AugPowerCheck(flowerPos[0].type);
                     //crownAnnouncement += flowerStats[0].fiveText;
                     //fiver = true;
                     break;
@@ -523,8 +534,22 @@ public class CrownConstruction : MonoBehaviour
             //   crownAnnouncement += " ";
         }
         Debug.Log("gottem");
-        
+
+        //check for sunny augment, apply tier value instead if it exists
+        if (actualAugs.ContainsKey("sunny"))
+            actualAugs["sunny"] += tier;
+
         Debug.Log(crownAnnouncement);
         return crownScore;
+
+        
+    }
+
+    private void AugPowerCheck(string type)
+    {
+        if (actualAugs.ContainsKey(type))
+            actualAugs[type]++;
+        else
+            actualAugs.Add(type, 1);
     }
 }
