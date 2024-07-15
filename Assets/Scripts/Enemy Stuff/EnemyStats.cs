@@ -10,6 +10,8 @@ public abstract class EnemyStats : MonoBehaviour
     [SerializeField] public GameObject enemyPrefab;
     [SerializeField] public float maxInterval, minInterval, maxSpeed, minSpeed;
     [SerializeField] public int maxHealth, healthInterval, startingEnemies, enemyScaleAmt, killScore, scoreIncrease, countScaleTime, statsScaleTime;
+    [SerializeField] public string type;
+    [SerializeField] public Sprite sprite;
     
     // Start is called before the first frame update
     void Start()

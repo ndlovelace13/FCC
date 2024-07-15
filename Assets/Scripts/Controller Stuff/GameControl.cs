@@ -26,6 +26,7 @@ public class SaveData
     public bool catalogUnlocked = false;
     public bool researchUnlocked = false;
     public bool completionUnlocked = false;
+    public bool almanacUnlocked = false;
     public Queue<string[]> dialogueQueue = new Queue<string[]>();
 
     //Persistent Counters
@@ -193,18 +194,25 @@ public class GameControl : MonoBehaviour
 
     public List<Upgrade> upgrades;
 
-    //essence progression
-    //public int essenceCount = 0;
-
     //research
     [SerializeField] GameObject ResearchPrefab;
     public List<Research> researchItems;
     [SerializeField] GameObject UnlockPrefab;
 
+    //almanac variables
+    public List<Page> almanacPages;
+    [SerializeField] GameObject stickerPage;
+    [SerializeField] public GameObject flowerInfoPage;
+    [SerializeField] public GameObject flowerStatPage;
+    [SerializeField] public GameObject enemyPage;
+    [SerializeField] GameObject helperPage;
+    [SerializeField] GameObject playerStatsPage;
+
     //enemy related variables
     [SerializeField] List<EnemyStats> enemyTypes = new List<EnemyStats>();
     List<GameObject> enemySpawners = new List<GameObject>();
     [SerializeField] GameObject enemySpawnPrefab;
+    public Dictionary<string, EnemyStats> enemyStatsDict;
     public int newEnemyTime = 60;
 
     private void Awake()
@@ -227,12 +235,14 @@ public class GameControl : MonoBehaviour
         SaveHandler.DeleteSaveFile();
         SaveData = new SaveData();
         SetFlowers();
+        EnemyDict();
         UpgradeInit();
         UpgradeApply();
         ResearchInit();
         //init shiftReports list if one doesn't exist
         SaveData.shiftReports = new List<ShiftReport>();
         CrownCompletion.PermutationEst();
+        AlmanacInit();
         continuePressed = true;
     }
 
@@ -241,11 +251,13 @@ public class GameControl : MonoBehaviour
         SaveHandler.LoadGame();
         //Restore flower unlocks
         SetFlowers();
+        EnemyDict();
         //Restore the Upgrades & Research
         UpgradeInit();
         UpgradeApply();
         ResearchInit();
         CrownCompletion.PermutationEst();
+        AlmanacInit();
         continuePressed = true;
         //Restore the Discovery Stuff
 
@@ -433,9 +445,63 @@ public class GameControl : MonoBehaviour
         
     }
 
+    private void AlmanacInit()
+    {
+        //make an almanac object to contain all the pages persistently
+        GameObject almanacContainer = new GameObject("AlmanacContainer");
+        almanacContainer.transform.SetParent(transform);
+
+        //initialize sticker pages for flowers and enemies
+        GameObject flowerStickers = Instantiate(stickerPage);
+        flowerStickers.GetComponent<StickerPage>().StickerAssign(flowerStatsDict);
+        flowerStickers.transform.SetParent(almanacContainer.transform);
+
+        GameObject enemyStickers = Instantiate(stickerPage);
+        enemyStickers.GetComponent<StickerPage>().StickerAssign(enemyStatsDict);
+        enemyStickers.transform.SetParent(almanacContainer.transform);
+
+        almanacPages = new List<Page> { flowerStickers.GetComponent<Page>(), enemyStickers.GetComponent<Page>() };
+
+        //init an info and stat page for each flower
+        List<Page> flowerPages = flowerStickers.GetComponent<StickerPage>().PageInit();
+        almanacPages.AddRange(flowerPages);
+        
+        //init an info page for each enemy
+        List<Page> enemyPages = enemyStickers.GetComponent<StickerPage>().PageInit();
+        almanacPages.AddRange(enemyPages);
+
+        //create the other info pages
+        //TODO - floral sash info page?
+        //TODO - mastery page?
+        GameObject helperObj = Instantiate(helperPage);
+        Page crownPage = helperObj.GetComponent<HelperPage>();
+        helperObj.transform.SetParent(almanacContainer.transform);
+
+        GameObject playerInfoObj = Instantiate(playerStatsPage);
+        Page playerInfo = playerInfoObj.GetComponent<PlayerStatsPage>();
+        playerInfoObj.transform.SetParent(almanacContainer.transform);
+
+        almanacPages.Add(crownPage);
+        almanacPages.Add(playerInfo);
+
+        Debug.Log("There are currently " + almanacPages.Count + " pages in the almanac");
+    }
+
+    //Enemy Initialization
+    private void EnemyDict()
+    {
+        enemyStatsDict = new Dictionary<string, EnemyStats>();
+        foreach (var enemy in enemyTypes)
+        {
+            enemyStatsDict.Add(enemy.type, enemy);
+        }
+    }
+
+    //Enemy Reset for ResetRun
     private void EnemyInit()
     {
         enemySpawners.Clear();
+        //enemyStatsDict = new Dictionary<string, EnemyStats>();
         foreach (var enemy in enemyTypes)
         {
             GameObject newSpawner = Instantiate(enemySpawnPrefab);

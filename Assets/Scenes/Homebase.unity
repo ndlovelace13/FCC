@@ -563,7 +563,7 @@ Transform:
   m_GameObject: {fileID: 101569446}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.07836344, w: 0.9969249}
-  m_LocalPosition: {x: 9.11, y: -2.08, z: 1.5}
+  m_LocalPosition: {x: 8.7, y: -2.25, z: 1.5}
   m_LocalScale: {x: 0.1599562, y: 0.15509084, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2478,6 +2478,7 @@ MonoBehaviour:
   catalog: {fileID: 947776396}
   research: {fileID: 1076012867}
   completionTracker: {fileID: 101569446}
+  almanac: {fileID: 1136862526}
   carKeys: {fileID: 1081832313}
   phone: {fileID: 1701193744}
   speechBubble: {fileID: 1249355621}
@@ -4649,13 +4650,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1076012867}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.15421899, w: 0.98803675}
-  m_LocalPosition: {x: 11.57, y: 1.72, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.08700707, w: 0.9962077}
+  m_LocalPosition: {x: 9.87, y: 2.44, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -17.743}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -9.983}
 --- !u!1001 &1078579619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5370,6 +5371,159 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1136862526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1136862530}
+  - component: {fileID: 1136862529}
+  - component: {fileID: 1136862528}
+  - component: {fileID: 1136862527}
+  m_Layer: 0
+  m_Name: AlmanacCover
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!61 &1136862527
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136862526}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.46406484, y: -0.17120814}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 10.24, y: 10.24}
+    newSize: {x: 10.24, y: 10.24}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 7.3895364, y: 8.576294}
+  m_EdgeRadius: 0
+--- !u!114 &1136862528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136862526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa13dd7a1a2b04349b9b5268f4f630bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuName: Almanac
+  menuTitle: <color="red">The Almanac
+  menuPopup: {fileID: 1607603755}
+  originalPlacement: {fileID: 1136862530}
+  finalPlacement: {fileID: 0}
+  sizeDiff: 2.25
+  horizontalPlacement: 0.4
+  report: {fileID: 563395985}
+  keys: 0
+  locHandler: {fileID: 0}
+--- !u!212 &1136862529
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136862526}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -139382901
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: da97df27eda1c1143a47f59c2471e8a1, type: 3}
+  m_Color: {r: 0.7830189, g: 0.21791564, b: 0.21791564, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 10.24, y: 10.24}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1136862530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136862526}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0.27585047, w: 0.96120054}
+  m_LocalPosition: {x: 13.97, y: 0.71, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -32.025}
 --- !u!1 &1221010742
 GameObject:
   m_ObjectHideFlags: 0
@@ -9209,6 +9363,7 @@ SceneRoots:
   - {fileID: 1875290706}
   - {fileID: 288610129}
   - {fileID: 947776399}
+  - {fileID: 1136862530}
   - {fileID: 1076012871}
   - {fileID: 101569450}
   - {fileID: 1081832317}

@@ -19,6 +19,7 @@ public class HomebaseCam : MonoBehaviour
     [SerializeField] GameObject catalog;
     [SerializeField] GameObject research;
     [SerializeField] GameObject completionTracker;
+    [SerializeField] GameObject almanac;
     [SerializeField] GameObject carKeys;
 
     //Dialogue Stuff
@@ -276,6 +277,8 @@ public class HomebaseCam : MonoBehaviour
             completionTracker.SetActive(true);
         if (GameControl.SaveData.catalogUnlocked)
             catalog.SetActive(true);
+        if (GameControl.SaveData.almanacUnlocked || GameControl.PlayerData.testing)
+            almanac.SetActive(true);
         yield return null;
     }
 

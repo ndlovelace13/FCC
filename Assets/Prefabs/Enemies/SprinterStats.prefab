@@ -57,6 +57,8 @@ MonoBehaviour:
   scoreIncrease: 5
   countScaleTime: 30
   statsScaleTime: 40
+  type: sprinter
+  sprite: {fileID: -320072828, guid: 3997d72c90df9674780d9a690d035d0c, type: 3}
   sprintLength: 2
   sprintSpeed: 6
   chargeTime: 2

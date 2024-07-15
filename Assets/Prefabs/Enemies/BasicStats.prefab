@@ -57,3 +57,5 @@ MonoBehaviour:
   scoreIncrease: 2
   countScaleTime: 45
   statsScaleTime: 30
+  type: basic
+  sprite: {fileID: -1219982013, guid: 3c573c61a2b854644a15e25a08e0dbad, type: 3}

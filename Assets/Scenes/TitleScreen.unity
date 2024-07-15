@@ -487,7 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300420c45485e27469d46d85a5883b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testing: 0
+  testing: 1
   tutorialActive: 0
   speaking: 0
   dialogueComplete: 0
@@ -584,6 +584,13 @@ MonoBehaviour:
   ResearchPrefab: {fileID: 5122733356647096448, guid: 51f36e36923db974da9666aa476680d7, type: 3}
   researchItems: []
   UnlockPrefab: {fileID: 0}
+  almanacPages: []
+  stickerPage: {fileID: 5497271469674503023, guid: 3c86417fe9903a748a3f8d4cbf12bd12, type: 3}
+  flowerInfoPage: {fileID: 5497271469674503023, guid: 7130a90814f296b4e96b28b3f2ef7f8c, type: 3}
+  flowerStatPage: {fileID: 5497271469674503023, guid: e350df2f2e1b67a4dad494a1537a00b9, type: 3}
+  enemyPage: {fileID: 5497271469674503023, guid: a0a54442dede0b04c9ae0ade9c7344cc, type: 3}
+  helperPage: {fileID: 5497271469674503023, guid: 58188cdbdb5aad3439b45823a008d092, type: 3}
+  playerStatsPage: {fileID: 5497271469674503023, guid: 49d6a98f26df62f44a97577372581b90, type: 3}
   enemyTypes:
   - {fileID: 6648197801844819290, guid: 2330b4c813fa77f4083a6f9b9ccf1806, type: 3}
   - {fileID: 6760059903058135406, guid: 3969d15c77713874abbdeabf94510183, type: 3}
