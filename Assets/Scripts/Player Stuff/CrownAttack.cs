@@ -14,9 +14,10 @@ public class CrownAttack : MonoBehaviour
     [SerializeField] float speed = 5f;
     float range;
     int damage;
-    string augment1;
-    string augment2;
-    string augment3;
+    //string augment1;
+    //string augment2;
+    //string augment3;
+    Dictionary<string, int> actualAugs;
     int projCount;
     int tier;
 
@@ -53,14 +54,15 @@ public class CrownAttack : MonoBehaviour
         }
     }
 
-    public void SetProjStats(float r, int d, string type, string aug1, string aug2, string aug3, int numProjs, int tier)
+    public void SetProjStats(float r, int d, string type, Dictionary<string, int> actualAugs, int numProjs, int tier)
     {
         range = r;
         damage = d;
         projType = type;
-        augment1 = aug1;
-        augment2 = aug2;
-        augment3 = aug3;
+        //augment1 = aug1;
+        //augment2 = aug2;
+        //augment3 = aug3;
+        this.actualAugs = actualAugs;
         projCount = numProjs;
         this.tier = tier;
     }
@@ -215,7 +217,7 @@ public class CrownAttack : MonoBehaviour
 
         //rotating towards direction of movement
         proj.SetActive(true);
-        proj.GetComponent<ProjectileBehavior>().SetProps(range, damage, augment1, augment2, augment3, projDir, tier);
+        proj.GetComponent<ProjectileBehavior>().SetProps(range, damage, actualAugs, projDir);
         proj.GetComponentInChildren<Rigidbody2D>().velocity = projDir * speed;
         singleFire = false;
         yield return null;
@@ -246,12 +248,14 @@ public class CrownAttack : MonoBehaviour
 
         range = GameControl.PlayerData.flowerStatsDict[type].GetProjRange(behavior.tier);
         damage = GameControl.PlayerData.flowerStatsDict[type].GetDamage(behavior.tier);
-        augment1 = type;
-        Debug.Log("Type: " + type + " Augment: " + augment1);
-        augment2 = "";
-        augment3 = "";
+        //augment1 = type;
+        //Debug.Log("Type: " + type + " Augment: " + augment1);
+        //augment2 = "";
+        //augment3 = "";
         tier = behavior.tier - 1;
         singleFire = true;
+        actualAugs = new Dictionary<string, int>();
+        actualAugs.Add(type, behavior.tier);
         StartCoroutine(ProjSpawn(angleRadians));
         //get that shit outta here
         Destroy(flower);
@@ -261,7 +265,7 @@ public class CrownAttack : MonoBehaviour
     {
         if (GameControl.PlayerData.tutorialState == 6)
             GameControl.PlayerData.crownThrown = true;
-        if (GameControl.PlayerData.tutorialState == 7 && augment1 != "red")
+        if (GameControl.PlayerData.tutorialState == 7 && !actualAugs.ContainsKey("red"))
             GameControl.PlayerData.fireReset = true;
         Destroy(crown);
         attacking = false;

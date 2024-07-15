@@ -9,6 +9,10 @@ public class YellowStats : FlowerStats
     float stunTime = 1f;
     int electricDamage = 5;
 
+    //power scaling
+    int targetIncrease = 1;
+    int damageIncrease = 3;
+
     GameObject lightningPool;
     // Start is called before the first frame update
     void Start()
@@ -24,17 +28,21 @@ public class YellowStats : FlowerStats
 
     public override void OnEnemyCollision(GameObject enemy, int t)
     {
+        //ElectricApply the numTargets based on power level t
         if (lightningPool == null)
             lightningPool = GameObject.FindGameObjectWithTag("lightningPool");
         if (!enemy.GetComponent<EnemyBehavior>().electricPassed)
         {
-            string[] augs = enemy.GetComponent<EnemyBehavior>().augments;
-            StartCoroutine(ElectricApply(numTargets, augs, enemy, t));
+            Dictionary<string, int> actualAugs = new Dictionary<string, int>(enemy.GetComponent<EnemyBehavior>().actualAugs);
+            int thisTargets = numTargets + targetIncrease * (t - 1);
+            actualAugs.Remove("yellow");
+            StartCoroutine(ElectricApply(thisTargets, actualAugs, enemy, t));
         }
     }
 
-    IEnumerator ElectricApply(int remainingTargets, string[] augs, GameObject enemy, int tier)
+    IEnumerator ElectricApply(int remainingTargets, Dictionary<string, int> actualAugs, GameObject enemy, int tier)
     {
+        //TODO - remove electricity from the augments at some point before passing
         Debug.Log("This mf electrified");
         enemy.GetComponent<EnemyBehavior>().isElectrified = true;
         enemy.GetComponent<SpriteRenderer>().color = Color.yellow;
@@ -51,9 +59,10 @@ public class YellowStats : FlowerStats
             if (closestEnemy != null)
             {
                 StartCoroutine(LightningEffect(enemy, closestEnemy));
-                ElectricPass(remainingTargets - 1, augs, closestEnemy, tier);
+                ElectricPass(remainingTargets - 1, actualAugs, closestEnemy, tier);
             }
-            enemy.GetComponent<EnemyBehavior>().DealDamage(electricDamage, Color.yellow);
+            int thisDamage = electricDamage + damageIncrease * (tier - 1);
+            enemy.GetComponent<EnemyBehavior>().DealDamage(thisDamage, Color.yellow);
         }
         //isElectrified = false;
         yield return null;
@@ -77,11 +86,11 @@ public class YellowStats : FlowerStats
         //newLightning.SetActive(false);
     }
 
-    public void ElectricPass(int remainingTargets, string[] augs, GameObject nextEnemy, int tier)
+    public void ElectricPass(int remainingTargets, Dictionary<string, int> actualAugs, GameObject nextEnemy, int tier)
     {
         nextEnemy.GetComponent<EnemyBehavior>().electricPassed = true;
-        StartCoroutine(ElectricApply(remainingTargets, augs, nextEnemy, tier));
-        nextEnemy.GetComponent<EnemyBehavior>().AugmentApplication(augs, tier);
+        StartCoroutine(ElectricApply(remainingTargets, actualAugs, nextEnemy, tier));
+        nextEnemy.GetComponent<EnemyBehavior>().AugmentApplication(actualAugs);
         nextEnemy.GetComponent<EnemyBehavior>().electricPassed = false;
     }
 }

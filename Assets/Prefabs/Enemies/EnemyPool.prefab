@@ -66,6 +66,7 @@ MonoBehaviour:
   Player: {fileID: 0}
   spawnDelay: 3
   thisEnemy: {fileID: 6648197801844819290, guid: 2330b4c813fa77f4083a6f9b9ccf1806, type: 3}
+  marker: {fileID: 1286147157867614864, guid: 8b5cc1bce2a433f4bbcd369bdf57f134, type: 3}
   currentMax: 0
   currentMin: 0
   currentHealth: 0

@@ -24,9 +24,9 @@ public class DandyStats : FlowerStats
         
     }
 
-    public override void OnProjArrival(GameObject proj)
+    public override void OnProjArrival(GameObject proj, int power)
     {
-        base.OnProjArrival(proj);
+        base.OnProjArrival(proj, power);
         //find the projectile pool
         projPool = GameObject.FindWithTag("projectilePool").GetComponent<ObjectPool>();
 
@@ -61,18 +61,18 @@ public class DandyStats : FlowerStats
         {
             proj.transform.localScale = Vector3.one / splitCount;
         }
-        string[] augs = original.GetComponent<ProjectileBehavior>().getAugments();
+        //string[] augs = original.GetComponent<ProjectileBehavior>().getAugments();
         int tier = original.GetComponent<ProjectileBehavior>().GetTier();
-        for (int i = 0; i < augs.Length; i++)
+        Dictionary<string, int> actualAugs = new Dictionary<string, int>(original.GetComponent<ProjectileBehavior>().getActualAugs());
+        if (actualAugs.ContainsKey("dandy"))
         {
-            if (augs[i] == "dandy")
-            {
-                augs[i] = "";
-                break;
-            }
+            if (actualAugs["dandy"] == 1)
+                actualAugs.Remove("dandy");
+            else
+                actualAugs["dandy"]--;
         }
         float speed = original.GetComponent<Rigidbody2D>().velocity.magnitude;
-        proj.GetComponent<ProjectileBehavior>().SetProps(range / 2f, damage / splitCount, augs[0], augs[1], augs[2], projDir, tier);
+        proj.GetComponent<ProjectileBehavior>().SetProps(range / 2f, damage / splitCount, actualAugs, projDir);
         proj.GetComponent<Rigidbody2D>().velocity = projDir * speed;
         yield return null;
     }

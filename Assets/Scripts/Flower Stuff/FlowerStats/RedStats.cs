@@ -13,6 +13,11 @@ public class RedStats : FlowerStats
     float burnCooldown = 0.5f;
     float burnTime = 3;
 
+    //power scaling
+    int damageIncrease = 1;
+    float timeIncrease = 1.5f;
+    float flameTimeIncrease = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,14 +30,14 @@ public class RedStats : FlowerStats
         
     }
 
-    public override void OnProjTravel(GameObject proj)
+    public override void OnProjTravel(GameObject proj, int power)
     {
-        base.OnProjTravel(proj);
+        base.OnProjTravel(proj, power);
         if (GameControl.PlayerData.tutorialActive)
             GameControl.PlayerData.redCrown = true;
     }
 
-    public override void OnProjArrival(GameObject proj)
+    public override void OnProjArrival(GameObject proj, int power)
     {
         Debug.Log("ITS WORKING");
         if (flamesPool == null)
@@ -43,7 +48,8 @@ public class RedStats : FlowerStats
         newFlame.SetActive(true);
         newFlame.transform.position = proj.transform.position;
         int tier = proj.GetComponent<ProjectileBehavior>().GetTier();
-        newFlame.GetComponent<AoeBehavior>().Activate(proj.GetComponent<ProjectileBehavior>().getAugments(), flameTime, "red", tier);
+        float thisFlameTime = flameTime + flameTimeIncrease * (power - 1);
+        newFlame.GetComponent<AoeBehavior>().Activate(proj.GetComponent<ProjectileBehavior>().getActualAugs(), thisFlameTime, "red");
         //proj.GetComponent<ProjectileBehavior>().ObjectDeactivate();
     }
 
@@ -51,21 +57,24 @@ public class RedStats : FlowerStats
     {
         enemy.GetComponent<EnemyBehavior>().isBurning = true;
         enemy.GetComponent<SpriteRenderer>().color = Color.red;
-        StartCoroutine(BurnHandler(enemy));
+        StartCoroutine(BurnHandler(enemy, t));
     }
 
-    IEnumerator BurnHandler(GameObject enemy)
+    IEnumerator BurnHandler(GameObject enemy, int power)
     {
         float burnTimer = 0f;
+        //TODO - fuck up this system, foul ass particle system needs to go
         GameObject part = enemy.GetComponent<EnemyBehavior>().nextParticle();
         enemy.GetComponent<EnemyBehavior>().setParticle(part, 1);
-        while (burnTimer < burnTime)
+        float thisBurnTime = burnTime + timeIncrease * (power - 1);
+        int thisBurnDmg = burnDamage + damageIncrease * (power - 1);
+        while (burnTimer < thisBurnTime)
         {
             //Debug.Log("ouch " + health);
             yield return new WaitForSeconds(burnCooldown);
             if (enemy.activeSelf == false)
                 break;
-            enemy.GetComponent<EnemyBehavior>().DealDamage(burnDamage, Color.red);
+            enemy.GetComponent<EnemyBehavior>().DealDamage(thisBurnDmg, Color.red);
             burnTimer += burnCooldown;
         }
         Debug.Log("Done");

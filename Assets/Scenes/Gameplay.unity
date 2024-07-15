@@ -2113,6 +2113,14 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1700137180}
+    - target: {fileID: 965411139455985238, guid: 230f3e16254910d4abe21bdedad81e84, type: 3}
+      propertyPath: negMarker
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 965411139455985238, guid: 230f3e16254910d4abe21bdedad81e84, type: 3}
+      propertyPath: posMarker
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5356731414288089438, guid: 230f3e16254910d4abe21bdedad81e84, type: 3}
       propertyPath: m_Name
       value: EnemyPool

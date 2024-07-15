@@ -160,18 +160,18 @@ public abstract class FlowerStats : MonoBehaviour
         projCount = projTiers[tier];
     }
 
-    public virtual void OnProjArrival(GameObject proj)
+    public virtual void OnProjArrival(GameObject proj, int power)
     {
-        Debug.Log("on arrival called for " + type);
+        Debug.Log("on arrival called for " + type + " | Level: " + power);
         //proj.GetComponent<ProjectileBehavior>().ObjectDeactivate();
     }
 
     public virtual void OnEnemyCollision(GameObject enemy, int tier)
     {
-
+        Debug.Log("enemy collision called for " + type + " | Level: " + tier);
     }
 
-    public virtual void OnProjTravel(GameObject proj)
+    public virtual void OnProjTravel(GameObject proj, int power)
     {
 
     }
@@ -183,6 +183,7 @@ public abstract class FlowerStats : MonoBehaviour
 
     protected IEnumerator SlowApply(float slowEffect, float slowTime, int particle, GameObject enemy)
     {
+        Debug.Log("slow beginning");
         GameObject part = enemy.GetComponent<EnemyBehavior>().nextParticle();
         enemy.GetComponent<EnemyBehavior>().setParticle(part, particle);
         enemy.GetComponent<EnemyBehavior>().isSlowed = true;
@@ -194,7 +195,23 @@ public abstract class FlowerStats : MonoBehaviour
         else
             moveSpeed = moveSpeed * slowEffect;*/
         enemy.GetComponent<EnemyBehavior>().SpeedDown(slowEffect);
-        yield return new WaitForSeconds(slowTime);
+        float currentTime = 0f;
+        while (currentTime < slowTime)
+        {
+            if (!enemy.activeSelf)
+            {
+                enemy.GetComponent<EnemyBehavior>().SpeedUp(slowEffect);
+                enemy.GetComponent<EnemyBehavior>().isSlowed = false;
+                enemy.GetComponent<SpriteRenderer>().color = Color.white;
+                enemy.GetComponent<EnemyBehavior>().setParticle(part, 0);
+                if (particle == 4)
+                    enemy.GetComponent<EnemyBehavior>().isElectrified = false;
+                yield break;
+            }
+            currentTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        //yield return new WaitForSeconds(slowTime);
         //this might be fucked;
         /*if (isFrozen || backupUsed)
         {
@@ -203,15 +220,12 @@ public abstract class FlowerStats : MonoBehaviour
         }
         else
             moveSpeed = moveSpeed / slowEffect;*/
-        if (!enemy.GetComponent<EnemyBehavior>().wasKilled)
-        {
-            enemy.GetComponent<EnemyBehavior>().SpeedUp(slowEffect);
-            enemy.GetComponent<EnemyBehavior>().isSlowed = false;
-            enemy.GetComponent<SpriteRenderer>().color = Color.white;
-            enemy.GetComponent<EnemyBehavior>().setParticle(part, 0);
-            if (particle == 4)
-                enemy.GetComponent<EnemyBehavior>().isElectrified = false;
-        }
+        enemy.GetComponent<EnemyBehavior>().SpeedUp(slowEffect);
+        enemy.GetComponent<EnemyBehavior>().isSlowed = false;
+        enemy.GetComponent<SpriteRenderer>().color = Color.white;
+        enemy.GetComponent<EnemyBehavior>().setParticle(part, 0);
+        if (particle == 4)
+            enemy.GetComponent<EnemyBehavior>().isElectrified = false;
         /*if (backupUsed)
         {
             moveSpeed = backupSpeed;

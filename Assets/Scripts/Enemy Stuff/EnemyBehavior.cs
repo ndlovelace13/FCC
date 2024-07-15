@@ -38,6 +38,7 @@ public abstract class EnemyBehavior : MonoBehaviour
     [SerializeField] GameObject notif;
 
     public string[] augments;
+    public Dictionary<string, int> actualAugs;
 
     //1 FIRE
     public bool isBurning = false;
@@ -164,34 +165,28 @@ public abstract class EnemyBehavior : MonoBehaviour
 
     public void CollisionCheck(Collider2D other)
     {
-        augments = new string[3];
         //Debug.Log("collision happening");
         if (other.gameObject.tag == "projectile")
         {
             GameObject otherParent = other.gameObject.transform.parent.gameObject;
             DealDamage(otherParent.GetComponent<ProjectileBehavior>().damage, Color.white);
-            augments = otherParent.GetComponent<ProjectileBehavior>().getAugments();
-            int tier = otherParent.GetComponent<ProjectileBehavior>().GetTier();
-            AugmentApplication(augments, tier);
+            actualAugs = otherParent.GetComponent<ProjectileBehavior>().getActualAugs();
+            AugmentApplication(actualAugs);
             otherParent.GetComponent<ProjectileBehavior>().ObjectDeactivate();
         }
         else if (other.gameObject.tag == "aoe")
         {
             GameObject otherParent = other.gameObject.transform.parent.gameObject;
-            augments =  otherParent.GetComponent<AoeBehavior>().getAugments();
-            int tier = otherParent.GetComponent<AoeBehavior>().GetTier();
-            AugmentApplication(augments, tier);
+            actualAugs = otherParent.GetComponent<AoeBehavior>().getActualAugs();
+            AugmentApplication(actualAugs);
         }
     }
 
-    public void AugmentApplication(string[] augs, int tier)
+    public void AugmentApplication(Dictionary<string, int> actualAugs)
     {
-        foreach (string aug in augs)
+        foreach (var aug in actualAugs)
         {
-            if (aug != null && aug != "")
-            {
-                GameControl.PlayerData.flowerStatsDict[aug].OnEnemyCollision(gameObject, tier);
-            }
+            GameControl.PlayerData.flowerStatsDict[aug.Key].OnEnemyCollision(gameObject, aug.Value);
         }
     }
 

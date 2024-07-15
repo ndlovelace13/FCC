@@ -28,9 +28,9 @@ public class CrownConstruction : MonoBehaviour
     float range;
     int damage;
     string projType;
-    string aug1 = "";
-    string aug2 = "";
-    string aug3 = "";
+    //string aug1 = "";
+    //string aug2 = "";
+    //string aug3 = "";
     Dictionary<string, int> actualAugs;
     int numProjs = 0;
     int projRange = 0;
@@ -103,7 +103,7 @@ public class CrownConstruction : MonoBehaviour
             //TODO - switch hardcoded augments to passing actualAugs dict
             foreach (var aug in actualAugs)
                 Debug.Log("Augment " + aug.Key + " " + aug.Value);
-            finalCrown.GetComponent<CrownAttack>().SetProjStats(projRange, damage, projType, aug1, aug2, aug3, numProjs, tier);
+            finalCrown.GetComponent<CrownAttack>().SetProjStats(projRange, damage, projType, actualAugs, numProjs, tier);
             //Instantiation of new crown
             CrownReplace();
             crownHeld = true;
@@ -346,9 +346,9 @@ public class CrownConstruction : MonoBehaviour
         //reset variables
         int crownScore = 0;
         //crownAnnouncement = "";
-        aug1 = "";
-        aug2 = "";
-        aug3 = "";
+        //aug1 = "";
+        //aug2 = "";
+        //aug3 = "";
         actualAugs = new Dictionary<string, int>();
         Transform[] flowers = docket.GetComponentsInChildren<Transform>();
         flowers = flowers.Where(child => child.tag == "FlowerHead").ToArray();
@@ -379,8 +379,8 @@ public class CrownConstruction : MonoBehaviour
         damage = flowerStats[1].GetDamage(flowerPos[1].tier) + flowerStats[2].GetDamage(flowerPos[2].tier) + flowerStats[3].GetDamage(flowerPos[3].tier);
         projType = flowerPos[2].type;
         //remove the basic augs eventually
-        aug1 = flowerPos[2].type;
-        AugPowerCheck(aug1);
+        //aug1 = flowerPos[2].type;
+        AugPowerCheck(flowerPos[2].type);
         numProjs = centerStats.GetProjCount(flowerPos[2].tier);
         foreach (var flower in flowerPos)
         {
@@ -420,14 +420,6 @@ public class CrownConstruction : MonoBehaviour
                     {
                         Debug.Log("Symmetric");
                         crownScore += flowerStats[0].GetPoints(flowerPos[0].tier) * 2 * 4;
-                        /*if (dupePositions.Contains(0))
-                            crownAnnouncement += flowerStats[0].outsideText;
-                        else
-                            crownAnnouncement += flowerStats[0].insideText;*/
-                        if (aug2 == "")
-                            aug2 = flowerPos[0].type;
-                        else
-                            aug3 = flowerPos[0].type;
                         AugPowerCheck(flowerPos[0].type);
                     }
                     else
@@ -444,14 +436,6 @@ public class CrownConstruction : MonoBehaviour
                     {
                         Debug.Log("Symmetric");
                         crownScore += flowerStats[0].GetPoints(flowerPos[0].tier) * 3 * 4;
-                        /*if (dupePositions.Contains(0))
-                            crownAnnouncement += flowerStats[0].outsideText;
-                        else
-                            crownAnnouncement += flowerStats[0].insideText;*/
-                        if (aug2 == "")
-                            aug2 = flowerPos[0].type;
-                        else
-                            aug3 = flowerPos[0].type;
                         AugPowerCheck(flowerPos[0].type);
                     }
                     else
@@ -466,13 +450,8 @@ public class CrownConstruction : MonoBehaviour
                     if (!dupePositions.Contains(2))
                     {
                         Debug.Log("Symmetric");
-                        //8x the quad's base points
+                        //4x the quad's base points
                         crownScore += flowerStats[0].GetPoints(flowerPos[0].tier) * 4 * 4;
-                        //5x the middle's base points
-                        //crownScore += flowerStats[2].basePoints * 5;
-                        //flowerStats.RemoveAt(2);
-                        aug2 = flowerPos[0].type;
-                        aug3 = flowerPos[0].type;
                         AugPowerCheck(flowerPos[0].type);
                         AugPowerCheck(flowerPos[0].type);
                         //crownAnnouncement = flowerStats[0].fourText;
@@ -487,8 +466,6 @@ public class CrownConstruction : MonoBehaviour
                 case 5:
                     Debug.Log("Fiver");
                     crownScore += flowerStats[0].GetPoints(flowerPos[0].tier) * 5 * 5;
-                    aug2 = flowerPos[0].type;
-                    aug3 = flowerPos[0].type;
                     AugPowerCheck(flowerPos[0].type);
                     AugPowerCheck(flowerPos[0].type);
                     //crownAnnouncement += flowerStats[0].fiveText;
@@ -518,16 +495,6 @@ public class CrownConstruction : MonoBehaviour
                 flowerStats.Remove(flowerStats[index]);
                 flowerPos.Remove(flowerPos[index]);
             }
-            /*for (int k = flowerStats.Count - 1; k > -1; k--)
-            {
-                if (flowerStats[k].type == currentType)
-                {
-                    
-                    flowerStats.Remove(flowerStats[k]);
-                    flowerPos.Remove(flowerPos[k]);
-                }
-                    
-            }*/
             //reset dupePositions
             dupePositions.Clear();
             //if (crownAnnouncement != "")

@@ -18,6 +18,10 @@ public class EnemySpawn : MonoBehaviour
     //All enemy related variables
     [SerializeField] public EnemyStats thisEnemy;
 
+    [SerializeField] GameObject marker;
+    GameObject posMarker;
+    GameObject negMarker;
+
     public float currentMax;
     public float currentMin;
     public int currentHealth;
@@ -35,6 +39,12 @@ public class EnemySpawn : MonoBehaviour
         currentHealth = thisEnemy.maxHealth;
         killScore = thisEnemy.killScore;
         currentMaxEnemies = thisEnemy.startingEnemies;
+        if (GameControl.PlayerData.testing)
+        {
+            posMarker = Instantiate(marker);
+            negMarker = Instantiate(marker);
+            negMarker.GetComponent<SpriteRenderer>().color = Color.blue;
+        }
     }
 
     public void enemyBegin()
@@ -85,33 +95,49 @@ public class EnemySpawn : MonoBehaviour
     {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
-        float spawnX = 0;
-        float spawnY = 0;
+        float spawnX;
+        float spawnY;
         float spawnOffset = Mathf.Abs(pos.x - Player.transform.position.x);
         int choice = Random.Range(0, 2);
+        int xFavor = Random.Range(0, 2);
         if (moveHorizontal > 0)
-            spawnX = Random.Range(pos.x, pos.x + Mathf.Abs(pos.x - Player.transform.position.x));
+            spawnX = Random.Range(pos.x, pos.x + spawnOffset);
         else if (moveHorizontal < 0)
-            spawnX = Random.Range(negPos.x - Mathf.Abs(negPos.x - Player.transform.position.x), negPos.x);
+            spawnX = Random.Range(negPos.x - spawnOffset, negPos.x);
         else
         {
-            if (choice == 0)
-                spawnX = Random.Range(pos.x, pos.x + spawnOffset);
+            if (moveVertical == 0 && xFavor == 0)
+            {
+                //spawn on any edge if the player is not moving
+                if (choice == 0)
+                    spawnX = Random.Range(pos.x, pos.x + spawnOffset);
+                else
+                    spawnX = Random.Range(negPos.x - spawnOffset, negPos.x);
+            }
+            //spawn anywhere on the x axis if the player is moving in a vertical straight line
             else
-                spawnX = Random.Range(negPos.x - spawnOffset, negPos.x);
+                spawnX = Random.Range(negPos.x - spawnOffset, pos.x + spawnOffset);
         }
         choice = Random.Range(0, 2);
         spawnOffset = Mathf.Abs(pos.y - Player.transform.position.y);
         if (moveVertical > 0)
-            spawnY = Random.Range(pos.y, pos.y + Mathf.Abs(pos.y - Player.transform.position.y));
+            spawnY = Random.Range(pos.y, pos.y + spawnOffset);
         else if (moveVertical < 0)
-            spawnY = Random.Range(negPos.y - Mathf.Abs(negPos.y - Player.transform.position.y), negPos.y);
+            spawnY = Random.Range(negPos.y - spawnOffset, negPos.y);
         else
         {
-            if (choice == 0)
-                spawnY = Random.Range(pos.y, pos.y + spawnOffset);
+            if (moveHorizontal == 0 && xFavor == 1)
+            {
+                //spawn on any edge if the player is not moving
+                if (choice == 0)
+                    spawnY = Random.Range(pos.y, pos.y + spawnOffset);
+                else
+                    spawnY = Random.Range(negPos.y - spawnOffset, negPos.y);
+            }
+            //spawn anywhere on the y axis if they are moving in a straight line
             else
-                spawnY = Random.Range(negPos.y - spawnOffset, negPos.y);
+                spawnY = Random.Range(negPos.y - spawnOffset, pos.y + spawnOffset);
+            
         }
         Vector3 spawnPos = new Vector3(spawnX, spawnY);
         return spawnPos;
@@ -175,7 +201,11 @@ public class EnemySpawn : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
             pos = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
+            if (GameControl.PlayerData.testing)
+                posMarker.transform.localPosition = pos;
             negPos = cam.ScreenToWorldPoint(new Vector3(0, 0));
+            if (GameControl.PlayerData.testing)
+                negMarker.transform.localPosition = negPos;
             xDiff = Mathf.Abs(pos.x - negPos.x) / 2;
             yDiff = Mathf.Abs(pos.y - negPos.y) / 2;
 

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
 public class AoeBehavior : MonoBehaviour
 {
     string[] augments;
+    Dictionary<string, int> actualAugs;
     float activeTime = 2;
     List<GameObject> particles;
     //what does this do????
@@ -23,15 +25,16 @@ public class AoeBehavior : MonoBehaviour
         
     }
 
-    public void Activate(string[] augs, float time, string partIgnore, int tier)
+    public void Activate(Dictionary<string, int> augPass, float time, string partIgnore)
     {
-        augments = augs;
+        //augments = augs;
+        actualAugs = augPass;
         activeTime = time;
         particleIgnore = partIgnore;
         if (particles == null)
             getParticles();
-        this.tier = tier;
-        setParticles(augments);
+        //this.tier = tier;
+        setParticles();
         StartCoroutine(Deactivate());
     }
 
@@ -70,7 +73,38 @@ public class AoeBehavior : MonoBehaviour
         }
     }
 
+    public void setParticles()
+    {
+        /*for (int i = 0; i < augs.Length; i++)
+        {
+            //Debug.Log("current aug: " + augs[i]);
+            if (augs[i] != "" && augs[i] != null)
+            {
+                FlowerStats currentStats = GameControl.PlayerData.flowerStatsDict[augs[i]];
+                particles[i].GetComponent<Animator>().SetInteger("augment", currentStats.aug);
+            }
+            else
+            {
+                particles[i].GetComponent<Animator>().SetInteger("augment", 0);
+            }
+        }*/
+        for (int i = 0; i < actualAugs.Count; i++)
+        {
+            if (actualAugs.ElementAt(i).Key != particleIgnore)
+            {
+                FlowerStats currentStats = GameControl.PlayerData.flowerStatsDict[actualAugs.ElementAt(i).Key];
+                particles[i].GetComponent<Animator>().SetInteger("augment", currentStats.aug);
+            }
+            
+        }
+    }
+
     public string[] getAugments() { return augments; }
+
+    public Dictionary<string, int> getActualAugs()
+    { return actualAugs; }
+
+    public 
 
     IEnumerator Deactivate()
     {

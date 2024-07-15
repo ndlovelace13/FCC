@@ -15,6 +15,11 @@ public class GreenStats : FlowerStats
     float poisonTime = 4f;
     float poisonSlow = 0.7f;
 
+    //power scaling
+    float cooldownDecrease = 0.075f;
+    float timeIncrease = 1f;
+    float cloudTimeIncrease = 0.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,16 +37,19 @@ public class GreenStats : FlowerStats
         base.OnEnemyCollision(enemy, t);
         enemy.GetComponent<EnemyBehavior>().isPoisoned = true;
         enemy.GetComponent<SpriteRenderer>().color = Color.green;
-        StartCoroutine(PoisonHandler(enemy));
-        StartCoroutine(SlowApply(poisonSlow, poisonTime, 3, enemy));
+        StartCoroutine(PoisonHandler(enemy, t));
+        
     }
 
-    IEnumerator PoisonHandler(GameObject enemy)
+    IEnumerator PoisonHandler(GameObject enemy, int power)
     {
+        float thisPoisonTime = poisonTime + timeIncrease * (power - 1);
+        float thisPoisonCooldown = poisonCooldown - cooldownDecrease * (power - 1);
+        StartCoroutine(SlowApply(poisonSlow, thisPoisonTime, 3, enemy));
         float poisonTimer = 0f;
-        while (poisonTimer < poisonTime)
+        while (poisonTimer < thisPoisonTime)
         {
-            yield return new WaitForSeconds(poisonCooldown);
+            yield return new WaitForSeconds(thisPoisonCooldown);
             if (!enemy.activeSelf)
                 break;
             enemy.GetComponent<EnemyBehavior>().DealDamage(poisonDamage, Color.green);
@@ -52,15 +60,16 @@ public class GreenStats : FlowerStats
         enemy.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    public override void OnProjTravel(GameObject proj)
+    public override void OnProjTravel(GameObject proj, int power)
     {
         poisonPool = GameObject.FindGameObjectWithTag("poisonPool");
-        StartCoroutine(PoisonSpawn(proj));
+        StartCoroutine(PoisonSpawn(proj, power));
     }
 
-    IEnumerator PoisonSpawn(GameObject proj)
+    IEnumerator PoisonSpawn(GameObject proj, int power)
     {
         bool first = true;
+        float thisCloudTime = cloudTime + cloudTimeIncrease * (power - 1);
         while (proj.activeSelf)
         {
             if (first)
@@ -71,9 +80,10 @@ public class GreenStats : FlowerStats
             GameObject newCloud = poisonPool.GetComponent<ObjectPool>().GetPooledObject();
             newCloud.SetActive(true);
             newCloud.transform.position = proj.transform.position;
-            int tier = proj.GetComponent<ProjectileBehavior>().GetTier();
-            string[] augs = proj.GetComponent<ProjectileBehavior>().getAugments();
-            newCloud.GetComponent<AoeBehavior>().Activate(augs, cloudTime, "green", tier);
+            //int tier = proj.GetComponent<ProjectileBehavior>().GetTier();
+            //string[] augs = proj.GetComponent<ProjectileBehavior>().getAugments();
+            Dictionary<string, int> actualAugs = proj.GetComponent<ProjectileBehavior>().getActualAugs();
+            newCloud.GetComponent<AoeBehavior>().Activate(actualAugs, thisCloudTime, "green");
             yield return new WaitForSeconds(cloudCooldown);
         }
     }

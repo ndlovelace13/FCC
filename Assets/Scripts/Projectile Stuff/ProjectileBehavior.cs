@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -45,11 +46,11 @@ public class ProjectileBehavior : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float range;
     [SerializeField] public int damage;
-    [SerializeField] int augment1;
-    [SerializeField] int augment2;
-    [SerializeField] int augment3;
+    //[SerializeField] int augment1;
+    //[SerializeField] int augment2;
+    //[SerializeField] int augment3;
     int tier = 1;
-    string[] augs = new string[3];
+    //string[] augs = new string[3];
     Vector3 startingPos = Vector3.zero;
     public Dictionary<string, int> actualAugs = new Dictionary<string, int>();
 
@@ -72,7 +73,7 @@ public class ProjectileBehavior : MonoBehaviour
         //Debug.Log(spriteTrans.name);
     }
 
-    public void SetProps(float r, int d, string aug1, string aug2, string aug3, Vector2 rotation, int tier)
+    public void SetProps(float r, int d, Dictionary<string, int> augsPass, Vector2 rotation)
     {
         if (particles == null)
             getParticles();
@@ -80,15 +81,19 @@ public class ProjectileBehavior : MonoBehaviour
             ResetAugs();
         range = r;
         damage = d;
-        augs = new string[3];
-        augs[0] = aug1;
-        augs[1] = aug2;
-        augs[2] = aug3;
-        this.tier = tier;
-        Debug.Log("Augments at start: " + augs[0] + " " + augs[1] + " " + augs[2]);
+        //augs = new string[3];
+        //augs[0] = aug1;
+        //augs[1] = aug2;
+        //augs[2] = aug3;
+        actualAugs = augsPass;
+        foreach (var aug in actualAugs)
+            Debug.Log("Augment " + aug.Key + " " + aug.Value + " made it all the way to the finish line");
+        //this.tier = tier;
+        //Debug.Log("Augments at start: " + augs[0] + " " + augs[1] + " " + augs[2]);
         Augmentation();
         spriteTrans = transform.GetChild(0).gameObject;
-        SpriteApply(aug1);
+        //TO DO - TRANSITION THIS TO CHECK IN THE Sprite Apply thing
+        SpriteApply();
         ProjBegin();
         spriteTrans.transform.rotation = Quaternion.LookRotation(Vector3.forward, rotation);
     }
@@ -115,13 +120,17 @@ public class ProjectileBehavior : MonoBehaviour
 
     private void ProjBegin()
     {
-        for (int i = 0; i < augs.Length; i++)
+        /*for (int i = 0; i < augs.Length; i++)
         {
             if (augs[i] != null && augs[i] != "")
             {
                 Debug.Log("calling for " + augs[i]);
                 GameControl.PlayerData.flowerStatsDict[augs[i]].OnProjTravel(gameObject);
             }
+        }*/
+        foreach (var aug in actualAugs)
+        {
+            GameControl.PlayerData.flowerStatsDict[aug.Key].OnProjTravel(gameObject, aug.Value);
         }
     }
 
@@ -132,14 +141,18 @@ public class ProjectileBehavior : MonoBehaviour
 
     private void ProjArrival()
     {
-        Debug.Log("Current Augs: " + augs[0] + " " + augs[1] + " " + augs[2]);
-        for (int i = 0; i < augs.Length; i++)
+        //Debug.Log("Current Augs: " + augs[0] + " " + augs[1] + " " + augs[2]);
+        /*for (int i = 0; i < augs.Length; i++)
         {
             if (augs[i] != null && augs[i] != "")
             {
                 Debug.Log("calling for " + augs[i]);
                 GameControl.PlayerData.flowerStatsDict[augs[i]].OnProjArrival(gameObject);
             }
+        }*/
+        foreach (var aug in actualAugs)
+        {
+            GameControl.PlayerData.flowerStatsDict[aug.Key].OnProjArrival(gameObject, aug.Value);
         }
         ObjectDeactivate();
     }
@@ -147,7 +160,7 @@ public class ProjectileBehavior : MonoBehaviour
     //This is where to make the augment objects
     private void Augmentation()
     {
-        foreach (var aug in augs)
+        /*foreach (var aug in augs)
         {
             if (aug != null && aug != "")
             {
@@ -156,15 +169,20 @@ public class ProjectileBehavior : MonoBehaviour
                 else
                     actualAugs.Add(aug, 1);
             }
-        }
+        }*/
         //change this eventually to take in the augments with power level instead of just types
-        setParticles(augs);
+        setParticles();
     }
 
-    public string[] getAugments()
+    /*public string[] getAugments()
     {
         //int[] allAugs = { augment1, augment2, augment3 };
         return augs;
+    }*/
+
+    public Dictionary<string, int> getActualAugs()
+    {
+        return actualAugs;
     }
 
     private void getParticles()
@@ -180,9 +198,9 @@ public class ProjectileBehavior : MonoBehaviour
         }
     }
 
-    public void setParticles(string[] augs)
+    public void setParticles()
     {
-        for (int i = 0; i < augs.Length; i++)
+        /*for (int i = 0; i < augs.Length; i++)
         {
             //Debug.Log("current aug: " + augs[i]);
             if (augs[i] != "" && augs[i] != null)
@@ -194,17 +212,36 @@ public class ProjectileBehavior : MonoBehaviour
             {
                 particles[i].GetComponent<Animator>().SetInteger("augment", 0);
             }
+        }*/
+        for (int i = 0; i < actualAugs.Count; i++)
+        {
+            FlowerStats currentStats = GameControl.PlayerData.flowerStatsDict[actualAugs.ElementAt(i).Key];
+            particles[i].GetComponent<Animator>().SetInteger("augment", currentStats.aug);
         }
     }
 
-    private void SpriteApply(string type)
+    public void ResetParticles()
+    {
+        for (int i = 0; i < particles.Count; i++)
+        {
+            particles[i].GetComponent<Animator>().SetInteger("augment", 0);
+        }
+    }
+
+    private void SpriteApply()
     {
         //apply sprites instead here
+        string type = string.Empty;
+        if (actualAugs.Count > 0)
+            type = actualAugs.First().Key;
         Sprite currentSprite;
         if (miniDandy)
         {
             DandyStats dandy = (DandyStats)GameControl.PlayerData.flowerStatsDict["dandy"];
-            currentSprite = dandy.miniProjSprite;
+            if (type != "dandy")
+                currentSprite = dandy.miniProjSprite;
+            else
+                currentSprite = dandy.projSprite;
         }
         else
         {
@@ -226,9 +263,9 @@ public class ProjectileBehavior : MonoBehaviour
 
     private void ResetAugs()
     {
-        augs = new string[3];
+        //augs = new string[3];
         arrived = false;
-        setParticles(augs);
+        ResetParticles();
         transform.localScale = Vector3.one;
     }
 

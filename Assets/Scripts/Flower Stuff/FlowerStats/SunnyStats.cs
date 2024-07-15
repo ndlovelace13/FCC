@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class SunnyStats : FlowerStats
@@ -28,7 +29,7 @@ public class SunnyStats : FlowerStats
 
     //blindStats
     float baseBlindTime = 1f;
-    float blindTime;
+    //float blindTime;
     float additionalBlindTime = 0.5f;
 
     // Start is called before the first frame update
@@ -110,19 +111,19 @@ public class SunnyStats : FlowerStats
     public override void OnEnemyCollision(GameObject enemy, int tier)
     {
         Debug.Log("blind Called? " + tier);
-        blindTime = baseBlindTime + (tier * additionalBlindTime);
-        StartCoroutine(BlindHandler(enemy));
+        StartCoroutine(BlindHandler(enemy, tier));
     }
 
-    IEnumerator BlindHandler(GameObject enemy)
+    IEnumerator BlindHandler(GameObject enemy, int power)
     {
         //wait for surprise to be over - BROKEN
-        while (enemy.GetComponent<EnemyBehavior>().surprised)
+        while (enemy.GetComponent<EnemyBehavior>().surprised || enemy.GetComponent<EnemyBehavior>().isFrozen)
         {
             yield return new WaitForEndOfFrame();
         }
         //begin the blinding
         float time = 0f;
+        float blindTime = baseBlindTime + (power * additionalBlindTime);
         GameObject part = enemy.GetComponent<EnemyBehavior>().nextParticle();
         enemy.GetComponent<EnemyBehavior>().setParticle(part, 5);
         enemy.GetComponent<EnemyBehavior>().isBlinded = true;
