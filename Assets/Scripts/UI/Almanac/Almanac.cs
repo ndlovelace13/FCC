@@ -35,7 +35,8 @@ public class Almanac : MonoBehaviour
             pageDupe.transform.SetParent(transform);
             pageDupe.transform.localScale = Vector3.one;
             pageObjects.Add(pageDupe);
-            //pageDupe.SetActive(false);
+            pageDupe.GetComponent<Page>().FillPage();
+            pageDupe.SetActive(false);
         }
     }
 

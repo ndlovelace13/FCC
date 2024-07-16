@@ -19,4 +19,9 @@ public abstract class Page : MonoBehaviour
     {
         
     }
+
+    public virtual void FillPage()
+    {
+
+    }
 }

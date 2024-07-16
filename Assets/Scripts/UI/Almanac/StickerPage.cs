@@ -21,7 +21,7 @@ public class StickerPage : Page
         
     }
 
-    public void OnEnable()
+    public override void FillPage()
     {
         if (flowerStickers)
             subheader.text = "-- Flowers --";
@@ -45,6 +45,7 @@ public class StickerPage : Page
         {
             GameObject row = new GameObject("Row" + i);
             row.transform.parent = transform;
+            row.transform.localScale = Vector3.one;
             row.AddComponent<HorizontalLayoutGroup>();
             LayoutElement layout = row.AddComponent<LayoutElement>();
             layout.flexibleHeight = 1;
@@ -57,7 +58,8 @@ public class StickerPage : Page
                 rowCount = stickerDivisor - 1;
             for (int j = 0; j < rowCount; j++)
             {
-                stickerList[stickerIndex].transform.parent = row.transform;
+                stickerList[stickerIndex].transform.SetParent(row.transform);
+                stickerList[stickerIndex].GetComponent<Sticker>().DiscoveryCheck();
                 Debug.Log("Sticker " + stickerIndex + " assigned");
                 stickerIndex++;
             }
@@ -77,7 +79,7 @@ public class StickerPage : Page
         {
             //make a flower sticker for each flower, add it to the list
             GameObject newSticker = Instantiate(stickerPrefab);
-            newSticker.transform.parent = transform;
+            newSticker.transform.SetParent(transform);
             Sticker flowerSticker = newSticker.GetComponent<Sticker>();
             flowerSticker.SetType(flower.Key, flowerStickers);
             stickerList.Add(newSticker);
@@ -95,7 +97,7 @@ public class StickerPage : Page
         {
             //make an enemy sticker for each enemy, add it to the list
             GameObject newSticker = Instantiate(stickerPrefab);
-            newSticker.transform.parent = transform;
+            newSticker.transform.SetParent(transform);
             Sticker enemySticker = newSticker.GetComponent<Sticker>();
             enemySticker.SetType(enemy.Key, flowerStickers);
             stickerList.Add(newSticker);
@@ -103,7 +105,7 @@ public class StickerPage : Page
         //StickerOrganize();
     }
 
-    public List<Page> PageInit()
+    public List<Page> PageInit(int offset)
     {
         List<Page> associatedPages = new List<Page>();
         
@@ -117,11 +119,13 @@ public class StickerPage : Page
                 //pull the flowerStats from the sticker so that the created info and stats page match that flower
                 GameObject infoObject = Instantiate(GameControl.PlayerData.flowerInfoPage);
                 FlowerInfoPage flowerInfo = infoObject.GetComponent<FlowerInfoPage>();
+                flowerInfo.SetType(sticker.GetComponent<Sticker>().type);
 
                 GameObject statObject = Instantiate(GameControl.PlayerData.flowerStatPage);
                 FlowerStatPage flowerStat = statObject.GetComponent<FlowerStatPage>();
-                sticker.GetComponent<Sticker>().SetLink(flowerInfo);
+                //add to the array and get the index of the first page added
                 associatedPages.Add(flowerInfo);
+                sticker.GetComponent<Sticker>().SetPageIndex(associatedPages.Count - 1 + offset);
                 associatedPages.Add(flowerStat);
 
                 infoObject.transform.SetParent(transform.parent);
@@ -132,8 +136,9 @@ public class StickerPage : Page
                 //pull the enemyStats from the sticker so that the created stats page matches the enemy
                 GameObject enemyObj = Instantiate(GameControl.PlayerData.enemyPage);
                 EnemyPage enemyInfo = enemyObj.GetComponent<EnemyPage>();
-                sticker.GetComponent<Sticker>().SetLink(enemyInfo);
+                //add to the array and get the index
                 associatedPages.Add(enemyInfo);
+                sticker.GetComponent<Sticker>().SetPageIndex(associatedPages.Count - 1 + offset);
 
                 enemyObj.transform.SetParent(transform.parent);
             }

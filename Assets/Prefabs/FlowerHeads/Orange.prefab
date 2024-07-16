@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 4ae993c47b4e3564da7c5527f0cdb069, type: 3}
-  m_Color: {r: 1, g: 0.8076727, b: 0.082352936, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -138,4 +138,6 @@ MonoBehaviour:
   outsideText: 'Tawny '
   fourText: 'Paprika '
   fiveText: 'Annoying '
+  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
+    SOMETIME YOU FUCKING IDIOT
   textColor: {r: 1, g: 0.3254902, b: 0, a: 0}

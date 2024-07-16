@@ -138,5 +138,7 @@ MonoBehaviour:
   outsideText: 'Poisonous '
   fourText: 'Lethal '
   fiveText: 'Caustic '
+  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
+    SOMETIME YOU FUCKING IDIOT
   textColor: {r: 0.14901961, g: 0.5882353, b: 0.050980397, a: 0}
   poisonPool: {fileID: 0}

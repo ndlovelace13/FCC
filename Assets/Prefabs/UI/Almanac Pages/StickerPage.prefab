@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9188127616219884112
 RectTransform:
   m_ObjectHideFlags: 0
@@ -95,6 +95,7 @@ MonoBehaviour:
   subheader: {fileID: 678382451060376022}
   stickerList: []
   stickerPrefab: {fileID: 2202650924107202310, guid: 98691480be323d846b5b1f8c49c4222c, type: 3}
+  flowerStickers: 0
 --- !u!114 &9144374855473153147
 MonoBehaviour:
   m_ObjectHideFlags: 0

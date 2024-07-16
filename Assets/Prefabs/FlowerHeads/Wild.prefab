@@ -138,4 +138,6 @@ MonoBehaviour:
   outsideText: 'Random '
   fourText: 'Anomolous '
   fiveText: 'Gambler''s '
+  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
+    SOMETIME YOU FUCKING IDIOT
   textColor: {r: 0.4156863, g: 0.42352945, b: 0.82745105, a: 0}

@@ -154,6 +154,10 @@ public class EnemySpawn : MonoBehaviour
         if (!enemies.Contains(newEnemy))
             enemies.Add(newEnemy);
         activeEnemies++;
+
+        //set the encountered data if not set already
+        if (GameControl.PlayerData.savedEnemyDict[thisEnemy.type].encountered == false)
+            GameControl.PlayerData.savedEnemyDict[thisEnemy.type].encountered = true;
         yield return null;
     }
 

@@ -76,7 +76,7 @@ public class FlowerHarvest : MonoBehaviour
                                 string type = head.GetComponent<FlowerStats>().type;
                                 GameControl.PlayerData.flowerUse[type]++;
                             }
-                            //StartCoroutine(DiscoveryCheck(type));
+                            StartCoroutine(EncounteredCheck(head.GetComponent<FlowerStats>().type));
                             slots[slotPos].tag = "slotFull";
                             if (GameControl.PlayerData.tutorialState == 2)
                                 GameControl.PlayerData.flowerHarvested = true;
@@ -113,12 +113,17 @@ public class FlowerHarvest : MonoBehaviour
         }
     }
 
-    IEnumerator DiscoveryCheck(string type)
+    //expand this to increment the harvest counter as well in the save data
+    IEnumerator EncounteredCheck(string type)
     {
-        if (GameControl.PlayerData.undiscoveredUncommon.Contains(type))
+        Debug.Log("Checking the flower encounter" + type);
+        if (!GameControl.PlayerData.savedFlowerDict[type].encountered)
         {
-            GameControl.PlayerData.FlowerDiscovery(type);
+            Debug.Log("Flower Encounter Data added");
+            GameControl.PlayerData.savedFlowerDict[type].encountered = true;
         }
+        else
+            Debug.Log("Flower Already Encountered");
         yield return null;
     }
 

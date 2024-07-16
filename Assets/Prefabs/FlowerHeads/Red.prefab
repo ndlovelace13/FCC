@@ -138,5 +138,7 @@ MonoBehaviour:
   outsideText: 'Blazing '
   fourText: 'Scorching '
   fiveText: 'Razing '
+  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
+    SOMETIME YOU FUCKING IDIOT
   textColor: {r: 1, g: 0.24313727, b: 0.20392159, a: 0}
   flamesPool: {fileID: 0}

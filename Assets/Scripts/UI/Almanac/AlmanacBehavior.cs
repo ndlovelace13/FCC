@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AlmanacBehavior : MonoBehaviour
 {
@@ -14,5 +15,10 @@ public class AlmanacBehavior : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Homebase()
+    {
+        SceneManager.LoadScene("Homebase");
     }
 }

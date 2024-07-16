@@ -138,4 +138,6 @@ MonoBehaviour:
   outsideText: 'Charged '
   fourText: 'Voltaic '
   fiveText: 'Juiced '
+  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
+    SOMETIME YOU FUCKING IDIOT
   textColor: {r: 0.9686275, g: 0.9215687, b: 0.34509805, a: 0}

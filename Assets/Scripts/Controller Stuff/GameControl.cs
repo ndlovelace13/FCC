@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,10 @@ public class SaveData
     public List<UpgradeEssentials> upgrades;
     public List<ResearchData> researchData;
     public List<string> discoveredUncommon;
+
+    //Almanac Stats
+    public List<SavedFlowerStats> flowerSaveData;
+    public List<SavedEnemyStats> enemySaveData;
 
     //Completion Data
     public List<CrownData> discoveredCrowns;
@@ -137,6 +142,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] public GameObject[] flowers;
     public FlowerStats[] flowerStats;
     public Dictionary<string, FlowerStats> flowerStatsDict;
+    public Dictionary<string, SavedFlowerStats> savedFlowerDict;
     public string[] flowerTypes;
     public GameObject flowerPool;
     public Dictionary<string, ObjectPool> flowerPoolDict;
@@ -213,6 +219,7 @@ public class GameControl : MonoBehaviour
     List<GameObject> enemySpawners = new List<GameObject>();
     [SerializeField] GameObject enemySpawnPrefab;
     public Dictionary<string, EnemyStats> enemyStatsDict;
+    public Dictionary<string, SavedEnemyStats> savedEnemyDict;
     public int newEnemyTime = 60;
 
     private void Awake()
@@ -304,8 +311,30 @@ public class GameControl : MonoBehaviour
             {
                 undiscoveredUncommon.Remove(SaveData.discoveredUncommon[i]);
             }
-            DiscoveredPooling();
+            //DiscoveredPooling();
         }
+
+        //check for flowerSaveData list, init if it doesn't exist
+        if (SaveData.flowerSaveData == null)
+        {
+            //initialize the flowerSaveData list
+            SaveData.flowerSaveData = new List<SavedFlowerStats>();
+            foreach (var flower in flowerStatsDict)
+            {
+                SavedFlowerStats newData = new SavedFlowerStats(flower.Key);
+                SaveData.flowerSaveData.Add(newData);
+            }
+        }
+        
+
+        //init the SavedFlowerDict once data is either created or restored
+        savedFlowerDict = new Dictionary<string, SavedFlowerStats>();
+        foreach (var flower in SaveData.flowerSaveData)
+        {
+            savedFlowerDict.Add(flower.key, flower);
+        }
+
+        Debug.Log(savedFlowerDict.Count + " flower saveData in the dict");
 
         //init the flowerUse stuff so that it doesn't tweak out if continue is pressed
         flowerUse = new Dictionary<string, int>();
@@ -463,11 +492,11 @@ public class GameControl : MonoBehaviour
         almanacPages = new List<Page> { flowerStickers.GetComponent<Page>(), enemyStickers.GetComponent<Page>() };
 
         //init an info and stat page for each flower
-        List<Page> flowerPages = flowerStickers.GetComponent<StickerPage>().PageInit();
+        List<Page> flowerPages = flowerStickers.GetComponent<StickerPage>().PageInit(almanacPages.Count);
         almanacPages.AddRange(flowerPages);
         
         //init an info page for each enemy
-        List<Page> enemyPages = enemyStickers.GetComponent<StickerPage>().PageInit();
+        List<Page> enemyPages = enemyStickers.GetComponent<StickerPage>().PageInit(almanacPages.Count);
         almanacPages.AddRange(enemyPages);
 
         //create the other info pages
@@ -495,6 +524,22 @@ public class GameControl : MonoBehaviour
         {
             enemyStatsDict.Add(enemy.type, enemy);
         }
+        
+        //create save data for each enemy if it doesn't exist, then add to dict for easy access
+        if (SaveData.enemySaveData == null)
+        {
+            SaveData.enemySaveData = new List<SavedEnemyStats>();
+            foreach (var enemy in enemyStatsDict)
+            {
+                SavedEnemyStats newData = new SavedEnemyStats(enemy.Key);
+                SaveData.enemySaveData.Add(newData);
+            }
+        }
+
+        savedEnemyDict = new Dictionary<string, SavedEnemyStats>();
+        foreach (var enemy in SaveData.enemySaveData)
+            savedEnemyDict.Add(enemy.key, enemy);
+        Debug.Log(savedEnemyDict.Count + " enemy saveData in the dict");
     }
 
     //Enemy Reset for ResetRun
@@ -604,6 +649,8 @@ public class GameControl : MonoBehaviour
         foreach(var flower in allDiscovered)
         {
             flowerPoolDict[flower].Pooling();
+            if (!savedFlowerDict[flower].discovered)
+                savedFlowerDict[flower].discovered = true;
         }
     }
 

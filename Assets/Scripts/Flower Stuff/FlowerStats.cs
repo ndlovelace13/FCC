@@ -2,6 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//this class will store the data about each individual flower use stats for the almanac
+[System.Serializable]
+public class SavedFlowerStats
+{
+    public string key;
+
+    public bool discovered;
+    public bool encountered;
+
+    public int singleCount;
+    public int crownCount;
+    public int harvestCount;
+
+    public int highestTier;
+
+    public SavedFlowerStats(string key)
+    {
+        discovered = false;
+        encountered = false;
+
+        singleCount = 0;
+        crownCount = 0;
+        harvestCount = 0;
+
+        highestTier = 0;
+        this.key = key;
+    }
+}
 public abstract class FlowerStats : MonoBehaviour
 {
     [SerializeField] public int rarity;
@@ -33,6 +61,7 @@ public abstract class FlowerStats : MonoBehaviour
     //Title stuff
     [SerializeField] public string title;
     [SerializeField] public string primaryText, insideText, outsideText, fourText, fiveText;
+    [SerializeField] public string description = "THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT SOMETIME YOU FUCKING IDIOT";
     [SerializeField] public Color textColor;
 
     // Start is called before the first frame update

@@ -138,4 +138,6 @@ MonoBehaviour:
   outsideText: 'Chilled '
   fourText: 'Arctic '
   fiveText: 'Solid '
+  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
+    SOMETIME YOU FUCKING IDIOT
   textColor: {r: 0.22352943, g: 0.7294118, b: 0.9686275, a: 0}
