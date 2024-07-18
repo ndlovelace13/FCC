@@ -17,7 +17,8 @@ public class YellowStats : FlowerStats
     // Start is called before the first frame update
     void Start()
     {
-        
+        description = "Little is known about the conductivity of skinwalkers and how exactly the Electric Flower is able to arc its power between hosts. However, R&D did find out pretty quickly not to prod this flower with a fork. We wish Daryl a speedy recovery.";
+        effects = "Stun - Afflicted enemies will be slowed for a short period of time\nChain LIghtning - Nearby enemies will also be affected by stun and any other crown augmentations";
     }
 
     // Update is called once per frame
@@ -92,5 +93,28 @@ public class YellowStats : FlowerStats
         StartCoroutine(ElectricApply(remainingTargets, actualAugs, nextEnemy, tier));
         nextEnemy.GetComponent<EnemyBehavior>().AugmentApplication(actualAugs);
         nextEnemy.GetComponent<EnemyBehavior>().electricPassed = false;
+    }
+
+    public override List<SpecialStats> GetSpecialValues(int power)
+    {
+        List<SpecialStats> returnedStats = new List<SpecialStats>();
+
+        //target count
+        SpecialStats targetNum = new SpecialStats("Chain Arcing", numTargets + targetIncrease * (power - 1), "targets");
+        returnedStats.Add(targetNum);
+
+        //electric damage
+        SpecialStats electricDam = new SpecialStats("Chain Damage", electricDamage + damageIncrease * (power - 1), "seconds");
+        returnedStats.Add(electricDam);
+
+        //stun amount
+        SpecialStats stunTimer = new SpecialStats("Stun Time", stunTime, "seconds");
+        returnedStats.Add(stunTimer);
+
+        //stun time
+        SpecialStats stunAmounts = new SpecialStats("Stun Amount", stunAmount, "base speed");
+        returnedStats.Add(stunAmounts);
+
+        return returnedStats;
     }
 }

@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum crownType
@@ -75,6 +76,8 @@ public class Crown
         primary = prim;
         inside = ins;
         outside = outs;
+
+        //savedFlowerData stuff
 
         //yeah fuck you unity i guess
         //identifier = { primary, inside, outside};
@@ -185,8 +188,14 @@ public class Crown
         //Create a new crownData obj and add to the save list
         saveData = new CrownData(this);
         GameControl.SaveData.discoveredCrowns.Add(saveData);
-        //Debug.Log(GameControl.SaveData.discoveredCrowns[0].GetId());
-        //Debug.Log(GameControl.SaveData.discoveredCrowns[0].GetTitle());
+
+        //increment the discoveredCounter in all associated flower save data
+        List<string> flowers = GetFlowers().Distinct().ToList();
+        foreach (var flower in flowers)
+        {
+            if (GameControl.PlayerData.savedFlowerDict.ContainsKey(flower))
+                GameControl.PlayerData.savedFlowerDict[flower].discoveredCrowns++;
+        }
     }
 
     public int GetShift()
@@ -205,6 +214,14 @@ public class Crown
         if (timesCrafted > 1)
             saveData.timesCrafted++;
         Debug.Log("You've crafted it " + timesCrafted + " times");
+
+        //increment the crownCounter in all associated flower save data
+        List<string> flowers = GetFlowers().Distinct().ToList();
+        foreach (var flower in flowers)
+        {
+            if (GameControl.PlayerData.savedFlowerDict.ContainsKey(flower))
+                GameControl.PlayerData.savedFlowerDict[flower].crownCount++;
+        }
     }
 
     public List<string> GetFlowers()
@@ -300,6 +317,9 @@ public class CrownCompletionism : MonoBehaviour
 
         //Call the save data restore routine
         StartCoroutine(CrownDataRestore());
+        //Call the saving data routine
+        if (!GameControl.SaveData.crownCounterSet)
+            StartCoroutine(CrownCounterSet());
         yield return null;
     }
 
@@ -318,10 +338,36 @@ public class CrownCompletionism : MonoBehaviour
                 //Debug.Log(saveCrown.GetId());
                 //Debug.Log(saveCrown.GetTitle());
                 allCrowns[saveCrown.id].RestoreData(saveCrown);
+
+                //add pre-discovered crowns to the counters if crowncounter is not set
+                if (!GameControl.SaveData.crownCounterSet)
+                {
+                    List<string> flowers = allCrowns[saveCrown.id].GetFlowers().Distinct().ToList();
+                    foreach (var flower in flowers)
+                    {
+                        if (GameControl.PlayerData.savedFlowerDict.ContainsKey(flower))
+                            GameControl.PlayerData.savedFlowerDict[flower].discoveredCrowns++;
+                    }
+                }
             }
             Debug.Log(totalDiscovered + "crowns restored");
         }
 
+        yield return null;
+    }
+
+    IEnumerator CrownCounterSet()
+    {
+        foreach (var crown in allCrowns)
+        {
+            List<string> flowers = crown.Value.GetFlowers().Distinct().ToList();
+            foreach (var flower in flowers)
+            {
+                if (GameControl.PlayerData.savedFlowerDict.ContainsKey(flower))
+                    GameControl.PlayerData.savedFlowerDict[flower].possibleCrowns++;
+            }
+        }
+        GameControl.SaveData.crownCounterSet = true;
         yield return null;
     }
 

@@ -26,6 +26,10 @@ public class FlowerInfoPage : Page
 
     //special stats section - TODO
     [SerializeField] GameObject powerButton;
+    [SerializeField] GameObject specialStatPrefab;
+    [SerializeField] GameObject specialRow;
+    [SerializeField] GameObject noSpecial;
+    [SerializeField] TMP_Text noSpecialText;
     
 
 
@@ -87,6 +91,41 @@ public class FlowerInfoPage : Page
             else
                 tierButton.SetActive(false);
 
+            //special stats handler
+            
+            //retrieve the special stats
+            List<SpecialStats> specialStats = currentFlower.GetSpecialValues(1);
+            List<GameObject> prefabs = new List<GameObject>();
+            if (specialStats.Count > 0)
+            {
+                //Initialize the specialstat prefab for each one and fill the values
+                foreach (var specialStat in specialStats)
+                {
+                    GameObject statObj = Instantiate(specialStatPrefab);
+                    statObj.transform.SetParent(specialRow.transform);
+                    statObj.transform.localScale = Vector3.one;
+                    statObj.GetComponent<SpecialStats>().TransferData(specialStat);
+                    prefabs.Add(statObj);
+                }
+
+                if (GameControl.PlayerData.savedFlowerDict[type].highestPower > 1)
+                    powerButton.SetActive(true);
+                else
+                    powerButton.SetActive(false);
+            }
+            else
+            {
+                //handle the case in which there are no special values to report
+                noSpecial.SetActive(true);
+                noSpecialText.text = "No Special Effects";
+                powerButton.SetActive(false);
+            }
+
+            /*foreach (var prefab in prefabs)
+            {
+                prefab.GetComponent<LayoutElement>().height
+            }*/
+
         }
         else
         {
@@ -103,6 +142,9 @@ public class FlowerInfoPage : Page
             projCountText.text = "?";
             valueText.text = "?";
             tierButton.SetActive(false);
+            noSpecial.SetActive(true);
+            noSpecialText.text = "Flower Abilities are Unknown";
+            powerButton.SetActive(false);
         }
     }
 }

@@ -15,13 +15,33 @@ public class BlueStats : FlowerStats
     // Start is called before the first frame update
     void Start()
     {
-        
+        description = "Like the Fiery Flower, the Frozen Flower catches some flak for being \"derivative\" (thanks a lot, Italian Plumbers). However, there's nothing quite like crafting a cold one - unless you're a skinwalker. It's pretty unpleasant for them.";
+        effects = "Freeze - Afflicted enemies will be frozen in place and slowed down while thawing out";
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public override List<SpecialStats> GetSpecialValues(int power)
+    {
+        List<SpecialStats> returnedStats = new List<SpecialStats>();
+
+        //freeze time
+        SpecialStats freezeTimer = new SpecialStats("Freeze Time", freezeTime + timeIncrease * (power - 1), "seconds");
+        returnedStats.Add(freezeTimer);
+
+        //slow time
+        SpecialStats thawTimer = new SpecialStats("Thaw Time", slowTime + timeIncrease * (power - 1), "seconds");
+        returnedStats.Add(thawTimer);
+
+        //slow amount
+        SpecialStats slowAmounts = new SpecialStats("Slow Effect", slowAmount, "base speed");
+        returnedStats.Add(slowAmounts);
+
+        return returnedStats;
     }
 
     public override void OnEnemyCollision(GameObject enemy, int t)

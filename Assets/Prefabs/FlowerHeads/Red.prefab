@@ -138,9 +138,9 @@ MonoBehaviour:
   outsideText: 'Blazing '
   fourText: 'Scorching '
   fiveText: 'Razing '
-  description: Some may call the fiery flower \"unoriginal\" or \"derivative\", but
+  description: Some may call the fiery flower /"unoriginal/" or /"derivative/", but
     there's a reason for its affinity for fire - it gets the job done, and done right.
-  effects: Burn - Afflicted enemies will take fire damage over time\nFlames - Projectiles
+  effects: Burn - Afflicted enemies will take fire damage over time/nFlames - Projectiles
     will leave behind burning  flames upon reaching the end of their flight
   textColor: {r: 1, g: 0.24313727, b: 0.20392159, a: 0}
   flamesPool: {fileID: 0}

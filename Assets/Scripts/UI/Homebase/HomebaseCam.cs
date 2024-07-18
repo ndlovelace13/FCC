@@ -220,6 +220,17 @@ public class HomebaseCam : MonoBehaviour
         //create the shiftReport object
         ShiftReport currentReport = new ShiftReport(GameControl.SaveData.shiftCounter, scoreBonus, scoreBreakdown, timeBonus, GameControl.PlayerData.shiftSeeds);
         GameControl.SaveData.shiftReports.Add(currentReport);
+        
+
+        //update the highest use count for each flower
+        foreach (var flower in GameControl.PlayerData.flowerUse)
+        {
+            if (GameControl.PlayerData.savedFlowerDict[flower.Key].highestHarvest < flower.Value)
+            {
+                GameControl.PlayerData.savedFlowerDict[flower.Key].highestHarvest = flower.Value;
+                GameControl.PlayerData.savedFlowerDict[flower.Key].highestShift = GameControl.SaveData.shiftCounter;
+            }
+        }
         GameControl.SaveHandler.SaveGame();
         yield return null;
     }

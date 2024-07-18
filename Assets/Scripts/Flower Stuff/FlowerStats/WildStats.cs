@@ -8,7 +8,8 @@ public class WildStats : FlowerStats
     // Start is called before the first frame update
     void Start()
     {
-        
+        description = "The Wildflower's self-insecurity is both its greatest strength and weakness. It is able to fit in to great effect with any group of flower, but when left alone, has a hard time deciding just who it is.";
+        effects = "Imitation - This flower duplicates the effects of the symmetrically placed flower in a crown\nMimicry - This flower will take on the effects of a random discovered flower if it has no flower to imitate";
     }
 
     // Update is called once per frame

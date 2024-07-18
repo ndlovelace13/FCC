@@ -185,26 +185,31 @@ public abstract class FlowerStats : MonoBehaviour
 
     public string GetPrimaryText()
     {
+        GameControl.PlayerData.savedFlowerDict[type].primary = true;
         return Colorizer(primaryText);
     }
 
     public string GetInsideText()
     {
+        GameControl.PlayerData.savedFlowerDict[type].inside = true;
         return Colorizer(insideText);
     }
 
     public string GetOutsideText()
     {
+        GameControl.PlayerData.savedFlowerDict[type].outside = true;
         return Colorizer(outsideText);
     }
 
     public string GetFourText()
     {
+        GameControl.PlayerData.savedFlowerDict[type].four = true;
         return Colorizer(fourText);
     }
 
     public string GetFiveText()
     {
+        GameControl.PlayerData.savedFlowerDict[type].five = true;
         return Colorizer(fiveText);
     }
 
@@ -215,6 +220,19 @@ public abstract class FlowerStats : MonoBehaviour
         damage = damageTiers[tier];
         range = rangeTiers[tier];
         projCount = projTiers[tier];
+
+        //check for new highestTier here
+        if (GameControl.PlayerData.savedFlowerDict != null)
+        {
+            if (GameControl.PlayerData.savedFlowerDict[type].highestTier < tier)
+                GameControl.PlayerData.savedFlowerDict[type].highestTier = tier;
+        }
+    }
+
+    public virtual List<SpecialStats> GetSpecialValues(int power)
+    {
+        List<SpecialStats> defaultResult = new List<SpecialStats>();
+        return defaultResult;
     }
 
     public virtual void OnProjArrival(GameObject proj, int power)

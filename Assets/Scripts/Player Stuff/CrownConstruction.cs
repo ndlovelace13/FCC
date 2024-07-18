@@ -506,6 +506,13 @@ public class CrownConstruction : MonoBehaviour
         if (actualAugs.ContainsKey("sunny"))
             actualAugs["sunny"] += tier;
 
+        //check for highestPower in save data for each 
+        foreach (var aug in actualAugs)
+        {
+            if (GameControl.PlayerData.savedFlowerDict[aug.Key].highestPower < aug.Value)
+                GameControl.PlayerData.savedFlowerDict[aug.Key].highestPower = aug.Value;
+        }
+
         Debug.Log(crownAnnouncement);
         return crownScore;
 

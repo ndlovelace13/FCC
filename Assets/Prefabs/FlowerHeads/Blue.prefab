@@ -139,7 +139,7 @@ MonoBehaviour:
   fourText: 'Arctic '
   fiveText: 'Solid '
   description: Like the Fiery Flower, the Frozen Flower catches some flak for being
-    \"derivative\" (thanks a lot, Italian Plumbers). However, there's nothing quite
+    /"derivative/" (thanks a lot, Italian Plumbers). However, there's nothing quite
     like crafting a cold one - unless you're a skinwalker. It's pretty unpleasant
     for them.
   effects: Freeze - Afflicted enemies will be frozen in place and slowed down while

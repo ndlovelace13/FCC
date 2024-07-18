@@ -116,10 +116,13 @@ public class FlowerHarvest : MonoBehaviour
     //expand this to increment the harvest counter as well in the save data
     IEnumerator EncounteredCheck(string type)
     {
-        Debug.Log("Checking the flower encounter" + type);
+        //harvest counter up
+        GameControl.PlayerData.savedFlowerDict[type].harvestCount++;
+
+        //Debug.Log("Checking the flower encounter" + type);
         if (!GameControl.PlayerData.savedFlowerDict[type].encountered)
         {
-            Debug.Log("Flower Encounter Data added");
+            //Debug.Log("Flower Encounter Data added");
             GameControl.PlayerData.savedFlowerDict[type].encountered = true;
         }
         else

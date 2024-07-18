@@ -70,17 +70,32 @@ public class FlowerStatPage : Page
                 tierObj.SetActive(false);
 
             //crown completion stuff - TODO
-            crownCompletion.text = "bruh";
+            crownCompletion.text = "<color=\"green\">" + currentSaveData.discoveredCrowns + "</color>/<color=\"yellow\">" + currentSaveData.possibleCrowns + "</color>\n" + ((float)currentSaveData.discoveredCrowns / currentSaveData.possibleCrowns).ToString("0.00%");
 
             shiftHarvestRecord.text = "Shift #" + currentSaveData.highestShift + " - " + currentSaveData.highestHarvest;
             totalHarvestCount.text = currentSaveData.harvestCount.ToString();
 
             //handle name stuff - add in checks for discovyery here
-            primary.text = currentFlower.primaryText;
-            interior.text = currentFlower.insideText;
-            exterior.text = currentFlower.outsideText;
-            four.text = currentFlower.fourText;
-            fiver.text = currentFlower.fiveText;
+            if (currentSaveData.primary)
+                primary.text = currentFlower.GetPrimaryText();
+            else
+                primary.text = "Undiscovered";
+            if (currentSaveData.inside)
+                interior.text = currentFlower.GetInsideText();
+            else
+                interior.text = "Undiscovered";
+            if (currentSaveData.outside)
+                exterior.text = currentFlower.GetOutsideText();
+            else
+                exterior.text = "Undiscovered";
+            if (currentSaveData.four)
+                four.text = currentFlower.GetFourText();
+            else
+                four.text = "Undiscovered";
+            if (currentSaveData.five)
+                fiver.text = currentFlower.fiveText;
+            else
+                fiver.text = "Undiscovered";
         }
         else
         {

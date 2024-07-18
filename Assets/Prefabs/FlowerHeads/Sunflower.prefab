@@ -138,8 +138,9 @@ MonoBehaviour:
   outsideText: 'Radiant '
   fourText: 'Beaming '
   fiveText: 'Blinding '
-  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
-    SOMETIME YOU FUCKING IDIOT
+  description: The Sunflower, while related to its zombie fighting cousins, shares
+    little resemblence when it comes to its abilities. It sometimes questions whether
+    it can really be related to those cheery healers - genetics are weird like that.
   effects: Extended Growth - If the player walks over this flower without harvesting,
     it will continue to grow in power\nBlind - Afflicted enemies will be unable to
     track the player for a period of time

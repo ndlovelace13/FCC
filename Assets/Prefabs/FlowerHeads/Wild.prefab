@@ -138,8 +138,9 @@ MonoBehaviour:
   outsideText: 'Random '
   fourText: 'Anomolous '
   fiveText: 'Gambler''s '
-  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
-    SOMETIME YOU FUCKING IDIOT
+  description: 'The Wildflower''s self-insecurity is both its greatest strength and
+    weakness. It is able to fit in to great effect with any group of flower, but
+    when left alone, has a hard time deciding just who it is. '
   effects: Imitation - This flower duplicate the effects of the symmetrically placed
     flower in a crown\nMimicry - This flower will take on the effects of a random
     discovered flower if it has no flower to imitate

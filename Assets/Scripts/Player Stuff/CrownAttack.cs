@@ -236,6 +236,10 @@ public class CrownAttack : MonoBehaviour
         Debug.Log("radians: " + angleRadians);
         //set the params based on the flower being thrown]
         FlowerBehavior behavior = flower.GetComponent<FlowerBehavior>();
+
+        //increment single flower throw for associated type
+        GameControl.PlayerData.savedFlowerDict[behavior.type].singleCount++;
+
         string type;
         //Wild Check
         if (behavior.type == "wild")

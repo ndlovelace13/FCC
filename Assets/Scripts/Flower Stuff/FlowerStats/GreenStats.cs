@@ -23,7 +23,8 @@ public class GreenStats : FlowerStats
     // Start is called before the first frame update
     void Start()
     {
-        
+        description = "The Toxic Flower is universally known to be quite effective against skinwalkers, though it is referred to by different names in some regions - notably the \"League\" and \"Rainbow\" flowers. The origins of these alternative names is unclear.";
+        effects = "Poison - Afflicted enemies will be slowed and take poison damage over time\nCloud Burst - Projectiles leave behind dissapating toxic clouds as they travel";
     }
 
     // Update is called once per frame
@@ -86,5 +87,36 @@ public class GreenStats : FlowerStats
             newCloud.GetComponent<AoeBehavior>().Activate(actualAugs, thisCloudTime, "green");
             yield return new WaitForSeconds(cloudCooldown);
         }
+    }
+
+    public override List<SpecialStats> GetSpecialValues(int power)
+    {
+        List<SpecialStats> returnedStats = new List<SpecialStats>();
+
+        //poison damage
+        SpecialStats poisonDamages = new SpecialStats("Poison Damage", poisonDamage, "");
+        returnedStats.Add(poisonDamages);
+
+        //poison tickRate
+        SpecialStats poisonTick = new SpecialStats("Poison Applied Every", poisonCooldown - cooldownDecrease * (power - 1), "seconds");
+        returnedStats.Add(poisonTick);
+
+        //active time
+        SpecialStats poisonTimer = new SpecialStats("Poison Length", poisonTime + timeIncrease * (power - 1), "seconds");
+        returnedStats.Add(poisonTimer);
+
+        //slow amount
+        SpecialStats slowAm = new SpecialStats("Slow Amount", poisonSlow, "Base Speed");
+        returnedStats.Add(slowAm);
+
+        //cloud time
+        SpecialStats cloudTimes = new SpecialStats("Cloud Time", cloudTime + cloudTimeIncrease * (power - 1), "seconds");
+        returnedStats.Add(cloudTimes);
+
+        //cloud spawn rate
+        SpecialStats cloudRelease = new SpecialStats("Cloud Released Every", cloudCooldown, "seconds");
+        returnedStats.Add(cloudRelease);
+
+        return returnedStats;
     }
 }

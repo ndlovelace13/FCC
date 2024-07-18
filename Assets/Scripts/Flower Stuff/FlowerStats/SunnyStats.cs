@@ -35,6 +35,8 @@ public class SunnyStats : FlowerStats
     // Start is called before the first frame update
     void Start()
     {
+        description = "The Sunflower, while related to its zombie fighting cousins, shares little resemblence when it comes to its abilities. It sometimes questions whether it can really be related to those cheery healers - genetics are weird like that.";
+        effects = "Extended Growth - If the player walks over this flower without harvesting, it will continue to grow in power\nBlind - Afflicted enemies will be unable to track the player for a period of time";
     }
 
     // Update is called once per frame

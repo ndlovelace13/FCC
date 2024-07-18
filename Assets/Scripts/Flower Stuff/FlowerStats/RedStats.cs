@@ -18,16 +18,43 @@ public class RedStats : FlowerStats
     float timeIncrease = 1.5f;
     float flameTimeIncrease = 1f;
 
+    //text stuff
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        description = "Some may call the fiery flower \"unoriginal\" or \"derivative\", but there's a reason for its affinity for fire - it gets the job done, and done right.";
+        effects = "Burn - Afflicted enemies will take fire damage over time\nFlames - Projectiles will leave behind burning  flames upon reaching the end of their flight";
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public override List<SpecialStats> GetSpecialValues(int power)
+    {
+        List<SpecialStats> returnedStats = new List<SpecialStats>();
+
+        //burn damage
+        SpecialStats damageStat = new SpecialStats("Burn Damage", burnDamage + damageIncrease * (power - 1), "");
+        returnedStats.Add(damageStat);
+
+        //burn tick time
+        SpecialStats tickTime = new SpecialStats("Burn Applied Every", burnCooldown, "Seconds");
+        returnedStats.Add(tickTime);
+
+        //burn time
+        SpecialStats burnTimer = new SpecialStats("Burn Length", burnTime + timeIncrease * (power - 1), "Seconds");
+        returnedStats.Add(burnTimer);
+
+        //flame active time
+        SpecialStats flameTimer = new SpecialStats("Flames Length", flameTime + flameTimeIncrease * (power - 1), "Seconds");
+        returnedStats.Add(flameTimer);
+
+        return returnedStats;
     }
 
     public override void OnProjTravel(GameObject proj, int power)

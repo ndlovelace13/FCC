@@ -15,7 +15,8 @@ public class DandyStats : FlowerStats
     // Start is called before the first frame update
     void Start()
     {
-        
+        description = "Prior to the skinwalker threat, the Dandelion was a controversial weed, hated by many for its seemingly endless ability to reproduce. Those haters are noticeably silent following the discovery of dandelion's remarkable extermination power.";
+        effects = "Seed Dispersal - Projectiles will split upon reaching their destination";
     }
 
     // Update is called once per frame

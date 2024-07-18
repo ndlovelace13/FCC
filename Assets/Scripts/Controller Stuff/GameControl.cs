@@ -23,6 +23,8 @@ public class SaveData
 
     public bool contractSigned = false;
 
+    public bool crownCounterSet = false;
+
     //Tool Unlocks & Dialogue Stuff
     public bool catalogUnlocked = false;
     public bool researchUnlocked = false;
