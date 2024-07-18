@@ -129,7 +129,7 @@ MonoBehaviour:
   pool: {fileID: 0}
   pointsTiers: 03000000040000000500000007000000
   damageTiers: 0f000000120000001400000016000000
-  rangeTiers: 0f000000120000001400000016000000
+  rangeTiers: 0500000006000000080000000a000000
   projTiers: 06000000060000000700000008000000
   aug: 3
   title: Toxic Flower
@@ -138,7 +138,10 @@ MonoBehaviour:
   outsideText: 'Poisonous '
   fourText: 'Lethal '
   fiveText: 'Caustic '
-  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
-    SOMETIME YOU FUCKING IDIOT
+  description: Placeholder placeholder placeholder placeholder placeholder plakdswjf
+    alskdjf alskdfjjasdk f
+  effects: Poison - Afflicted enemies will be slowed and take poison damage over
+    time\nCloud Burst - Projectiles leave behind dissapating toxic clouds as they
+    travel
   textColor: {r: 0.14901961, g: 0.5882353, b: 0.050980397, a: 0}
   poisonPool: {fileID: 0}

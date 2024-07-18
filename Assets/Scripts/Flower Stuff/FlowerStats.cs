@@ -16,6 +16,20 @@ public class SavedFlowerStats
     public int harvestCount;
 
     public int highestTier;
+    public int highestPower;
+    public int highestHarvest;
+    public int highestShift;
+
+    //crown completion stuff - link to completion tracker
+    public int possibleCrowns;
+    public int discoveredCrowns;
+
+    //title discovery - check during naming convention
+    public bool primary;
+    public bool inside;
+    public bool outside;
+    public bool four;
+    public bool five;
 
     public SavedFlowerStats(string key)
     {
@@ -27,6 +41,19 @@ public class SavedFlowerStats
         harvestCount = 0;
 
         highestTier = 0;
+        highestPower = 0;
+        highestHarvest = 0;
+        highestShift = 0;
+
+        possibleCrowns = 0;
+        discoveredCrowns = 0;
+
+        primary = false;
+        inside = false;
+        outside = false;
+        four = false;
+        five = false;
+
         this.key = key;
     }
 }
@@ -62,6 +89,7 @@ public abstract class FlowerStats : MonoBehaviour
     [SerializeField] public string title;
     [SerializeField] public string primaryText, insideText, outsideText, fourText, fiveText;
     [SerializeField] public string description = "THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT SOMETIME YOU FUCKING IDIOT";
+    [SerializeField] public string effects;
     [SerializeField] public Color textColor;
 
     // Start is called before the first frame update

@@ -140,4 +140,7 @@ MonoBehaviour:
   fiveText: 'Gambler''s '
   description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
     SOMETIME YOU FUCKING IDIOT
+  effects: Imitation - This flower duplicate the effects of the symmetrically placed
+    flower in a crown\nMimicry - This flower will take on the effects of a random
+    discovered flower if it has no flower to imitate
   textColor: {r: 0.4156863, g: 0.42352945, b: 0.82745105, a: 0}

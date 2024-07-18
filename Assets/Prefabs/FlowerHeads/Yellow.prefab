@@ -140,4 +140,7 @@ MonoBehaviour:
   fiveText: 'Juiced '
   description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
     SOMETIME YOU FUCKING IDIOT
+  effects: Stun - Afflicted enemies will be slowed for a short period of time\nChain
+    LIghtning - Nearby enemies will also be affected by stun and any other crown
+    augmentations
   textColor: {r: 0.9686275, g: 0.9215687, b: 0.34509805, a: 0}

@@ -138,6 +138,7 @@ MonoBehaviour:
   outsideText: 'Pale '
   fourText: 'Colorless '
   fiveText: 'Blank '
-  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
-    SOMETIME YOU FUCKING IDIOT
+  description: The white flower is as basic as it gets. Found in abundance in these
+    parts, one really doesn't stand out from the next. Nothing fancy, just good range.
+  effects: No effects, but has a higher throw range than its common counterparts
   textColor: {r: 1, g: 1, b: 1, a: 0}

@@ -138,6 +138,10 @@ MonoBehaviour:
   outsideText: 'Chilled '
   fourText: 'Arctic '
   fiveText: 'Solid '
-  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
-    SOMETIME YOU FUCKING IDIOT
+  description: Like the Fiery Flower, the Frozen Flower catches some flak for being
+    \"derivative\" (thanks a lot, Italian Plumbers). However, there's nothing quite
+    like crafting a cold one - unless you're a skinwalker. It's pretty unpleasant
+    for them.
+  effects: Freeze - Afflicted enemies will be frozen in place and slowed down while
+    thawing out
   textColor: {r: 0.22352943, g: 0.7294118, b: 0.9686275, a: 0}

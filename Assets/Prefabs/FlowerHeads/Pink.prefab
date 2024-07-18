@@ -138,6 +138,8 @@ MonoBehaviour:
   outsideText: 'Flushed '
   fourText: 'Plastic '
   fiveText: 'Pretty '
-  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
-    SOMETIME YOU FUCKING IDIOT
+  description: The pink flower isn't very special, but it does mog the other common
+    flowers in terms of looks. As such, crowns that include pink flowers go for a
+    pretty penny.
+  effects: No effects, but has a higher value than it's common counterparts
   textColor: {r: 0.89019614, g: 0.41176474, b: 0.6627451, a: 0}

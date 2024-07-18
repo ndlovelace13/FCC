@@ -123,6 +123,7 @@ public class StickerPage : Page
 
                 GameObject statObject = Instantiate(GameControl.PlayerData.flowerStatPage);
                 FlowerStatPage flowerStat = statObject.GetComponent<FlowerStatPage>();
+                flowerStat.SetType(sticker.GetComponent<Sticker>().type);
                 //add to the array and get the index of the first page added
                 associatedPages.Add(flowerInfo);
                 sticker.GetComponent<Sticker>().SetPageIndex(associatedPages.Count - 1 + offset);

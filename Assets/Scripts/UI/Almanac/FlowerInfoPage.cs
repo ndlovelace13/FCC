@@ -13,6 +13,21 @@ public class FlowerInfoPage : Page
     [SerializeField] Image flowerImage;
     [SerializeField] TMP_Text description;
     [SerializeField] Image flowerProj;
+    [SerializeField] TMP_Text effects;
+
+    //basic stats section
+    [SerializeField] TMP_Text damageText;
+    [SerializeField] TMP_Text rangeText;
+    [SerializeField] TMP_Text projRangeText;
+    [SerializeField] TMP_Text projCountText;
+    [SerializeField] TMP_Text valueText;
+    [SerializeField] GameObject tierButton;
+    int currentTier = 0;
+
+    //special stats section - TODO
+    [SerializeField] GameObject powerButton;
+    
+
 
     void Start()
     {
@@ -33,6 +48,7 @@ public class FlowerInfoPage : Page
     public override void FillPage()
     {
         FlowerStats currentFlower = GameControl.PlayerData.flowerStatsDict[type];
+        Debug.Log("Filling the page for " + type);
 
         //set the flower rarity text regardless of encounter
         switch (currentFlower.rarity)
@@ -44,19 +60,49 @@ public class FlowerInfoPage : Page
             case 4: subheader.text = "Legendary Flower"; break;
         }
 
+        //assign the flower and projectile image either way
+        flowerImage.sprite = currentFlower.headSprite;
+        flowerProj.sprite = currentFlower.projSprite;
+
         //check whether the flower is encountered or not - fill out the page if true, otherwise gray out and don't fill
         if (GameControl.PlayerData.savedFlowerDict[type].encountered)
         {
-            title.text = GameControl.PlayerData.flowerStatsDict[type].title;
+            title.text = GameControl.PlayerData.flowerStatsDict[type].title + " Info";
             //pull description from the flowerStats obj
-            flowerImage.sprite = currentFlower.headSprite;
+
+            //if encountered, set the image alpha low
+            flowerImage.color = new Color(flowerImage.color.r, flowerImage.color.g, flowerImage.color.b, 1 / 255f);
             description.text = currentFlower.description;
-            
+            flowerProj.color = new Color(flowerImage.color.r, flowerImage.color.g, flowerImage.color.b, 1 / 255f);
+            effects.text = currentFlower.effects;
+
+            //basic stats
+            damageText.text = currentFlower.damageTiers[currentTier].ToString();
+            rangeText.text = currentFlower.rangeTiers[currentTier].ToString();
+            projRangeText.text = currentFlower.GetProjRange(currentTier).ToString();
+            projCountText.text = currentFlower.projTiers[currentTier].ToString();
+            valueText.text = string.Format("{0:C}", currentFlower.pointsTiers[currentTier] / 100f);
+            if (GameControl.SaveData.sashActive)
+                tierButton.SetActive(true);
+            else
+                tierButton.SetActive(false);
+
         }
         else
         {
+            flowerImage.color = new Color(flowerImage.color.r, flowerImage.color.g, flowerImage.color.b, 1f);
             title.text = "???";
             description.text = "You haven't encountered this flower in the field! Come back once you've figured it out";
+            flowerProj.color = new Color(flowerImage.color.r, flowerImage.color.g, flowerImage.color.b, 1f);
+            effects.text = "Unknown";
+
+            //basic stats
+            damageText.text = "?";
+            rangeText.text = "?";
+            projRangeText.text = "?";
+            projCountText.text = "?";
+            valueText.text = "?";
+            tierButton.SetActive(false);
         }
     }
 }

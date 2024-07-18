@@ -138,6 +138,8 @@ MonoBehaviour:
   outsideText: 'Tawny '
   fourText: 'Paprika '
   fiveText: 'Annoying '
-  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
-    SOMETIME YOU FUCKING IDIOT
+  description: The orange flower is notorious for its uncouth attitude and resultingly
+    high damage output. Skinwalkers and flowers alike find it aggressively annoying.
+    Hey apple, hey apple, hey!
+  effects: No effects, but has deals more damage than its common counterparts
   textColor: {r: 1, g: 0.3254902, b: 0, a: 0}
