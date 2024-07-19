@@ -77,4 +77,23 @@ public class DandyStats : FlowerStats
         proj.GetComponent<Rigidbody2D>().velocity = projDir * speed;
         yield return null;
     }
+
+    public override List<SpecialStats> GetSpecialValues(int power)
+    {
+        List<SpecialStats> returnedStats = new List<SpecialStats>();
+
+        //proj split times
+        SpecialStats projSplit = new SpecialStats("Split Count", power, "Times");
+        returnedStats.Add(projSplit);
+
+        //proj count
+        SpecialStats projCount = new SpecialStats("Projectile Count", splitCount, "per projectile");
+        returnedStats.Add(projCount);
+
+        //damage dropoff
+        SpecialStats damageDrop = new SpecialStats("Split Damage", 1 / splitCount, "Base Damage");
+        returnedStats.Add(damageDrop);
+
+        return returnedStats;
+    }
 }

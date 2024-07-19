@@ -246,6 +246,11 @@ public abstract class FlowerStats : MonoBehaviour
         Debug.Log("enemy collision called for " + type + " | Level: " + tier);
     }
 
+    public virtual void OnPlayerCollision(GameObject playerShadow, int power)
+    {
+        Debug.Log("player collision called for " + type + "| Level: " + power);
+    }
+
     public virtual void OnProjTravel(GameObject proj, int power)
     {
 

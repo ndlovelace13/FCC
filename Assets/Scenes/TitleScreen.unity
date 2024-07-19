@@ -532,6 +532,7 @@ MonoBehaviour:
   - dandy
   - wild
   - sunny
+  - coffee
   flowers:
   - {fileID: 7262396329031763444, guid: ffeb57f7923994c439f2b7e14236b3ba, type: 3}
   - {fileID: 2043813655405953477, guid: 02f42b7acc18a5b4a8c8fd4982515757, type: 3}
@@ -543,6 +544,7 @@ MonoBehaviour:
   - {fileID: 7956063438138374131, guid: 245f079010862a240802ee13f9b0b7b9, type: 3}
   - {fileID: 7956063438138374131, guid: 43c7493a0ee1a0740925bb8214d0a63a, type: 3}
   - {fileID: 7956063438138374131, guid: 7bd8e1c89760d1d48946beba1da13c92, type: 3}
+  - {fileID: 1936280616163390971, guid: 1807cad3884caf448acd9441a14f1423, type: 3}
   flowerStats: []
   flowerTypes: []
   flowerPool: {fileID: 3829620497689640212, guid: 5d8333c12bfc0254fa6de0b00c142da2, type: 3}

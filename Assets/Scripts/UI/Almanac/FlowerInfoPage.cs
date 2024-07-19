@@ -22,14 +22,20 @@ public class FlowerInfoPage : Page
     [SerializeField] TMP_Text projCountText;
     [SerializeField] TMP_Text valueText;
     [SerializeField] GameObject tierButton;
+    [SerializeField] TMP_Text tierNum;
+
+    //wild handler
     int currentTier = 0;
 
     //special stats section - TODO
     [SerializeField] GameObject powerButton;
+    [SerializeField] TMP_Text powerNum;
     [SerializeField] GameObject specialStatPrefab;
     [SerializeField] GameObject specialRow;
     [SerializeField] GameObject noSpecial;
     [SerializeField] TMP_Text noSpecialText;
+    List<GameObject> specialObjs;
+    int currentPower = 1;
     
 
 
@@ -81,21 +87,37 @@ public class FlowerInfoPage : Page
             effects.text = currentFlower.effects;
 
             //basic stats
-            damageText.text = currentFlower.damageTiers[currentTier].ToString();
-            rangeText.text = currentFlower.rangeTiers[currentTier].ToString();
-            projRangeText.text = currentFlower.GetProjRange(currentTier).ToString();
-            projCountText.text = currentFlower.projTiers[currentTier].ToString();
-            valueText.text = string.Format("{0:C}", currentFlower.pointsTiers[currentTier] / 100f);
-            if (GameControl.SaveData.sashActive)
-                tierButton.SetActive(true);
+            if (currentFlower.type != "wild")
+            {
+                damageText.text = currentFlower.damageTiers[currentTier].ToString();
+                rangeText.text = currentFlower.rangeTiers[currentTier].ToString();
+                projRangeText.text = currentFlower.GetProjRange(currentTier).ToString();
+                projCountText.text = currentFlower.projTiers[currentTier].ToString();
+                valueText.text = string.Format("{0:C}", currentFlower.pointsTiers[currentTier] / 100f);
+                if (GameControl.SaveData.sashActive)
+                {
+                    tierButton.SetActive(true);
+                    tierNum.text = currentTier.ToString();
+                }
+                else
+                    tierButton.SetActive(false);
+            }
             else
+            {
+                damageText.text = "X";
+                rangeText.text = "X";
+                projRangeText.text = "X";
+                projCountText.text = "X";
+                valueText.text = "X";
                 tierButton.SetActive(false);
+            }
+            
 
             //special stats handler
             
             //retrieve the special stats
-            List<SpecialStats> specialStats = currentFlower.GetSpecialValues(1);
-            List<GameObject> prefabs = new List<GameObject>();
+            List<SpecialStats> specialStats = currentFlower.GetSpecialValues(currentPower);
+            specialObjs = new List<GameObject>();
             if (specialStats.Count > 0)
             {
                 //Initialize the specialstat prefab for each one and fill the values
@@ -105,11 +127,14 @@ public class FlowerInfoPage : Page
                     statObj.transform.SetParent(specialRow.transform);
                     statObj.transform.localScale = Vector3.one;
                     statObj.GetComponent<SpecialStats>().TransferData(specialStat);
-                    prefabs.Add(statObj);
+                    specialObjs.Add(statObj);
                 }
 
                 if (GameControl.PlayerData.savedFlowerDict[type].highestPower > 1)
+                {
                     powerButton.SetActive(true);
+                    powerNum.text = currentPower.ToString();
+                }
                 else
                     powerButton.SetActive(false);
             }
@@ -117,7 +142,10 @@ public class FlowerInfoPage : Page
             {
                 //handle the case in which there are no special values to report
                 noSpecial.SetActive(true);
-                noSpecialText.text = "No Special Effects";
+                if (currentFlower.type == "wild")
+                    noSpecialText.text = "Replicates the Effects of Other Flowers";
+                else
+                    noSpecialText.text = "No Special Effects";
                 powerButton.SetActive(false);
             }
 
@@ -147,4 +175,47 @@ public class FlowerInfoPage : Page
             powerButton.SetActive(false);
         }
     }
+
+    public void IncrementTier()
+    {
+        FlowerStats currentFlower = GameControl.PlayerData.flowerStatsDict[type];
+        if (currentTier < GameControl.PlayerData.savedFlowerDict[type].highestTier)
+        {
+            currentTier++;
+        }
+        else
+        {
+            currentTier = 0;
+        }
+        //pull the values from the associated tier
+        damageText.text = currentFlower.damageTiers[currentTier].ToString();
+        rangeText.text = currentFlower.rangeTiers[currentTier].ToString();
+        projRangeText.text = currentFlower.GetProjRange(currentTier).ToString();
+        projCountText.text = currentFlower.projTiers[currentTier].ToString();
+        valueText.text = string.Format("{0:C}", currentFlower.pointsTiers[currentTier] / 100f);
+        tierNum.text = currentTier.ToString();
+    }
+
+
+    public void IncrementPower()
+    {
+        FlowerStats currentFlower = GameControl.PlayerData.flowerStatsDict[type];
+        if (currentPower < GameControl.PlayerData.savedFlowerDict[type].highestPower)
+        {
+            currentPower++;
+        }
+        else
+            currentPower = 1;
+
+        //retrieve the special stats
+        List<SpecialStats> specialStats = currentFlower.GetSpecialValues(currentPower);
+        //Initialize the specialstat prefab for each one and fill the values
+        for (int i = 0; i < specialStats.Count; i++)
+        {
+            specialObjs[i].GetComponent<SpecialStats>().TransferData(specialStats[i]);
+        }
+        powerNum.text = currentPower.ToString();
+    }
+
+    
 }

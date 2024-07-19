@@ -197,4 +197,23 @@ public class SunnyStats : FlowerStats
         shadow.GetComponent<SizeLerp>().Execute(false);
         yield return null;
     }
+
+    public override List<SpecialStats> GetSpecialValues(int power)
+    {
+        List<SpecialStats> returnedStats = new List<SpecialStats>();
+
+        //blind time
+        SpecialStats blindStat = new SpecialStats("Blind Length", baseBlindTime + additionalBlindTime * (power - 1), "seconds");
+        returnedStats.Add(blindStat);
+
+        //tier two grow time
+        SpecialStats twoGrowth = new SpecialStats("First Growth", firstTierTime, "Seconds");
+        returnedStats.Add(twoGrowth);
+
+        //tier three grow time
+        SpecialStats threeGrowth = new SpecialStats("Second Growth", secondTierTime, "Seconds");
+        returnedStats.Add(threeGrowth);
+
+        return returnedStats;
+    }
 }

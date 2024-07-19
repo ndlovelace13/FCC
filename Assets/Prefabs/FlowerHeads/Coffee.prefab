@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7956063438138374131
+--- !u!1 &1936280616163390971
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3357287182761453125}
-  - component: {fileID: 4638092677251401720}
-  - component: {fileID: 406143116129897093}
-  - component: {fileID: 8920025342897894981}
+  - component: {fileID: 6494731187895313485}
+  - component: {fileID: 3813213846306833904}
+  - component: {fileID: 2761018581081467435}
+  - component: {fileID: 223856435557191167}
   m_Layer: 0
-  m_Name: Wild
+  m_Name: Coffee
   m_TagString: FlowerHead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3357287182761453125
+--- !u!4 &6494731187895313485
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7956063438138374131}
+  m_GameObject: {fileID: 1936280616163390971}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.4, z: 0}
@@ -34,13 +34,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4638092677251401720
+--- !u!212 &3813213846306833904
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7956063438138374131}
+  m_GameObject: {fileID: 1936280616163390971}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,73 +75,75 @@ SpriteRenderer:
   m_SortingLayerID: 1825740317
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 2eb664c5d314e4a4da89a218f98f39f4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4afbfbcf56221b64bbbdcc90bb620775, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &406143116129897093
+--- !u!114 &2761018581081467435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7956063438138374131}
+  m_GameObject: {fileID: 1936280616163390971}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e5992e68d1e740479972dfff05bd457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: wild
+  type: coffee
   position: 0
   picked: 1
   growing: 0
   tier: 0
---- !u!114 &8920025342897894981
+--- !u!114 &223856435557191167
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7956063438138374131}
+  m_GameObject: {fileID: 1936280616163390971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2225e788be76f04e9644e8a157b060f, type: 3}
+  m_Script: {fileID: 11500000, guid: 48b0c925c9bb5ff4f956fc326120eeb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rarity: 1
-  type: wild
-  id: 8
-  basePoints: 0
-  damage: 0
-  range: 0
-  projCount: 0
-  projRange: 0
-  headSprite: {fileID: 21300000, guid: 2eb664c5d314e4a4da89a218f98f39f4, type: 3}
-  projSprite: {fileID: 21300000, guid: 32316d72cb74b8a4598d6a70b3b4c74a, type: 3}
+  type: coffee
+  id: 10
+  basePoints: 3
+  damage: 15
+  range: 5
+  projCount: 6
+  projRange: 8
+  headSprite: {fileID: 21300000, guid: 4afbfbcf56221b64bbbdcc90bb620775, type: 3}
+  projSprite: {fileID: 21300000, guid: beb30078578622249a355b0aecc5b48a, type: 3}
   stemSprite: {fileID: 21300000, guid: 2351e182e81d46542a43cefa85e8ee95, type: 3}
   pool: {fileID: 0}
-  pointsTiers: 00000000000000000000000000000000
-  damageTiers: 00000000000000000000000000000000
-  rangeTiers: 00000000000000000000000000000000
-  projTiers: 00000000000000000000000000000000
-  aug: 0
-  title: Wildflower
-  primaryText: 'Curious '
-  insideText: 'Unpredictable '
-  outsideText: 'Random '
-  fourText: 'Anomolous '
-  fiveText: 'Gambler''s '
-  description: 'The Wildflower''s self-insecurity is both its greatest strength and
-    weakness. It is able to fit in to great effect with any group of flower, but
-    when left alone, has a hard time deciding just who it is. '
-  effects: Imitation - This flower duplicate the effects of the symmetrically placed
-    flower in a crown\nMimicry - This flower will take on the effects of a random
-    discovered flower if it has no flower to imitate
-  textColor: {r: 0.4156863, g: 0.42352945, b: 0.82745105, a: 0}
+  pointsTiers: 03000000040000000500000007000000
+  damageTiers: 0f000000120000001400000016000000
+  rangeTiers: 0500000006000000080000000a000000
+  projTiers: 06000000060000000700000008000000
+  aug: 6
+  title: Coffee Flower
+  primaryText: 'Strong '
+  insideText: 'Stimulating '
+  outsideText: 'Energizing '
+  fourText: 'Jittery '
+  fiveText: 'Geeked Up '
+  description: Unlike most flowers, the Coffee Flower's stimulating effects have
+    not been observed in skinwalkers - instead, this flower targets humans. We are
+    incredibly thankful for this evolutionary oddity - we can think of few things
+    more terrifying than a caffeinated skinwalker.
+  effects: Caffeination - The Coffee Flower's projectiles grant the player with a
+    speed boost upon collision\nCoffee Beans - Projectiles will drop an speed-boosting
+    item upon reaching the end of their trajectory
+  textColor: {r: 0.34117648, g: 0.24705884, b: 0.10196079, a: 0}
+  coffeePool: {fileID: 0}

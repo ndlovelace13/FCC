@@ -52,16 +52,28 @@ public class StickerPage : Page
 
             //assign the stickers to a row
             int rowCount;
-            if (i % 2 == 0)
-                rowCount = stickerDivisor;
+            if (i < numRows - 1)
+            {
+                if (i % 2 == 0)
+                    rowCount = stickerDivisor;
+                else
+                    rowCount = stickerDivisor - 1;
+            }
             else
-                rowCount = stickerDivisor - 1;
+                rowCount = numRows;
             for (int j = 0; j < rowCount; j++)
             {
-                stickerList[stickerIndex].transform.SetParent(row.transform);
-                stickerList[stickerIndex].GetComponent<Sticker>().DiscoveryCheck();
-                Debug.Log("Sticker " + stickerIndex + " assigned");
-                stickerIndex++;
+                if (stickerIndex < stickerList.Count)
+                {
+                    stickerList[stickerIndex].transform.SetParent(row.transform);
+                    stickerList[stickerIndex].GetComponent<Sticker>().DiscoveryCheck();
+                    Debug.Log("Sticker " + stickerIndex + " assigned");
+                    stickerIndex++;
+                }
+                else
+                {
+                    break;
+                }
             }
 
         }

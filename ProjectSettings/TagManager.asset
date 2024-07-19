@@ -45,6 +45,7 @@ TagManager:
   - report
   - quitMenu
   - almanac
+  - coffeePool
   layers:
   - Default
   - TransparentFX

@@ -127,6 +127,10 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log(transform.position);
             GameOver();
         }
+        if (other.gameObject.tag == "projectile" || other.gameObject.tag == "aoe")
+        {
+            GetComponent<PlayerStatus>().CollisionCheck(other);
+        }
     }
 
     public void GameOver()

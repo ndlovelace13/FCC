@@ -1215,6 +1215,55 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 767032636668993792, guid: 0b59706b31283e045b955cb82e68f00d, type: 3}
   m_PrefabInstance: {fileID: 215006153}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &936447888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 936447890}
+  - component: {fileID: 936447889}
+  m_Layer: 0
+  m_Name: CoffeePool
+  m_TagString: coffeePool
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &936447889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936447888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae007295bccc1e342aa6ea8f6a688adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToPool: {fileID: 7354332287466844734, guid: 5582991e32fc67247a9afa2c89b82882, type: 3}
+  pooledObjects: []
+  amountToPool: 50
+  activeObjects: 0
+  autoPool: 1
+--- !u!4 &936447890
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936447888}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7975697, y: 0.6279697, z: 0.0724516}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1089609517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2403,6 +2452,7 @@ SceneRoots:
   - {fileID: 3772154450252809083}
   - {fileID: 212852600}
   - {fileID: 808248086688013130}
+  - {fileID: 936447890}
   - {fileID: 7174202958303088636}
   - {fileID: 700796774}
   - {fileID: 8481954401232756112}
