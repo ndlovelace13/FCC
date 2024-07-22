@@ -152,6 +152,7 @@ public class StickerPage : Page
                 //add to the array and get the index
                 associatedPages.Add(enemyInfo);
                 sticker.GetComponent<Sticker>().SetPageIndex(associatedPages.Count - 1 + offset);
+                enemyInfo.SetType(sticker.GetComponent<Sticker>().type);
 
                 enemyObj.transform.SetParent(transform.parent);
             }

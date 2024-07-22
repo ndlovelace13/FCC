@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public abstract class EnemyBehavior : MonoBehaviour
 {
+    public string type;
     protected int health;
     TMP_Text scoreNotif;
     [SerializeField] int maxHealth;
@@ -280,6 +281,11 @@ public abstract class EnemyBehavior : MonoBehaviour
         scoreNotif.GetComponent<ScoreNotification>().newFeed("Enemy Defeated | ", mySpawner.killScore);
         GameControl.PlayerData.enemyScore += mySpawner.killScore;
         GameControl.PlayerData.shiftEnemies++;
+
+        //increment the total defeatedCount & shift defeated
+        GameControl.PlayerData.savedEnemyDict[type].defeatedCount++;
+        GameControl.PlayerData.enemyKills[type]++;
+
         //int currentScore = PlayerPrefs.GetInt("totalScore");
         //PlayerPrefs.SetInt("totalScore", currentScore + destructScore);
         GameControl.PlayerData.score += mySpawner.killScore;

@@ -125,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //Debug.Log(other.gameObject.transform.position);
             //Debug.Log(transform.position);
+            GameControl.PlayerData.savedEnemyDict[other.transform.parent.GetComponent<EnemyBehavior>().type].deathCount++;
             GameOver();
         }
         if (other.gameObject.tag == "projectile" || other.gameObject.tag == "aoe")

@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4930f9e9e1ea641ace1d7ebf3d4e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: sprinter
   maxHealth: 80
   isActive: 0
   target: {fileID: 0}

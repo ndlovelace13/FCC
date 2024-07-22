@@ -151,6 +151,8 @@ public class GameControl : MonoBehaviour
 
     //used for keeping track of most used flowers - TODO - could overhaul the sash system to use this metric instead
     public Dictionary<string, int> flowerUse;
+    //used for keeping track of enemy eliminations
+    public Dictionary<string, int> enemyKills;
 
     //player stats
     /*public int highScore = 0;
@@ -602,6 +604,13 @@ public class GameControl : MonoBehaviour
         foreach (var flower in allDiscovered)
         {
             flowerUse.Add(flower, 0);
+        }
+
+        //Reset the enemy kill counters
+        enemyKills = new Dictionary<string, int>();
+        foreach (var enemy in enemyTypes)
+        {
+            enemyKills.Add(enemy.type, 0);
         }
         
         GameObject.FindWithTag("flowerPool").GetComponent<FlowerCalc>().PreroundCalc();

@@ -12,6 +12,8 @@ public class SavedEnemyStats
 
     public int defeatedCount;
     public int deathCount;
+    public int defeatedRecord;
+    public int shiftRecord;
 
     public SavedEnemyStats(string key)
     {
@@ -19,6 +21,9 @@ public class SavedEnemyStats
 
         defeatedCount = 0;
         deathCount = 0;
+        defeatedRecord = 0;
+        shiftRecord = 0;
+
         this.key = key;
     }
 }
@@ -33,6 +38,9 @@ public abstract class EnemyStats : MonoBehaviour
     [SerializeField] public string type;
     [SerializeField] public Sprite sprite;
     public bool encountered = false;
+
+    //Almanac stuff
+    public string title, subtext, description, behavior, weakness;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,5 +51,30 @@ public abstract class EnemyStats : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public virtual string GetTitle()
+    {
+        return title;
+    }
+
+    public virtual string GetSubtext()
+    {
+        return subtext;
+    }
+
+    public virtual string GetDescription()
+    {
+        return description;
+    }
+
+    public virtual string GetBehavior()
+    {
+        return behavior;
+    }
+
+    public virtual string GetWeakness()
+    {
+        return weakness;
     }
 }

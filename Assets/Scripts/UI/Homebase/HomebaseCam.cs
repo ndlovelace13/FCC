@@ -231,6 +231,16 @@ public class HomebaseCam : MonoBehaviour
                 GameControl.PlayerData.savedFlowerDict[flower.Key].highestShift = GameControl.SaveData.shiftCounter;
             }
         }
+
+        //update the highest kill count for each enemy
+        foreach (var enemy in GameControl.PlayerData.enemyKills)
+        {
+            if (GameControl.PlayerData.savedEnemyDict[enemy.Key].defeatedRecord <  enemy.Value)
+            {
+                GameControl.PlayerData.savedEnemyDict[enemy.Key].defeatedRecord = enemy.Value;
+                GameControl.PlayerData.savedEnemyDict[enemy.Key].shiftRecord = GameControl.SaveData.shiftCounter;
+            }
+        }
         GameControl.SaveHandler.SaveGame();
         yield return null;
     }
