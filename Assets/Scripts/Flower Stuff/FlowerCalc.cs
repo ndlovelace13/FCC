@@ -165,8 +165,9 @@ public class FlowerCalc : MonoBehaviour
                     currentWidth += inc;
                     //Debug.Log("current Height:" + currentHeight + "\ncurrent Width:" + currentWidth);
                     string flowerType = FlowerChoice();
-                    //random color gen needs to happen here
-                    FlowerData data = new FlowerData(new Vector2(currentWidth, currentHeight), flowerType, raritySelection);
+                    
+                    Vector2 finalPos = SpacingCalc(currentWidth, currentHeight);
+                    FlowerData data = new FlowerData(finalPos, flowerType, raritySelection);
                     flowers.Add(data);
                     //Debug.Log("This is the current num:" + flowers);
                 }
@@ -178,6 +179,13 @@ public class FlowerCalc : MonoBehaviour
         //Debug.Log("This is the count" + flowers.Count);
         //TO DO - SECOND WAVE OF RANDOMIZATION, random movement within a 1 square grid
         return flowers;
+    }
+
+    private Vector2 SpacingCalc(float width, float height)
+    {
+        float finalWidth = Random.Range(width - 0.5f, width + 0.5f);
+        float finalHeight = Random.Range(height - 0.5f, height + 0.5f);
+        return new Vector2(finalWidth, finalHeight);
     }
 
     private string FlowerChoice()

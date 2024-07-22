@@ -277,7 +277,7 @@ public abstract class EnemyBehavior : MonoBehaviour
     {
         StartCoroutine(StateReset());
         AkSoundEngine.PostEvent("EnemyKilled", gameObject);
-        scoreNotif.GetComponent<ScoreNotification>().newFeed("Enemy Defeated | +" + mySpawner.killScore);
+        scoreNotif.GetComponent<ScoreNotification>().newFeed("Enemy Defeated | ", mySpawner.killScore);
         GameControl.PlayerData.enemyScore += mySpawner.killScore;
         GameControl.PlayerData.shiftEnemies++;
         //int currentScore = PlayerPrefs.GetInt("totalScore");

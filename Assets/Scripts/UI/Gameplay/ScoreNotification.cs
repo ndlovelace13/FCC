@@ -29,9 +29,17 @@ public class ScoreNotification : MonoBehaviour
         else
             feedText.text = "";
     }
-    
+
     public void newFeed(string newMessage)
     {
+        newNotifs.Add(newMessage);
+        feedText.color = ogColor;
+        StartCoroutine("removeFeed");
+    }
+
+    public void newFeed(string newMessage, int score)
+    {
+        newMessage += "<color=\"green\">+" + string.Format("{0:C}", score / 100f);
         newNotifs.Add(newMessage);
         feedText.color = ogColor;
         StartCoroutine("removeFeed");

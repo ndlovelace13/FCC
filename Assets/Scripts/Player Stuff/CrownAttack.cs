@@ -217,7 +217,7 @@ public class CrownAttack : MonoBehaviour
 
         //rotating towards direction of movement
         proj.SetActive(true);
-        proj.GetComponent<ProjectileBehavior>().SetProps(range, damage, actualAugs, projDir);
+        proj.GetComponent<ProjectileBehavior>().SetProps(range, damage, actualAugs, projDir, singleFire);
         proj.GetComponentInChildren<Rigidbody2D>().velocity = projDir * speed;
         singleFire = false;
         yield return null;

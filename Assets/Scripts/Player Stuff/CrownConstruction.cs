@@ -91,12 +91,12 @@ public class CrownConstruction : MonoBehaviour
             {
                 GameControl.SaveData.newDiscoveries++;
                 crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement, Color.green);
-                scoreNotif.GetComponent<ScoreNotification>().newFeed("New Crown Discovered | +" + crownDiscoveryScore);
+                scoreNotif.GetComponent<ScoreNotification>().newFeed("New Crown Discovered | ", crownDiscoveryScore);
             }
             else
                 crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement);
             AkSoundEngine.PostEvent("CraftingDone", gameObject);
-            scoreNotif.GetComponent<ScoreNotification>().newFeed("Crown Construction | +" + crownScore);
+            scoreNotif.GetComponent<ScoreNotification>().newFeed("Crown Construction | ", crownScore);
             finalCrown.GetComponent<SpriteRenderer>().enabled = true;
             finalCrown.transform.parent = null;
             gameObject.GetComponent<CrownThrowing>().CompletedCrown(finalCrown, range);

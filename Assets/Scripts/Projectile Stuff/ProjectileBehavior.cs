@@ -13,6 +13,7 @@ public enum augment
     ELECTRIC
 }
 
+//not used
 public class Augment
 {
     string type;
@@ -53,6 +54,7 @@ public class ProjectileBehavior : MonoBehaviour
     //string[] augs = new string[3];
     Vector3 startingPos = Vector3.zero;
     public Dictionary<string, int> actualAugs = new Dictionary<string, int>();
+    public bool single = false;
 
 
     bool arrived = false;
@@ -73,7 +75,7 @@ public class ProjectileBehavior : MonoBehaviour
         //Debug.Log(spriteTrans.name);
     }
 
-    public void SetProps(float r, int d, Dictionary<string, int> augsPass, Vector2 rotation)
+    public void SetProps(float r, int d, Dictionary<string, int> augsPass, Vector2 rotation, bool singleFire)
     {
         if (particles == null)
             getParticles();
@@ -86,6 +88,7 @@ public class ProjectileBehavior : MonoBehaviour
         //augs[1] = aug2;
         //augs[2] = aug3;
         actualAugs = augsPass;
+        single = singleFire;
         foreach (var aug in actualAugs)
             Debug.Log("Augment " + aug.Key + " " + aug.Value + " made it all the way to the finish line");
         //this.tier = tier;

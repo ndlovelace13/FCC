@@ -73,7 +73,7 @@ public class DandyStats : FlowerStats
                 actualAugs["dandy"]--;
         }
         float speed = original.GetComponent<Rigidbody2D>().velocity.magnitude;
-        proj.GetComponent<ProjectileBehavior>().SetProps(range / 2f, damage / splitCount, actualAugs, projDir);
+        proj.GetComponent<ProjectileBehavior>().SetProps(range / 2f, damage / splitCount, actualAugs, projDir, original.GetComponent<ProjectileBehavior>().single);
         proj.GetComponent<Rigidbody2D>().velocity = projDir * speed;
         yield return null;
     }

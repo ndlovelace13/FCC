@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerStatus : MonoBehaviour
 {
     Dictionary<string, int> actualAugs = new Dictionary<string, int>();
+    [SerializeField] public Animator playerParticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +24,12 @@ public class PlayerStatus : MonoBehaviour
         if (other.gameObject.tag == "projectile")
         {
             GameObject otherParent = other.gameObject.transform.parent.gameObject;
-            actualAugs = otherParent.GetComponent<ProjectileBehavior>().getActualAugs();
-            AugmentApplication(actualAugs);
-            otherParent.GetComponent<ProjectileBehavior>().ObjectDeactivate();
+            if (!otherParent.GetComponent<ProjectileBehavior>().single)
+            {
+                actualAugs = otherParent.GetComponent<ProjectileBehavior>().getActualAugs();
+                AugmentApplication(actualAugs);
+                otherParent.GetComponent<ProjectileBehavior>().ObjectDeactivate();
+            }
         }
         else if (other.gameObject.tag == "aoe")
         {

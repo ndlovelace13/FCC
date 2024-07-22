@@ -5,15 +5,15 @@ using UnityEngine;
 public class CoffeeStats : FlowerStats
 {
     [SerializeField] GameObject coffeePool;
-    float beanTime = 7.5f;
+    float beanTime = 5f;
 
     //speed effect stats
     float speedTime = 3f;
-    float speedEffect = 1.25f;
+    float speedEffect = 1.1f;
 
     //power scaling
     float timeIncrease = 1f;
-    float speedIncrease = 0.125f;
+    float speedIncrease = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -74,16 +74,21 @@ public class CoffeeStats : FlowerStats
         float thisSpeedLength = speedTime + timeIncrease * (power - 1);
         float thisSpeedEffect = speedEffect + speedIncrease * (power - 1);
         PlayerMovement player = playerShadow.GetComponent<PlayerMovement>();
+        Animator particle = playerShadow.GetComponent<PlayerStatus>().playerParticle;
 
         //apply the speed boost
         player.speed *= thisSpeedEffect;
+        particle.SetInteger("augment", 6);
 
         //wait for the timer to run
         float currentTime = 0f;
         while (currentTime < thisSpeedLength)
         {
             if (GameControl.PlayerData.gameOver)
+            {
+                particle.SetInteger("augment", 0);
                 yield break;
+            }
             currentTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
             Debug.Log("Player Speed: " + player.speed);
@@ -91,6 +96,7 @@ public class CoffeeStats : FlowerStats
 
         //remove the speed boost
         player.speed /= thisSpeedEffect;
+        particle.SetInteger("augment", 0);
 
         yield return null;
     }
