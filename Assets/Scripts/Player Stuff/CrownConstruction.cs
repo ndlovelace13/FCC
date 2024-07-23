@@ -44,7 +44,15 @@ public class CrownConstruction : MonoBehaviour
     int craftAnimChoice = 1;
 
     [SerializeField] GameObject flowerUIPool;
+    
+
+    //stuff for the skill checking rework
+    FlowerBehavior[] currentFlowers;
+    int prevSkillCheckCount = 0;
     int skillCheckCounter = 0;
+    [SerializeField] GameObject craftStem;
+    GameObject[] stems;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,11 +61,18 @@ public class CrownConstruction : MonoBehaviour
         slots = docket.GetComponentsInChildren<Transform>();
         slots = slots.Where(child => child.tag == "slotEmpty").ToArray();
         chosenInputs = new List<GameObject>();
+
+        stems = new GameObject[slots.Length];
+        for (int i = 0; i < stems.Length; i++)
+        {
+            stems[i] = Instantiate(craftStem);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        //activated when the docket is loaded and the player presses E - initiates crown construction
         if (harvestObj.docketLoaded == true && Input.GetKeyDown(KeyCode.E) && !skillCheckActive && !constructionReady && !crownHeld)
         {
             if (GameControl.PlayerData.tutorialState == 4)
@@ -68,6 +83,7 @@ public class CrownConstruction : MonoBehaviour
             GetComponentInChildren<Animator>().SetBool("isMoving", false);
             GetComponentInChildren<Animator>().SetBool("isCrafting", true);
         }
+        //activated when the crown is fully crafted - calculates the score and resets for more harvesting
         if (constructionReady == true)
         {
             GetComponentInChildren<Animator>().SetBool("isCrafting", false);
@@ -97,17 +113,18 @@ public class CrownConstruction : MonoBehaviour
                 crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement);
             AkSoundEngine.PostEvent("CraftingDone", gameObject);
             scoreNotif.GetComponent<ScoreNotification>().newFeed("Crown Construction | ", crownScore);
-            finalCrown.GetComponent<SpriteRenderer>().enabled = true;
-            finalCrown.transform.parent = null;
+            //finalCrown.GetComponent<SpriteRenderer>().enabled = true;
+            
             gameObject.GetComponent<CrownThrowing>().CompletedCrown(finalCrown, range);
             //TODO - switch hardcoded augments to passing actualAugs dict
             foreach (var aug in actualAugs)
                 Debug.Log("Augment " + aug.Key + " " + aug.Value);
             finalCrown.GetComponent<CrownAttack>().SetProjStats(projRange, damage, projType, actualAugs, numProjs, tier);
-            //Instantiation of new crown
-            CrownReplace();
-            crownHeld = true;
+            //crownHeld = true;
+            //reactivate the crosshair
+            GameControl.PlayerData.crosshairActive = true;
         }
+        //triggers when the skillcheck is active - not ideal but may be necessary for the tutorial state checking
         if (skillCheckActive)
         {
             if (GameControl.PlayerData.tutorialState != 4)
@@ -131,9 +148,13 @@ public class CrownConstruction : MonoBehaviour
         crownHeld = false;
     }
 
+    //sets up the skill check - retain this function to place the flowers and crown for crafting minigame
     void ConstructionSkillCheck()
     {
-        foreach (Transform t in slots)
+        StartCoroutine(CraftingSetupLerp());
+
+        //slots contains the final positions for the flowers
+        /*foreach (Transform t in slots)
         {
             skillCheckCounter = 0;
             int inputRand = UnityEngine.Random.Range(0, 4);
@@ -141,14 +162,97 @@ public class CrownConstruction : MonoBehaviour
             chosenInputs.Add(newInput);
             Debug.Log(chosenInputs.Count);
             chosenInputs[chosenInputs.Count - 1].transform.parent = docket.transform;
+        }*/
+    }
+
+    //use this function to place all the flowers and crown in the right spots for construction minigame
+    IEnumerator CraftingSetupLerp()
+    {
+        //activate the crown spriteRenderer
+        finalCrown.GetComponent<SpriteRenderer>().enabled = true;
+
+        //calculate the edge of the screen and the finalLocation
+        Vector3 topEdge = Camera.main.ScreenToWorldPoint(new Vector3(0f, Screen.height));
+        Vector3 center = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2));
+        float yOffset = Math.Abs(topEdge.y - center.y) / 4f;
+        Vector3 finalPos = new Vector3(finalCrown.transform.localPosition.x, yOffset);
+
+        //calculate a random location for all of the flowers
+        currentFlowers = finalCrown.transform.GetComponentsInChildren<FlowerBehavior>();
+        //Transform[] flowers = children.Where(child => child.tag == "FlowerHead").ToArray();
+        for (int i = currentFlowers.Length - 1; i >= 0; i--)
+        {
+            //store the finalPosition as the current localPos in relation to the crown
+            currentFlowers[i].finalDocketPos = currentFlowers[i].gameObject.transform.localPosition;
+
+            //generate a random location on the surrounding oval
+            float generatedRad = UnityEngine.Random.Range(0f, Mathf.PI * 2);
+            Vector3 generatedPos = new Vector3(4 * Mathf.Cos(generatedRad), 2.5f * Mathf.Sin(generatedRad));
+            currentFlowers[i].randomCraftPos = generatedPos;
+
+            //assign a stem to the current flower
+            stems[i].GetComponent<CraftingStem>().SetFlower(currentFlowers[i]);
+            stems[i].transform.SetParent(finalCrown.transform);
         }
+
+
+        float currentTime = 0f;
+        while (currentTime < 0.2f)
+        {
+            finalCrown.transform.localPosition = Vector3.Lerp(Vector3.zero, finalPos, currentTime / 0.2f);
+            foreach (var flower in currentFlowers)
+            {
+                flower.gameObject.transform.localPosition = Vector3.Lerp(flower.finalDocketPos, flower.randomCraftPos, currentTime / 0.2f);
+            }
+            yield return new WaitForEndOfFrame();
+            currentTime += Time.deltaTime;
+        }
+
+        //finally allow for the skillChecking to begin
+        foreach (var flower in currentFlowers)
+        {
+            flower.draggable = true;
+            flower.placed = false;
+        }
+
+        prevSkillCheckCount = 0;
         skillCheckActive = true;
+        
         gameObject.GetComponentInChildren<PlayerMovement>().CraftingSlow();
+        GameControl.PlayerData.crosshairActive = false;
+    }
+
+    IEnumerator CrownFinishLerp()
+    {
+        skillCheckActive = false;
+        gameObject.GetComponentInChildren<PlayerMovement>().CraftingDone();
+        constructionReady = true;
+
+        Vector3 currentPos = finalCrown.transform.position;
+        //Debug.Log(currentPos + " " + transform.position);
+
+        float currentTime = 0f;
+        while (currentTime < 0.2f)
+        {
+            finalCrown.transform.position = Vector3.Lerp(currentPos, transform.position, currentTime / 0.2f);
+            finalCrown.transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 0.6f, currentTime / 0.2f);
+            currentTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        //set things up for the reckoning when done
+        //Instantiation of new crown
+        finalCrown.transform.parent = null;
+        CrownReplace();
+        crownHeld = true;
+        gameObject.GetComponent<CrownThrowing>().crownHeld = true;
+        //free the crown from the bonds of parentage
+        
     }
     
     void skillChecking()
     {
-        if (chosenInputs.Count > 0)
+        /*if (chosenInputs.Count > 0)
         {
             bool inputPressed = false;
             GameObject currentInput = chosenInputs[0];
@@ -189,6 +293,28 @@ public class CrownConstruction : MonoBehaviour
             skillCheckActive = false;
             gameObject.GetComponentInChildren<PlayerMovement>().CraftingDone();
             constructionReady = true;
+        }*/
+
+        //the new version
+        if (prevSkillCheckCount < 5)
+        {
+            skillCheckCounter = 0;
+            foreach (var flower in currentFlowers)
+            {
+                if (flower.placed)
+                    skillCheckCounter++;
+            }
+            if (skillCheckCounter > prevSkillCheckCount)
+            {
+                AkSoundEngine.PostEvent("CraftingInput", gameObject);
+                prevSkillCheckCount = skillCheckCounter;
+            }
+        }
+        else
+        {
+            Debug.Log("Skill Check Complete");
+            //lerp crown back down
+            StartCoroutine(CrownFinishLerp());
         }
         
     }

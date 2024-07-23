@@ -569,6 +569,7 @@ MonoBehaviour:
   skillCheckActive: 0
   crownAnnouncement: 
   flowerUIPool: {fileID: 0}
+  craftStem: {fileID: 1713123191170323571, guid: e1a2be600d901c7468825b6988fc3646, type: 3}
 --- !u!70 &3850106713470985190
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -226,6 +226,9 @@ public class GameControl : MonoBehaviour
     public Dictionary<string, SavedEnemyStats> savedEnemyDict;
     public int newEnemyTime = 60;
 
+    //cursor vs. crosshair
+    public bool crosshairActive = true;
+
     private void Awake()
     {
         if (PlayerData == null)

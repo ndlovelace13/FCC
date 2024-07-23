@@ -15,8 +15,10 @@ public class CrosshairPlacement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameControl.PlayerData.gameOver)
+        if (!GameControl.PlayerData.gameOver && GameControl.PlayerData.crosshairActive)
         {
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            Cursor.visible = false;
             Vector3 mousePos = Input.mousePosition;
             Vector2 realMousePos = Camera.main.ScreenToWorldPoint(mousePos);
             /*Vector2 playerPos = player.position;
@@ -26,7 +28,10 @@ public class CrosshairPlacement : MonoBehaviour
             crosshair.position = realMousePos;
         }
         else
-            gameObject.SetActive(false);
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            Cursor.visible = true;
+        }
 
     }
 }

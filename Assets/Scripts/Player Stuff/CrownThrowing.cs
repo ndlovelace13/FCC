@@ -7,7 +7,7 @@ public class CrownThrowing : MonoBehaviour
 {
     GameObject finalCrown;
     [SerializeField] public GameObject landingZone;
-    public bool crownHeld;
+    public bool crownHeld = false;
     [SerializeField] float sizeMod;
     [SerializeField] float throwTime;
     [SerializeField] float throwSpeed;
@@ -24,6 +24,7 @@ public class CrownThrowing : MonoBehaviour
     {
         if (crownHeld)
         {
+            //Debug.Log("crown held");
             finalCrown.transform.position = gameObject.transform.position;
             if ((GameControl.PlayerData.tutorialState >= 6 && GameControl.PlayerData.tutorialActive) || !GameControl.PlayerData.tutorialActive)
             {
@@ -77,8 +78,8 @@ public class CrownThrowing : MonoBehaviour
     public void CompletedCrown(GameObject finishedCrown, float maxDist)
     {
         finalCrown = finishedCrown;
-        finalCrown.transform.localScale = Vector3.one * 0.6f;
-        crownHeld = true;
+        //finalCrown.transform.localScale = Vector3.one * 0.6f;
+        //crownHeld = true;
         //activate the landingZone
         landingZone.SetActive(true);
         landingZone.GetComponent<LandingZone>().Activate(maxDist);
