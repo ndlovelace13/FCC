@@ -32,15 +32,38 @@ public class SaveData
     public bool almanacUnlocked = false;
     public Queue<string[]> dialogueQueue = new Queue<string[]>();
 
-    //Persistent Counters
+    //Persistent Total Counters
     public int shiftCounter = 0;
+    public float totalIncome = 0;
+    public int totalCrowns = 0;
+    public int totalFlowers = 0;
+    public int totalKills = 0;
+    public int totalSeeds = 0;
+    public float totalSpent = 0;
+    public int totalUpgrades = 0;
+    public int totalDrives = 0;
 
+    //Completion Stats
+    public int upgradeAmount = 0;
+    public int researchAmount = 0;
+
+    //Persistent Record Counters
     public float highMoney = 0;
     public int highMin = 0;
     public int highSec = 0;
     public int highEnemies = 0;
     public int highSeeds = 0;
     public int highCrowns = 0;
+    public int highDiscoveries = 0;
+
+    //Favorites
+    public string mostUsedFlower;
+    public int flowerTimes;
+
+    public string mostUsedCrown;
+    public string crownTimes;
+
+
 
     public int sashSlots = 3;
 
@@ -167,6 +190,7 @@ public class GameControl : MonoBehaviour
     public int shiftSeeds = 0;
     public int shiftEnemies = 0;
     public int shiftCrowns = 0;
+    public int shiftDiscoveries = 0;
 
     //specific score totals
     public int discoveryScore = 0;
@@ -216,7 +240,9 @@ public class GameControl : MonoBehaviour
     [SerializeField] public GameObject flowerStatPage;
     [SerializeField] public GameObject enemyPage;
     [SerializeField] GameObject helperPage;
+    [SerializeField] GameObject controlPage;
     [SerializeField] GameObject playerStatsPage;
+    [SerializeField] GameObject playerCompPage;
 
     //enemy related variables
     [SerializeField] List<EnemyStats> enemyTypes = new List<EnemyStats>();
@@ -513,12 +539,23 @@ public class GameControl : MonoBehaviour
         Page crownPage = helperObj.GetComponent<HelperPage>();
         helperObj.transform.SetParent(almanacContainer.transform);
 
+        GameObject controlObj = Instantiate(controlPage);
+        Page controlPagee = controlObj.GetComponent<HelperPage>();
+        controlObj.transform.SetParent(almanacContainer.transform);
+
         GameObject playerInfoObj = Instantiate(playerStatsPage);
         Page playerInfo = playerInfoObj.GetComponent<PlayerStatsPage>();
         playerInfoObj.transform.SetParent(almanacContainer.transform);
 
+        //Player Completion Page here
+        GameObject playerCompObj = Instantiate(playerCompPage);
+        Page playerCompletion = playerCompObj.GetComponent<PlayerCompletionPage>();
+        playerCompObj.transform.SetParent(almanacContainer.transform);
+
         almanacPages.Add(crownPage);
+        almanacPages.Add(controlPagee);
         almanacPages.Add(playerInfo);
+        almanacPages.Add(playerCompletion);
 
         Debug.Log("There are currently " + almanacPages.Count + " pages in the almanac");
     }
