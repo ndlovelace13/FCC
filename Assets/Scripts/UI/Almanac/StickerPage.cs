@@ -9,6 +9,9 @@ public class StickerPage : Page
     [SerializeField] GameObject stickerPrefab;
     public bool flowerStickers;
     bool stickersOrganized = false;
+    [SerializeField] Button crownInfoButton;
+    [SerializeField] Button careerButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +29,9 @@ public class StickerPage : Page
         if (flowerStickers)
             subheader.text = "-- Flowers --";
         else
+        {
             subheader.text = "-- Skinwalkers --";
+        }
         if (!stickersOrganized)
             StickerOrganize();
     }
@@ -37,7 +42,11 @@ public class StickerPage : Page
         Debug.Log("Stickers Being Organized");
         int stickerCount = stickerList.Count;
         int stickerDivisor = (int)Mathf.Floor(Mathf.Sqrt(stickerCount));
-        int numRows = (stickerCount / stickerDivisor) + 1;
+        int numRows = (stickerCount / stickerDivisor);
+        if (flowerStickers)
+            numRows++;
+        if (stickerCount < 4)
+            numRows = 1;
         int stickerIndex = 0;
 
         //initialize a horizontal grouping for each row in numRows
@@ -60,7 +69,7 @@ public class StickerPage : Page
                     rowCount = stickerDivisor - 1;
             }
             else
-                rowCount = numRows;
+                rowCount = 5;
             for (int j = 0; j < rowCount; j++)
             {
                 if (stickerIndex < stickerList.Count)
@@ -78,6 +87,21 @@ public class StickerPage : Page
 
         }
         stickersOrganized = true;
+        if (!flowerStickers)
+        {
+            Almanac almanac = GameObject.FindWithTag("almanac").GetComponent<Almanac>();
+            crownInfoButton.gameObject.SetActive(true);
+            crownInfoButton.transform.SetAsLastSibling();
+            crownInfoButton.onClick.AddListener(() => almanac.ChangePages(GameControl.PlayerData.almanacPages.Count - 4));
+            careerButton.gameObject.SetActive(true);
+            careerButton.transform.SetAsLastSibling();
+            careerButton.onClick.AddListener(() => almanac.ChangePages(GameControl.PlayerData.almanacPages.Count - 2));
+        }
+        else
+        {
+            crownInfoButton.gameObject.SetActive(false);
+            careerButton.gameObject.SetActive(false);
+        }
     }
 
     //constructor for flowers

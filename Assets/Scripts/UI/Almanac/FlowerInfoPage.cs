@@ -77,7 +77,7 @@ public class FlowerInfoPage : Page
         //check whether the flower is encountered or not - fill out the page if true, otherwise gray out and don't fill
         if (GameControl.PlayerData.savedFlowerDict[type].encountered)
         {
-            title.text = GameControl.PlayerData.flowerStatsDict[type].title + " Info";
+            title.text = GameControl.PlayerData.flowerStatsDict[type].GetTitle() + " Info";
             //pull description from the flowerStats obj
 
             //if encountered, set the image alpha low

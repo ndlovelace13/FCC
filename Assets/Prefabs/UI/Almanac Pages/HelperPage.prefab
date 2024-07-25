@@ -717,6 +717,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: {fileID: 0}
   subheader: {fileID: 0}
+  backButton: {fileID: 0}
+  forwardButton: {fileID: 0}
 --- !u!114 &5668309358279174956
 MonoBehaviour:
   m_ObjectHideFlags: 0

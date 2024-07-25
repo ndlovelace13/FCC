@@ -30,6 +30,7 @@ public class ShiftReport
     public int timeSec;
 
     public int crowns;
+    public int discoveries;
     public int enemies;
     public int seedsEarned;
 
@@ -41,6 +42,7 @@ public class ShiftReport
     public bool highTime = false;
     public bool highMoney = false;
     public bool highCrowns = false;
+    public bool highDiscoveries = false;
     public bool highEnemies = false;
     public bool highSeeds = false;
 
@@ -62,6 +64,7 @@ public class ShiftReport
         timeMin = GameControl.PlayerData.min;
         timeSec = GameControl.PlayerData.sec;
         crowns = GameControl.PlayerData.shiftCrowns;
+        discoveries = GameControl.PlayerData.shiftDiscoveries;
         enemies = GameControl.PlayerData.shiftEnemies;
 
         //most used - TODO Implement different view once the sash is unlocked
@@ -93,6 +96,12 @@ public class ShiftReport
         {
             GameControl.SaveData.highCrowns = crowns;
             highCrowns = true;
+        }
+        //discoveries check
+        if (GameControl.SaveData.highDiscoveries < discoveries)
+        {
+            GameControl.SaveData.highDiscoveries = discoveries;
+            highDiscoveries = true;
         }
         //enemy check
         if (GameControl.SaveData.highEnemies < enemies)
@@ -128,7 +137,7 @@ public class ShiftReport
         return timeBonus;
     }
 
-    public float GetSeedsEarned()
+    public int GetSeedsEarned()
     {
         return seedsEarned;
     }
@@ -174,6 +183,11 @@ public class ShiftReport
         return crowns;
     }
 
+    public int GetDiscoveries()
+    {
+        return discoveries;
+    }
+
     public int GetEnemies()
     {
         return enemies;
@@ -203,6 +217,11 @@ public class ShiftReport
     public bool GetHighCrowns()
     {
         return highCrowns;
+    }
+
+    public bool GetHighDiscoveries()
+    {
+        return highDiscoveries;
     }
 
     public bool GetHighEnemies()
@@ -239,6 +258,7 @@ public class ReportBehavior : MonoBehaviour
     [SerializeField] TMP_Text timeSurvived;
     [SerializeField] TMP_Text moneyEarned;
     [SerializeField] TMP_Text crownsCrafted;
+    [SerializeField] TMP_Text crownsDiscovered;
     [SerializeField] TMP_Text enemiesElim;
     [SerializeField] TMP_Text seedsCollected;
     [SerializeField] Image usedFlower;
@@ -332,7 +352,8 @@ public class ReportBehavior : MonoBehaviour
             //disable everything else
             moneyEarned.enabled = false;
             enemiesElim.enabled = false;
-            crownsCrafted .enabled = false;
+            crownsCrafted.enabled = false;
+            crownsDiscovered.enabled = false;
             seedsCollected.enabled = false;
             usedFlower.enabled = false;
             usedCount.enabled = false;
@@ -408,6 +429,9 @@ public class ReportBehavior : MonoBehaviour
         crownsCrafted.text = "Crowns Crafted: " + currentReport.GetCrowns();
         if (currentReport.GetHighCrowns())
             crownsCrafted.text += "<color=\"yellow\"> - New PB!";
+        crownsDiscovered.text = "Crowns Discovered: " + currentReport.GetDiscoveries();
+        if (currentReport.GetHighDiscoveries())
+            crownsDiscovered.text += "<color=\"yellow\"> - New PB!";
         enemiesElim.text = "Skinwalkers Eliminated: " + currentReport.GetEnemies();
         if (currentReport.GetHighEnemies())
             enemiesElim.text += "<color=\"yellow\"> - New PB!";

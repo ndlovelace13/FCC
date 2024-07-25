@@ -8,6 +8,10 @@ public class SashResearch : Research
     {
         requiredSeeds = 10;
         maxResearchTimes = 1;
+
+        //increment the total research possibilities
+        if (GameControl.SaveData.firstRun)
+            GameControl.SaveData.researchAmount += maxResearchTimes;
     }
     public override void ResearchAction()
     {

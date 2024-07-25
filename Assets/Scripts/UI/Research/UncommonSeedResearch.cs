@@ -8,6 +8,10 @@ public class UncommonSeedResearch : Research
     {
         requiredSeeds = 3;
         maxResearchTimes = GameControl.PlayerData.undiscoveredUncommon.Count - 1;
+
+        //increment the total research possibilities
+        if (GameControl.SaveData.firstRun)
+            GameControl.SaveData.researchAmount += maxResearchTimes;
     }
     public override void ResearchAction()
     {
@@ -18,5 +22,8 @@ public class UncommonSeedResearch : Research
         GameControl.PlayerData.FlowerDiscovery(type);
         GameObject unlockNotif = Instantiate(unlockPrefab);
         unlockNotif.GetComponent<UnlockNotif>().BeginNotif(GameControl.PlayerData.SpriteAssign(type), "New Flower Discovered!");
+
+        //update the totals for the almanac
+        GameControl.SaveData.totalDrives++;
     }
 }

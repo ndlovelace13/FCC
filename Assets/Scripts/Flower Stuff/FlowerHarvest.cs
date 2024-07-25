@@ -60,7 +60,7 @@ public class FlowerHarvest : MonoBehaviour
                             //TODO: PUll from the pool instead
                             GameObject newHead = Instantiate(head, slots[slotPos].transform);
                             newHead.GetComponent<SpriteRenderer>().sortingLayerName = "Midground";
-                            newHead.GetComponent<SpriteRenderer>().sortingOrder = 4;
+                            newHead.GetComponent<SpriteRenderer>().sortingOrder = 6;
                             newHead.transform.localScale = new Vector3(1f, 1f, 1f);
                             newHead.GetComponent<FlowerBehavior>().picked = true;
                             //newHead.transform.position = slots[slotPos].transform.position;

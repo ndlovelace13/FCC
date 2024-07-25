@@ -68,6 +68,9 @@ public class Upgrade : MonoBehaviour
         this.description = description;
         unit = units;
         icon = newIcon;
+
+        if (GameControl.SaveData.firstRun)
+            GameControl.SaveData.upgradeAmount += maxTimesUpgraded;
     }
 
     // Update is called once per frame
@@ -81,6 +84,8 @@ public class Upgrade : MonoBehaviour
     {
         //PlayerPrefs.SetFloat("balance", PlayerPrefs.GetFloat("balance") - currentPrice);
         GameControl.SaveData.balance -= currentPrice;
+        GameControl.SaveData.totalSpent += currentPrice;
+        GameControl.SaveData.totalUpgrades++;
         //PlayerPrefs.SetFloat(upgradeKey, PlayerPrefs.GetFloat(upgradeKey) + upgradeAmount);
         GameControl.PlayerData.upgradeDict[upgradeKey] = currentValue + upgradeAmount;
         timesUpgraded++;

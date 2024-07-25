@@ -50,6 +50,7 @@ public class TutorialBehavior : MonoBehaviour
     string[] text5 =
     {
         "Crafting a crown takes a bit of skill. Your movement will be slowed while crafting, but if you're quick about it, that shouldn't be TOO much of an issue",
+        "The stems will indicate which slot to drag each flower to - don't worry, the arrangement will be the same order you picked them up in",
         "Now get to it"
     };
     string[] text6 =
@@ -89,7 +90,7 @@ public class TutorialBehavior : MonoBehaviour
         "Use the spacebar to pick up your first flower",
         "Use the mouse to aim and click the right mouse button or Q to fire a single flower",
         "Pick up five flowers and press E to craft your first flower crown",
-        "Follow the input queues to finish crafting your first crown", 
+        "Drag the flowers to their correct slot using the mouse", 
         "Use the mouse to aim and click the left mouse button to toss your first crown",
         "Create and throw a crown with the unnatural flower in its center"
     };
@@ -313,6 +314,7 @@ public class TutorialBehavior : MonoBehaviour
     public void TutorialContinue()
     {
         popUp.SetActive(false);
+        GameControl.PlayerData.crosshairActive = true;
         tutorialText = new List<string[]> { text1, text2, text3, text4, text5, text6, text7, text8 };
         //tutorialText.Add(text1);
         //tutorialText.Add(text2);

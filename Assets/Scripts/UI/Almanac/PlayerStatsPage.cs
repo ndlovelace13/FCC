@@ -45,7 +45,7 @@ public class PlayerStatsPage : Page
         totalFlowers.text = GameControl.SaveData.totalFlowers + " Flowers Harvested";
         totalSkinwalkers.text = GameControl.SaveData.totalKills + " Skinwalkers Eliminated";
         totalEssence.text = GameControl.SaveData.totalSeeds + " Essence Seeds Collected";
-        totalSpent.text = string.Format("{0:C}", GameControl.SaveData.totalIncome) + " Spent";
+        totalSpent.text = string.Format("{0:C}", GameControl.SaveData.totalSpent) + " Spent";
         totalUpgrades.text = GameControl.SaveData.totalUpgrades + " Upgrades Purchased";
         totalDrives.text = GameControl.SaveData.totalDrives + " Research Drives Completed";
 

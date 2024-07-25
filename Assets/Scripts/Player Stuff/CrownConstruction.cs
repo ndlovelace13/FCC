@@ -319,13 +319,18 @@ public class CrownConstruction : MonoBehaviour
         
     }
 
-    IEnumerator CraftDirection()
+    public void CraftLerpCommand(int pos)
+    {
+        StartCoroutine(CraftDirection(pos));
+    }
+
+    IEnumerator CraftDirection(int pos)
     {
         GetComponentInChildren<Animator>().SetInteger("CraftDirection", craftAnimChoice);
         if (flowerUIPool)
         {
-            Debug.Log("currentCounter: " + skillCheckCounter);
-            StartCoroutine(flowerLerpBegin(skillCheckCounter));
+            //Debug.Log("currentCounter: " + skillCheckCounter);
+            StartCoroutine(flowerLerpBegin(pos));
         }
         if (craftAnimChoice == 1)
             craftAnimChoice = 2;

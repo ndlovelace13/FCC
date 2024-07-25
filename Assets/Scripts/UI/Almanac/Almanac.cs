@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Almanac : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Almanac : MonoBehaviour
     [SerializeField] List<GameObject> pageObjects;
 
     [SerializeField] int currentIndex = 0;
+    [SerializeField] Button prevButton;
+    [SerializeField] Button nextButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +56,20 @@ public class Almanac : MonoBehaviour
 
         //open the book up to the sticker pages - this should be the initial state
         pageObjects[currentIndex].SetActive(true);
+
+        //activate forward if nextpages exist
+        if (currentIndex != 0)
+            prevButton.gameObject.SetActive(true);
+        else
+            prevButton.gameObject.SetActive(false);
+
         pageObjects[currentIndex + 1].SetActive(true);
+
+        //activate forward if nextpages exist
+        if (currentIndex != pageObjects.Count - 2)
+            nextButton.gameObject.SetActive(true);
+        else
+            nextButton.gameObject.SetActive(false);
     }
 
     public void NextPages()

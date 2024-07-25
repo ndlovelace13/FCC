@@ -84,6 +84,8 @@ public class FlowerBehavior : MonoBehaviour
                 draggable = false;
                 transform.localPosition = finalDocketPos;
                 placed = true;
+                GameObject.FindWithTag("Player").GetComponent<CrownConstruction>().CraftLerpCommand(position);
+                GetComponent<SpriteRenderer>().sortingOrder = 4;
             }
             //otherwise, reset
             else

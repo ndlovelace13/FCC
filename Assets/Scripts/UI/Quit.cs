@@ -15,7 +15,7 @@ public class Quit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameControl.PlayerData == null)
+        if (GameControl.PlayerData != null)
         {
             if (GameControl.PlayerData.quitCooldown)
                 StartCoroutine(QuitCooldown());
@@ -23,7 +23,7 @@ public class Quit : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.Escape))
                 {
-                    GameObject quitPrefab = GameObject.FindWithTag("quitMenu");
+                    //GameObject quitPrefab = GameObject.FindWithTag("quitMenu");
                     if (Time.timeScale != 0)
                         QuitPopup();
                 }

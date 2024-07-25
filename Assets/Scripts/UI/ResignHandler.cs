@@ -27,6 +27,7 @@ public class ResignHandler : MonoBehaviour
         //Call the GameOver method from the player obj
         GameObject.FindWithTag("Player").GetComponentInChildren<PlayerMovement>().GameOver();
         //then kill
+        GameControl.PlayerData.crosshairActive = false;
         Destroy(gameObject);
         /*GameControl.PlayerData.gameOver = true;
         Time.timeScale = 1f;

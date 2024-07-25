@@ -99,6 +99,20 @@ public class HomebaseCam : MonoBehaviour
         "Be sure to check it out as you continue to discover new flower crown combinations - who knows, it may be more than a fancy checklist"
     };
 
+    string[] almanacUnlock = new string[]
+    {
+        "Greetings, my promising new coworker!",
+        "The name's Clark Shotknee, Archivist for the Anti-Anomaly Action Team and botanist extraordinaire",
+        "I actually used to be a field agent like you...\n\nat least before the accident",
+        "My job here at the AAAT is to keep track of all kinds of information and statistics",
+        "When I heard about this upcropping of seed-dropping skinwalkers and fatal flora, my botanist brain just had to request this assignment",
+        "Lucky for you, I landed the position! Although, that was never in doubt with my stellar history as an archivist",
+        "While you've been hard at work over these past few shifts, I've also been putting together a bit of a surprise for you - The Almanac!",
+        "This little handbook will tell you everything you need to know about the flowers you find, skinwalkers you eliminate, and plenty more",
+        "Plus, I'll be sure to keep it updated as your career with us continues",
+        "I look forward to working with you and keeping track of your undoubtedly many accomplishments to come"
+    };
+
     //public bool menusReady = false;
     // Start is called before the first frame update
     void Start()
@@ -200,6 +214,15 @@ public class HomebaseCam : MonoBehaviour
             GameControl.SaveData.completionUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
         }
+        //unlock almanac when the player has unlocked at least one new type of flower
+        if (GameControl.PlayerData.allDiscovered.Count > 4 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.almanacUnlocked)
+        {
+            GameControl.SaveData.dialogueQueue.Enqueue(almanacUnlock);
+            phone.GetComponent<PhoneLerp>().callerKnown = false;
+            GameControl.SaveData.almanacUnlocked = true;
+            GameControl.PlayerData.unlockDone = true;
+        }
+
         GameControl.SaveHandler.SaveGame();
 
         //TODO - Almanac unlock when player discovers their first flower
@@ -220,8 +243,8 @@ public class HomebaseCam : MonoBehaviour
         //create the shiftReport object
         ShiftReport currentReport = new ShiftReport(GameControl.SaveData.shiftCounter, scoreBonus, scoreBreakdown, timeBonus, GameControl.PlayerData.shiftSeeds);
         GameControl.SaveData.shiftReports.Add(currentReport);
-        
 
+        int shiftFlowers = 0;
         //update the highest use count for each flower
         foreach (var flower in GameControl.PlayerData.flowerUse)
         {
@@ -230,6 +253,7 @@ public class HomebaseCam : MonoBehaviour
                 GameControl.PlayerData.savedFlowerDict[flower.Key].highestHarvest = flower.Value;
                 GameControl.PlayerData.savedFlowerDict[flower.Key].highestShift = GameControl.SaveData.shiftCounter;
             }
+            shiftFlowers += flower.Value;
         }
 
         //update the highest kill count for each enemy
@@ -241,6 +265,24 @@ public class HomebaseCam : MonoBehaviour
                 GameControl.PlayerData.savedEnemyDict[enemy.Key].shiftRecord = GameControl.SaveData.shiftCounter;
             }
         }
+
+        //update all total values for the almanac
+        GameControl.SaveData.totalIncome += currentReport.GetTotalProfit();
+        GameControl.SaveData.totalCrowns += currentReport.GetCrowns();
+        GameControl.SaveData.totalFlowers += shiftFlowers;
+        GameControl.SaveData.totalKills += currentReport.GetEnemies();
+        GameControl.SaveData.totalSeeds += currentReport.GetSeedsEarned();
+
+        //check for most used flower
+        foreach (var flower in GameControl.PlayerData.savedFlowerDict)
+        {
+            if (flower.Value.harvestCount > GameControl.SaveData.flowerTimes)
+            {
+                GameControl.SaveData.flowerTimes = flower.Value.harvestCount;
+                GameControl.SaveData.mostUsedFlower = flower.Key;
+            }
+        }
+
         GameControl.SaveHandler.SaveGame();
         yield return null;
     }
@@ -266,7 +308,7 @@ public class HomebaseCam : MonoBehaviour
 
     IEnumerator MenuInit()
     {
-        Cursor.visible = true;
+        GameControl.PlayerData.crosshairActive = false;
         mainCam.orthographicSize = 10;
         transform.position = new Vector3(0, 0, -10);
         menuActive = true;

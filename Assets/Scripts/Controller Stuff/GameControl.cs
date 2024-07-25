@@ -57,11 +57,11 @@ public class SaveData
     public int highDiscoveries = 0;
 
     //Favorites
-    public string mostUsedFlower;
+    public string mostUsedFlower = "white";
     public int flowerTimes;
 
     public string mostUsedCrown;
-    public string crownTimes;
+    public int crownTimes;
 
 
 
@@ -253,7 +253,7 @@ public class GameControl : MonoBehaviour
     public int newEnemyTime = 60;
 
     //cursor vs. crosshair
-    public bool crosshairActive = true;
+    public bool crosshairActive = false;
 
     private void Awake()
     {
@@ -614,11 +614,14 @@ public class GameControl : MonoBehaviour
         shiftSeeds = 0;
         shiftEnemies = 0;
         shiftCrowns = 0;
+        shiftDiscoveries = 0;
         discoveryScore = 0;
         constructionScore = 0;
         enemyScore = 0;
         otherScore = 0;
         unlockDone = false;
+
+        crosshairActive = true;
 
         
 

@@ -34,7 +34,7 @@ public class PlayerCompletionPage : Page
 
     public override void FillPage()
     {
-        //flowerImage.sprite = GameControl.PlayerData.flowerStatsDict[GameControl.SaveData.mostUsedFlower].headSprite;
+        flowerImage.sprite = GameControl.PlayerData.flowerStatsDict[GameControl.SaveData.mostUsedFlower].headSprite;
         flowerTimes.text = GameControl.SaveData.flowerTimes + " Times";
 
         crownName.text = GameControl.SaveData.mostUsedCrown;

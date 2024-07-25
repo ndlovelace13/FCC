@@ -196,6 +196,9 @@ public class Crown
             if (GameControl.PlayerData.savedFlowerDict.ContainsKey(flower))
                 GameControl.PlayerData.savedFlowerDict[flower].discoveredCrowns++;
         }
+
+        //increment the shift discovery counter
+        GameControl.PlayerData.shiftDiscoveries++;
     }
 
     public int GetShift()
@@ -221,6 +224,13 @@ public class Crown
         {
             if (GameControl.PlayerData.savedFlowerDict.ContainsKey(flower))
                 GameControl.PlayerData.savedFlowerDict[flower].crownCount++;
+        }
+
+        //check if mostUsed
+        if (timesCrafted > GameControl.SaveData.crownTimes)
+        {
+            GameControl.SaveData.crownTimes = timesCrafted;
+            GameControl.SaveData.mostUsedCrown = title;
         }
     }
 

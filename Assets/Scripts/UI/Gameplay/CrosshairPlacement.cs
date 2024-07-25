@@ -15,6 +15,10 @@ public class CrosshairPlacement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameControl.PlayerData.gamePaused)
+            GameControl.PlayerData.crosshairActive = false;
+        else if (!GameControl.PlayerData.gameOver)
+            GameControl.PlayerData.crosshairActive = true;
         if (!GameControl.PlayerData.gameOver && GameControl.PlayerData.crosshairActive)
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = true;
@@ -30,7 +34,7 @@ public class CrosshairPlacement : MonoBehaviour
         else
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            Cursor.visible = true;
+            //Cursor.visible = true;
         }
 
     }

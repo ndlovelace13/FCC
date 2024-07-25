@@ -54,7 +54,7 @@ public class FlowerStatPage : Page
         if (GameControl.PlayerData.savedFlowerDict[type].encountered)
         {
             //title
-            title.text = "Your " + currentFlower.title + " Stats";
+            title.text = "Your " + currentFlower.GetTitle() + " Stats";
 
             //set the stats according to the savedFlower item
             totalCrowns.text = currentSaveData.crownCount.ToString();

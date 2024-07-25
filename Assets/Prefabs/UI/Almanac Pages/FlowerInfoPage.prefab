@@ -2836,6 +2836,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: {fileID: 7478144025641808647}
   subheader: {fileID: 3011474182419533733}
+  backButton: {fileID: 0}
+  forwardButton: {fileID: 0}
   type: 
   flowerImage: {fileID: 3522900001789174745}
   description: {fileID: 5911098437055801046}
