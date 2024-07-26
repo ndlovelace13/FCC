@@ -17,8 +17,8 @@ public class CrosshairPlacement : MonoBehaviour
     {
         if (GameControl.PlayerData.gamePaused)
             GameControl.PlayerData.crosshairActive = false;
-        else if (!GameControl.PlayerData.gameOver)
-            GameControl.PlayerData.crosshairActive = true;
+        //else if (!GameControl.PlayerData.gameOver)
+            //GameControl.PlayerData.crosshairActive = true;
         if (!GameControl.PlayerData.gameOver && GameControl.PlayerData.crosshairActive)
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = true;

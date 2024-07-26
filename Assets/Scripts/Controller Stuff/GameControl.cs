@@ -18,6 +18,7 @@ public class SaveData
 
     public bool firstCatalog = true;
     public bool firstResearch = true;
+    public bool firstAlmanac = true;
     public bool sashActivated = false;
     public bool sashActive = false;
 

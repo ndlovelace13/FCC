@@ -101,18 +101,18 @@ public class EnemySpawn : MonoBehaviour
         int choice = Random.Range(0, 2);
         int xFavor = Random.Range(0, 2);
         if (moveHorizontal > 0)
-            spawnX = Random.Range(pos.x, pos.x + spawnOffset);
+            spawnX = Random.Range(pos.x + spawnOffset / 2, pos.x + spawnOffset);
         else if (moveHorizontal < 0)
-            spawnX = Random.Range(negPos.x - spawnOffset, negPos.x);
+            spawnX = Random.Range(negPos.x - spawnOffset, negPos.x - spawnOffset / 2);
         else
         {
             if (moveVertical == 0 && xFavor == 0)
             {
                 //spawn on any edge if the player is not moving
                 if (choice == 0)
-                    spawnX = Random.Range(pos.x, pos.x + spawnOffset);
+                    spawnX = Random.Range(pos.x + spawnOffset / 2, pos.x + spawnOffset);
                 else
-                    spawnX = Random.Range(negPos.x - spawnOffset, negPos.x);
+                    spawnX = Random.Range(negPos.x - spawnOffset, negPos.x - spawnOffset / 2);
             }
             //spawn anywhere on the x axis if the player is moving in a vertical straight line
             else
@@ -121,18 +121,18 @@ public class EnemySpawn : MonoBehaviour
         choice = Random.Range(0, 2);
         spawnOffset = Mathf.Abs(pos.y - Player.transform.position.y);
         if (moveVertical > 0)
-            spawnY = Random.Range(pos.y, pos.y + spawnOffset);
+            spawnY = Random.Range(pos.y + spawnOffset / 2, pos.y + spawnOffset);
         else if (moveVertical < 0)
-            spawnY = Random.Range(negPos.y - spawnOffset, negPos.y);
+            spawnY = Random.Range(negPos.y - spawnOffset, negPos.y - spawnOffset / 2);
         else
         {
             if (moveHorizontal == 0 && xFavor == 1)
             {
                 //spawn on any edge if the player is not moving
                 if (choice == 0)
-                    spawnY = Random.Range(pos.y, pos.y + spawnOffset);
+                    spawnY = Random.Range(pos.y + spawnOffset / 2, pos.y + spawnOffset);
                 else
-                    spawnY = Random.Range(negPos.y - spawnOffset, negPos.y);
+                    spawnY = Random.Range(negPos.y - spawnOffset, negPos.y - spawnOffset / 2);
             }
             //spawn anywhere on the y axis if they are moving in a straight line
             else
