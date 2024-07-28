@@ -45,17 +45,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1003814786078272635, guid: 68ef06de361cafb49979cd312a75bbf1, type: 3}
-  maxInterval: 0.35
-  minInterval: 0.2
+  maxInterval: 0.2
+  minInterval: 0.15
   maxSpeed: 2
   minSpeed: 1
   maxHealth: 50
   healthInterval: 10
-  startingEnemies: 8
-  enemyScaleAmt: 4
+  startingEnemies: 6
+  enemyScaleAmt: 3
   killScore: 10
   scoreIncrease: 2
   countScaleTime: 45
   statsScaleTime: 30
   type: basic
   sprite: {fileID: -1219982013, guid: 3c573c61a2b854644a15e25a08e0dbad, type: 3}
+  encountered: 0
+  title: 
+  subtext: 
+  description: 
+  behavior: 
+  weakness: 

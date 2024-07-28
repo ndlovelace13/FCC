@@ -40,14 +40,14 @@ public class SaveHandler : MonoBehaviour
             GameControl.SaveData.researchData[i].SetData(GameControl.PlayerData.researchItems[i]);
         }
         //Print all the currently discovered crowns
-        for (int i = 0; i < GameControl.SaveData.discoveredCrowns.Count; i++)
+        /*for (int i = 0; i < GameControl.SaveData.discoveredCrowns.Count; i++)
         {
-            Debug.Log(GameControl.SaveData.discoveredCrowns[i].statusChanged);
+            //Debug.Log(GameControl.SaveData.discoveredCrowns[i].statusChanged);
         }
         foreach (var shiftReport in GameControl.SaveData.shiftReports)
         {
-            Debug.Log("Shift Num: " + shiftReport.GetShiftNum() + " " + shiftReport.GetScorePay());
-        }
+            //Debug.Log("Shift Num: " + shiftReport.GetShiftNum() + " " + shiftReport.GetScorePay());
+        }*/
         string savePlayerData = JsonUtility.ToJson(GameControl.SaveData);
         File.WriteAllText(saveFilePath, savePlayerData);
 

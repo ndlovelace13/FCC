@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1003814786078272635, guid: ca9eba2f1d19f93479f5c51c2223ba08, type: 3}
-  maxInterval: 0.25
-  minInterval: 0.2
+  maxInterval: 0.2
+  minInterval: 0.15
   maxSpeed: 3
   minSpeed: 2.25
   maxHealth: 75
@@ -56,9 +56,15 @@ MonoBehaviour:
   killScore: 20
   scoreIncrease: 5
   countScaleTime: 30
-  statsScaleTime: 40
+  statsScaleTime: 45
   type: sprinter
   sprite: {fileID: -320072828, guid: 3997d72c90df9674780d9a690d035d0c, type: 3}
+  encountered: 0
+  title: 
+  subtext: 
+  description: 
+  behavior: 
+  weakness: 
   sprintLength: 2
   sprintSpeed: 6
   chargeTime: 2

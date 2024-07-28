@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class FlowerBehavior : MonoBehaviour
@@ -59,7 +58,7 @@ public class FlowerBehavior : MonoBehaviour
     {
         if (draggable)
         {
-            Debug.Log(name + " being dragged " + transform.position);
+            //Debug.Log(name + " being dragged " + transform.position);
             Vector3 currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(currentPos.x, currentPos.y, 0);
         }
@@ -69,7 +68,7 @@ public class FlowerBehavior : MonoBehaviour
     {
         if (draggable)
         {
-            Debug.Log(name + " is being hovered over");
+            //Debug.Log(name + " is being hovered over");
         }
     }
 

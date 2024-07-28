@@ -6,7 +6,8 @@ public class UncommonSeedResearch : Research
 {
     private void Start()
     {
-        requiredSeeds = 3;
+        if (requiredSeeds == 0)
+            requiredSeeds = 3;
         maxResearchTimes = GameControl.PlayerData.undiscoveredUncommon.Count - 1;
 
         //increment the total research possibilities
