@@ -98,7 +98,7 @@ public class Pointdexter : EnemyBehavior
                 //get an ally if one does not exist or was killed
                 if (ally == null || !ally.activeSelf || currentAllyDist > 10)
                 {
-                    allyModifier = AllyAcquire(allyModifier);
+                    allyModifier = AllyAcquire(allyModifier, true);
                 }
                     
 
@@ -108,7 +108,8 @@ public class Pointdexter : EnemyBehavior
                     isTargeting = false;
                     isRetreating = true;
                     currentTime = 0f;
-                    SpeedUp(1.3f);
+                    SpeedDown(allyModifier);
+                    SpeedDown(1.15f);
                 }
                 else if (currentAllyDist < 1)
                 {
@@ -154,14 +155,14 @@ public class Pointdexter : EnemyBehavior
                         isTargeting = false;
                         isPointing = false;
                         isRetreating = true;
-                        SpeedUp(1.3f);
+                        SpeedDown(1.15f);
                     }
                     else
                     {
                         isPointing = false;
                         isTargeting = true;
                         //new ally and new speed
-                        allyModifier = AllyAcquire(allyModifier);
+                        allyModifier = AllyAcquire(allyModifier, false);
                         //set the movement to 1.25x
                         //SpeedUp(1.25f);
                     }
@@ -176,9 +177,9 @@ public class Pointdexter : EnemyBehavior
                     isTargeting = true;
                     isRetreating = false;
                     currentTime = 0f;
-                    SpeedDown(1.3f);
+                    SpeedUp(1.15f);
                     //new ally and new speed
-                    allyModifier = AllyAcquire(allyModifier);
+                    allyModifier = AllyAcquire(allyModifier, false);
                     //set the movement to 1.25x
                     //SpeedUp(1.25f);
                 }
@@ -193,9 +194,10 @@ public class Pointdexter : EnemyBehavior
 
 
     //get a random ally anytime the targeting state is active
-    private float AllyAcquire(float allyModifier)
+    private float AllyAcquire(float allyModifier, bool speedDown)
     {
-        SpeedDown(allyModifier);
+        if (speedDown)
+            SpeedDown(allyModifier);
         Debug.Log("new ally acquired");
         //retrieve all enemies
         GameObject[] enemies = AllEnemies();
