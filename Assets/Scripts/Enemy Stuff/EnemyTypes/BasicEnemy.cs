@@ -41,8 +41,6 @@ public class BasicEnemy : EnemyBehavior
             }
             if (!isFrozen && !surprised)
                 moveSpeed = backupSpeed;
-            else
-                Debug.Log("is Frozen" + isFrozen);
             //movement
             if (!isBlinded)
             {

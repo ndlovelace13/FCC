@@ -55,6 +55,9 @@ public class EssenceBehavior : MonoBehaviour
         }
         GameControl.SaveData.essenceCount++;
         GameControl.PlayerData.shiftSeeds++;
+        //first seed is picked up
+        if (!GameControl.SaveData.firstSeed)
+           GameControl.SaveData.firstSeed = true;
         gameObject.SetActive(false);
     }
 }

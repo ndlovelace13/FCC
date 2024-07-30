@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PointdexterStats : EnemyStats
 {
+    [SerializeField] public float pointCharge;
+    [SerializeField] public float retreatTime;
+    [SerializeField] public float pointCooldown;
+
+    [SerializeField] public float buffRange;
+
     // Start is called before the first frame update
     void Start()
     {

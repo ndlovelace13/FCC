@@ -1321,7 +1321,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Score Text
+  m_text: Score Text <sprite=1>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 34be12df329d1324584b09ad170bf1fd, type: 2}
   m_sharedMaterial: {fileID: 8078532019170761467, guid: 34be12df329d1324584b09ad170bf1fd, type: 2}
@@ -1340,7 +1340,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: a91508981c1f0d648a6a20164535de81, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -1891,6 +1891,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 304612978}
     m_Modifications:
+    - target: {fileID: 1411956487124004505, guid: 67dd13c15a87f9641b3428867b40b2d8, type: 3}
+      propertyPath: m_isRichText
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1411956487124004505, guid: 67dd13c15a87f9641b3428867b40b2d8, type: 3}
+      propertyPath: m_spriteAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c41005c129ba4d66911b75229fd70b45, type: 2}
     - target: {fileID: 1941545693980610970, guid: 67dd13c15a87f9641b3428867b40b2d8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

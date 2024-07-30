@@ -601,7 +601,7 @@ MonoBehaviour:
   - {fileID: 6760059903058135406, guid: 3969d15c77713874abbdeabf94510183, type: 3}
   - {fileID: 6846610235968199208, guid: 9cbcb36dc676ec24890cd0fa9762a825, type: 3}
   enemySpawnPrefab: {fileID: 5356731414288089438, guid: 230f3e16254910d4abe21bdedad81e84, type: 3}
-  newEnemyTime: 90
+  newEnemyTime: 5
   crosshairActive: 1
 --- !u!4 &271687010
 Transform:

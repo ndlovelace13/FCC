@@ -70,7 +70,7 @@ public class BlueStats : FlowerStats
                 while (currentTime < thisFreezeTime)
                 {
                     //Debug.Log("still frozen " + thisFreezeTime);
-                    if (!enemy.activeSelf)
+                    if (!enemy.activeSelf || !enemy.GetComponent<EnemyBehavior>().isFrozen)
                     {
                         enemy.GetComponent<EnemyBehavior>().isFrozen = false;
                         enemy.GetComponent<Animator>().SetBool("Surprise", false);

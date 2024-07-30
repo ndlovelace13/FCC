@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public abstract class EnemyBehavior : MonoBehaviour
 {
+    [SerializeField] public Transform shadow;
+
     public string type;
     protected int health;
     TMP_Text scoreNotif;
@@ -109,10 +111,23 @@ public abstract class EnemyBehavior : MonoBehaviour
         isFrozen = false;
         isSlowed = false;
         isPoisoned = false;
+        isBlinded = false;
         isElectrified = false;
         isActive = false;
         surprised = false;
         wasKilled = true;
+        yield return null;
+    }
+
+    public IEnumerator Cleanse()
+    {
+        isBurning = false;
+        isFrozen = false;
+        isSlowed = false;
+        isPoisoned = false;
+        isBlinded = false;
+        isElectrified = false;
+        surprised = false;
         yield return null;
     }
 
@@ -367,5 +382,34 @@ public abstract class EnemyBehavior : MonoBehaviour
             { return particle; }
         }
         return null;
+    }
+
+    //called by the pointdexter when in range
+    public void PointBuff()
+    {
+        StartCoroutine(Buffed());
+    }
+
+    IEnumerator Buffed()
+    {
+        //boost speed and remove all status effects
+        SpeedDown(1.25f);
+        StartCoroutine(Cleanse());
+        GameObject part = nextParticle();
+        setParticle(part, 6);
+
+
+        float timer = 0f;
+        while (timer < 3f)
+        {
+            timer += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+            if (!gameObject.activeSelf)
+            {
+                break;
+            }
+        }
+        SpeedUp(1.25f);
+        setParticle(part, 0);
     }
 }

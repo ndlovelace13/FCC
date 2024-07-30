@@ -130,9 +130,10 @@ public class SunnyStats : FlowerStats
         enemy.GetComponent<EnemyBehavior>().isBlinded = true;
         while (time < blindTime)
         {
-            if (!enemy.activeInHierarchy)
+            if (!enemy.activeInHierarchy || !enemy.GetComponent<EnemyBehavior>().isBlinded)
             {
                 enemy.GetComponent<EnemyBehavior>().isBlinded = false;
+                enemy.GetComponent<EnemyBehavior>().setParticle(part, 0);
                 yield break;
             }
             yield return new WaitForEndOfFrame();

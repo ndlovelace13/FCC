@@ -51,7 +51,7 @@ public class GreenStats : FlowerStats
         while (poisonTimer < thisPoisonTime)
         {
             yield return new WaitForSeconds(thisPoisonCooldown);
-            if (!enemy.activeSelf)
+            if (!enemy.activeSelf || !enemy.GetComponent<EnemyBehavior>().isPoisoned)
                 break;
             enemy.GetComponent<EnemyBehavior>().DealDamage(poisonDamage, Color.green);
             poisonTimer += poisonCooldown;

@@ -44,20 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e8a0bbdde8c0f4c91708665b568f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 1003814786078272635, guid: e27dd7fbe355dde4e84a057bdcc11630, type: 3}
   maxInterval: 0.5
   minInterval: 0.5
-  maxSpeed: 2.5
-  minSpeed: 1.5
+  maxSpeed: 3
+  minSpeed: 2
   maxHealth: 60
   healthInterval: 15
   startingEnemies: 1
-  enemyScaleAmt: 1
+  enemyScaleAmt: 0
   killScore: 20
   scoreIncrease: 3
   countScaleTime: 30
   statsScaleTime: 45
-  type: pointdexter
+  type: point
   sprite: {fileID: 21300000, guid: 7247e50a7a4c6cf42bb1d87428aad901, type: 3}
   encountered: 0
   title: 
@@ -65,3 +65,7 @@ MonoBehaviour:
   description: 
   behavior: 
   weakness: 
+  pointCharge: 3
+  retreatTime: 2
+  pointCooldown: 3
+  buffRange: 1.5

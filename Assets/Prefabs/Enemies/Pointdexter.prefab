@@ -72,9 +72,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1825740317
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.3445621, g: 0.7572624, b: 0.8207547, a: 0.34901962}
   m_FlipX: 0
@@ -395,6 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09a0c6a67e503974982467df5d242e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shadow: {fileID: 1389098257366031348}
   type: point
   maxHealth: 60
   isActive: 0
@@ -404,7 +405,7 @@ MonoBehaviour:
   backupSpeed: 0
   surprised: 0
   preSurpriseVel: {x: 0, y: 0, z: 0}
-  notif: {fileID: 0}
+  notif: {fileID: 7155992749287334371, guid: 57602ac8dbb3e3441931b13c9bcfa0b8, type: 3}
   augments: []
   isBurning: 0
   isFrozen: 0
@@ -414,6 +415,10 @@ MonoBehaviour:
   electricPassed: 0
   isBlinded: 0
   wasKilled: 0
+  isTargeting: 1
+  isRetreating: 0
+  isCharging: 0
+  isPointing: 0
 --- !u!1 &2186241190138067228
 GameObject:
   m_ObjectHideFlags: 0

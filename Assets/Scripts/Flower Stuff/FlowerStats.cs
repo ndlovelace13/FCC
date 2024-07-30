@@ -278,7 +278,7 @@ public abstract class FlowerStats : MonoBehaviour
         float currentTime = 0f;
         while (currentTime < slowTime)
         {
-            if (!enemy.activeSelf)
+            if (!enemy.activeSelf || !enemy.GetComponent<EnemyBehavior>().isSlowed)
             {
                 enemy.GetComponent<EnemyBehavior>().SpeedUp(slowEffect);
                 enemy.GetComponent<EnemyBehavior>().isSlowed = false;

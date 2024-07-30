@@ -99,7 +99,7 @@ public class RedStats : FlowerStats
         {
             //Debug.Log("ouch " + health);
             yield return new WaitForSeconds(burnCooldown);
-            if (enemy.activeSelf == false)
+            if (enemy.activeSelf == false || !enemy.GetComponent<EnemyBehavior>().isBurning)
                 break;
             enemy.GetComponent<EnemyBehavior>().DealDamage(thisBurnDmg, Color.red);
             burnTimer += burnCooldown;

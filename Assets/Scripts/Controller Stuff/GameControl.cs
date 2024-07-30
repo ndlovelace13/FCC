@@ -21,6 +21,7 @@ public class SaveData
     public bool firstAlmanac = true;
     public bool sashActivated = false;
     public bool sashActive = false;
+    public bool firstSeed = false;
 
     public bool contractSigned = false;
 
