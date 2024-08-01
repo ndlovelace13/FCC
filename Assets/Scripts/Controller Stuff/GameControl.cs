@@ -581,6 +581,20 @@ public class GameControl : MonoBehaviour
                 SaveData.enemySaveData.Add(newData);
             }
         }
+        else
+        {
+            int savedCount = SaveData.enemySaveData.Count;
+            int iterator = 0;
+            foreach (var enemy in enemyStatsDict)
+            {
+                if (iterator >= savedCount)
+                {
+                    SavedEnemyStats newData = new SavedEnemyStats(enemy.Key);
+                    SaveData.enemySaveData.Add(newData);
+                }
+                iterator++;
+            }
+        }
 
         savedEnemyDict = new Dictionary<string, SavedEnemyStats>();
         foreach (var enemy in SaveData.enemySaveData)

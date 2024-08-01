@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3c573c61a2b854644a15e25a08e0dbad
+guid: 35345c1169986ee4ab2cf76761c37ca3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: enemySheet_0
+      name: PointSheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c05b5d8a73b2a2046883767b656da3d1
-      internalID: -1219982013
+      spriteID: 818533f6f868d974d845b0b870a358e4
+      internalID: -535529335
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemySheet_1
+      name: PointSheet_1
       rect:
         serializedVersion: 2
         x: 240
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d07b0ac8939ca4498f2d08233c1598c
-      internalID: -873653551
+      spriteID: 9cd8f323745164743b6b877f316112f8
+      internalID: -1171005898
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemySheet_2
+      name: PointSheet_2
       rect:
         serializedVersion: 2
         x: 480
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44b5c2b4788658743937013c4c657644
-      internalID: -1820930384
+      spriteID: 9a68e44a68b614244be34d8c84e1c6de
+      internalID: 1478652335
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemySheet_3
+      name: PointSheet_3
       rect:
         serializedVersion: 2
         x: 720
@@ -200,18 +200,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e47d9809bea1265418a3e2ba373985c1
-      internalID: -1080411541
+      spriteID: 5c01b9e378e163b48880673d48256eae
+      internalID: -79207030
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemySheet_4
+      name: PointSheet_4
       rect:
         serializedVersion: 2
-        x: 960
-        y: 720
+        x: 0
+        y: 480
         width: 240
         height: 240
       alignment: 9
@@ -221,18 +221,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b815b35b1e32c44aa4ad71376860394
-      internalID: 399822822
+      spriteID: e6b246a6a6b7d59409245ee4e290466d
+      internalID: -1084710526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemySheet_5
+      name: PointSheet_5
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 720
+        x: 240
+        y: 480
         width: 240
         height: 240
       alignment: 9
@@ -242,18 +242,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be499b961c8dd2341ae7c05003a56b06
-      internalID: 522583483
+      spriteID: 4aac99a1865d6594f89c855853a8675d
+      internalID: -39760878
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemySheet_6
+      name: PointSheet_6
       rect:
         serializedVersion: 2
-        x: 1440
-        y: 720
+        x: 480
+        y: 480
         width: 240
         height: 240
       alignment: 9
@@ -263,18 +263,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d37f2e8a59928954baf5df6f30bb39af
-      internalID: -917584568
+      spriteID: 3853b3efad6691a4f9292a5c52a06ef6
+      internalID: 659509547
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemySheet_7
+      name: PointSheet_7
       rect:
         serializedVersion: 2
-        x: 1680
-        y: 720
+        x: 720
+        y: 480
         width: 240
         height: 240
       alignment: 9
@@ -284,8 +284,176 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d390f6756840f8c4baaf20ce694435c7
-      internalID: 269635278
+      spriteID: 176661a3168c99c4b94dfbe31688281f
+      internalID: -749294550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PointSheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 240
+        height: 240
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f8d62878c041f34dbdc2cdeeef16dce
+      internalID: -1655236253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PointSheet_9
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 240
+        width: 240
+        height: 240
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa1bf9271daaf72469f4ff6bddf05b16
+      internalID: -869575375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PointSheet_10
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 240
+        width: 240
+        height: 240
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46861e251400c9b4dbdd577d3f17b289
+      internalID: -1609440369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PointSheet_11
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 240
+        width: 240
+        height: 240
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89c465d49101e3a409d88476f836b883
+      internalID: -1911893994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PointSheet_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 240
+        height: 240
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8322e58847e7a924db7570bf2385dc50
+      internalID: -1084271425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PointSheet_13
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 240
+        height: 240
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6e278fb9664fb14d9b3771e8fd4e5d3
+      internalID: -937335058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PointSheet_14
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 240
+        height: 240
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3452f26779273d24fbbda41b3beeda6b
+      internalID: 57402864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PointSheet_15
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 240
+        height: 240
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1882b915d8f6a36499cb52816da4f9e0
+      internalID: -702124781
       vertices: []
       indices: 
       edges: []
@@ -301,14 +469,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      enemySheet_0: -1219982013
-      enemySheet_1: -873653551
-      enemySheet_2: -1820930384
-      enemySheet_3: -1080411541
-      enemySheet_4: 399822822
-      enemySheet_5: 522583483
-      enemySheet_6: -917584568
-      enemySheet_7: 269635278
+      PointSheet_0: -535529335
+      PointSheet_1: -1171005898
+      PointSheet_10: -1609440369
+      PointSheet_11: -1911893994
+      PointSheet_12: -1084271425
+      PointSheet_13: -937335058
+      PointSheet_14: 57402864
+      PointSheet_15: -702124781
+      PointSheet_2: 1478652335
+      PointSheet_3: -79207030
+      PointSheet_4: -1084710526
+      PointSheet_5: -39760878
+      PointSheet_6: 659509547
+      PointSheet_7: -749294550
+      PointSheet_8: -1655236253
+      PointSheet_9: -869575375
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

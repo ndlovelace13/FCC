@@ -34,16 +34,16 @@ public class PointdexterStats : EnemyStats
 
     public override string GetDescription()
     {
-        return "Just your everyday child-replicating skinwalker. Below average speed, intelligence, and looks, this variant's only strength lies in numbers.";
+        return "The Pointdexter variant is a bit more lucid than other skinwalkers - however, this intelligence has manifested in a passive aggressive personality. It prefers to pull the strings rather than take matters into their (three) hands";
     }
 
     public override string GetBehavior()
     {
-        return "This variant will relentlessly chase its closest target - whether that be you or a flower crown";
+        return "This variant is aware of the threat you pose - it will avoid direct confrontation. Instead, it influences its allies by way of a speed boost and cleansing of any status effects.";
     }
 
     public override string GetWeakness()
     {
-        return "- Everything\n- Easily Distracted & Easily Surprised";
+        return "- The pointdexter is weakest before and after pointing - it can't run away\n- Freezing the skinwalker will delay its buffing powers";
     }
 }

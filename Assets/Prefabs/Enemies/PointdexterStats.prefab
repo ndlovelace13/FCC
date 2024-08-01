@@ -58,7 +58,7 @@ MonoBehaviour:
   countScaleTime: 30
   statsScaleTime: 45
   type: point
-  sprite: {fileID: 21300000, guid: 7247e50a7a4c6cf42bb1d87428aad901, type: 3}
+  sprite: {fileID: -1655236253, guid: 35345c1169986ee4ab2cf76761c37ca3, type: 3}
   encountered: 0
   title: 
   subtext: 

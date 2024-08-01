@@ -91,7 +91,11 @@ public class Pointdexter : EnemyBehavior
             //target acquisition
             if (isTargeting)
             {
-                Debug.Log("currently Targeting");
+                //Set Anim State
+                GetComponent<Animator>().SetInteger("state", 0);
+                GetComponent<Animator>().speed = backupSpeed * 0.5f;
+
+                //Debug.Log("currently Targeting");
                 float currentAllyDist = 0;
                 if (ally)
                     currentAllyDist = Vector2.Distance(ally.GetComponent<EnemyBehavior>().shadow.position, shadow.position);
@@ -115,6 +119,8 @@ public class Pointdexter : EnemyBehavior
                 {
                     isTargeting = false;
                     isCharging = true;
+                    GetComponent<Animator>().SetInteger("state", 1);
+                    GetComponent<Animator>().speed = 1;
                     //return to base speed
                     SpeedDown(allyModifier);
                     //match ally speed
@@ -127,10 +133,16 @@ public class Pointdexter : EnemyBehavior
             //start pointing anim while in range of enemies
             if (isCharging)
             {
-                Debug.Log("currently Charging");
+                //Set Anim State
+                GetComponent<Animator>().SetInteger("state", 1);
+                GetComponent<Animator>().speed = 1;
+
+                //Debug.Log("currently Charging");
                 //transition to the pointing
                 if (currentTime >= stats.pointCharge)
                 {
+                    GetComponent<Animator>().SetInteger("state", 2);
+                    GetComponent<Animator>().speed = 1;
                     isPointing = true;
                     isCharging = false;
                     //do the pointing shit here
@@ -146,7 +158,10 @@ public class Pointdexter : EnemyBehavior
             //pointing (buffing)
             if (isPointing)
             {
-                Debug.Log("currently Pointing");
+                //Set Anim State
+                GetComponent<Animator>().SetInteger("state", 2);
+                GetComponent<Animator>().speed = 1;
+                //Debug.Log("currently Pointing");
                 if (currentTime >= stats.pointCooldown)
                 {
                     SpeedUp(0.75f);
@@ -171,7 +186,10 @@ public class Pointdexter : EnemyBehavior
             }
             if (isRetreating)
             {
-                Debug.Log("currently Retreating");
+                //Set Anim State
+                GetComponent<Animator>().SetInteger("state", 3);
+                GetComponent<Animator>().speed = backupSpeed * 0.5f;
+                //Debug.Log("currently Retreating");
                 if (currentTime >= stats.retreatTime)
                 {
                     isTargeting = true;
@@ -186,7 +204,9 @@ public class Pointdexter : EnemyBehavior
             }
 
             //add to the timer
-            currentTime += Time.deltaTime;
+            if (!isFrozen && !surprised)
+                currentTime += Time.deltaTime;
+
             yield return new WaitForEndOfFrame();
         }
 
@@ -256,6 +276,7 @@ public class Pointdexter : EnemyBehavior
         direction.Normalize();
         gameObject.GetComponent<Rigidbody2D>().velocity = direction * backupSpeed;
         GetComponent<Animator>().SetInteger("SprinterState", 0);*/
+        GetComponent<Animator>().SetInteger("state", 0);
         return base.StateReset();
     }
 }
