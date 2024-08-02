@@ -17,7 +17,7 @@ public class ShadowCollision : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (transform.parent.tag == "enemy")
+        if (transform.parent.tag == "enemy" || transform.parent.tag == "boss")
             transform.parent.GetComponent<EnemyBehavior>().CollisionCheck(other); 
         if (transform.parent.tag == "flower" && other.gameObject.transform.parent.tag == "Player" && !GameControl.PlayerData.loading)
         {

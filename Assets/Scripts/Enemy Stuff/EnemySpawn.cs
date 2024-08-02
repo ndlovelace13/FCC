@@ -66,20 +66,23 @@ public class EnemySpawn : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(spawnDelay);
-            //check how many enemies are currently active in hierarchy
-            //GameObject[] currentEnemies = GameObject.FindGameObjectsWithTag("enemy");
-            Debug.Log("There are currently " + activeEnemies + " enemies in play");
-            if (activeEnemies < currentMaxEnemies)
+            if (!GameControl.PlayerData.bossActive && !GameControl.PlayerData.bossSpawning)
             {
-                GameObject newEnemy = gameObject.GetComponent<ObjectPool>().GetPooledObject();
-                if (newEnemy != null)
+                //check how many enemies are currently active in hierarchy
+                //GameObject[] currentEnemies = GameObject.FindGameObjectsWithTag("enemy");
+                Debug.Log("There are currently " + activeEnemies + " enemies in play");
+                if (activeEnemies < currentMaxEnemies)
                 {
-                    //Debug.Log("Yall got me fucked up");
-                    StartCoroutine(Spawn(newEnemy));
-                }
-                else
-                {
-                    Debug.Log("What the fuck is a kilometer");
+                    GameObject newEnemy = gameObject.GetComponent<ObjectPool>().GetPooledObject();
+                    if (newEnemy != null)
+                    {
+                        //Debug.Log("Yall got me fucked up");
+                        StartCoroutine(Spawn(newEnemy));
+                    }
+                    else
+                    {
+                        Debug.Log("What the fuck is a kilometer");
+                    }
                 }
             }
         }

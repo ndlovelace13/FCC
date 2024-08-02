@@ -12,9 +12,9 @@ public abstract class EnemyBehavior : MonoBehaviour
     [SerializeField] public Transform shadow;
 
     public string type;
-    protected int health;
+    public int health;
     TMP_Text scoreNotif;
-    [SerializeField] int maxHealth;
+    [SerializeField] public int maxHealth;
 
     public bool isActive;
 
@@ -29,7 +29,7 @@ public abstract class EnemyBehavior : MonoBehaviour
     public float moveSpeed;
     float minSpeed;
     float maxSpeed;
-    [SerializeField] protected float backupSpeed;
+    [SerializeField] public float backupSpeed;
     float speedCooldown = 10f;
     float speedIncrement = 0.9f;
 
@@ -62,10 +62,16 @@ public abstract class EnemyBehavior : MonoBehaviour
 
     public bool wasKilled = false;
 
-    SpriteRenderer[] allSprites;
+
+    //Boss Spawning Stuff
+    public bool isBoss;
+    protected bool sacrifice = false;
+    protected bool summoning = false;
+
+    protected SpriteRenderer[] allSprites;
 
     //Particles
-    List<GameObject> particles;
+    protected List<GameObject> particles;
 
     //Seed Stuff
     GameObject seedPool;
@@ -131,7 +137,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator SortingAdjust()
+    protected IEnumerator SortingAdjust()
     {
         while (gameObject.activeSelf)
         {
@@ -252,7 +258,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         myStats = newSpawner.thisEnemy;
     }
 
-    public void Activate()
+    public virtual void Activate()
     {
         AkSoundEngine.PostEvent("EnemySpawn", gameObject);
         //initialize variables
@@ -289,7 +295,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         StartCoroutine(StateUpdate());
     }
 
-    protected void Deactivate()
+    protected virtual void Deactivate()
     {
         StartCoroutine(StateReset());
         AkSoundEngine.PostEvent("EnemyKilled", gameObject);
@@ -312,6 +318,66 @@ public abstract class EnemyBehavior : MonoBehaviour
         }
         mySpawner.activeEnemies--;
         gameObject.SetActive(false);
+    }
+
+    public IEnumerator BossSummoning()
+    {
+        Debug.Log("Boss Summoning Beginning");
+        if (isBoss)
+        {
+            Debug.Log("bro what");
+            yield break;
+        }
+        else
+        {
+            float waitTime = Random.Range(2f, 15f);
+            Debug.Log("waiting for " + waitTime);
+            yield return new WaitForSeconds(waitTime);
+            sacrifice = true;
+        }
+    }
+
+    public IEnumerator Sacrifice()
+    {
+        target = GameObject.FindWithTag("boss").GetComponent<EnemyBehavior>().shadow.transform;
+        moveSpeed = backupSpeed;
+        while (gameObject.activeSelf)
+        {
+            //check whether the enemy is within sacrifice range of the boss
+            float dist = Vector2.Distance(target.position, shadow.position);
+            if (dist < 2)
+            {
+                StartCoroutine(Despawn(true));
+                yield break;
+            }
+            //if the boss gets activated anyways, deactivate
+            else if (GameControl.PlayerData.bossActive)
+            {
+                Debug.Log("Boss Active - killing self");
+                StartCoroutine(Despawn(false));
+                yield break;
+            }
+            //move towards the boss 
+            if (!isFrozen && !surprised)
+                moveSpeed = backupSpeed;
+            Vector2 direction = new Vector2(target.position.x - shadow.position.x, target.position.y - shadow.position.y);
+            direction.Normalize();
+            gameObject.GetComponent<Rigidbody2D>().velocity = direction * moveSpeed;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public IEnumerator Despawn(bool voluntary)
+    {
+        StartCoroutine(StateReset());
+        Debug.Log("Now Killing Self");
+        //increment the enemy stats if you go the scaling route - only if voluntary = true
+        if (voluntary)
+            GameObject.FindWithTag("boss").GetComponent<Bully>().HealthSacrifice();
+
+        mySpawner.activeEnemies--;
+        gameObject.SetActive(false);
+        yield return null;
     }
 
     IEnumerator KillReset()

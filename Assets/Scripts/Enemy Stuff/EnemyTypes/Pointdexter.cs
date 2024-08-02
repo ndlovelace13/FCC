@@ -77,6 +77,18 @@ public class Pointdexter : EnemyBehavior
             {
                 Deactivate();
             }
+
+            //boss summon check
+            if (GameControl.PlayerData.bossSpawning && summoning == false)
+            {
+                StartCoroutine(BossSummoning());
+                summoning = true;
+            }
+            if (sacrifice)
+            {
+                StartCoroutine(Sacrifice());
+                yield break;
+            }
             yield return new WaitForEndOfFrame();
         }
     }
@@ -85,8 +97,9 @@ public class Pointdexter : EnemyBehavior
     {
         PointdexterStats stats = (PointdexterStats)myStats;
         float allyModifier = 1f;
+        float currentAllyDist = 0f;
 
-        while (gameObject.activeSelf)
+        while (gameObject.activeSelf && !summoning)
         {
             //target acquisition
             if (isTargeting)
@@ -95,16 +108,15 @@ public class Pointdexter : EnemyBehavior
                 GetComponent<Animator>().SetInteger("state", 0);
                 GetComponent<Animator>().speed = backupSpeed * 0.5f;
 
-                //Debug.Log("currently Targeting");
-                float currentAllyDist = 0;
-                if (ally)
-                    currentAllyDist = Vector2.Distance(ally.GetComponent<EnemyBehavior>().shadow.position, shadow.position);
+                Debug.Log("currently Targeting");
                 //get an ally if one does not exist or was killed
                 if (ally == null || !ally.activeSelf || currentAllyDist > 10)
                 {
                     allyModifier = AllyAcquire(allyModifier, true);
                 }
-                    
+                if (ally)
+                    currentAllyDist = Vector2.Distance(ally.GetComponent<EnemyBehavior>().shadow.position, shadow.position);
+
 
                 //check for retreat
                 if (Vector2.Distance(player.transform.position, shadow.position) < 3)
@@ -115,7 +127,7 @@ public class Pointdexter : EnemyBehavior
                     SpeedDown(allyModifier);
                     SpeedDown(1.15f);
                 }
-                else if (currentAllyDist < 1)
+                else if (ally && currentAllyDist < 2f)
                 {
                     isTargeting = false;
                     isCharging = true;
@@ -137,7 +149,7 @@ public class Pointdexter : EnemyBehavior
                 GetComponent<Animator>().SetInteger("state", 1);
                 GetComponent<Animator>().speed = 1;
 
-                //Debug.Log("currently Charging");
+                Debug.Log(currentTime);
                 //transition to the pointing
                 if (currentTime >= stats.pointCharge)
                 {
@@ -161,7 +173,7 @@ public class Pointdexter : EnemyBehavior
                 //Set Anim State
                 GetComponent<Animator>().SetInteger("state", 2);
                 GetComponent<Animator>().speed = 1;
-                //Debug.Log("currently Pointing");
+                Debug.Log("currently Pointing");
                 if (currentTime >= stats.pointCooldown)
                 {
                     SpeedUp(0.75f);
@@ -216,8 +228,12 @@ public class Pointdexter : EnemyBehavior
     //get a random ally anytime the targeting state is active
     private float AllyAcquire(float allyModifier, bool speedDown)
     {
-        if (speedDown)
+        if (speedDown && allyModifier != 0)
+        {
+            Debug.Log("previous ally modifier: " + allyModifier);
             SpeedDown(allyModifier);
+        }
+            
         Debug.Log("new ally acquired");
         //retrieve all enemies
         GameObject[] enemies = AllEnemies();
@@ -225,7 +241,7 @@ public class Pointdexter : EnemyBehavior
         int choice = Random.Range(0, enemies.Length);
         ally = enemies[choice];
 
-        allyModifier = backupSpeed / (ally.GetComponent<EnemyBehavior>().moveSpeed * 1.5f);
+        allyModifier = backupSpeed / (ally.GetComponent<EnemyBehavior>().backupSpeed * 1.5f);
         SpeedUp(allyModifier);
         return allyModifier;
     }

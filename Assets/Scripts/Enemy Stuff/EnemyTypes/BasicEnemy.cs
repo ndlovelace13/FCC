@@ -49,10 +49,23 @@ public class BasicEnemy : EnemyBehavior
                 direction.Normalize();
                 gameObject.GetComponent<Rigidbody2D>().velocity = direction * moveSpeed;
             }
+            //death check
             if (health <= 0)
             {
                 Deactivate();
             }
+
+            //boss summon check
+            if (GameControl.PlayerData.bossSpawning && summoning == false)
+            {
+                StartCoroutine(BossSummoning());
+                summoning = true;
+            }
+            if (sacrifice)
+            {
+                StartCoroutine(Sacrifice());
+                yield break;
+            }  
             yield return new WaitForEndOfFrame();
         }
     }

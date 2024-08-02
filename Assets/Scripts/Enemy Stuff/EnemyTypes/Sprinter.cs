@@ -58,12 +58,23 @@ public class Sprinter : EnemyBehavior
                 direction.Normalize();
                 gameObject.GetComponent<Rigidbody2D>().velocity = direction * moveSpeed;
             }
-            else
-                Debug.Log("Enemy isn't currently tracking");
             if (health <= 0)
             {
                 Deactivate();
             }
+
+            //boss summon check
+            if (GameControl.PlayerData.bossSpawning && summoning == false)
+            {
+                StartCoroutine(BossSummoning());
+                summoning = true;
+            }
+            if (sacrifice)
+            {
+                StartCoroutine(Sacrifice());
+                yield break;
+            }
+
             yield return new WaitForEndOfFrame();
         }
     }
@@ -73,7 +84,7 @@ public class Sprinter : EnemyBehavior
         surpriseTime = 0.5f;
         SprinterStats realStats = (SprinterStats)myStats;
         //walkSpeed = backupSpeed;
-        while (gameObject.activeSelf)
+        while (gameObject.activeSelf && !summoning)
         {
             if ((isFrozen || isElectrified) && !justReset)
             {

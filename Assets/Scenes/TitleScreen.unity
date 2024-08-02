@@ -508,6 +508,8 @@ MonoBehaviour:
   menuActive: 0
   unlockDone: 0
   quitCooldown: 0
+  bossSpawning: 0
+  bossActive: 0
   tutorialHandler: {fileID: 0}
   currentReportIndex: 0
   inputsTested: 0
@@ -600,6 +602,7 @@ MonoBehaviour:
   - {fileID: 6648197801844819290, guid: 2330b4c813fa77f4083a6f9b9ccf1806, type: 3}
   - {fileID: 6760059903058135406, guid: 3969d15c77713874abbdeabf94510183, type: 3}
   - {fileID: 6846610235968199208, guid: 9cbcb36dc676ec24890cd0fa9762a825, type: 3}
+  - {fileID: 5903115748895758002, guid: e5445783a90acaf48a380d58edf07a5e, type: 3}
   enemySpawnPrefab: {fileID: 5356731414288089438, guid: 230f3e16254910d4abe21bdedad81e84, type: 3}
   newEnemyTime: 5
   crosshairActive: 1

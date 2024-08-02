@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BullyStats : MonoBehaviour
+public class BullyStats : EnemyStats
 {
     // Start is called before the first frame update
     void Start()
@@ -14,5 +14,30 @@ public class BullyStats : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public override string GetTitle()
+    {
+        return "The Bully";
+    }
+
+    public override string GetSubtext()
+    {
+        return "Boss Variant";
+    }
+
+    public override string GetDescription()
+    {
+        return "Placeholder placeholder placeholder placeholder";
+    }
+
+    public override string GetBehavior()
+    {
+        return "Placeholder placeholder placeholder placeholder placeholder placeholder";
+    }
+
+    public override string GetWeakness()
+    {
+        return "- Placeholder placeholder placeholder\n- Placeholder placeholder placeholder placeholder placeholder";
     }
 }

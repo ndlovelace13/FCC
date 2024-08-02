@@ -141,6 +141,10 @@ public class GameControl : MonoBehaviour
 
     public bool quitCooldown = false;
 
+    //boss fight stuff
+    public bool bossSpawning = false;
+    public bool bossActive = false;
+
     public GameObject tutorialHandler;
 
     public int currentReportIndex = 0;
@@ -358,6 +362,20 @@ public class GameControl : MonoBehaviour
             {
                 SavedFlowerStats newData = new SavedFlowerStats(flower.Key);
                 SaveData.flowerSaveData.Add(newData);
+            }
+        }
+        else
+        {
+            int savedCount = SaveData.flowerSaveData.Count;
+            int iterator = 0;
+            foreach (var flower in flowerStatsDict)
+            {
+                if (iterator >= savedCount)
+                {
+                    SavedFlowerStats newData = new SavedFlowerStats(flower.Key);
+                    SaveData.flowerSaveData.Add(newData);
+                }
+                iterator++;
             }
         }
         
@@ -638,6 +656,9 @@ public class GameControl : MonoBehaviour
         unlockDone = false;
 
         crosshairActive = true;
+
+        bossActive = false;
+        bossSpawning = false;
 
         
 

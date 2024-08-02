@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3897722535358710819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5998858682861247464}
+  - component: {fileID: 5903115748895758002}
+  m_Layer: 0
+  m_Name: BullyStats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5998858682861247464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3897722535358710819}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.541823, y: 2.085292, z: -4.526296}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5903115748895758002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3897722535358710819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f7f9fdb2791dfc4eb6060a1d7333b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 1003814786078272635, guid: 526945e056651c148828064611db327f, type: 3}
+  maxInterval: 0
+  minInterval: 0
+  maxSpeed: 7
+  minSpeed: 7
+  maxHealth: 500
+  healthInterval: 0
+  startingEnemies: 1
+  enemyScaleAmt: 0
+  killScore: 300
+  scoreIncrease: 0
+  countScaleTime: 500
+  statsScaleTime: 500
+  type: bully
+  sprite: {fileID: -614393820, guid: 44374ce06d527134cbe1d821867c0c7e, type: 3}
+  encountered: 0
+  title: The Bully
+  subtext: Boss Variant
+  description: 
+  behavior: 
+  weakness: 
