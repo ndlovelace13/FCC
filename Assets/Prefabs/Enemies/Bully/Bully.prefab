@@ -197,6 +197,7 @@ MonoBehaviour:
   isBlinded: 0
   wasKilled: 0
   isBoss: 1
+  spawnTime: 30
   healthbarPrefab: {fileID: 9136698399812099878, guid: b72098d3ce56d584cbcfa9435b631068, type: 3}
 --- !u!1 &2186241190138067228
 GameObject:

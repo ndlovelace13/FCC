@@ -67,6 +67,7 @@ public abstract class EnemyBehavior : MonoBehaviour
     public bool isBoss;
     protected bool sacrifice = false;
     protected bool summoning = false;
+    protected bool invulnerable = false;
 
     protected SpriteRenderer[] allSprites;
 
@@ -188,19 +189,22 @@ public abstract class EnemyBehavior : MonoBehaviour
     public void CollisionCheck(Collider2D other)
     {
         //Debug.Log("collision happening");
-        if (other.gameObject.tag == "projectile")
+        if (!invulnerable)
         {
-            GameObject otherParent = other.gameObject.transform.parent.gameObject;
-            DealDamage(otherParent.GetComponent<ProjectileBehavior>().damage, Color.white);
-            actualAugs = otherParent.GetComponent<ProjectileBehavior>().getActualAugs();
-            AugmentApplication(actualAugs);
-            otherParent.GetComponent<ProjectileBehavior>().ObjectDeactivate();
-        }
-        else if (other.gameObject.tag == "aoe")
-        {
-            GameObject otherParent = other.gameObject.transform.parent.gameObject;
-            actualAugs = otherParent.GetComponent<AoeBehavior>().getActualAugs();
-            AugmentApplication(actualAugs);
+            if (other.gameObject.tag == "projectile")
+            {
+                GameObject otherParent = other.gameObject.transform.parent.gameObject;
+                DealDamage(otherParent.GetComponent<ProjectileBehavior>().damage, Color.white);
+                actualAugs = otherParent.GetComponent<ProjectileBehavior>().getActualAugs();
+                AugmentApplication(actualAugs);
+                otherParent.GetComponent<ProjectileBehavior>().ObjectDeactivate();
+            }
+            else if (other.gameObject.tag == "aoe")
+            {
+                GameObject otherParent = other.gameObject.transform.parent.gameObject;
+                actualAugs = otherParent.GetComponent<AoeBehavior>().getActualAugs();
+                AugmentApplication(actualAugs);
+            }
         }
     }
 
@@ -343,6 +347,12 @@ public abstract class EnemyBehavior : MonoBehaviour
         moveSpeed = backupSpeed;
         while (gameObject.activeSelf)
         {
+            //check for death
+            if (health < 0)
+            {
+                Deactivate();
+                yield break;
+            }
             //check whether the enemy is within sacrifice range of the boss
             float dist = Vector2.Distance(target.position, shadow.position);
             if (dist < 2)
@@ -373,7 +383,8 @@ public abstract class EnemyBehavior : MonoBehaviour
         Debug.Log("Now Killing Self");
         //increment the enemy stats if you go the scaling route - only if voluntary = true
         if (voluntary)
-            GameObject.FindWithTag("boss").GetComponent<Bully>().HealthSacrifice();
+            GameObject.FindWithTag("boss").GetComponent<Bully>().HealthSacrifice((float)health / (float)maxHealth);
+        Debug.Log(health + " / " + maxHealth);
 
         mySpawner.activeEnemies--;
         gameObject.SetActive(false);

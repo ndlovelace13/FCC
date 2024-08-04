@@ -38,7 +38,7 @@ public class BossHealthBar : MonoBehaviour
             //update the healthbar to reflect the boss's current health
             float currentPercent = (float)currentBoss.health / (float)currentBoss.maxHealth;
             currentMask = maxMask - currentPercent * maxMask;
-            Debug.Log(currentBoss.health + " | " + currentBoss.maxHealth + " = " + currentBoss.health / currentBoss.maxHealth);
+            //Debug.Log(currentBoss.health + " | " + currentBoss.maxHealth + " = " + currentBoss.health / currentBoss.maxHealth);
 
             //get the current padding, adjust the x value
             var padding = healthMask.padding;
