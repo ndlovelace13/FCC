@@ -20,7 +20,7 @@ public class Bully : EnemyBehavior
     BossState prevState;
 
     bool spawning = true;
-    float spawnTime = 30f;
+    public float spawnTime = 30f;
 
     [SerializeField] GameObject healthbarPrefab;
     int healthScale;
