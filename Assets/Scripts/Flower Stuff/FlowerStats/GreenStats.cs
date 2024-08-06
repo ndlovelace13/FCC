@@ -46,7 +46,7 @@ public class GreenStats : FlowerStats
     {
         float thisPoisonTime = poisonTime + timeIncrease * (power - 1);
         float thisPoisonCooldown = poisonCooldown - cooldownDecrease * (power - 1);
-        StartCoroutine(SlowApply(poisonSlow, thisPoisonTime, 3, enemy));
+        SlowHandler(poisonSlow, thisPoisonTime, 3, enemy);
         float poisonTimer = 0f;
         while (poisonTimer < thisPoisonTime)
         {

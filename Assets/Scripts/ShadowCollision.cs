@@ -24,6 +24,10 @@ public class ShadowCollision : MonoBehaviour
             FlowerStats thisFlower = transform.parent.GetComponentInChildren<FlowerStats>();
             GameControl.PlayerData.flowerStatsDict[thisFlower.type].OnHitboxEnter(transform.parent.gameObject);
         }
+        if (transform.parent.tag == "bossPart")
+        {
+            transform.parent.GetComponent<BossExtension>().CollisionCheck(other);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)

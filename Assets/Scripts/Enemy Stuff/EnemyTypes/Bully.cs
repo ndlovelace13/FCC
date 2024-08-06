@@ -29,6 +29,12 @@ public class Bully : EnemyBehavior
     public float spawnTime = 20f;
     BullyStats stats;
 
+    //insult Stuff
+    ObjectPool projPool;
+
+    //hook Stuff
+    [SerializeField] GameObject fistPrefab;
+
     //health Stuff
     [SerializeField] GameObject healthbarPrefab;
     int healthScale;
@@ -114,6 +120,9 @@ public class Bully : EnemyBehavior
         GetComponent<Animator>().speed = backupSpeed * 0.5f;
 
         allSprites = GetComponentsInChildren<SpriteRenderer>();
+
+        //get the projPool
+        projPool = GameObject.FindWithTag("projectilePool").GetComponent<ObjectPool>();
 
         //set the enemy's initial target to be the player
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CapsuleCollider2D>().transform;
@@ -264,7 +273,7 @@ public class Bully : EnemyBehavior
         stateTime = 3f;
         //punch at the target - stop if canceled
         SpeedUp(0.75f);
-        while (passedTime < stateTime / 1)
+        while (passedTime < stateTime / 2)
         {
             GetComponentInChildren<Rigidbody2D>().velocity = -direction.normalized * moveSpeed;
             if (isFrozen || isElectrified) { stateCancel = true; break; }
@@ -275,8 +284,8 @@ public class Bully : EnemyBehavior
         float currentTime = passedTime;
         while (passedTime < stateTime && !stateCancel)
         {
-            Debug.Log("Now Cooling Down");
-            GetComponentInChildren<Rigidbody2D>().velocity = Vector2.Lerp(currentVel, Vector2.zero, (passedTime - currentTime) / stateTime);
+            Debug.Log("Now Cooling Down " + GetComponentInChildren<Rigidbody2D>().velocity);
+            GetComponentInChildren<Rigidbody2D>().velocity = Vector2.Lerp(currentVel, Vector2.zero, (passedTime - currentTime) / (stateTime - currentTime));
             if (isFrozen || isElectrified) { stateCancel = true; break; }
             yield return new WaitForEndOfFrame();
         }
@@ -295,7 +304,7 @@ public class Bully : EnemyBehavior
         Debug.Log("Charge Called");
         //reset time vars
         passedTime = 0f;
-        stateTime = 5f;
+        stateTime = 4f;
         //slow while charging up charge
         Vector2 direction = shadow.position - target.position;
         SpeedDown(0.25f);
@@ -310,18 +319,19 @@ public class Bully : EnemyBehavior
         SpeedUp(0.25f);
         //speed up to charge speed & get final direction
         SpeedUp(2 / 3f);
-        while (passedTime < 3.5f && !stateCancel)
+        while (passedTime < 3f && !stateCancel)
         {
             GetComponentInChildren<Rigidbody2D>().velocity = -direction.normalized * moveSpeed;
             if (isFrozen || isElectrified) { stateCancel = true; break; }
             yield return new WaitForEndOfFrame();
         }
         Vector2 currentVel = GetComponentInChildren<Rigidbody2D>().velocity;
+        float currentTime = passedTime;
         //slow to a halt unless cancelled
         while (passedTime < stateTime && !stateCancel)
         {
-            Debug.Log("Now Cooling Down");
-            GetComponentInChildren<Rigidbody2D>().velocity = Vector2.Lerp(currentVel, Vector2.zero, passedTime / stateTime);
+            Debug.Log("Now Cooling Down " + GetComponentInChildren<Rigidbody2D>().velocity);
+            GetComponentInChildren<Rigidbody2D>().velocity = Vector2.Lerp(currentVel, Vector2.zero, (passedTime - currentTime) / (stateTime - currentTime));
             if (isFrozen || isElectrified) { stateCancel = true; break; }
             yield return new WaitForEndOfFrame();
         }
@@ -337,7 +347,34 @@ public class Bully : EnemyBehavior
     {
         Debug.Log("Hook Called");
         //TODO - Spawn a fist obj here on a random side of the player
-        yield return new WaitForSeconds(2f);
+        //reset time vals
+        passedTime = 0f;
+        stateTime = 6f;
+        //hand in ground anim
+        while (passedTime < 1f)
+        {
+            if (isFrozen || isElectrified) { stateCancel = true; break; }
+            yield return new WaitForEndOfFrame();
+        }
+        GameObject fist = new GameObject();
+        if (!stateCancel)
+        {
+            int sideChoice = Random.Range(0, 2);
+            Vector3 sideOffset;
+            if (sideChoice == 0)
+                sideOffset = new Vector3(5f, 0f);
+            else
+                sideOffset = new Vector3(-5f, 0f);
+            Vector3 spawnLoc = target.transform.position + sideOffset;
+            //spawn the fist
+            fist = Instantiate(fistPrefab, spawnLoc, Quaternion.identity);
+            fist.transform.SetParent(transform);
+        }
+        //chill, repeat the same anim while the fist is active
+        while (fist.activeSelf && !stateCancel)
+        {
+            yield return new WaitForEndOfFrame();
+        }
         currentState = BossState.Stalk;
         StartCoroutine(StateUpdate());
         yield break;
@@ -347,11 +384,50 @@ public class Bully : EnemyBehavior
     IEnumerator Insult()
     {
         Debug.Log("Insult Called");
-        //TODO - Spawn a projectile here to fly to the player, make the debuff as well
-        yield return new WaitForSeconds(2f);
+        //reset time vals
+        passedTime = 0f;
+        stateTime = 2f;
+        while (passedTime < stateTime)
+        {
+            if (isFrozen || isElectrified) { stateCancel = true; break; }
+            yield return new WaitForEndOfFrame();
+        }    
+        if (!stateCancel)
+        {
+            //proj spawn here
+            Vector2 direction = player.transform.position - transform.position;
+            //radian conversion (idk what this does tbh)
+            float angleRadians = Mathf.Atan2(-direction.y, direction.x);
+            if (angleRadians < 0)
+                angleRadians += 2 * Mathf.PI;
+            angleRadians += Mathf.PI / 2;
+            StartCoroutine(ProjSpawn(angleRadians));
+        }
+
         currentState = BossState.Stalk;
         StartCoroutine(StateUpdate());
         yield break;
+    }
+
+    IEnumerator ProjSpawn(float angle)
+    {
+        Vector2 projDir = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle));
+        projDir.Normalize();
+        GameObject proj = projPool.GetComponent<ObjectPool>().GetPooledObject();
+        if (proj == null)
+            Debug.Log("get fucked");
+        //Debug.Log(proj.transform.position);
+        //Debug.Log(crown.transform.position);
+        //proj.transform.rotation = new Quaternion(angle);
+        proj.transform.position = transform.position;
+        proj.transform.localScale = Vector3.one * 2;
+        Dictionary<string, int> projAugs = new Dictionary<string, int>();
+        projAugs.Add("bully", 0);
+        //rotating towards direction of movement
+        proj.SetActive(true);
+        proj.GetComponent<ProjectileBehavior>().SetProps(20f, 0, projAugs, projDir, false, true);
+        proj.GetComponentInChildren<Rigidbody2D>().velocity = projDir * moveSpeed * 2;
+        yield return null;
     }
 
     IEnumerator BossSpawn()

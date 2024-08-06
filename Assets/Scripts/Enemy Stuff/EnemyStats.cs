@@ -36,7 +36,7 @@ public abstract class EnemyStats : MonoBehaviour
     [SerializeField] public float maxInterval, minInterval, maxSpeed, minSpeed;
     [SerializeField] public int maxHealth, healthInterval, startingEnemies, enemyScaleAmt, killScore, scoreIncrease, countScaleTime, statsScaleTime;
     [SerializeField] public string type;
-    [SerializeField] public Sprite sprite;
+    [SerializeField] public Sprite sprite, projSprite;
     public bool encountered = false;
 
     //Almanac stuff

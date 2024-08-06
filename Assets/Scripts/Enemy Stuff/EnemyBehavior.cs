@@ -38,7 +38,7 @@ public abstract class EnemyBehavior : MonoBehaviour
     protected float surpriseTime = 1f;
     public Vector3 preSurpriseVel;
 
-    [SerializeField] GameObject notif;
+    [SerializeField] protected GameObject notif;
 
     public string[] augments;
     public Dictionary<string, int> actualAugs;
@@ -186,7 +186,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         }
     }
 
-    public void CollisionCheck(Collider2D other)
+    public virtual void CollisionCheck(Collider2D other)
     {
         //Debug.Log("collision happening");
         if (!invulnerable)
@@ -194,10 +194,13 @@ public abstract class EnemyBehavior : MonoBehaviour
             if (other.gameObject.tag == "projectile")
             {
                 GameObject otherParent = other.gameObject.transform.parent.gameObject;
-                DealDamage(otherParent.GetComponent<ProjectileBehavior>().damage, Color.white);
-                actualAugs = otherParent.GetComponent<ProjectileBehavior>().getActualAugs();
-                AugmentApplication(actualAugs);
-                otherParent.GetComponent<ProjectileBehavior>().ObjectDeactivate();
+                if (!otherParent.GetComponent<ProjectileBehavior>().enemyProj)
+                {
+                    DealDamage(otherParent.GetComponent<ProjectileBehavior>().damage, Color.white);
+                    actualAugs = otherParent.GetComponent<ProjectileBehavior>().getActualAugs();
+                    AugmentApplication(actualAugs);
+                    otherParent.GetComponent<ProjectileBehavior>().ObjectDeactivate();
+                }
             }
             else if (other.gameObject.tag == "aoe")
             {
@@ -237,7 +240,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         return closestEnemy;
     }
 
-    public void DealDamage(int damage, Color color)
+    public virtual void DealDamage(int damage, Color color)
     {
         AkSoundEngine.PostEvent("EnemyHit", gameObject);
         health -= damage;

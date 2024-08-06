@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BullyStats : EnemyStats
 {
+    public float insultDebuff = 0.5f;
+    public float insultLength = 7f;
+
     // Start is called before the first frame update
     void Start()
     {

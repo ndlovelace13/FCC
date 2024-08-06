@@ -59,9 +59,12 @@ MonoBehaviour:
   statsScaleTime: 500
   type: bully
   sprite: {fileID: -614393820, guid: 44374ce06d527134cbe1d821867c0c7e, type: 3}
+  projSprite: {fileID: 21300000, guid: 1b7ad021cfde5e0408b7c1802bd809ff, type: 3}
   encountered: 0
   title: The Bully
   subtext: Boss Variant
   description: 
   behavior: 
   weakness: 
+  insultDebuff: 0.5
+  insultLength: 7
