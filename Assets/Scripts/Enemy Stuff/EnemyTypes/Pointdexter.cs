@@ -110,7 +110,7 @@ public class Pointdexter : EnemyBehavior
 
                 Debug.Log("currently Targeting");
                 //get an ally if one does not exist or was killed
-                if (ally == null || !ally.activeSelf || currentAllyDist > 10)
+                if (ally == null || !ally.activeSelf || currentAllyDist > 15)
                 {
                     allyModifier = AllyAcquire(allyModifier, true);
                 }

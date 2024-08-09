@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
@@ -92,12 +93,8 @@ public abstract class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        /*if (isActive)
-        {
-            
-            
-            
-        }*/
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerStatus>().transform;
     }
 
     public virtual IEnumerator StandardBehavior()
@@ -294,7 +291,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         allSprites = GetComponentsInChildren<SpriteRenderer>();
 
         //set the enemy's initial target to be the player
-        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CapsuleCollider2D>().transform;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerStatus>().transform;
         target = player;
         //Debug.Log(player.position);
         StartCoroutine(SortingAdjust());

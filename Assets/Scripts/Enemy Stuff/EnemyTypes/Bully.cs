@@ -125,7 +125,7 @@ public class Bully : EnemyBehavior
         projPool = GameObject.FindWithTag("projectilePool").GetComponent<ObjectPool>();
 
         //set the enemy's initial target to be the player
-        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CapsuleCollider2D>().transform;
+        player = player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerStatus>().transform;
         target = player;
         //Debug.Log(player.position);
         
@@ -232,6 +232,7 @@ public class Bully : EnemyBehavior
                 nextStates.Add((BossState)i);
         }
         currentState = nextStates[Random.Range(0, nextStates.Count)];
+        //currentState = BossState.Hook;
         StartCoroutine(StateUpdate());
     }
     
@@ -366,6 +367,7 @@ public class Bully : EnemyBehavior
             else
                 sideOffset = new Vector3(-5f, 0f);
             Vector3 spawnLoc = target.transform.position + sideOffset;
+            Debug.Log("Spawn Location: " + spawnLoc + " | target Location: " + target.transform.position + " | player location: " + player.transform.position);
             //spawn the fist
             fist = Instantiate(fistPrefab, spawnLoc, Quaternion.identity);
             fist.transform.SetParent(transform);
@@ -375,6 +377,7 @@ public class Bully : EnemyBehavior
         {
             yield return new WaitForEndOfFrame();
         }
+        Destroy(fist);
         currentState = BossState.Stalk;
         StartCoroutine(StateUpdate());
         yield break;

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2966977713507855080}
   - component: {fileID: 228346828096061805}
   - component: {fileID: 5783538252221588449}
-  - component: {fileID: 163464877424082007}
   - component: {fileID: 7850145777368289608}
+  - component: {fileID: 5826295114471604450}
   m_Layer: 0
   m_Name: Bully
   m_TagString: boss
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: -139382901
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -763197830, guid: 313a2fecee743714ea58cdb75aa0910f, type: 3}
+  m_Sprite: {fileID: -1266133144, guid: 6032221be7fca0f4ea1af8009704d874, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,27 +142,6 @@ MonoBehaviour:
   unloadTriggerList: 958ca0ea
   bankNameInternal: 
   valueGuidInternal: 
---- !u!95 &163464877424082007
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003814786078272635}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4cbd43b5039eeae44bc2bc7c8b821cc1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7850145777368289608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +161,7 @@ MonoBehaviour:
   isActive: 0
   target: {fileID: 0}
   mySpawner: {fileID: 0}
-  moveSpeed: 0
+  moveSpeed: 7
   backupSpeed: 7
   surprised: 0
   preSurpriseVel: {x: 0, y: 0, z: 0}
@@ -197,9 +176,30 @@ MonoBehaviour:
   isBlinded: 0
   wasKilled: 0
   isBoss: 1
-  spawnTime: 30
+  spawnTime: 5
   fistPrefab: {fileID: 1003814786078272635, guid: 97c51102c91226c4eaaf5c8b9890f0df, type: 3}
   healthbarPrefab: {fileID: 9136698399812099878, guid: b72098d3ce56d584cbcfa9435b631068, type: 3}
+--- !u!95 &5826295114471604450
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003814786078272635}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b501c05a48d50714b8cb5ab8768b5ca9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2186241190138067228
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,15 +492,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5599003621512615538, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 5599003621512615538, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.29166666
       objectReference: {fileID: 0}
     - target: {fileID: 5599003621512615538, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 5599003621512615538, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -508,7 +508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5599003621512615538, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.77
+      value: -0.18
       objectReference: {fileID: 0}
     - target: {fileID: 5599003621512615538, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
       propertyPath: m_LocalPosition.z
