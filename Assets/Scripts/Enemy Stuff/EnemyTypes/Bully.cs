@@ -9,12 +9,12 @@ public class Bully : EnemyBehavior
 {
     enum BossState
     {
-        Stalk,
-        Approach,
-        Punch,
-        Charge,
-        Hook,
-        Insult,
+        Stalk, //0
+        Approach, //1
+        Punch, //2
+        Charge, //3
+        Hook, //4
+        Insult, //5
     }
 
     //state Stuff
@@ -23,6 +23,7 @@ public class Bully : EnemyBehavior
     float passedTime = 0f;
     float stateTime = 0f;
     bool stateCancel = false;
+    bool directionLock = false;
 
     //spawn Stuff
     bool spawning = true;
@@ -76,10 +77,13 @@ public class Bully : EnemyBehavior
             {
                 moveSpeed = backupSpeed;
                 passedTime += Time.deltaTime;
+                //implement anim speed here based on slow effects
             }
-            
+
             //TODO - implement function to update the anim based on currentState, scale anim speed based off of currentSlow effect
-                
+
+            if (!directionLock)
+                StartCoroutine(DirectionHandle());
             //movement
             if (!isBlinded)
             {
@@ -94,6 +98,16 @@ public class Bully : EnemyBehavior
             //wait for end of frame regardless of the situation
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    IEnumerator DirectionHandle()
+    {
+        Vector2 direction = GetComponentInChildren<Rigidbody2D>().velocity;
+        if (direction.x < 0f)
+            transform.localScale = new Vector3(-1, 1);
+        else
+            transform.localScale = Vector3.one;
+        yield return null;
     }
 
     //right when the boss spawns do all this shit
@@ -117,7 +131,7 @@ public class Bully : EnemyBehavior
         //assign base speed
         backupSpeed = mySpawner.currentMax;
         moveSpeed = backupSpeed;
-        GetComponent<Animator>().speed = backupSpeed * 0.5f;
+        //GetComponent<Animator>().speed = backupSpeed * 0.5f;
 
         allSprites = GetComponentsInChildren<SpriteRenderer>();
 
@@ -180,7 +194,8 @@ public class Bully : EnemyBehavior
             prevState = currentState;
         //probably not necessary - maybe tho
         //else if (currentState == BossState.Punch)
-            //prevState = BossState.Approach;
+        //prevState = BossState.Approach;
+        GetComponent<Animator>().SetInteger("state", (int)currentState);
         yield return null;
 
     }
@@ -189,6 +204,7 @@ public class Bully : EnemyBehavior
     IEnumerator Stalk()
     {
         currentState = BossState.Stalk;
+        //directionLock = true;
         //calculate the downtime
         passedTime = 0f;
         stateTime = Random.Range(4f, 7f);
@@ -211,11 +227,22 @@ public class Bully : EnemyBehavior
             if (direction.magnitude < 5.5)
             {
                 GetComponentInChildren<Rigidbody2D>().velocity = direction.normalized * 4f;
+                GetComponent<Animator>().SetBool("adjusting", true);
+                GetComponent<Animator>().speed = Mathf.Abs(GetComponent<Animator>().speed);
             }
             else if (direction.magnitude > 8.5)
+            {
                 GetComponentInChildren<Rigidbody2D>().velocity = -direction.normalized * 4f;
+                GetComponent<Animator>().SetBool("adjusting", true);
+                GetComponent<Animator>().speed = Mathf.Abs(GetComponent<Animator>().speed);
+            }
             else
+            {
                 GetComponentInChildren<Rigidbody2D>().velocity = Vector2.zero;
+                GetComponent<Animator>().SetBool("adjusting", false);
+                GetComponent<Animator>().speed = Mathf.Abs(GetComponent<Animator>().speed);
+            }
+                
 
             yield return new WaitForEndOfFrame();
         }
@@ -223,6 +250,8 @@ public class Bully : EnemyBehavior
         //once stalk is complete, choose an attack abd callStateUpdate to execute
         Debug.Log("stalking complete");
         GetComponentInChildren<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Animator>().speed = Mathf.Abs(GetComponent<Animator>().speed);
+        GetComponent<Animator>().SetBool("adjusting", false);
 
         List<BossState> nextStates = new List<BossState>();
         for (int i = 0; i < System.Enum.GetValues(typeof(BossState)).Length; i++)
@@ -232,6 +261,7 @@ public class Bully : EnemyBehavior
                 nextStates.Add((BossState)i);
         }
         currentState = nextStates[Random.Range(0, nextStates.Count)];
+        //directionLock = false;
         //currentState = BossState.Hook;
         StartCoroutine(StateUpdate());
     }
@@ -271,7 +301,7 @@ public class Bully : EnemyBehavior
         Vector2 direction = shadow.position - target.position;
         //reset time variables
         passedTime = 0f;
-        stateTime = 3f;
+        stateTime = 2f;
         //punch at the target - stop if canceled
         SpeedUp(0.75f);
         while (passedTime < stateTime / 2)
@@ -296,6 +326,7 @@ public class Bully : EnemyBehavior
         GetComponentInChildren<Rigidbody2D>().velocity = Vector2.zero;
         currentState = BossState.Stalk;
         StartCoroutine(StateUpdate());
+        
         yield break;
     }
 
@@ -328,6 +359,7 @@ public class Bully : EnemyBehavior
         }
         Vector2 currentVel = GetComponentInChildren<Rigidbody2D>().velocity;
         float currentTime = passedTime;
+        GetComponent<Animator>().SetTrigger("finish");
         //slow to a halt unless cancelled
         while (passedTime < stateTime && !stateCancel)
         {
@@ -377,6 +409,7 @@ public class Bully : EnemyBehavior
         {
             yield return new WaitForEndOfFrame();
         }
+        GetComponent<Animator>().SetTrigger("finish");
         Destroy(fist);
         currentState = BossState.Stalk;
         StartCoroutine(StateUpdate());

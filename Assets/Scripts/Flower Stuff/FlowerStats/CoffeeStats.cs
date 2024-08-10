@@ -92,7 +92,7 @@ public class CoffeeStats : FlowerStats
             }
             currentTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
-            Debug.Log("Player Speed: " + player.speed);
+            //Debug.Log("Player Speed: " + player.speed);
         }
 
         //remove the speed boost
