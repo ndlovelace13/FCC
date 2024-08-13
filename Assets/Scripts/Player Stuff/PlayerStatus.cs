@@ -79,9 +79,11 @@ public class PlayerStatus : MonoBehaviour
         //set speedBuff to false
         speedBuffs = 0;
         BullyStats bully = (BullyStats)GameControl.PlayerData.enemyStatsDict["bully"];
+        
 
         PlayerMovement player = GetComponentInChildren<PlayerMovement>();
         player.speed *= bully.insultDebuff;
+        playerParticle.SetInteger("augment", 7);
 
         float currentTime = 0f;
         while (currentTime < bully.insultLength)
@@ -93,5 +95,6 @@ public class PlayerStatus : MonoBehaviour
         }
 
         player.speed /= bully.insultDebuff;
+        playerParticle.SetInteger("augment", 0);
     }
 }

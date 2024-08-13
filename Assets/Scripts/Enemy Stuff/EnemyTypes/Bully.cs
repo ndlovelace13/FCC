@@ -210,6 +210,21 @@ public class Bully : EnemyBehavior
         stateTime = Random.Range(4f, 7f);
         //choose a direction
         int right = Random.Range(0, 2);
+
+        /*//lock the direction function
+        directionLock = true;
+        
+        //set the direction
+
+        if (right == 1)
+        {
+            transform.localScale = new Vector3(1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-1, 1);
+        }*/
+
         Vector3 dir;
         if (right == 1)
             dir = Vector3.forward;
@@ -218,30 +233,34 @@ public class Bully : EnemyBehavior
 
         while (passedTime < stateTime)
         {
-            //rotate around player depending on direction
-            transform.RotateAround(target.position, dir, Time.deltaTime * moveSpeed * 2);
-            transform.rotation = Quaternion.identity;
-
+            Vector2 radiusAdj;
             //stay within a certain distance of player while stalking
-            Vector2 direction = transform.position - target.position;
+            Vector2 direction = target.position - transform.position;
+            //rotate around player depending on direction
+            //transform.RotateAround(target.position, dir, Time.deltaTime * moveSpeed * 2);
+            Vector2 newForward = Vector3.Cross(direction, Vector3.back).normalized * moveSpeed / 2f;
+            //transform.rotation = Quaternion.identity;
+
             if (direction.magnitude < 5.5)
             {
-                GetComponentInChildren<Rigidbody2D>().velocity = direction.normalized * 4f;
+                radiusAdj = -direction.normalized * 4f;
                 GetComponent<Animator>().SetBool("adjusting", true);
                 GetComponent<Animator>().speed = Mathf.Abs(GetComponent<Animator>().speed);
             }
             else if (direction.magnitude > 8.5)
             {
-                GetComponentInChildren<Rigidbody2D>().velocity = -direction.normalized * 4f;
+                radiusAdj = direction.normalized * 4f;
                 GetComponent<Animator>().SetBool("adjusting", true);
                 GetComponent<Animator>().speed = Mathf.Abs(GetComponent<Animator>().speed);
             }
             else
             {
-                GetComponentInChildren<Rigidbody2D>().velocity = Vector2.zero;
+                radiusAdj = Vector2.zero;
                 GetComponent<Animator>().SetBool("adjusting", false);
                 GetComponent<Animator>().speed = Mathf.Abs(GetComponent<Animator>().speed);
             }
+
+            GetComponentInChildren<Rigidbody2D>().velocity = newForward + radiusAdj;
                 
 
             yield return new WaitForEndOfFrame();
@@ -411,6 +430,12 @@ public class Bully : EnemyBehavior
         }
         GetComponent<Animator>().SetTrigger("finish");
         Destroy(fist);
+        passedTime = 0f;
+        while (passedTime < 0.5f)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        
         currentState = BossState.Stalk;
         StartCoroutine(StateUpdate());
         yield break;
@@ -458,7 +483,7 @@ public class Bully : EnemyBehavior
         proj.transform.position = transform.position;
         proj.transform.localScale = Vector3.one * 2;
         Dictionary<string, int> projAugs = new Dictionary<string, int>();
-        projAugs.Add("bully", 0);
+        projAugs.Add("bully", 7);
         //rotating towards direction of movement
         proj.SetActive(true);
         proj.GetComponent<ProjectileBehavior>().SetProps(20f, 0, projAugs, projDir, false, true);

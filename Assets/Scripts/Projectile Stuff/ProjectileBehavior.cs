@@ -95,8 +95,7 @@ public class ProjectileBehavior : MonoBehaviour
             Debug.Log("Augment " + aug.Key + " " + aug.Value + " made it all the way to the finish line");
         //this.tier = tier;
         //Debug.Log("Augments at start: " + augs[0] + " " + augs[1] + " " + augs[2]);
-        if (!enemyProj)
-            Augmentation();
+        Augmentation();
         spriteTrans = transform.GetChild(0).gameObject;
         //TO DO - TRANSITION THIS TO CHECK IN THE Sprite Apply thing
         SpriteApply();
@@ -221,11 +220,24 @@ public class ProjectileBehavior : MonoBehaviour
                 particles[i].GetComponent<Animator>().SetInteger("augment", 0);
             }
         }*/
-        for (int i = 0; i < actualAugs.Count; i++)
+        if (!enemyProj)
         {
-            FlowerStats currentStats = GameControl.PlayerData.flowerStatsDict[actualAugs.ElementAt(i).Key];
-            particles[i].GetComponent<Animator>().SetInteger("augment", currentStats.aug);
+            for (int i = 0; i < actualAugs.Count; i++)
+            {
+                FlowerStats currentStats = GameControl.PlayerData.flowerStatsDict[actualAugs.ElementAt(i).Key];
+                particles[i].GetComponent<Animator>().SetInteger("augment", currentStats.aug);
+            }
         }
+        else
+        {
+            int counter = 0;
+            foreach (var aug in actualAugs)
+            {
+                particles[counter].GetComponent<Animator>().SetInteger("augment", aug.Value);
+                counter++;
+            }
+        }
+        
     }
 
     public void ResetParticles()
