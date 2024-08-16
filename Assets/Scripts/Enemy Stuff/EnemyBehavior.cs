@@ -33,6 +33,7 @@ public abstract class EnemyBehavior : MonoBehaviour
     [SerializeField] public float backupSpeed;
     float speedCooldown = 10f;
     float speedIncrement = 0.9f;
+    public float speedMod = 1f;
 
 
     public bool surprised = false;
@@ -399,11 +400,13 @@ public abstract class EnemyBehavior : MonoBehaviour
 
     public void SpeedUp(float mod)
     {
+        speedMod /= mod;
         backupSpeed = backupSpeed / mod;
     }
 
     public void SpeedDown(float mod)
     {
+        speedMod *= mod;
         backupSpeed = backupSpeed * mod;
     }
 
@@ -423,7 +426,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         }
     }
 
-    protected void getParticles()
+    public void getParticles()
     {
         //retrieving all particles
         particles = new List<GameObject>();
@@ -458,6 +461,7 @@ public abstract class EnemyBehavior : MonoBehaviour
             if (particle.GetComponent<Animator>().GetInteger("augment") == 0)
             { return particle; }
         }
+        Debug.Log("no particles found?");
         return null;
     }
 

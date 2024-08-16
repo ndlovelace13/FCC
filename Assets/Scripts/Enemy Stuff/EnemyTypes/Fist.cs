@@ -36,14 +36,18 @@ public class Fist : BossExtension
         if (!isFrozen)
         {
             moveSpeed = backupSpeed;
-            passedTime += Time.deltaTime;
+            passedTime += Time.deltaTime * speedMod;
+            //implement anim speed here based on slow effects
+            GetComponent<Animator>().speed = speedMod;
         }
+        else
+            GetComponent<Animator>().speed = 0f;
     }
 
     IEnumerator Grow()
     {
         //reset the time vars
-        stateTime = 1f;
+        stateTime = 0.5f;
         passedTime = 0f;
         
         float finalRot;
@@ -78,7 +82,7 @@ public class Fist : BossExtension
     IEnumerator Hook()
     {
         //reset the time vars
-        stateTime = 1.5f;
+        stateTime = 1f;
         passedTime = 0f;
 
         int dir;
@@ -126,7 +130,7 @@ public class Fist : BossExtension
     IEnumerator Return()
     {
         //reset the time vars
-        stateTime = 1.5f;
+        stateTime = 1f;
         passedTime = 0f;
 
         int dir;
@@ -159,7 +163,7 @@ public class Fist : BossExtension
     IEnumerator Despawn()
     {
         //reset the time vars
-        stateTime = 1f;
+        stateTime = 0.5f;
         passedTime = 0f;
 
         //starting vals

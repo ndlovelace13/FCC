@@ -84,7 +84,7 @@ public class Sprinter : EnemyBehavior
         surpriseTime = 0.5f;
         SprinterStats realStats = (SprinterStats)myStats;
         //walkSpeed = backupSpeed;
-        while (gameObject.activeSelf && !summoning)
+        while (gameObject.activeSelf && !sacrifice)
         {
             if ((isFrozen || isElectrified) && !justReset)
             {

@@ -76,9 +76,12 @@ public class Bully : EnemyBehavior
             if (!isFrozen)
             {
                 moveSpeed = backupSpeed;
-                passedTime += Time.deltaTime;
+                passedTime += Time.deltaTime * speedMod;
                 //implement anim speed here based on slow effects
+                GetComponent<Animator>().speed = speedMod;
             }
+            else
+                GetComponent<Animator>().speed = 0f;
 
             //TODO - implement function to update the anim based on currentState, scale anim speed based off of currentSlow effect
 
@@ -125,6 +128,7 @@ public class Bully : EnemyBehavior
         }
         foreach (var particle in particles)
         {
+            Debug.Log("particle found");
             particle.GetComponent<Animator>().SetInteger("augment", 0);
         }
 
@@ -301,6 +305,10 @@ public class Bully : EnemyBehavior
             if (isFrozen || isElectrified) { stateCancel = true; break; }
             yield return new WaitForEndOfFrame();
             direction = shadow.position - target.position;
+
+            //start the punch anim early if time allows for it
+            if (passedTime > stateTime / 3 * 2)
+                GetComponent<Animator>().SetInteger("state", 2);
         }
         SpeedUp(0.75f);
         //if cancelled, return to stalk - otherwise proceed to punch
@@ -447,7 +455,7 @@ public class Bully : EnemyBehavior
         Debug.Log("Insult Called");
         //reset time vals
         passedTime = 0f;
-        stateTime = 2f;
+        stateTime = 1.5f;
         while (passedTime < stateTime)
         {
             if (isFrozen || isElectrified) { stateCancel = true; break; }
@@ -463,6 +471,11 @@ public class Bully : EnemyBehavior
                 angleRadians += 2 * Mathf.PI;
             angleRadians += Mathf.PI / 2;
             StartCoroutine(ProjSpawn(angleRadians));
+        }
+        passedTime = 0f;
+        while (passedTime < 0.5f)
+        {
+            yield return new WaitForEndOfFrame();
         }
 
         currentState = BossState.Stalk;

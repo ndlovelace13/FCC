@@ -222,6 +222,72 @@ public class CrownConstruction : MonoBehaviour
         GameControl.PlayerData.crosshairActive = false;
     }
 
+    //define the behavior for resetting crown to the pre-crafted state
+    IEnumerator CraftingCancelLerp()
+    {
+        Debug.Log("Crafting Cancel Started");
+
+        /*//calculate the edge of the screen and the finalLocation
+        Vector3 topEdge = Camera.main.ScreenToWorldPoint(new Vector3(0f, Screen.height));
+        Vector3 center = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2));
+        float yOffset = Math.Abs(topEdge.y - center.y) / 4f;
+        Vector3 finalPos = new Vector3(finalCrown.transform.localPosition.x, yOffset);
+
+        //calculate a random location for all of the flowers
+        currentFlowers = finalCrown.transform.GetComponentsInChildren<FlowerBehavior>();
+        //Transform[] flowers = children.Where(child => child.tag == "FlowerHead").ToArray();
+        for (int i = currentFlowers.Length - 1; i >= 0; i--)
+        {
+            //store the finalPosition as the current localPos in relation to the crown
+            currentFlowers[i].finalDocketPos = currentFlowers[i].gameObject.transform.localPosition;
+
+            //generate a random location on the surrounding oval
+            float generatedRad = UnityEngine.Random.Range(0f, Mathf.PI * 2);
+            Vector3 generatedPos = new Vector3(4 * Mathf.Cos(generatedRad), 2.5f * Mathf.Sin(generatedRad));
+            currentFlowers[i].randomCraftPos = generatedPos;
+
+            //assign a stem to the current flower
+            stems[i].GetComponent<CraftingStem>().SetFlower(currentFlowers[i]);
+            stems[i].transform.SetParent(finalCrown.transform);
+        }*/
+
+        Vector3 currentCrownPos = finalCrown.transform.localPosition;
+
+        float currentTime = 0f;
+        while (currentTime < 0.2f)
+        {
+            finalCrown.transform.localPosition = Vector3.Lerp(currentCrownPos, Vector3.zero, currentTime / 0.2f);
+            foreach (var flower in currentFlowers)
+            {
+                flower.gameObject.transform.localPosition = Vector3.Lerp(flower.randomCraftPos, flower.finalDocketPos, currentTime / 0.2f);
+            }
+            yield return new WaitForEndOfFrame();
+            currentTime += Time.deltaTime;
+        }
+
+        //finally allow for the skillChecking to begin
+        foreach (var flower in currentFlowers)
+        {
+            flower.draggable = false;
+            flower.placed = false;
+        }
+
+        skillCheckActive = false;
+
+        gameObject.GetComponentInChildren<PlayerMovement>().CraftingDone();
+        GameControl.PlayerData.crosshairActive = true;
+
+        //disable the crown spriteRenderer
+        finalCrown.GetComponent<SpriteRenderer>().enabled = false;
+
+        GetComponentInChildren<Animator>().SetBool("isCrafting", false);
+        harvestObj.docketLoaded = true;
+        GetComponentInChildren<Animator>().SetBool("isMoving", true);
+
+        yield return null;
+        
+    }
+
     IEnumerator CrownFinishLerp()
     {
         skillCheckActive = false;
@@ -294,7 +360,11 @@ public class CrownConstruction : MonoBehaviour
             gameObject.GetComponentInChildren<PlayerMovement>().CraftingDone();
             constructionReady = true;
         }*/
-
+        if (Input.GetKeyDown(KeyCode.E) && !GameControl.PlayerData.tutorialActive)
+        {
+            StartCoroutine(CraftingCancelLerp());
+        }
+        
         //the new version
         if (prevSkillCheckCount < 5)
         {

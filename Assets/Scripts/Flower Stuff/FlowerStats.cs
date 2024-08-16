@@ -266,14 +266,17 @@ public abstract class FlowerStats : MonoBehaviour
         //call on self and any bossParts 
         if (enemy.CompareTag("boss"))
         {
-            EnemyBehavior[] bossParts = GetComponentsInChildren<EnemyBehavior>();
+            EnemyBehavior[] bossParts = UnityEngine.Object.FindObjectsOfType<EnemyBehavior>();
             GameObject[] enemies = new GameObject[bossParts.Length];
             for (int i = 0; i < enemies.Length; i++)
             {
-                enemies[i] = bossParts[i].gameObject;
+                if (bossParts[i].transform.root == enemy.transform)
+                    enemies[i] = bossParts[i].gameObject;
             }
+            Debug.Log("Count:" + enemies.Length);
             foreach (var part in enemies)
             {
+                Debug.Log("Calling on " + part.name);
                 StartCoroutine(SlowApply(slowEffect, slowTime, particle, part));
             }
                 

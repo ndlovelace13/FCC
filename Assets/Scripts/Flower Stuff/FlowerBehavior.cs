@@ -16,6 +16,7 @@ public class FlowerBehavior : MonoBehaviour
     public Vector3 randomCraftPos;
     public bool draggable = false;
     public bool placed = false;
+    public bool sashAdd = false;
 
     // Start is called before the first frame update
     void Start()
@@ -83,7 +84,11 @@ public class FlowerBehavior : MonoBehaviour
                 draggable = false;
                 transform.localPosition = finalDocketPos;
                 placed = true;
-                GameObject.FindWithTag("Player").GetComponent<CrownConstruction>().CraftLerpCommand(position);
+                if (!sashAdd)
+                {
+                    GameObject.FindWithTag("Player").GetComponent<CrownConstruction>().CraftLerpCommand(position);
+                    sashAdd = true;
+                }
                 GetComponent<SpriteRenderer>().sortingOrder = 4;
             }
             //otherwise, reset

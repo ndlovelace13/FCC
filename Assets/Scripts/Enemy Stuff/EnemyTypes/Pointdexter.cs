@@ -99,7 +99,7 @@ public class Pointdexter : EnemyBehavior
         float allyModifier = 1f;
         float currentAllyDist = 0f;
 
-        while (gameObject.activeSelf && !summoning)
+        while (gameObject.activeSelf && !sacrifice)
         {
             //target acquisition
             if (isTargeting)
