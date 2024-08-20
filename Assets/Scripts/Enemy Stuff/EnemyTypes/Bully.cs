@@ -529,4 +529,47 @@ public class Bully : EnemyBehavior
         StartCoroutine(StandardBehavior());
         StartCoroutine(StateUpdate());
     }
+
+    //Death Behavior
+    protected override void Deactivate()
+    {
+        AkSoundEngine.PostEvent("EnemyKilled", gameObject);
+        scoreNotif.GetComponent<ScoreNotification>().newFeed("Great Enemy Defeated | ", mySpawner.killScore);
+        GameControl.PlayerData.enemyScore += mySpawner.killScore;
+        GameControl.PlayerData.shiftEnemies++;
+
+        //increment the total defeatedCount & shift defeated
+        GameControl.PlayerData.savedEnemyDict[type].defeatedCount++;
+        GameControl.PlayerData.enemyKills[type]++;
+
+
+        GameControl.PlayerData.score += mySpawner.killScore;
+
+        //seed stuff from 3 - 5 seeds depending on seedChahnce stat
+        int seedCount = 3;
+        for (int i = 0; i < 2; i++)
+        {
+            if (Random.Range(0f, 1f) < GameControl.PlayerData.seedChance)
+            {
+                seedCount++;
+            }
+        }
+
+        for (int i = 0; i < seedCount; i++)
+        {
+            GameObject newSeed = seedPool.GetComponent<ObjectPool>().GetPooledObject();
+            newSeed.SetActive(true);
+            newSeed.transform.localPosition = transform.localPosition;
+            //lerp the seed to a random drop zone in the immediate vicinity of the boss
+            newSeed.GetComponent<EssenceBehavior>().LootDrop();
+        }
+
+        //TODO - spawn a poppy here and unlock it for the player
+
+        //start health bar deactivate
+        healthBar.GetComponentInChildren<BossHealthBar>().BossKilled();
+        
+        mySpawner.activeEnemies--;
+        gameObject.SetActive(false);
+    }    
 }

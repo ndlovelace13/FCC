@@ -62,6 +62,11 @@ public class BossHealthBar : MonoBehaviour
         }
     }
 
+    public void BossKilled()
+    {
+        StartCoroutine(LerpDown());
+    }
+
     IEnumerator LerpDown()
     {
         Vector2 startingPos = fullObj.localPosition;
@@ -74,6 +79,8 @@ public class BossHealthBar : MonoBehaviour
             currentTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+
+        Destroy(gameObject);
     }
 
     IEnumerator HealthbarFill()

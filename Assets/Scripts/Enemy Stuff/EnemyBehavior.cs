@@ -14,7 +14,7 @@ public abstract class EnemyBehavior : MonoBehaviour
 
     public string type;
     public int health;
-    TMP_Text scoreNotif;
+    protected TMP_Text scoreNotif;
     [SerializeField] public int maxHealth;
 
     public bool isActive;
@@ -77,7 +77,7 @@ public abstract class EnemyBehavior : MonoBehaviour
     protected List<GameObject> particles;
 
     //Seed Stuff
-    GameObject seedPool;
+    protected GameObject seedPool;
 
     // Start is called before the first frame update
     protected void Start()

@@ -49,7 +49,7 @@ MonoBehaviour:
   minInterval: 0
   maxSpeed: 7
   minSpeed: 7
-  maxHealth: 500
+  maxHealth: 50
   healthInterval: 0
   startingEnemies: 1
   enemyScaleAmt: 0

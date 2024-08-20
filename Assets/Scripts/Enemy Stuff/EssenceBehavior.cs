@@ -27,6 +27,24 @@ public class EssenceBehavior : MonoBehaviour
         }
     }
 
+    public void LootDrop()
+    {
+        StartCoroutine(LootLerp());
+    }
+
+    IEnumerator LootLerp()
+    {
+        Vector2 currentLoc = transform.localPosition;
+        Vector2 finalLootLoc = currentLoc + new Vector2(Random.Range(-3.0f, 3.0f), Random.Range(-3.0f, 3.0f));
+        float currentTime = 0f;
+        while (currentTime < 0.5f)
+        {
+            transform.localPosition = Vector2.Lerp(currentLoc, finalLootLoc, currentTime / 0.5f);
+            yield return new WaitForEndOfFrame();
+            currentTime += Time.deltaTime;
+        }
+    }
+
     private void OnEnable()
     {
         transform.localScale = Vector3.one * 0.25f;
