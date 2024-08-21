@@ -90,7 +90,7 @@ public class Crown
             insideId = flowerDict[inside].id;
         if (flowerDict.ContainsKey(outside))
             outsideId = flowerDict[outside].id;
-        id += primaryId.ToString() + insideId.ToString() + outsideId.ToString();
+        id += primaryId.ToString() + "." + insideId.ToString() + "." + outsideId.ToString();
         //Debug.Log(id);
         SetType();
         return id;

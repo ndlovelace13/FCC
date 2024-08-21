@@ -565,11 +565,44 @@ public class Bully : EnemyBehavior
         }
 
         //TODO - spawn a poppy here and unlock it for the player
+        StartCoroutine(PoppySpawn());
 
         //start health bar deactivate
         healthBar.GetComponentInChildren<BossHealthBar>().BossKilled();
         
         mySpawner.activeEnemies--;
         gameObject.SetActive(false);
-    }    
+    }
+
+    IEnumerator PoppySpawn()
+    {
+        GameObject newFlower = GameObject.FindWithTag("flowerPool").GetComponent<ObjectPool>().GetPooledObject();
+        if (newFlower != null)
+        {
+            newFlower.SetActive(true);
+            newFlower.transform.position = transform.position;
+
+            GameObject head = GameControl.PlayerData.flowerPoolDict["poppy"].GetPooledObject();
+            head.transform.SetParent(newFlower.transform);
+            head.transform.position = newFlower.transform.position;
+            head.GetComponent<SpriteRenderer>().enabled = false;
+            head.SetActive(true);
+            //execute the initial growth anim
+            Animator stemAnim = newFlower.GetComponentsInChildren<Animator>().Last();
+            stemAnim.Play("BasicGrow");
+            while (stemAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            head.GetComponent<SpriteRenderer>().enabled = true;
+            //set the head sprite
+            head.GetComponent<SpriteRenderer>().sprite = GameControl.PlayerData.flowerStatsDict["poppy"].GetHeadSprite(0);
+            //reset the behavior object or pull values from last time
+            head.GetComponent<FlowerBehavior>().picked = false;
+            head.GetComponent<FlowerBehavior>().growing = false;
+
+            //set the stem and head pos
+            GameControl.PlayerData.flowerStatsDict["poppy"].SetStem(head, stemAnim.gameObject);
+        }
+    }
 }

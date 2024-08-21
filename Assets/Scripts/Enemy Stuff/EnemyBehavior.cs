@@ -62,6 +62,9 @@ public abstract class EnemyBehavior : MonoBehaviour
     //5 BLINDING
     public bool isBlinded = false;
 
+    //POPPY Stuff
+    public int poppyCount = 0;
+
     public bool wasKilled = false;
 
 
@@ -133,6 +136,16 @@ public abstract class EnemyBehavior : MonoBehaviour
         isBlinded = false;
         isElectrified = false;
         surprised = false;
+
+        //reset enemy to base speed, removing each stack of poppy debuff
+        PoppyStats poppy = (PoppyStats)GameControl.PlayerData.flowerStatsDict["poppy"];
+
+        for (int i = 0; i < poppyCount; i++)
+        {
+            SpeedUp(poppy.poppyDebuff);
+        }
+        poppyCount = 0;
+
         yield return null;
     }
 

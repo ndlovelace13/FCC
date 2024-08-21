@@ -517,7 +517,7 @@ public class CrownConstruction : MonoBehaviour
             crownAnnouncement += dict[flowerStats[2].type].GetPrimaryText();
         crownAnnouncement += "Crown";
         //check for unlock here
-        id += primaryId.ToString() + insideId.ToString() + outsideId.ToString();
+        id += primaryId.ToString() + "." + insideId.ToString() + "." + outsideId.ToString();
         Crown constructedCrown = GameControl.CrownCompletion.allCrowns[id];
         if (constructedCrown.IsDiscovered())
         {
