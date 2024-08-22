@@ -41,6 +41,9 @@ public class Bully : EnemyBehavior
     int healthScale;
     GameObject healthBar;
 
+    //poppy stuff
+    [SerializeField] GameObject poppyHead;
+
     // Start is called before the first frame update
     /*void Start()
     {
@@ -582,7 +585,7 @@ public class Bully : EnemyBehavior
             newFlower.SetActive(true);
             newFlower.transform.position = transform.position;
 
-            GameObject head = GameControl.PlayerData.flowerPoolDict["poppy"].GetPooledObject();
+            GameObject head = Instantiate(poppyHead);
             head.transform.SetParent(newFlower.transform);
             head.transform.position = newFlower.transform.position;
             head.GetComponent<SpriteRenderer>().enabled = false;
@@ -594,7 +597,7 @@ public class Bully : EnemyBehavior
             {
                 yield return new WaitForEndOfFrame();
             }
-            head.GetComponent<SpriteRenderer>().enabled = true;
+            
             //set the head sprite
             head.GetComponent<SpriteRenderer>().sprite = GameControl.PlayerData.flowerStatsDict["poppy"].GetHeadSprite(0);
             //reset the behavior object or pull values from last time
@@ -603,6 +606,8 @@ public class Bully : EnemyBehavior
 
             //set the stem and head pos
             GameControl.PlayerData.flowerStatsDict["poppy"].SetStem(head, stemAnim.gameObject);
+
+            head.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 }

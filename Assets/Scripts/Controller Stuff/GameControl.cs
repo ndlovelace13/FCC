@@ -78,6 +78,7 @@ public class SaveData
     public List<UpgradeEssentials> upgrades;
     public List<ResearchData> researchData;
     public List<string> discoveredUncommon;
+    public List<string> discoveredRare;
 
     //Almanac Stats
     public List<SavedFlowerStats> flowerSaveData;
@@ -161,12 +162,14 @@ public class GameControl : MonoBehaviour
 
     //flower probabilities
     public float uncommon = 0.05f;
+    public float rare = 0.1f;
     //public float undiscovered = 0.05f;
 
     [SerializeField] public List<string> allDiscovered;
     [SerializeField] public List<string> commonPool;
     //[SerializeField] public List<string> discoveredUncommon;
     [SerializeField] public List<string> undiscoveredUncommon;
+    [SerializeField] public List<string> undiscoveredRare;
 
     //flower stuff
     //[SerializeField] public Sprite[] flowerSprites;
@@ -351,6 +354,20 @@ public class GameControl : MonoBehaviour
                 undiscoveredUncommon.Remove(SaveData.discoveredUncommon[i]);
             }
             //DiscoveredPooling();
+        }
+
+        if (SaveData.discoveredRare == null)
+        {
+            Debug.Log("Rareflower data not found");
+            SaveData.discoveredRare = new List<string>();
+        }
+        else
+        {
+            Debug.Log("rare flower save data restored");
+            for (int i = 0; i < SaveData.discoveredRare.Count; i++)
+            {
+                undiscoveredRare.Remove(SaveData.discoveredRare[i]);
+            }
         }
 
         //check for flowerSaveData list, init if it doesn't exist
@@ -737,7 +754,8 @@ public class GameControl : MonoBehaviour
         //TO DO - combine into one list of all discovered
         //allDiscovered = commonPool;
         allDiscovered = allDiscovered.Union(SaveData.discoveredUncommon).ToList();
-        foreach(var flower in allDiscovered)
+        allDiscovered = allDiscovered.Union(SaveData.discoveredRare).ToList();
+        foreach (var flower in allDiscovered)
         {
             flowerPoolDict[flower].Pooling();
             if (!savedFlowerDict[flower].discovered)
@@ -765,14 +783,24 @@ public class GameControl : MonoBehaviour
         }*/
         //need to change this once rare flowers are added
         Debug.Log("Flower Discovery called for " + type);
-        if (SaveData.discoveredUncommon.Contains(type))
+        if (SaveData.discoveredUncommon.Contains(type) || SaveData.discoveredRare.Contains(type))
             return;
         else
         {
             Debug.Log("Flower discovery went through");
-            undiscoveredUncommon.Remove(type);
-            SaveData.discoveredUncommon.Add(type);
-            allDiscovered = allDiscovered.Union(SaveData.discoveredUncommon).ToList();
+            if (undiscoveredUncommon.Contains(type))
+            {
+                undiscoveredUncommon.Remove(type);
+                SaveData.discoveredUncommon.Add(type);
+                allDiscovered = allDiscovered.Union(SaveData.discoveredUncommon).ToList();
+            }
+            else
+            {
+                undiscoveredRare.Remove(type);
+                SaveData.discoveredRare.Add(type);
+                allDiscovered = allDiscovered.Union(SaveData.discoveredRare).ToList();
+            }
+            
             foreach (var flower in allDiscovered)
                 Debug.Log(flower);
             SaveHandler.SaveGame();

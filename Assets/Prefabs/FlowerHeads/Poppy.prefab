@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 1825740317
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 4afbfbcf56221b64bbbdcc90bb620775, type: 3}
-  m_Color: {r: 0.8773585, g: 0.11173906, b: 0.11173906, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b6833224e92014a44a89cd7bfdbe08ae, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -130,8 +130,8 @@ MonoBehaviour:
   range: 0
   projCount: 0
   projRange: 10
-  headSprite: {fileID: 21300000, guid: 4afbfbcf56221b64bbbdcc90bb620775, type: 3}
-  projSprite: {fileID: 21300000, guid: 1b7ad021cfde5e0408b7c1802bd809ff, type: 3}
+  headSprite: {fileID: 21300000, guid: b6833224e92014a44a89cd7bfdbe08ae, type: 3}
+  projSprite: {fileID: 21300000, guid: fdc7ee94d62d74745b1ea38f49032ca5, type: 3}
   stemSprite: {fileID: 21300000, guid: 2351e182e81d46542a43cefa85e8ee95, type: 3}
   pool: {fileID: 0}
   pointsTiers: 04000000050000000700000008000000
@@ -148,7 +148,7 @@ MonoBehaviour:
   description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
     SOMETIME YOU FUCKING IDIOT
   effects: 
-  textColor: {r: 0.8584906, g: 0.13363297, b: 0.13363297, a: 0}
+  textColor: {r: 0.9058824, g: 0.30588236, b: 0.10588236, a: 0}
   poppyDebuff: 0.9
 --- !u!58 &-2532114097151648687
 CircleCollider2D:

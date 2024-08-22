@@ -163,6 +163,7 @@ MonoBehaviour:
   mySpawner: {fileID: 0}
   moveSpeed: 7
   backupSpeed: 7
+  speedMod: 1
   surprised: 0
   preSurpriseVel: {x: 0, y: 0, z: 0}
   notif: {fileID: 7155992749287334371, guid: 57602ac8dbb3e3441931b13c9bcfa0b8, type: 3}
@@ -174,11 +175,13 @@ MonoBehaviour:
   isElectrified: 0
   electricPassed: 0
   isBlinded: 0
+  poppyCount: 0
   wasKilled: 0
   isBoss: 1
   spawnTime: 5
   fistPrefab: {fileID: 1003814786078272635, guid: 97c51102c91226c4eaaf5c8b9890f0df, type: 3}
   healthbarPrefab: {fileID: 9136698399812099878, guid: b72098d3ce56d584cbcfa9435b631068, type: 3}
+  poppyHead: {fileID: 1936280616163390971, guid: cfa86b2a3a63ae7429f4fda57ffb2284, type: 3}
 --- !u!95 &5826295114471604450
 Animator:
   serializedVersion: 5

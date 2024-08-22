@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 
 public class FlowerData
@@ -89,10 +90,12 @@ public class FlowerCalc : MonoBehaviour
 
     //rarity shit
     static float uncommonRarity;
+    static float rareRarity;
     //float undiscoveredRarity;
     List<string> Flowers = new List<string>();
     [SerializeField] List<string> common;
     [SerializeField] List<string> uncommon;
+    [SerializeField] List<string> rare;
     List<string> undiscovered;
     int raritySelection;
     // Start is called before the first frame update
@@ -140,6 +143,7 @@ public class FlowerCalc : MonoBehaviour
         uncommonRarity = GameControl.PlayerData.uncommon;
         common = GameControl.PlayerData.commonPool;
         uncommon = GameControl.SaveData.discoveredUncommon;
+        rare = GameControl.SaveData.discoveredRare;
         undiscovered = GameControl.PlayerData.undiscoveredUncommon;
         //undiscoveredRarity = GameControl.PlayerData.undiscovered;
         totalWidth = (int)background.size.x;
@@ -200,8 +204,16 @@ public class FlowerCalc : MonoBehaviour
         else
         {
             rarityChoice = Random.Range(0f, 1f);
-            raritySelection = 1;
-            Flowers = uncommon;
+            if (rarityChoice > rareRarity && rare.Count > 0)
+            {
+                raritySelection = 2;
+                Flowers = rare;
+            }
+            else
+            {
+                raritySelection = 1;
+                Flowers = uncommon;
+            }
         }
         //selection of a flower from the given list and spawning
         int flowerChoice = Random.Range(0, Flowers.Count);

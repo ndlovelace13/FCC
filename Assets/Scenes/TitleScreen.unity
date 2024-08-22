@@ -521,6 +521,7 @@ MonoBehaviour:
   redCrown: 0
   fireReset: 0
   uncommon: 0
+  rare: 0.1
   allDiscovered: []
   commonPool:
   - pink
@@ -535,6 +536,7 @@ MonoBehaviour:
   - wild
   - sunny
   - coffee
+  undiscoveredRare:
   - poppy
   flowers:
   - {fileID: 7262396329031763444, guid: ffeb57f7923994c439f2b7e14236b3ba, type: 3}
