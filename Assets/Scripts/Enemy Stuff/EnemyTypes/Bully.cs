@@ -100,6 +100,7 @@ public class Bully : EnemyBehavior
             if (health <= 0)
             {
                 Deactivate();
+                yield break;
             }
             //wait for end of frame regardless of the situation
             yield return new WaitForEndOfFrame();
@@ -569,12 +570,12 @@ public class Bully : EnemyBehavior
 
         //TODO - spawn a poppy here and unlock it for the player
         StartCoroutine(PoppySpawn());
+        GameControl.PlayerData.FlowerDiscovery("poppy");
 
         //start health bar deactivate
         healthBar.GetComponentInChildren<BossHealthBar>().BossKilled();
         
         mySpawner.activeEnemies--;
-        gameObject.SetActive(false);
     }
 
     IEnumerator PoppySpawn()
@@ -593,10 +594,13 @@ public class Bully : EnemyBehavior
             //execute the initial growth anim
             Animator stemAnim = newFlower.GetComponentsInChildren<Animator>().Last();
             stemAnim.Play("BasicGrow");
+            //Debug.Log(stemAnim.gameObject.name);
             while (stemAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
             {
+                Debug.Log(stemAnim.GetCurrentAnimatorStateInfo(0).normalizedTime);
                 yield return new WaitForEndOfFrame();
             }
+            Debug.Log("exited loop");
             
             //set the head sprite
             head.GetComponent<SpriteRenderer>().sprite = GameControl.PlayerData.flowerStatsDict["poppy"].GetHeadSprite(0);
@@ -608,6 +612,9 @@ public class Bully : EnemyBehavior
             GameControl.PlayerData.flowerStatsDict["poppy"].SetStem(head, stemAnim.gameObject);
 
             head.GetComponent<SpriteRenderer>().enabled = true;
+            Debug.Log("Poppy  head placed");
+
+            gameObject.SetActive(false);
         }
     }
 }

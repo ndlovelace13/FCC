@@ -204,7 +204,7 @@ public class FlowerCalc : MonoBehaviour
         else
         {
             rarityChoice = Random.Range(0f, 1f);
-            if (rarityChoice > rareRarity && rare.Count > 0)
+            if (rarityChoice < rareRarity && rare.Count > 0)
             {
                 raritySelection = 2;
                 Flowers = rare;

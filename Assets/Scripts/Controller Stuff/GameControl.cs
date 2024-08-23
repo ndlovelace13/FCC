@@ -162,7 +162,7 @@ public class GameControl : MonoBehaviour
 
     //flower probabilities
     public float uncommon = 0.05f;
-    public float rare = 0.1f;
+    public float rare = 0.2f;
     //public float undiscovered = 0.05f;
 
     [SerializeField] public List<string> allDiscovered;

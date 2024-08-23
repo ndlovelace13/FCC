@@ -140,11 +140,11 @@ MonoBehaviour:
   projTiers: 06000000070000000800000009000000
   aug: 0
   title: Poppy
-  primaryText: Drowsy
-  insideText: Narcotic
-  outsideText: Anesthetic
-  fourText: Tranquilizing
-  fiveText: Sedating
+  primaryText: 'Drowsy '
+  insideText: 'Narcotic '
+  outsideText: 'Anesthetic '
+  fourText: 'Tranquilizing '
+  fiveText: 'Sedating '
   description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
     SOMETIME YOU FUCKING IDIOT
   effects: 
