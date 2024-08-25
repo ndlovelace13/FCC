@@ -503,10 +503,12 @@ MonoBehaviour:
   balanceUpdated: 0
   loading: 0
   gameOver: 0
+  gameWin: 0
   gamePaused: 0
   menusReady: 0
   menuActive: 0
   unlockDone: 0
+  unlockNotifActive: 0
   quitCooldown: 0
   bossSpawning: 0
   bossActive: 0
@@ -592,7 +594,8 @@ MonoBehaviour:
   upgrades: []
   ResearchPrefab: {fileID: 5122733356647096448, guid: 51f36e36923db974da9666aa476680d7, type: 3}
   researchItems: []
-  UnlockPrefab: {fileID: 0}
+  UnlockPrefab: {fileID: 7155992749287334371, guid: 64794020202bcc44db7fa19251e03a5f, type: 3}
+  BlackoutPrefab: {fileID: 7155992749287334371, guid: 0e974f432e079854dbb7da06058a0260, type: 3}
   almanacPages: []
   stickerPage: {fileID: 5497271469674503023, guid: 3c86417fe9903a748a3f8d4cbf12bd12, type: 3}
   flowerInfoPage: {fileID: 5497271469674503023, guid: 7130a90814f296b4e96b28b3f2ef7f8c, type: 3}

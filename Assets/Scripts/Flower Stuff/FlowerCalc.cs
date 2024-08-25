@@ -96,8 +96,9 @@ public class FlowerCalc : MonoBehaviour
     [SerializeField] List<string> common;
     [SerializeField] List<string> uncommon;
     [SerializeField] List<string> rare;
-    List<string> undiscovered;
     int raritySelection;
+
+    int rareSpawns = 0;
     // Start is called before the first frame update
 
     void Start()
@@ -141,15 +142,16 @@ public class FlowerCalc : MonoBehaviour
     {
         GameControl.PlayerData.discoveryDisplay = true;
         uncommonRarity = GameControl.PlayerData.uncommon;
+        rareRarity = GameControl.PlayerData.rare;
         common = GameControl.PlayerData.commonPool;
         uncommon = GameControl.SaveData.discoveredUncommon;
         rare = GameControl.SaveData.discoveredRare;
-        undiscovered = GameControl.PlayerData.undiscoveredUncommon;
         //undiscoveredRarity = GameControl.PlayerData.undiscovered;
         totalWidth = (int)background.size.x;
         totalHeight = (int)background.size.y;
         flowerInfo = InitialCalc();
         Debug.Log(flowerInfo.Count);
+        Debug.Log("Rares: " + rareSpawns);
         visibleFlowerHandler.GetComponent<VisibleFlowers>().FlowerEstablish(flowerInfo);
         yield return null;
     }
@@ -206,6 +208,7 @@ public class FlowerCalc : MonoBehaviour
             rarityChoice = Random.Range(0f, 1f);
             if (rarityChoice < rareRarity && rare.Count > 0)
             {
+                rareSpawns++;
                 raritySelection = 2;
                 Flowers = rare;
             }

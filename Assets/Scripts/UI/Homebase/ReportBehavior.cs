@@ -38,6 +38,9 @@ public class ShiftReport
     public string mostUsed;
     public int mostUsedCount;
 
+    //WIN??
+    public bool completeShift = false;
+
     //HIGH SCORE BOOLS
     public bool highTime = false;
     public bool highMoney = false;
@@ -233,6 +236,16 @@ public class ShiftReport
     {
         return highSeeds;
     }
+
+    public bool GetCompleteShift()
+    {
+        return completeShift;
+    }
+
+    public void SetCompleteShift()
+    {
+        completeShift = true;
+    }
 }
 
 public class ReportBehavior : MonoBehaviour
@@ -401,7 +414,16 @@ public class ReportBehavior : MonoBehaviour
         }
         List<float> scoreBreakdown = currentReport.GetScoreBreakdown();
         //fill in the payout info
+
+        //if completed shift, make the color golden
+        if (currentReport.GetCompleteShift())
+            GetComponent<Image>().color = new Color(245f/ 255f, 240f / 255f, 110f / 255f);
+        else
+            GetComponent<Image>().color = Color.white;
+
         shiftNum.text = "Shift #" + currentReport.GetShiftNum();
+        if (currentReport.GetCompleteShift())
+            shiftNum.text += " - Fully Completed!";
         constructionText.text = "<align=left>Crown Construction - <line-height=0>\n<align=right>+" + 
             string.Format("{0:C}", scoreBreakdown[0]) + "<line-height=1em>";
         enemyText.text = "<align=left>Skinwalkers Eliminated - <line-height=0>\n<align=right>+" +

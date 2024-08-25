@@ -27,6 +27,7 @@ public class UnlockNotif : MonoBehaviour
 
     public void BeginNotif(Sprite unlock, string text)
     {
+        GameControl.PlayerData.unlockNotifActive = true;
         unlockImage.sprite = unlock;
         unlockText.text = text;
         StartCoroutine(BackgroundFade());
@@ -56,6 +57,7 @@ public class UnlockNotif : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        GameControl.PlayerData.unlockNotifActive = false;
         Destroy(gameObject);
         yield return null;
     }

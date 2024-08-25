@@ -22,6 +22,7 @@ public class SaveData
     public bool sashActivated = false;
     public bool sashActive = false;
     public bool firstSeed = false;
+    public bool bullyDefeated = false;
 
     public bool contractSigned = false;
 
@@ -36,6 +37,7 @@ public class SaveData
 
     //Persistent Total Counters
     public int shiftCounter = 0;
+    public int completeShifts = 0;
     public float totalIncome = 0;
     public int totalCrowns = 0;
     public int totalFlowers = 0;
@@ -133,12 +135,14 @@ public class GameControl : MonoBehaviour
 
     public bool loading = false;
     public bool gameOver = false;
+    public bool gameWin = false;
     public bool gamePaused = false;
 
     public bool menusReady = false;
     public bool menuActive = false;
 
     public bool unlockDone = false;
+    public bool unlockNotifActive = false;
 
     public bool quitCooldown = false;
 
@@ -162,7 +166,7 @@ public class GameControl : MonoBehaviour
 
     //flower probabilities
     public float uncommon = 0.05f;
-    public float rare = 0.2f;
+    public float rare = 0.1f;
     //public float undiscovered = 0.05f;
 
     [SerializeField] public List<string> allDiscovered;
@@ -241,6 +245,8 @@ public class GameControl : MonoBehaviour
     [SerializeField] GameObject ResearchPrefab;
     public List<Research> researchItems;
     [SerializeField] GameObject UnlockPrefab;
+
+    [SerializeField] GameObject BlackoutPrefab;
 
     //almanac variables
     public List<Page> almanacPages;
@@ -657,6 +663,7 @@ public class GameControl : MonoBehaviour
     public void ResetRun()
     {
         gameOver = false;
+        gameWin = false;
         loading = true;
         //reset the scores
         min = 0;
@@ -898,8 +905,38 @@ public class GameControl : MonoBehaviour
             }
             time = 0f;
             enemyTypeCounter++;
-        } while (!gameOver);
+        } while (!gameOver);   
+    }
 
-        
+    public void GameWinBehavior(string type)
+    {
+        StartCoroutine(GameWinExe(type));
+    }
+
+    IEnumerator GameWinExe(string type)
+    {
+        //check for flower discovery and pop-up with discovery notif if not
+        if (!allDiscovered.Contains(type))
+        {
+            FlowerDiscovery(type);
+            GameObject unlock = Instantiate(UnlockPrefab);
+            unlock.GetComponent<UnlockNotif>().BeginNotif(SpriteAssign(type), "New Flower Discovered!");
+        }
+        else
+        {
+            unlockNotifActive = false;
+        }
+
+        while (unlockNotifActive)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        //then fade to black
+        GameObject blackoutObj = Instantiate(BlackoutPrefab);
+        blackoutObj.GetComponent<BlackoutBehavior>().BeginBlackout("You Eliminated the Skinwalker Threat", "...For Now...", "Homebase");
+        unlockDone = false;
+
+        yield return null;
     }
 }

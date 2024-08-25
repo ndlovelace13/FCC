@@ -541,6 +541,7 @@ public class Bully : EnemyBehavior
         scoreNotif.GetComponent<ScoreNotification>().newFeed("Great Enemy Defeated | ", mySpawner.killScore);
         GameControl.PlayerData.enemyScore += mySpawner.killScore;
         GameControl.PlayerData.shiftEnemies++;
+        
 
         //increment the total defeatedCount & shift defeated
         GameControl.PlayerData.savedEnemyDict[type].defeatedCount++;
@@ -548,6 +549,9 @@ public class Bully : EnemyBehavior
 
 
         GameControl.PlayerData.score += mySpawner.killScore;
+
+        GameControl.PlayerData.gameWin = true;
+        GameControl.SaveData.bullyDefeated = true;
 
         //seed stuff from 3 - 5 seeds depending on seedChahnce stat
         int seedCount = 3;
@@ -568,9 +572,8 @@ public class Bully : EnemyBehavior
             newSeed.GetComponent<EssenceBehavior>().LootDrop();
         }
 
-        //TODO - spawn a poppy here and unlock it for the player
+        //spawn a poppy here and unlock it for the player
         StartCoroutine(PoppySpawn());
-        GameControl.PlayerData.FlowerDiscovery("poppy");
 
         //start health bar deactivate
         healthBar.GetComponentInChildren<BossHealthBar>().BossKilled();
@@ -612,7 +615,10 @@ public class Bully : EnemyBehavior
             GameControl.PlayerData.flowerStatsDict["poppy"].SetStem(head, stemAnim.gameObject);
 
             head.GetComponent<SpriteRenderer>().enabled = true;
-            Debug.Log("Poppy  head placed");
+            Debug.Log("Poppy head placed");
+
+            //pass the torch to the player object - REMOVE THIS WHEN THE END OF THE GAME SHIFTS
+            GameObject.FindWithTag("Player").GetComponentInChildren<PlayerMovement>().GameWin(newFlower.transform.position, head.GetComponent<FlowerBehavior>().type);
 
             gameObject.SetActive(false);
         }

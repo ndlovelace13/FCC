@@ -113,6 +113,19 @@ public class HomebaseCam : MonoBehaviour
         "I look forward to working with you and keeping track of your undoubtedly many accomplishments to come"
     };
 
+    string[] bullyDefeat = new string[]
+    {
+        "Well done, recruit! I'm genuinely impressed",
+        "That bully sure was no joke and we at the AAAT are all thrilled to see your accomplishment - as you can see I've used a golden shift report to signify your success",
+        "You may have noticed a new flower appeared when you took down the brute - keep your eye out for it in your next few shifts!",
+        "It seems to appear even less often than the uncommon flowers you've encountered - it must be pretty special!",
+        "At this time, the bully seems to be the strongest member of the skinwalker species - however, you're still under contract - it'd be a shame to stop now!",
+        "Keep investing those dollars to upgrade your working conditions, and be sure to keep donating seeds to discover all that R&D can offer you!",
+        "Now, that you've conquered the best of the skinwalkers, their increased rate of evolution suggests they may return even stronger",
+        "Even if you want to take some time off, be sure to return when new threats arrive!",
+        "Well done again, I'm proud to have you under my wing. Keep on crafting!"
+    };
+
     //public bool menusReady = false;
     // Start is called before the first frame update
     void Start()
@@ -191,8 +204,15 @@ public class HomebaseCam : MonoBehaviour
     IEnumerator UnlockChecker()
     {
         yield return null;
+        //post-boss defeat when the player defeats the boss for the first time
+        if (GameControl.PlayerData.gameWin && !GameControl.SaveData.bullyDefeated)
+        {
+            GameControl.SaveData.dialogueQueue.Enqueue(bullyDefeat);
+            GameControl.SaveData.bullyDefeated = true;
+            GameControl.PlayerData.unlockDone = true;
+        }
         //unlock the catalog after the first run
-        if (GameControl.SaveData.shiftCounter == 1 && !GameControl.SaveData.catalogUnlocked)
+        if (GameControl.SaveData.shiftCounter == 1 && !GameControl.SaveData.catalogUnlocked && GameControl.PlayerData.unlockDone)
         {
             //QUEUE DIALOGUE HERE
             GameControl.SaveData.dialogueQueue.Enqueue(catalogUnlock);
@@ -207,7 +227,7 @@ public class HomebaseCam : MonoBehaviour
             GameControl.SaveData.researchUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
         }
-        //unlock completion tracker when the player has crafted 15 different crowns
+        //unlock completion tracker when the player has crafted 20 different crowns
         if (GameControl.CrownCompletion.totalDiscovered >= 20 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.completionUnlocked)
         {
             GameControl.SaveData.dialogueQueue.Enqueue(completionUnlock);
@@ -281,6 +301,13 @@ public class HomebaseCam : MonoBehaviour
                 GameControl.SaveData.flowerTimes = flower.Value.harvestCount;
                 GameControl.SaveData.mostUsedFlower = flower.Key;
             }
+        }
+
+        //check whether the shift was complete
+        if (GameControl.PlayerData.gameWin)
+        {
+            GameControl.SaveData.completeShifts++;
+            currentReport.SetCompleteShift();
         }
 
         GameControl.SaveHandler.SaveGame();

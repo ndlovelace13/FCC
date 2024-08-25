@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameControl.PlayerData.loading == false && GameControl.PlayerData.gamePaused == false && GameControl.PlayerData.gameOver == false)
+        if (!GameControl.PlayerData.loading && !GameControl.PlayerData.gamePaused && !GameControl.PlayerData.gameOver && !GameControl.PlayerData.gameWin)
         {
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
@@ -159,6 +159,38 @@ public class PlayerMovement : MonoBehaviour
         }
         Time.timeScale = 1f;
         SceneManager.LoadScene("Homebase");
+    }
+
+    public void GameWin(Vector3 finalPos, string type)
+    {
+        StartCoroutine(GameWinAnim(finalPos, type));
+    }
+
+    IEnumerator GameWinAnim(Vector3 finalPos, string type)
+    {
+        animator.SetBool("isMoving", false);
+        rigid.velocity = Vector3.zero;
+        GameControl.PlayerData.shiftJustEnded = true;
+        yield return new WaitForSeconds(2f);
+        
+        Vector3 currentPos = transform.parent.transform.position;
+        finalPos = finalPos + Vector3.up * 3;
+        //lerp the player to directly above the poppy position
+        float time = 0f;
+        while (time < 2.5f)
+        {
+            animator.SetBool("isMoving", true);
+            transform.parent.transform.position = Vector3.Lerp(currentPos, finalPos, time / 2.5f);
+            time += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        animator.SetBool("isMoving", false);
+
+        //poppy discovery pop-up and fade to black
+        GameControl.PlayerData.GameWinBehavior(type);
+
+        //display a win message
+        yield return null;
     }
 
     public void CraftingSlow()
