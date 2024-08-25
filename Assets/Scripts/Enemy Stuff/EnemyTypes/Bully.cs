@@ -33,6 +33,9 @@ public class Bully : EnemyBehavior
     //insult Stuff
     ObjectPool projPool;
 
+    //bulb handler
+    [SerializeField] GameObject bulb;
+
     //hook Stuff
     [SerializeField] GameObject fistPrefab;
 
@@ -181,6 +184,7 @@ public class Bully : EnemyBehavior
         if (health > maxHealth)
             health = maxHealth;
         //size should grow here
+        bulb.GetComponent<SizeLerp>().Execute(false);
     }
 
     public override IEnumerator StateUpdate()
@@ -510,6 +514,10 @@ public class Bully : EnemyBehavior
 
     IEnumerator BossSpawn()
     {
+        //disable the sprite renderer and animator
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Animator>().enabled = false;
+
         float timer = 0f;
         Debug.Log("Boss Spawn Initiated");
         healthBar = Instantiate(healthbarPrefab);
@@ -517,6 +525,7 @@ public class Bully : EnemyBehavior
 
         while (timer < spawnTime)
         {
+            transform.localScale = Vector3.Lerp(Vector3.one * 0.1f, Vector3.one, timer / spawnTime);
             yield return new WaitForEndOfFrame();
             timer += Time.deltaTime;
         }
@@ -525,13 +534,26 @@ public class Bully : EnemyBehavior
         GameControl.PlayerData.bossSpawning = false;
         spawning = false;
         invulnerable = false;
+
+        //do the bulb anim
+        bulb.GetComponent<Animator>().SetTrigger("BullySpawn");
+
+        //enable the sprite renderer and animator
+        GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<Animator>().enabled = true;
+
+        yield return new WaitForSeconds(1f);
+        bulb.SetActive(false);
+
         Debug.Log("Boss Spawning Complete");
+
 
         //Now start all the regular routines
         stats = (BullyStats)myStats;
         StartCoroutine(SortingAdjust());
         StartCoroutine(StandardBehavior());
         StartCoroutine(StateUpdate());
+        
     }
 
     //Death Behavior

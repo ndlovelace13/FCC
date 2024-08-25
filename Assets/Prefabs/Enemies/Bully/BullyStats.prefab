@@ -63,7 +63,10 @@ MonoBehaviour:
   encountered: 0
   title: The Bully
   subtext: Boss Variant
-  description: 
+  description: This variant's imposing demeanor takes after that of a school-yard
+    bully. Rather than taking lunch money from the children it torments, this bully
+    absorbs life energy from its fellow skinwalkers. Don't blame the kid, blame the
+    parenting.
   behavior: 
   weakness: 
   insultDebuff: 0.5

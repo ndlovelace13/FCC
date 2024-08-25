@@ -212,7 +212,7 @@ public class HomebaseCam : MonoBehaviour
             GameControl.PlayerData.unlockDone = true;
         }
         //unlock the catalog after the first run
-        if (GameControl.SaveData.shiftCounter == 1 && !GameControl.SaveData.catalogUnlocked && GameControl.PlayerData.unlockDone)
+        if (GameControl.SaveData.shiftCounter == 1 && !GameControl.SaveData.catalogUnlocked && !GameControl.PlayerData.unlockDone)
         {
             //QUEUE DIALOGUE HERE
             GameControl.SaveData.dialogueQueue.Enqueue(catalogUnlock);

@@ -153,7 +153,8 @@ public class EnemySpawn : MonoBehaviour
         newEnemy.transform.position = newSpawn();
         newEnemy.GetComponent<EnemyBehavior>().SetObjects(this);
         newEnemy.GetComponent<EnemyBehavior>().Activate();
-        StartCoroutine(HatAssign(newEnemy));
+        if (newEnemy.tag != "boss")
+            StartCoroutine(HatAssign(newEnemy));
         if (!enemies.Contains(newEnemy))
             enemies.Add(newEnemy);
         activeEnemies++;
