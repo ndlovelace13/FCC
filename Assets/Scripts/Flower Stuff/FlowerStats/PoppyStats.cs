@@ -26,8 +26,11 @@ public class PoppyStats : FlowerStats
 
 
         enemyBe.poppyCount++;
-        enemyBe.SpeedDown(poppyDebuff);
-        Debug.Log("Enemy speed down");
+        for (int i = 0; i < tier; i++)
+        {
+            enemyBe.SpeedDown(poppyDebuff);
+            Debug.Log("Enemy speed down " + i);
+        }
     }
 
 

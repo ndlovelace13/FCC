@@ -227,30 +227,6 @@ public class CrownConstruction : MonoBehaviour
     {
         Debug.Log("Crafting Cancel Started");
 
-        /*//calculate the edge of the screen and the finalLocation
-        Vector3 topEdge = Camera.main.ScreenToWorldPoint(new Vector3(0f, Screen.height));
-        Vector3 center = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2));
-        float yOffset = Math.Abs(topEdge.y - center.y) / 4f;
-        Vector3 finalPos = new Vector3(finalCrown.transform.localPosition.x, yOffset);
-
-        //calculate a random location for all of the flowers
-        currentFlowers = finalCrown.transform.GetComponentsInChildren<FlowerBehavior>();
-        //Transform[] flowers = children.Where(child => child.tag == "FlowerHead").ToArray();
-        for (int i = currentFlowers.Length - 1; i >= 0; i--)
-        {
-            //store the finalPosition as the current localPos in relation to the crown
-            currentFlowers[i].finalDocketPos = currentFlowers[i].gameObject.transform.localPosition;
-
-            //generate a random location on the surrounding oval
-            float generatedRad = UnityEngine.Random.Range(0f, Mathf.PI * 2);
-            Vector3 generatedPos = new Vector3(4 * Mathf.Cos(generatedRad), 2.5f * Mathf.Sin(generatedRad));
-            currentFlowers[i].randomCraftPos = generatedPos;
-
-            //assign a stem to the current flower
-            stems[i].GetComponent<CraftingStem>().SetFlower(currentFlowers[i]);
-            stems[i].transform.SetParent(finalCrown.transform);
-        }*/
-
         Vector3 currentCrownPos = finalCrown.transform.localPosition;
 
         float currentTime = 0f;
@@ -268,6 +244,7 @@ public class CrownConstruction : MonoBehaviour
         //finally allow for the skillChecking to begin
         foreach (var flower in currentFlowers)
         {
+            flower.gameObject.transform.localPosition = flower.finalDocketPos;
             flower.draggable = false;
             flower.placed = false;
         }

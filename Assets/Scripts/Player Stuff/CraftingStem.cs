@@ -30,7 +30,7 @@ public class CraftingStem : MonoBehaviour
 
     IEnumerator StemStretch()
     {
-        while (connectedFlower.placed == false)
+        while (connectedFlower != null && connectedFlower.placed == false)
         {
             Vector2 length = flowerPos.localPosition - slotPos;
             float angleRadians = Mathf.Atan2(length.y, -length.x);

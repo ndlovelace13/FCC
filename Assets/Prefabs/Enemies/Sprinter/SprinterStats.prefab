@@ -49,6 +49,7 @@ MonoBehaviour:
   minInterval: 0.15
   maxSpeed: 3
   minSpeed: 2.25
+  speedCap: 5.5
   maxHealth: 75
   healthInterval: 15
   startingEnemies: 1
@@ -59,6 +60,7 @@ MonoBehaviour:
   statsScaleTime: 45
   type: sprinter
   sprite: {fileID: -320072828, guid: 3997d72c90df9674780d9a690d035d0c, type: 3}
+  projSprite: {fileID: 0}
   encountered: 0
   title: 
   subtext: 

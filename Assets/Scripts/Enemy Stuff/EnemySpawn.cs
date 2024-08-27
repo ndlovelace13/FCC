@@ -237,7 +237,7 @@ public class EnemySpawn : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(thisEnemy.statsScaleTime);
-            if (GameControl.PlayerData.playerSpeed > currentMax)
+            if (thisEnemy.speedCap > currentMax)
             {
                 currentMax += thisEnemy.maxInterval;
                 currentMin += thisEnemy.minInterval;

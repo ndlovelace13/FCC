@@ -31,8 +31,8 @@ public abstract class EnemyBehavior : MonoBehaviour
     float minSpeed;
     float maxSpeed;
     [SerializeField] public float backupSpeed;
-    float speedCooldown = 10f;
-    float speedIncrement = 0.9f;
+    float speedCooldown = 15f;
+    float speedIncrement = 0.95f;
     public float speedMod = 1f;
 
 
@@ -428,14 +428,11 @@ public abstract class EnemyBehavior : MonoBehaviour
         while (isActive)
         {
             yield return new WaitForSeconds(speedCooldown);
-            if (backupSpeed < GameControl.PlayerData.playerSpeed)
+            if (backupSpeed < myStats.speedCap)
             {
-                if (backupSpeed < GameControl.PlayerData.playerSpeed - 2f)
-                    SpeedUp(speedIncrement);
-                else
-                    SpeedUp(speedIncrement + 0.05f);
-                GetComponent<Animator>().speed = backupSpeed * 0.5f;
+                SpeedUp(speedIncrement);
             }
+            GetComponent<Animator>().speed = backupSpeed * 0.5f;
         }
     }
 

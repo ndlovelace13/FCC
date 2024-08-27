@@ -33,7 +33,7 @@ public abstract class EnemyStats : MonoBehaviour
 {
     //eventually store the enemyPrefab in here so I can procedurally generate enemyPools, fine for now
     [SerializeField] public GameObject enemyPrefab;
-    [SerializeField] public float maxInterval, minInterval, maxSpeed, minSpeed;
+    [SerializeField] public float maxInterval, minInterval, maxSpeed, minSpeed, speedCap;
     [SerializeField] public int maxHealth, healthInterval, startingEnemies, enemyScaleAmt, killScore, scoreIncrease, countScaleTime, statsScaleTime;
     [SerializeField] public string type;
     [SerializeField] public Sprite sprite, projSprite;
