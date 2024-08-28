@@ -49,8 +49,8 @@ MonoBehaviour:
   minInterval: 0.15
   maxSpeed: 2
   minSpeed: 1
-  speedCap: 4
-  maxHealth: 50
+  speedCap: 5
+  maxHealth: 30
   healthInterval: 10
   startingEnemies: 6
   enemyScaleAmt: 3

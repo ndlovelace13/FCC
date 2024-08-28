@@ -228,12 +228,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadow: {fileID: 1389098257366031348}
   type: point
-  maxHealth: 60
+  health: 0
+  maxHealth: 50
   isActive: 0
   target: {fileID: 0}
   mySpawner: {fileID: 0}
   moveSpeed: 0
   backupSpeed: 0
+  speedMod: 1
   surprised: 0
   preSurpriseVel: {x: 0, y: 0, z: 0}
   notif: {fileID: 7155992749287334371, guid: 57602ac8dbb3e3441931b13c9bcfa0b8, type: 3}
@@ -245,7 +247,9 @@ MonoBehaviour:
   isElectrified: 0
   electricPassed: 0
   isBlinded: 0
+  poppyCount: 0
   wasKilled: 0
+  isBoss: 0
   isTargeting: 1
   isRetreating: 0
   isCharging: 0

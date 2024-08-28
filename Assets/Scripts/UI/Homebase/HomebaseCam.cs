@@ -22,6 +22,9 @@ public class HomebaseCam : MonoBehaviour
     [SerializeField] GameObject almanac;
     [SerializeField] GameObject carKeys;
 
+    //menuLerp
+    GameObject menuLerpObj;
+
     //Dialogue Stuff
     [SerializeField] GameObject phone;
     [SerializeField] GameObject speechBubble;
@@ -52,7 +55,7 @@ public class HomebaseCam : MonoBehaviour
 
     string[] postContract = new string[]
             {
-                "Finally, phew thought you were never going to sign",
+                "Finally, thought you were never going to sign",
                 "Congrats on joining the Anti-Anomaly Action Team, I was going to send a cake but we don't really have the budget",
                 "So...I may have fibbed a little in the job description. As you may have guessed by the name, the Anti-Anomaly Action Team doesn't usually handle birthday parties",
                 "The kids you signed up to deal with are a little...off, you'll see what I mean soon enough",
@@ -187,7 +190,7 @@ public class HomebaseCam : MonoBehaviour
             {
                 branchDialogue = new string[]
                 {
-                    "Well done in with the training, you're a natural crown creator"
+                    "Well done with the training, you're a natural crown creator"
                 };
             }
             contractDiscussion = branchDialogue.Concat(contractDiscussion).ToArray();
@@ -203,6 +206,7 @@ public class HomebaseCam : MonoBehaviour
 
     IEnumerator UnlockChecker()
     {
+        menuLerpObj = null;
         yield return null;
         //post-boss defeat when the player defeats the boss for the first time
         if (GameControl.PlayerData.gameWin && !GameControl.SaveData.bullyDefeated)
@@ -218,6 +222,7 @@ public class HomebaseCam : MonoBehaviour
             GameControl.SaveData.dialogueQueue.Enqueue(catalogUnlock);
             GameControl.SaveData.catalogUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
+            menuLerpObj = catalog;
         }
         //unlock research when the player has collected their first essence seed
         if (GameControl.SaveData.highSeeds > 0 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.researchUnlocked)
@@ -226,6 +231,7 @@ public class HomebaseCam : MonoBehaviour
             phone.GetComponent<PhoneLerp>().callerKnown = false;
             GameControl.SaveData.researchUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
+            menuLerpObj = research;
         }
         //unlock completion tracker when the player has crafted 20 different crowns
         if (GameControl.CrownCompletion.totalDiscovered >= 20 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.completionUnlocked)
@@ -233,6 +239,7 @@ public class HomebaseCam : MonoBehaviour
             GameControl.SaveData.dialogueQueue.Enqueue(completionUnlock);
             GameControl.SaveData.completionUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
+            menuLerpObj = completionTracker;
         }
         //unlock almanac when the player has unlocked at least one new type of flower
         if (GameControl.PlayerData.allDiscovered.Count > 4 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.almanacUnlocked)
@@ -241,6 +248,7 @@ public class HomebaseCam : MonoBehaviour
             phone.GetComponent<PhoneLerp>().callerKnown = false;
             GameControl.SaveData.almanacUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
+            menuLerpObj = almanac;
         }
 
         GameControl.SaveHandler.SaveGame();
@@ -369,6 +377,12 @@ public class HomebaseCam : MonoBehaviour
             catalog.SetActive(true);
         if (GameControl.SaveData.almanacUnlocked || GameControl.PlayerData.testing)
             almanac.SetActive(true);
+
+        //check shift count for 0
+        if (GameControl.SaveData.shiftCounter < 1)
+            menuLerpObj = carKeys;
+
+        StartCoroutine(MenuLerper());
         yield return null;
     }
 
@@ -404,6 +418,18 @@ public class HomebaseCam : MonoBehaviour
             phone.GetComponent<PhoneLerp>().PhoneClose();
             GameControl.PlayerData.menusReady = true;
         }  
+    }
+
+    IEnumerator MenuLerper()
+    {
+        while (true)
+        {
+            if (menuLerpObj != null && GameControl.PlayerData.menusReady && menuLerpObj.GetComponent<SizeLerp>().enabled)
+            {
+                menuLerpObj.GetComponent<SizeLerp>().Execute(true);
+            }
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void PostContract()
