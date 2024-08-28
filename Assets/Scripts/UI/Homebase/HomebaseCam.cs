@@ -209,7 +209,7 @@ public class HomebaseCam : MonoBehaviour
         menuLerpObj = null;
         yield return null;
         //post-boss defeat when the player defeats the boss for the first time
-        if (GameControl.PlayerData.gameWin && !GameControl.SaveData.bullyDefeated)
+        if (GameControl.PlayerData.gameWin && !GameControl.SaveData.bullyDefeated && !GameControl.PlayerData.unlockDone)
         {
             GameControl.SaveData.dialogueQueue.Enqueue(bullyDefeat);
             GameControl.SaveData.bullyDefeated = true;

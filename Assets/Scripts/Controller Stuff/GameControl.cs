@@ -337,7 +337,7 @@ public class GameControl : MonoBehaviour
             GameObject newPool = Instantiate(flowerPool);
             newPool.transform.SetParent(transform);
             flowers[i].GetComponent<SpriteRenderer>().enabled = true;
-            newPool.GetComponent<ObjectPool>().Establish(flowers[i], 50);
+            newPool.GetComponent<ObjectPool>().Establish(flowers[i], 75);
             flowerPoolDict.Add(flowerStats[i].type, newPool.GetComponent<ObjectPool>());
             //store in dictionary for easy access based on type
             flowerStatsDict.Add(flowerStats[i].type, flowerStats[i]);

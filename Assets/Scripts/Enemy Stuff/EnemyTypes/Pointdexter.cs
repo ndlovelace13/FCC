@@ -278,6 +278,7 @@ public class Pointdexter : EnemyBehavior
             enemies[i] = enemyBehaviors[i].gameObject;
         }
         enemies = enemies.Where(child => child.name != gameObject.name).ToArray();
+        enemies = enemies.Where(child => child.tag != "boss").ToArray();
         return enemies;
     }
 

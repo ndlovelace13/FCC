@@ -160,8 +160,11 @@ public class EnemySpawn : MonoBehaviour
         activeEnemies++;
 
         //set the encountered data if not set already
-        if (GameControl.PlayerData.savedEnemyDict[thisEnemy.type].encountered == false)
+        if (GameControl.PlayerData.savedEnemyDict[thisEnemy.type].encountered == false && thisEnemy.type != "bully")
+        {
+            Debug.Log(thisEnemy.type + " is now encountered");
             GameControl.PlayerData.savedEnemyDict[thisEnemy.type].encountered = true;
+        }
         yield return null;
     }
 
@@ -183,7 +186,7 @@ public class EnemySpawn : MonoBehaviour
             yield return new WaitForEndOfFrame();
             foreach (var enemy in enemies)
             {
-                if (enemy.GetComponent<EnemyBehavior>().isActive && !isVisible(enemy) && GameControl.PlayerData.bossSpawning)
+                if (enemy.GetComponent<EnemyBehavior>().isActive && !isVisible(enemy) && !GameControl.PlayerData.bossSpawning)
                     StartCoroutine(Respawn(enemy));
             }
         }

@@ -158,7 +158,7 @@ MonoBehaviour:
   shadow: {fileID: 1389098257366031348}
   type: bully
   health: 0
-  maxHealth: 300
+  maxHealth: 400
   isActive: 0
   target: {fileID: 0}
   mySpawner: {fileID: 0}

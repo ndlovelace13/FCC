@@ -545,6 +545,9 @@ public class Bully : EnemyBehavior
         yield return new WaitForSeconds(1f);
         bulb.SetActive(false);
 
+        if (GameControl.PlayerData.savedEnemyDict[type].encountered == false)
+            GameControl.PlayerData.savedEnemyDict[type].encountered = true;
+
         Debug.Log("Boss Spawning Complete");
 
 
