@@ -22,6 +22,7 @@ public class SaveData
     public bool sashActivated = false;
     public bool sashActive = false;
     public bool firstSeed = false;
+    public bool bullyDefeated = false;
 
     public bool contractSigned = false;
 
@@ -36,6 +37,7 @@ public class SaveData
 
     //Persistent Total Counters
     public int shiftCounter = 0;
+    public int completeShifts = 0;
     public float totalIncome = 0;
     public int totalCrowns = 0;
     public int totalFlowers = 0;
@@ -78,6 +80,7 @@ public class SaveData
     public List<UpgradeEssentials> upgrades;
     public List<ResearchData> researchData;
     public List<string> discoveredUncommon;
+    public List<string> discoveredRare;
 
     //Almanac Stats
     public List<SavedFlowerStats> flowerSaveData;
@@ -132,14 +135,20 @@ public class GameControl : MonoBehaviour
 
     public bool loading = false;
     public bool gameOver = false;
+    public bool gameWin = false;
     public bool gamePaused = false;
 
     public bool menusReady = false;
     public bool menuActive = false;
 
     public bool unlockDone = false;
+    public bool unlockNotifActive = false;
 
     public bool quitCooldown = false;
+
+    //boss fight stuff
+    public bool bossSpawning = false;
+    public bool bossActive = false;
 
     public GameObject tutorialHandler;
 
@@ -157,12 +166,14 @@ public class GameControl : MonoBehaviour
 
     //flower probabilities
     public float uncommon = 0.05f;
+    public float rare = 0.1f;
     //public float undiscovered = 0.05f;
 
     [SerializeField] public List<string> allDiscovered;
     [SerializeField] public List<string> commonPool;
     //[SerializeField] public List<string> discoveredUncommon;
     [SerializeField] public List<string> undiscoveredUncommon;
+    [SerializeField] public List<string> undiscoveredRare;
 
     //flower stuff
     //[SerializeField] public Sprite[] flowerSprites;
@@ -234,6 +245,8 @@ public class GameControl : MonoBehaviour
     [SerializeField] GameObject ResearchPrefab;
     public List<Research> researchItems;
     [SerializeField] GameObject UnlockPrefab;
+
+    [SerializeField] GameObject BlackoutPrefab;
 
     //almanac variables
     public List<Page> almanacPages;
@@ -324,7 +337,7 @@ public class GameControl : MonoBehaviour
             GameObject newPool = Instantiate(flowerPool);
             newPool.transform.SetParent(transform);
             flowers[i].GetComponent<SpriteRenderer>().enabled = true;
-            newPool.GetComponent<ObjectPool>().Establish(flowers[i], 50);
+            newPool.GetComponent<ObjectPool>().Establish(flowers[i], 75);
             flowerPoolDict.Add(flowerStats[i].type, newPool.GetComponent<ObjectPool>());
             //store in dictionary for easy access based on type
             flowerStatsDict.Add(flowerStats[i].type, flowerStats[i]);
@@ -349,6 +362,20 @@ public class GameControl : MonoBehaviour
             //DiscoveredPooling();
         }
 
+        if (SaveData.discoveredRare == null)
+        {
+            Debug.Log("Rareflower data not found");
+            SaveData.discoveredRare = new List<string>();
+        }
+        else
+        {
+            Debug.Log("rare flower save data restored");
+            for (int i = 0; i < SaveData.discoveredRare.Count; i++)
+            {
+                undiscoveredRare.Remove(SaveData.discoveredRare[i]);
+            }
+        }
+
         //check for flowerSaveData list, init if it doesn't exist
         if (SaveData.flowerSaveData == null)
         {
@@ -358,6 +385,20 @@ public class GameControl : MonoBehaviour
             {
                 SavedFlowerStats newData = new SavedFlowerStats(flower.Key);
                 SaveData.flowerSaveData.Add(newData);
+            }
+        }
+        else
+        {
+            int savedCount = SaveData.flowerSaveData.Count;
+            int iterator = 0;
+            foreach (var flower in flowerStatsDict)
+            {
+                if (iterator >= savedCount)
+                {
+                    SavedFlowerStats newData = new SavedFlowerStats(flower.Key);
+                    SaveData.flowerSaveData.Add(newData);
+                }
+                iterator++;
             }
         }
         
@@ -404,7 +445,7 @@ public class GameControl : MonoBehaviour
         //playerSpeed
         newUpgrade = Instantiate(upgradeObj);
         newUpgrade.transform.SetParent(transform);
-        newUpgrade.GetComponent<Upgrade>().SetValues("playerSpeed", 3f, 1.75f, 10, 0.5f, "Faster Shoes", "Increases Player Movement Speed", " m/s", icons[1]);
+        newUpgrade.GetComponent<Upgrade>().SetValues("playerSpeed", 4f, 1.75f, 10, 0.25f, "Faster Shoes", "Increases Player Movement Speed", " m/s", icons[1]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
 
         //crownSlow
@@ -622,6 +663,7 @@ public class GameControl : MonoBehaviour
     public void ResetRun()
     {
         gameOver = false;
+        gameWin = false;
         loading = true;
         //reset the scores
         min = 0;
@@ -638,6 +680,9 @@ public class GameControl : MonoBehaviour
         unlockDone = false;
 
         crosshairActive = true;
+
+        bossActive = false;
+        bossSpawning = false;
 
         
 
@@ -716,7 +761,8 @@ public class GameControl : MonoBehaviour
         //TO DO - combine into one list of all discovered
         //allDiscovered = commonPool;
         allDiscovered = allDiscovered.Union(SaveData.discoveredUncommon).ToList();
-        foreach(var flower in allDiscovered)
+        allDiscovered = allDiscovered.Union(SaveData.discoveredRare).ToList();
+        foreach (var flower in allDiscovered)
         {
             flowerPoolDict[flower].Pooling();
             if (!savedFlowerDict[flower].discovered)
@@ -744,14 +790,24 @@ public class GameControl : MonoBehaviour
         }*/
         //need to change this once rare flowers are added
         Debug.Log("Flower Discovery called for " + type);
-        if (SaveData.discoveredUncommon.Contains(type))
+        if (SaveData.discoveredUncommon.Contains(type) || SaveData.discoveredRare.Contains(type))
             return;
         else
         {
             Debug.Log("Flower discovery went through");
-            undiscoveredUncommon.Remove(type);
-            SaveData.discoveredUncommon.Add(type);
-            allDiscovered = allDiscovered.Union(SaveData.discoveredUncommon).ToList();
+            if (undiscoveredUncommon.Contains(type))
+            {
+                undiscoveredUncommon.Remove(type);
+                SaveData.discoveredUncommon.Add(type);
+                allDiscovered = allDiscovered.Union(SaveData.discoveredUncommon).ToList();
+            }
+            else
+            {
+                undiscoveredRare.Remove(type);
+                SaveData.discoveredRare.Add(type);
+                allDiscovered = allDiscovered.Union(SaveData.discoveredRare).ToList();
+            }
+            
             foreach (var flower in allDiscovered)
                 Debug.Log(flower);
             SaveHandler.SaveGame();
@@ -849,8 +905,38 @@ public class GameControl : MonoBehaviour
             }
             time = 0f;
             enemyTypeCounter++;
-        } while (!gameOver);
+        } while (!gameOver);   
+    }
 
-        
+    public void GameWinBehavior(string type)
+    {
+        StartCoroutine(GameWinExe(type));
+    }
+
+    IEnumerator GameWinExe(string type)
+    {
+        //check for flower discovery and pop-up with discovery notif if not
+        if (!allDiscovered.Contains(type))
+        {
+            FlowerDiscovery(type);
+            GameObject unlock = Instantiate(UnlockPrefab);
+            unlock.GetComponent<UnlockNotif>().BeginNotif(SpriteAssign(type), "New Flower Discovered!");
+        }
+        else
+        {
+            unlockNotifActive = false;
+        }
+
+        while (unlockNotifActive)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        //then fade to black
+        GameObject blackoutObj = Instantiate(BlackoutPrefab);
+        blackoutObj.GetComponent<BlackoutBehavior>().BeginBlackout("You Eliminated the Skinwalker Threat", "...For Now...", "Homebase");
+        unlockDone = false;
+
+        yield return null;
     }
 }

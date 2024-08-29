@@ -90,7 +90,7 @@ public class RedStats : FlowerStats
     IEnumerator BurnHandler(GameObject enemy, int power)
     {
         float burnTimer = 0f;
-        //TODO - fuck up this system, foul ass particle system needs to go
+        //TODO - fuck this system, foul ass particle system needs to go
         GameObject part = enemy.GetComponent<EnemyBehavior>().nextParticle();
         enemy.GetComponent<EnemyBehavior>().setParticle(part, 1);
         float thisBurnTime = burnTime + timeIncrease * (power - 1);

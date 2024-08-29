@@ -75,6 +75,7 @@ public class CoffeeStats : FlowerStats
         float thisSpeedEffect = speedEffect + speedIncrease * (power - 1);
         PlayerMovement player = playerShadow.GetComponent<PlayerMovement>();
         Animator particle = playerShadow.GetComponent<PlayerStatus>().playerParticle;
+        playerShadow.GetComponent<PlayerStatus>().speedBuffs++;
 
         //apply the speed boost
         player.speed *= thisSpeedEffect;
@@ -91,12 +92,19 @@ public class CoffeeStats : FlowerStats
             }
             currentTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
-            Debug.Log("Player Speed: " + player.speed);
+            //Debug.Log("Player Speed: " + player.speed);
         }
 
         //remove the speed boost
+        if (playerShadow.GetComponent<PlayerStatus>().speedBuffs > 0)
+            playerShadow.GetComponent<PlayerStatus>().speedBuffs--;
         player.speed /= thisSpeedEffect;
-        particle.SetInteger("augment", 0);
+        if (playerShadow.GetComponent<PlayerStatus>().speedBuffs == 0)
+        {
+            particle.SetInteger("augment", 0);
+        }
+        
+        
 
         yield return null;
     }

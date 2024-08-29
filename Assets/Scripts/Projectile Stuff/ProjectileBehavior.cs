@@ -55,6 +55,7 @@ public class ProjectileBehavior : MonoBehaviour
     Vector3 startingPos = Vector3.zero;
     public Dictionary<string, int> actualAugs = new Dictionary<string, int>();
     public bool single = false;
+    public bool enemyProj = false;
 
 
     bool arrived = false;
@@ -75,12 +76,12 @@ public class ProjectileBehavior : MonoBehaviour
         //Debug.Log(spriteTrans.name);
     }
 
-    public void SetProps(float r, int d, Dictionary<string, int> augsPass, Vector2 rotation, bool singleFire)
+    public void SetProps(float r, int d, Dictionary<string, int> augsPass, Vector2 rotation, bool singleFire, bool enemyProj)
     {
         if (particles == null)
             getParticles();
-        else
-            ResetAugs();
+        //else
+            //ResetAugs();
         range = r;
         damage = d;
         //augs = new string[3];
@@ -89,6 +90,7 @@ public class ProjectileBehavior : MonoBehaviour
         //augs[2] = aug3;
         actualAugs = augsPass;
         single = singleFire;
+        this.enemyProj = enemyProj;
         foreach (var aug in actualAugs)
             Debug.Log("Augment " + aug.Key + " " + aug.Value + " made it all the way to the finish line");
         //this.tier = tier;
@@ -97,7 +99,8 @@ public class ProjectileBehavior : MonoBehaviour
         spriteTrans = transform.GetChild(0).gameObject;
         //TO DO - TRANSITION THIS TO CHECK IN THE Sprite Apply thing
         SpriteApply();
-        ProjBegin();
+        if (!enemyProj)
+            ProjBegin();
         spriteTrans.transform.rotation = Quaternion.LookRotation(Vector3.forward, rotation);
     }
 
@@ -113,7 +116,8 @@ public class ProjectileBehavior : MonoBehaviour
         {
 
             arrived = true;
-            ProjArrival();
+            if (!enemyProj)
+                ProjArrival();
         }
         /*if (gameObject.activeSelf)
         {
@@ -216,11 +220,24 @@ public class ProjectileBehavior : MonoBehaviour
                 particles[i].GetComponent<Animator>().SetInteger("augment", 0);
             }
         }*/
-        for (int i = 0; i < actualAugs.Count; i++)
+        if (!enemyProj)
         {
-            FlowerStats currentStats = GameControl.PlayerData.flowerStatsDict[actualAugs.ElementAt(i).Key];
-            particles[i].GetComponent<Animator>().SetInteger("augment", currentStats.aug);
+            for (int i = 0; i < actualAugs.Count; i++)
+            {
+                FlowerStats currentStats = GameControl.PlayerData.flowerStatsDict[actualAugs.ElementAt(i).Key];
+                particles[i].GetComponent<Animator>().SetInteger("augment", currentStats.aug);
+            }
         }
+        else
+        {
+            int counter = 0;
+            foreach (var aug in actualAugs)
+            {
+                particles[counter].GetComponent<Animator>().SetInteger("augment", aug.Value);
+                counter++;
+            }
+        }
+        
     }
 
     public void ResetParticles()
@@ -238,21 +255,31 @@ public class ProjectileBehavior : MonoBehaviour
         if (actualAugs.Count > 0)
             type = actualAugs.First().Key;
         Sprite currentSprite;
-        if (miniDandy)
+        //apply if the proj is from an enemy
+        if (enemyProj)
         {
-            DandyStats dandy = (DandyStats)GameControl.PlayerData.flowerStatsDict["dandy"];
-            if (type != "dandy")
-                currentSprite = dandy.miniProjSprite;
-            else
-                currentSprite = dandy.projSprite;
-        }
-        else
-        {
-            FlowerStats stats = GameControl.PlayerData.flowerStatsDict[type];
+            EnemyStats stats = GameControl.PlayerData.enemyStatsDict[type];
             currentSprite = stats.projSprite;
         }
-        
-        miniDandy = false;
+        //apply if the proj is from a flower
+        else
+        {
+            if (miniDandy)
+            {
+                DandyStats dandy = (DandyStats)GameControl.PlayerData.flowerStatsDict["dandy"];
+                if (type != "dandy")
+                    currentSprite = dandy.miniProjSprite;
+                else
+                    currentSprite = dandy.projSprite;
+            }
+            else
+            {
+                FlowerStats stats = GameControl.PlayerData.flowerStatsDict[type];
+                currentSprite = stats.projSprite;
+            }
+
+            miniDandy = false;
+        }
         spriteTrans.GetComponent<SpriteRenderer>().sprite = currentSprite;
     }
 

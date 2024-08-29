@@ -175,7 +175,7 @@ public class FlowerHarvest : MonoBehaviour
     public GameObject lastFlower()
     {
         int slotPos = lastSlot();
-        Transform[] currentFlowers = crown.GetComponentsInChildren<Transform>();
+        FlowerStats[] currentFlowers = crown.GetComponentsInChildren<FlowerStats>();
         int flowerNum = currentFlowers.Length;
         return currentFlowers[flowerNum - 1].gameObject;
     }

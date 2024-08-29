@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
@@ -12,9 +13,9 @@ public abstract class EnemyBehavior : MonoBehaviour
     [SerializeField] public Transform shadow;
 
     public string type;
-    protected int health;
-    TMP_Text scoreNotif;
-    [SerializeField] int maxHealth;
+    public int health;
+    protected TMP_Text scoreNotif;
+    [SerializeField] public int maxHealth;
 
     public bool isActive;
 
@@ -29,16 +30,17 @@ public abstract class EnemyBehavior : MonoBehaviour
     public float moveSpeed;
     float minSpeed;
     float maxSpeed;
-    [SerializeField] protected float backupSpeed;
-    float speedCooldown = 10f;
-    float speedIncrement = 0.9f;
+    [SerializeField] public float backupSpeed;
+    float speedCooldown = 15f;
+    float speedIncrement = 0.95f;
+    public float speedMod = 1f;
 
 
     public bool surprised = false;
     protected float surpriseTime = 1f;
     public Vector3 preSurpriseVel;
 
-    [SerializeField] GameObject notif;
+    [SerializeField] protected GameObject notif;
 
     public string[] augments;
     public Dictionary<string, int> actualAugs;
@@ -60,15 +62,25 @@ public abstract class EnemyBehavior : MonoBehaviour
     //5 BLINDING
     public bool isBlinded = false;
 
+    //POPPY Stuff
+    public int poppyCount = 0;
+
     public bool wasKilled = false;
 
-    SpriteRenderer[] allSprites;
+
+    //Boss Spawning Stuff
+    public bool isBoss;
+    protected bool sacrifice = false;
+    protected bool summoning = false;
+    protected bool invulnerable = false;
+
+    protected SpriteRenderer[] allSprites;
 
     //Particles
-    List<GameObject> particles;
+    protected List<GameObject> particles;
 
     //Seed Stuff
-    GameObject seedPool;
+    protected GameObject seedPool;
 
     // Start is called before the first frame update
     protected void Start()
@@ -85,12 +97,8 @@ public abstract class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        /*if (isActive)
-        {
-            
-            
-            
-        }*/
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerStatus>().transform;
     }
 
     public virtual IEnumerator StandardBehavior()
@@ -128,10 +136,20 @@ public abstract class EnemyBehavior : MonoBehaviour
         isBlinded = false;
         isElectrified = false;
         surprised = false;
+
+        //reset enemy to base speed, removing each stack of poppy debuff
+        PoppyStats poppy = (PoppyStats)GameControl.PlayerData.flowerStatsDict["poppy"];
+
+        for (int i = 0; i < poppyCount; i++)
+        {
+            SpeedUp(poppy.poppyDebuff);
+        }
+        poppyCount = 0;
+
         yield return null;
     }
 
-    IEnumerator SortingAdjust()
+    protected IEnumerator SortingAdjust()
     {
         while (gameObject.activeSelf)
         {
@@ -179,22 +197,28 @@ public abstract class EnemyBehavior : MonoBehaviour
         }
     }
 
-    public void CollisionCheck(Collider2D other)
+    public virtual void CollisionCheck(Collider2D other)
     {
         //Debug.Log("collision happening");
-        if (other.gameObject.tag == "projectile")
+        if (!invulnerable)
         {
-            GameObject otherParent = other.gameObject.transform.parent.gameObject;
-            DealDamage(otherParent.GetComponent<ProjectileBehavior>().damage, Color.white);
-            actualAugs = otherParent.GetComponent<ProjectileBehavior>().getActualAugs();
-            AugmentApplication(actualAugs);
-            otherParent.GetComponent<ProjectileBehavior>().ObjectDeactivate();
-        }
-        else if (other.gameObject.tag == "aoe")
-        {
-            GameObject otherParent = other.gameObject.transform.parent.gameObject;
-            actualAugs = otherParent.GetComponent<AoeBehavior>().getActualAugs();
-            AugmentApplication(actualAugs);
+            if (other.gameObject.tag == "projectile")
+            {
+                GameObject otherParent = other.gameObject.transform.parent.gameObject;
+                if (!otherParent.GetComponent<ProjectileBehavior>().enemyProj)
+                {
+                    DealDamage(otherParent.GetComponent<ProjectileBehavior>().damage, Color.white);
+                    actualAugs = otherParent.GetComponent<ProjectileBehavior>().getActualAugs();
+                    AugmentApplication(actualAugs);
+                    otherParent.GetComponent<ProjectileBehavior>().ObjectDeactivate();
+                }
+            }
+            else if (other.gameObject.tag == "aoe")
+            {
+                GameObject otherParent = other.gameObject.transform.parent.gameObject;
+                actualAugs = otherParent.GetComponent<AoeBehavior>().getActualAugs();
+                AugmentApplication(actualAugs);
+            }
         }
     }
 
@@ -227,7 +251,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         return closestEnemy;
     }
 
-    public void DealDamage(int damage, Color color)
+    public virtual void DealDamage(int damage, Color color)
     {
         AkSoundEngine.PostEvent("EnemyHit", gameObject);
         health -= damage;
@@ -252,7 +276,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         myStats = newSpawner.thisEnemy;
     }
 
-    public void Activate()
+    public virtual void Activate()
     {
         AkSoundEngine.PostEvent("EnemySpawn", gameObject);
         //initialize variables
@@ -281,7 +305,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         allSprites = GetComponentsInChildren<SpriteRenderer>();
 
         //set the enemy's initial target to be the player
-        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CapsuleCollider2D>().transform;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerStatus>().transform;
         target = player;
         //Debug.Log(player.position);
         StartCoroutine(SortingAdjust());
@@ -289,7 +313,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         StartCoroutine(StateUpdate());
     }
 
-    protected void Deactivate()
+    protected virtual void Deactivate()
     {
         StartCoroutine(StateReset());
         AkSoundEngine.PostEvent("EnemyKilled", gameObject);
@@ -314,6 +338,73 @@ public abstract class EnemyBehavior : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public IEnumerator BossSummoning()
+    {
+        Debug.Log("Boss Summoning Beginning");
+        if (isBoss)
+        {
+            Debug.Log("bro what");
+            yield break;
+        }
+        else
+        {
+            float waitTime = Random.Range(2f, 15f);
+            Debug.Log("waiting for " + waitTime);
+            yield return new WaitForSeconds(waitTime);
+            sacrifice = true;
+        }
+    }
+
+    public IEnumerator Sacrifice()
+    {
+        target = GameObject.FindWithTag("boss").GetComponent<EnemyBehavior>().shadow.transform;
+        moveSpeed = backupSpeed;
+        while (gameObject.activeSelf)
+        {
+            //check for death
+            if (health < 0)
+            {
+                Deactivate();
+                yield break;
+            }
+            //check whether the enemy is within sacrifice range of the boss
+            float dist = Vector2.Distance(target.position, shadow.position);
+            if (dist < 2)
+            {
+                StartCoroutine(Despawn(true));
+                yield break;
+            }
+            //if the boss gets activated anyways, deactivate
+            else if (GameControl.PlayerData.bossActive)
+            {
+                Debug.Log("Boss Active - killing self");
+                StartCoroutine(Despawn(false));
+                yield break;
+            }
+            //move towards the boss 
+            if (!isFrozen && !surprised)
+                moveSpeed = backupSpeed;
+            Vector2 direction = new Vector2(target.position.x - shadow.position.x, target.position.y - shadow.position.y);
+            direction.Normalize();
+            gameObject.GetComponent<Rigidbody2D>().velocity = direction * moveSpeed;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public IEnumerator Despawn(bool voluntary)
+    {
+        StartCoroutine(StateReset());
+        Debug.Log("Now Killing Self");
+        //increment the enemy stats if you go the scaling route - only if voluntary = true
+        if (voluntary)
+            GameObject.FindWithTag("boss").GetComponent<Bully>().HealthSacrifice((float)health / (float)maxHealth);
+        Debug.Log(health + " / " + maxHealth);
+
+        mySpawner.activeEnemies--;
+        gameObject.SetActive(false);
+        yield return null;
+    }
+
     IEnumerator KillReset()
     {
         yield return new WaitForSeconds(5);
@@ -322,11 +413,13 @@ public abstract class EnemyBehavior : MonoBehaviour
 
     public void SpeedUp(float mod)
     {
+        speedMod /= mod;
         backupSpeed = backupSpeed / mod;
     }
 
     public void SpeedDown(float mod)
     {
+        speedMod *= mod;
         backupSpeed = backupSpeed * mod;
     }
 
@@ -335,18 +428,15 @@ public abstract class EnemyBehavior : MonoBehaviour
         while (isActive)
         {
             yield return new WaitForSeconds(speedCooldown);
-            if (backupSpeed < GameControl.PlayerData.playerSpeed)
+            if (backupSpeed < myStats.speedCap)
             {
-                if (backupSpeed < GameControl.PlayerData.playerSpeed - 2f)
-                    SpeedUp(speedIncrement);
-                else
-                    SpeedUp(speedIncrement + 0.05f);
-                GetComponent<Animator>().speed = backupSpeed * 0.5f;
+                SpeedUp(speedIncrement);
             }
+            GetComponent<Animator>().speed = backupSpeed * 0.5f;
         }
     }
 
-    protected void getParticles()
+    public void getParticles()
     {
         //retrieving all particles
         particles = new List<GameObject>();
@@ -381,6 +471,7 @@ public abstract class EnemyBehavior : MonoBehaviour
             if (particle.GetComponent<Animator>().GetInteger("augment") == 0)
             { return particle; }
         }
+        Debug.Log("no particles found?");
         return null;
     }
 

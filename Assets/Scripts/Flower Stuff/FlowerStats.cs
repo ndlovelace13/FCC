@@ -261,6 +261,37 @@ public abstract class FlowerStats : MonoBehaviour
         Debug.Log("Hitbox enter called for " + type);
     }
 
+    public void SlowHandler(float slowEffect, float slowTime, int particle, GameObject enemy)
+    {
+        //call on self and any bossParts 
+        if (enemy.CompareTag("boss"))
+        {
+            EnemyBehavior[] bossParts = UnityEngine.Object.FindObjectsOfType<EnemyBehavior>();
+            GameObject[] enemies = new GameObject[bossParts.Length];
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                if (bossParts[i].transform.root == enemy.transform)
+                    enemies[i] = bossParts[i].gameObject;
+            }
+            Debug.Log("Count:" + enemies.Length);
+            foreach (var part in enemies)
+            {
+                Debug.Log("Calling on " + part.name);
+                StartCoroutine(SlowApply(slowEffect, slowTime, particle, part));
+            }
+                
+        }
+        else if (enemy.CompareTag("bossPart"))
+        {
+            Debug.Log("this is already slowed");
+        }
+        //call normally
+        else
+        {
+            StartCoroutine(SlowApply(slowEffect, slowTime, particle, enemy));
+        }
+    }
+
     protected IEnumerator SlowApply(float slowEffect, float slowTime, int particle, GameObject enemy)
     {
         Debug.Log("slow beginning");

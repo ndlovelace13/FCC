@@ -112,6 +112,9 @@ public class InitialFlowers : MonoBehaviour
             case "coffee":
                 head = Instantiate(GameControl.PlayerData.flowers[10]);
                 break;
+            case "poppy":
+                head = Instantiate(GameControl.PlayerData.flowers[11]);
+                break;
             default:
                 Debug.Log("fucked it up");
                 break;

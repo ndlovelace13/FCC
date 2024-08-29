@@ -66,20 +66,23 @@ public class EnemySpawn : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(spawnDelay);
-            //check how many enemies are currently active in hierarchy
-            //GameObject[] currentEnemies = GameObject.FindGameObjectsWithTag("enemy");
-            Debug.Log("There are currently " + activeEnemies + " enemies in play");
-            if (activeEnemies < currentMaxEnemies)
+            if (!GameControl.PlayerData.bossActive && !GameControl.PlayerData.bossSpawning)
             {
-                GameObject newEnemy = gameObject.GetComponent<ObjectPool>().GetPooledObject();
-                if (newEnemy != null)
+                //check how many enemies are currently active in hierarchy
+                //GameObject[] currentEnemies = GameObject.FindGameObjectsWithTag("enemy");
+                Debug.Log("There are currently " + activeEnemies + " enemies in play");
+                if (activeEnemies < currentMaxEnemies)
                 {
-                    //Debug.Log("Yall got me fucked up");
-                    StartCoroutine(Spawn(newEnemy));
-                }
-                else
-                {
-                    Debug.Log("What the fuck is a kilometer");
+                    GameObject newEnemy = gameObject.GetComponent<ObjectPool>().GetPooledObject();
+                    if (newEnemy != null)
+                    {
+                        //Debug.Log("Yall got me fucked up");
+                        StartCoroutine(Spawn(newEnemy));
+                    }
+                    else
+                    {
+                        Debug.Log("What the fuck is a kilometer");
+                    }
                 }
             }
         }
@@ -150,14 +153,18 @@ public class EnemySpawn : MonoBehaviour
         newEnemy.transform.position = newSpawn();
         newEnemy.GetComponent<EnemyBehavior>().SetObjects(this);
         newEnemy.GetComponent<EnemyBehavior>().Activate();
-        StartCoroutine(HatAssign(newEnemy));
+        if (newEnemy.tag != "boss")
+            StartCoroutine(HatAssign(newEnemy));
         if (!enemies.Contains(newEnemy))
             enemies.Add(newEnemy);
         activeEnemies++;
 
         //set the encountered data if not set already
-        if (GameControl.PlayerData.savedEnemyDict[thisEnemy.type].encountered == false)
+        if (GameControl.PlayerData.savedEnemyDict[thisEnemy.type].encountered == false && thisEnemy.type != "bully")
+        {
+            Debug.Log(thisEnemy.type + " is now encountered");
             GameControl.PlayerData.savedEnemyDict[thisEnemy.type].encountered = true;
+        }
         yield return null;
     }
 
@@ -179,7 +186,7 @@ public class EnemySpawn : MonoBehaviour
             yield return new WaitForEndOfFrame();
             foreach (var enemy in enemies)
             {
-                if (enemy.GetComponent<EnemyBehavior>().isActive && !isVisible(enemy))
+                if (enemy.GetComponent<EnemyBehavior>().isActive && !isVisible(enemy) && !GameControl.PlayerData.bossSpawning)
                     StartCoroutine(Respawn(enemy));
             }
         }
@@ -233,7 +240,7 @@ public class EnemySpawn : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(thisEnemy.statsScaleTime);
-            if (GameControl.PlayerData.playerSpeed > currentMax)
+            if (thisEnemy.speedCap > currentMax)
             {
                 currentMax += thisEnemy.maxInterval;
                 currentMin += thisEnemy.minInterval;

@@ -10,12 +10,14 @@ public class FlowerBehavior : MonoBehaviour
     public bool picked = true;
     public bool growing = false;
     public int tier = 0;
+    public int rarity = 0;
 
     //shit for construction
     public Vector3 finalDocketPos;
     public Vector3 randomCraftPos;
     public bool draggable = false;
     public bool placed = false;
+    public bool sashAdd = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +34,8 @@ public class FlowerBehavior : MonoBehaviour
         if (!picked)
         {
             Animator animator = transform.parent.GetChild(0).GetComponentInChildren<Animator>();
-            animator.SetInteger("rarity", GetComponent<FlowerStats>().rarity);
+            rarity = GetComponent<FlowerStats>().rarity;
+            animator.SetInteger("rarity", rarity);
         }
 
         if (GameControl.PlayerData.gameOver)
@@ -83,7 +86,11 @@ public class FlowerBehavior : MonoBehaviour
                 draggable = false;
                 transform.localPosition = finalDocketPos;
                 placed = true;
-                GameObject.FindWithTag("Player").GetComponent<CrownConstruction>().CraftLerpCommand(position);
+                if (!sashAdd)
+                {
+                    GameObject.FindWithTag("Player").GetComponent<CrownConstruction>().CraftLerpCommand(position);
+                    sashAdd = true;
+                }
                 GetComponent<SpriteRenderer>().sortingOrder = 4;
             }
             //otherwise, reset

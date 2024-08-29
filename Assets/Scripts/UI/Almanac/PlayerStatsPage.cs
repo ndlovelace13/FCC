@@ -7,6 +7,7 @@ public class PlayerStatsPage : Page
 {
     //Totals
     [SerializeField] TMP_Text shiftsComplete;
+    [SerializeField] TMP_Text shiftsWon;
     [SerializeField] TMP_Text totalIncome;
     [SerializeField] TMP_Text totalCrowns;
     [SerializeField] TMP_Text totalFlowers;
@@ -39,8 +40,9 @@ public class PlayerStatsPage : Page
     public override void FillPage()
     {
         //fill the totals
-        shiftsComplete.text = GameControl.SaveData.shiftCounter + " Shifts Completed";
-        totalIncome.text = string.Format("{0:C}", GameControl.SaveData.totalIncome) + " Earned"; ;
+        shiftsComplete.text = GameControl.SaveData.shiftCounter + " Total Shifts";
+        shiftsWon.text = GameControl.SaveData.completeShifts + " Shifts Completed";
+        totalIncome.text = string.Format("{0:C}", GameControl.SaveData.totalIncome) + " Earned";
         totalCrowns.text = GameControl.SaveData.totalCrowns + " Crowns Crafted";
         totalFlowers.text = GameControl.SaveData.totalFlowers + " Flowers Harvested";
         totalSkinwalkers.text = GameControl.SaveData.totalKills + " Skinwalkers Eliminated";

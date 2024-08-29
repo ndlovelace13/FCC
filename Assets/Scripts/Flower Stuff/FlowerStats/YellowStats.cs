@@ -47,7 +47,7 @@ public class YellowStats : FlowerStats
         Debug.Log("This mf electrified");
         enemy.GetComponent<EnemyBehavior>().isElectrified = true;
         enemy.GetComponent<SpriteRenderer>().color = Color.yellow;
-        StartCoroutine(SlowApply(stunAmount, stunTime, 4, enemy));
+        SlowHandler(stunAmount, stunTime, 4, enemy);
         if (remainingTargets > 0)
         {
             EnemyBehavior[] enemyBehaviors = UnityEngine.Object.FindObjectsOfType<EnemyBehavior>();

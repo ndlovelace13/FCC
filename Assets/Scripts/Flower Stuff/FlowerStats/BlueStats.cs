@@ -88,7 +88,7 @@ public class BlueStats : FlowerStats
         }
         if (enemy.activeSelf)
         {
-            StartCoroutine(SlowApply(slowAmount, thisSlowTime, 2, enemy));
+            SlowHandler(slowAmount, thisSlowTime, 2, enemy);
             enemy.GetComponent<SpriteRenderer>().color = Color.cyan;
         }
     }

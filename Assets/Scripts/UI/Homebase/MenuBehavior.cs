@@ -49,6 +49,7 @@ public class MenuBehavior : MonoBehaviour
         //Grow on hover, maybe add outline
         if (GameControl.PlayerData.menusReady && !GameControl.PlayerData.menuActive)
         {
+            GetComponent<SizeLerp>().enabled = false;
             sizeLerp = StartCoroutine(HoverEnter());
             menuPopup.text = menuTitle;
         }

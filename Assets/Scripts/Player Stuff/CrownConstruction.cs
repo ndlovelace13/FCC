@@ -222,6 +222,49 @@ public class CrownConstruction : MonoBehaviour
         GameControl.PlayerData.crosshairActive = false;
     }
 
+    //define the behavior for resetting crown to the pre-crafted state
+    IEnumerator CraftingCancelLerp()
+    {
+        Debug.Log("Crafting Cancel Started");
+
+        Vector3 currentCrownPos = finalCrown.transform.localPosition;
+
+        float currentTime = 0f;
+        while (currentTime < 0.2f)
+        {
+            finalCrown.transform.localPosition = Vector3.Lerp(currentCrownPos, Vector3.zero, currentTime / 0.2f);
+            foreach (var flower in currentFlowers)
+            {
+                flower.gameObject.transform.localPosition = Vector3.Lerp(flower.randomCraftPos, flower.finalDocketPos, currentTime / 0.2f);
+            }
+            yield return new WaitForEndOfFrame();
+            currentTime += Time.deltaTime;
+        }
+
+        //finally allow for the skillChecking to begin
+        foreach (var flower in currentFlowers)
+        {
+            flower.gameObject.transform.localPosition = flower.finalDocketPos;
+            flower.draggable = false;
+            flower.placed = false;
+        }
+
+        skillCheckActive = false;
+
+        gameObject.GetComponentInChildren<PlayerMovement>().CraftingDone();
+        GameControl.PlayerData.crosshairActive = true;
+
+        //disable the crown spriteRenderer
+        finalCrown.GetComponent<SpriteRenderer>().enabled = false;
+
+        GetComponentInChildren<Animator>().SetBool("isCrafting", false);
+        harvestObj.docketLoaded = true;
+        GetComponentInChildren<Animator>().SetBool("isMoving", true);
+
+        yield return null;
+        
+    }
+
     IEnumerator CrownFinishLerp()
     {
         skillCheckActive = false;
@@ -294,7 +337,11 @@ public class CrownConstruction : MonoBehaviour
             gameObject.GetComponentInChildren<PlayerMovement>().CraftingDone();
             constructionReady = true;
         }*/
-
+        if (Input.GetKeyDown(KeyCode.E) && !GameControl.PlayerData.tutorialActive)
+        {
+            StartCoroutine(CraftingCancelLerp());
+        }
+        
         //the new version
         if (prevSkillCheckCount < 5)
         {
@@ -447,7 +494,7 @@ public class CrownConstruction : MonoBehaviour
             crownAnnouncement += dict[flowerStats[2].type].GetPrimaryText();
         crownAnnouncement += "Crown";
         //check for unlock here
-        id += primaryId.ToString() + insideId.ToString() + outsideId.ToString();
+        id += primaryId.ToString() + "." + insideId.ToString() + "." + outsideId.ToString();
         Crown constructedCrown = GameControl.CrownCompletion.allCrowns[id];
         if (constructedCrown.IsDiscovered())
         {

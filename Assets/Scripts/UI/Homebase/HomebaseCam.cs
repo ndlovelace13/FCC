@@ -22,6 +22,9 @@ public class HomebaseCam : MonoBehaviour
     [SerializeField] GameObject almanac;
     [SerializeField] GameObject carKeys;
 
+    //menuLerp
+    GameObject menuLerpObj;
+
     //Dialogue Stuff
     [SerializeField] GameObject phone;
     [SerializeField] GameObject speechBubble;
@@ -52,7 +55,7 @@ public class HomebaseCam : MonoBehaviour
 
     string[] postContract = new string[]
             {
-                "Finally, phew thought you were never going to sign",
+                "Finally, thought you were never going to sign",
                 "Congrats on joining the Anti-Anomaly Action Team, I was going to send a cake but we don't really have the budget",
                 "So...I may have fibbed a little in the job description. As you may have guessed by the name, the Anti-Anomaly Action Team doesn't usually handle birthday parties",
                 "The kids you signed up to deal with are a little...off, you'll see what I mean soon enough",
@@ -111,6 +114,19 @@ public class HomebaseCam : MonoBehaviour
         "This little handbook will tell you everything you need to know about the flowers you find, skinwalkers you eliminate, and plenty more",
         "Plus, I'll be sure to keep it updated as your career with us continues",
         "I look forward to working with you and keeping track of your undoubtedly many accomplishments to come"
+    };
+
+    string[] bullyDefeat = new string[]
+    {
+        "Well done, recruit! I'm genuinely impressed",
+        "That bully sure was no joke and we at the AAAT are all thrilled to see your accomplishment - as you can see I've used a golden shift report to signify your success",
+        "You may have noticed a new flower appeared when you took down the brute - keep your eye out for it in your next few shifts!",
+        "It seems to appear even less often than the uncommon flowers you've encountered - it must be pretty special!",
+        "At this time, the bully seems to be the strongest member of the skinwalker species - however, you're still under contract - it'd be a shame to stop now!",
+        "Keep investing those dollars to upgrade your working conditions, and be sure to keep donating seeds to discover all that R&D can offer you!",
+        "Now, that you've conquered the best of the skinwalkers, their increased rate of evolution suggests they may return even stronger",
+        "Even if you want to take some time off, be sure to return when new threats arrive!",
+        "Well done again, I'm proud to have you under my wing. Keep on crafting!"
     };
 
     //public bool menusReady = false;
@@ -174,7 +190,7 @@ public class HomebaseCam : MonoBehaviour
             {
                 branchDialogue = new string[]
                 {
-                    "Well done in with the training, you're a natural crown creator"
+                    "Well done with the training, you're a natural crown creator"
                 };
             }
             contractDiscussion = branchDialogue.Concat(contractDiscussion).ToArray();
@@ -190,14 +206,23 @@ public class HomebaseCam : MonoBehaviour
 
     IEnumerator UnlockChecker()
     {
+        menuLerpObj = null;
         yield return null;
+        //post-boss defeat when the player defeats the boss for the first time
+        if (GameControl.PlayerData.gameWin && !GameControl.SaveData.bullyDefeated && !GameControl.PlayerData.unlockDone)
+        {
+            GameControl.SaveData.dialogueQueue.Enqueue(bullyDefeat);
+            GameControl.SaveData.bullyDefeated = true;
+            GameControl.PlayerData.unlockDone = true;
+        }
         //unlock the catalog after the first run
-        if (GameControl.SaveData.shiftCounter == 1 && !GameControl.SaveData.catalogUnlocked)
+        if (GameControl.SaveData.shiftCounter == 1 && !GameControl.SaveData.catalogUnlocked && !GameControl.PlayerData.unlockDone)
         {
             //QUEUE DIALOGUE HERE
             GameControl.SaveData.dialogueQueue.Enqueue(catalogUnlock);
             GameControl.SaveData.catalogUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
+            menuLerpObj = catalog;
         }
         //unlock research when the player has collected their first essence seed
         if (GameControl.SaveData.highSeeds > 0 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.researchUnlocked)
@@ -206,13 +231,15 @@ public class HomebaseCam : MonoBehaviour
             phone.GetComponent<PhoneLerp>().callerKnown = false;
             GameControl.SaveData.researchUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
+            menuLerpObj = research;
         }
-        //unlock completion tracker when the player has crafted 15 different crowns
+        //unlock completion tracker when the player has crafted 20 different crowns
         if (GameControl.CrownCompletion.totalDiscovered >= 20 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.completionUnlocked)
         {
             GameControl.SaveData.dialogueQueue.Enqueue(completionUnlock);
             GameControl.SaveData.completionUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
+            menuLerpObj = completionTracker;
         }
         //unlock almanac when the player has unlocked at least one new type of flower
         if (GameControl.PlayerData.allDiscovered.Count > 4 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.almanacUnlocked)
@@ -221,6 +248,7 @@ public class HomebaseCam : MonoBehaviour
             phone.GetComponent<PhoneLerp>().callerKnown = false;
             GameControl.SaveData.almanacUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
+            menuLerpObj = almanac;
         }
 
         GameControl.SaveHandler.SaveGame();
@@ -283,6 +311,13 @@ public class HomebaseCam : MonoBehaviour
             }
         }
 
+        //check whether the shift was complete
+        if (GameControl.PlayerData.gameWin)
+        {
+            GameControl.SaveData.completeShifts++;
+            currentReport.SetCompleteShift();
+        }
+
         GameControl.SaveHandler.SaveGame();
         yield return null;
     }
@@ -342,6 +377,12 @@ public class HomebaseCam : MonoBehaviour
             catalog.SetActive(true);
         if (GameControl.SaveData.almanacUnlocked || GameControl.PlayerData.testing)
             almanac.SetActive(true);
+
+        //check shift count for 0
+        if (GameControl.SaveData.shiftCounter < 1)
+            menuLerpObj = carKeys;
+
+        StartCoroutine(MenuLerper());
         yield return null;
     }
 
@@ -377,6 +418,18 @@ public class HomebaseCam : MonoBehaviour
             phone.GetComponent<PhoneLerp>().PhoneClose();
             GameControl.PlayerData.menusReady = true;
         }  
+    }
+
+    IEnumerator MenuLerper()
+    {
+        while (true)
+        {
+            if (menuLerpObj != null && GameControl.PlayerData.menusReady && menuLerpObj.GetComponent<SizeLerp>().enabled)
+            {
+                menuLerpObj.GetComponent<SizeLerp>().Execute(true);
+            }
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void PostContract()

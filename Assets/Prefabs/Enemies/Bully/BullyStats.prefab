@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5998858682861247464}
-  - component: {fileID: 6648197801844819290}
+  - component: {fileID: 5903115748895758002}
   m_Layer: 0
-  m_Name: BasicStats
+  m_Name: BullyStats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6648197801844819290
+--- !u!114 &5903115748895758002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,27 +41,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 3897722535358710819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97212871789053c49a44f672971084e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f7f9fdb2791dfc4eb6060a1d7333b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 1003814786078272635, guid: 68ef06de361cafb49979cd312a75bbf1, type: 3}
-  maxInterval: 0.2
-  minInterval: 0.15
-  maxSpeed: 2
-  minSpeed: 1
-  maxHealth: 50
-  healthInterval: 10
-  startingEnemies: 6
-  enemyScaleAmt: 3
-  killScore: 10
-  scoreIncrease: 2
-  countScaleTime: 45
-  statsScaleTime: 30
-  type: basic
-  sprite: {fileID: -1219982013, guid: 3c573c61a2b854644a15e25a08e0dbad, type: 3}
+  enemyPrefab: {fileID: 1003814786078272635, guid: 526945e056651c148828064611db327f, type: 3}
+  maxInterval: 0
+  minInterval: 0
+  maxSpeed: 7
+  minSpeed: 7
+  speedCap: 0
+  maxHealth: 400
+  healthInterval: 0
+  startingEnemies: 1
+  enemyScaleAmt: 0
+  killScore: 300
+  scoreIncrease: 0
+  countScaleTime: 500
+  statsScaleTime: 500
+  type: bully
+  sprite: {fileID: -1266133144, guid: 6032221be7fca0f4ea1af8009704d874, type: 3}
+  projSprite: {fileID: 21300000, guid: 90ccb9a214c5fc6438a485d7956be427, type: 3}
   encountered: 0
-  title: 
-  subtext: 
-  description: 
+  title: The Bully
+  subtext: Boss Variant
+  description: This variant's imposing demeanor takes after that of a school-yard
+    bully. Rather than taking lunch money from the children it torments, this bully
+    absorbs life energy from its fellow skinwalkers. Don't blame the kid, blame the
+    parenting.
   behavior: 
   weakness: 
+  insultDebuff: 0.5
+  insultLength: 7

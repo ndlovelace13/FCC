@@ -46,6 +46,8 @@ TagManager:
   - quitMenu
   - almanac
   - coffeePool
+  - boss
+  - bossPart
   layers:
   - Default
   - TransparentFX

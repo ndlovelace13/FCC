@@ -6,7 +6,7 @@ public class SizeLerp : MonoBehaviour
 {
     [SerializeField] float sizeModifier;
     [SerializeField] float loopTime;
-    [SerializeField] bool looping = false;
+    [SerializeField] public bool looping = false;
     public bool lerping = false;
     // Start is called before the first frame update
     void Start()

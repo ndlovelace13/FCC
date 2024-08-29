@@ -22,8 +22,38 @@ public class EssenceBehavior : MonoBehaviour
             if (currentDist.magnitude < GameControl.PlayerData.pickupDist)
             {
                 pickingUp = true;
-                StartCoroutine(PlayerLerp());
+                StartCoroutine(PlayerLerp(1f));
             }
+        }
+    }
+
+    public void LootDrop()
+    {
+        StartCoroutine(LootLerp());
+    }
+
+    IEnumerator LootLerp()
+    {
+        Vector2 currentLoc = transform.localPosition;
+        Vector2 finalLootLoc = currentLoc + new Vector2(Random.Range(-3.0f, 3.0f), Random.Range(-3.0f, 3.0f));
+        float currentTime = 0f;
+        while (currentTime < 0.5f)
+        {
+            transform.localPosition = Vector2.Lerp(currentLoc, finalLootLoc, currentTime / 0.5f);
+            yield return new WaitForEndOfFrame();
+            currentTime += Time.deltaTime;
+        }
+
+        if (GameControl.PlayerData.gameWin)
+        {
+            Debug.Log("now lerping to player");
+            pickingUp = true;
+            yield return new WaitForSeconds(Random.Range(0f, 2f));
+            StartCoroutine(PlayerLerp(3f));
+        }
+        else
+        {
+            Debug.Log("not happening");
         }
     }
 
@@ -42,12 +72,12 @@ public class EssenceBehavior : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator PlayerLerp()
+    IEnumerator PlayerLerp(float lerpTime)
     {
         float time = 0f;
-        while (time < 1f)
+        while (time < lerpTime)
         {
-            transform.localPosition = Vector2.Lerp(transform.localPosition, player.transform.position, time);
+            transform.localPosition = Vector2.Lerp(transform.localPosition, player.transform.position, time / lerpTime);
             if ((transform.localPosition - player.transform.position).magnitude < 0.05f)
                 break;
             time += Time.deltaTime;

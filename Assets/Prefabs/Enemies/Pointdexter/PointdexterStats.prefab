@@ -49,7 +49,8 @@ MonoBehaviour:
   minInterval: 0.5
   maxSpeed: 3
   minSpeed: 2
-  maxHealth: 60
+  speedCap: 6
+  maxHealth: 50
   healthInterval: 15
   startingEnemies: 1
   enemyScaleAmt: 0
@@ -59,6 +60,7 @@ MonoBehaviour:
   statsScaleTime: 45
   type: point
   sprite: {fileID: -1655236253, guid: 35345c1169986ee4ab2cf76761c37ca3, type: 3}
+  projSprite: {fileID: 0}
   encountered: 0
   title: 
   subtext: 

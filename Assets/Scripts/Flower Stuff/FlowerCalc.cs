@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 
 public class FlowerData
@@ -89,12 +90,15 @@ public class FlowerCalc : MonoBehaviour
 
     //rarity shit
     static float uncommonRarity;
+    static float rareRarity;
     //float undiscoveredRarity;
     List<string> Flowers = new List<string>();
     [SerializeField] List<string> common;
     [SerializeField] List<string> uncommon;
-    List<string> undiscovered;
+    [SerializeField] List<string> rare;
     int raritySelection;
+
+    int rareSpawns = 0;
     // Start is called before the first frame update
 
     void Start()
@@ -138,14 +142,16 @@ public class FlowerCalc : MonoBehaviour
     {
         GameControl.PlayerData.discoveryDisplay = true;
         uncommonRarity = GameControl.PlayerData.uncommon;
+        rareRarity = GameControl.PlayerData.rare;
         common = GameControl.PlayerData.commonPool;
         uncommon = GameControl.SaveData.discoveredUncommon;
-        undiscovered = GameControl.PlayerData.undiscoveredUncommon;
+        rare = GameControl.SaveData.discoveredRare;
         //undiscoveredRarity = GameControl.PlayerData.undiscovered;
         totalWidth = (int)background.size.x;
         totalHeight = (int)background.size.y;
         flowerInfo = InitialCalc();
         Debug.Log(flowerInfo.Count);
+        Debug.Log("Rares: " + rareSpawns);
         visibleFlowerHandler.GetComponent<VisibleFlowers>().FlowerEstablish(flowerInfo);
         yield return null;
     }
@@ -200,8 +206,17 @@ public class FlowerCalc : MonoBehaviour
         else
         {
             rarityChoice = Random.Range(0f, 1f);
-            raritySelection = 1;
-            Flowers = uncommon;
+            if (rarityChoice < rareRarity && rare.Count > 0)
+            {
+                rareSpawns++;
+                raritySelection = 2;
+                Flowers = rare;
+            }
+            else
+            {
+                raritySelection = 1;
+                Flowers = uncommon;
+            }
         }
         //selection of a flower from the given list and spawning
         int flowerChoice = Random.Range(0, Flowers.Count);

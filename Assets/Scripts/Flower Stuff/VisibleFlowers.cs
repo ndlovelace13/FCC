@@ -235,7 +235,7 @@ public class VisibleFlowers : MonoBehaviour
         {
             if (flower == f.getFlower())
             {
-                GameObject head = f.getFlower().transform.GetChild(2).gameObject;
+                GameObject head = f.getFlower().GetComponentInChildren<FlowerBehavior>().gameObject;
                 head.transform.parent = null;
                 head.SetActive(false);
                 f.getFlower().SetActive(false);

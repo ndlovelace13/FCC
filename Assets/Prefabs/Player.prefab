@@ -495,8 +495,6 @@ GameObject:
   - component: {fileID: 2861173018192084170}
   - component: {fileID: 1377547105940834894}
   - component: {fileID: 1027482110490891573}
-  - component: {fileID: 3850106713470985190}
-  - component: {fileID: 394218078222584076}
   - component: {fileID: 8938931006307031047}
   - component: {fileID: 1018602555976014721}
   - component: {fileID: -8521360569479197397}
@@ -570,76 +568,6 @@ MonoBehaviour:
   crownAnnouncement: 
   flowerUIPool: {fileID: 0}
   craftStem: {fileID: 1713123191170323571, guid: e1a2be600d901c7468825b6988fc3646, type: 3}
---- !u!70 &3850106713470985190
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3443022955973237853}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.070562005, y: -0.14732885}
-  m_Size: {x: 0.709672, y: 2.5604348}
-  m_Direction: 0
---- !u!58 &394218078222584076
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3443022955973237853}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.078244746, y: -1}
-  serializedVersion: 2
-  m_Radius: 0.6
 --- !u!50 &8938931006307031047
 Rigidbody2D:
   serializedVersion: 4
@@ -1230,3 +1158,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerParticle: {fileID: 5614310608083154241}
+  speedBuffs: 0
