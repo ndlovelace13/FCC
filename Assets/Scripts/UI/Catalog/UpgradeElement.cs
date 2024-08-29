@@ -32,7 +32,7 @@ public class UpgradeElement : MonoBehaviour
             }
 
             //set current and cost text to reflect the variables
-            current.text = "Current Value: " + currentUpgrade.currentValue + " +" + currentUpgrade.upgradeAmount + currentUpgrade.unit;
+            current.text = "Current Value: " + currentUpgrade.currentValue.ToString("F2") + " +" + currentUpgrade.upgradeAmount.ToString("F2") + currentUpgrade.unit;
             cost.text = "Upgrade Cost: " + string.Format("{0:C}", currentUpgrade.currentPrice);
             //Debug.Log(currentUpgrade);
         }

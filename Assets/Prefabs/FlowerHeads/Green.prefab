@@ -105,10 +105,12 @@ MonoBehaviour:
   picked: 1
   growing: 0
   tier: 0
+  rarity: 0
   finalDocketPos: {x: 0, y: 0, z: 0}
   randomCraftPos: {x: 0, y: 0, z: 0}
   draggable: 0
   placed: 0
+  sashAdd: 0
 --- !u!114 &358341209870185651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +189,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 0.8
 --- !u!50 &-809860835235327840
 Rigidbody2D:
   serializedVersion: 4

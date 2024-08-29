@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
@@ -576,7 +575,7 @@ public class Bully : EnemyBehavior
         GameControl.PlayerData.score += mySpawner.killScore;
 
         GameControl.PlayerData.gameWin = true;
-        GameControl.SaveData.bullyDefeated = true;
+        //GameControl.SaveData.bullyDefeated = true;
 
         //seed stuff from 3 - 5 seeds depending on seedChahnce stat
         int seedCount = 3;

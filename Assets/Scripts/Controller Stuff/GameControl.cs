@@ -445,7 +445,7 @@ public class GameControl : MonoBehaviour
         //playerSpeed
         newUpgrade = Instantiate(upgradeObj);
         newUpgrade.transform.SetParent(transform);
-        newUpgrade.GetComponent<Upgrade>().SetValues("playerSpeed", 3f, 1.75f, 10, 0.5f, "Faster Shoes", "Increases Player Movement Speed", " m/s", icons[1]);
+        newUpgrade.GetComponent<Upgrade>().SetValues("playerSpeed", 4f, 1.75f, 10, 0.25f, "Faster Shoes", "Increases Player Movement Speed", " m/s", icons[1]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
 
         //crownSlow

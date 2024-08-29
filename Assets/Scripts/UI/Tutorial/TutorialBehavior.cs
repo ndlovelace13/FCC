@@ -230,7 +230,7 @@ public class TutorialBehavior : MonoBehaviour
         objective.color = Color.green;
         yield return new WaitForSeconds(1);
         objective.color = Color.white;
-        objective.text = "Press Space to advance/skip dialogue";
+        objective.text = "";
         PlayerDisable();
         speech.SetActive(true);
         speech.GetComponent<TextAdvancement>().setDialogue(tutorialText[GameControl.PlayerData.tutorialState]);
@@ -320,7 +320,7 @@ public class TutorialBehavior : MonoBehaviour
         //tutorialText.Add(text2);
         //tutorialText.Add(text3);
         GameControl.PlayerData.tutorialActive = true;
-        objective.text = "Press Space to advance/skip dialogue";
+        objective.text = "";
         phone.SetActive(true);
         speech.SetActive(true);
         speech.GetComponent<TextAdvancement>().setDialogue(tutorialText[GameControl.PlayerData.tutorialState]);
