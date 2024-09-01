@@ -426,7 +426,7 @@ public class ReportBehavior : MonoBehaviour
             shiftNum.text += " - Fully Completed!";
         constructionText.text = "<align=left>Crown Construction - <line-height=0>\n<align=right>+" + 
             string.Format("{0:C}", scoreBreakdown[0]) + "<line-height=1em>";
-        enemyText.text = "<align=left>Skinwalkers Eliminated - <line-height=0>\n<align=right>+" +
+        enemyText.text = "<align=left>Replicants Eliminated - <line-height=0>\n<align=right>+" +
             string.Format("{0:C}", scoreBreakdown[1]) + "<line-height=1em>";
         discoveryText.text = "<align=left>Crown Discovery - <line-height=0>\n<align=right>+" +
             string.Format("{0:C}", scoreBreakdown[2]) + "<line-height=1em>";
@@ -454,7 +454,7 @@ public class ReportBehavior : MonoBehaviour
         crownsDiscovered.text = "Crowns Discovered: " + currentReport.GetDiscoveries();
         if (currentReport.GetHighDiscoveries())
             crownsDiscovered.text += "<color=\"yellow\"> - New PB!";
-        enemiesElim.text = "Skinwalkers Eliminated: " + currentReport.GetEnemies();
+        enemiesElim.text = "Replicants Eliminated: " + currentReport.GetEnemies();
         if (currentReport.GetHighEnemies())
             enemiesElim.text += "<color=\"yellow\"> - New PB!";
         seedsCollected.text = "Essence Seeds Collected: " + currentReport.GetSeedsEarned();

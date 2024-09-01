@@ -34,7 +34,7 @@ public class PointdexterStats : EnemyStats
 
     public override string GetDescription()
     {
-        return "The Pointdexter variant is a bit more lucid than other skinwalkers - however, this intelligence has manifested in a passive aggressive personality. It prefers to pull the strings rather than take matters into their (three) hands";
+        return "The Pointdexter variant is a bit more lucid than other replicants - however, this intelligence has manifested in a passive aggressive personality. It prefers to pull the strings rather than take matters into their (three) hands";
     }
 
     public override string GetBehavior()
@@ -44,6 +44,6 @@ public class PointdexterStats : EnemyStats
 
     public override string GetWeakness()
     {
-        return "- The pointdexter is weakest before and after pointing - it can't run away\n- Freezing the skinwalker will delay its buffing powers";
+        return "- The pointdexter is weakest before and after pointing - it can't run away\n- Freezing the replicant will delay its buffing powers";
     }
 }

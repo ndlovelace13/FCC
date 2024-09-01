@@ -14,10 +14,10 @@ public class AlmanacBehavior : MonoBehaviour
     string[] almanacLines = { 
         "Be sure to turn to the back for the most important data I collect - yours!", 
         "If you ever forget how to do your job (it happens to the best of us), I included some informational pages towards the back!", 
-        "As you encounter new flowers and skinwalker variants, I'll be adding in their pages for easy reference. You can always access a page easily by clicking on the stickers on the homepage!",
+        "As you encounter new flowers and replicant variants, I'll be adding in their pages for easy reference. You can always access a page easily by clicking on the stickers on the homepage!",
         "Each flower's page features helpful information and stats about their behavior - as you discover new ways to grow their power, you can also toggle to see their updated stats!", 
         "Ever wonder what your most used flower is? Turn to the back to see - of course, I keep track of that! There are very few things about you I DON'T keep track of...",
-        "Skinwalker variant pages feature important stats, like their health, speed, how many times you've eliminated them, and how many times they've eliminated you (nothing personal, that's just the job)"
+        "Replicant variant pages feature important stats, like their health, speed, how many times you've eliminated them, and how many times they've eliminated you (nothing personal, that's just the job)"
     };
     // Start is called before the first frame update
     void Start()

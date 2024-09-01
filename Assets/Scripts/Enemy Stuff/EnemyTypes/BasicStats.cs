@@ -8,9 +8,9 @@ public class BasicStats : EnemyStats
     // Start is called before the first frame update
     void Start()
     {
-        title = "The Skinwalker";
+        title = "The Replicant";
         subtext = "Very Common Variant";
-        description = "Just your everyday child-replicating skinwalker. Below average speed, intelligence, and looks, this variant's only strength lies in numbers.";
+        description = "Just your everyday child-replicating cryptid. Below average speed, intelligence, and looks, this variant's only strength lies in numbers.";
         behavior = "This variant will relentlessly chase its closest target - whether that be you or a flower crown";
         weakness = "- Everything\n- Easily Distracted & Easily Surprised";
     }
@@ -23,7 +23,7 @@ public class BasicStats : EnemyStats
 
     public override string GetTitle()
     {
-        return "The Skinwalker";
+        return "The Replicant";
     }
 
     public override string GetSubtext()
@@ -33,7 +33,7 @@ public class BasicStats : EnemyStats
 
     public override string GetDescription()
     {
-        return "Just your everyday child-replicating skinwalker. Below average speed, intelligence, and looks, this variant's only strength lies in numbers.";
+        return "Just your everyday child-replicating cryptid. Below average speed, intelligence, and looks, this variant's only strength lies in numbers.";
     }
 
     public override string GetBehavior()

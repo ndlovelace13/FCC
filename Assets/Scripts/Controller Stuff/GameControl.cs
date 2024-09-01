@@ -457,7 +457,7 @@ public class GameControl : MonoBehaviour
         //seedChance
         newUpgrade = Instantiate(upgradeObj);
         newUpgrade.transform.SetParent(transform);
-        newUpgrade.GetComponent<Upgrade>().SetValues("seedChance", 2f, 1.75f, 10, 0.05f, "Seedier Skinwalkers", "Increased Chance of Essence Seed Drop on Kill", "%", icons[3]);
+        newUpgrade.GetComponent<Upgrade>().SetValues("seedChance", 2f, 1.75f, 10, 0.05f, "Seedier Replicants", "Increased Chance of Essence Seed Drop on Kill", "%", icons[3]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
 
         //pickupDist
@@ -934,7 +934,7 @@ public class GameControl : MonoBehaviour
 
         //then fade to black
         GameObject blackoutObj = Instantiate(BlackoutPrefab);
-        blackoutObj.GetComponent<BlackoutBehavior>().BeginBlackout("You Eliminated the Skinwalker Threat", "...For Now...", "Homebase");
+        blackoutObj.GetComponent<BlackoutBehavior>().BeginBlackout("You Eliminated the Replicant Threat", "...For Now...", "Homebase");
         unlockDone = false;
 
         yield return null;

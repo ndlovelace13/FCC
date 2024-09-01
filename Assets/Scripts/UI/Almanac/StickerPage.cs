@@ -30,7 +30,7 @@ public class StickerPage : Page
             subheader.text = "-- Flowers --";
         else
         {
-            subheader.text = "-- Skinwalkers --";
+            subheader.text = "-- Replicants --";
         }
         if (!stickersOrganized)
             StickerOrganize();

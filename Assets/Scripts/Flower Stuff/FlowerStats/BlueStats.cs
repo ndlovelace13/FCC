@@ -15,7 +15,7 @@ public class BlueStats : FlowerStats
     // Start is called before the first frame update
     void Start()
     {
-        description = "Like the Fiery Flower, the Frozen Flower catches some flak for being \"derivative\" (thanks a lot, Italian Plumbers). However, there's nothing quite like crafting a cold one - unless you're a skinwalker. It's pretty unpleasant for them.";
+        description = "Like the Fiery Flower, the Frozen Flower catches some flak for being \"derivative\" (thanks a lot, Italian Plumbers). However, there's nothing quite like crafting a cold one - unless you're a replicant. It's pretty unpleasant for them.";
         effects = "Freeze - Afflicted enemies will be frozen in place and slowed down while thawing out";
     }
 

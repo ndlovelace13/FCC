@@ -65,7 +65,7 @@ public class HomebaseCam : MonoBehaviour
 
     string[] catalogUnlock = new string[]
     {
-        "So...skinwalker children...apologies for the lack of transparency - company rules",
+        "So...replicant children...apologies for the lack of transparency - company rules",
         "Although, to be fair, if you actually read the terms and conditions, you'd know that this job isn't exactly a cake walk",
         "Lucky for you, we need all the help we can get - you'll never have to worry about being ready for the next shift",
         "As a new recruit, I'm not really allowed to say how its possible, only that you'll always wake up here in perfect condition if anything happens out on the job",
@@ -80,11 +80,11 @@ public class HomebaseCam : MonoBehaviour
     {
         "Hello, hello, hello, Mr. Rookie!!!",
         "A little (grumpy) birdy told me you stumbled upon an essence seed out in the field",
-        "Of course, as a newbie to this whole \"skinwalker elimination\" thing, I can't really explain the intricacies of their corpses dropping seeds",
+        "Of course, as a newbie to this whole \"replicant elimination\" thing, I can't really explain the intricacies of their corpses dropping seeds",
         "To tell you the truth, we don't really have a clear answer yet either...fascinating specimens, aren't they?",
         "Thus, as a member of the Anti-Anomaly Action Team's Research and Development division, I implore you to collect as many of those seeds as you can find!",
         "I've passed along a handy-dandy little booklet of Research Drives that you can donate the seeds you find to!",
-        "It's a win-win situation - my colleagues and I get to dig into the skinwalker species and YOU get to mess around with the cool new things we discover!",
+        "It's a win-win situation - my colleagues and I get to dig into the replicant species and YOU get to mess around with the cool new things we discover!",
         "Go ahead, send us those seeds of yours, and we promise to make your job much more interesting",
         "Oh yeah, the name's Jill Frye, yes the one from the science show...oh, the good old days"
     };
@@ -108,10 +108,10 @@ public class HomebaseCam : MonoBehaviour
         "The name's Clark Shotknee, Archivist for the Anti-Anomaly Action Team and botanist extraordinaire",
         "I actually used to be a field agent like you...\n\nat least before the accident",
         "My job here at the AAAT is to keep track of all kinds of information and statistics",
-        "When I heard about this upcropping of seed-dropping skinwalkers and fatal flora, my botanist brain just had to request this assignment",
+        "When I heard about this upcropping of seed-dropping replicants and fatal flora, my botanist brain just had to request this assignment",
         "Lucky for you, I landed the position! Although, that was never in doubt with my stellar history as an archivist",
         "While you've been hard at work over these past few shifts, I've also been putting together a bit of a surprise for you - The Almanac!",
-        "This little handbook will tell you everything you need to know about the flowers you find, skinwalkers you eliminate, and plenty more",
+        "This little handbook will tell you everything you need to know about the flowers you find, replicants you eliminate, and plenty more",
         "Plus, I'll be sure to keep it updated as your career with us continues",
         "I look forward to working with you and keeping track of your undoubtedly many accomplishments to come"
     };
@@ -122,9 +122,9 @@ public class HomebaseCam : MonoBehaviour
         "That bully sure was no joke and we at the AAAT are all thrilled to see your accomplishment - as you can see I've used a golden shift report to signify your success",
         "You may have noticed a new flower appeared when you took down the brute - keep your eye out for it in your next few shifts!",
         "It seems to appear even less often than the uncommon flowers you've encountered - it must be pretty special!",
-        "At this time, the bully seems to be the strongest member of the skinwalker species - however, you're still under contract - it'd be a shame to stop now!",
+        "At this time, the bully seems to be the strongest member of the replicant species - however, you're still under contract - it'd be a shame to stop now!",
         "Keep investing those dollars to upgrade your working conditions, and be sure to keep donating seeds to discover all that R&D can offer you!",
-        "Now, that you've conquered the best of the skinwalkers, their increased rate of evolution suggests they may return even stronger",
+        "Now, that you've conquered the best of the replicants, their increased rate of evolution suggests they may return even stronger",
         "Even if you want to take some time off, be sure to return when new threats arrive!",
         "Well done again, I'm proud to have you under my wing. Keep on crafting!"
     };

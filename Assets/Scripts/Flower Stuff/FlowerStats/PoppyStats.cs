@@ -9,7 +9,7 @@ public class PoppyStats : FlowerStats
     // Start is called before the first frame update
     void Start()
     {
-        description = "Despite its undeniable beauty, the poppy contains a powerful narcotic that is very effective in slowing the skinwalker threat. Unrelated to its potency in the field, its seeds are delicious - just don't eat too many before a drug test";
+        description = "Despite its undeniable beauty, the poppy contains a powerful narcotic that is very effective in slowing the replicant threat. Unrelated to its potency in the field, its seeds are delicious - just don't eat too many before a drug test";
         effects = "Sedation - Afflicted enemies are permanently slowed - this effect can only be removed by a buffing enemy";
     }
 

@@ -17,7 +17,7 @@ public class YellowStats : FlowerStats
     // Start is called before the first frame update
     void Start()
     {
-        description = "Little is known about the conductivity of skinwalkers and how exactly the Electric Flower is able to arc its power between hosts. However, R&D did find out pretty quickly not to prod this flower with a fork. We wish Daryl a speedy recovery.";
+        description = "Little is known about the conductivity of replicants and how exactly the Electric Flower is able to arc its power between hosts. However, R&D did find out pretty quickly not to prod this flower with a fork. We wish Daryl a speedy recovery.";
         effects = "Stun - Afflicted enemies will be slowed for a short period of time\nChain LIghtning - Nearby enemies will also be affected by stun and any other crown augmentations";
     }
 

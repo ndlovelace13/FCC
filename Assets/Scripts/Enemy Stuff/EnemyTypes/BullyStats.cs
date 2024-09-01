@@ -31,7 +31,7 @@ public class BullyStats : EnemyStats
 
     public override string GetDescription()
     {
-        return "This variant's imposing demeanor takes after that of a school-yard bully. Rather than taking lunch money from the children it torments, this bully absorbs life energy from its fellow skinwalkers. Don't blame the kid, blame the parenting.";
+        return "This variant's imposing demeanor takes after that of a school-yard bully. Rather than taking lunch money from the children it torments, this bully absorbs life energy from its fellow replicants. Don't blame the kid, blame the parenting.";
     }
 
     public override string GetBehavior()
@@ -41,6 +41,6 @@ public class BullyStats : EnemyStats
 
     public override string GetWeakness()
     {
-        return "- Eliminating or stalling skinwalkers when the Bully is spawning will decrease it's maximum health\n- Its hook attack leaves the Bully stationary and vulnerable - damaging its fist will also injure the target itself";
+        return "- Eliminating or stalling replicants when the Bully is spawning will decrease it's maximum health\n- Its hook attack leaves the Bully stationary and vulnerable - damaging its fist will also injure the target itself";
     }
 }

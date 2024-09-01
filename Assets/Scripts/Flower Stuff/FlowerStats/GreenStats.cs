@@ -23,7 +23,7 @@ public class GreenStats : FlowerStats
     // Start is called before the first frame update
     void Start()
     {
-        description = "The Toxic Flower is universally known to be quite effective against skinwalkers, though it is referred to by different names in some regions - notably the \"League\" and \"Rainbow\" flowers. The origins of these alternative names is unclear.";
+        description = "The Toxic Flower is universally known to be quite effective against replicants, though it is referred to by different names in some regions - notably the \"League\" and \"Rainbow\" flowers. The origins of these alternative names is unclear.";
         effects = "Poison - Afflicted enemies will be slowed and take poison damage over time\nCloud Burst - Projectiles leave behind dissapating toxic clouds as they travel";
     }
 
