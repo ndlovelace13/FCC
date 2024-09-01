@@ -103,6 +103,7 @@ MonoBehaviour:
   speed: 5
   crownActive: 0
   crownArmed: 0
+  attacking: 0
 --- !u!70 &-983435056909554813
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -318,7 +318,14 @@ public abstract class EnemyBehavior : MonoBehaviour
         StartCoroutine(StateReset());
         AkSoundEngine.PostEvent("EnemyKilled", gameObject);
         scoreNotif.GetComponent<ScoreNotification>().newFeed("Enemy Defeated | ", mySpawner.killScore);
-        GameControl.PlayerData.enemyScore += mySpawner.killScore;
+
+        //Spawn coins
+        GameObject moneySpawner = GameControl.PlayerData.moneySpawner.GetPooledObject();
+        moneySpawner.transform.position = transform.position;
+        moneySpawner.SetActive(true);
+        moneySpawner.GetComponent<CoinSpawn>().Payout(mySpawner.killScore, ScoreCategory.enemy);
+
+        //GameControl.PlayerData.enemyScore += mySpawner.killScore;
         GameControl.PlayerData.shiftEnemies++;
 
         //increment the total defeatedCount & shift defeated
@@ -327,7 +334,8 @@ public abstract class EnemyBehavior : MonoBehaviour
 
         //int currentScore = PlayerPrefs.GetInt("totalScore");
         //PlayerPrefs.SetInt("totalScore", currentScore + destructScore);
-        GameControl.PlayerData.score += mySpawner.killScore;
+        
+        //GameControl.PlayerData.score += mySpawner.killScore;
         if (Random.Range(0f, 1f) < GameControl.PlayerData.seedChance)
         {
             GameObject newSeed = seedPool.GetComponent<ObjectPool>().GetPooledObject();

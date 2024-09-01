@@ -10,7 +10,8 @@ public class CoinSpawn : MonoBehaviour
     void Start()
     {
         //grab the coin pool from the gameControl object here - store as a variable in gamecontrol as well
-        StartCoroutine(CoinTesting());
+        coinPool = GameControl.PlayerData.moneyPool;
+        //StartCoroutine(CoinTesting());
     }
 
     // Update is called once per frame
@@ -19,7 +20,7 @@ public class CoinSpawn : MonoBehaviour
         
     }
 
-    IEnumerator CoinTesting()
+    /*IEnumerator CoinTesting()
     {
         while (true)
         {
@@ -28,15 +29,16 @@ public class CoinSpawn : MonoBehaviour
         }
         
 
-    }
+    }*/
 
-    public void Payout(int amount)
+    public void Payout(int amount, ScoreCategory cat)
     {
         //input is the amount of coins necessary to spawn
-        StartCoroutine(CoinSpawning(amount));
+        Debug.Log("Spawner paying out: " + amount);
+        StartCoroutine(CoinSpawning(amount, cat));
     }
 
-    IEnumerator CoinSpawning(int amount)
+    IEnumerator CoinSpawning(int amount, ScoreCategory cat)
     {
         yield return null;
         int remainingCoins = amount;
@@ -53,11 +55,12 @@ public class CoinSpawn : MonoBehaviour
             {
                 GameObject coin = coinPool.GetPooledObject();
                 coin.SetActive(true);
-                coin.GetComponent<CoinBehavior>().CoinLerp(transform.position, transform.position);
+                coin.GetComponent<CoinBehavior>().CoinLerp(transform.position, transform.position, cat);
             }
 
             remainingCoins -= currentCoins;
             yield return new WaitForEndOfFrame();
         }
+        gameObject.SetActive(false);
     }
 }

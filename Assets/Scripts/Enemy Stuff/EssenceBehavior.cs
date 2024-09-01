@@ -1,34 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class EssenceBehavior : MonoBehaviour
+public class EssenceBehavior : Item
 {
-    GameObject player;
-    bool pickingUp = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        //player = GameObject.FindWithTag("Player");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!pickingUp)
-        {
-            Vector2 currentDist = player.transform.position - transform.position;
-            //Debug.Log(currentDist.magnitude);
-            if (currentDist.magnitude < GameControl.PlayerData.pickupDist)
-            {
-                pickingUp = true;
-                StartCoroutine(PlayerLerp(1f));
-            }
-        }
-    }
-
     public void LootDrop()
     {
+        placed = false;
         StartCoroutine(LootLerp());
     }
 
@@ -43,6 +22,7 @@ public class EssenceBehavior : MonoBehaviour
             yield return new WaitForEndOfFrame();
             currentTime += Time.deltaTime;
         }
+        placed = true;
 
         if (GameControl.PlayerData.gameWin)
         {
@@ -57,11 +37,12 @@ public class EssenceBehavior : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+        lerpTarget = player.transform;
         transform.localScale = Vector3.one * 0.25f;
-        player = GameObject.FindWithTag("Player").GetComponentInChildren<PlayerMovement>().gameObject;
-        pickingUp = false;
+        placed = true;
         GetComponent<SizeLerp>().lerping = false;
         GetComponent<SizeLerp>().Execute(true);
     }
@@ -72,22 +53,14 @@ public class EssenceBehavior : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator PlayerLerp(float lerpTime)
+
+    protected override void AssignValue()
     {
-        float time = 0f;
-        while (time < lerpTime)
-        {
-            transform.localPosition = Vector2.Lerp(transform.localPosition, player.transform.position, time / lerpTime);
-            if ((transform.localPosition - player.transform.position).magnitude < 0.05f)
-                break;
-            time += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
         GameControl.SaveData.essenceCount++;
         GameControl.PlayerData.shiftSeeds++;
         //first seed is picked up
         if (!GameControl.SaveData.firstSeed)
-           GameControl.SaveData.firstSeed = true;
-        gameObject.SetActive(false);
+            GameControl.SaveData.firstSeed = true;
+        base.AssignValue();
     }
 }

@@ -267,6 +267,10 @@ public class GameControl : MonoBehaviour
     public Dictionary<string, SavedEnemyStats> savedEnemyDict;
     public int newEnemyTime = 60;
 
+    //money stuff
+    public ObjectPool moneyPool;
+    public ObjectPool moneySpawner;
+
     //cursor vs. crosshair
     public bool crosshairActive = false;
 
@@ -702,6 +706,8 @@ public class GameControl : MonoBehaviour
             sash.SetActive(false);
         }
         DiscoveredPooling();
+        moneyPool.Pooling();
+        moneySpawner.Pooling();
 
         //Reset the flower use counters
         flowerUse = new Dictionary<string, int>();

@@ -94,13 +94,21 @@ public class CrownConstruction : MonoBehaviour
             //PlayerPrefs.SetInt("totalScore", currentScore + crownScore);
             if (!GameControl.PlayerData.tutorialActive)
             {
-                GameControl.PlayerData.score += crownScore;
-                GameControl.PlayerData.constructionScore += crownScore;
+                //GameControl.PlayerData.score += crownScore;
+                //GameControl.PlayerData.constructionScore += crownScore;
                 GameControl.PlayerData.shiftCrowns++;
+                GameObject moneySpawner = GameControl.PlayerData.moneySpawner.GetPooledObject();
+                moneySpawner.transform.position = transform.position;
+                moneySpawner.SetActive(true);
+                moneySpawner.GetComponent<CoinSpawn>().Payout(crownScore, ScoreCategory.construction);
                 if (crownDiscovered)
                 {
-                    GameControl.PlayerData.score += crownDiscoveryScore;
-                    GameControl.PlayerData.discoveryScore += crownDiscoveryScore;
+                    //GameControl.PlayerData.score += crownDiscoveryScore;
+                    //GameControl.PlayerData.discoveryScore += crownDiscoveryScore;
+                    moneySpawner = GameControl.PlayerData.moneySpawner.GetPooledObject();
+                    moneySpawner.transform.position = transform.position;
+                    moneySpawner.SetActive(true);
+                    moneySpawner.GetComponent<CoinSpawn>().Payout(crownDiscoveryScore, ScoreCategory.discovery);
                 }
             }
             if (crownDiscovered)
@@ -113,8 +121,11 @@ public class CrownConstruction : MonoBehaviour
                 crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement);
             AkSoundEngine.PostEvent("CraftingDone", gameObject);
             scoreNotif.GetComponent<ScoreNotification>().newFeed("Crown Construction | ", crownScore);
-            //finalCrown.GetComponent<SpriteRenderer>().enabled = true;
             
+
+            
+            //finalCrown.GetComponent<SpriteRenderer>().enabled = true;
+
             gameObject.GetComponent<CrownThrowing>().CompletedCrown(finalCrown, range);
             //TODO - switch hardcoded augments to passing actualAugs dict
             foreach (var aug in actualAugs)

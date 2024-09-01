@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 228346828096061805}
   - component: {fileID: 1459612083958673078}
   - component: {fileID: 5783538252221588449}
+  - component: {fileID: 292887291337596477}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: enemy
@@ -271,6 +272,19 @@ MonoBehaviour:
   unloadTriggerList: 958ca0ea
   bankNameInternal: 
   valueGuidInternal: 
+--- !u!114 &292887291337596477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003814786078272635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d262e565027b98c409ca02262c52cff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPool: {fileID: 0}
 --- !u!1 &2186241190138067228
 GameObject:
   m_ObjectHideFlags: 0

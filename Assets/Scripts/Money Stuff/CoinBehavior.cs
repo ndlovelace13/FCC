@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinBehavior : MonoBehaviour
+public enum ScoreCategory
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    construction,
+    discovery,
+    enemy,
+    other
+}
 
-    // Update is called once per frame
-    void Update()
+public class CoinBehavior : Item
+{
+    ScoreCategory cat;
+    [SerializeField] int value = 1;
+    protected override void OnEnable()
     {
-        
+        base.OnEnable();
+        lerpTarget = player.transform.root;
     }
-
-    public void CoinLerp(Vector3 startPos, Vector3 endPos)
+    public void CoinLerp(Vector3 startPos, Vector3 endPos, ScoreCategory scoreCat)
     {
+        cat = scoreCat;
         StartCoroutine(ActualCoinLerp(startPos, endPos));
     }
 
@@ -29,25 +33,40 @@ public class CoinBehavior : MonoBehaviour
 
 
         //randomly assign a landing position
-        float targetMag = Random.Range(1f, 2f);
-        Vector2 targetAngle = new Vector2(Mathf.Cos(Random.Range(0, 2 * Mathf.PI)), Mathf.Sin(Random.Range(0, 2 * Mathf.PI)));
-        float targetX = endPos.x + Random.Range(0.25f, 2f) * (Random.Range(0, 2) * 2 - 1);
-        float targetY = endPos.y + Random.Range(0f, 2f) * (Random.Range(0, 2) * 2 - 1);
-        float targetHeight = Random.Range(1f, 3f);
+        //float targetMag = Random.Range(1f, 2f);
+        //Vector2 targetAngle = new Vector2(Mathf.Cos(Random.Range(0, 2 * Mathf.PI)), Mathf.Sin(Random.Range(0, 2 * Mathf.PI)));
+        float xVel = Random.Range(0f, 3f) * (Random.Range(0, 2) * 2 - 1);
+        float yVel = Random.Range(5f, 10f);
+        float accel = -10f;
 
-        Vector2 targetPos = endPos + targetAngle * targetMag;
+        //Vector2 targetPos = endPos + targetAngle * targetMag;
 
         //randomly assign a rotation speed and starting rotation
         transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360f));
-        float rotSpeed = Random.Range(0.1f, 3f) * (Random.Range(0, 2) * 2 - 1);
+        float rotSpeed = Random.Range(1f, 3f) * (Random.Range(0, 2) * 2 - 1);
 
 
         while (currentTime < targetTime)
         {
-            transform.position = Vector2.Lerp(startPos, targetPos, currentTime / targetTime);
+            float yFunc = accel * (Mathf.Pow(currentTime, 2)) + yVel * currentTime;
+            transform.position = new Vector2(startPos.x + xVel * currentTime, startPos.y + yFunc);
             transform.localRotation = Quaternion.Euler(0, 0, transform.localRotation.eulerAngles.z + (360f * Time.deltaTime * rotSpeed));
             currentTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        placed = true;
+    }
+
+    protected override void AssignValue()
+    {
+        GameControl.PlayerData.score += value;
+        switch (cat)
+        {
+            case ScoreCategory.construction: GameControl.PlayerData.constructionScore += value; break;
+            case ScoreCategory.discovery: GameControl.PlayerData.discoveryScore += value; break;
+            case ScoreCategory.enemy: GameControl.PlayerData.enemyScore += value; break;
+            case ScoreCategory.other: GameControl.PlayerData.otherScore += value; break;
+        }
+        base.AssignValue();
     }
 }

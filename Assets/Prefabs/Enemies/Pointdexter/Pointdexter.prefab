@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5783538252221588449}
   - component: {fileID: 6664602478661858038}
   - component: {fileID: 163464877424082007}
+  - component: {fileID: 3520313788573153301}
   m_Layer: 0
   m_Name: Pointdexter
   m_TagString: enemy
@@ -275,6 +276,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3520313788573153301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003814786078272635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d262e565027b98c409ca02262c52cff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPool: {fileID: 0}
 --- !u!1 &2186241190138067228
 GameObject:
   m_ObjectHideFlags: 0
