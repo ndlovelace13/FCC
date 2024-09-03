@@ -14,14 +14,20 @@ public class CoinBehavior : Item
 {
     ScoreCategory cat;
     [SerializeField] int value = 1;
+
+    [SerializeField] Sprite penny;
+    [SerializeField] Sprite nickel;
+    [SerializeField] Sprite quarter;
+
     protected override void OnEnable()
     {
         base.OnEnable();
         lerpTarget = player.transform.root;
     }
-    public void CoinLerp(Vector3 startPos, Vector3 endPos, ScoreCategory scoreCat)
+    public void CoinLerp(Vector3 startPos, Vector3 endPos, ScoreCategory scoreCat, int val)
     {
         cat = scoreCat;
+        CoinType(val);
         StartCoroutine(ActualCoinLerp(startPos, endPos));
     }
 
@@ -55,6 +61,18 @@ public class CoinBehavior : Item
             yield return new WaitForEndOfFrame();
         }
         placed = true;
+    }
+
+    protected void CoinType(int val)
+    {
+        value = val;
+        switch (val)
+        {
+            case 1: GetComponent<SpriteRenderer>().sprite = penny; break;
+            case 5: GetComponent<SpriteRenderer>().sprite = nickel; break;
+            case 25: GetComponent<SpriteRenderer>().sprite = quarter; break;
+            default: Debug.Log("monetary amount not yet assigned"); break;
+        }
     }
 
     protected override void AssignValue()

@@ -84,57 +84,10 @@ public class CrownConstruction : MonoBehaviour
             GetComponentInChildren<Animator>().SetBool("isCrafting", true);
         }
         //activated when the crown is fully crafted - calculates the score and resets for more harvesting
-        if (constructionReady == true)
+        /*if (constructionReady == true)
         {
-            GetComponentInChildren<Animator>().SetBool("isCrafting", false);
-            int crownScore = (int) (Construction() * GameControl.PlayerData.crownMult);
-            constructionReady = false;
-            Debug.Log(crownScore);
-            //int currentScore = PlayerPrefs.GetInt("totalScore");
-            //PlayerPrefs.SetInt("totalScore", currentScore + crownScore);
-            if (!GameControl.PlayerData.tutorialActive)
-            {
-                //GameControl.PlayerData.score += crownScore;
-                //GameControl.PlayerData.constructionScore += crownScore;
-                GameControl.PlayerData.shiftCrowns++;
-                GameObject moneySpawner = GameControl.PlayerData.moneySpawner.GetPooledObject();
-                moneySpawner.transform.position = transform.position;
-                moneySpawner.SetActive(true);
-                moneySpawner.GetComponent<CoinSpawn>().Payout(crownScore, ScoreCategory.construction);
-                if (crownDiscovered)
-                {
-                    //GameControl.PlayerData.score += crownDiscoveryScore;
-                    //GameControl.PlayerData.discoveryScore += crownDiscoveryScore;
-                    moneySpawner = GameControl.PlayerData.moneySpawner.GetPooledObject();
-                    moneySpawner.transform.position = transform.position;
-                    moneySpawner.SetActive(true);
-                    moneySpawner.GetComponent<CoinSpawn>().Payout(crownDiscoveryScore, ScoreCategory.discovery);
-                }
-            }
-            if (crownDiscovered)
-            {
-                GameControl.SaveData.newDiscoveries++;
-                crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement, Color.green);
-                scoreNotif.GetComponent<ScoreNotification>().newFeed("New Crown Discovered | ", crownDiscoveryScore);
-            }
-            else
-                crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement);
-            AkSoundEngine.PostEvent("CraftingDone", gameObject);
-            scoreNotif.GetComponent<ScoreNotification>().newFeed("Crown Construction | ", crownScore);
             
-
-            
-            //finalCrown.GetComponent<SpriteRenderer>().enabled = true;
-
-            gameObject.GetComponent<CrownThrowing>().CompletedCrown(finalCrown, range);
-            //TODO - switch hardcoded augments to passing actualAugs dict
-            foreach (var aug in actualAugs)
-                Debug.Log("Augment " + aug.Key + " " + aug.Value);
-            finalCrown.GetComponent<CrownAttack>().SetProjStats(projRange, damage, projType, actualAugs, numProjs, tier);
-            //crownHeld = true;
-            //reactivate the crosshair
-            GameControl.PlayerData.crosshairActive = true;
-        }
+        }*/
         //triggers when the skillcheck is active - not ideal but may be necessary for the tutorial state checking
         if (skillCheckActive)
         {
@@ -280,19 +233,103 @@ public class CrownConstruction : MonoBehaviour
     {
         skillCheckActive = false;
         gameObject.GetComponentInChildren<PlayerMovement>().CraftingDone();
-        constructionReady = true;
+        //constructionReady = true;
 
-        Vector3 currentPos = finalCrown.transform.position;
+        Vector3 currentPos = finalCrown.transform.localPosition;
         //Debug.Log(currentPos + " " + transform.position);
 
+        //lerp to the raise ahead anim
         float currentTime = 0f;
-        while (currentTime < 0.2f)
+        float currentCamSize = Camera.main.orthographicSize;
+        float lerpLength = 0.4f;
+        while (currentTime < lerpLength)
         {
-            finalCrown.transform.position = Vector3.Lerp(currentPos, transform.position, currentTime / 0.2f);
-            finalCrown.transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 0.6f, currentTime / 0.2f);
+            finalCrown.transform.localPosition = Vector3.Lerp(currentPos, Vector3.zero, currentTime / lerpLength);
+            finalCrown.transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 0.8f, currentTime / lerpLength);
+            Camera.main.orthographicSize = Mathf.Lerp(currentCamSize, currentCamSize * 0.75f, currentTime / lerpLength);
             currentTime += Time.deltaTime;
+            Time.timeScale = Mathf.Lerp(1, 0.65f, currentTime / lerpLength);
             yield return new WaitForEndOfFrame();
         }
+
+        //slow and present the name and money
+        currentTime = 0f;
+        currentPos = finalCrown.transform.position;
+        GetComponentInChildren<Animator>().SetBool("isCrafting", false);
+        int crownScore = (int)(Construction() * GameControl.PlayerData.crownMult);
+        //reactivate the crosshair
+        GameControl.PlayerData.crosshairActive = true;
+        //constructionReady = false;
+        Debug.Log(crownScore);
+        //int currentScore = PlayerPrefs.GetInt("totalScore");
+        //PlayerPrefs.SetInt("totalScore", currentScore + crownScore);
+
+        yield return new WaitForSeconds(0.05f);
+        
+        if (crownDiscovered)
+        {
+            GameControl.SaveData.newDiscoveries++;
+            crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement, Color.green);
+            scoreNotif.GetComponent<ScoreNotification>().newFeed("New Crown Discovered | ", crownDiscoveryScore);
+        }
+        else
+            crownNotif.GetComponent<ScoreNotification>().newFeed(crownAnnouncement);
+        AkSoundEngine.PostEvent("CraftingDone", gameObject);
+        scoreNotif.GetComponent<ScoreNotification>().newFeed("Crown Construction | ", crownScore);
+
+
+
+        //finalCrown.GetComponent<SpriteRenderer>().enabled = true;
+
+        gameObject.GetComponent<CrownThrowing>().CompletedCrown(finalCrown, range);
+        //TODO - switch hardcoded augments to passing actualAugs dict
+        foreach (var aug in actualAugs)
+            Debug.Log("Augment " + aug.Key + " " + aug.Value);
+        finalCrown.GetComponent<CrownAttack>().SetProjStats(projRange, damage, projType, actualAugs, numProjs, tier);
+        //crownHeld = true;
+        
+
+
+
+        yield return new WaitForSeconds(0.15f);
+
+        if (!GameControl.PlayerData.tutorialActive)
+        {
+            //GameControl.PlayerData.score += crownScore;
+            //GameControl.PlayerData.constructionScore += crownScore;
+            GameControl.PlayerData.shiftCrowns++;
+            GameObject moneySpawner = GameControl.PlayerData.moneySpawner.GetPooledObject();
+            moneySpawner.transform.SetParent(finalCrown.transform);
+            moneySpawner.transform.localPosition = Vector3.zero;
+            moneySpawner.SetActive(true);
+            moneySpawner.GetComponent<CoinSpawn>().Payout(crownScore, ScoreCategory.construction);
+            if (crownDiscovered)
+            {
+                //GameControl.PlayerData.score += crownDiscoveryScore;
+                //GameControl.PlayerData.discoveryScore += crownDiscoveryScore;
+                moneySpawner = GameControl.PlayerData.moneySpawner.GetPooledObject();
+                moneySpawner.transform.SetParent(finalCrown.transform);
+                moneySpawner.transform.localPosition = Vector3.zero;
+                moneySpawner.SetActive(true);
+                moneySpawner.GetComponent<CoinSpawn>().Payout(crownDiscoveryScore, ScoreCategory.discovery);
+            }
+        }
+
+        yield return new WaitForSeconds(0.25f);
+
+        //lerp to hold position and back to full speed
+        while (currentTime < lerpLength)
+        {
+            finalCrown.transform.position = Vector3.Lerp(currentPos, transform.position, currentTime / lerpLength);
+            finalCrown.transform.localScale = Vector3.Lerp(Vector3.one * 0.8f, Vector3.one * 0.6f, currentTime / lerpLength);
+            Camera.main.orthographicSize = Mathf.Lerp(currentCamSize * 0.75f, currentCamSize, currentTime / lerpLength);
+            currentTime += Time.deltaTime;
+            Time.timeScale = Mathf.Lerp(0.65f, 1, currentTime / lerpLength);
+            yield return new WaitForEndOfFrame();
+        }
+        
+
+        
 
         //set things up for the reckoning when done
         //Instantiation of new crown

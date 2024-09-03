@@ -663,7 +663,7 @@ MonoBehaviour:
   enemySpawnPrefab: {fileID: 5356731414288089438, guid: 230f3e16254910d4abe21bdedad81e84, type: 3}
   newEnemyTime: 60
   moneyPool: {fileID: 1246453620}
-  moneySpawner: {fileID: 1246453620}
+  moneySpawner: {fileID: 228944091}
   crosshairActive: 1
 --- !u!4 &271687010
 Transform:

@@ -1787,6 +1787,7 @@ MonoBehaviour:
   - blue
   - green
   - yellow
+  rare: []
 --- !u!114 &1824308847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2135,7 +2136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5123464050770747551, guid: a7496a85adbaad44b8dfbeb32c6363d8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 273
+      value: 325
       objectReference: {fileID: 0}
     - target: {fileID: 5123464050770747551, guid: a7496a85adbaad44b8dfbeb32c6363d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
