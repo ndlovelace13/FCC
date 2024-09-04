@@ -281,11 +281,7 @@ public class CrownConstruction : MonoBehaviour
 
         //finalCrown.GetComponent<SpriteRenderer>().enabled = true;
 
-        gameObject.GetComponent<CrownThrowing>().CompletedCrown(finalCrown, range);
-        //TODO - switch hardcoded augments to passing actualAugs dict
-        foreach (var aug in actualAugs)
-            Debug.Log("Augment " + aug.Key + " " + aug.Value);
-        finalCrown.GetComponent<CrownAttack>().SetProjStats(projRange, damage, projType, actualAugs, numProjs, tier);
+        
         //crownHeld = true;
         
 
@@ -305,6 +301,7 @@ public class CrownConstruction : MonoBehaviour
             moneySpawner.GetComponent<CoinSpawn>().Payout(crownScore, ScoreCategory.construction);
             if (crownDiscovered)
             {
+                yield return new WaitForSeconds(0.15f);
                 //GameControl.PlayerData.score += crownDiscoveryScore;
                 //GameControl.PlayerData.discoveryScore += crownDiscoveryScore;
                 moneySpawner = GameControl.PlayerData.moneySpawner.GetPooledObject();
@@ -327,9 +324,13 @@ public class CrownConstruction : MonoBehaviour
             Time.timeScale = Mathf.Lerp(0.65f, 1, currentTime / lerpLength);
             yield return new WaitForEndOfFrame();
         }
-        
 
-        
+        gameObject.GetComponent<CrownThrowing>().CompletedCrown(finalCrown, range);
+        //TODO - switch hardcoded augments to passing actualAugs dict
+        foreach (var aug in actualAugs)
+            Debug.Log("Augment " + aug.Key + " " + aug.Value);
+        finalCrown.GetComponent<CrownAttack>().SetProjStats(projRange, damage, projType, actualAugs, numProjs, tier);
+
 
         //set things up for the reckoning when done
         //Instantiation of new crown

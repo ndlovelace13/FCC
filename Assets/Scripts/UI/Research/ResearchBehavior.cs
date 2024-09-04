@@ -54,6 +54,11 @@ public class ResearchBehavior : MonoBehaviour
                 PurchaseLineAssign();
             GameControl.PlayerData.donationMade = false;
         }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            ReturnToEnd();
+        }
     }
 
     private int nextSlot()

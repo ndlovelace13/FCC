@@ -85,6 +85,7 @@ public class CoinBehavior : Item
             case ScoreCategory.enemy: GameControl.PlayerData.enemyScore += value; break;
             case ScoreCategory.other: GameControl.PlayerData.otherScore += value; break;
         }
+        GameObject.FindWithTag("MoneyCombo").GetComponent<MoneyCounter>().MoneyAdded(value);
         base.AssignValue();
     }
 }

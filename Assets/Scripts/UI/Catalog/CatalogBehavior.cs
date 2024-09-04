@@ -51,6 +51,11 @@ public class CatalogBehavior : MonoBehaviour
             GameControl.PlayerData.purchaseMade = false;
             PurchaseLineAssign();
         }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            ReturnToEnd();
+        }
     }
 
     private int nextSlot()

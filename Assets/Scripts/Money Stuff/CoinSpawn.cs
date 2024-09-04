@@ -6,6 +6,7 @@ using UnityEngine;
 public class CoinSpawn : MonoBehaviour
 {
     int maxCoins = 30;
+    [SerializeField] GameObject notif;
     [SerializeField] ObjectPool coinPool;
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,11 @@ public class CoinSpawn : MonoBehaviour
     {
         //input is the amount of coins necessary to spawn
         Debug.Log("Spawner paying out: " + amount);
+
+        //spawn money popup
+        GameObject newNotif = Instantiate(notif, transform.position + new Vector3(0, 0.5f), Quaternion.identity);
+        newNotif.GetComponent<DamageNotif>().Creation("+ " + string.Format("{0:C}", (float)amount / 100f), Color.green);
+
         StartCoroutine(CoinSpawning(amount, cat));
     }
 

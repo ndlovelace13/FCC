@@ -28,7 +28,10 @@ public class AlmanacBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Homebase();
+        }
     }
 
     IEnumerator NewLineAssign()

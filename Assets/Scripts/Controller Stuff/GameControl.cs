@@ -132,6 +132,7 @@ public class GameControl : MonoBehaviour
     public bool shiftJustEnded = false;
     public bool continuePressed = false;
     public bool balanceUpdated = false;
+    public bool gameVarsSet = false;
 
     public bool loading = false;
     public bool gameOver = false;
@@ -293,33 +294,39 @@ public class GameControl : MonoBehaviour
     {
         SaveHandler.DeleteSaveFile();
         SaveData = new SaveData();
-        SetFlowers();
-        EnemyDict();
-        UpgradeInit();
-        UpgradeApply();
-        ResearchInit();
+        if (!gameVarsSet)
+        {
+            SetFlowers();
+            EnemyDict();
+            UpgradeInit();
+            UpgradeApply();
+            ResearchInit();
+            CrownCompletion.PermutationEst();
+            AlmanacInit();
+            gameVarsSet = true;
+        }
         //init shiftReports list if one doesn't exist
         SaveData.shiftReports = new List<ShiftReport>();
-        CrownCompletion.PermutationEst();
-        AlmanacInit();
         continuePressed = true;
     }
 
     public void LoadGame()
     {
         SaveHandler.LoadGame();
-        //Restore flower unlocks
-        SetFlowers();
-        EnemyDict();
-        //Restore the Upgrades & Research
-        UpgradeInit();
-        UpgradeApply();
-        ResearchInit();
-        CrownCompletion.PermutationEst();
-        AlmanacInit();
+        if (!gameVarsSet)
+        {
+            //Restore flower unlocks
+            SetFlowers();
+            EnemyDict();
+            //Restore the Upgrades & Research
+            UpgradeInit();
+            UpgradeApply();
+            ResearchInit();
+            CrownCompletion.PermutationEst();
+            AlmanacInit();
+        }
         continuePressed = true;
-        //Restore the Discovery Stuff
-
+        gameVarsSet = true;
     }
 
     private void SetFlowers()

@@ -7,15 +7,22 @@ using UnityEngine;
 public class TextAdvancement : MonoBehaviour
 {
     [SerializeField] TMP_Text speechBubble;
+    [SerializeField] GameObject spaceToSkip;
     string[] dialogue;
     string currentLine;
+    string alphaTag = "<alpha=#00>";
     int index = 0;
     bool skipText = false;
+    public bool skippable = false;
     // Start is called before the first frame update
     void Start()
     {
         //currentLine = "My name is Hugh Mungus - Hugh Mungus what? - Hugh Mungus";
         //StartCoroutine(speech());
+        if (!skippable)
+        {
+            spaceToSkip.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -65,11 +72,11 @@ public class TextAdvancement : MonoBehaviour
         var talkSound = AkSoundEngine.PostEvent("DialogueStart", gameObject);
         //AkSoundEngine.Seek(talkSound, Random.Range(0f, 1f), false);
         GameControl.PlayerData.speaking = true;
-        speechBubble.text = "";
+        speechBubble.text = alphaTag + currentLine;
         for (int i = 0; i < currentLine.Length; i++)
         {
             yield return new WaitForSeconds(0.05f);
-            speechBubble.text += currentLine[i];
+            speechBubble.text = currentLine.Substring(0, i+1) + alphaTag + currentLine.Substring(i+1);
             if (skipText)
             {
                 speechBubble.text = currentLine;

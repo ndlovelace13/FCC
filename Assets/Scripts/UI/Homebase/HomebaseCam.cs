@@ -242,7 +242,7 @@ public class HomebaseCam : MonoBehaviour
             menuLerpObj = completionTracker;
         }
         //unlock almanac when the player has unlocked at least one new type of flower
-        if (GameControl.PlayerData.allDiscovered.Count > 4 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.almanacUnlocked)
+        if (GameControl.SaveData.shiftCounter > 1 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.almanacUnlocked)
         {
             GameControl.SaveData.dialogueQueue.Enqueue(almanacUnlock);
             phone.GetComponent<PhoneLerp>().callerKnown = false;
