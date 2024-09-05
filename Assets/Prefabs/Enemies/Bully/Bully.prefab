@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shadow: {fileID: 1389098257366031348}
+  rb2D: {fileID: 228346828096061805}
   type: bully
   health: 0
   maxHealth: 400
@@ -218,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d262e565027b98c409ca02262c52cff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notif: {fileID: 0}
   coinPool: {fileID: 0}
 --- !u!1 &2186241190138067228
 GameObject:

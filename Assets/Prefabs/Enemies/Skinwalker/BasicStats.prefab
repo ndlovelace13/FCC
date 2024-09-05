@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1003814786078272635, guid: 68ef06de361cafb49979cd312a75bbf1, type: 3}
-  maxInterval: 0.2
-  minInterval: 0.15
-  maxSpeed: 2
-  minSpeed: 1
-  speedCap: 5
+  maxInterval: 0.5
+  minInterval: 0.25
+  maxSpeed: 3.5
+  minSpeed: 2.75
+  speedCap: 7.5
   maxHealth: 30
   healthInterval: 10
   startingEnemies: 6

@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public abstract class EnemyBehavior : MonoBehaviour
 {
     [SerializeField] public Transform shadow;
+    [SerializeField] public Rigidbody2D rb2D;
 
     public string type;
     public int health;
@@ -32,7 +33,7 @@ public abstract class EnemyBehavior : MonoBehaviour
     float maxSpeed;
     [SerializeField] public float backupSpeed;
     float speedCooldown = 15f;
-    float speedIncrement = 0.95f;
+    float speedIncrement = 0.925f;
     public float speedMod = 1f;
 
 

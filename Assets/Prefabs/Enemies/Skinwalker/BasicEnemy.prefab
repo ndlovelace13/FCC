@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1459612083958673078}
   - component: {fileID: 5783538252221588449}
   - component: {fileID: 292887291337596477}
+  - component: {fileID: 3736622382265683046}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: enemy
@@ -156,7 +157,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1003814786078272635}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -179,9 +180,9 @@ CircleCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 1
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1, y: -0.6}
+  m_Offset: {x: 0.1, y: -0.1}
   serializedVersion: 2
   m_Radius: 0.45
 --- !u!50 &228346828096061805
@@ -192,7 +193,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1003814786078272635}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -224,6 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shadow: {fileID: 1389098257366031348}
+  rb2D: {fileID: 228346828096061805}
   type: basic
   health: 0
   maxHealth: 30
@@ -284,7 +286,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d262e565027b98c409ca02262c52cff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notif: {fileID: 0}
   coinPool: {fileID: 0}
+--- !u!250 &3736622382265683046
+PointEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003814786078272635}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceMagnitude: 10
+  m_ForceVariation: 0
+  m_DistanceScale: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 0
+  m_AngularDrag: 0
 --- !u!1 &2186241190138067228
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,6 +597,10 @@ PrefabInstance:
     - target: {fileID: 4473606477811331541, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473606477811331541, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5599003621512615538, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
       propertyPath: m_LocalScale.x

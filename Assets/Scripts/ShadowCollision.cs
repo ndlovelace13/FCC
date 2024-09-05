@@ -19,7 +19,7 @@ public class ShadowCollision : MonoBehaviour
     {
         if (transform.parent.tag == "enemy" || transform.parent.tag == "boss")
             transform.parent.GetComponent<EnemyBehavior>().CollisionCheck(other); 
-        if (transform.parent.tag == "flower" && other.gameObject.transform.parent.tag == "Player" && !GameControl.PlayerData.loading)
+        if (transform.parent.tag == "flower" && other.gameObject.transform.root.tag == "Player" && !GameControl.PlayerData.loading)
         {
             FlowerStats thisFlower = transform.parent.GetComponentInChildren<FlowerStats>();
             GameControl.PlayerData.flowerStatsDict[thisFlower.type].OnHitboxEnter(transform.parent.gameObject);

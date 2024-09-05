@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class BasicEnemy : EnemyBehavior
 {
@@ -47,7 +46,7 @@ public class BasicEnemy : EnemyBehavior
                 //Debug.Log(target.position);
                 Vector2 direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
                 direction.Normalize();
-                gameObject.GetComponent<Rigidbody2D>().velocity = direction * moveSpeed;
+                rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
             }
             //death check
             if (health <= 0)
