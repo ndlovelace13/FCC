@@ -696,7 +696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9202098316419635173, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
       propertyPath: m_TagString
-      value: enemy
+      value: shadow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

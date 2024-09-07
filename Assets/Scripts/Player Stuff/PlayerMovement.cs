@@ -121,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("what the sigma");
-        if (other.gameObject.tag == "enemy")
+        if (other.gameObject.tag == "shadow" && other.transform.root.tag == "enemy")
         {
             //Debug.Log(other.gameObject.transform.position);
             //Debug.Log(transform.position);

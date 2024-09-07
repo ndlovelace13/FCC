@@ -68,8 +68,9 @@ public class SaveData
     public int crownTimes;
 
 
-
+    //item unlocks
     public int sashSlots = 3;
+    public int repellentCount = 1;
 
     //Balances
     public int essenceCount = 0;
@@ -205,6 +206,7 @@ public class GameControl : MonoBehaviour
     public int shiftEnemies = 0;
     public int shiftCrowns = 0;
     public int shiftDiscoveries = 0;
+    public int remainingRepellent = 0;
 
     //specific score totals
     public int discoveryScore = 0;
@@ -689,6 +691,9 @@ public class GameControl : MonoBehaviour
         enemyScore = 0;
         otherScore = 0;
         unlockDone = false;
+
+        Debug.Log("resetting repellents to: " + SaveData.repellentCount);
+        remainingRepellent = SaveData.repellentCount;
 
         crosshairActive = true;
 

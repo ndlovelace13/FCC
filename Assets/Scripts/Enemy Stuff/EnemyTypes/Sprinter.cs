@@ -56,7 +56,7 @@ public class Sprinter : EnemyBehavior
                 //Debug.Log(target.position);
                 Vector2 direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
                 direction.Normalize();
-                gameObject.GetComponent<Rigidbody2D>().velocity = direction * moveSpeed;
+                rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
             }
             if (health <= 0)
             {
@@ -126,7 +126,8 @@ public class Sprinter : EnemyBehavior
                     //SpeedUp(realStats.sprintSpeed);
                     Vector2 direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
                     direction.Normalize();
-                    gameObject.GetComponent<Rigidbody2D>().velocity = direction * backupSpeed * realStats.sprintSpeed;
+                    rb2D.MovePosition(rb2D.position + direction * moveSpeed * realStats.sprintSpeed * Time.deltaTime);
+                    //gameObject.GetComponent<Rigidbody2D>().velocity = direction * backupSpeed * realStats.sprintSpeed;
                     Debug.Log("NOW SPRINTING");
                     GetComponent<Animator>().SetInteger("SprinterState", 2);
                 }
@@ -183,7 +184,8 @@ public class Sprinter : EnemyBehavior
         justReset = false;
         Vector2 direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
         direction.Normalize();
-        gameObject.GetComponent<Rigidbody2D>().velocity = direction * backupSpeed;
+        rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
+        //gameObject.GetComponent<Rigidbody2D>().velocity = direction * backupSpeed;
         GetComponent<Animator>().SetInteger("SprinterState", 0);
         return base.StateReset();
     }

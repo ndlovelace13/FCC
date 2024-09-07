@@ -7,10 +7,13 @@ public class PlayerStatus : MonoBehaviour
     Dictionary<string, int> actualAugs = new Dictionary<string, int>();
     [SerializeField] public Animator playerParticle;
     public int speedBuffs = 0;
+
+    public bool inDanger = false;
+    public bool repellentMoment = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(RepellentChecker());
     }
 
     // Update is called once per frame
@@ -97,4 +100,51 @@ public class PlayerStatus : MonoBehaviour
         player.speed /= bully.insultDebuff;
         playerParticle.SetInteger("augment", 0);
     }
+
+    IEnumerator RepellentChecker()
+    {
+        while (true)
+        {
+            if (!GameControl.PlayerData.loading && !GameControl.PlayerData.gameOver && !GameControl.PlayerData.gamePaused)
+            {
+                if (inDanger)
+                    Debug.Log("Among us balls");
+                //Debug.Log(GameControl.PlayerData.remainingRepellent);
+                if (inDanger && !repellentMoment && GameControl.PlayerData.remainingRepellent > 0)
+                {
+                    repellentMoment = true;
+                    StartCoroutine(RepellentBegin());
+                }
+                if (!inDanger && repellentMoment)
+                {
+                    repellentMoment = false;
+                    StartCoroutine(RepellentEnd());
+                }
+            }
+            yield return new WaitForEndOfFrame();
+        }
+
+    }
+
+    IEnumerator RepellentBegin()
+    {
+        Debug.Log("we do a little repelling");
+        yield return null;
+    }
+
+    IEnumerator RepellentEnd()
+    {
+        Debug.Log("no more repelling");
+        yield return null;
+    }
+
+    public void DangerOn()
+    {
+        inDanger = true;
+    }
+
+    public void DangerOff()
+    {
+        inDanger = false;
+    }    
 }

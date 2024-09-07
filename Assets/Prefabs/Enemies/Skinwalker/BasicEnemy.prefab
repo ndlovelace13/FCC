@@ -184,7 +184,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.1, y: -0.1}
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.6
 --- !u!50 &228346828096061805
 Rigidbody2D:
   serializedVersion: 4
@@ -664,7 +664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9202098316419635173, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
       propertyPath: m_TagString
-      value: enemy
+      value: shadow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

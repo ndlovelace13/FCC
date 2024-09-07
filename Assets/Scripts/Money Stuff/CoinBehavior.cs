@@ -61,6 +61,21 @@ public class CoinBehavior : Item
             yield return new WaitForEndOfFrame();
         }
         placed = true;
+
+        Quaternion currentRot = transform.localRotation;
+        float currentZ = currentRot.z;
+        float targetZ;
+        if (Mathf.Abs(currentZ - 180f) < Mathf.Abs(currentZ - 0f))
+            targetZ = 180f;
+        else
+            targetZ = 0f;
+        currentTime = 0f;
+        while (currentTime < 0.25f)
+        {
+            transform.localRotation = Quaternion.Lerp(currentRot, Quaternion.Euler(0, 0, targetZ), currentTime / 0.25f);
+            currentTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }    
     }
 
     protected void CoinType(int val)

@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shadow: {fileID: 1389098257366031348}
+  rb2D: {fileID: 0}
   type: bully
   health: 0
   maxHealth: 0
@@ -138,6 +139,7 @@ MonoBehaviour:
   mySpawner: {fileID: 0}
   moveSpeed: 0
   backupSpeed: 10
+  speedMod: 1
   surprised: 0
   preSurpriseVel: {x: 0, y: 0, z: 0}
   notif: {fileID: 7155992749287334371, guid: 57602ac8dbb3e3441931b13c9bcfa0b8, type: 3}
@@ -149,6 +151,7 @@ MonoBehaviour:
   isElectrified: 0
   electricPassed: 0
   isBlinded: 0
+  poppyCount: 0
   wasKilled: 0
   isBoss: 0
   activeBoss: {fileID: 0}
@@ -503,7 +506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9202098316419635173, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
       propertyPath: m_TagString
-      value: enemy
+      value: shadow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -881,7 +884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9202098316419635173, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
       propertyPath: m_TagString
-      value: enemy
+      value: shadow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

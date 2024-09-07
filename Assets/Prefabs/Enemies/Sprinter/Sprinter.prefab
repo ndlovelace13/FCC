@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5783538252221588449}
   - component: {fileID: 5110070605700836507}
   - component: {fileID: -3223752900376184805}
+  - component: {fileID: 1972809715602474962}
   m_Layer: 0
   m_Name: Sprinter
   m_TagString: enemy
@@ -156,7 +157,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1003814786078272635}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -179,11 +180,11 @@ CircleCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 1
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1, y: -0.6}
+  m_Offset: {x: 0.15, y: -0.2}
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.6
 --- !u!50 &228346828096061805
 Rigidbody2D:
   serializedVersion: 4
@@ -287,6 +288,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notif: {fileID: 0}
   coinPool: {fileID: 0}
+--- !u!250 &1972809715602474962
+PointEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003814786078272635}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceMagnitude: 15
+  m_ForceVariation: 0
+  m_DistanceScale: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 0
+  m_AngularDrag: 0
 --- !u!1 &2186241190138067228
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,7 +660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9202098316419635173, guid: d705708b2c45ca64188ce081e319b5b4, type: 3}
       propertyPath: m_TagString
-      value: enemy
+      value: shadow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
