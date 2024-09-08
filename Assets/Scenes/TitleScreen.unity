@@ -551,10 +551,12 @@ MonoBehaviour:
   shiftJustEnded: 0
   continuePressed: 0
   balanceUpdated: 0
+  gameVarsSet: 0
   loading: 0
   gameOver: 0
   gameWin: 0
   gamePaused: 0
+  repellentMode: 0
   menusReady: 0
   menuActive: 0
   unlockDone: 0
@@ -613,6 +615,7 @@ MonoBehaviour:
   shiftEnemies: 0
   shiftCrowns: 0
   shiftDiscoveries: 0
+  remainingRepellent: 0
   discoveryScore: 0
   constructionScore: 0
   enemyScore: 0

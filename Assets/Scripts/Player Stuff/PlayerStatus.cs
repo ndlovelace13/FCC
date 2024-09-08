@@ -6,13 +6,29 @@ public class PlayerStatus : MonoBehaviour
 {
     Dictionary<string, int> actualAugs = new Dictionary<string, int>();
     [SerializeField] public Animator playerParticle;
+    [SerializeField] RepellentRange repellentRange;
     public int speedBuffs = 0;
 
+    //repellent stuff
     public bool inDanger = false;
     public bool repellentMoment = false;
+    public float repellentLerpTime = 0.25f;
+    public float repellentModeTimeScale = 0.2f;
+    public float repellentModeZoom = 0.5f;
+    [SerializeField] GameObject repellentObj;
+
+    public float repMaxZoom;
+    public float ogZoom;
+
+    public float ogTimeScale;
+    public float repTimeScale;
     // Start is called before the first frame update
     void Start()
     {
+        repMaxZoom = Camera.main.orthographicSize * repellentModeZoom;
+        ogZoom = Camera.main.orthographicSize;
+
+        ogTimeScale = Time.timeScale;
         StartCoroutine(RepellentChecker());
     }
 
@@ -107,8 +123,11 @@ public class PlayerStatus : MonoBehaviour
         {
             if (!GameControl.PlayerData.loading && !GameControl.PlayerData.gameOver && !GameControl.PlayerData.gamePaused)
             {
-                if (inDanger)
-                    Debug.Log("Among us balls");
+                //Debug.Log("Running");
+                if (repellentRange.enemiesInRange > 0)
+                    inDanger = true;
+                else
+                    inDanger = false;
                 //Debug.Log(GameControl.PlayerData.remainingRepellent);
                 if (inDanger && !repellentMoment && GameControl.PlayerData.remainingRepellent > 0)
                 {
@@ -120,31 +139,75 @@ public class PlayerStatus : MonoBehaviour
                     repellentMoment = false;
                     StartCoroutine(RepellentEnd());
                 }
+                //add a check here for using repellent - or start a coroutine after repellent begin
             }
             yield return new WaitForEndOfFrame();
         }
 
     }
 
+    //lerp in to the repellent option
     IEnumerator RepellentBegin()
     {
         Debug.Log("we do a little repelling");
+        GameControl.PlayerData.repellentMode = true;
+        repellentObj.SetActive(true);
+        
+        //get the current values of everything
+        float currentTimeScale = Time.timeScale;
+        float currentCamZoom = Camera.main.orthographicSize;
+        float currentTime = 0f;
+        while (currentTime < repellentLerpTime)
+        {
+            Time.timeScale = Mathf.Lerp(currentTimeScale, repellentModeTimeScale, currentTime / repellentLerpTime);
+            Camera.main.orthographicSize = Mathf.Lerp(currentCamZoom, repMaxZoom, currentTime / repellentLerpTime);
+            currentTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+            if (!inDanger)
+            {
+                yield break;
+            }
+        }
+        Camera.main.orthographicSize = repMaxZoom;
+
         yield return null;
     }
 
+    //lerp out of the repellent option
     IEnumerator RepellentEnd()
     {
         Debug.Log("no more repelling");
+
+        //get the current values of everything
+        float currentTimeScale = Time.timeScale;
+        float currentCamZoom = Camera.main.orthographicSize;
+        float currentTime = 0f;
+        while (currentTime < repellentLerpTime)
+        {
+            Time.timeScale = Mathf.Lerp(currentTimeScale, ogTimeScale, currentTime / repellentLerpTime);
+            Camera.main.orthographicSize = Mathf.Lerp(currentCamZoom, ogZoom, currentTime / repellentLerpTime);
+            currentTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+            if (inDanger)
+            {
+                yield break;
+            }
+        }
+        Camera.main.orthographicSize = ogZoom;
+        repellentObj.SetActive(false);
+        GameControl.PlayerData.repellentMode = false;
         yield return null;
     }
 
     public void DangerOn()
     {
         inDanger = true;
+        //Debug.Log("Danger on");
     }
 
     public void DangerOff()
     {
         inDanger = false;
+        //Debug.Log("Danger off");
     }    
 }

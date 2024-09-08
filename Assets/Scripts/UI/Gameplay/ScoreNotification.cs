@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScoreNotification : MonoBehaviour
@@ -9,6 +10,8 @@ public class ScoreNotification : MonoBehaviour
     List<string> newNotifs;
     string notifications;
     Color ogColor;
+
+    [SerializeField] bool crownAnnounce = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +27,9 @@ public class ScoreNotification : MonoBehaviour
         {
             notifications += notif + "\n";
         }
-        if (!GameControl.PlayerData.gameOver)
+        if (GameControl.PlayerData.repellentMode && crownAnnounce)
+            feedText.text = "Use a Replicant Repellent!";
+        else if (!GameControl.PlayerData.gameOver)
             feedText.text = notifications;
         else
             feedText.text = "";

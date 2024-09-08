@@ -6,22 +6,20 @@ public class RepellentRange : MonoBehaviour
 {
     [SerializeField] GameObject shadow;
     public PlayerStatus status;
-    int enemiesInRange = 0;
+    public int enemiesInRange = 0;
 
     bool statusSet = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        status = transform.root.GetComponentInChildren<PlayerStatus>();
-        statusSet = true;
-        //status = shadow.GetComponent<PlayerStatus>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (statusSet)
+        /*if (statusSet)
         {
             if (enemiesInRange > 0)
             {
@@ -33,7 +31,7 @@ public class RepellentRange : MonoBehaviour
             {
                 status.DangerOff();
             }
-        }
+        }*/
         
     }
 

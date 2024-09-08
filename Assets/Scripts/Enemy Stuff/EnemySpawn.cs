@@ -186,7 +186,7 @@ public class EnemySpawn : MonoBehaviour
             yield return new WaitForEndOfFrame();
             foreach (var enemy in enemies)
             {
-                if (enemy.GetComponent<EnemyBehavior>().isActive && !isVisible(enemy) && !GameControl.PlayerData.bossSpawning)
+                if (enemy.GetComponent<EnemyBehavior>().isActive && !isVisible(enemy) && !GameControl.PlayerData.bossSpawning && !GameControl.PlayerData.repellentMode)
                     StartCoroutine(Respawn(enemy));
             }
         }

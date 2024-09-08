@@ -139,6 +139,7 @@ public class GameControl : MonoBehaviour
     public bool gameOver = false;
     public bool gameWin = false;
     public bool gamePaused = false;
+    public bool repellentMode = false;
 
     public bool menusReady = false;
     public bool menuActive = false;

@@ -771,6 +771,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shadow: {fileID: 8190960292287519935}
+  status: {fileID: 3719800162118964237}
+  enemiesInRange: 0
 --- !u!1 &6490589540602285821
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,6 +983,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shadow: {fileID: 0}
+  status: {fileID: 0}
+  enemiesInRange: 0
 --- !u!1 &8314208078677303592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,6 +1311,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerParticle: {fileID: 5614310608083154241}
+  repellentRange: {fileID: 3193702057912636553}
   speedBuffs: 0
   inDanger: 0
   repellentMoment: 0
+  repellentLerpTime: 0.5
+  repellentModeTimeScale: 0.2
+  repellentModeZoom: 0.25
+  repMaxZoom: 0
+  ogZoom: 0
+  ogTimeScale: 0
+  repTimeScale: 0

@@ -19,5 +19,7 @@ public class ScoreText : MonoBehaviour
         scoreText.text = "Earnings: " + string.Format("{0:C}", GameControl.PlayerData.score / 100f); 
         if (GameControl.SaveData.firstSeed)
             scoreText.text += "\nEssence: " + GameControl.SaveData.essenceCount + " <sprite=1>";
+        //transition this to images instead at some point
+        scoreText.text += "\nRepellent: " + GameControl.PlayerData.remainingRepellent;
     }
 }
