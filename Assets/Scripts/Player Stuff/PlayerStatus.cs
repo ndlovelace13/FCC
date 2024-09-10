@@ -169,6 +169,7 @@ public class PlayerStatus : MonoBehaviour
             }
         }
         Camera.main.orthographicSize = repMaxZoom;
+        GameControl.PlayerData.crosshairActive = false;
 
         yield return null;
     }
@@ -196,6 +197,8 @@ public class PlayerStatus : MonoBehaviour
         Camera.main.orthographicSize = ogZoom;
         repellentObj.SetActive(false);
         GameControl.PlayerData.repellentMode = false;
+        GameControl.PlayerData.crosshairActive = true;
+
         yield return null;
     }
 

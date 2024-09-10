@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class RepellentBehavior : MonoBehaviour
+public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerUpHandler
 {
     bool clicked = false;
+    Vector2 startMousePos;
+    Vector2 currentMousePos;
+    [SerializeField] RectTransform rect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,29 +35,38 @@ public class RepellentBehavior : MonoBehaviour
         {
             if (clicked)
             {
-                GameControl.PlayerData.remainingRepellent--;
-                break;
+                currentMousePos = Input.mousePosition;
+                rect.position = currentMousePos;
+                //TODO implement shake checker and counter
             }
+            else
+                yield break;
             yield return new WaitForEndOfFrame();
         }
         yield return null;
         gameObject.SetActive(false);
     }
 
-    private void OnMouseDown()
+    public void OnPointerEnter(PointerEventData pointerEventData)
     {
-        clicked = true;
+        //Output to console the GameObject's name and the following message
+        Debug.Log("Cursor Entering " + name + " GameObject");
     }
 
-    private void OnMouseEnter()
+    public void OnPointerDown(PointerEventData pointerEventData)
     {
-        Debug.Log("Mouse Detected");
-        GameControl.PlayerData.crosshairActive = false;
+        if (!clicked)
+        {
+            startMousePos = pointerEventData.position;
+            clicked = true;
+            StartCoroutine(ShakeChecker());
+        }
+        
     }
 
-    private void OnMouseExit()
+    public void OnPointerUp(PointerEventData pointerEventData)
     {
-        GameControl.PlayerData.crosshairActive = true;
+        clicked = false;
     }
 
     //TODO - lerp up and down on repellent mode

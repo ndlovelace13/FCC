@@ -1317,7 +1317,8 @@ MonoBehaviour:
   repellentMoment: 0
   repellentLerpTime: 0.5
   repellentModeTimeScale: 0.2
-  repellentModeZoom: 0.25
+  repellentModeZoom: 0.5
+  repellentObj: {fileID: 0}
   repMaxZoom: 0
   ogZoom: 0
   ogTimeScale: 0
