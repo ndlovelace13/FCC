@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,7 +10,13 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
     bool clicked = false;
     Vector2 startMousePos;
     Vector2 currentMousePos;
+    Vector2 prevMousePos;
     [SerializeField] RectTransform rect;
+    Vector3 startingPos;
+    float maxDist = 200f;
+    bool firstAppearance = true;
+    float shakeDist = 0f;
+    float requiredShake = 3000f;
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +30,17 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
         
     }
 
-    private void Awake()
+    private void OnEnable()
     {
+        if (firstAppearance)
+        {
+            startingPos = rect.position;
+            firstAppearance = false;
+        }
+        else
+            rect.position = startingPos;
         clicked = false;
+        shakeDist = 0f;
         StartCoroutine(ShakeChecker());
     }
 
@@ -36,15 +51,27 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
             if (clicked)
             {
                 currentMousePos = Input.mousePosition;
-                rect.position = currentMousePos;
-                //TODO implement shake checker and counter
+                
+                Vector3 mouseDiff = prevMousePos - currentMousePos;
+                Vector3 ogMouseDiff = startMousePos - currentMousePos;
+                Vector3 ogDist = startingPos - rect.position - mouseDiff;
+                if (ogMouseDiff.sqrMagnitude < Mathf.Pow(maxDist, 2))
+                {
+                    rect.position -= mouseDiff;
+                    shakeDist += mouseDiff.magnitude;
+                }
+                if (shakeDist > requiredShake)
+                {
+                    StartCoroutine(RepellentActivate());
+                    break;
+                }
             }
             else
                 yield break;
             yield return new WaitForEndOfFrame();
+            prevMousePos = currentMousePos;
         }
         yield return null;
-        gameObject.SetActive(false);
     }
 
     public void OnPointerEnter(PointerEventData pointerEventData)
@@ -58,6 +85,7 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
         if (!clicked)
         {
             startMousePos = pointerEventData.position;
+            prevMousePos = startMousePos;
             clicked = true;
             StartCoroutine(ShakeChecker());
         }
@@ -67,6 +95,41 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
     public void OnPointerUp(PointerEventData pointerEventData)
     {
         clicked = false;
+        shakeDist = 0f;
+    }
+
+    IEnumerator RepellentActivate()
+    {
+        //kill the lerping effects
+        GetComponent<SizeLerp>().enabled = false;
+        GetComponent<ShakeLerp>().enabled = false;
+
+        //decrement repellent var
+        GameControl.PlayerData.remainingRepellent--;
+
+        //Get the docket location for lerping
+        GameObject player = GameObject.FindWithTag("Player");
+        Transform[] children = player.GetComponentsInChildren<Transform>();
+        Transform docket = children.Where(child => child.tag == "docket").ToArray()[0];
+
+        Vector3 finalPos = Camera.main.WorldToScreenPoint(docket.position);
+        Vector3 currentPos = rect.position;
+
+        //Shrink, spin, and lerp to the player
+        float currentTime = 0f;
+        while (currentTime < 1f)
+        {
+            rect.position = Vector3.Lerp(currentPos, finalPos, currentTime);
+            rect.rotation = Quaternion.Euler(0, 0, rect.rotation.eulerAngles.z + 360f * currentTime);
+            rect.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 0.2f, currentTime);
+            currentTime += Time.unscaledDeltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        rect.position = finalPos;
+        yield return new WaitForSeconds(0.5f);
+        gameObject.SetActive(false);
+        yield return null;
     }
 
     //TODO - lerp up and down on repellent mode

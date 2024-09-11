@@ -1576,8 +1576,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   looping: 1
-  lerpAngle: 30
-  lerpTime: 2
+  lerpAngle: 2
+  lerpTime: 1.5
 --- !u!1 &996063011
 GameObject:
   m_ObjectHideFlags: 0
