@@ -49,6 +49,7 @@ TagManager:
   - boss
   - bossPart
   - MoneyCombo
+  - docket
   layers:
   - Default
   - TransparentFX
