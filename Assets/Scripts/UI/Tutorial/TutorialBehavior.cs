@@ -150,7 +150,8 @@ public class TutorialBehavior : MonoBehaviour
         GameControl.PlayerData.tutorialActive = false;
         GameControl.PlayerData.tutorialState = 0;
         GameControl.SaveData.tutorialComplete = true;
-        SceneManager.LoadScene("Homebase");
+        GameObject blackout = Instantiate(GameControl.PlayerData.BlackoutPrefab);
+        blackout.GetComponent<BlackoutBehavior>().BeginBlackout("", " ", "Homebase", 1.5f);
     }
 
     IEnumerator checkCondition()

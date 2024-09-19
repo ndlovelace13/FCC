@@ -88,7 +88,9 @@ public class StartScreenTransition : MonoBehaviour
                 SceneManager.LoadScene("Tutorial");
             else
                 SceneManager.LoadScene("Gameplay");*/
-            SceneManager.LoadScene("Homebase");
+            GameObject blackout = Instantiate(GameControl.PlayerData.BlackoutPrefab);
+            blackout.GetComponent<BlackoutBehavior>().BeginBlackout("", " ", "Homebase", 1.5f);
+            //SceneManager.LoadScene("Homebase");
         }
     }
 
@@ -103,7 +105,9 @@ public class StartScreenTransition : MonoBehaviour
             }
             else if (GameControl.SaveData.firstRun)
                 SceneManager.LoadScene("Tutorial");*/
-            SceneManager.LoadScene("Homebase");
+            GameObject blackout = Instantiate(GameControl.PlayerData.BlackoutPrefab);
+            blackout.GetComponent<BlackoutBehavior>().BeginBlackout("", " ", "Homebase", 1.5f);
+            //SceneManager.LoadScene("Homebase");
         }
     }
 

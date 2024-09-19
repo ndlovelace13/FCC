@@ -10,6 +10,7 @@ public class BlackoutBehavior : MonoBehaviour
     [SerializeField] Image background;
     [SerializeField] TMP_Text topText;
     [SerializeField] TMP_Text bottomText;
+    float blackoutLength;
 
     // Start is called before the first frame update
     void Start()
@@ -23,10 +24,11 @@ public class BlackoutBehavior : MonoBehaviour
         
     }
 
-    public void BeginBlackout(string text1, string text2, string nextScene)
+    public void BeginBlackout(string text1, string text2, string nextScene, float time)
     {
         topText.text = text1;
         bottomText.text = text2;
+        blackoutLength = time;
         StartCoroutine(BlackingOut(nextScene));
     }
 
@@ -34,9 +36,9 @@ public class BlackoutBehavior : MonoBehaviour
     {
         float alpha = 0f;
         float time = 0f;
-        while (time < 3f)
+        while (time < blackoutLength)
         {
-            alpha = Mathf.Lerp(0f, 1f, time / 3f);
+            alpha = Mathf.Lerp(0f, 1f, time / blackoutLength);
             background.color = new Color(0, 0, 0, alpha);
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();

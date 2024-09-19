@@ -23,6 +23,7 @@ public abstract class EnemyBehavior : MonoBehaviour
     protected Transform player;
     protected Transform crown;
     [SerializeField] protected Transform target;
+    protected Vector2 direction;
 
     public EnemySpawn mySpawner;
     protected EnemyStats myStats;
@@ -40,6 +41,9 @@ public abstract class EnemyBehavior : MonoBehaviour
     public bool surprised = false;
     protected float surpriseTime = 1f;
     public Vector3 preSurpriseVel;
+
+    //repellent effects
+    public bool repelled = false;
 
     [SerializeField] protected GameObject notif;
 
@@ -198,6 +202,29 @@ public abstract class EnemyBehavior : MonoBehaviour
         }
     }
 
+    protected IEnumerator RepelHandler()
+    {
+        if (!repelled)
+        {
+            repelled = true;
+            backupSpeed = -backupSpeed;
+            float currentTime = 0f;
+            while (currentTime < GameControl.PlayerData.repellentEffect)
+            { 
+                if (!gameObject.activeSelf)
+                {
+                    repelled = false;
+                    backupSpeed = -backupSpeed;
+                    yield break;
+                }
+                currentTime += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+            backupSpeed = -backupSpeed;
+            repelled = false;
+        }    
+    }
+
     public virtual void CollisionCheck(Collider2D other)
     {
         //Debug.Log("collision happening");
@@ -206,12 +233,16 @@ public abstract class EnemyBehavior : MonoBehaviour
             if (other.gameObject.tag == "projectile")
             {
                 GameObject otherParent = other.gameObject.transform.parent.gameObject;
-                if (!otherParent.GetComponent<ProjectileBehavior>().enemyProj)
+                if (!otherParent.GetComponent<ProjectileBehavior>().enemyProj && !otherParent.GetComponent<ProjectileBehavior>().repellent)
                 {
                     DealDamage(otherParent.GetComponent<ProjectileBehavior>().damage, Color.white);
                     actualAugs = otherParent.GetComponent<ProjectileBehavior>().getActualAugs();
                     AugmentApplication(actualAugs);
                     otherParent.GetComponent<ProjectileBehavior>().ObjectDeactivate();
+                }
+                else if (otherParent.GetComponent<ProjectileBehavior>().repellent)
+                {
+                    StartCoroutine(RepelHandler());
                 }
             }
             else if (other.gameObject.tag == "aoe")

@@ -4,15 +4,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public enum augment
-{
-    NULL,
-    FIRE,
-    ICE,
-    POISON,
-    ELECTRIC
-}
-
 //not used
 public class Augment
 {
@@ -56,6 +47,7 @@ public class ProjectileBehavior : MonoBehaviour
     public Dictionary<string, int> actualAugs = new Dictionary<string, int>();
     public bool single = false;
     public bool enemyProj = false;
+    public bool repellent = false;
 
 
     bool arrived = false;
@@ -101,6 +93,17 @@ public class ProjectileBehavior : MonoBehaviour
         SpriteApply();
         if (!enemyProj)
             ProjBegin();
+        spriteTrans.transform.rotation = Quaternion.LookRotation(Vector3.forward, rotation);
+    }
+
+    public void RepellentSpawn(float r, Vector2 rotation)
+    {
+        repellent = true;
+        if (particles == null)
+            getParticles();
+        range = r;
+        spriteTrans = transform.GetChild(0).gameObject;
+        SpriteApply();
         spriteTrans.transform.rotation = Quaternion.LookRotation(Vector3.forward, rotation);
     }
 
@@ -262,7 +265,7 @@ public class ProjectileBehavior : MonoBehaviour
             currentSprite = stats.projSprite;
         }
         //apply if the proj is from a flower
-        else
+        else if (!repellent)
         {
             if (miniDandy)
             {
@@ -280,6 +283,8 @@ public class ProjectileBehavior : MonoBehaviour
 
             miniDandy = false;
         }
+        else //TODO - replace this with the repellent sprite eventually
+            currentSprite = GameControl.PlayerData.flowerStatsDict["pink"].projSprite;
         spriteTrans.GetComponent<SpriteRenderer>().sprite = currentSprite;
     }
 
@@ -295,6 +300,8 @@ public class ProjectileBehavior : MonoBehaviour
     {
         //augs = new string[3];
         arrived = false;
+        enemyProj = false;
+        repellent = false;
         ResetParticles();
         transform.localScale = Vector3.one;
     }

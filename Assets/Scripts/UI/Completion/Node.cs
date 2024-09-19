@@ -11,6 +11,8 @@ public class Node : MonoBehaviour
     Coroutine sizeLerp;
     RectTransform nodeFrame;
     bool isSelected = true;
+
+    Coroutine currentLerp;
     // Start is called before the first frame update
     void Start()
     {
@@ -86,14 +88,17 @@ public class Node : MonoBehaviour
 
     public void newLocationLerp(Vector3 newLocation)
     {
+        if (currentLerp != null)
+            StopCoroutine(currentLerp);
+
         gameObject.layer = 2;
         if (newLocation == basePos)
         {
-            StartCoroutine(Reset());
+            currentLerp = StartCoroutine(Reset());
         }
         else
         {
-            StartCoroutine(NewLocation(newLocation));
+            currentLerp = StartCoroutine(NewLocation(newLocation));
         }
     }
 

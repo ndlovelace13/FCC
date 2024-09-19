@@ -41,13 +41,14 @@ public class BasicEnemy : EnemyBehavior
             if (!isFrozen && !surprised)
                 moveSpeed = backupSpeed;
             //movement
-            if (!isBlinded)
+            if (!isBlinded && !repelled)
             {
                 //Debug.Log(target.position);
-                Vector2 direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
+                direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
                 direction.Normalize();
-                rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
+                //rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
             }
+            rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
             //death check
             if (health <= 0)
             {

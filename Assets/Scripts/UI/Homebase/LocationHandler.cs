@@ -24,11 +24,13 @@ public class LocationHandler : MonoBehaviour
 
     public void Tutorial()
     {
-        SceneManager.LoadScene("Tutorial");
+        GameObject blackout = Instantiate(GameControl.PlayerData.BlackoutPrefab);
+        blackout.GetComponent<BlackoutBehavior>().BeginBlackout("", " ", "Tutorial", 1.5f);
     }
 
     public void NextShift()
     {
-        SceneManager.LoadScene("Gameplay");
+        GameObject blackout = Instantiate(GameControl.PlayerData.BlackoutPrefab);
+        blackout.GetComponent<BlackoutBehavior>().BeginBlackout("", " ", "Gameplay", 1.5f);
     }
 }

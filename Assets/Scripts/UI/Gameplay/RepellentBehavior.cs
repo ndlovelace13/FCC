@@ -18,6 +18,10 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
     float shakeDist = 0f;
     float requiredShake = 3000f;
 
+    //projectile stats
+    public float range = 5f;
+    public float speed = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -127,7 +131,13 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
         }
 
         rect.position = finalPos;
+        //player recieve anim plays here
         yield return new WaitForSeconds(0.5f);
+
+        //call the repellent active script here
+        player.GetComponent<CrownThrowing>().RepellentActivate();
+
+        //deactivate
         gameObject.SetActive(false);
         yield return null;
     }

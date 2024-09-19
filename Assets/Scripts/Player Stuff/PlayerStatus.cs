@@ -11,6 +11,7 @@ public class PlayerStatus : MonoBehaviour
 
     //repellent stuff
     public bool inDanger = false;
+    public bool repelling = false;
     public bool repellentMoment = false;
     public float repellentLerpTime = 0.25f;
     public float repellentModeTimeScale = 0.2f;
@@ -44,7 +45,7 @@ public class PlayerStatus : MonoBehaviour
         if (other.gameObject.tag == "projectile")
         {
             GameObject otherParent = other.gameObject.transform.parent.gameObject;
-            if (!otherParent.GetComponent<ProjectileBehavior>().single)
+            if (!otherParent.GetComponent<ProjectileBehavior>().single && !otherParent.GetComponent<ProjectileBehavior>().repellent)
             {
                 bool enemyProj = otherParent.GetComponent<ProjectileBehavior>().enemyProj;
                 actualAugs = otherParent.GetComponent<ProjectileBehavior>().getActualAugs();
@@ -129,12 +130,12 @@ public class PlayerStatus : MonoBehaviour
                 else
                     inDanger = false;
                 //Debug.Log(GameControl.PlayerData.remainingRepellent);
-                if (inDanger && !repellentMoment && GameControl.PlayerData.remainingRepellent > 0)
+                if (inDanger && !repellentMoment && GameControl.PlayerData.remainingRepellent > 0 && !repelling)
                 {
                     repellentMoment = true;
                     StartCoroutine(RepellentBegin());
                 }
-                if (!inDanger && repellentMoment)
+                if ((!inDanger && repellentMoment) || repelling)
                 {
                     repellentMoment = false;
                     StartCoroutine(RepellentEnd());
@@ -189,7 +190,7 @@ public class PlayerStatus : MonoBehaviour
             Camera.main.orthographicSize = Mathf.Lerp(currentCamZoom, ogZoom, currentTime / repellentLerpTime);
             currentTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
-            if (inDanger)
+            if (inDanger && !repelling)
             {
                 yield break;
             }

@@ -168,11 +168,11 @@ RectTransform:
   - {fileID: 1898062996539604405}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -21.7384}
-  m_SizeDelta: {x: 0, y: -43.4767}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 224}
+  m_SizeDelta: {x: 1500, y: 1000}
+  m_Pivot: {x: 1, y: 0}
 --- !u!222 &4145691713534284790
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -257,7 +257,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1200, y: 100}
+  m_SizeDelta: {x: 1206.4263, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &4483391162508269708
 MonoBehaviour:
@@ -357,7 +357,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1.5
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &472807700755568576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,11 +385,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 175
-    m_Right: 225
-    m_Top: 425
-    m_Bottom: 375
-  m_ChildAlignment: 0
+    m_Left: 275
+    m_Right: 300
+    m_Top: 650
+    m_Bottom: 550
+  m_ChildAlignment: 1
   m_Spacing: 50
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -433,8 +433,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 775, y: 0}
-  m_SizeDelta: {x: 1200, y: 0}
+  m_AnchoredPosition: {x: 1025, y: 0}
+  m_SizeDelta: {x: 1500, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6584595132479922574
 CanvasRenderer:
@@ -464,9 +464,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Whoa, is this some sort of a , suicide squad? Like this post to die instantly.
-    I just stuck my dick in a bag of doritos alskdjfsalkjdf laksdjf  alskdjf  asldkfj
-    a sdflkj asd f kd dlskj alksdj flaskdjf lasjkdf laksjdf lakj dfl
+  m_text: 'Whoa, is this some sort of a
 
 '
   m_isRightToLeft: 0
@@ -495,8 +493,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 90
+  m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 32

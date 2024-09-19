@@ -235,8 +235,9 @@ public class GameControl : MonoBehaviour
     public float pickupDist = 0.5f;
     public float seedChance = 0.25f;
     public float crownMult = 1f;
-    //implement with precision throw mechanic
-    //public float throwDist;
+    public float repellentLength = 2f;
+    public float repellentEffect = 3f;
+    
 
     //upgrades
     [SerializeField] GameObject upgradeObj;
@@ -250,7 +251,7 @@ public class GameControl : MonoBehaviour
     public List<Research> researchItems;
     [SerializeField] GameObject UnlockPrefab;
 
-    [SerializeField] GameObject BlackoutPrefab;
+    [SerializeField] public GameObject BlackoutPrefab;
 
     //almanac variables
     public List<Page> almanacPages;
@@ -953,7 +954,7 @@ public class GameControl : MonoBehaviour
 
         //then fade to black
         GameObject blackoutObj = Instantiate(BlackoutPrefab);
-        blackoutObj.GetComponent<BlackoutBehavior>().BeginBlackout("You Eliminated the Replicant Threat", "...For Now...", "Homebase");
+        blackoutObj.GetComponent<BlackoutBehavior>().BeginBlackout("You Eliminated the Replicant Threat", "...For Now...", "Homebase", 3f);
         unlockDone = false;
 
         yield return null;

@@ -29,6 +29,7 @@ public class CrownAttack : MonoBehaviour
 
     //single fire bool
     bool singleFire = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -264,6 +265,8 @@ public class CrownAttack : MonoBehaviour
         //get that shit outta here
         Destroy(flower);
     }
+
+    
 
     void CrownDestroy()
     {

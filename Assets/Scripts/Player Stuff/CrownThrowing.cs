@@ -13,10 +13,18 @@ public class CrownThrowing : MonoBehaviour
     [SerializeField] float throwSpeed;
     Vector2 endPos;
 
+    GameObject projPool;
+    [SerializeField] RepellentBehavior repellent;
+    float range;
+    float speed;
+
     // Start is called before the first frame update
     void Start()
     {
-        //landingZone = GameObject.FindWithTag("landingZone");
+        projPool = GameObject.FindWithTag("projectilePool");
+        range = repellent.range;
+        speed = repellent.speed;
+
     }
 
     // Update is called once per frame
@@ -73,6 +81,53 @@ public class CrownThrowing : MonoBehaviour
         finalCrown.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         finalCrown.GetComponent<CrownAttack>().CrownArmed();
         landingZone.GetComponent<LandingZone>().Deactivate();
+    }
+
+    public void RepellentActivate()
+    {
+        StartCoroutine(Repelling());
+    }
+
+    IEnumerator Repelling()
+    {
+        transform.GetComponentInChildren<PlayerStatus>().repelling = true;
+        float currentTime = 0f;
+        float subTimer = 0f;
+        while (currentTime < GameControl.PlayerData.repellentLength)
+        {
+            subTimer += Time.deltaTime;
+            currentTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+            if (subTimer > 0.2f)
+            {
+                Vector2 endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 direction = endPos - new Vector2(transform.position.x, transform.position.y);
+                //direction.Normalize();
+                float angleRadians = Mathf.Atan2(-direction.y, direction.x);
+                if (angleRadians < 0)
+                    angleRadians += 2 * Mathf.PI;
+                angleRadians += Mathf.PI / 2;
+
+                //spawn a repellent proj here
+                float range = repellent.GetComponent<RepellentBehavior>().range;
+                StartCoroutine(RepellentSpawn(angleRadians, range));
+                subTimer = 0f;
+            }
+        }
+        transform.GetComponentInChildren<PlayerStatus>().repelling = false;
+    }
+
+    IEnumerator RepellentSpawn(float angle, float range)
+    {
+        Vector2 projDir = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle));
+        projDir.Normalize();
+        GameObject proj = projPool.GetComponent<ObjectPool>().GetPooledObject();
+        proj.transform.position = transform.position;
+
+        proj.SetActive(true);
+        proj.GetComponent<ProjectileBehavior>().RepellentSpawn(range, projDir);
+        proj.GetComponentInChildren<Rigidbody2D>().velocity = projDir * speed;
+        yield return null;
     }
 
     public void CompletedCrown(GameObject finishedCrown, float maxDist)
