@@ -6,6 +6,7 @@ using UnityEngine;
 public class ScoreText : MonoBehaviour
 {
     public TMP_Text scoreText;
+    public TMP_Text essenceText;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,10 +17,11 @@ public class ScoreText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Earnings: " + string.Format("{0:C}", GameControl.PlayerData.score / 100f); 
+        scoreText.text = "Earnings: " + string.Format("{0:C}", GameControl.PlayerData.score / 100f);
         if (GameControl.SaveData.firstSeed)
-            scoreText.text += "\nEssence: " + GameControl.SaveData.essenceCount + " <sprite=1>";
+            essenceText.text = "Essence: " + GameControl.SaveData.essenceCount + " <sprite=1>";
+        else
+            essenceText.enabled = false;
         //transition this to images instead at some point
-        scoreText.text += "\nRepellent: " + GameControl.PlayerData.remainingRepellent;
     }
 }

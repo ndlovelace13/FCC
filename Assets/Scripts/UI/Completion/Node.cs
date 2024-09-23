@@ -12,6 +12,9 @@ public class Node : MonoBehaviour
     RectTransform nodeFrame;
     bool isSelected = true;
 
+    //canceling bool
+    bool prevCancel = false;
+
     Coroutine currentLerp;
     // Start is called before the first frame update
     void Start()
@@ -22,7 +25,12 @@ public class Node : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameControl.PlayerData.nodeShiftCancel != prevCancel)
+        {
+            prevCancel = GameControl.PlayerData.nodeShiftCancel;
+            if (currentLerp != null)
+                StopCoroutine(currentLerp);
+        }
     }
 
     public void SetVisible(bool isVisible)
@@ -87,9 +95,7 @@ public class Node : MonoBehaviour
     }
 
     public void newLocationLerp(Vector3 newLocation)
-    {
-        if (currentLerp != null)
-            StopCoroutine(currentLerp);
+    {      
 
         gameObject.layer = 2;
         if (newLocation == basePos)

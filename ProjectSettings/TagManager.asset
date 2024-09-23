@@ -50,6 +50,7 @@ TagManager:
   - bossPart
   - MoneyCombo
   - docket
+  - catalog
   layers:
   - Default
   - TransparentFX

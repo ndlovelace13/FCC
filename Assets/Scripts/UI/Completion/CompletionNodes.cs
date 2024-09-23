@@ -29,6 +29,8 @@ public class CompletionNodes : MonoBehaviour
     bool showAll;
     int completedCount;
     int selectedCount;
+
+    Coroutine currentSort;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +43,7 @@ public class CompletionNodes : MonoBehaviour
         GameControl.CrownCompletion.infoPopup.SetActive(false);
         NodeAssign();
         ToggleAssign();
-        StartCoroutine(NodeMapping(nodes, 0f));
+        currentSort = StartCoroutine(NodeMapping(nodes, 0f));
         selectedCount = GameControl.CrownCompletion.allCrowns.Count();
         completedCount = GameControl.CrownCompletion.totalDiscovered;
         GameControl.SaveData.newDiscoveries = 0;
@@ -187,7 +189,9 @@ public class CompletionNodes : MonoBehaviour
         Debug.Log("Post sorting count: " + selected.Count());
         if (selectedNodes != selected)
         {
-            StartCoroutine(NodeMapping(all, 0f));
+            if (currentSort != null)
+                StopCoroutine(currentSort);
+            currentSort = StartCoroutine(NodeMapping(all, 0f));
             Debug.Log("mapping starts now");
         }
             
@@ -197,6 +201,7 @@ public class CompletionNodes : MonoBehaviour
 
     IEnumerator NodeMapping(List<Node> nodeGroup, float delayTime)
     {
+        GameControl.PlayerData.nodeShiftCancel = !GameControl.PlayerData.nodeShiftCancel;
         Debug.Log("nodeGroup Last: " + nodeGroup.Last().gameObject.name);
         int layer = 0;
         int nodesPerLayer = 1;

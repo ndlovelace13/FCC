@@ -130,6 +130,8 @@ public class GameControl : MonoBehaviour
     //public bool firstResearch = true;
     public bool donationMade = false;
 
+    public bool nodeShiftCancel = false;
+
     public bool shiftJustEnded = false;
     public bool continuePressed = false;
     public bool balanceUpdated = false;
@@ -245,6 +247,8 @@ public class GameControl : MonoBehaviour
     [SerializeField] Sprite[] icons;
 
     public List<Upgrade> upgrades;
+    public List<Page> catalogPages;
+    [SerializeField] GameObject catalogPage;
 
     //research
     [SerializeField] GameObject ResearchPrefab;
@@ -447,8 +451,10 @@ public class GameControl : MonoBehaviour
             {"craftingSlow", 0.5f},
             {"seedChance", 0.25f},
             {"pickupDist", 1f},
-            {"crownMult", 1f}
-        };
+            {"crownMult", 1f},
+            {"repellentLength", 2f },
+            {"repellentEffect", 3f }
+};
         upgrades = new List<Upgrade>();
 
         //uncommon rarity
@@ -486,7 +492,19 @@ public class GameControl : MonoBehaviour
         newUpgrade.transform.SetParent(transform);
         newUpgrade.GetComponent<Upgrade>().SetValues("crownMult", 10f, 1.75f, 6, 0.25f, "Crown Pay Raise", "Increases the score multiplier on crown creation", "x", icons[5]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
-        
+
+        //repellent timeframe
+        newUpgrade = Instantiate(upgradeObj);
+        newUpgrade.transform.SetParent(transform);
+        newUpgrade.GetComponent<Upgrade>().SetValues("repellentLength", 12f, 1.5f, 5, 0.5f, "Improved Aerosols", "Increases the active time of replicant repellent", "secs", icons[5]);
+        upgrades.Add(newUpgrade.GetComponent<Upgrade>());
+
+        //repellent effect
+        newUpgrade = Instantiate(upgradeObj);
+        newUpgrade.transform.SetParent(transform);
+        newUpgrade.GetComponent<Upgrade>().SetValues("repellentEffect", 15f, 1.5f, 5, 0.25f, "Repellent Revision", "Increases the effective time of replicant repellent", "secs", icons[5]);
+        upgrades.Add(newUpgrade.GetComponent<Upgrade>());
+
         //if there is no previous data, initialize the saveData from the objects
         if (SaveData.upgrades == null)
         {
@@ -503,13 +521,51 @@ public class GameControl : MonoBehaviour
         else
         {
             Debug.Log("upgrade data FOUND");
-            for (int i = 0; i < upgrades.Count; i++)
+            /*for (int i = 0; i < upgrades.Count; i++)
             {
                 upgrades[i].SetValues(SaveData.upgrades[i]);
                 //set the value in the dict
                 upgradeDict[upgrades[i].upgradeKey] = upgrades[i].currentValue;
+            }*/
+
+            int savedCount = SaveData.upgrades.Count;
+            int iterator = 0;
+            foreach (var upgrade in upgrades)
+            {
+                if (iterator >= savedCount)
+                {
+                    UpgradeEssentials newUp = new UpgradeEssentials();
+                    newUp.SetStats(upgrade);
+                    SaveData.upgrades.Add(newUp);
+                }
+                else
+                {
+                    upgrades[iterator].SetValues(SaveData.upgrades[iterator]);
+                    //set the value in the dict
+                    upgradeDict[upgrades[iterator].upgradeKey] = upgrades[iterator].currentValue;
+                }
+                iterator++;
             }
         }
+
+        //Catalog Pages initialized
+        catalogPages = new List<Page>();
+        GameObject catalogContainer = new GameObject("CatalogContainer");
+        catalogContainer.transform.SetParent(transform);
+
+        for (int i = 0; i < upgrades.Count; i++)
+        {
+            //instantiate a new page object every three upgrades
+            if (i % 3 == 0)
+            {
+                //Debug.Log("Adding " + i);
+                GameObject newPage = Instantiate(catalogPage);
+                newPage.transform.SetParent(catalogContainer.transform);
+                newPage.GetComponent<CatalogPage>().SetStartIndex(i);
+                catalogPages.Add(newPage.GetComponent<Page>());
+            }
+        }
+        Debug.Log("There are " + catalogPages.Count + " pages in the catalog");
     }
 
     /*private void UpgradeRestore()

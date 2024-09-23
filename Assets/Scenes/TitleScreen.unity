@@ -548,6 +548,7 @@ MonoBehaviour:
   discoveryDisplay: 1
   purchaseMade: 0
   donationMade: 0
+  nodeShiftCancel: 0
   shiftJustEnded: 0
   continuePressed: 0
   balanceUpdated: 0
@@ -636,6 +637,8 @@ MonoBehaviour:
   pickupDist: 0.5
   seedChance: 0.25
   crownMult: 1
+  repellentLength: 2
+  repellentEffect: 3
   upgradeObj: {fileID: 8343937570677949578, guid: a347e37e23979d546bb4818ddf485b45, type: 3}
   icons:
   - {fileID: 21300000, guid: 80a95511b92732b49aff886fa1cbdfa8, type: 3}
@@ -645,6 +648,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e43ee0bb0a5aba6429c38913d1ad8582, type: 3}
   - {fileID: 21300000, guid: e78652f24170ee24abfb3ee588fbaba9, type: 3}
   upgrades: []
+  catalogPages: []
+  catalogPage: {fileID: 263456905851068690, guid: 774b49ebfc90a00429f646c322bf6c7e, type: 3}
   ResearchPrefab: {fileID: 5122733356647096448, guid: 51f36e36923db974da9666aa476680d7, type: 3}
   researchItems: []
   UnlockPrefab: {fileID: 7155992749287334371, guid: 64794020202bcc44db7fa19251e03a5f, type: 3}

@@ -9,8 +9,11 @@ using UnityEngine.SceneManagement;
 
 public class CatalogBehavior : MonoBehaviour
 {
+    //potentially outmoded
     [SerializeField] GameObject[] upgradeSlots;
     [SerializeField] GameObject upgradeElem;
+
+    [SerializeField] GameObject catalogParent;
     // Start is called before the first frame update
 
     [SerializeField] TMP_Text balance;
@@ -27,7 +30,7 @@ public class CatalogBehavior : MonoBehaviour
         /*upgradeSlots = GetComponentsInChildren<RectTransform>();
         upgradeSlots = upgradeSlots.Where(child => child.tag == "upgrade").ToArray();
         upgradeSlots[0].gameObject.GetComponent<Upgrade>().SetValues("uncommon", 3f, 1.25f, 10, 0.02f);*/
-        foreach (Upgrade upgrade in GameControl.PlayerData.upgrades)
+        /*foreach (Upgrade upgrade in GameControl.PlayerData.upgrades)
         {
             //GameObject newUpgrade = Instantiate(upgradeElem);
             //newUpgrade.GetComponent<UpgradeElement>().setUpgrade(upgrade);
@@ -38,7 +41,7 @@ public class CatalogBehavior : MonoBehaviour
             newUpgrade.tag = "slotFull";
             newUpgrade.GetComponent<UpgradeElement>().setUpgrade(upgrade);
             //newUpgrade.transform.position = upgradeSlots[available].position;
-        }
+        }*/
         IntroLineAssign();
     }
 

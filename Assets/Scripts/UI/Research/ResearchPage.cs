@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Almanac : Paginator
+public class ResearchPage : Page
 {
     // Start is called before the first frame update
-    public override void Start()
+    void Start()
     {
-        referencePages = GameControl.PlayerData.almanacPages;
-        base.Start();
+        
     }
 
     // Update is called once per frame

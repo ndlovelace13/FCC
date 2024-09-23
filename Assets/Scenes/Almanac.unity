@@ -135,8 +135,8 @@ GameObject:
   - component: {fileID: 51267380}
   - component: {fileID: 51267379}
   - component: {fileID: 51267381}
-  - component: {fileID: 51267382}
   - component: {fileID: 51267383}
+  - component: {fileID: 51267384}
   m_Layer: 5
   m_Name: Almanac
   m_TagString: almanac
@@ -239,22 +239,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &51267382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51267377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64cee910f8c42ed4998e32df9162ec02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pageObjects: []
-  currentIndex: 0
-  prevButton: {fileID: 1865065619}
-  nextButton: {fileID: 1241593940}
 --- !u!114 &51267383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +253,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 0
+--- !u!114 &51267384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51267377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 433bd7913d2bb214c8b0d50c2a7375b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pageObjects: []
+  currentIndex: 0
+  prevButton: {fileID: 1865065619}
+  nextButton: {fileID: 1241593940}
 --- !u!1 &166945311
 GameObject:
   m_ObjectHideFlags: 0
@@ -3505,7 +3505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1923853003247964665, guid: 0b59706b31283e045b955cb82e68f00d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1025
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1923853003247964665, guid: 0b59706b31283e045b955cb82e68f00d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6203,7 +6203,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 51267382}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Almanac, Assembly-CSharp
         m_MethodName: NextPages
         m_Mode: 1
@@ -15769,7 +15769,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 51267382}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Almanac, Assembly-CSharp
         m_MethodName: PrevPages
         m_Mode: 1
