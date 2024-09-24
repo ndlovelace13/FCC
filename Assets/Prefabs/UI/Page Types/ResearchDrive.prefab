@@ -380,6 +380,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: {fileID: 2313018453131585162}
+  subheader: {fileID: 678382451060376022}
+  title: {fileID: 2313018453131585162}
   description: {fileID: 678382451060376022}
   image: {fileID: 5513214429351081334}
   goalText: {fileID: 156601181421767081}

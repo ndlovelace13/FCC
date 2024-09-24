@@ -253,6 +253,8 @@ public class GameControl : MonoBehaviour
     //research
     [SerializeField] GameObject ResearchPrefab;
     public List<Research> researchItems;
+    public List<Page> researchPages;
+    [SerializeField] GameObject researchPage;
     [SerializeField] GameObject UnlockPrefab;
 
     [SerializeField] public GameObject BlackoutPrefab;
@@ -568,28 +570,6 @@ public class GameControl : MonoBehaviour
         Debug.Log("There are " + catalogPages.Count + " pages in the catalog");
     }
 
-    /*private void UpgradeRestore()
-    {
-        upgradeDict = new Dictionary<string, float>()
-        {
-            //check if there is a way to directly influence the value of these variables
-            {"uncommon", 0.05f},
-            {"playerSpeed", 5f},
-            {"craftingSlow", 0.5f},
-            {"seedChance", 0.25f},
-            {"pickupDist", 1f},
-            {"crownMult", 1f}
-        };
-        foreach (var upgrade in SaveData.upgrades)
-        {
-            GameObject newUpgrade = Instantiate(upgradeObj);
-            newUpgrade.transform.SetParent(transform);
-            newUpgrade.GetComponent<Upgrade>().SetValues(upgrade);
-            //update the dictionary from the stored upgrade obj
-            upgradeDict[upgrade.upgradeKey] = upgrade.currentValue;
-        }
-    }*/
-
     private void ResearchInit()
     {
         researchItems = new List<Research>();
@@ -612,13 +592,40 @@ public class GameControl : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < researchItems.Count; i++)
+            Debug.Log("Research Data Found!");
+            int savedCount = SaveData.researchData.Count;
+            int iterator = 0;
+            foreach (var research in researchItems)
             {
-                researchItems[i].RestoreData(SaveData.researchData[i]);
+                if (iterator >= savedCount)
+                {
+                    ResearchData newRes = new ResearchData();
+                    newRes.SetData(research);
+                    SaveData.researchData.Add(newRes); ;
+                }
+                else
+                {
+                    researchItems[iterator].RestoreData(SaveData.researchData[iterator]);
+                }
+                iterator++;
             }
         }
-        
-        
+
+        //Create research pages and store
+        researchPages = new List<Page>();
+        GameObject researchContainer = new GameObject("ResearchContainer");
+        researchContainer.transform.SetParent(transform);
+
+        for (int i = 0; i < researchItems.Count; i++)
+        {
+            GameObject newPage = Instantiate(researchPage);
+            newPage.transform.SetParent(researchContainer.transform);
+            newPage.GetComponent<ResearchPage>().SetIndex(i);
+            researchPages.Add(newPage.GetComponent<Page>());
+        }
+        Debug.Log("There are " + researchPages.Count + " pages in the research drives");
+
+
     }
 
     private void AlmanacInit()

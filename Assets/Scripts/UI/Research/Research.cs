@@ -19,6 +19,12 @@ public class ResearchData
 
 public abstract class Research : MonoBehaviour
 {
+    [SerializeField]
+    [TextArea] public string title;
+
+    [SerializeField]
+    [TextArea] public string description;
+
     [SerializeField] public GameObject unlockPrefab;
     [SerializeField] public Sprite resultImg;
     public int requiredSeeds;

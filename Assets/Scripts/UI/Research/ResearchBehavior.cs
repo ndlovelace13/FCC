@@ -9,8 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class ResearchBehavior : MonoBehaviour
 {
-    [SerializeField] GameObject[] donateSlots;
-    [SerializeField] GameObject donateElem;
     // Start is called before the first frame update
 
     [SerializeField] TMP_Text balance;
@@ -59,18 +57,6 @@ public class ResearchBehavior : MonoBehaviour
         {
             ReturnToEnd();
         }
-    }
-
-    private int nextSlot()
-    {
-        for (int i = 0; i < donateSlots.Length; i++)
-        {
-            if (donateSlots[i].tag == "slotEmpty")
-            {
-                return i;
-            }
-        }
-        return -1;
     }
 
     private void PurchaseLineAssign()

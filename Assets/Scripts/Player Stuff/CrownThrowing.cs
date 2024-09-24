@@ -15,8 +15,8 @@ public class CrownThrowing : MonoBehaviour
 
     GameObject projPool;
     [SerializeField] RepellentBehavior repellent;
-    float range;
-    float speed;
+    public float range;
+    public float speed;
 
     // Start is called before the first frame update
     void Start()

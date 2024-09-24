@@ -652,6 +652,8 @@ MonoBehaviour:
   catalogPage: {fileID: 263456905851068690, guid: 774b49ebfc90a00429f646c322bf6c7e, type: 3}
   ResearchPrefab: {fileID: 5122733356647096448, guid: 51f36e36923db974da9666aa476680d7, type: 3}
   researchItems: []
+  researchPages: []
+  researchPage: {fileID: 5497271469674503023, guid: ee45db260f7a1df41b3307d64ffc849d, type: 3}
   UnlockPrefab: {fileID: 7155992749287334371, guid: 64794020202bcc44db7fa19251e03a5f, type: 3}
   BlackoutPrefab: {fileID: 7155992749287334371, guid: 0e974f432e079854dbb7da06058a0260, type: 3}
   almanacPages: []
