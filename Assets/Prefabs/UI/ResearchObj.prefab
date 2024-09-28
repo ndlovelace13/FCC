@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8467472768156911243}
   - component: {fileID: 4644278154495367246}
   - component: {fileID: 7323529434612242457}
+  - component: {fileID: -5591822112453341338}
   m_Layer: 0
   m_Name: ResearchObj
   m_TagString: Untagged
@@ -70,6 +71,26 @@ MonoBehaviour:
     Most!
   unlockPrefab: {fileID: 7155992749287334371, guid: 64794020202bcc44db7fa19251e03a5f, type: 3}
   resultImg: {fileID: 21300000, guid: 632eb3afc28140940bd522bc96844014, type: 3}
+  requiredSeeds: 0
+  maxResearchTimes: 0
+  currentResearchTimes: 0
+  currentSeeds: 0
+--- !u!114 &-5591822112453341338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5122733356647096448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e1f6fe6883fbe4f86eb75664ca6d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Replicant Repellent Charge
+  description: Donate Seeds to Unlock a Spray that Repels All Incoming Replicants!
+  unlockPrefab: {fileID: 7155992749287334371, guid: 64794020202bcc44db7fa19251e03a5f, type: 3}
+  resultImg: {fileID: 21300000, guid: a475e36d26f6ffe4a94881fa2618b88d, type: 3}
   requiredSeeds: 0
   maxResearchTimes: 0
   currentResearchTimes: 0

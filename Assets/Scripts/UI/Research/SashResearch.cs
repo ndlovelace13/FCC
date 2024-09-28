@@ -10,8 +10,8 @@ public class SashResearch : Research
         maxResearchTimes = 1;
 
         //increment the total research possibilities
-        if (GameControl.SaveData.firstRun)
-            GameControl.SaveData.researchAmount += maxResearchTimes;
+        //if (GameControl.SaveData.firstRun)
+            //GameControl.SaveData.researchAmount += maxResearchTimes;
     }
     public override void ResearchAction()
     {
@@ -20,5 +20,7 @@ public class SashResearch : Research
         currentResearchTimes++;
         GameObject unlockNotif = Instantiate(unlockPrefab);
         unlockNotif.GetComponent<UnlockNotif>().BeginNotif(resultImg, "Affinity Sash Unlocked!");
+
+        GameControl.SaveData.totalDrives++;
     }
 }

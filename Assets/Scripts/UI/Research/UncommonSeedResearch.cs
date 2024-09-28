@@ -11,8 +11,8 @@ public class UncommonSeedResearch : Research
         maxResearchTimes = GameControl.PlayerData.undiscoveredUncommon.Count - 1;
 
         //increment the total research possibilities
-        if (GameControl.SaveData.firstRun)
-            GameControl.SaveData.researchAmount += maxResearchTimes;
+        //f (GameControl.SaveData.firstRun)
+            
     }
     public override void ResearchAction()
     {

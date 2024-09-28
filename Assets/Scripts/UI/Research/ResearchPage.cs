@@ -48,7 +48,7 @@ public class ResearchPage : Page
     {
         if (pageFilled)
         {
-            Debug.Log("Donated once");
+            Debug.Log("Donated once - " + gameObject.name);
             GameControl.SaveData.essenceCount--;
             currentResearch.currentSeeds++;
             if (currentResearch.requiredSeeds == currentResearch.currentSeeds)
@@ -61,8 +61,8 @@ public class ResearchPage : Page
     public override void FillPage()
     {
         currentResearch = GameControl.PlayerData.researchItems[index];
-        donationButton.onClick.RemoveAllListeners();
-        donationButton.onClick.AddListener(Donate);
+        //donationButton.onClick.RemoveAllListeners();
+        //donationButton.onClick.AddListener(Donate);
         image.sprite = currentResearch.resultImg;
 
         title.text = currentResearch.title;

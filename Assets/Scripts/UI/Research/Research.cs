@@ -6,14 +6,19 @@ using UnityEngine;
 public class ResearchData
 {
     public int currentResearchTimes;
+    public int maxResearchTimes;
     public int currentSeeds;
     public int requiredSeeds;
 
     public void SetData(Research input)
     {
         currentResearchTimes = input.currentResearchTimes;
+        maxResearchTimes = input.maxResearchTimes;
         currentSeeds = input.currentSeeds;
         requiredSeeds= input.requiredSeeds;
+
+        //increment the maxResearchTimes if this is being instantiated for the first time
+        GameControl.SaveData.researchAmount += maxResearchTimes;
     }
 }
 
@@ -50,6 +55,7 @@ public abstract class Research : MonoBehaviour
         currentResearchTimes = savedData.currentResearchTimes;
         currentSeeds = savedData.currentSeeds;
         requiredSeeds = savedData.requiredSeeds;
+        maxResearchTimes = savedData.maxResearchTimes;
     }
 
     public virtual void ResearchAction()

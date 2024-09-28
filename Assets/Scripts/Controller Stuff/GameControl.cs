@@ -24,6 +24,8 @@ public class SaveData
     public bool firstSeed = false;
     public bool bullyDefeated = false;
 
+    public bool repellentIntro = false;
+
     public bool contractSigned = false;
 
     public bool crownCounterSet = false;
@@ -70,7 +72,7 @@ public class SaveData
 
     //item unlocks
     public int sashSlots = 3;
-    public int repellentCount = 1;
+    public int repellentCount = 0;
 
     //Balances
     public int essenceCount = 0;
@@ -576,8 +578,13 @@ public class GameControl : MonoBehaviour
         GameObject newResearch = Instantiate(ResearchPrefab);
         newResearch.transform.parent = transform;
         //Add the elements to the research list in the controller
-        researchItems.Add(newResearch.GetComponent<UncommonSeedResearch>());
-        researchItems.Add(newResearch.GetComponent<SashResearch>());
+        Research[] allResearch = newResearch.GetComponentsInChildren<Research>();
+
+        foreach (Research research in allResearch)
+            researchItems.Add(research);
+        
+        //researchItems.Add(newResearch.GetComponent<UncommonSeedResearch>());
+       //researchItems.Add(newResearch.GetComponent<SashResearch>());
 
         //update the values according to the save data
         if (SaveData.researchData == null)
@@ -832,6 +839,11 @@ public class GameControl : MonoBehaviour
         {
             tutorialHandler.GetComponent<InRoundTutorial>().SashIntro();
             SaveData.sashActivated = false;
+        }
+        else if (SaveData.repellentCount > 0 && !SaveData.repellentIntro)
+        {
+            tutorialHandler.GetComponent<InRoundTutorial>().RepellIntro();
+            SaveData.repellentIntro = true;
         }
         else
         {

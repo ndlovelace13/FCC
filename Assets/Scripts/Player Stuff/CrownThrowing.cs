@@ -22,9 +22,11 @@ public class CrownThrowing : MonoBehaviour
     void Start()
     {
         projPool = GameObject.FindWithTag("projectilePool");
-        range = repellent.range;
-        speed = repellent.speed;
-
+        if (repellent != null)
+        {
+            range = repellent.range;
+            speed = repellent.speed;
+        }
     }
 
     // Update is called once per frame

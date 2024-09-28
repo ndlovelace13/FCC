@@ -47,7 +47,7 @@ public class ProjectileBehavior : MonoBehaviour
     public Dictionary<string, int> actualAugs = new Dictionary<string, int>();
     public bool single = false;
     public bool enemyProj = false;
-    public bool repellent = false;
+    
 
 
     bool arrived = false;
@@ -59,6 +59,10 @@ public class ProjectileBehavior : MonoBehaviour
 
     //Particles
     List<GameObject> particles;
+
+    //repellent stuff
+    public bool repellent = false;
+    [SerializeField] Sprite repellentProj;
 
     // Start is called before the first frame update
     void Start()
@@ -284,7 +288,7 @@ public class ProjectileBehavior : MonoBehaviour
             miniDandy = false;
         }
         else //TODO - replace this with the repellent sprite eventually
-            currentSprite = GameControl.PlayerData.flowerStatsDict["pink"].projSprite;
+            currentSprite = repellentProj;
         spriteTrans.GetComponent<SpriteRenderer>().sprite = currentSprite;
     }
 

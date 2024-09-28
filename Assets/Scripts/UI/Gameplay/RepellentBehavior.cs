@@ -45,6 +45,7 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
             rect.position = startingPos;
         clicked = false;
         shakeDist = 0f;
+        rect.localScale = Vector3.one;
         StartCoroutine(ShakeChecker());
     }
 

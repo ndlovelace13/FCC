@@ -16,6 +16,15 @@ public class InRoundTutorial : MonoBehaviour
         "You can replace a slot at any time by pressing the corresponding number key again, however you will lose all affinity to the replaced flower",
         "Get out there and make some money - now with even more efficiency!"
     };
+    string[] repelText =
+    {
+        "Replicant Repellent, eh? Guess those essence seeds really do help!",
+        "According to Jill, this spray will allow you to ward off those pesky replicants for a short amount of time",
+        "Your goal is still to eliminate as many as you can - however, this new tech should come in handy if you find yourself in a tight spot",
+        "Just be sure to give it a good shake first!",
+        "Oh yeah, each can of Repellent is single-use. Be sure to use it only when absolutely necessary!",
+        "However, we will be sure to refill your supply before each shift, so don't be TOO stingy with them. Good luck out there!"
+    };
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +34,11 @@ public class InRoundTutorial : MonoBehaviour
     public void SashIntro()
     {
         TutorialContinue(sashText);
+    }
+
+    public void RepellIntro()
+    {
+        TutorialContinue(repelText);
     }
 
     // Update is called once per frame
