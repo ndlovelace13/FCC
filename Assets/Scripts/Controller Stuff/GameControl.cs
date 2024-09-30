@@ -457,7 +457,8 @@ public class GameControl : MonoBehaviour
             {"pickupDist", 1f},
             {"crownMult", 1f},
             {"repellentLength", 2f },
-            {"repellentEffect", 3f }
+            {"repellentEffect", 3f },
+            {"rare", 0.1f}
 };
         upgrades = new List<Upgrade>();
 
@@ -507,6 +508,12 @@ public class GameControl : MonoBehaviour
         newUpgrade = Instantiate(upgradeObj);
         newUpgrade.transform.SetParent(transform);
         newUpgrade.GetComponent<Upgrade>().SetValues("repellentEffect", 15f, 1.5f, 5, 0.25f, "Repellent Revision", "Increases the effective time of replicant repellent", "secs", icons[5]);
+        upgrades.Add(newUpgrade.GetComponent<Upgrade>());
+
+        //repellent effect
+        newUpgrade = Instantiate(upgradeObj);
+        newUpgrade.transform.SetParent(transform);
+        newUpgrade.GetComponent<Upgrade>().SetValues("rare", 10f, 1.5f, 15, 0.025f, "Superior Soil", "Increased Chance of Encountering Rare Flowers", "%", icons[5]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
 
         //if there is no previous data, initialize the saveData from the objects
@@ -867,12 +874,37 @@ public class GameControl : MonoBehaviour
 
     public void UpgradeApply()
     {
+        //check the unlock requirements first
+        for (int i = 0; i < upgrades.Count; i++)
+        {
+            switch (i)
+            {
+                case 6 or 7:
+                    if (SaveData.repellentCount > 0)
+                        upgrades[i].display = true;
+                    else
+                        upgrades[i].display = false;
+                    break;
+                case 8:
+                    if (SaveData.discoveredRare.Count > 0)
+                        upgrades[i].display = true; 
+                    else
+                        upgrades[i].display = false;   
+                    break;
+                default:
+                    upgrades[i].display = true; break;
+            }
+        }
+
         uncommon = upgradeDict["uncommon"];
         playerSpeed = upgradeDict["playerSpeed"];
         craftingSlow = upgradeDict["craftingSlow"];
         seedChance = upgradeDict["seedChance"];
         pickupDist = upgradeDict["pickupDist"];
         crownMult = upgradeDict["crownMult"];
+        repellentLength = upgradeDict["repellentLength"];
+        repellentEffect = upgradeDict["repellentEffect"];
+        rare = upgradeDict["rare"];
     }
 
     public void FlowerDiscovery(string type)

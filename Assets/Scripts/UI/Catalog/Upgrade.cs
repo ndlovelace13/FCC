@@ -12,6 +12,7 @@ public class UpgradeEssentials
     public float upgradeAmount;
     public float currentPrice;
     public int timesUpgraded;
+    public bool display;
 
     public void SetStats(Upgrade upgrade)
     {
@@ -19,6 +20,7 @@ public class UpgradeEssentials
         upgradeAmount = upgrade.upgradeAmount;
         currentPrice = upgrade.currentPrice;
         timesUpgraded = upgrade.timesUpgraded;
+        display = upgrade.display;
     }
 }
 
@@ -41,6 +43,7 @@ public class Upgrade : MonoBehaviour
     float priceInflation;
     public int timesUpgraded = 0;
     public int maxTimesUpgraded;
+    public bool display = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +57,8 @@ public class Upgrade : MonoBehaviour
         upgradeAmount = oldUpgrade.upgradeAmount;
         timesUpgraded = oldUpgrade.timesUpgraded;
         currentPrice = oldUpgrade.currentPrice;
+        if (oldUpgrade.display)
+            display = oldUpgrade.display;
     }
 
     public void SetValues(string key, float priceBase, float inflation, int maximumUpgrades, float increaseAmount, string title, string description, string units, Sprite newIcon)
@@ -68,6 +73,7 @@ public class Upgrade : MonoBehaviour
         this.description = description;
         unit = units;
         icon = newIcon;
+        display = false;
 
         if (GameControl.SaveData.firstRun)
             GameControl.SaveData.upgradeAmount += maxTimesUpgraded;
@@ -99,5 +105,10 @@ public class Upgrade : MonoBehaviour
         currentPrice = currentPrice * priceInflation;
         GameControl.SaveHandler.SaveGame();
         yield return null;
+    }
+
+    public void Unlock()
+    {
+        display = true;
     }
 }

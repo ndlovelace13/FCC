@@ -24,6 +24,8 @@ public class UpgradeElement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!currentUpgrade.display)
+            gameObject.SetActive(false);
         if (upgradeSet)
         {
             if (currentUpgrade.currentPrice > GameControl.SaveData.balance || currentUpgrade.timesUpgraded == currentUpgrade.maxTimesUpgraded)
