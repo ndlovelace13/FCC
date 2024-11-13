@@ -330,7 +330,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         minSpeed = mySpawner.currentMin;
         backupSpeed = Random.Range(minSpeed, maxSpeed);
         moveSpeed = backupSpeed;
-        GetComponent<Animator>().speed = backupSpeed * 0.5f;
+        GetComponent<Animator>().speed = backupSpeed * 0.25f;
         //begin the gradual speed up routine
         StartCoroutine(GradualSpeedUp());
         StartCoroutine(KillReset());
@@ -472,7 +472,7 @@ public abstract class EnemyBehavior : MonoBehaviour
             {
                 SpeedUp(speedIncrement);
             }
-            GetComponent<Animator>().speed = backupSpeed * 0.5f;
+            GetComponent<Animator>().speed = backupSpeed * 0.25f;
         }
     }
 
