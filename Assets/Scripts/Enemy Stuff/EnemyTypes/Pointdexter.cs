@@ -50,8 +50,7 @@ public class Pointdexter : EnemyBehavior
                     StartCoroutine(Surprised(surpriseTime));
                 target = player;
             }
-            if (!isFrozen && !surprised)
-                moveSpeed = backupSpeed;
+            
             //movement
             if (!isBlinded)
             {
@@ -59,20 +58,27 @@ public class Pointdexter : EnemyBehavior
                 //move away from the target
                 if (isRetreating)
                 {
-                    Vector2 direction = new Vector2(target.position.x - shadow.position.x, target.position.y - shadow.position.y);
+                    direction = new Vector2(target.position.x - shadow.position.x, target.position.y - shadow.position.y);
                     direction.Normalize();
-                    gameObject.GetComponent<Rigidbody2D>().velocity = -direction * moveSpeed;
+                    //gameObject.GetComponent<Rigidbody2D>().velocity = -direction * moveSpeed;
                 }
                 //move towards the ally
                 else if ((isTargeting || isCharging) && ally != null)
                 {
-                    Vector2 direction = new Vector2(ally.transform.position.x - shadow.position.x, ally.transform.position.y - shadow.position.y);
+                    direction = new Vector2(ally.transform.position.x - shadow.position.x, ally.transform.position.y - shadow.position.y);
                     direction.Normalize();
-                    gameObject.GetComponent<Rigidbody2D>().velocity = direction * moveSpeed;
+                    //gameObject.GetComponent<Rigidbody2D>().velocity = direction * moveSpeed;
                 }
             }
             else
                 Debug.Log("Enemy isn't currently tracking");
+
+            if (!isFrozen && !surprised)
+            {
+                moveSpeed = backupSpeed;
+                rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
+            }
+                
             if (health <= 0)
             {
                 Deactivate();

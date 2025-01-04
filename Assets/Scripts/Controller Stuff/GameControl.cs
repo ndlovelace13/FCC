@@ -501,19 +501,19 @@ public class GameControl : MonoBehaviour
         //repellent timeframe
         newUpgrade = Instantiate(upgradeObj);
         newUpgrade.transform.SetParent(transform);
-        newUpgrade.GetComponent<Upgrade>().SetValues("repellentLength", 12f, 1.5f, 5, 0.5f, "Improved Aerosols", "Increases the active time of replicant repellent", "secs", icons[5]);
+        newUpgrade.GetComponent<Upgrade>().SetValues("repellentLength", 12f, 1.5f, 5, 0.5f, "Improved Aerosols", "Increases the active time of replicant repellent", "secs", icons[6]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
 
         //repellent effect
         newUpgrade = Instantiate(upgradeObj);
         newUpgrade.transform.SetParent(transform);
-        newUpgrade.GetComponent<Upgrade>().SetValues("repellentEffect", 15f, 1.5f, 5, 0.25f, "Repellent Revision", "Increases the effective time of replicant repellent", "secs", icons[5]);
+        newUpgrade.GetComponent<Upgrade>().SetValues("repellentEffect", 15f, 1.5f, 5, 0.25f, "Repellent Revision", "Increases the effective time of replicant repellent", "secs", icons[7]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
 
         //repellent effect
         newUpgrade = Instantiate(upgradeObj);
         newUpgrade.transform.SetParent(transform);
-        newUpgrade.GetComponent<Upgrade>().SetValues("rare", 10f, 1.5f, 15, 0.025f, "Superior Soil", "Increased Chance of Encountering Rare Flowers", "%", icons[5]);
+        newUpgrade.GetComponent<Upgrade>().SetValues("rare", 10f, 1.5f, 15, 0.025f, "Superior Soil", "Increased Chance of Encountering Rare Flowers", "%", icons[8]);
         upgrades.Add(newUpgrade.GetComponent<Upgrade>());
 
         //if there is no previous data, initialize the saveData from the objects

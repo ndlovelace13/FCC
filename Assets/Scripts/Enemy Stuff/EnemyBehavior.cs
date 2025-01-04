@@ -424,9 +424,9 @@ public abstract class EnemyBehavior : MonoBehaviour
             //move towards the boss 
             if (!isFrozen && !surprised)
                 moveSpeed = backupSpeed;
-            Vector2 direction = new Vector2(target.position.x - shadow.position.x, target.position.y - shadow.position.y);
+            direction = new Vector2(target.position.x - shadow.position.x, target.position.y - shadow.position.y);
             direction.Normalize();
-            gameObject.GetComponent<Rigidbody2D>().velocity = direction * moveSpeed;
+            rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
     }

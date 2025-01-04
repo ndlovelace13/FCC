@@ -13,6 +13,8 @@ public class Sprinter : EnemyBehavior
 
     float currentTimer = 0f;
 
+    //Vector2 direction;
+
     //float walkSpeed;
     // Start is called before the first frame update
     /*void Start()
@@ -48,16 +50,20 @@ public class Sprinter : EnemyBehavior
                     StartCoroutine(Surprised(surpriseTime));
                 target = player;
             }
-            if (!isFrozen && !surprised)
-                moveSpeed = backupSpeed;
+      
             //movement
             if (!isBlinded && !isSprinting)
             {
                 //Debug.Log(target.position);
-                Vector2 direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
+                direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
                 direction.Normalize();
+            }
+            if (!isFrozen && !surprised)
+            {
+                moveSpeed = backupSpeed;
                 rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
             }
+                
             if (health <= 0)
             {
                 Deactivate();
@@ -124,9 +130,10 @@ public class Sprinter : EnemyBehavior
 
                     //begin the sprint
                     //SpeedUp(realStats.sprintSpeed);
-                    Vector2 direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
+                    direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
                     direction.Normalize();
-                    rb2D.MovePosition(rb2D.position + direction * moveSpeed * realStats.sprintSpeed * Time.deltaTime);
+                    SpeedUp(realStats.sprintSpeed * 0.5f);
+                    //rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
                     //gameObject.GetComponent<Rigidbody2D>().velocity = direction * backupSpeed * realStats.sprintSpeed;
                     Debug.Log("NOW SPRINTING");
                     GetComponent<Animator>().SetInteger("SprinterState", 2);
@@ -141,7 +148,7 @@ public class Sprinter : EnemyBehavior
                     currentTimer = 0f;
 
                     //set the moveSpeed to the normal walkSpeed
-                    SpeedUp(0.5f);
+                    SpeedDown(realStats.sprintSpeed);
                     Debug.Log("NOW RESTING");
                     GetComponent<Animator>().SetInteger("SprinterState", 0);
                 }
@@ -182,7 +189,7 @@ public class Sprinter : EnemyBehavior
         isResting = true;
         currentTimer = 0f;
         justReset = false;
-        Vector2 direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
+        direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y);
         direction.Normalize();
         rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
         //gameObject.GetComponent<Rigidbody2D>().velocity = direction * backupSpeed;
