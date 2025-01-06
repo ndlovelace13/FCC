@@ -170,7 +170,7 @@ public class VisibleFlowers : MonoBehaviour
 
                 GameObject head = headReturn(flower.getType());
                 head.transform.SetParent(newFlower.transform);
-                head.transform.position = newFlower.transform.position;
+                head.transform.localPosition = Vector3.zero;
                 head.GetComponent<SpriteRenderer>().enabled = false;
                 head.SetActive(true);
                 //execute the initial growth anim

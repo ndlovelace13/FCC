@@ -58,7 +58,7 @@ public class InitialFlowers : MonoBehaviour
         GameObject head = HeadReturn(flowerTypes[flowerChoice]);
         GameObject newFlower = Instantiate(flowerBase, spawnPos, Quaternion.identity);
         head.transform.SetParent(newFlower.transform);
-        head.transform.position = newFlower.transform.position;
+        head.transform.localPosition = Vector3.zero;
         //execute the initial growth anim
         Animator stemAnim = newFlower.GetComponentsInChildren<Animator>().Last();
         stemAnim.Play("BasicGrow");

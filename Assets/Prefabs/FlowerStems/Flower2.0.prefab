@@ -296,6 +296,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2059865695210303109}
     m_Modifications:
+    - target: {fileID: 1167388063577121091, guid: 972753dddfcb89f409d33efa3e7b1be9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167388063577121091, guid: 972753dddfcb89f409d33efa3e7b1be9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167388063577121091, guid: 972753dddfcb89f409d33efa3e7b1be9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -139382901
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167388063577121091, guid: 972753dddfcb89f409d33efa3e7b1be9, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3863230675089593816, guid: 972753dddfcb89f409d33efa3e7b1be9, type: 3}
       propertyPath: m_TagString
       value: stem

@@ -111,7 +111,7 @@ public abstract class FlowerStats : MonoBehaviour
 
     public virtual void SetStem(GameObject head, GameObject stem)
     {
-        head.transform.localPosition = new Vector3(-0.061f, 0.44f);
+        head.transform.localPosition = new Vector3(-0.05f, -0.275f, 0f);
         stem.GetComponent<SpriteRenderer>().sprite = stemSprite;
     }
 
