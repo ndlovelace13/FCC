@@ -131,7 +131,8 @@ MonoBehaviour:
   range: 5
   projCount: 6
   projRange: 8
-  headSprite: {fileID: 21300000, guid: 035710b6dbc5c4841a2de9809bf352c7, type: 3}
+  headSprite: {fileID: 21300000, guid: b2d79020c02c9404cad075bcf2aeaf5f, type: 3}
+  headOffsetSprite: {fileID: 21300000, guid: 035710b6dbc5c4841a2de9809bf352c7, type: 3}
   projSprite: {fileID: 21300000, guid: 8f5fdcbb4a5d72a4d826873bf7a91f65, type: 3}
   stemSprite: {fileID: 21300000, guid: 2351e182e81d46542a43cefa85e8ee95, type: 3}
   pool: {fileID: 0}

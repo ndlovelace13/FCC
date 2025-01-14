@@ -630,7 +630,7 @@ public class Bully : EnemyBehavior
             Debug.Log("exited loop");
             
             //set the head sprite
-            head.GetComponent<SpriteRenderer>().sprite = GameControl.PlayerData.flowerStatsDict["poppy"].GetHeadSprite(0);
+            head.GetComponent<SpriteRenderer>().sprite = GameControl.PlayerData.flowerStatsDict["poppy"].GetHeadOffsetSprite(0);
             //reset the behavior object or pull values from last time
             head.GetComponent<FlowerBehavior>().picked = false;
             head.GetComponent<FlowerBehavior>().growing = false;

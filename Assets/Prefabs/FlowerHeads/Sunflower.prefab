@@ -131,7 +131,8 @@ MonoBehaviour:
   range: 0
   projCount: 0
   projRange: 6
-  headSprite: {fileID: 21300000, guid: d76bd23d856bc374492ee043f19dc828, type: 3}
+  headSprite: {fileID: 21300000, guid: 7adf90cd9aa194a4d801f936a774d554, type: 3}
+  headOffsetSprite: {fileID: 21300000, guid: d76bd23d856bc374492ee043f19dc828, type: 3}
   projSprite: {fileID: 21300000, guid: 3e766295bffa2e24cb2c7f51d8bcde01, type: 3}
   stemSprite: {fileID: 21300000, guid: 2351e182e81d46542a43cefa85e8ee95, type: 3}
   pool: {fileID: 0}
@@ -153,8 +154,8 @@ MonoBehaviour:
     it will continue to grow in power\nBlind - Afflicted enemies will be unable to
     track the player for a period of time
   textColor: {r: 0.9058824, g: 0.9333334, b: 0.16078432, a: 0}
-  headSprite2: {fileID: 21300000, guid: d4a5456d39d6cdf448e460d7ce0281c7, type: 3}
-  headSprite3: {fileID: 21300000, guid: f23443144f12d61448f88df75d15a8ac, type: 3}
+  headSprite2: {fileID: 21300000, guid: 4cad8ff8191559d4dbebbb96ebfa78fe, type: 3}
+  headSprite3: {fileID: 21300000, guid: 22867fb918a1416448f3825a316215db, type: 3}
   stem2: {fileID: -333095599, guid: f48144af38cbed6448d065c9e88882b6, type: 3}
   stem3: {fileID: 2079372141, guid: f48144af38cbed6448d065c9e88882b6, type: 3}
 --- !u!58 &-5071946681003261559

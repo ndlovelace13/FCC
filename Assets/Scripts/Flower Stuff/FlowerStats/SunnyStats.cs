@@ -23,6 +23,9 @@ public class SunnyStats : FlowerStats
     [SerializeField] Sprite headSprite2;
     [SerializeField] Sprite headSprite3;
 
+    [SerializeField] Sprite headOffsetSprite2;
+    [SerializeField] Sprite headOffsetSprite3;
+
     [SerializeField] Sprite stem2;
     [SerializeField] Sprite stem3;
 
@@ -51,6 +54,16 @@ public class SunnyStats : FlowerStats
             case 2: return headSprite2;
             case 3: return headSprite3;
             default: return headSprite;
+        }
+    }
+
+    public override Sprite GetHeadOffsetSprite(int tier)
+    {
+        switch (tier)
+        {
+            case 2: return headOffsetSprite2;
+            case 3: return headOffsetSprite3;
+            default: return headOffsetSprite;
         }
     }
 

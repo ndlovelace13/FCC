@@ -61,6 +61,9 @@ public class FlowerHarvest : MonoBehaviour
                             GameObject newHead = Instantiate(head, slots[slotPos].transform);
                             newHead.GetComponent<SpriteRenderer>().sortingLayerName = "Midground";
                             newHead.GetComponent<SpriteRenderer>().sortingOrder = 6;
+                            newHead.GetComponent<SpriteRenderer>().spriteSortPoint = SpriteSortPoint.Center;
+                            //retrieve the headSprite without an offset based on the current tier
+                            newHead.GetComponent<SpriteRenderer>().sprite = newHead.GetComponent<FlowerStats>().GetHeadSprite(newHead.GetComponent<FlowerBehavior>().tier);
                             newHead.transform.localScale = new Vector3(1f, 1f, 1f);
                             newHead.GetComponent<FlowerBehavior>().picked = true;
                             //newHead.transform.position = slots[slotPos].transform.position;

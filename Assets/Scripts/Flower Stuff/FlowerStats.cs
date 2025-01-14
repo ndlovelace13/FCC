@@ -70,6 +70,7 @@ public abstract class FlowerStats : MonoBehaviour
     [SerializeField] protected int projRange;
 
     public Sprite headSprite;
+    public Sprite headOffsetSprite;
     public Sprite projSprite;
     public Sprite stemSprite;
     public GameObject pool;
@@ -107,6 +108,11 @@ public abstract class FlowerStats : MonoBehaviour
     public virtual Sprite GetHeadSprite(int tier)
     {
         return headSprite;
+    }
+
+    public virtual Sprite GetHeadOffsetSprite(int tier)
+    {
+        return headOffsetSprite;
     }
 
     public virtual void SetStem(GameObject head, GameObject stem)

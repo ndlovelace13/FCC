@@ -182,7 +182,7 @@ public class VisibleFlowers : MonoBehaviour
                 }
                 head.GetComponent<SpriteRenderer>().enabled = true;
                 //set the head sprite
-                head.GetComponent<SpriteRenderer>().sprite = GameControl.PlayerData.flowerStatsDict[flower.getType()].GetHeadSprite(flower.getTier());
+                head.GetComponent<SpriteRenderer>().sprite = GameControl.PlayerData.flowerStatsDict[flower.getType()].GetHeadOffsetSprite(flower.getTier());
                 //reset the behavior object or pull values from last time
                 head.GetComponent<FlowerBehavior>().picked = false;
                 head.GetComponent<FlowerBehavior>().growing = false;
