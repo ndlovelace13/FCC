@@ -104,7 +104,7 @@ public class VisibleFlowers : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
             if (flowerInfo != null && !GameControl.PlayerData.repellentMode)
             {
                 foreach (var flower in flowerInfo)

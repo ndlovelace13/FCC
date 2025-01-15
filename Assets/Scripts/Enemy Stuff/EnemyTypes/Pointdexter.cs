@@ -95,7 +95,7 @@ public class Pointdexter : EnemyBehavior
                 StartCoroutine(Sacrifice());
                 yield break;
             }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -225,7 +225,7 @@ public class Pointdexter : EnemyBehavior
             if (!isFrozen && !surprised)
                 currentTime += Time.deltaTime;
 
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
 
     }

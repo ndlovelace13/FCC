@@ -105,7 +105,7 @@ public class Bully : EnemyBehavior
                 yield break;
             }
             //wait for end of frame regardless of the situation
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -274,7 +274,7 @@ public class Bully : EnemyBehavior
             GetComponentInChildren<Rigidbody2D>().velocity = newForward + radiusAdj;
                 
 
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
 
         //once stalk is complete, choose an attack abd callStateUpdate to execute
@@ -310,7 +310,7 @@ public class Bully : EnemyBehavior
         {
             GetComponentInChildren<Rigidbody2D>().velocity = -direction.normalized * moveSpeed;
             if (isFrozen || isElectrified) { stateCancel = true; break; }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
             direction = shadow.position - target.position;
 
             //start the punch anim early if time allows for it
@@ -342,7 +342,7 @@ public class Bully : EnemyBehavior
         {
             GetComponentInChildren<Rigidbody2D>().velocity = -direction.normalized * moveSpeed;
             if (isFrozen || isElectrified) { stateCancel = true; break; }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
         Vector2 currentVel = GetComponentInChildren<Rigidbody2D>().velocity;
         //slow to a halt unless cancelled
@@ -352,7 +352,7 @@ public class Bully : EnemyBehavior
             Debug.Log("Now Cooling Down " + GetComponentInChildren<Rigidbody2D>().velocity);
             GetComponentInChildren<Rigidbody2D>().velocity = Vector2.Lerp(currentVel, Vector2.zero, (passedTime - currentTime) / (stateTime - currentTime));
             if (isFrozen || isElectrified) { stateCancel = true; break; }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
         SpeedDown(0.75f);
 
@@ -378,7 +378,7 @@ public class Bully : EnemyBehavior
         {
             GetComponentInChildren<Rigidbody2D>().velocity = -direction.normalized * moveSpeed;
             if (isFrozen || isElectrified) { stateCancel = true; break; }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
             direction = shadow.position - target.position;
         }
         //speed back to normal
@@ -389,7 +389,7 @@ public class Bully : EnemyBehavior
         {
             GetComponentInChildren<Rigidbody2D>().velocity = -direction.normalized * moveSpeed;
             if (isFrozen || isElectrified) { stateCancel = true; break; }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
         Vector2 currentVel = GetComponentInChildren<Rigidbody2D>().velocity;
         float currentTime = passedTime;
@@ -400,7 +400,7 @@ public class Bully : EnemyBehavior
             Debug.Log("Now Cooling Down " + GetComponentInChildren<Rigidbody2D>().velocity);
             GetComponentInChildren<Rigidbody2D>().velocity = Vector2.Lerp(currentVel, Vector2.zero, (passedTime - currentTime) / (stateTime - currentTime));
             if (isFrozen || isElectrified) { stateCancel = true; break; }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
         //prepare for the next state
         SpeedDown(2 / 3f);
@@ -421,7 +421,7 @@ public class Bully : EnemyBehavior
         while (passedTime < 1f)
         {
             if (isFrozen || isElectrified) { stateCancel = true; break; }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
         GameObject fist = new GameObject();
         if (!stateCancel)
@@ -441,14 +441,14 @@ public class Bully : EnemyBehavior
         //chill, repeat the same anim while the fist is active
         while (fist.activeSelf && !stateCancel)
         {
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
         GetComponent<Animator>().SetTrigger("finish");
         Destroy(fist);
         passedTime = 0f;
         while (passedTime < 0.5f)
         {
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
         
         currentState = BossState.Stalk;
@@ -466,7 +466,7 @@ public class Bully : EnemyBehavior
         while (passedTime < stateTime)
         {
             if (isFrozen || isElectrified) { stateCancel = true; break; }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }    
         if (!stateCancel)
         {
@@ -482,7 +482,7 @@ public class Bully : EnemyBehavior
         passedTime = 0f;
         while (passedTime < 0.5f)
         {
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
 
         currentState = BossState.Stalk;
@@ -525,8 +525,8 @@ public class Bully : EnemyBehavior
         while (timer < spawnTime)
         {
             transform.localScale = Vector3.Lerp(Vector3.one * 0.1f, Vector3.one, timer / spawnTime);
-            yield return new WaitForEndOfFrame();
-            timer += Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+            timer += Time.fixedDeltaTime;
         }
         //boss actually spawned here - activate the sprite and state machine
         GameControl.PlayerData.bossActive = true;

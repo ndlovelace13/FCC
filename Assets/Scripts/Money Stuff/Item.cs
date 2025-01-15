@@ -36,7 +36,7 @@ public class Item : MonoBehaviour
         player = GameObject.FindWithTag("Player").GetComponentInChildren<PlayerMovement>().gameObject;
     }
 
-    protected IEnumerator PlayerLerp(float lerpTime)
+    protected virtual IEnumerator PlayerLerp(float lerpTime)
     {
         float time = 0f;
         while (time < lerpTime)

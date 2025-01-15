@@ -194,10 +194,12 @@ public abstract class EnemyBehavior : MonoBehaviour
             //backupSpeed = moveSpeed;
             surprised = true;
             moveSpeed = 0f;
+            GetComponentInChildren<PointEffector2D>().enabled = false;
             yield return new WaitForSeconds(surpriseTime);
             //moveSpeed = backupSpeed;
             surprised = false;
             GetComponent<Animator>().SetBool("Surprise", false);
+            GetComponentInChildren<PointEffector2D>().enabled = true;
             GetComponentInChildren<Rigidbody2D>().velocity = preSurpriseVel;
         }
     }
@@ -316,6 +318,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         maxHealth = health;
         isActive = true;
         GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponentInChildren<PointEffector2D>().enabled = true;
         if (particles == null)
         {
             getParticles();

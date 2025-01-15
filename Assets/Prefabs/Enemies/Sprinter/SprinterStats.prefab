@@ -47,9 +47,9 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1003814786078272635, guid: ca9eba2f1d19f93479f5c51c2223ba08, type: 3}
   maxInterval: 0.25
   minInterval: 0.2
-  maxSpeed: 5
-  minSpeed: 3.5
-  speedCap: 8
+  maxSpeed: 3
+  minSpeed: 2
+  speedCap: 6
   maxHealth: 60
   healthInterval: 15
   startingEnemies: 1
@@ -68,6 +68,6 @@ MonoBehaviour:
   behavior: 
   weakness: 
   sprintLength: 2
-  sprintSpeed: 0.2
+  sprintSpeed: 0.35
   chargeTime: 2
   sprintCooldown: 5

@@ -57,7 +57,7 @@ public class Node : MonoBehaviour
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (crown.IsDiscovered())
-            spriteRenderer.color = new Color(22 / 255f, 209 / 255f, 33 / 255f);
+            spriteRenderer.color = new Color(32 / 255f, 123 / 255f, 32 / 255f);
         else if (crown.Discoverable())
             spriteRenderer.color = Color.yellow;
 

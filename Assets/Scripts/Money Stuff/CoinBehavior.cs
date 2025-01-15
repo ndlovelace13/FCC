@@ -23,6 +23,7 @@ public class CoinBehavior : Item
     {
         base.OnEnable();
         lerpTarget = player.transform.root;
+        transform.rotation = Quaternion.identity;
     }
     public void CoinLerp(Vector3 startPos, Vector3 endPos, ScoreCategory scoreCat, int val)
     {
@@ -103,4 +104,25 @@ public class CoinBehavior : Item
         GameObject.FindWithTag("MoneyCombo").GetComponent<MoneyCounter>().MoneyAdded(value);
         base.AssignValue();
     }
+
+    protected override IEnumerator PlayerLerp(float lerpTime)
+    {
+        //Debug.Log("Starting coin rotating");
+        StartCoroutine(CoinSpin());
+        return base.PlayerLerp(lerpTime);
+    }
+
+    IEnumerator CoinSpin()
+    {
+        //Debug.Log("Coin rotating");
+        float rotSpeed = 300f * (Random.Range(0, 2) * 2 - 1);
+        while (gameObject.activeSelf)
+        {
+            transform.Rotate(0, 0, rotSpeed * Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
+        }
+        //Debug.Log("Done rotating");
+    }
+
+
 }

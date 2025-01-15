@@ -81,7 +81,7 @@ public class Sprinter : EnemyBehavior
                 yield break;
             }
 
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -160,7 +160,7 @@ public class Sprinter : EnemyBehavior
                 StartCoroutine(DirectionHandle());
             }
 
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
     }
 

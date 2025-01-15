@@ -66,7 +66,7 @@ public class BasicEnemy : EnemyBehavior
                 StartCoroutine(Sacrifice());
                 yield break;
             }  
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
     }
 }
