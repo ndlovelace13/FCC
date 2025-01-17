@@ -10,10 +10,4 @@ public class Almanac : Paginator
         referencePages = GameControl.PlayerData.almanacPages;
         base.Start();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

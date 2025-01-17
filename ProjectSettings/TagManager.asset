@@ -51,6 +51,7 @@ TagManager:
   - MoneyCombo
   - docket
   - catalog
+  - cursor
   layers:
   - Default
   - TransparentFX

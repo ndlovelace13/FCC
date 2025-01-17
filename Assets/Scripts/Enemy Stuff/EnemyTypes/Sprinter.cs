@@ -167,7 +167,7 @@ public class Sprinter : EnemyBehavior
     IEnumerator DirectionHandle()
     {
         Vector2 direction = GetComponent<Rigidbody2D>().velocity;
-        if (direction.x > 0f)
+        if (direction.x < 0f)
             transform.localScale = new Vector3(-1, 1);
         else
             transform.localScale = Vector3.one;

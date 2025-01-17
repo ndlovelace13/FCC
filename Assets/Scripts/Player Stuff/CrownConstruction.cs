@@ -16,6 +16,7 @@ public class CrownConstruction : MonoBehaviour
     List<GameObject> chosenInputs;
     GameObject finalCrown;
     Transform[] slots;
+    [SerializeField] Transform[] finalSlots;
 
     public bool constructionInProgress = false;
     public bool constructionReady = false;
@@ -138,19 +139,29 @@ public class CrownConstruction : MonoBehaviour
         //calculate the edge of the screen and the finalLocation
         Vector3 topEdge = Camera.main.ScreenToWorldPoint(new Vector3(0f, Screen.height));
         Vector3 center = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2));
-        float yOffset = Math.Abs(topEdge.y - center.y) / 4f;
+        float yOffset = Math.Abs(topEdge.y - center.y) / 3f;
         Vector3 finalPos = new Vector3(finalCrown.transform.localPosition.x, yOffset);
 
         //calculate a random location for all of the flowers
         currentFlowers = finalCrown.transform.GetComponentsInChildren<FlowerBehavior>();
         //Transform[] flowers = children.Where(child => child.tag == "FlowerHead").ToArray();
+        float generatedRad = UnityEngine.Random.Range(0f, Mathf.PI * 2);
+        float arcCovered = 0f;
         for (int i = currentFlowers.Length - 1; i >= 0; i--)
         {
             //store the finalPosition as the current localPos in relation to the crown
-            currentFlowers[i].finalDocketPos = currentFlowers[i].gameObject.transform.localPosition;
+            currentFlowers[i].finalDocketPos = finalSlots[i].localPosition;
 
             //generate a random location on the surrounding oval
-            float generatedRad = UnityEngine.Random.Range(0f, Mathf.PI * 2);
+            if (i < 4)
+            {
+                float maxArc = ((Mathf.PI * 2f) - arcCovered - Mathf.PI / 8f) / (i+1);
+                float newArc = UnityEngine.Random.Range(Mathf.PI / 8f, maxArc);
+                Debug.Log("maxArc" + maxArc + "calculatedArc" + newArc);
+                arcCovered += newArc;
+                generatedRad += newArc;
+            }
+                
             Vector3 generatedPos = new Vector3(4 * Mathf.Cos(generatedRad), 2.5f * Mathf.Sin(generatedRad));
             currentFlowers[i].randomCraftPos = generatedPos;
 
@@ -233,6 +244,8 @@ public class CrownConstruction : MonoBehaviour
     {
         skillCheckActive = false;
         gameObject.GetComponentInChildren<PlayerMovement>().CraftingDone();
+        GetComponentInChildren<Animator>().SetBool("isCrafting", false);
+        GetComponentInChildren<Animator>().SetBool("craftComplete", true);
         //constructionReady = true;
 
         Vector3 currentPos = finalCrown.transform.localPosition;
@@ -255,12 +268,12 @@ public class CrownConstruction : MonoBehaviour
         //slow and present the name and money
         currentTime = 0f;
         currentPos = finalCrown.transform.position;
-        GetComponentInChildren<Animator>().SetBool("isCrafting", false);
+    
         int crownScore = (int)(Construction() * GameControl.PlayerData.crownMult);
         //reactivate the crosshair
         GameControl.PlayerData.crosshairActive = true;
         //constructionReady = false;
-        Debug.Log(crownScore);
+        //Debug.Log(crownScore);
         //int currentScore = PlayerPrefs.GetInt("totalScore");
         //PlayerPrefs.SetInt("totalScore", currentScore + crownScore);
 
@@ -314,6 +327,7 @@ public class CrownConstruction : MonoBehaviour
 
         yield return new WaitForSeconds(0.25f);
 
+        GetComponentInChildren<Animator>().SetBool("craftComplete", false);
         //lerp to hold position and back to full speed
         while (currentTime < lerpLength)
         {

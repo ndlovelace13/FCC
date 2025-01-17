@@ -51,7 +51,10 @@ public class Paginator : MonoBehaviour
             currentLynn.transform.localScale = Vector3.one;
             currentLynn.SetActive(false);
         }
-            
+
+        //move the buttons to the end of the hierarchy so they always will display on top
+        nextButton.transform.SetSiblingIndex(nextButton.transform.parent.childCount - 1);
+        prevButton.transform.SetSiblingIndex(prevButton.transform.parent.childCount - 1);
     }
 
     public void ChangePages(int newIndex)

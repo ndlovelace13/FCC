@@ -10,10 +10,4 @@ public class Catalog : Paginator
         referencePages = GameControl.PlayerData.catalogPages;
         base.Start();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

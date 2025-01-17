@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9935346, g: 1, b: 0.8066038, a: 1}
+  m_Color: {r: 0.9245283, g: 0.90074426, b: 0.51023495, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -269,6 +269,7 @@ MonoBehaviour:
   currentIndex: 0
   prevButton: {fileID: 1865065619}
   nextButton: {fileID: 1241593940}
+  lynnRobert: {fileID: 0}
 --- !u!1 &166945311
 GameObject:
   m_ObjectHideFlags: 0
@@ -3505,7 +3506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1923853003247964665, guid: 0b59706b31283e045b955cb82e68f00d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1025
       objectReference: {fileID: 0}
     - target: {fileID: 1923853003247964665, guid: 0b59706b31283e045b955cb82e68f00d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6152,6 +6153,7 @@ GameObject:
   - component: {fileID: 1241593941}
   - component: {fileID: 1241593940}
   - component: {fileID: 1241593942}
+  - component: {fileID: 1241593945}
   m_Layer: 5
   m_Name: ForwardButton
   m_TagString: Untagged
@@ -6203,8 +6205,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Almanac, Assembly-CSharp
+      - m_Target: {fileID: 51267384}
+        m_TargetAssemblyTypeName: Paginator, Assembly-CSharp
         m_MethodName: NextPages
         m_Mode: 1
         m_Arguments:
@@ -6228,14 +6230,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7735849, g: 0.7531368, b: 0.41233534, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b15f367cc63cc8c41ac345d832e24286, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5cdc54efd91320440a81d4627f85181a, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -6282,16 +6284,29 @@ RectTransform:
   m_GameObject: {fileID: 1241593939}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 51267378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -68, y: 62}
   m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1241593945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241593939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347a06f36bf57904990e5a9d21e33ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directionSprite: {fileID: 21300000, guid: 4cfdee23010d6e24fb6e3f4e150e6b50, type: 3}
 --- !u!1001 &1430507188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15679,6 +15694,7 @@ GameObject:
   - component: {fileID: 1865065620}
   - component: {fileID: 1865065619}
   - component: {fileID: 1865065618}
+  - component: {fileID: 1865065622}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -15695,14 +15711,14 @@ RectTransform:
   m_GameObject: {fileID: 1865065616}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 51267378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 75, y: 61}
   m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1865065618
@@ -15769,8 +15785,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Almanac, Assembly-CSharp
+      - m_Target: {fileID: 51267384}
+        m_TargetAssemblyTypeName: Paginator, Assembly-CSharp
         m_MethodName: PrevPages
         m_Mode: 1
         m_Arguments:
@@ -15794,14 +15810,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7735849, g: 0.7531368, b: 0.41233534, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 10764696e1b06c342ac7706179eec3d3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 021d3e9d0240c2946aa2a9727e0fb772, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -15819,6 +15835,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865065616}
   m_CullTransparentMesh: 1
+--- !u!114 &1865065622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865065616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347a06f36bf57904990e5a9d21e33ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directionSprite: {fileID: 21300000, guid: 334052946ab2251459c5123f266fda09, type: 3}
 --- !u!1 &2013750970
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,7 +18,8 @@ public class ResearchData
         requiredSeeds= input.requiredSeeds;
 
         //increment the maxResearchTimes if this is being instantiated for the first time
-        GameControl.SaveData.researchAmount += maxResearchTimes;
+        if (GameControl.SaveData.firstRun)
+            GameControl.SaveData.researchAmount += maxResearchTimes;
     }
 }
 

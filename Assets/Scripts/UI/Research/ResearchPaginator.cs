@@ -10,10 +10,4 @@ public class ResearchPaginator : Paginator
         referencePages = GameControl.PlayerData.researchPages;
         base.Start();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

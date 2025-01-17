@@ -12,10 +12,10 @@ public class ShakeLerp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (looping)
+        /*if (looping)
         {
             Execute(true);
-        }
+        }*/
     }
 
     // Update is called once per frame
@@ -33,10 +33,11 @@ public class ShakeLerp : MonoBehaviour
 
     IEnumerator ShakeLerping()
     {
+        float currentTime = 0f;
         do
         {
-            float currentTime = 0;
             targetRot = Quaternion.Euler(startingRot.x, startingRot.y, startingRot.z + lerpAngle);
+            //Debug.Log("currentTime: " + currentTime);
 
             while (currentTime < lerpTime)
             {
@@ -55,7 +56,10 @@ public class ShakeLerp : MonoBehaviour
             }
             transform.rotation = startingRot;
 
-            lerpAngle *= -1f;
+            lerpAngle = -lerpAngle;
+            //Debug.Log("lerpAngle" + lerpAngle);
+            currentTime = 0f;
+            yield return new WaitForEndOfFrame();
 
         } while (looping);
     }

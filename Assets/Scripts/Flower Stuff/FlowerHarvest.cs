@@ -47,7 +47,7 @@ public class FlowerHarvest : MonoBehaviour
             {
                 //I'm putting a bullet through my skull
                 GameObject flower = collision.gameObject.transform.parent.gameObject;
-                Debug.Log("This is the thing: " + flower.name);
+                //Debug.Log("This is the thing: " + flower.name);
                 foreach (Transform t in flower.transform)
                 {
                     if (t.CompareTag("FlowerHead"))
@@ -71,7 +71,7 @@ public class FlowerHarvest : MonoBehaviour
                             newHead.transform.SetParent(crown.transform);
 
                             newHead.GetComponent<FlowerBehavior>().position = slotPos;
-                            Debug.Log("slot Position assigned: " + slotPos);
+                            //Debug.Log("slot Position assigned: " + slotPos);
 
                             //update the flowerUse counter
                             if (!GameControl.PlayerData.tutorialActive)
@@ -99,7 +99,7 @@ public class FlowerHarvest : MonoBehaviour
 
     private void SingleFire()
     {
-        Debug.Log("Last full slot" + lastSlot());
+        //Debug.Log("Last full slot" + lastSlot());
         int slotPos = lastSlot();
         if (slotPos != -1 && !transform.parent.GetComponent<CrownConstruction>().skillCheckActive && !transform.parent.GetComponent<CrownConstruction>().constructionReady)
         {
@@ -107,7 +107,7 @@ public class FlowerHarvest : MonoBehaviour
             docketLoaded = false;
             slots[slotPos].tag = "slotEmpty";
             GameObject tossedFlower = lastFlower();
-            Debug.Log(tossedFlower.GetComponent<FlowerStats>().type);
+            //Debug.Log(tossedFlower.GetComponent<FlowerStats>().type);
             crown.GetComponent<CrownAttack>().SingleFire(tossedFlower);
             if (GameControl.PlayerData.tutorialState == 3)
             {
@@ -128,8 +128,8 @@ public class FlowerHarvest : MonoBehaviour
             //Debug.Log("Flower Encounter Data added");
             GameControl.PlayerData.savedFlowerDict[type].encountered = true;
         }
-        else
-            Debug.Log("Flower Already Encountered");
+        //else
+          //  Debug.Log("Flower Already Encountered");
         yield return null;
     }
 
@@ -143,10 +143,10 @@ public class FlowerHarvest : MonoBehaviour
         Transform[] allObjects = docket.GetComponentsInChildren<Transform>();
         allObjects = allObjects.Where(child => child.tag == "finalCrown").ToArray();
         crown = allObjects[0].gameObject;
-        if (crown)
+        /*if (crown)
         {
             Debug.Log(crown.gameObject.name);
-        }
+        }*/
     }
 
     private int nextSlot()

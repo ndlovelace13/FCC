@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class CursorBehavior : MonoBehaviour
 {
+    [SerializeField] Sprite baseCursor;
+    [SerializeField] Sprite leftCursor;
+    [SerializeField] Sprite rightCursor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,5 +32,15 @@ public class CursorBehavior : MonoBehaviour
         }
         else
             GetComponent<Image>().enabled = true;
+    }
+
+    public void ApplySprite(Sprite appliedSprite)
+    {
+        GetComponent<Image>().sprite = appliedSprite;
+    }
+
+    public void ResetSprite()
+    {
+        GetComponent<Image>().sprite = baseCursor;
     }
 }

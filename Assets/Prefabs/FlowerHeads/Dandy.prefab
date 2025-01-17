@@ -128,7 +128,7 @@ MonoBehaviour:
   id: 7
   basePoints: 3
   damage: 15
-  range: 5
+  range: 3
   projCount: 4
   projRange: 6
   headSprite: {fileID: 21300000, guid: a0421258a95987c4d9d4f26b864595f0, type: 3}
@@ -138,7 +138,7 @@ MonoBehaviour:
   pool: {fileID: 0}
   pointsTiers: 03000000040000000500000007000000
   damageTiers: 0f000000120000001500000018000000
-  rangeTiers: 0500000006000000080000000a000000
+  rangeTiers: 03000000040000000500000006000000
   projTiers: 04000000050000000600000007000000
   aug: 0
   title: Dandelion
