@@ -1,0 +1,10 @@
+Event	ID	Name			Wwise Object Path	Notes
+	311417904	HomebaseMusicStop			\Default Work Unit\Music\HomebaseMusicStop	
+	545868898	GameplayMusicStop			\Default Work Unit\Music\GameplayMusicStop	
+	2275179450	GameplayMusic			\Default Work Unit\Music\GameplayMusic	
+	3375575032	HomebaseMusic			\Default Work Unit\Music\HomebaseMusic	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	8471930	Homebase	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\E5\{E52B25EC-4758-C6F5-9D35-B729A320C98F}.wem		\Interactive Music Hierarchy\Default Work Unit\MenuPlaylist\Menu1\Homebase		24576096
+	217776234	Gameplay1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\78\{78912790-5D6A-55E0-F10B-9D3DC55A0E39}.wem		\Interactive Music Hierarchy\Default Work Unit\GameplayPlaylist\GameplayMusic\Gameplay1		16384096
+

@@ -38,7 +38,7 @@ namespace AK.Wwise
 		{
 			if (IsValid())
 			{
-				var result = AkSoundEngine.SetState(GroupId, Id);
+				var result = AkUnitySoundEngine.SetState(GroupId, Id);
 				Verify(result);
 			}
 		}

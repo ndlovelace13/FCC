@@ -99,7 +99,7 @@ public class AkInitializer : UnityEngine.MonoBehaviour
 			return;
 		}
 	#if !(AK_WWISE_ADDRESSABLES && UNITY_ADDRESSABLES)
-		AkWwiseSoundbanksInfoXMLFileWatcher.Instance.XMLUpdated += AkBankManager.ReloadAllBanks;
+		WwiseProjectDatabase.SoundBankDirectoryUpdated += AkBankManager.ReloadAllBanks;
 	#endif
 #endif
 
@@ -152,7 +152,7 @@ public class AkInitializer : UnityEngine.MonoBehaviour
 		}
 #endif
 
-if (IsInstance())
+		if (IsInstance())
 		{
 #if UNITY_WEBGL && !UNITY_EDITOR
 			bool bRegistered = AkVerifyPluginRegistration();
@@ -203,6 +203,10 @@ if (IsInstance())
 #endif
 			ms_Instance = null;
 		}
+
+#if UNITY_EDITOR
+		AkWwiseTypes.DragAndDropObjectReference = null;
+#endif
 	}
 
 	private void OnApplicationPause(bool pauseStatus)
@@ -223,7 +227,7 @@ if (IsInstance())
 
 	private void OnApplicationQuit()
 	{
-		if (IsInstance() && !AkSoundEngineInitialization.Instance.ShouldKeepSoundEngineEnabled())
+		if (IsInstance() && !AkUnitySoundEngineInitialization.Instance.ShouldKeepSoundEngineEnabled())
 		{
 			AkSoundEngineController.Instance.Terminate();
 		}

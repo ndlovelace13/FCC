@@ -25,7 +25,7 @@ Copyright (c) 2024 Audiokinetic Inc.
 /// \sa
 /// - \ref AkEventTrack
 /// - \ref AkEventPlayableBehavior
-[System.Obsolete(AkSoundEngine.Deprecation_2019_2_0)]
+[System.Obsolete(AkUnitySoundEngine.Deprecation_2019_2_0)]
 public class AkEventPlayable : UnityEngine.Playables.PlayableAsset, UnityEngine.Timeline.ITimelineClipAsset
 {
 	public AK.Wwise.Event akEvent = new AK.Wwise.Event();

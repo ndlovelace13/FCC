@@ -49,35 +49,35 @@ public class AkRadialEmitter : UnityEngine.MonoBehaviour
 
 	public void SetGameObjectOuterRadius(float in_outerRadius)
 	{
-		AkSoundEngine.SetGameObjectRadius(AkSoundEngine.GetAkGameObjectID(gameObject), in_outerRadius, innerRadius);
+		AkUnitySoundEngine.SetGameObjectRadius(AkUnitySoundEngine.GetAkGameObjectID(gameObject), in_outerRadius, innerRadius);
 		previousOuterRadius = outerRadius = in_outerRadius;
 		previousInnerRadius = innerRadius;
 	}
 
 	public void SetGameObjectInnerRadius(float in_innerRadius)
 	{
-		AkSoundEngine.SetGameObjectRadius(AkSoundEngine.GetAkGameObjectID(gameObject), outerRadius, in_innerRadius);
+		AkUnitySoundEngine.SetGameObjectRadius(AkUnitySoundEngine.GetAkGameObjectID(gameObject), outerRadius, in_innerRadius);
 		previousOuterRadius = outerRadius;
 		previousInnerRadius = innerRadius = in_innerRadius;
 	}
 
 	public void SetGameObjectRadius(float in_outerRadius, float in_innerRadius)
 	{
-		AkSoundEngine.SetGameObjectRadius(AkSoundEngine.GetAkGameObjectID(gameObject), in_outerRadius, in_innerRadius);
+		AkUnitySoundEngine.SetGameObjectRadius(AkUnitySoundEngine.GetAkGameObjectID(gameObject), in_outerRadius, in_innerRadius);
 		previousOuterRadius = outerRadius = in_outerRadius;
 		previousInnerRadius = innerRadius = in_innerRadius;
 	}
 
 	public void SetGameObjectRadius()
 	{
-		AkSoundEngine.SetGameObjectRadius(AkSoundEngine.GetAkGameObjectID(gameObject), outerRadius, innerRadius);
+		AkUnitySoundEngine.SetGameObjectRadius(AkUnitySoundEngine.GetAkGameObjectID(gameObject), outerRadius, innerRadius);
 		previousOuterRadius = outerRadius;
 		previousInnerRadius = innerRadius;
 	}
 
 	public void SetGameObjectRadius(UnityEngine.GameObject in_gameObject)
 	{
-		AkSoundEngine.SetGameObjectRadius(AkSoundEngine.GetAkGameObjectID(in_gameObject), outerRadius, innerRadius);
+		AkUnitySoundEngine.SetGameObjectRadius(AkUnitySoundEngine.GetAkGameObjectID(in_gameObject), outerRadius, innerRadius);
 	}
 
 	private void OnEnable()

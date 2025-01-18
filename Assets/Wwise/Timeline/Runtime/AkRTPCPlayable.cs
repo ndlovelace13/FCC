@@ -25,7 +25,7 @@ Copyright (c) 2024 Audiokinetic Inc.
 //--------------------------------------------------------------------------------------------
 
 [System.Serializable]
-[System.Obsolete(AkSoundEngine.Deprecation_2019_2_0)]
+[System.Obsolete(AkUnitySoundEngine.Deprecation_2019_2_0)]
 public class AkRTPCPlayable : UnityEngine.Playables.PlayableAsset, UnityEngine.Timeline.ITimelineClipAsset
 {
 	public bool overrideTrackObject = false;
@@ -61,7 +61,7 @@ public class AkRTPCPlayable : UnityEngine.Playables.PlayableAsset, UnityEngine.T
 //--------------------------------------------------------------------------------------------
 
 [System.Serializable]
-[System.Obsolete(AkSoundEngine.Deprecation_2019_2_0)]
+[System.Obsolete(AkUnitySoundEngine.Deprecation_2019_2_0)]
 public class AkRTPCPlayableBehaviour : UnityEngine.Playables.PlayableBehaviour
 {
 	[UnityEngine.SerializeField]

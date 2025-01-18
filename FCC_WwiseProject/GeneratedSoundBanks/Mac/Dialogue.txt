@@ -2,5 +2,5 @@ Event	ID	Name			Wwise Object Path	Notes
 	1791909165	DialogueStart			\Default Work Unit\DialogueStart	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	339031925	flowerGuyTalk	C:\Users\ndlov\Documents\Game Projects\FlowerCrownChaos\FCC\FCC_WwiseProject\.cache\Mac\SFX\flowerGuyTalk_FBC78EF0.wem		\Actor-Mixer Hierarchy\Default Work Unit\flowerGuyTalk		6713968
+	339031925	flowerGuyTalk	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\67\{67272CE9-C4A4-DCA6-EF48-FD6112435D13}.wem		\Actor-Mixer Hierarchy\Default Work Unit\flowerGuyTalk		6713968
 

@@ -26,7 +26,7 @@ Copyright (c) 2024 Audiokinetic Inc.
 [UnityEngine.Timeline.TrackClipType(typeof(AkRTPCPlayable))]
 // Use if the track requires a binding to a scene object or asset
 [UnityEngine.Timeline.TrackBindingType(typeof(UnityEngine.GameObject))]
-[System.Obsolete(AkSoundEngine.Deprecation_2019_2_0)]
+[System.Obsolete(AkUnitySoundEngine.Deprecation_2019_2_0)]
 #if UNITY_2019_1_OR_NEWER
 [UnityEngine.Timeline.HideInMenu]
 #endif

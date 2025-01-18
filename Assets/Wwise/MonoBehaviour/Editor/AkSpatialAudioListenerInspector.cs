@@ -16,7 +16,7 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2024 Audiokinetic Inc.
 *******************************************************************************/
 
-[UnityEditor.CustomEditor(typeof(AkSpatialAudioListener))]
+[UnityEditor.CustomEditor(typeof(AkSpatialAudioListener), true)]
 public class AkSpatialAudioListenerInspector : UnityEditor.Editor
 {
 	public override void OnInspectorGUI()

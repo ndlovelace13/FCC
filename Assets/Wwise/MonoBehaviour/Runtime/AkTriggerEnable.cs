@@ -16,7 +16,7 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2024 Audiokinetic Inc.
 *******************************************************************************/
 
-[System.Obsolete(AkSoundEngine.Deprecation_2019_2_2)]
+[System.Obsolete(AkUnitySoundEngine.Deprecation_2019_2_2)]
 public class AkTriggerEnable : AkTriggerBase
 {
 }

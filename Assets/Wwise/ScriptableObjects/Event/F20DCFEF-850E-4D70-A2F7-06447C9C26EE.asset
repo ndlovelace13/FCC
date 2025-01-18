@@ -15,3 +15,5 @@ MonoBehaviour:
   objectName: UpgradePurchase
   id: 2834561310
   guid: F20DCFEF-850E-4D70-A2F7-06447C9C26EE
+  IsInUserDefinedSoundBank: 1
+  IsAutoBankLoaded: 0

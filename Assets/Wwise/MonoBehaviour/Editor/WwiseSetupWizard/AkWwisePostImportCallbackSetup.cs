@@ -17,6 +17,7 @@ Copyright (c) 2024 Audiokinetic Inc.
 
 #if UNITY_EDITOR
 using UnityEditor;
+using UnityEngine;
 
 [UnityEditor.InitializeOnLoad]
 public class AkWwisePostImportCallbackSetup
@@ -318,7 +319,11 @@ public class AkWwisePostImportCallbackSetup
 
 		var settings = AkWwiseEditorSettings.Instance;
 		// Look for a game object which has the initializer component
-		var AkInitializers = UnityEngine.Object.FindObjectsOfType<AkInitializer>();
+#if UNITY_6000_0_OR_NEWER
+		var AkInitializers = Object.FindObjectsByType<AkInitializer>(FindObjectsSortMode.None);
+#else
+		var AkInitializers = Object.FindObjectsOfType<AkInitializer>();
+#endif
 		if (AkInitializers.Length == 0)
 		{
 			if (settings.CreateWwiseGlobal)

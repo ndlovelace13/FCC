@@ -15,3 +15,5 @@ MonoBehaviour:
   objectName: ResearchInvest
   id: 2982833173
   guid: B54EC935-1299-49AD-B701-811E29628BBC
+  IsInUserDefinedSoundBank: 1
+  IsAutoBankLoaded: 0

@@ -15,3 +15,5 @@ MonoBehaviour:
   objectName: Flower_Harvest
   id: 2696148806
   guid: 39F58104-5D72-4FDB-A6E3-AEB6BC1CC232
+  IsInUserDefinedSoundBank: 1
+  IsAutoBankLoaded: 0

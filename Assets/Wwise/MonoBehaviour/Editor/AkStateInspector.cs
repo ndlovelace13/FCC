@@ -17,7 +17,7 @@ Copyright (c) 2024 Audiokinetic Inc.
 *******************************************************************************/
 
 [UnityEditor.CanEditMultipleObjects]
-[UnityEditor.CustomEditor(typeof(AkState))]
+[UnityEditor.CustomEditor(typeof(AkState), true)]
 public class AkStateInspector : AkBaseInspector
 {
 	private readonly AkUnityEventHandlerInspector m_UnityEventHandlerInspector = new AkUnityEventHandlerInspector();

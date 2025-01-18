@@ -16,6 +16,7 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2024 Audiokinetic Inc.
 *******************************************************************************/
 
+[System.Obsolete(AkUnitySoundEngine.Deprecation_2024_1_0)]
 [UnityEngine.DisallowMultipleComponent]
 public class AkTerminator : UnityEngine.MonoBehaviour
 {

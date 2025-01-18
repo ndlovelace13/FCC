@@ -24,12 +24,12 @@ public class AkTriangleArray : AkBaseArray<AkTriangle>
 
 	protected override int StructureSize
 	{
-		get { return AkSoundEnginePINVOKE.CSharp_AkTriangle_GetSizeOf(); }
+		get { return AkUnitySoundEnginePINVOKE.CSharp_AkTriangle_GetSizeOf(); }
 	}
 
 	protected override void DefaultConstructAtIntPtr(System.IntPtr address)
 	{
-		AkSoundEnginePINVOKE.CSharp_AkTriangle_Clear(address);
+		AkUnitySoundEnginePINVOKE.CSharp_AkTriangle_Clear(address);
 	}
 
 	protected override AkTriangle CreateNewReferenceFromIntPtr(System.IntPtr address)
@@ -39,7 +39,7 @@ public class AkTriangleArray : AkBaseArray<AkTriangle>
 
 	protected override void CloneIntoReferenceFromIntPtr(System.IntPtr address, AkTriangle other)
 	{
-		AkSoundEnginePINVOKE.CSharp_AkTriangle_Clone(address, AkTriangle.getCPtr(other));
+		AkUnitySoundEnginePINVOKE.CSharp_AkTriangle_Clone(address, AkTriangle.getCPtr(other));
 	}
 }
 #endif // #if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.

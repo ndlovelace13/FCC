@@ -569,7 +569,7 @@ public class AkWwiseTreeView : TreeView
 
 	protected void OpenSettings()
 	{
-		UnityEditor.SettingsService.OpenProjectSettings("Project/Wwise Editor");
+		UnityEditor.SettingsService.OpenProjectSettings("Project/Wwise Integration");
 	}
 
 	protected override void KeyEvent()

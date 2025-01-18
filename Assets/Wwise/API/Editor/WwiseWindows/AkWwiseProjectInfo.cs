@@ -134,7 +134,7 @@ public static class AkWwiseProjectInfo
 		if (AkUtilities.IsWwiseProjectAvailable)
 		{
 			bDirty = AkWwiseWWUBuilder.Populate();
-			bDirty |= AkWwiseXMLBuilder.Populate();
+			bDirty |= AkWwiseJSONBuilder.Populate();
 			if (bDirty)
 			{
 				UnityEditor.EditorUtility.SetDirty(GetData());

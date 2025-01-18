@@ -28,6 +28,8 @@ namespace AK.Wwise
 	public class Bank : BaseType
 	{
 		public override WwiseObjectType WwiseObjectType { get { return WwiseObjectType.Soundbank; } }
+		
+		///@brief The reference to the SoundBank the script loads or unloads.
 		public WwiseBankReference WwiseObjectReference;
 
 		public override WwiseObjectReference ObjectReference
@@ -65,6 +67,10 @@ namespace AK.Wwise
 			}
 		}
 #else
+		///@brief Load the SoundBank
+		///For more details about bank decoding, see 'Saving a Decoded SoundBank' in Lesson 3 of the Wwise 301 certification.
+		///@param[in] decodeBank (Deprecated) Whether to decode the bank or not. 
+		///@param[in] saveDecodedBank (Deprecated) Whether to save the decoded bank or not.
 		public void Load(bool decodeBank = false, bool saveDecodedBank = false)
 		{
 			if (IsValid())
@@ -73,6 +79,8 @@ namespace AK.Wwise
 			}
 		}
 
+		///@brief Load the SoundBank asynchronously.
+		///@param[in] callback A callback called when the loading operation is complete.
 		public void LoadAsync(AkCallbackManager.BankCallback callback = null)
 		{
 			if (IsValid())
@@ -80,7 +88,8 @@ namespace AK.Wwise
 				AkBankManager.LoadBankAsync(Name, callback);
 			}
 		}
-
+		
+		///@brief Unload the SoundBank.
 		public void Unload()
 		{
 			if (IsValid())

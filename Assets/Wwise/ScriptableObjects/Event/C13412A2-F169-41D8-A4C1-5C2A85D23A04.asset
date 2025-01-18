@@ -15,3 +15,5 @@ MonoBehaviour:
   objectName: ButtonClick
   id: 4051332235
   guid: C13412A2-F169-41D8-A4C1-5C2A85D23A04
+  IsInUserDefinedSoundBank: 1
+  IsAutoBankLoaded: 0

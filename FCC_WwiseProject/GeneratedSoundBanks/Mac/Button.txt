@@ -5,8 +5,8 @@ Event	ID	Name			Wwise Object Path	Notes
 	4051332235	ButtonClick			\Default Work Unit\ButtonClick	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	24292098	crownCraft	C:\Users\ndlov\Documents\Game Projects\FlowerCrownChaos\FCC\FCC_WwiseProject\.cache\Mac\SFX\crownCraft_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\crownCraft		441096
-	343197594	collectionBuy	C:\Users\ndlov\Documents\Game Projects\FlowerCrownChaos\FCC\FCC_WwiseProject\.cache\Mac\SFX\collectionBuy_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\collectionBuy		391852
-	566951220	buttonClick	C:\Users\ndlov\Documents\Game Projects\FlowerCrownChaos\FCC\FCC_WwiseProject\.cache\Mac\SFX\buttonClick_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\buttonClick		191776
-	797605621	researchInvest	C:\Users\ndlov\Documents\Game Projects\FlowerCrownChaos\FCC\FCC_WwiseProject\.cache\Mac\SFX\researchInvest_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\researchInvest		280572
+	24292098	crownCraft	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\F6\{F693BF0F-B57D-4DE4-8C68-F12D7240C38B}.wem		\Actor-Mixer Hierarchy\Default Work Unit\crownCraft		441096
+	343197594	collectionBuy	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\9D\{9D3D5179-A047-E415-D1FF-A3EA3571A4E5}.wem		\Actor-Mixer Hierarchy\Default Work Unit\collectionBuy		391852
+	566951220	buttonClick	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\DA\{DAE5622A-6B99-2AAA-EF27-5212FE7A769F}.wem		\Actor-Mixer Hierarchy\Default Work Unit\buttonClick		191776
+	797605621	researchInvest	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\10\{10D4C9B1-3065-2A85-5A66-2D3E2F956A6C}.wem		\Actor-Mixer Hierarchy\Default Work Unit\researchInvest		280572
 

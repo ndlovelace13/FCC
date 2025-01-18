@@ -39,6 +39,16 @@
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>
 				</SoundBank>
+				<SoundBank Name="Music" ID="{4A3A0934-DE9B-482D-B6E6-3EFA3E5F2DC1}">
+					<ObjectInclusionList>
+						<ObjectRef Name="HomebaseMusicStop" ID="{5697AA27-948D-439A-88E0-C4E1B91E781B}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="GameplayMusic" ID="{2DDAD958-4288-48C6-8AF1-3E7E56221F59}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="HomebaseMusic" ID="{E754B373-13E8-4A07-9655-17B597768FB1}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="GameplayMusicStop" ID="{E07DEC6C-A48E-4D34-AA6D-D9881396EFF5}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
 			</ChildrenList>
 		</WorkUnit>
 	</SoundBanks>

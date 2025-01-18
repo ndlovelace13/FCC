@@ -33,16 +33,16 @@ public class AkListenerDistanceProbe : UnityEngine.MonoBehaviour
 	{
         if (distanceProbe)
         {
-            var listenerGameObjectID = AkSoundEngine.GetAkGameObjectID(this.gameObject);
-            var distanceProbeGameObjectID = AkSoundEngine.GetAkGameObjectID(distanceProbe.gameObject);
-			AkSoundEngine.SetDistanceProbe(listenerGameObjectID, distanceProbeGameObjectID);
+            var listenerGameObjectID = AkUnitySoundEngine.GetAkGameObjectID(this.gameObject);
+            var distanceProbeGameObjectID = AkUnitySoundEngine.GetAkGameObjectID(distanceProbe.gameObject);
+			AkUnitySoundEngine.SetDistanceProbe(listenerGameObjectID, distanceProbeGameObjectID);
         }
     }
 
 	private void OnDisable()
 	{
-        var listenerGameObjectID = AkSoundEngine.GetAkGameObjectID(this.gameObject);
-        AkSoundEngine.SetDistanceProbe(listenerGameObjectID, AkSoundEngine.AK_INVALID_GAME_OBJECT);
+        var listenerGameObjectID = AkUnitySoundEngine.GetAkGameObjectID(this.gameObject);
+        AkUnitySoundEngine.SetDistanceProbe(listenerGameObjectID, AkUnitySoundEngine.AK_INVALID_GAME_OBJECT);
 	}
 
 }

@@ -80,7 +80,7 @@ public class AkTimelineRtpcPlayable : UnityEngine.Playables.PlayableAsset, Unity
 	}
 
 #if UNITY_EDITOR
-	[UnityEditor.CustomEditor(typeof(AkTimelineRtpcPlayable))]
+	[UnityEditor.CustomEditor(typeof(AkTimelineRtpcPlayable), true)]
 	public class Editor : UnityEditor.Editor
 	{
 		private AkTimelineRtpcPlayable playable;

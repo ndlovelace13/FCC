@@ -26,7 +26,7 @@ public abstract class WwiseObjectReference : UnityEngine.ScriptableObject
 
 	[AkShowOnly]
 	[UnityEngine.SerializeField]
-	private uint id = AkSoundEngine.AK_INVALID_UNIQUE_ID;
+	private uint id = AkUnitySoundEngine.AK_INVALID_UNIQUE_ID;
 
 	[AkShowOnly]
 	[UnityEngine.SerializeField]
@@ -105,7 +105,7 @@ public abstract class WwiseObjectReference : UnityEngine.ScriptableObject
 		{
 			objectReference = CreateInstance<WwiseObjectReference>();
 		}
-
+		
 		objectReference.guid = guid.ToString().ToUpper();
 
 		if (!s_objectReferenceDictionary.ContainsKey(wwiseObjectType))
@@ -208,6 +208,13 @@ public abstract class WwiseObjectReference : UnityEngine.ScriptableObject
 		}
 
 		var changed = UpdateWwiseObjectData(asset, name);
+		
+		if (wwiseObjectType == WwiseObjectType.Event)
+		{
+			//Need to directly set IsUserDefinedSoundBank, since we can't rely on the user to generate the bank after the creation of the reference.
+			WwiseEventReference eventRef = (WwiseEventReference)asset;
+			eventRef.UpdateIsUserDefinedSoundBank();
+		}
 		if (!assetExists)
 			UnityEditor.AssetDatabase.CreateAsset(asset, path);
 		else if (changed)

@@ -754,6 +754,9 @@ public class GameControl : MonoBehaviour
 
     public void ResetRun()
     {
+        //start the gameplay music
+        GetComponentInChildren<MusicHandler>().GameplayMusicStart();
+
         gameOver = false;
         gameWin = false;
         loading = true;
@@ -1064,6 +1067,8 @@ public class GameControl : MonoBehaviour
         blackoutObj.GetComponent<BlackoutBehavior>().BeginBlackout("You Eliminated the Replicant Threat", "...For Now...", "Homebase", 3f);
         unlockDone = false;
 
+        //stop the music
+        GetComponentInChildren<MusicHandler>().GameplayMusicStop();
         yield return null;
     }
 }

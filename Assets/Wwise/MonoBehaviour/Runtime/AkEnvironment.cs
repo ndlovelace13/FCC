@@ -101,10 +101,10 @@ public class AkEnvironment : UnityEngine.MonoBehaviour
 	}
 
 	#region Obsolete
-	[System.Obsolete(AkSoundEngine.Deprecation_2018_1_2)]
-	public int m_auxBusID { get { return (int)(data == null ? AkSoundEngine.AK_INVALID_UNIQUE_ID : data.Id); } }
+	[System.Obsolete(AkUnitySoundEngine.Deprecation_2018_1_2)]
+	public int m_auxBusID { get { return (int)(data == null ? AkUnitySoundEngine.AK_INVALID_UNIQUE_ID : data.Id); } }
 
-	[System.Obsolete(AkSoundEngine.Deprecation_2018_1_6)]
+	[System.Obsolete(AkUnitySoundEngine.Deprecation_2018_1_6)]
 	public byte[] valueGuid
 	{
 		get
@@ -117,13 +117,13 @@ public class AkEnvironment : UnityEngine.MonoBehaviour
 		}
 	}
 
-	[System.Obsolete(AkSoundEngine.Deprecation_2018_1_2)]
+	[System.Obsolete(AkUnitySoundEngine.Deprecation_2018_1_2)]
 	public uint GetAuxBusID()
 	{
 		return data.Id;
 	}
 
-	[System.Obsolete(AkSoundEngine.Deprecation_2018_1_6)]
+	[System.Obsolete(AkUnitySoundEngine.Deprecation_2018_1_6)]
 	public UnityEngine.Collider GetCollider()
 	{
 		return Collider;
@@ -135,7 +135,7 @@ public class AkEnvironment : UnityEngine.MonoBehaviour
 	[UnityEngine.HideInInspector]
 	[UnityEngine.SerializeField]
 	[UnityEngine.Serialization.FormerlySerializedAs("m_auxBusID")]
-	private int auxBusIdInternal = (int)AkSoundEngine.AK_INVALID_UNIQUE_ID;
+	private int auxBusIdInternal = (int)AkUnitySoundEngine.AK_INVALID_UNIQUE_ID;
 	[UnityEngine.HideInInspector]
 	[UnityEngine.SerializeField]
 	[UnityEngine.Serialization.FormerlySerializedAs("valueGuid")]

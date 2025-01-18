@@ -46,11 +46,11 @@ namespace AK.Wwise
 
 		public uint Id
 		{
-			get { return IsValid() ? ObjectReference.Id : AkSoundEngine.AK_INVALID_UNIQUE_ID; }
+			get { return IsValid() ? ObjectReference.Id : AkUnitySoundEngine.AK_INVALID_UNIQUE_ID; }
 		}
 		public static uint InvalidId
 		{
-			get { return AkSoundEngine.AK_INVALID_UNIQUE_ID; }
+			get { return AkUnitySoundEngine.AK_INVALID_UNIQUE_ID; }
 		}
 
 		public virtual bool IsValid()
@@ -70,7 +70,7 @@ namespace AK.Wwise
 		protected void Verify(AKRESULT result)
 		{
 #if UNITY_EDITOR
-			if (result != AKRESULT.AK_Success && AkSoundEngine.IsInitialized())
+			if (result != AKRESULT.AK_Success && AkUnitySoundEngine.IsInitialized())
 				UnityEngine.Debug.LogWarning("Unsuccessful call made on " + GetType().Name + ".");
 #endif
 		}
@@ -101,13 +101,13 @@ namespace AK.Wwise
 		}
 
 		#region Obsolete
-		[System.Obsolete(AkSoundEngine.Deprecation_2018_1_2)]
+		[System.Obsolete(AkUnitySoundEngine.Deprecation_2018_1_2)]
 		public int ID
 		{
 			get { return (int)Id; }
 		}
 
-		[System.Obsolete(AkSoundEngine.Deprecation_2018_1_6)]
+		[System.Obsolete(AkUnitySoundEngine.Deprecation_2018_1_6)]
 		public byte[] valueGuid
 		{
 			get

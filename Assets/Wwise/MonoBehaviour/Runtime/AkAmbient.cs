@@ -89,7 +89,7 @@ public class AkAmbient : AkEvent
 
 			var positionArray = BuildMultiDirectionArray(eventPosList);
 			//Set multiple positions
-			AkSoundEngine.SetMultiplePositions(eventPosList.list[0].gameObject, positionArray, (ushort) positionArray.Count, MultiPositionType);
+			AkUnitySoundEngine.SetMultiplePositions(eventPosList.list[0].gameObject, positionArray, (ushort) positionArray.Count, MultiPositionType);
 		}
 		base.OnEnable();
 	}
@@ -115,11 +115,11 @@ public class AkAmbient : AkEvent
 			}
 #endif
 			var positionArray = BuildAkPositionArray();
-			AkSoundEngine.SetMultiplePositions(gameObject, positionArray, (ushort)positionArray.Count, MultiPositionType);
+			AkUnitySoundEngine.SetMultiplePositions(gameObject, positionArray, (ushort)positionArray.Count, MultiPositionType);
 		}
 	}
 
-	private void OnDisable()
+	private new void OnDisable()
 	{
 #if UNITY_EDITOR
         if (UnityEngine.Application.isBatchMode)
@@ -140,9 +140,11 @@ public class AkAmbient : AkEvent
 				eventPosList.list.Remove(this);
 
 				var positionArray = BuildMultiDirectionArray(eventPosList);
-				AkSoundEngine.SetMultiplePositions(eventPosList.list[0].gameObject, positionArray, (ushort) positionArray.Count, MultiPositionType);
+				AkUnitySoundEngine.SetMultiplePositions(eventPosList.list[0].gameObject, positionArray, (ushort) positionArray.Count, MultiPositionType);
 			}
 		}
+        
+        base.OnDisable();
 	}
 
 	public override void HandleEvent(UnityEngine.GameObject in_gameObject)
@@ -169,7 +171,7 @@ public class AkAmbient : AkEvent
 			}
 			else
 			{
-				playingId = data.Post(soundEmitterObject, (uint)AkCallbackType.AK_EndOfEvent, multiPositionSoundEmitter.FinishedPlaying);
+				data.Post(soundEmitterObject, (uint)AkCallbackType.AK_EndOfEvent, multiPositionSoundEmitter.FinishedPlaying);
 			}
 		}
 	}

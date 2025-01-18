@@ -27,7 +27,7 @@ public class AkBank : AkTriggerHandler
 {
 	public AK.Wwise.Bank data = new AK.Wwise.Bank();
 
-	/// Decode this SoundBank upon load
+	/// DEPRECATED Decode this SoundBank upon load
 	public bool decodeBank = false;
 
 	public bool overrideLoadSetting = false;
@@ -35,7 +35,7 @@ public class AkBank : AkTriggerHandler
 	/// Check this to load the SoundBank in the background. Be careful, if Events are triggered and the SoundBank hasn't finished loading, you'll have "Event not found" errors.
 	public bool loadAsynchronous = false;
 
-	/// Save the decoded SoundBank to disk for faster loads in the future
+	/// DEPRECATED Save the decoded SoundBank to disk for faster loads in the future
 	public bool saveDecodedBank = false;
 
 	/// Reserved.
@@ -57,7 +57,7 @@ public class AkBank : AkTriggerHandler
 			data.ObjectReference = reference;
 			AkWwiseTypes.DragAndDropObjectReference = null;
 		}
-		AkSoundEngineInitialization.Instance.initializationDelegate += HandleEvent;
+		AkUnitySoundEngineInitialization.Instance.initializationDelegate += HandleEvent;
 #endif
 
 		base.Awake();
@@ -73,10 +73,6 @@ public class AkBank : AkTriggerHandler
         {
 			return;
         }
-		if (!UnityEditor.EditorApplication.isPlaying)
-		{
-			HandleEvent();
-		}
 		base.OnEnable();
 	}
 #endif
@@ -86,6 +82,10 @@ public class AkBank : AkTriggerHandler
 		if (UnityEditor.BuildPipeline.isBuildingPlayer || AkUtilities.IsMigrating)
 		{
 			return;
+		}
+		if (!UnityEditor.EditorApplication.isPlaying)
+		{
+			HandleEvent();
 		}
 #endif
 
@@ -134,7 +134,7 @@ public class AkBank : AkTriggerHandler
 		{
 			return;
 		}
-		AkSoundEngineInitialization.Instance.initializationDelegate -= HandleEvent;
+		AkUnitySoundEngineInitialization.Instance.initializationDelegate -= HandleEvent;
 #endif
 
 		base.OnDestroy();
@@ -143,10 +143,10 @@ public class AkBank : AkTriggerHandler
 	}
 
 	#region Obsolete
-	[System.Obsolete(AkSoundEngine.Deprecation_2018_1_6)]
+	[System.Obsolete(AkUnitySoundEngine.Deprecation_2018_1_6)]
 	public string bankName { get { return data == null ? string.Empty : data.Name; } }
 
-	[System.Obsolete(AkSoundEngine.Deprecation_2018_1_6)]
+	[System.Obsolete(AkUnitySoundEngine.Deprecation_2018_1_6)]
 	public byte[] valueGuid
 	{
 		get

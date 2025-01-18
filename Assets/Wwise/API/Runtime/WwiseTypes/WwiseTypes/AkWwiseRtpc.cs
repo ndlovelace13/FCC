@@ -37,7 +37,7 @@ namespace AK.Wwise
 		{
 			if (IsValid())
 			{
-				var result = AkSoundEngine.SetRTPCValue(Id, value, gameObject);
+				var result = AkUnitySoundEngine.SetRTPCValue(Id, value, gameObject);
 				Verify(result);
 			}
 		}
@@ -49,7 +49,7 @@ namespace AK.Wwise
 			{
 				var akQueryValue = gameObject ? AkQueryRTPCValue.RTPCValue_GameObject : AkQueryRTPCValue.RTPCValue_Global;
 				var queryValue = (int)akQueryValue;
-				var result = AkSoundEngine.GetRTPCValue(Id, gameObject, AkSoundEngine.AK_INVALID_PLAYING_ID, out value, ref queryValue);
+				var result = AkUnitySoundEngine.GetRTPCValue(Id, gameObject, AkUnitySoundEngine.AK_INVALID_PLAYING_ID, out value, ref queryValue);
 				Verify(result);
 			}
 
@@ -60,7 +60,7 @@ namespace AK.Wwise
 		{
 			if (IsValid())
 			{
-				var result = AkSoundEngine.SetRTPCValue(Id, value);
+				var result = AkUnitySoundEngine.SetRTPCValue(Id, value);
 				Verify(result);
 			}
 		}

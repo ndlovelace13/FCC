@@ -38,7 +38,7 @@ namespace AK.Wwise
 		{
 			if (IsValid())
 			{
-				var result = AkSoundEngine.SetSwitch(GroupId, Id, gameObject);
+				var result = AkUnitySoundEngine.SetSwitch(GroupId, Id, gameObject);
 				Verify(result);
 			}
 		}

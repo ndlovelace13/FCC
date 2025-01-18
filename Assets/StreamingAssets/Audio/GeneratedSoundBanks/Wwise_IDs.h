@@ -21,6 +21,10 @@ namespace AK
         static const AkUniqueID ENEMYKILLED = 465333688U;
         static const AkUniqueID ENEMYSPAWN = 3453203440U;
         static const AkUniqueID FLOWER_HARVEST = 2696148806U;
+        static const AkUniqueID GAMEPLAYMUSIC = 2275179450U;
+        static const AkUniqueID GAMEPLAYMUSICSTOP = 545868898U;
+        static const AkUniqueID HOMEBASEMUSIC = 3375575032U;
+        static const AkUniqueID HOMEBASEMUSICSTOP = 311417904U;
         static const AkUniqueID RESEARCHINVEST = 2982833173U;
         static const AkUniqueID RESEARCHUNLOCK = 668166534U;
         static const AkUniqueID THROW = 745179803U;
@@ -33,6 +37,7 @@ namespace AK
         static const AkUniqueID BASICENEMY = 2360806359U;
         static const AkUniqueID BUTTON = 977454165U;
         static const AkUniqueID DIALOGUE = 3930136735U;
+        static const AkUniqueID MUSIC = 3991942870U;
         static const AkUniqueID PLAYER = 1069431850U;
     } // namespace BANKS
 

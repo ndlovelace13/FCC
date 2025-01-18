@@ -4,7 +4,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3453203440	EnemySpawn			\Default Work Unit\EnemySpawn	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	78482138	enemyDeath1	C:\Users\ndlov\Documents\Game Projects\FlowerCrownChaos\FCC\FCC_WwiseProject\.cache\Mac\SFX\enemyDeath_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\enemyDeath\enemyDeath1		398760
-	873878954	enemyHit1	C:\Users\ndlov\Documents\Game Projects\FlowerCrownChaos\FCC\FCC_WwiseProject\.cache\Mac\SFX\enemyHit_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\enemyHit\enemyHit1		286836
-	1031096079	enemyLaugh	C:\Users\ndlov\Documents\Game Projects\FlowerCrownChaos\FCC\FCC_WwiseProject\.cache\Mac\SFX\enemyLaugh_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\enemySpawn\enemyLaugh		308620
+	78482138	enemyDeath1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\7F\{7F844DAE-07DB-D3E6-9F31-F343B837BE76}.wem		\Actor-Mixer Hierarchy\Default Work Unit\enemyDeath\enemyDeath1		398760
+	873878954	enemyHit1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\9D\{9D88FA8F-9701-B86B-6411-9083B7A90390}.wem		\Actor-Mixer Hierarchy\Default Work Unit\enemyHit\enemyHit1		286836
+	1031096079	enemyLaugh	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\07\{07DD58BF-2D60-8EBE-AB66-B626CC585D6E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\enemySpawn\enemyLaugh		308620
 

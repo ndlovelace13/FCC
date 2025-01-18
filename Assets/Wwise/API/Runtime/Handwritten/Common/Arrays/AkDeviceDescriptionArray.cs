@@ -24,12 +24,12 @@ public class AkDeviceDescriptionArray : AkBaseArray<AkDeviceDescription>
 
 	protected override int StructureSize
 	{
-		get { return AkSoundEnginePINVOKE.CSharp_AkDeviceDescription_GetSizeOf(); }
+		get { return AkUnitySoundEnginePINVOKE.CSharp_AkDeviceDescription_GetSizeOf(); }
 	}
 
 	protected override void DefaultConstructAtIntPtr(System.IntPtr address)
 	{
-		AkSoundEnginePINVOKE.CSharp_AkDeviceDescription_Clear(address);
+		AkUnitySoundEnginePINVOKE.CSharp_AkDeviceDescription_Clear(address);
 	}
 
 	protected override AkDeviceDescription CreateNewReferenceFromIntPtr(System.IntPtr address)
@@ -39,7 +39,7 @@ public class AkDeviceDescriptionArray : AkBaseArray<AkDeviceDescription>
 
 	protected override void CloneIntoReferenceFromIntPtr(System.IntPtr address, AkDeviceDescription other)
 	{
-		AkSoundEnginePINVOKE.CSharp_AkDeviceDescription_Clone(address, AkDeviceDescription.getCPtr(other));
+		AkUnitySoundEnginePINVOKE.CSharp_AkDeviceDescription_Clone(address, AkDeviceDescription.getCPtr(other));
 	}
 }
 #endif

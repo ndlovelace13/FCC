@@ -18,7 +18,7 @@ Copyright (c) 2024 Audiokinetic Inc.
 
 public class AkEventCallbackData : UnityEngine.ScriptableObject
 {
-	////AkSoundEngine.PostEvent callback flags. See the AkCallbackType enumeration for a list of all callbacks
+	////AkUnitySoundEngine.PostEvent callback flags. See the AkCallbackType enumeration for a list of all callbacks
 	public System.Collections.Generic.List<int> callbackFlags = new System.Collections.Generic.List<int>();
 
 	////Names of the callback functions.
@@ -28,7 +28,7 @@ public class AkEventCallbackData : UnityEngine.ScriptableObject
 	public System.Collections.Generic.List<UnityEngine.GameObject> callbackGameObj =
 		new System.Collections.Generic.List<UnityEngine.GameObject>();
 
-	////The sum of the flags of all game objects. This is the flag that will be passed to AkSoundEngine.PostEvent
+	////The sum of the flags of all game objects. This is the flag that will be passed to AkUnitySoundEngine.PostEvent
 	public int uFlags = 0;
 }
 

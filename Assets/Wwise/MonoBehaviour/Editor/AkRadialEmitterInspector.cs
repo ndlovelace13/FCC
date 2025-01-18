@@ -16,7 +16,7 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2024 Audiokinetic Inc.
 *******************************************************************************/
 
-[UnityEditor.CustomEditor(typeof(AkRadialEmitter))]
+[UnityEditor.CustomEditor(typeof(AkRadialEmitter), true)]
 public class AkRadialEmitterInspector : UnityEditor.Editor
 {
 	private AkRadialEmitter m_AkRadialEmitter;

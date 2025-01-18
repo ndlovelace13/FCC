@@ -22,7 +22,7 @@ MonoBehaviour:
       ObjectType: 12
       guid: 1b88f9a0e769f94fafb8929715bb9e0a
     ParentPath: Virtual Acoustics\Default Work Unit
-    guid: 1b88f9a0e769f94fafb8929715bb9e0a
+    guid: 00000000000000000000000000000000
     GuidInternal: 
     m_lastTime: -8584646396414404693
     List: []
@@ -36,7 +36,7 @@ MonoBehaviour:
       ObjectType: 12
       guid: b15891677c3eda4a9256d861900ef874
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
-    guid: b15891677c3eda4a9256d861900ef874
+    guid: 00000000000000000000000000000000
     GuidInternal: 
     m_lastTime: -8584646396414536416
     List:
@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: c38583b8445d944cb8872fb7c1f3ac8f
     GuidInternal: 
-    m_lastTime: -8584646396414247996
+    m_lastTime: -8584644387567773069
     List:
     - name: BasicEnemy
       guid: f6793cf0e940344b9353fff7d4861b6a
@@ -110,6 +110,20 @@ MonoBehaviour:
         ObjectType: 7
         guid: bafca92818c0ae4f855cdc2bc0204747
       Path: SoundBanks\Default Work Unit\Dialogue
+    - name: Music
+      guid: 34093a4a9bde2d48b6e63efa3e5f2dc1
+      id: 3991942870
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c38583b8445d944cb8872fb7c1f3ac8f
+      - ElementName: Music
+        ObjectType: 7
+        guid: 34093a4a9bde2d48b6e63efa3e5f2dc1
+      Path: SoundBanks\Default Work Unit\Music
     - name: Player
       guid: a942af2b15ddb94c805c735bb49074b6
       id: 1069431850
@@ -136,7 +150,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 48ed7fdb16f388418594cf5ce384c227
     GuidInternal: 
-    m_lastTime: -8584646396414303084
+    m_lastTime: -8584644387567793069
     List:
     - name: ButtonClick
       guid: a21234c169f1d841a4c15c2a85d23a04
@@ -221,8 +235,8 @@ MonoBehaviour:
         guid: c7d4d4569e2a334cbaac6e780b933214
       Path: Events\Default Work Unit\DialogueStart
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: DialogueStop
       guid: 2ca721cd109b4f4db9e29f2496804dba
       id: 3304726383
@@ -308,6 +322,103 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 1.1747673
       minDuration: 0.9324134
+    - name: GameplayMusic
+      guid: 58d9da2d8842c6488af13e7e56221f59
+      id: 2275179450
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Music
+        ObjectType: 4
+        guid: bcff0956841eed4296df01fed98b2219
+      - ElementName: GameplayMusic
+        ObjectType: 3
+        guid: 58d9da2d8842c6488af13e7e56221f59
+      Path: Events\Default Work Unit\Music\GameplayMusic
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: GameplayMusicStop
+      guid: 6cec7de08ea4344daa6dd9881396eff5
+      id: 545868898
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Music
+        ObjectType: 4
+        guid: bcff0956841eed4296df01fed98b2219
+      - ElementName: GameplayMusicStop
+        ObjectType: 3
+        guid: 6cec7de08ea4344daa6dd9881396eff5
+      Path: Events\Default Work Unit\Music\GameplayMusicStop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: HomebaseMusic
+      guid: 73b354e7e813074a965517b597768fb1
+      id: 3375575032
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Music
+        ObjectType: 4
+        guid: bcff0956841eed4296df01fed98b2219
+      - ElementName: HomebaseMusic
+        ObjectType: 3
+        guid: 73b354e7e813074a965517b597768fb1
+      Path: Events\Default Work Unit\Music\HomebaseMusic
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: HomebaseMusicStop
+      guid: 27aa97568d949a4388e0c4e1b91e781b
+      id: 311417904
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Music
+        ObjectType: 4
+        guid: bcff0956841eed4296df01fed98b2219
+      - ElementName: HomebaseMusicStop
+        ObjectType: 3
+        guid: 27aa97568d949a4388e0c4e1b91e781b
+      Path: Events\Default Work Unit\Music\HomebaseMusicStop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Music
+      guid: bcff0956841eed4296df01fed98b2219
+      id: 3991942870
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Music
+        ObjectType: 4
+        guid: bcff0956841eed4296df01fed98b2219
+      Path: Events\Default Work Unit\Music
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: ResearchInvest
       guid: 35c94eb59912ad49b701811e29628bbc
       id: 2982833173
@@ -386,7 +497,7 @@ MonoBehaviour:
       ObjectType: 12
       guid: da0d46268a8f1a42a40f96995ccdea9b
     ParentPath: Game Parameters\Default Work Unit
-    guid: da0d46268a8f1a42a40f96995ccdea9b
+    guid: 00000000000000000000000000000000
     GuidInternal: 
     m_lastTime: -8584646396414436264
     List: []
@@ -400,7 +511,7 @@ MonoBehaviour:
       ObjectType: 12
       guid: 670ba111cacaae4594b2a2799e2c4a7b
     ParentPath: States\Default Work Unit
-    guid: 670ba111cacaae4594b2a2799e2c4a7b
+    guid: 00000000000000000000000000000000
     GuidInternal: 
     m_lastTime: -8584646396414247996
     List: []
@@ -414,7 +525,7 @@ MonoBehaviour:
       ObjectType: 12
       guid: 9cea3587350d4c4e9277d77aa2cfae32
     ParentPath: Switches\Default Work Unit
-    guid: 9cea3587350d4c4e9277d77aa2cfae32
+    guid: 00000000000000000000000000000000
     GuidInternal: 
     m_lastTime: -8584646396414349574
     List: []
@@ -428,12 +539,12 @@ MonoBehaviour:
       ObjectType: 12
       guid: a095dbe06d424348a41ad7dc208ffc61
     ParentPath: Triggers\Default Work Unit
-    guid: a095dbe06d424348a41ad7dc208ffc61
+    guid: 00000000000000000000000000000000
     GuidInternal: 
     m_lastTime: -8584646396414333128
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 0500000006000000070000000a0000000b0000000c00000010000000150000001600000018000000190000001e0000001f000000
+  ExpandedWaapiItemIds: 010000000500000011000000190000001a000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0

@@ -1,0 +1,471 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "RootPaths": {
+   "ProjectRoot": "../..",
+   "SourceFilesRoot": "../../.cache",
+   "SoundBanksRoot": ".",
+   "ExternalSourcesInputFile": "",
+   "ExternalSourcesOutputRoot": "."
+  },
+  "DialogueEvents": [],
+  "SoundBanks": [
+   {
+    "Id": "977454165",
+    "Type": "User",
+    "GUID": "{B7A9EB3A-41EF-44D3-82F3-E34BBBE6CD34}",
+    "Language": "SFX",
+    "Hash": "{7809AA0E-D87C-1A82-CACB-443D51E4147B}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Button",
+    "ShortName": "Button",
+    "Path": "Button.bnk",
+    "Media": [
+     {
+      "Id": "24292098",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "crownCraft.wav",
+      "CachePath": "F6/{F693BF0F-B57D-4DE4-8C68-F12D7240C38B}.wem"
+     },
+     {
+      "Id": "343197594",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "collectionBuy.wav",
+      "CachePath": "9D/{9D3D5179-A047-E415-D1FF-A3EA3571A4E5}.wem"
+     },
+     {
+      "Id": "566951220",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "buttonClick.wav",
+      "CachePath": "DA/{DAE5622A-6B99-2AAA-EF27-5212FE7A769F}.wem"
+     },
+     {
+      "Id": "797605621",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "researchInvest.wav",
+      "CachePath": "10/{10D4C9B1-3065-2A85-5A66-2D3E2F956A6C}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "4051332235",
+      "Name": "ButtonClick",
+      "ObjectPath": "\\Events\\Default Work Unit\\ButtonClick",
+      "GUID": "{C13412A2-F169-41D8-A4C1-5C2A85D23A04}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.0866213",
+      "DurationMax": "1.0866213",
+      "MediaRefs": [
+       {
+        "Id": "566951220"
+       }
+      ]
+     },
+     {
+      "Id": "2982833173",
+      "Name": "ResearchInvest",
+      "ObjectPath": "\\Events\\Default Work Unit\\ResearchInvest",
+      "GUID": "{B54EC935-1299-49AD-B701-811E29628BBC}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.4165289",
+      "DurationMax": "1.7847147",
+      "MediaRefs": [
+       {
+        "Id": "797605621"
+       }
+      ]
+     },
+     {
+      "Id": "668166534",
+      "Name": "ResearchUnlock",
+      "ObjectPath": "\\Events\\Default Work Unit\\ResearchUnlock",
+      "GUID": "{78457351-0FA8-4109-8AAF-98FA6C1311A6}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.5",
+      "DurationMax": "2.5",
+      "MediaRefs": [
+       {
+        "Id": "24292098"
+       }
+      ]
+     },
+     {
+      "Id": "2834561310",
+      "Name": "UpgradePurchase",
+      "ObjectPath": "\\Events\\Default Work Unit\\UpgradePurchase",
+      "GUID": "{F20DCFEF-850E-4D70-A2F7-06447C9C26EE}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.9785426",
+      "DurationMax": "2.4928074",
+      "MediaRefs": [
+       {
+        "Id": "343197594"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "Id": "1069431850",
+    "Type": "User",
+    "GUID": "{2BAF42A9-DD15-4CB9-805C-735BB49074B6}",
+    "Language": "SFX",
+    "Hash": "{BF97A335-8F9B-3A5A-61F2-BA1D6D3ABDE3}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Player",
+    "ShortName": "Player",
+    "Path": "Player.bnk",
+    "Media": [
+     {
+      "Id": "24292098",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "crownCraft.wav",
+      "CachePath": "F6/{F693BF0F-B57D-4DE4-8C68-F12D7240C38B}.wem"
+     },
+     {
+      "Id": "69574967",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "crownThrow.wav",
+      "CachePath": "98/{98F2F31D-B2D3-BC11-7948-71CFB568BBB4}.wem"
+     },
+     {
+      "Id": "528063931",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "craft3.wav",
+      "CachePath": "66/{66BFF01D-9E22-AA6E-BC0F-241A907938AA}.wem"
+     },
+     {
+      "Id": "573708483",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "craft1.wav",
+      "CachePath": "32/{32DD2F9D-945E-D38D-C27C-9EAFB525DEDD}.wem"
+     },
+     {
+      "Id": "583231221",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "craft2.wav",
+      "CachePath": "F5/{F5C0A50D-B957-ACE4-A4AC-D8D10CCF4DFF}.wem"
+     },
+     {
+      "Id": "806856628",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "harvest2.wav",
+      "CachePath": "83/{8300B8D4-A2B9-1DA4-F3BC-A54732F06145}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "4264775619",
+      "Name": "CraftingDone",
+      "ObjectPath": "\\Events\\Default Work Unit\\CraftingDone",
+      "GUID": "{93E922B6-5A58-40D5-9F14-9A80FD6DCFE4}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.5",
+      "DurationMax": "2.5",
+      "MediaRefs": [
+       {
+        "Id": "24292098"
+       }
+      ]
+     },
+     {
+      "Id": "3670604801",
+      "Name": "CraftingInput",
+      "ObjectPath": "\\Events\\Default Work Unit\\CraftingInput",
+      "GUID": "{B36995CF-7556-4D61-8574-C306B9E2A551}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3831481",
+      "DurationMax": "3.5688047",
+      "MediaRefs": [
+       {
+        "Id": "528063931"
+       },
+       {
+        "Id": "573708483"
+       },
+       {
+        "Id": "583231221"
+       }
+      ]
+     },
+     {
+      "Id": "2696148806",
+      "Name": "Flower_Harvest",
+      "ObjectPath": "\\Events\\Default Work Unit\\Flower_Harvest",
+      "GUID": "{39F58104-5D72-4FDB-A6E3-AEB6BC1CC232}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.9324134",
+      "DurationMax": "1.1747673",
+      "MediaRefs": [
+       {
+        "Id": "806856628"
+       }
+      ]
+     },
+     {
+      "Id": "745179803",
+      "Name": "Throw",
+      "ObjectPath": "\\Events\\Default Work Unit\\Throw",
+      "GUID": "{52922290-0C94-4836-AEA5-FE88A4146E08}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.2445805",
+      "DurationMax": "1.2445805",
+      "MediaRefs": [
+       {
+        "Id": "69574967"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "Id": "1355168291",
+    "Type": "User",
+    "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
+    "Language": "SFX",
+    "Hash": "{89C218AE-9E0B-8562-B379-0ABAC724E516}",
+    "ObjectPath": "Init",
+    "ShortName": "Init",
+    "Path": "Init.bnk",
+    "Plugins": {
+     "AudioDevices": [
+      {
+       "Id": "2317455096",
+       "Name": "No_Output",
+       "ObjectPath": "\\Audio Devices\\Default Work Unit\\No_Output",
+       "GUID": "{73C49FC7-E51A-4997-ABB2-0B9FD510918E}",
+       "LibName": "No Output",
+       "LibId": "11862023"
+      },
+      {
+       "Id": "3859886410",
+       "Name": "System",
+       "ObjectPath": "\\Audio Devices\\Default Work Unit\\System",
+       "GUID": "{61791F90-C2B5-4806-A065-856EBC7A425A}",
+       "LibName": "System",
+       "LibId": "11403271"
+      }
+     ]
+    },
+    "Busses": [
+     {
+      "Id": "3803692087",
+      "Name": "Master Audio Bus",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus",
+      "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     }
+    ]
+   },
+   {
+    "Id": "2360806359",
+    "Type": "User",
+    "GUID": "{F03C79F6-40E9-4B34-9353-FFF7D4861B6A}",
+    "Language": "SFX",
+    "Hash": "{22F60532-C64C-03F1-A850-55424AE48404}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\BasicEnemy",
+    "ShortName": "BasicEnemy",
+    "Path": "BasicEnemy.bnk",
+    "Media": [
+     {
+      "Id": "78482138",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "enemyDeath.wav",
+      "CachePath": "7F/{7F844DAE-07DB-D3E6-9F31-F343B837BE76}.wem"
+     },
+     {
+      "Id": "873878954",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "enemyHit.wav",
+      "CachePath": "9D/{9D88FA8F-9701-B86B-6411-9083B7A90390}.wem"
+     },
+     {
+      "Id": "1031096079",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "enemyLaugh.wav",
+      "CachePath": "07/{07DD58BF-2D60-8EBE-AB66-B626CC585D6E}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "391172934",
+      "Name": "EnemyHit",
+      "ObjectPath": "\\Events\\Default Work Unit\\EnemyHit",
+      "GUID": "{C258AA26-FA2D-47FC-904F-0EEA9A81D1B0}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.2177567",
+      "DurationMax": "2.1697958",
+      "MediaRefs": [
+       {
+        "Id": "873878954"
+       }
+      ]
+     },
+     {
+      "Id": "465333688",
+      "Name": "EnemyKilled",
+      "ObjectPath": "\\Events\\Default Work Unit\\EnemyKilled",
+      "GUID": "{8AC0AD71-939C-49BC-89F5-F9E43D0933E7}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.693087",
+      "DurationMax": "3.016738",
+      "MediaRefs": [
+       {
+        "Id": "78482138"
+       }
+      ]
+     },
+     {
+      "Id": "3453203440",
+      "Name": "EnemySpawn",
+      "ObjectPath": "\\Events\\Default Work Unit\\EnemySpawn",
+      "GUID": "{51AD3BDC-735A-4C11-8C00-E44FB04FF2C7}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3102713",
+      "DurationMax": "2.3346379",
+      "MediaRefs": [
+       {
+        "Id": "1031096079"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "Id": "3930136735",
+    "Type": "User",
+    "GUID": "{28A9FCBA-C018-4FAE-855C-DC2BC0204747}",
+    "Language": "SFX",
+    "Hash": "{7B30EC40-A972-C57E-7940-BC75EBF16118}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Dialogue",
+    "ShortName": "Dialogue",
+    "Path": "Dialogue.bnk",
+    "Media": [
+     {
+      "Id": "339031925",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "flowerGuyTalk.wav",
+      "CachePath": "67/{67272CE9-C4A4-DCA6-EF48-FD6112435D13}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "1791909165",
+      "Name": "DialogueStart",
+      "ObjectPath": "\\Events\\Default Work Unit\\DialogueStart",
+      "GUID": "{56D4D4C7-2A9E-4C33-BAAC-6E780B933214}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "339031925"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "Id": "3991942870",
+    "Type": "User",
+    "GUID": "{4A3A0934-DE9B-482D-B6E6-3EFA3E5F2DC1}",
+    "Language": "SFX",
+    "Hash": "{31AEA2B4-CA94-5176-3E67-A61099DFF7E1}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Music",
+    "ShortName": "Music",
+    "Path": "Music.bnk",
+    "Media": [
+     {
+      "Id": "8471930",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Homebase.wav",
+      "CachePath": "E5/{E52B25EC-4758-C6F5-9D35-B729A320C98F}.wem"
+     },
+     {
+      "Id": "217776234",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gameplay.wav",
+      "CachePath": "78/{78912790-5D6A-55E0-F10B-9D3DC55A0E39}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "2275179450",
+      "Name": "GameplayMusic",
+      "ObjectPath": "\\Events\\Default Work Unit\\Music\\GameplayMusic",
+      "GUID": "{2DDAD958-4288-48C6-8AF1-3E7E56221F59}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "217776234"
+       }
+      ]
+     },
+     {
+      "Id": "545868898",
+      "Name": "GameplayMusicStop",
+      "ObjectPath": "\\Events\\Default Work Unit\\Music\\GameplayMusicStop",
+      "GUID": "{E07DEC6C-A48E-4D34-AA6D-D9881396EFF5}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "3375575032",
+      "Name": "HomebaseMusic",
+      "ObjectPath": "\\Events\\Default Work Unit\\Music\\HomebaseMusic",
+      "GUID": "{E754B373-13E8-4A07-9655-17B597768FB1}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "8471930"
+       }
+      ]
+     },
+     {
+      "Id": "311417904",
+      "Name": "HomebaseMusicStop",
+      "ObjectPath": "\\Events\\Default Work Unit\\Music\\HomebaseMusicStop",
+      "GUID": "{5697AA27-948D-439A-88E0-C4E1B91E781B}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     }
+    ]
+   }
+  ],
+  "FileHash": "{7351FBE6-6CE5-7929-990F-C3D6CFD88AFB}"
+ }
+}

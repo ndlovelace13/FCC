@@ -43,7 +43,7 @@ internal class AkPlatformPluginList
 			return false; //XML not parsed, don't touch anything.
 		}
 
-		if (in_PluginName.Contains("AkSoundEngine"))
+		if (in_PluginName.Contains("AkUnitySoundEngine"))
 		{
 			return true;
 		}
@@ -96,6 +96,10 @@ internal class AkPlatformPluginList
 		return false;
 	}
 
+	public static void ExecuteParse()
+	{
+		Update();
+	}
 	public static void Update(bool forceUpdate = false)
 	{
 		//Gather all GeneratedSoundBanks folder from the project
@@ -172,7 +176,7 @@ internal class AkPlatformPluginList
 			{
 				var platform = pairPF.Key;
 
-				var newDlls = ParsePluginsXML(platform, fullPaths);
+				var newDlls = ParsePlugins(platform);
 				System.Collections.Generic.HashSet<AkPluginInfo> oldDlls = null;
 
 				s_PerPlatformPlugins.TryGetValue(platform, out oldDlls);
@@ -201,87 +205,64 @@ internal class AkPlatformPluginList
 		}
 	}
 
-	private static HashSet<AkPluginInfo> ParsePluginsXML(string platform, List<string> in_pluginFiles)
+	private static HashSet<AkPluginInfo> ParsePlugins(string platform)
 	{
 		var newPlugins = new System.Collections.Generic.HashSet<AkPluginInfo>();
-
-		foreach (var pluginFile in in_pluginFiles)
+		try
 		{
-			if (!System.IO.File.Exists(pluginFile))
+			WwisePluginRefArray pluginRefArray = new WwisePluginRefArray();
+			for (var i = 0; i < WwiseProjectDatabase.GetPluginCount(); i++)
 			{
-				continue;
-			}
-
-			try
-			{
-				var doc = new System.Xml.XmlDocument();
-				doc.Load(pluginFile);
-				var Navigator = doc.CreateNavigator();
-				var pluginInfoNode = Navigator.SelectSingleNode("//PluginInfo");
-				var boolMotion = pluginInfoNode.GetAttribute("Motion", "");
-
-				var it = Navigator.Select("//PluginLib");
-
-				if (boolMotion == "true")
+				var pluginRef = pluginRefArray[i];
+				var rawPluginID = pluginRef.Id;
+				if (rawPluginID == 0)
 				{
-					AkPluginInfo motionPluginInfo = new AkPluginInfo();
-					motionPluginInfo.DllName = "AkMotion";
-					newPlugins.Add(motionPluginInfo);
+					continue;
+				}
+				AkPluginActivatorConstants.PluginID pluginID = (AkPluginActivatorConstants.PluginID)rawPluginID;
+
+				if (AkPluginActivatorConstants.alwaysSkipPluginsIDs.Contains(pluginID))
+				{
+					continue;
 				}
 
-				foreach (System.Xml.XPath.XPathNavigator node in it)
+				var dll = string.Empty;
+
+				if (platform == "Switch" || platform == "Web")
 				{
-					var rawPluginID = uint.Parse(node.GetAttribute("LibId", ""));
-					if (rawPluginID == 0)
+					if (pluginID == AkPluginActivatorConstants.PluginID.AkMeter)
 					{
-						continue;
+						dll = "AkMeter";
 					}
-
-					AkPluginActivatorConstants.PluginID pluginID = (AkPluginActivatorConstants.PluginID)rawPluginID;
-
-					if (AkPluginActivatorConstants.alwaysSkipPluginsIDs.Contains(pluginID))
-					{
-						continue;
-					}
-
-					var dll = string.Empty;
-
-					if (platform == "Switch" || platform == "Web")
-					{
-						if (pluginID == AkPluginActivatorConstants.PluginID.AkMeter)
-						{
-							dll = "AkMeter";
-						}
-					}
-					else if (AkPluginActivatorConstants.builtInPluginIDs.Contains(pluginID))
-					{
-						continue;
-					}
-
-					if (string.IsNullOrEmpty(dll))
-					{
-						dll = node.GetAttribute("DLL", "");
-					}
-
-					var staticLibName = node.GetAttribute("StaticLib", "");
-
-					AkPluginInfo newPluginInfo = new AkPluginInfo();
-					newPluginInfo.PluginID = rawPluginID;
-					newPluginInfo.DllName = dll;
-					newPluginInfo.StaticLibName = staticLibName;
-
-					if (string.IsNullOrEmpty(newPluginInfo.StaticLibName) && !AkPluginActivatorConstants.PluginIDToStaticLibName.TryGetValue(pluginID, out newPluginInfo.StaticLibName))
-					{
-						newPluginInfo.StaticLibName = dll;
-					}
-
-					newPlugins.Add(newPluginInfo);
 				}
+				else if (AkPluginActivatorConstants.builtInPluginIDs.Contains(pluginID))
+				{
+					continue;
+				}
+
+				if (string.IsNullOrEmpty(dll))
+				{
+					dll = pluginRef.DLL;
+				}
+
+				var staticLibName = pluginRef.StaticLib;
+
+				AkPluginInfo newPluginInfo = new AkPluginInfo();
+				newPluginInfo.PluginID = rawPluginID;
+				newPluginInfo.DllName = dll;
+				newPluginInfo.StaticLibName = staticLibName;
+
+				if (string.IsNullOrEmpty(newPluginInfo.StaticLibName) && !AkPluginActivatorConstants.PluginIDToStaticLibName.TryGetValue(pluginID, out newPluginInfo.StaticLibName))
+				{
+					newPluginInfo.StaticLibName = dll;
+				}
+
+				newPlugins.Add(newPluginInfo);
 			}
-			catch (System.Exception ex)
-			{
-				UnityEngine.Debug.LogError("WwiseUnity: " + pluginFile + " could not be parsed. " + ex.Message);
-			}
+		}
+		catch (System.Exception ex)
+		{
+			UnityEngine.Debug.LogError("WwiseUnity: plugins could not be parsed. " + ex.Message);
 		}
 
 		return newPlugins;

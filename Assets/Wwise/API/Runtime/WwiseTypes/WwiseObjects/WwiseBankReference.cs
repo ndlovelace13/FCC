@@ -37,7 +37,11 @@ public class WwiseBankReference : WwiseObjectReference
 
 	public override void CompleteData()
 	{
+#if WWISE_ADDRESSABLES_24_1_OR_LATER
+		SetAddressableBank(AkAssetUtilities.GetAddressableBankAsset(DisplayName, false));
+#else
 		SetAddressableBank(AkAssetUtilities.GetAddressableBankAsset(DisplayName));
+#endif
 	}
 
 	public override bool IsComplete()

@@ -152,7 +152,7 @@ public class AkWwisePicker : UnityEditor.EditorWindow
 				}
 				else
 				{
-					UnityEngine.Debug.LogError("Access to Wwise is required to generate the SoundBanks. Please go to Edit > Project Settings... and set the Wwise Application Path found in the Wwise Editor view.");
+					UnityEngine.Debug.LogError("Access to Wwise is required to generate the SoundBanks. Please go to Edit > Project Settings... and set the Wwise Application Path found in the Wwise Integration view.");
 				}
 			}
 

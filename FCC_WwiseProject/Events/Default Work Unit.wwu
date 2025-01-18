@@ -199,6 +199,60 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Folder Name="Music" ID="{5609FFBC-1E84-42ED-96DF-01FED98B2219}" ShortID="676180924">
+					<ChildrenList>
+						<Event Name="HomebaseMusic" ID="{E754B373-13E8-4A07-9655-17B597768FB1}">
+							<ChildrenList>
+								<Action Name="" ID="{204AE9EC-799C-4F39-BB02-25F8FDFF3D5E}" ShortID="828587167">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="MenuPlaylist" ID="{4E266AB1-4B12-4277-BCC4-0BE9236F2B7C}" WorkUnitID="{0070BC87-CF85-45EC-9C2C-7B483F5BB79B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="GameplayMusic" ID="{2DDAD958-4288-48C6-8AF1-3E7E56221F59}">
+							<ChildrenList>
+								<Action Name="" ID="{79C97C58-6A95-4DC8-842B-5210B67BD6BC}" ShortID="112130062">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="GameplayPlaylist" ID="{A02E3154-55D8-4C5E-A4AE-3416109A4D09}" WorkUnitID="{0070BC87-CF85-45EC-9C2C-7B483F5BB79B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="GameplayMusicStop" ID="{E07DEC6C-A48E-4D34-AA6D-D9881396EFF5}">
+							<ChildrenList>
+								<Action Name="" ID="{ACE0C1B5-F92A-49EB-88D6-0CBC8352799D}" ShortID="801557915">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="GameplayPlaylist" ID="{A02E3154-55D8-4C5E-A4AE-3416109A4D09}" WorkUnitID="{0070BC87-CF85-45EC-9C2C-7B483F5BB79B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="HomebaseMusicStop" ID="{5697AA27-948D-439A-88E0-C4E1B91E781B}">
+							<ChildrenList>
+								<Action Name="" ID="{AF38595D-3419-4254-9FEA-96382D2A0378}" ShortID="972778192">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="MenuPlaylist" ID="{4E266AB1-4B12-4277-BCC4-0BE9236F2B7C}" WorkUnitID="{0070BC87-CF85-45EC-9C2C-7B483F5BB79B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

@@ -47,7 +47,7 @@ namespace AK.Wwise
 		private static int GetId(UnityEditor.SerializedProperty property)
 		{
 			if (property == null)
-				return (int)AkSoundEngine.AK_INVALID_UNIQUE_ID;
+				return (int)AkUnitySoundEngine.AK_INVALID_UNIQUE_ID;
 
 			switch (property.propertyType)
 			{
@@ -58,7 +58,7 @@ namespace AK.Wwise
 					return (int)AkUtilities.ShortIDGenerator.Compute(property.stringValue);
 
 				default:
-					return (int)AkSoundEngine.AK_INVALID_UNIQUE_ID;
+					return (int)AkUnitySoundEngine.AK_INVALID_UNIQUE_ID;
 			}
 		}
 

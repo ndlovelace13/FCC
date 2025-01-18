@@ -16,7 +16,7 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2024 Audiokinetic Inc.
 *******************************************************************************/
 
-[UnityEditor.CustomEditor(typeof(AkRoomAwareObject))]
+[UnityEditor.CustomEditor(typeof(AkRoomAwareObject), true)]
 public class AkRoomAwareObjectInspector : UnityEditor.Editor
 {
 	private bool hideDefaultHandle;

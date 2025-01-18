@@ -37,7 +37,7 @@ namespace AK.Wwise
 		{
 			if (IsValid())
 			{
-				var result = AkSoundEngine.PostTrigger(Id, gameObject);
+				var result = AkUnitySoundEngine.PostTrigger(Id, gameObject);
 				Verify(result);
 			}
 		}

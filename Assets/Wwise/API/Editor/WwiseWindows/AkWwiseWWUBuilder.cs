@@ -89,14 +89,14 @@ public class AkWwiseWWUBuilder : UnityEditor.AssetPostprocessor
 
 		if (Populate())
 		{
-			AkWwiseXMLBuilder.Populate();
+			AkWwiseJSONBuilder.Populate();
 			//check if WAAPI or not
 			AkWwisePicker.Refresh(ignoreIfWaapi: true);
 			//Make sure that the Wwise picker and the inspector are updated
 			AkUtilities.RepaintInspector();
 		}
 
-		AkUtilities.SoundBankDestinationsUpdated(AkWwiseEditorSettings.Instance.WwiseProjectPath);
+		AkUtilities.WwiseProjectUpdated(AkWwiseEditorSettings.WwiseProjectAbsolutePath);
 		s_lastFileCheck = System.DateTime.Now;
 	}
 

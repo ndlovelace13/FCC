@@ -126,16 +126,16 @@ public class AkSpatialAudioListener : UnityEngine.MonoBehaviour
 			{
 				if (s_SpatialAudioListener != null)
 				{
-					AkSoundEngine.UnregisterSpatialAudioListener(s_SpatialAudioListener.gameObject);
+					AkUnitySoundEngine.UnregisterSpatialAudioListener(s_SpatialAudioListener.gameObject);
 				}
 
 				s_SpatialAudioListener = ListenerList[0];
 
-				AkSoundEngine.RegisterSpatialAudioListener(s_SpatialAudioListener.gameObject);
+				AkUnitySoundEngine.RegisterSpatialAudioListener(s_SpatialAudioListener.gameObject);
 			}
 			else if (ListenerList.Count == 0 && s_SpatialAudioListener != null)
 			{
-				AkSoundEngine.UnregisterSpatialAudioListener(s_SpatialAudioListener.gameObject);
+				AkUnitySoundEngine.UnregisterSpatialAudioListener(s_SpatialAudioListener.gameObject);
 				s_SpatialAudioListener = null;
 			}
 		}

@@ -52,6 +52,7 @@ TagManager:
   - docket
   - catalog
   - cursor
+  - music
   layers:
   - Default
   - TransparentFX

@@ -16,7 +16,7 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2024 Audiokinetic Inc.
 *******************************************************************************/
 
-[System.Obsolete(AkSoundEngine.Deprecation_2019_2_0)]
+[System.Obsolete(AkUnitySoundEngine.Deprecation_2019_2_0)]
 ///@brief (DEPRECATED) This script is deprecated as of 2019.2. Early reflections, Diffraction and Room Reverb can all be enabled per sound in the Sound Property Editor of the Authoring.
 /// @details Some functionalities were moved to different components. See the AkEarlyReflections and AkSpatialAudioDebugDraw components for more details.
 public class AkSpatialAudioEmitter : UnityEngine.MonoBehaviour

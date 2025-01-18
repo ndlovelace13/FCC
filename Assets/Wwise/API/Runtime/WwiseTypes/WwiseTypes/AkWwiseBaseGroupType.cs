@@ -36,7 +36,7 @@ namespace AK.Wwise
 
 		public uint GroupId
 		{
-			get { return GroupWwiseObjectReference ? GroupWwiseObjectReference.Id : AkSoundEngine.AK_INVALID_UNIQUE_ID; }
+			get { return GroupWwiseObjectReference ? GroupWwiseObjectReference.Id : AkUnitySoundEngine.AK_INVALID_UNIQUE_ID; }
 		}
 
 		public override bool IsValid()
@@ -45,13 +45,13 @@ namespace AK.Wwise
 		}
 
 		#region Obsolete
-		[System.Obsolete(AkSoundEngine.Deprecation_2018_1_2)]
+		[System.Obsolete(AkUnitySoundEngine.Deprecation_2018_1_2)]
 		public int groupID
 		{
 			get { return (int)GroupId; }
 		}
 
-		[System.Obsolete(AkSoundEngine.Deprecation_2018_1_6)]
+		[System.Obsolete(AkUnitySoundEngine.Deprecation_2018_1_6)]
 		public byte[] groupGuid
 		{
 			get

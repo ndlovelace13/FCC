@@ -17,7 +17,7 @@ Copyright (c) 2024 Audiokinetic Inc.
 *******************************************************************************/
 
 [UnityEditor.CanEditMultipleObjects]
-[UnityEditor.CustomEditor(typeof(AkWwiseTrigger))]
+[UnityEditor.CustomEditor(typeof(AkWwiseTrigger), true)]
 public class AkWwiseTriggerInspector : AkBaseInspector
 {
     private readonly AkUnityEventHandlerInspector m_UnityEventHandlerInspector = new AkUnityEventHandlerInspector();

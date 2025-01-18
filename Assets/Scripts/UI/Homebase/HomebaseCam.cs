@@ -324,6 +324,8 @@ public class HomebaseCam : MonoBehaviour
 
     IEnumerator InitialMove()
     {
+        //start the menu music
+        GameObject.FindWithTag("music").GetComponent<MusicHandler>().MenuMusicStart();
         yield return new WaitForSeconds(2f);
         float time = 0f;
         float startingSize = mainCam.orthographicSize;
