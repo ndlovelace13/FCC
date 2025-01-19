@@ -389,10 +389,12 @@ GameObject:
   m_Component:
   - component: {fileID: 375558315}
   - component: {fileID: 375558319}
+  - component: {fileID: 375558322}
   - component: {fileID: 375558318}
   - component: {fileID: 375558317}
   - component: {fileID: 375558316}
   - component: {fileID: 375558320}
+  - component: {fileID: 375558321}
   m_Layer: 5
   m_Name: ForwardButton
   m_TagString: Untagged
@@ -495,6 +497,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 375558321}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &375558318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,6 +560,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionSprite: {fileID: 21300000, guid: 4cfdee23010d6e24fb6e3f4e150e6b50, type: 3}
+--- !u!114 &375558321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375558314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f1013e63ef6124391328ec7fab9d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 430560dd2b7f6ab4c8d87f676386a224, type: 2}
+--- !u!114 &375558322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375558314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 26c57f9cdae0df64a911cecf5f5b7e47, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &590881958
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,10 +611,12 @@ GameObject:
   m_Component:
   - component: {fileID: 590881959}
   - component: {fileID: 590881963}
+  - component: {fileID: 590881966}
   - component: {fileID: 590881962}
   - component: {fileID: 590881961}
   - component: {fileID: 590881960}
   - component: {fileID: 590881964}
+  - component: {fileID: 590881965}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -662,6 +719,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 375558321}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &590881962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,6 +782,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionSprite: {fileID: 21300000, guid: 334052946ab2251459c5123f266fda09, type: 3}
+--- !u!114 &590881965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590881958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f1013e63ef6124391328ec7fab9d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 430560dd2b7f6ab4c8d87f676386a224, type: 2}
+--- !u!114 &590881966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590881958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 26c57f9cdae0df64a911cecf5f5b7e47, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &615282332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,6 +1725,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
   listenerId: 0
 --- !u!114 &1667389027
 MonoBehaviour:
@@ -1633,9 +1745,11 @@ MonoBehaviour:
     useDefaultListeners: 1
   isEnvironmentAware: 0
   isStaticObject: 0
+  usePositionOffsetData: 0
   m_positionOffsetData:
     KeepMe: 0
     positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
 --- !u!1 &1827459124 stripped

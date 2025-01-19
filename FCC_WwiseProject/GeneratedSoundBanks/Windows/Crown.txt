@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1336447716	ProjSplit			\Default Work Unit\ProjSplit	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	593297646	crownSplit	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\69\{697E7B27-1047-767E-86A3-6BC20EE697C4}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\crownSplit		33682
+

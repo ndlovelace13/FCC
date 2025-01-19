@@ -1,0 +1,13 @@
+Event	ID	Name			Wwise Object Path	Notes
+	471973337	EssencePickup			\Default Work Unit\Items\EssencePickup	
+	1825644851	CoinSpawn			\Default Work Unit\Items\CoinSpawn	
+	1829648494	EssenceDrop			\Default Work Unit\Items\EssenceDrop	
+	2752428610	CoinPickup			\Default Work Unit\Items\CoinPickup	
+	3309808761	EssenceStop			\Default Work Unit\Items\EssenceStop	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	473726511	essenceDrop	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\EE\{EE81FC41-6393-1A56-1742-B5C52AAD39AB}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Items\essence\essenceDrop		219232
+	509325829	essencePickup	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\0B\{0B985250-0852-2CB4-7B6B-75FB322A3EEE}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Items\essencePickup		166536
+	860063212	coinSpawn	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\5E\{5EC251D8-7B98-6D7B-F719-D1C2E8428E00}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Items\coinSpawn		40960
+	998862215	coinPickup	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\14\{1460C47B-3189-4E54-6AF2-D5CDBDCFAE30}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Items\coinPickup		22112
+

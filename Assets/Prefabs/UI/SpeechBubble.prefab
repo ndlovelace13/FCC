@@ -144,8 +144,8 @@ GameObject:
   m_Component:
   - component: {fileID: 949555031234793001}
   - component: {fileID: 4145691713534284790}
-  - component: {fileID: 5750353994604390376}
   - component: {fileID: 872960463531955146}
+  - component: {fileID: 5750353994604390376}
   m_Layer: 5
   m_Name: SpeechBubble
   m_TagString: dialogue
@@ -181,6 +181,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767032636668993792}
   m_CullTransparentMesh: 1
+--- !u!114 &872960463531955146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767032636668993792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 0a25030ea9e209344bd488076ca2ad55, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!114 &5750353994604390376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,31 +221,14 @@ MonoBehaviour:
   speechBubble: {fileID: 7544920510062580684}
   spaceToSkip: {fileID: 2322774379345793604}
   skippable: 1
---- !u!114 &872960463531955146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 767032636668993792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerList: f7e1664c
-  useOtherObject: 0
-  data:
+  dialogueStart:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 0a25030ea9e209344bd488076ca2ad55, type: 2}
-  decodeBank: 0
-  overrideLoadSetting: 0
-  loadAsynchronous: 0
-  saveDecodedBank: 0
-  unloadTriggerList: 958ca0ea
-  bankNameInternal: 
-  valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 9bd0603dfc71fdf41ab80c53ba4a4370, type: 2}
+  dialogueStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: f4ae3162059066b4394fc04fe66044b0, type: 2}
 --- !u!1 &2322774379345793604
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,8 +38,17 @@ public class BasicEnemy : EnemyBehavior
                     StartCoroutine(Surprised(surpriseTime));
                 target = player;
             }
+
             if (!isFrozen && !surprised)
+            {
                 moveSpeed = backupSpeed;
+                //passedTime += Time.deltaTime * speedMod;
+                //implement anim speed here based on slow effects
+                GetComponent<Animator>().speed = speedMod;
+            }
+            else
+                GetComponent<Animator>().speed = 0f;
+
             //movement
             if (!isBlinded && !repelled)
             {

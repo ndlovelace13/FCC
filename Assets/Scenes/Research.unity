@@ -393,6 +393,8 @@ GameObject:
   - component: {fileID: 482151073}
   - component: {fileID: 482151072}
   - component: {fileID: 482151076}
+  - component: {fileID: 482151077}
+  - component: {fileID: 482151078}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -495,6 +497,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 482151077}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &482151074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,6 +560,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionSprite: {fileID: 21300000, guid: 334052946ab2251459c5123f266fda09, type: 3}
+--- !u!114 &482151077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482151070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f1013e63ef6124391328ec7fab9d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 430560dd2b7f6ab4c8d87f676386a224, type: 2}
+--- !u!114 &482151078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482151070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 26c57f9cdae0df64a911cecf5f5b7e47, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1001 &698681525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -682,6 +737,14 @@ PrefabInstance:
       propertyPath: skippable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5750353994604390376, guid: 0b59706b31283e045b955cb82e68f00d, type: 3}
+      propertyPath: dialogueStop.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 822ca78ac27a75f4e9ab9f5ad506e691, type: 2}
+    - target: {fileID: 5750353994604390376, guid: 0b59706b31283e045b955cb82e68f00d, type: 3}
+      propertyPath: dialogueStart.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: ec2fbaaea49046d47b1c1a63279dc3e1, type: 2}
     - target: {fileID: 6354707137674029054, guid: 0b59706b31283e045b955cb82e68f00d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1410,6 +1473,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
   listenerId: 0
 --- !u!114 &1667389027
 MonoBehaviour:
@@ -1428,9 +1493,11 @@ MonoBehaviour:
     useDefaultListeners: 1
   isEnvironmentAware: 0
   isStaticObject: 0
+  usePositionOffsetData: 0
   m_positionOffsetData:
     KeepMe: 0
     positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
 --- !u!1 &1804101889
@@ -1447,6 +1514,8 @@ GameObject:
   - component: {fileID: 1804101890}
   - component: {fileID: 1804101892}
   - component: {fileID: 1804101895}
+  - component: {fileID: 1804101896}
+  - component: {fileID: 1804101897}
   m_Layer: 5
   m_Name: ForwardButton
   m_TagString: Untagged
@@ -1501,6 +1570,18 @@ MonoBehaviour:
       - m_Target: {fileID: 51267382}
         m_TargetAssemblyTypeName: Paginator, Assembly-CSharp
         m_MethodName: NextPages
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 482151077}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1600,6 +1681,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionSprite: {fileID: 21300000, guid: 4cfdee23010d6e24fb6e3f4e150e6b50, type: 3}
+--- !u!114 &1804101896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804101889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f1013e63ef6124391328ec7fab9d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 430560dd2b7f6ab4c8d87f676386a224, type: 2}
+--- !u!114 &1804101897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804101889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 26c57f9cdae0df64a911cecf5f5b7e47, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &1827459124 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 767032636668993792, guid: 0b59706b31283e045b955cb82e68f00d, type: 3}

@@ -154,8 +154,26 @@ MonoBehaviour:
     it will continue to grow in power\nBlind - Afflicted enemies will be unable to
     track the player for a period of time
   textColor: {r: 0.9058824, g: 0.9333334, b: 0.16078432, a: 0}
+  hitSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a00c96f7979343d41822a703988aa87b, type: 2}
+  aoeSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  aoeStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  tickSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   headSprite2: {fileID: 21300000, guid: 4cad8ff8191559d4dbebbb96ebfa78fe, type: 3}
   headSprite3: {fileID: 21300000, guid: 22867fb918a1416448f3825a316215db, type: 3}
+  headOffsetSprite2: {fileID: 0}
+  headOffsetSprite3: {fileID: 0}
   stem2: {fileID: -333095599, guid: f48144af38cbed6448d065c9e88882b6, type: 3}
   stem3: {fileID: 2079372141, guid: f48144af38cbed6448d065c9e88882b6, type: 3}
 --- !u!58 &-5071946681003261559

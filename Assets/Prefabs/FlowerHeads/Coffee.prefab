@@ -155,6 +155,18 @@ MonoBehaviour:
     speed boost upon collision\nCoffee Beans - Projectiles will drop an speed-boosting
     item upon reaching the end of their trajectory
   textColor: {r: 0.34117648, g: 0.24705884, b: 0.10196079, a: 0}
+  hitSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a00c96f7979343d41822a703988aa87b, type: 2}
+  aoeSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  tickSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   coffeePool: {fileID: 0}
 --- !u!58 &-2532114097151648687
 CircleCollider2D:

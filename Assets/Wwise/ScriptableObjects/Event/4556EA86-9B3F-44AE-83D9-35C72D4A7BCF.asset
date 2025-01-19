@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ddc2ada48f038a4ba4473b20048105e, type: 3}
+  m_Name: 4556EA86-9B3F-44AE-83D9-35C72D4A7BCF
+  m_EditorClassIdentifier: 
+  objectName: PlayerDeath
+  id: 1656947812
+  guid: 4556EA86-9B3F-44AE-83D9-35C72D4A7BCF
+  IsInUserDefinedSoundBank: 1
+  IsAutoBankLoaded: 0

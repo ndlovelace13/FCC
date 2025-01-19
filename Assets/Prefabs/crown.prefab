@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -3599405403365618437}
   - component: {fileID: -983435056909554813}
   - component: {fileID: 3502248101985923265}
+  - component: {fileID: 7587978540680713651}
   m_Layer: 0
   m_Name: crown
   m_TagString: finalCrown
@@ -104,6 +105,10 @@ MonoBehaviour:
   crownActive: 0
   crownArmed: 0
   attacking: 0
+  crownExplode:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: bd9642e24fad26e46b86063f4356cb6b, type: 2}
 --- !u!70 &-983435056909554813
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -166,6 +171,31 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7587978540680713651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7802864685035845812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 60a0e85fa9be35144b051cd681ff4346, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1001 &4224705967871346478
 PrefabInstance:
   m_ObjectHideFlags: 0

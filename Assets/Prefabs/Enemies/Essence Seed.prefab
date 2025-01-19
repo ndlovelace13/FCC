@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5284357008009796732}
   - component: {fileID: 5464717762115780519}
   - component: {fileID: -3422381824778559618}
+  - component: {fileID: 9203114856000014058}
   m_Layer: 0
   m_Name: Essence Seed
   m_TagString: Untagged
@@ -100,6 +101,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6a4b1c44170e8488d749310854161d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  activeStart:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8fe64b0663145d240929d1db9cc69ad8, type: 2}
+  activeStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: ef0854cd71434924f9f2be2bc02a6f41, type: 2}
+  pickupSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 603ea7ebd96b162418baaa36f20c22ba, type: 2}
 --- !u!95 &5464717762115780519
 Animator:
   serializedVersion: 5
@@ -137,6 +154,31 @@ MonoBehaviour:
   loopTime: 1.5
   looping: 1
   lerping: 0
+--- !u!114 &9203114856000014058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096147154556072256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 21de8c15f78d5a94f84cf6eef45d15d8, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1001 &6421375569789759537
 PrefabInstance:
   m_ObjectHideFlags: 0

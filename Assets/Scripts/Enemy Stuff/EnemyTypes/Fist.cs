@@ -14,17 +14,12 @@ public class Fist : BossExtension
     float passedTime = 0f;
     float stateTime = 0f;
 
-    public bool direction;
     // Start is called before the first frame update
     void Start()
     {
         activeBoss = GameObject.FindWithTag("boss").GetComponent<EnemyBehavior>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerStatus>().transform;
 
-        if (transform.position.x < player.position.x)
-            direction = true;
-        else
-            direction = false;
         //Debug.Log(activeBoss.gameObject.name);
         StartCoroutine(Grow());
         StartCoroutine(ShadowHandler());
@@ -51,7 +46,7 @@ public class Fist : BossExtension
         passedTime = 0f;
         
         float finalRot;
-        if (direction)
+        if (direction.x > 0f)
             finalRot = -90f;
         else
             finalRot = 90f;
@@ -86,7 +81,7 @@ public class Fist : BossExtension
         passedTime = 0f;
 
         int dir;
-        if (direction)
+        if (direction.x > 0)
             dir = 1;
         else
             dir = -1;
@@ -134,7 +129,7 @@ public class Fist : BossExtension
         passedTime = 0f;
 
         int dir;
-        if (direction)
+        if (direction.x > 0)
             dir = 1;
         else
             dir = -1;

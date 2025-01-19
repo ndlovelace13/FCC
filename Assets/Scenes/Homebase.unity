@@ -1736,6 +1736,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8685631897130184464, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
+      propertyPath: buttonSound.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 11a34b273ea54ad409ec8ac27f177b7a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2270,6 +2274,7 @@ GameObject:
   - component: {fileID: 563395989}
   - component: {fileID: 563395988}
   - component: {fileID: 563395987}
+  - component: {fileID: 563395990}
   m_Layer: 5
   m_Name: Report
   m_TagString: report
@@ -2338,6 +2343,10 @@ MonoBehaviour:
   contractLogo: {fileID: 1256936474}
   signatureZone: {fileID: 1458428755}
   contractSig: {fileID: 21300000, guid: d9f1ba808003d8946b65f0dc2d3cdf6f, type: 3}
+  pageUp:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 430560dd2b7f6ab4c8d87f676386a224, type: 2}
 --- !u!114 &563395988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2376,6 +2385,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563395985}
   m_CullTransparentMesh: 1
+--- !u!114 &563395990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563395985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 26c57f9cdae0df64a911cecf5f5b7e47, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &567093103
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,6 +2657,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
   listenerId: 0
 --- !u!114 &675801332
 MonoBehaviour:
@@ -2641,9 +2677,11 @@ MonoBehaviour:
     useDefaultListeners: 1
   isEnvironmentAware: 0
   isStaticObject: 0
+  usePositionOffsetData: 0
   m_positionOffsetData:
     KeepMe: 0
     positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
 --- !u!114 &675801333
@@ -2672,6 +2710,30 @@ MonoBehaviour:
   phone: {fileID: 1701193744}
   speechBubble: {fileID: 122937266}
   quitPopup: {fileID: 1249886966269341433, guid: 995e1ee28802eb7488dd29d21d9bde7c, type: 3}
+  jillStart:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: ec2fbaaea49046d47b1c1a63279dc3e1, type: 2}
+  jillStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 822ca78ac27a75f4e9ab9f5ad506e691, type: 2}
+  clarkStart:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 193c8510b47ff2945866701745ec2e06, type: 2}
+  clarkStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c2b55e9e5c7d8224985416adb61b07b6, type: 2}
+  flowerStart:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 9bd0603dfc71fdf41ab80c53ba4a4370, type: 2}
+  flowerStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: f4ae3162059066b4394fc04fe66044b0, type: 2}
 --- !u!1 &723893524
 GameObject:
   m_ObjectHideFlags: 0
@@ -5024,6 +5086,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Training
       objectReference: {fileID: 0}
+    - target: {fileID: 8685631897130184464, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
+      propertyPath: buttonSound.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 11a34b273ea54ad409ec8ac27f177b7a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5533,6 +5599,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Return
       objectReference: {fileID: 0}
+    - target: {fileID: 8685631897130184464, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
+      propertyPath: buttonSound.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: b4d608740a26759408b3d442226fd9e0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8356,6 +8426,14 @@ MonoBehaviour:
   callerKnown: 1
   unknownCaller: {fileID: 21300000, guid: 9739cb2bce802f640bd2af528e00ee0d, type: 3}
   flowerGuy: {fileID: 21300000, guid: 5ad81e0761a9c974bba3aa27d2a63b52, type: 3}
+  phoneRing:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: dfe3f4e73ab8311449d4ef44505ecd6e, type: 2}
+  stopRing:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: fd62e42ea23fa58469fe8bad5d372afb, type: 2}
 --- !u!1 &1746823935
 GameObject:
   m_ObjectHideFlags: 0

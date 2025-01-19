@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4743415653998564351}
+  - component: {fileID: 5783538252221588449}
   - component: {fileID: 2966977713507855080}
   - component: {fileID: 3276362812338415158}
   - component: {fileID: 3259970831933619588}
   - component: {fileID: 8156539619727094662}
   - component: {fileID: 228346828096061805}
-  - component: {fileID: 5783538252221588449}
   - component: {fileID: 5110070605700836507}
   - component: {fileID: -3223752900376184805}
   - component: {fileID: 1972809715602474962}
@@ -42,6 +42,31 @@ Transform:
   - {fileID: 1389098257366031348}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5783538252221588449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003814786078272635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 5d52dd343cb9ea846beda199dc721183, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!212 &2966977713507855080
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -212,31 +237,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5783538252221588449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003814786078272635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerList: f7e1664c
-  useOtherObject: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 5d52dd343cb9ea846beda199dc721183, type: 2}
-  decodeBank: 0
-  overrideLoadSetting: 0
-  loadAsynchronous: 0
-  saveDecodedBank: 0
-  unloadTriggerList: 958ca0ea
-  bankNameInternal: 
-  valueGuidInternal: 
 --- !u!114 &5110070605700836507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,6 +275,10 @@ MonoBehaviour:
   poppyCount: 0
   wasKilled: 0
   isBoss: 0
+  sprintSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 9b08bf75b3b34464b8369046728be9c3, type: 2}
 --- !u!114 &-3223752900376184805
 MonoBehaviour:
   m_ObjectHideFlags: 0

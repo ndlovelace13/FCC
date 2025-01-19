@@ -258,6 +258,7 @@ public abstract class EnemyBehavior : MonoBehaviour
 
     public void AugmentApplication(Dictionary<string, int> actualAugs)
     {
+        GameControl.PlayerData.flowerStatsDict[actualAugs.ElementAt(0).Key].HitSound(gameObject);
         foreach (var aug in actualAugs)
         {
             GameControl.PlayerData.flowerStatsDict[aug.Key].OnEnemyCollision(gameObject, aug.Value);
@@ -333,7 +334,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         minSpeed = mySpawner.currentMin;
         backupSpeed = Random.Range(minSpeed, maxSpeed);
         moveSpeed = backupSpeed;
-        GetComponent<Animator>().speed = backupSpeed * 0.25f;
+        speedMod = 1;
         //begin the gradual speed up routine
         StartCoroutine(GradualSpeedUp());
         StartCoroutine(KillReset());
@@ -475,7 +476,7 @@ public abstract class EnemyBehavior : MonoBehaviour
             {
                 SpeedUp(speedIncrement);
             }
-            GetComponent<Animator>().speed = backupSpeed * 0.25f;
+            //GetComponent<Animator>().speed = backupSpeed * 0.25f;
         }
     }
 

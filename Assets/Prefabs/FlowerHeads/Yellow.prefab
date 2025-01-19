@@ -147,7 +147,7 @@ MonoBehaviour:
   outsideText: 'Charged '
   fourText: 'Voltaic '
   fiveText: 'Juiced '
-  description: Little is known about the conductivity of skinwalkers and how exactly
+  description: Little is known about the conductivity of replicants and how exactly
     the Electric Flower is able to arc its power between hosts. However, R&D did
     find out pretty quickly not to prod this flower with a fork. We wish Daryl a
     speedy recovery.
@@ -155,6 +155,22 @@ MonoBehaviour:
     LIghtning - Nearby enemies will also be affected by stun and any other crown
     augmentations
   textColor: {r: 0.9686275, g: 0.9215687, b: 0.34509805, a: 0}
+  hitSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1f5e2bd281ecf944fa471a68279ba3a2, type: 2}
+  aoeSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  aoeStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  tickSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!58 &-6287234076929436638
 CircleCollider2D:
   m_ObjectHideFlags: 0

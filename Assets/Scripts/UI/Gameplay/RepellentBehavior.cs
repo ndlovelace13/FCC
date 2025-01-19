@@ -22,6 +22,12 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
     public float range = 5f;
     public float speed = 5f;
 
+    //audio
+    [SerializeField] AK.Wwise.Event shakeStart;
+    [SerializeField] AK.Wwise.Event shakeStop;
+    //[SerializeField] AK.Wwise.Event sprayStart;
+    //[SerializeField] AK.Wwise.Event sprayStop;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,7 +78,9 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
                 }
             }
             else
+            {
                 yield break;
+            }
             yield return new WaitForEndOfFrame();
             prevMousePos = currentMousePos;
         }
@@ -92,6 +100,10 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
             startMousePos = pointerEventData.position;
             prevMousePos = startMousePos;
             clicked = true;
+
+            //play audio
+            shakeStart.Post(gameObject);
+
             StartCoroutine(ShakeChecker());
         }
         
@@ -101,6 +113,9 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
     {
         clicked = false;
         shakeDist = 0f;
+        
+        //stop audio
+        shakeStop.Post(gameObject);
     }
 
     IEnumerator RepellentActivate()

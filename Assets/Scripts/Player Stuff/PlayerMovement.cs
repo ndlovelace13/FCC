@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     bool rightTested = false;
     bool upTested = false;
     bool downTested = false;
+
+    [SerializeField] AK.Wwise.Event deathSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -126,6 +128,8 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log(other.gameObject.transform.position);
             //Debug.Log(transform.position);
             GameControl.PlayerData.savedEnemyDict[other.transform.root.GetComponent<EnemyBehavior>().type].deathCount++;
+            GameObject.FindWithTag("music").GetComponent<MusicHandler>().GameplayMusicStop();
+            deathSound.Post(transform.root.gameObject);
             GameOver();
         }
         if (other.gameObject.tag == "projectile" || other.gameObject.tag == "aoe")

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Loading;
 using UnityEngine;
 
 public class EssenceBehavior : Item
@@ -45,6 +46,16 @@ public class EssenceBehavior : Item
         placed = true;
         GetComponent<SizeLerp>().lerping = false;
         GetComponent<SizeLerp>().Execute(true);
+
+        //play spawn audio
+        if (!GameControl.PlayerData.loading)
+            activeStart.Post(gameObject);
+    }
+
+    public void OnDisable()
+    {
+        if (!GameControl.PlayerData.loading)
+            activeStop.Post(gameObject);
     }
 
     IEnumerator StartLerp()

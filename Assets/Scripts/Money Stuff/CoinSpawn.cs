@@ -8,6 +8,8 @@ public class CoinSpawn : MonoBehaviour
     int maxCoins = 30;
     [SerializeField] GameObject notif;
     [SerializeField] ObjectPool coinPool;
+
+    [SerializeField] AK.Wwise.Event coinSpawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,11 @@ public class CoinSpawn : MonoBehaviour
     {
         //input is the amount of coins necessary to spawn
         Debug.Log("Spawner paying out: " + amount);
+
+        for (int i = 0; i < amount / 10; i++)
+        {
+            coinSpawn.Post(gameObject);
+        }
 
         //spawn money popup
         GameObject newNotif = Instantiate(notif, transform.position + new Vector3(0, 0.5f), Quaternion.identity);

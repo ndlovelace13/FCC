@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6667563939143748980}
+  - component: {fileID: -3307213021215334877}
   - component: {fileID: 2890588917025636399}
   m_Layer: 0
   m_Name: MoneySpawnPoint
@@ -32,6 +33,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3307213021215334877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8127508124839419733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 21de8c15f78d5a94f84cf6eef45d15d8, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!114 &2890588917025636399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,3 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notif: {fileID: 7155992749287334371, guid: 57602ac8dbb3e3441931b13c9bcfa0b8, type: 3}
   coinPool: {fileID: 0}
+  coinSpawn:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a63c8b56905127547871b0093ab3268e, type: 2}

@@ -10,6 +10,12 @@ public class PhoneLerp : MonoBehaviour
 
     [SerializeField] Sprite unknownCaller;
     [SerializeField] Sprite flowerGuy;
+
+    //audio cues
+    [SerializeField] AK.Wwise.Event phoneRing;
+    [SerializeField] AK.Wwise.Event stopRing;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +45,8 @@ public class PhoneLerp : MonoBehaviour
     }
     IEnumerator LerpUp()
     {
+        phoneRing.Post(gameObject);
+
         float time = 0f;
         Vector2 finalPos = GetComponent<RectTransform>().position;
         Vector2 startingPos = new Vector2(finalPos.x, -Screen.height * 1.5f);
@@ -50,6 +58,8 @@ public class PhoneLerp : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         inPlace = true;
+
+        stopRing.Post(gameObject);
     }
 
     IEnumerator LerpDown()

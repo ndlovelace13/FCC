@@ -154,6 +154,18 @@ MonoBehaviour:
   effects: Freeze - Afflicted enemies will be frozen in place and slowed down while
     thawing out
   textColor: {r: 0.22352943, g: 0.7294118, b: 0.9686275, a: 0}
+  hitSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 890f8480b87143649add34924929ca49, type: 2}
+  aoeSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  tickSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!58 &-8824248902405721022
 CircleCollider2D:
   m_ObjectHideFlags: 0

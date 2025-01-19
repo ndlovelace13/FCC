@@ -13,6 +13,9 @@ public class Sprinter : EnemyBehavior
 
     float currentTimer = 0f;
 
+    //audio cues
+    [SerializeField] AK.Wwise.Event sprintSound;
+
     //Vector2 direction;
 
     //float walkSpeed;
@@ -62,8 +65,11 @@ public class Sprinter : EnemyBehavior
             {
                 moveSpeed = backupSpeed;
                 rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
+                GetComponent<Animator>().speed = speedMod;
             }
-                
+            else
+                GetComponent<Animator>().speed = 0f;
+
             if (health <= 0)
             {
                 Deactivate();
@@ -123,6 +129,10 @@ public class Sprinter : EnemyBehavior
             {
                 if (currentTimer >= realStats.chargeTime)
                 {
+                    //play pointing sound
+                    sprintSound.Post(gameObject);
+                    Debug.Log(sprintSound);
+
                     //set the sprintDirection
                     isCharging = false;
                     isSprinting = true;
@@ -156,7 +166,7 @@ public class Sprinter : EnemyBehavior
             }
             if (!surprised)
             {
-                currentTimer += Time.deltaTime;
+                currentTimer += Time.deltaTime * speedMod;
                 StartCoroutine(DirectionHandle());
             }
 

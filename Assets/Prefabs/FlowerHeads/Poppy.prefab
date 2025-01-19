@@ -147,10 +147,27 @@ MonoBehaviour:
   outsideText: 'Anesthetic '
   fourText: 'Tranquilizing '
   fiveText: 'Sedating '
-  description: THIS IS A PLACEHOLDER DESCRIPTION FOR ALL THE FLOWERS. REPLACE IT
-    SOMETIME YOU FUCKING IDIOT
-  effects: 
+  description: The pill popping powers of the Poppy are simple, but dangerously effective.
+    Any replicants struggling with an ongoing addiction are encouraged to reach out
+    to the AAAT for immediate...care.
+  effects: Crippling Addiction - The afflicted replicant's speed is permanently decreased
   textColor: {r: 0.9058824, g: 0.30588236, b: 0.10588236, a: 0}
+  hitSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a00c96f7979343d41822a703988aa87b, type: 2}
+  aoeSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  aoeStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  tickSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   poppyDebuff: 0.9
 --- !u!58 &-2532114097151648687
 CircleCollider2D:

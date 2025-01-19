@@ -31,6 +31,16 @@ public class HomebaseCam : MonoBehaviour
 
     [SerializeField] GameObject quitPopup;
 
+    //Dialogue Stuff
+    [SerializeField] AK.Wwise.Event jillStart;
+    [SerializeField] AK.Wwise.Event jillStop;
+
+    [SerializeField] AK.Wwise.Event clarkStart;
+    [SerializeField] AK.Wwise.Event clarkStop;
+
+    [SerializeField] AK.Wwise.Event flowerStart;
+    [SerializeField] AK.Wwise.Event flowerStop;
+
     string[] introDialogue = new string[]
             {
                 "Uhhhh....Hello?",
@@ -214,6 +224,10 @@ public class HomebaseCam : MonoBehaviour
             GameControl.SaveData.dialogueQueue.Enqueue(bullyDefeat);
             GameControl.SaveData.bullyDefeated = true;
             GameControl.PlayerData.unlockDone = true;
+
+            //adjust dialogue
+            speechBubble.GetComponent<TextAdvancement>().dialogueStart = flowerStart;
+            speechBubble.GetComponent<TextAdvancement>().dialogueStop = flowerStop;
         }
         //unlock the catalog after the first run
         if (GameControl.SaveData.shiftCounter == 1 && !GameControl.SaveData.catalogUnlocked && !GameControl.PlayerData.unlockDone)
@@ -223,6 +237,10 @@ public class HomebaseCam : MonoBehaviour
             GameControl.SaveData.catalogUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
             menuLerpObj = catalog;
+
+            //adjust dialogue
+            speechBubble.GetComponent<TextAdvancement>().dialogueStart = flowerStart;
+            speechBubble.GetComponent<TextAdvancement>().dialogueStop = flowerStop;
         }
         //unlock research when the player has collected their first essence seed
         if (GameControl.SaveData.highSeeds > 0 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.researchUnlocked)
@@ -232,6 +250,10 @@ public class HomebaseCam : MonoBehaviour
             GameControl.SaveData.researchUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
             menuLerpObj = research;
+
+            //adjust dialogue
+            speechBubble.GetComponent<TextAdvancement>().dialogueStart = jillStart;
+            speechBubble.GetComponent<TextAdvancement>().dialogueStop = jillStop;
         }
         //unlock completion tracker when the player has crafted 20 different crowns
         if (GameControl.CrownCompletion.totalDiscovered >= 20 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.completionUnlocked)
@@ -240,6 +262,10 @@ public class HomebaseCam : MonoBehaviour
             GameControl.SaveData.completionUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
             menuLerpObj = completionTracker;
+
+            //adjust dialogue
+            speechBubble.GetComponent<TextAdvancement>().dialogueStart = flowerStart;
+            speechBubble.GetComponent<TextAdvancement>().dialogueStop = flowerStop;
         }
         //unlock almanac when the player has unlocked at least one new type of flower
         if (GameControl.SaveData.shiftCounter > 1 && !GameControl.PlayerData.unlockDone && !GameControl.SaveData.almanacUnlocked)
@@ -249,6 +275,10 @@ public class HomebaseCam : MonoBehaviour
             GameControl.SaveData.almanacUnlocked = true;
             GameControl.PlayerData.unlockDone = true;
             menuLerpObj = almanac;
+
+            //adjust dialogue
+            speechBubble.GetComponent<TextAdvancement>().dialogueStart = clarkStart;
+            speechBubble.GetComponent<TextAdvancement>().dialogueStop = clarkStop;
         }
 
         GameControl.SaveHandler.SaveGame();

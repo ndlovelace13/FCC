@@ -14,6 +14,11 @@ public class Pointdexter : EnemyBehavior
     float currentTime = 0f;
 
     GameObject ally;
+
+    //audio cues
+    [SerializeField] AK.Wwise.Event chargeSound;
+    [SerializeField] AK.Wwise.Event pointSound;
+
     // Start is called before the first frame update
     /*void Start()
     {
@@ -77,7 +82,10 @@ public class Pointdexter : EnemyBehavior
             {
                 moveSpeed = backupSpeed;
                 rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
+                GetComponent<Animator>().speed = speedMod;
             }
+            else
+                GetComponent<Animator>().speed = 0;
                 
             if (health <= 0)
             {
@@ -112,7 +120,7 @@ public class Pointdexter : EnemyBehavior
             {
                 //Set Anim State
                 GetComponent<Animator>().SetInteger("state", 0);
-                GetComponent<Animator>().speed = backupSpeed * 0.5f;
+                //GetComponent<Animator>().speed = backupSpeed * 0.5f;
 
                 Debug.Log("currently Targeting");
                 //get an ally if one does not exist or was killed
@@ -135,10 +143,14 @@ public class Pointdexter : EnemyBehavior
                 }
                 else if (ally && currentAllyDist < 2f)
                 {
+                    //play charging sound
+                    chargeSound.Post(gameObject);
+                    Debug.Log(chargeSound);
+
                     isTargeting = false;
                     isCharging = true;
                     GetComponent<Animator>().SetInteger("state", 1);
-                    GetComponent<Animator>().speed = 1;
+                    //GetComponent<Animator>().speed = 1;
                     //return to base speed
                     SpeedDown(allyModifier);
                     //match ally speed
@@ -153,14 +165,18 @@ public class Pointdexter : EnemyBehavior
             {
                 //Set Anim State
                 GetComponent<Animator>().SetInteger("state", 1);
-                GetComponent<Animator>().speed = 1;
+                //GetComponent<Animator>().speed = 1;
 
                 Debug.Log(currentTime);
                 //transition to the pointing
                 if (currentTime >= stats.pointCharge)
                 {
+                    //play pointing sound
+                    pointSound.Post(gameObject);
+                    Debug.Log(pointSound);
+
                     GetComponent<Animator>().SetInteger("state", 2);
-                    GetComponent<Animator>().speed = 1;
+                    //GetComponent<Animator>().speed = 1;
                     isPointing = true;
                     isCharging = false;
                     //do the pointing shit here
@@ -178,7 +194,7 @@ public class Pointdexter : EnemyBehavior
             {
                 //Set Anim State
                 GetComponent<Animator>().SetInteger("state", 2);
-                GetComponent<Animator>().speed = 1;
+                //GetComponent<Animator>().speed = 1;
                 Debug.Log("currently Pointing");
                 if (currentTime >= stats.pointCooldown)
                 {
@@ -206,7 +222,7 @@ public class Pointdexter : EnemyBehavior
             {
                 //Set Anim State
                 GetComponent<Animator>().SetInteger("state", 3);
-                GetComponent<Animator>().speed = backupSpeed * 0.5f;
+                //GetComponent<Animator>().speed = backupSpeed * 0.5f;
                 //Debug.Log("currently Retreating");
                 if (currentTime >= stats.retreatTime)
                 {
@@ -223,7 +239,7 @@ public class Pointdexter : EnemyBehavior
 
             //add to the timer
             if (!isFrozen && !surprised)
-                currentTime += Time.deltaTime;
+                currentTime += Time.deltaTime * speedMod;
 
             yield return new WaitForFixedUpdate();
         }

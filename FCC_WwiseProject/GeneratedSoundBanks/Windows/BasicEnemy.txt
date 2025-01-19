@@ -1,10 +1,28 @@
 Event	ID	Name			Wwise Object Path	Notes
-	391172934	EnemyHit			\Default Work Unit\EnemyHit	
-	465333688	EnemyKilled			\Default Work Unit\EnemyKilled	
-	3453203440	EnemySpawn			\Default Work Unit\EnemySpawn	
+	465333688	EnemyKilled			\Default Work Unit\Enemy\EnemyKilled	
+	524526084	FireHit			\Default Work Unit\Enemy\HitSounds\FireHit	
+	692491073	BaseHit			\Default Work Unit\Enemy\HitSounds\BaseHit	
+	785487965	PointCharge			\Default Work Unit\Enemy\PointCharge	
+	1296465089	Sprint			\Default Work Unit\Enemy\Sprint	
+	1305230485	PointPoint			\Default Work Unit\Enemy\PointPoint	
+	1525902545	SprintCharge			\Default Work Unit\Enemy\SprintCharge	
+	1901357644	PoisonHit			\Default Work Unit\Enemy\HitSounds\PoisonHit	
+	2352574039	FreezeHit			\Default Work Unit\Enemy\HitSounds\FreezeHit	
+	2497534315	ElectricHit			\Default Work Unit\Enemy\HitSounds\ElectricHit	
+	3453203440	EnemySpawn			\Default Work Unit\Enemy\EnemySpawn	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	78482138	enemyDeath1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\7F\{7F844DAE-07DB-D3E6-9F31-F343B837BE76}.wem		\Actor-Mixer Hierarchy\Default Work Unit\enemyDeath\enemyDeath1		398760
-	873878954	enemyHit1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\9D\{9D88FA8F-9701-B86B-6411-9083B7A90390}.wem		\Actor-Mixer Hierarchy\Default Work Unit\enemyHit\enemyHit1		286836
-	1031096079	enemyLaugh	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\07\{07DD58BF-2D60-8EBE-AB66-B626CC585D6E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\enemySpawn\enemyLaugh		308620
+	78482138	enemyDeath1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\7F\{7F844DAE-07DB-D3E6-9F31-F343B837BE76}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\enemyDeath\enemyDeath1		398760
+	274004080	pointPoint	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\EB\{EBF45A8D-32A9-02AF-B928-C1652DCDE5B3}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\pointerPoint\pointPoint		231516
+	379456823	catchFire	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\A4\{A4D0232A-09E8-8C8D-34A6-B67AC272D20E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\FireHit\catchFire		114824
+	509118957	freeze	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\64\{6411F508-7E55-F40A-730A-A2C0D28B33FE}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\freeze		95588
+	584750280	zap	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\F3\{F3E2439E-3720-79E5-A49E-724D868AFD30}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\zap		93660
+	665255929	sprintCharge	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\6D\{6D164C49-8282-F1C1-46C8-2CB4A942D086}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\sprintCharge		305368
+	696225861	burnTick	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\39\{390D9BDC-DA7E-9DBF-2C82-AACF1B9062A5}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\FireHit\burnTick		60608
+	750543515	replicantMoan	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\1D\{1D190EB2-BD68-854B-2FE3-4FB145D75F30}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\enemyDeath\replicantMoan		264284
+	769994105	basicHit	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\E0\{E0CE7077-46D1-F90C-E34E-C449C5D529DC}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\basicHit		38484
+	873878954	enemyHit1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\9D\{9D88FA8F-9701-B86B-6411-9083B7A90390}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\enemyDeath\enemyHit1		286836
+	901136481	sprinterDash	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\A7\{A7CF7E31-ADD9-88A4-A093-3C16C45F2C49}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\sprint\sprinterDash		256096
+	941451151	pointCharge	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\5B\{5B6FCDA9-C26C-0557-6C3D-B370FB957EBA}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\pointerCharge\pointCharge		281088
+	1031096079	enemyLaugh	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\07\{07DD58BF-2D60-8EBE-AB66-B626CC585D6E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\enemySpawn\enemyLaugh		308620
 

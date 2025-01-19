@@ -152,6 +152,22 @@ MonoBehaviour:
   effects: Burn - Afflicted enemies will take fire damage over time/nFlames - Projectiles
     will leave behind burning  flames upon reaching the end of their flight
   textColor: {r: 1, g: 0.24313727, b: 0.20392159, a: 0}
+  hitSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8039c9a263d28f049be16172fcb4dcde, type: 2}
+  aoeSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: b627c7da76160b3429a433c9a0b94e0d, type: 2}
+  aoeStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a768ba1e3cbb3ce4b8382e356de4dee0, type: 2}
+  tickSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8039c9a263d28f049be16172fcb4dcde, type: 2}
   flamesPool: {fileID: 0}
 --- !u!58 &-2754332762889153677
 CircleCollider2D:

@@ -12,6 +12,9 @@ public class MoneyCounter : MonoBehaviour
     Vector3 initSize;
 
     TMP_Text textObj;
+
+    [SerializeField] AK.Wwise.Event coinPickup;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,7 @@ public class MoneyCounter : MonoBehaviour
     //call this whenever money is added to the total
     public void MoneyAdded(int value)
     {
+        //coinPickup.Post(gameObject);
         currentCount += value;
         GetComponent<RectTransform>().localScale = GetComponent<RectTransform>().localScale + Vector3.one * (value / 100f);
     }

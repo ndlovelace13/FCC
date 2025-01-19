@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6571757136503722611}
   - component: {fileID: 1411956487124004505}
   - component: {fileID: 8265208734123089250}
+  - component: {fileID: 5078939416705368939}
   m_Layer: 5
   m_Name: Score Text
   m_TagString: scoreAnnounce
@@ -148,3 +149,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedText: {fileID: 1411956487124004505}
+  crownAnnounce: 0
+--- !u!114 &5078939416705368939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290936970504217884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 21de8c15f78d5a94f84cf6eef45d15d8, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 

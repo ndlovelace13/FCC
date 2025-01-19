@@ -152,6 +152,22 @@ MonoBehaviour:
     pretty penny.
   effects: No effects, but has a higher value than it's common counterparts
   textColor: {r: 0.89019614, g: 0.41176474, b: 0.6627451, a: 0}
+  hitSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a00c96f7979343d41822a703988aa87b, type: 2}
+  aoeSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  aoeStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  tickSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!58 &4092072391769649876
 CircleCollider2D:
   m_ObjectHideFlags: 0

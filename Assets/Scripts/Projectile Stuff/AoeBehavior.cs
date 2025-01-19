@@ -108,7 +108,9 @@ public class AoeBehavior : MonoBehaviour
 
     IEnumerator Deactivate()
     {
+        GameControl.PlayerData.flowerStatsDict[actualAugs.ElementAt(0).Key].AoeSound(gameObject);
         yield return new WaitForSeconds(activeTime);
+        GameControl.PlayerData.flowerStatsDict[actualAugs.ElementAt(0).Key].AoeStop(gameObject);
         particleIgnore = "";
         gameObject.SetActive(false);
     }

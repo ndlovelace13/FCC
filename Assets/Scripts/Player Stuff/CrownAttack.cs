@@ -30,6 +30,9 @@ public class CrownAttack : MonoBehaviour
     //single fire bool
     bool singleFire = false;
 
+    //audio
+    [SerializeField] AK.Wwise.Event crownExplode;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -103,6 +106,9 @@ public class CrownAttack : MonoBehaviour
     {
         if (!attacking)
         {
+            //play audio cue
+            crownExplode.Post(gameObject);
+
             attacking = true;
             StopAllCoroutines();
             //Debug.Log("why");

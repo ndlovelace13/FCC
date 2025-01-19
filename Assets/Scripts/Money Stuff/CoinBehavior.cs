@@ -27,6 +27,9 @@ public class CoinBehavior : Item
     }
     public void CoinLerp(Vector3 startPos, Vector3 endPos, ScoreCategory scoreCat, int val)
     {
+        //play spawn audio
+        //spawnSound.Post(gameObject);
+
         cat = scoreCat;
         CoinType(val);
         StartCoroutine(ActualCoinLerp(startPos, endPos));

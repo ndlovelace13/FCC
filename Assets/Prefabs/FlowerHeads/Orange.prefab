@@ -152,6 +152,22 @@ MonoBehaviour:
     Hey apple, hey apple, hey!
   effects: No effects, but has deals more damage than its common counterparts
   textColor: {r: 1, g: 0.3254902, b: 0, a: 0}
+  hitSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a00c96f7979343d41822a703988aa87b, type: 2}
+  aoeSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  aoeStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  tickSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!58 &-5179707626094354049
 CircleCollider2D:
   m_ObjectHideFlags: 0

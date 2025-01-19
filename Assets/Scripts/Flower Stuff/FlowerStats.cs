@@ -93,6 +93,12 @@ public abstract class FlowerStats : MonoBehaviour
     [SerializeField] public string effects;
     [SerializeField] public Color textColor;
 
+    //Sound FX
+    [SerializeField] public AK.Wwise.Event hitSound;
+    [SerializeField] public AK.Wwise.Event aoeSound;
+    [SerializeField] public AK.Wwise.Event aoeStop;
+    [SerializeField] public AK.Wwise.Event tickSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -264,7 +270,7 @@ public abstract class FlowerStats : MonoBehaviour
 
     public virtual void OnHitboxEnter(GameObject flower)
     {
-        Debug.Log("Hitbox enter called for " + type);
+        //Debug.Log("Hitbox enter called for " + type);
     }
 
     public void SlowHandler(float slowEffect, float slowTime, int particle, GameObject enemy)
@@ -348,5 +354,28 @@ public abstract class FlowerStats : MonoBehaviour
             moveSpeed = backupSpeed;
             backupUsed = false;
         }*/
+    }
+
+    //sound calls
+    public virtual void HitSound(GameObject enemy)
+    {
+        if (enemy.activeSelf)
+            hitSound.Post(enemy);
+    }
+
+    public virtual void AoeSound(GameObject obj)
+    {
+        aoeSound.Post(obj);
+    }
+
+    public virtual void AoeStop(GameObject obj)
+    {
+        aoeStop.Post(obj);
+    }
+
+    public virtual void TickSound(GameObject enemy)
+    {
+        if (enemy.activeSelf)
+            tickSound.Post(enemy);
     }
 }

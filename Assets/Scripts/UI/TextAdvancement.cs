@@ -14,6 +14,11 @@ public class TextAdvancement : MonoBehaviour
     int index = 0;
     bool skipText = false;
     public bool skippable = false;
+
+    //audio stuff
+    public AK.Wwise.Event dialogueStart;
+    public AK.Wwise.Event dialogueStop;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,7 +74,8 @@ public class TextAdvancement : MonoBehaviour
 
     IEnumerator speech()
     {
-        var talkSound = AkSoundEngine.PostEvent("DialogueStart", gameObject);
+        dialogueStart.Post(gameObject);
+        Debug.Log(dialogueStart.ToString());
         //AkSoundEngine.Seek(talkSound, Random.Range(0f, 1f), false);
         GameControl.PlayerData.speaking = true;
         speechBubble.text = alphaTag + currentLine;
@@ -83,9 +89,14 @@ public class TextAdvancement : MonoBehaviour
                 break;
             }
         }
-        AkSoundEngine.StopPlayingID(talkSound);
+        dialogueStop.Post(gameObject);
         skipText = false;
         GameControl.PlayerData.speaking = false;
         yield return null;
+    }
+
+    public void OnDisable()
+    {
+        dialogueStop.Post(gameObject);
     }
 }

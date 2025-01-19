@@ -67,7 +67,7 @@ MonoBehaviour:
   description: 
   behavior: 
   weakness: 
-  sprintLength: 2
+  sprintLength: 5
   sprintSpeed: 0.35
   chargeTime: 2
   sprintCooldown: 5

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ddc2ada48f038a4ba4473b20048105e, type: 3}
+  m_Name: CD21A72C-9B10-4D4F-B9E2-9F2496804DBA
+  m_EditorClassIdentifier: 
+  objectName: FlowerStop
+  id: 3607269504
+  guid: CD21A72C-9B10-4D4F-B9E2-9F2496804DBA
+  IsInUserDefinedSoundBank: 1
+  IsAutoBankLoaded: 0

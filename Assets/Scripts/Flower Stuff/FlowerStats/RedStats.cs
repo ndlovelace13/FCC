@@ -102,6 +102,7 @@ public class RedStats : FlowerStats
             if (enemy.activeSelf == false || !enemy.GetComponent<EnemyBehavior>().isBurning)
                 break;
             enemy.GetComponent<EnemyBehavior>().DealDamage(thisBurnDmg, Color.red);
+            TickSound(enemy);
             burnTimer += burnCooldown;
         }
         Debug.Log("Done");

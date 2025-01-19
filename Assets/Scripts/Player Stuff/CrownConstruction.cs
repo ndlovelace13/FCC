@@ -54,6 +54,10 @@ public class CrownConstruction : MonoBehaviour
     [SerializeField] GameObject craftStem;
     GameObject[] stems;
 
+    //audio
+    [SerializeField] AK.Wwise.Event craftSound;
+    [SerializeField] AK.Wwise.Event cancelSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -136,10 +140,13 @@ public class CrownConstruction : MonoBehaviour
         //activate the crown spriteRenderer
         finalCrown.GetComponent<SpriteRenderer>().enabled = true;
 
+        //play cancel audio
+        craftSound.Post(gameObject);
+
         //calculate the edge of the screen and the finalLocation
         Vector3 topEdge = Camera.main.ScreenToWorldPoint(new Vector3(0f, Screen.height));
         Vector3 center = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2));
-        float yOffset = Math.Abs(topEdge.y - center.y) / 3f;
+        float yOffset = Math.Abs(topEdge.y - center.y) / 4f;
         Vector3 finalPos = new Vector3(finalCrown.transform.localPosition.x, yOffset);
 
         //calculate a random location for all of the flowers
@@ -200,6 +207,9 @@ public class CrownConstruction : MonoBehaviour
     //define the behavior for resetting crown to the pre-crafted state
     IEnumerator CraftingCancelLerp()
     {
+        //play cancel audio
+        cancelSound.Post(gameObject);
+
         Debug.Log("Crafting Cancel Started");
 
         Vector3 currentCrownPos = finalCrown.transform.localPosition;

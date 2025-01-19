@@ -8,7 +8,7 @@ public class PageTurnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] Sprite directionSprite;
     CursorBehavior cursor;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         cursor = GameObject.FindWithTag("cursor").GetComponent<CursorBehavior>();
     }

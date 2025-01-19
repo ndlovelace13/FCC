@@ -151,6 +151,22 @@ MonoBehaviour:
     parts, one really doesn't stand out from the next. Nothing fancy, just good range.
   effects: No effects, but has a higher throw range than its common counterparts
   textColor: {r: 1, g: 1, b: 1, a: 0}
+  hitSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a00c96f7979343d41822a703988aa87b, type: 2}
+  aoeSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  aoeStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  tickSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!58 &6720982598517679114
 CircleCollider2D:
   m_ObjectHideFlags: 0

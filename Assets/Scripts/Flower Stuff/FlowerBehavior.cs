@@ -38,10 +38,12 @@ public class FlowerBehavior : MonoBehaviour
             animator.SetInteger("rarity", rarity);
         }
 
-        if (GameControl.PlayerData.gameOver)
+        if (GameControl.PlayerData.gameOver || GameControl.PlayerData.gamePaused)
         {
             draggable = false;
         }
+        else
+            draggable = true;
 
     }
 

@@ -155,6 +155,22 @@ MonoBehaviour:
     time\nCloud Burst - Projectiles leave behind dissapating toxic clouds as they
     travel
   textColor: {r: 0.14901961, g: 0.5882353, b: 0.050980397, a: 0}
+  hitSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a00c96f7979343d41822a703988aa87b, type: 2}
+  aoeSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 30d33022133af0447af47747de644028, type: 2}
+  aoeStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 094b02f8d39f8344ab8500e22fdb7147, type: 2}
+  tickSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 424fc6bb4f99a964496bc2b67397ba8c, type: 2}
   poisonPool: {fileID: 0}
 --- !u!58 &819113155037464351
 CircleCollider2D:

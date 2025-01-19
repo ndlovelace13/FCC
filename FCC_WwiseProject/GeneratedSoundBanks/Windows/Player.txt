@@ -1,14 +1,20 @@
 Event	ID	Name			Wwise Object Path	Notes
-	745179803	Throw			\Default Work Unit\Throw	
-	2696148806	Flower_Harvest			\Default Work Unit\Flower_Harvest	
-	3670604801	CraftingInput			\Default Work Unit\CraftingInput	
-	4264775619	CraftingDone			\Default Work Unit\CraftingDone	
+	745179803	Throw			\Default Work Unit\Player\Throw	
+	975214911	CraftCancel			\Default Work Unit\Player\CraftCancel	
+	1656947812	PlayerDeath			\Default Work Unit\Player\PlayerDeath	
+	1866025847	Footstep			\Default Work Unit\Player\Footstep	
+	2696148806	Flower_Harvest			\Default Work Unit\Player\Flower_Harvest	
+	3450203795	CraftStart			\Default Work Unit\Player\CraftStart	
+	3670604801	CraftingInput			\Default Work Unit\Player\CraftingInput	
+	4264775619	CraftingDone			\Default Work Unit\Player\CraftingDone	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	24292098	crownCraft	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\F6\{F693BF0F-B57D-4DE4-8C68-F12D7240C38B}.wem		\Actor-Mixer Hierarchy\Default Work Unit\crownCraft		441096
-	69574967	crownThrow	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\98\{98F2F31D-B2D3-BC11-7948-71CFB568BBB4}.wem		\Actor-Mixer Hierarchy\Default Work Unit\crownThrow		219640
-	528063931	craft3	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\66\{66BFF01D-9E22-AA6E-BC0F-241A907938AA}.wem		\Actor-Mixer Hierarchy\Default Work Unit\crafting\craft3		471716
-	573708483	craft1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\32\{32DD2F9D-945E-D38D-C27C-9EAFB525DEDD}.wem		\Actor-Mixer Hierarchy\Default Work Unit\crafting\craft1		325780
-	583231221	craft2	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\F5\{F5C0A50D-B957-ACE4-A4AC-D8D10CCF4DFF}.wem		\Actor-Mixer Hierarchy\Default Work Unit\crafting\craft2		367492
-	806856628	harvest2	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\83\{8300B8D4-A2B9-1DA4-F3BC-A54732F06145}.wem		\Actor-Mixer Hierarchy\Default Work Unit\harvest2		184716
+	24292098	crownCraft	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\F6\{F693BF0F-B57D-4DE4-8C68-F12D7240C38B}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\crownCraft		441096
+	69574967	crownThrow	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\98\{98F2F31D-B2D3-BC11-7948-71CFB568BBB4}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\crownThrow		219640
+	451419760	footstep	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\CE\{CE7EE408-7D31-A09F-4F61-89ED15945738}.wem		\Actor-Mixer Hierarchy\Default Work Unit\footsteps\footstep		55392
+	777347406	craftStart	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\0D\{0D59963F-08F0-C7D5-C47A-05237F6FB55C}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\craftStart		9830496
+	806856628	harvest2	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\83\{8300B8D4-A2B9-1DA4-F3BC-A54732F06145}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\harvest2		184716
+	816351686	craftCancel	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\3A\{3A3DE136-DCC0-8047-C6D7-A5288CCD8C46}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\craftCancel		9830496
+	883663682	playerDeath	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\94\{949FDDD3-B015-3B7C-5503-0E33017A01B6}.wem		\Actor-Mixer Hierarchy\Default Work Unit\playerDeath		65888
+	917800238	craft1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\76\{7636A956-31CD-C905-6BD3-9B0D38ADDAA0}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\crafting\craft1		22844
 

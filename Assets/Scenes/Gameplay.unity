@@ -282,6 +282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41369b2570b5ab941ab4a67812732da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinPickup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8823e0ee83965d744acde857bc167014, type: 2}
 --- !u!1001 &91322733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1015,6 +1019,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
   listenerId: 0
 --- !u!114 &624531418
 MonoBehaviour:
@@ -1033,9 +1039,11 @@ MonoBehaviour:
     useDefaultListeners: 1
   isEnvironmentAware: 0
   isStaticObject: 0
+  usePositionOffsetData: 0
   m_positionOffsetData:
     KeepMe: 0
     positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
 --- !u!1 &700796772
@@ -1781,6 +1789,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 1131
       objectReference: {fileID: 0}
+    - target: {fileID: 5750353994604390376, guid: 0b59706b31283e045b955cb82e68f00d, type: 3}
+      propertyPath: dialogueStop.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: f4ae3162059066b4394fc04fe66044b0, type: 2}
+    - target: {fileID: 5750353994604390376, guid: 0b59706b31283e045b955cb82e68f00d, type: 3}
+      propertyPath: dialogueStart.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 9bd0603dfc71fdf41ab80c53ba4a4370, type: 2}
     - target: {fileID: 5751346581167284526, guid: 0b59706b31283e045b955cb82e68f00d, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 738

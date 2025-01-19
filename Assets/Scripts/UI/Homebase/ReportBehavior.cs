@@ -291,6 +291,9 @@ public class ReportBehavior : MonoBehaviour
     bool placed = false;
     bool reportStable = false;
 
+    //audio
+    [SerializeField] AK.Wwise.Event pageUp;
+
 
     // Start is called before the first frame update
     void Start()
@@ -467,6 +470,9 @@ public class ReportBehavior : MonoBehaviour
 
     IEnumerator LerpUp()
     {
+        //play audio cue
+        pageUp.Post(gameObject);
+
         reportStable = false;
         float time = 0f;
             
@@ -493,6 +499,9 @@ public class ReportBehavior : MonoBehaviour
     
     IEnumerator LerpDown(int newReport)
     {
+        //play audio cue
+        pageUp.Post(gameObject);
+
         reportStable = false;
         float time = 0f;
         /*Vector2 startingPos = GetComponent<RectTransform>().position;

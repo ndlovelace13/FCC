@@ -9,6 +9,14 @@ public class Item : MonoBehaviour
     protected bool pickingUp = false;
     protected bool placed = false;
     // Start is called before the first frame update
+
+    //audio
+    [SerializeField] protected AK.Wwise.Event spawnSound;
+    [SerializeField] protected AK.Wwise.Event activeStart;
+    [SerializeField] protected AK.Wwise.Event activeStop;
+    [SerializeField] protected AK.Wwise.Event pickupSound;
+
+
     protected void Start()
     {
         
@@ -31,6 +39,7 @@ public class Item : MonoBehaviour
 
     protected virtual void OnEnable()
     {
+
         pickingUp = false;
         placed = false;
         player = GameObject.FindWithTag("Player").GetComponentInChildren<PlayerMovement>().gameObject;
@@ -38,6 +47,10 @@ public class Item : MonoBehaviour
 
     protected virtual IEnumerator PlayerLerp(float lerpTime)
     {
+        //stop active sound
+        if (activeStop != null)
+            activeStop.Post(gameObject);
+
         float time = 0f;
         while (time < lerpTime)
         {
@@ -53,6 +66,7 @@ public class Item : MonoBehaviour
 
     protected virtual void AssignValue()
     {
-
+        //play pickup sound
+        pickupSound.Post(gameObject);
     }
 }

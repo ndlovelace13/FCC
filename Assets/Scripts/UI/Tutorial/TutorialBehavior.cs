@@ -151,6 +151,7 @@ public class TutorialBehavior : MonoBehaviour
         GameControl.PlayerData.tutorialState = 0;
         GameControl.SaveData.tutorialComplete = true;
         GameObject blackout = Instantiate(GameControl.PlayerData.BlackoutPrefab);
+        GameObject.FindWithTag("music").GetComponent<MusicHandler>().MenuMusicStop();
         blackout.GetComponent<BlackoutBehavior>().BeginBlackout("", " ", "Homebase", 1.5f);
     }
 

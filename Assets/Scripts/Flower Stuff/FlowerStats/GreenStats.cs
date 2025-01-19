@@ -54,6 +54,7 @@ public class GreenStats : FlowerStats
             if (!enemy.activeSelf || !enemy.GetComponent<EnemyBehavior>().isPoisoned)
                 break;
             enemy.GetComponent<EnemyBehavior>().DealDamage(poisonDamage, Color.green);
+            TickSound(enemy);
             poisonTimer += poisonCooldown;
         }
         //Debug.Log("Done");

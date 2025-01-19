@@ -1,0 +1,7 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1268780255	PhoneStop			\Default Work Unit\PhoneStop	
+	3074298065	PhoneRing			\Default Work Unit\PhoneRing	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	931394748	phoneRing	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\24\{24843F54-5CA5-F333-ED19-7F6F0AEB8DA1}.wem		\Actor-Mixer Hierarchy\Default Work Unit\phoneRing		152308
+

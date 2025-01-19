@@ -1,0 +1,10 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1115079948	RepellentShake			\Default Work Unit\Repellent\RepellentShake	
+	1265012641	ShakeStop			\Default Work Unit\Repellent\ShakeStop	
+	2811868096	SprayStop			\Default Work Unit\Repellent\SprayStop	
+	3787428913	RepellentSpray			\Default Work Unit\Repellent\RepellentSpray	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	284268730	spray	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\40\{402600EE-F3B8-78E3-5833-DE9FAFA074A3}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Repellent\spray		35532
+	307235904	sprayShake	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\48\{48FC7BF0-3CDE-04A5-6B2C-614ED5ADF059}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Repellent\sprayShake		104536
+

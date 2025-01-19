@@ -18,6 +18,9 @@ public class CrownThrowing : MonoBehaviour
     public float range;
     public float speed;
 
+    [SerializeField] AK.Wwise.Event sprayStart;
+    [SerializeField] AK.Wwise.Event sprayStop;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -92,6 +95,7 @@ public class CrownThrowing : MonoBehaviour
 
     IEnumerator Repelling()
     {
+        sprayStart.Post(gameObject);
         transform.GetComponentInChildren<PlayerStatus>().repelling = true;
         float currentTime = 0f;
         float subTimer = 0f;
@@ -112,10 +116,14 @@ public class CrownThrowing : MonoBehaviour
 
                 //spawn a repellent proj here
                 float range = repellent.GetComponent<RepellentBehavior>().range;
+
+                //audio
+
                 StartCoroutine(RepellentSpawn(angleRadians, range));
                 subTimer = 0f;
             }
         }
+        sprayStop.Post(gameObject);
         transform.GetComponentInChildren<PlayerStatus>().repelling = false;
     }
 

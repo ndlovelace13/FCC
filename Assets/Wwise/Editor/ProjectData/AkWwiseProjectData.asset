@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: c38583b8445d944cb8872fb7c1f3ac8f
     GuidInternal: 
-    m_lastTime: -8584644387567773069
+    m_lastTime: -8584642817291677761
     List:
     - name: BasicEnemy
       guid: f6793cf0e940344b9353fff7d4861b6a
@@ -96,6 +96,20 @@ MonoBehaviour:
         ObjectType: 7
         guid: 3aeba9b7ef41d34482f3e34bbbe6cd34
       Path: SoundBanks\Default Work Unit\Button
+    - name: Crown
+      guid: 44183c2f2c2ded4b8d362fccd9b7fa62
+      id: 2848349022
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c38583b8445d944cb8872fb7c1f3ac8f
+      - ElementName: Crown
+        ObjectType: 7
+        guid: 44183c2f2c2ded4b8d362fccd9b7fa62
+      Path: SoundBanks\Default Work Unit\Crown
     - name: Dialogue
       guid: bafca92818c0ae4f855cdc2bc0204747
       id: 3930136735
@@ -110,6 +124,20 @@ MonoBehaviour:
         ObjectType: 7
         guid: bafca92818c0ae4f855cdc2bc0204747
       Path: SoundBanks\Default Work Unit\Dialogue
+    - name: Item
+      guid: 93a39c7ad08047499505a0d99a874bde
+      id: 1222624712
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c38583b8445d944cb8872fb7c1f3ac8f
+      - ElementName: Item
+        ObjectType: 7
+        guid: 93a39c7ad08047499505a0d99a874bde
+      Path: SoundBanks\Default Work Unit\Item
     - name: Music
       guid: 34093a4a9bde2d48b6e63efa3e5f2dc1
       id: 3991942870
@@ -138,6 +166,20 @@ MonoBehaviour:
         ObjectType: 7
         guid: a942af2b15ddb94c805c735bb49074b6
       Path: SoundBanks\Default Work Unit\Player
+    - name: Repellent
+      guid: 3c9ff34c6c0d184b95c3f3b71e23af61
+      id: 614192430
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c38583b8445d944cb8872fb7c1f3ac8f
+      - ElementName: Repellent
+        ObjectType: 7
+        guid: 3c9ff34c6c0d184b95c3f3b71e23af61
+      Path: SoundBanks\Default Work Unit\Repellent
   EventWwu:
   - PhysicalPath: Events\Default Work Unit.wwu
     PathAndIcons:
@@ -150,7 +192,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 48ed7fdb16f388418594cf5ce384c227
     GuidInternal: 
-    m_lastTime: -8584644387567793069
+    m_lastTime: -8584642817291687753
     List:
     - name: ButtonClick
       guid: a21234c169f1d841a4c15c2a85d23a04
@@ -162,13 +204,153 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Buttons
+        ObjectType: 4
+        guid: 6e84003f5461b64285b5cd7be42d216c
       - ElementName: ButtonClick
         ObjectType: 3
         guid: a21234c169f1d841a4c15c2a85d23a04
-      Path: Events\Default Work Unit\ButtonClick
+      Path: Events\Default Work Unit\Buttons\ButtonClick
       maxAttenuation: 0
       maxDuration: 1.0866213
       minDuration: 1.0866213
+    - name: Buttons
+      guid: 6e84003f5461b64285b5cd7be42d216c
+      id: 203100604
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Buttons
+        ObjectType: 4
+        guid: 6e84003f5461b64285b5cd7be42d216c
+      Path: Events\Default Work Unit\Buttons
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: CarStart
+      guid: a75b33f64214394c907a7a0ff12b19cd
+      id: 836532927
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Buttons
+        ObjectType: 4
+        guid: 6e84003f5461b64285b5cd7be42d216c
+      - ElementName: CarStart
+        ObjectType: 3
+        guid: a75b33f64214394c907a7a0ff12b19cd
+      Path: Events\Default Work Unit\Buttons\CarStart
+      maxAttenuation: 0
+      maxDuration: 4.4765835
+      minDuration: 4.4765835
+    - name: ClarkDialogue
+      guid: d8d62315be336d41ba0acdaa4a9c12b9
+      id: 1689025738
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Dialogue
+        ObjectType: 4
+        guid: 8368dde35d1c2b479933ca9df99997df
+      - ElementName: ClarkDialogue
+        ObjectType: 3
+        guid: d8d62315be336d41ba0acdaa4a9c12b9
+      Path: Events\Default Work Unit\Dialogue\ClarkDialogue
+      maxAttenuation: 0
+      maxDuration: 47.093582
+      minDuration: 47.093582
+    - name: ClarkStop
+      guid: 7a2e4e095467c843b26f004be1bc8de3
+      id: 2595137528
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Dialogue
+        ObjectType: 4
+        guid: 8368dde35d1c2b479933ca9df99997df
+      - ElementName: ClarkStop
+        ObjectType: 3
+        guid: 7a2e4e095467c843b26f004be1bc8de3
+      Path: Events\Default Work Unit\Dialogue\ClarkStop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: CoinPickup
+      guid: 54621097a5b25848a5f6c022a8de0cc5
+      id: 2752428610
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Items
+        ObjectType: 4
+        guid: 8e1c8528b940f647ba57353bd86014ba
+      - ElementName: CoinPickup
+        ObjectType: 3
+        guid: 54621097a5b25848a5f6c022a8de0cc5
+      Path: Events\Default Work Unit\Items\CoinPickup
+      maxAttenuation: 0
+      maxDuration: 0.44990307
+      minDuration: 0.24932629
+    - name: CoinSpawn
+      guid: 8f018961d760e24f805d92009f2749ab
+      id: 1825644851
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Items
+        ObjectType: 4
+        guid: 8e1c8528b940f647ba57353bd86014ba
+      - ElementName: CoinSpawn
+        ObjectType: 3
+        guid: 8f018961d760e24f805d92009f2749ab
+      Path: Events\Default Work Unit\Items\CoinSpawn
+      maxAttenuation: 0
+      maxDuration: 0.42640492
+      minDuration: 0.42492965
+    - name: CraftCancel
+      guid: 85b76d1f4ed70e4e9bb482fadc7d55d4
+      id: 975214911
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Player
+        ObjectType: 4
+        guid: f2911ed9c711e14883ec3bd95d4a0013
+      - ElementName: CraftCancel
+        ObjectType: 3
+        guid: 85b76d1f4ed70e4e9bb482fadc7d55d4
+      Path: Events\Default Work Unit\Player\CraftCancel
+      maxAttenuation: 0
+      maxDuration: 51.2
+      minDuration: 51.2
     - name: CraftingDone
       guid: b622e993585ad5409f149a80fd6dcfe4
       id: 4264775619
@@ -179,10 +361,13 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Player
+        ObjectType: 4
+        guid: f2911ed9c711e14883ec3bd95d4a0013
       - ElementName: CraftingDone
         ObjectType: 3
         guid: b622e993585ad5409f149a80fd6dcfe4
-      Path: Events\Default Work Unit\CraftingDone
+      Path: Events\Default Work Unit\Player\CraftingDone
       maxAttenuation: 0
       maxDuration: 2.5
       minDuration: 2.5
@@ -196,16 +381,19 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Player
+        ObjectType: 4
+        guid: f2911ed9c711e14883ec3bd95d4a0013
       - ElementName: CraftingInput
         ObjectType: 3
         guid: cf9569b35675614d8574c306b9e2a551
-      Path: Events\Default Work Unit\CraftingInput
+      Path: Events\Default Work Unit\Player\CraftingInput
       maxAttenuation: 0
-      maxDuration: 3.5688047
-      minDuration: 1.3831481
-    - name: DialogueRandom
-      guid: 5f4138aea435644e87905d12418a8f58
-      id: 4044946174
+      maxDuration: 0.17213683
+      minDuration: 0.09660853
+    - name: CraftStart
+      guid: 7b8cac29a4bf3b489fae0536f542ede9
+      id: 3450203795
       PathAndIcons:
       - ElementName: Events
         ObjectType: 5
@@ -213,16 +401,36 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 48ed7fdb16f388418594cf5ce384c227
-      - ElementName: DialogueRandom
+      - ElementName: Player
+        ObjectType: 4
+        guid: f2911ed9c711e14883ec3bd95d4a0013
+      - ElementName: CraftStart
         ObjectType: 3
-        guid: 5f4138aea435644e87905d12418a8f58
-      Path: Events\Default Work Unit\DialogueRandom
+        guid: 7b8cac29a4bf3b489fae0536f542ede9
+      Path: Events\Default Work Unit\Player\CraftStart
+      maxAttenuation: 0
+      maxDuration: 51.2
+      minDuration: 51.2
+    - name: Dialogue
+      guid: 8368dde35d1c2b479933ca9df99997df
+      id: 3930136735
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Dialogue
+        ObjectType: 4
+        guid: 8368dde35d1c2b479933ca9df99997df
+      Path: Events\Default Work Unit\Dialogue
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
-    - name: DialogueStart
-      guid: c7d4d4569e2a334cbaac6e780b933214
-      id: 1791909165
+    - name: Enemy
+      guid: 0616c64a94aa3e4485b71103d99fba2c
+      id: 2299321487
       PathAndIcons:
       - ElementName: Events
         ObjectType: 5
@@ -230,27 +438,10 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 48ed7fdb16f388418594cf5ce384c227
-      - ElementName: DialogueStart
-        ObjectType: 3
-        guid: c7d4d4569e2a334cbaac6e780b933214
-      Path: Events\Default Work Unit\DialogueStart
-      maxAttenuation: 0
-      maxDuration: 0
-      minDuration: 0
-    - name: DialogueStop
-      guid: 2ca721cd109b4f4db9e29f2496804dba
-      id: 3304726383
-      PathAndIcons:
-      - ElementName: Events
-        ObjectType: 5
-        guid: 00000000000000000000000000000000
-      - ElementName: Default Work Unit
-        ObjectType: 12
-        guid: 48ed7fdb16f388418594cf5ce384c227
-      - ElementName: DialogueStop
-        ObjectType: 3
-        guid: 2ca721cd109b4f4db9e29f2496804dba
-      Path: Events\Default Work Unit\DialogueStop
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      Path: Events\Default Work Unit\Enemy
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -264,13 +455,16 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
       - ElementName: EnemyHit
         ObjectType: 3
         guid: 26aa58c22dfafc47904f0eea9a81d1b0
-      Path: Events\Default Work Unit\EnemyHit
+      Path: Events\Default Work Unit\Enemy\EnemyHit
       maxAttenuation: 0
-      maxDuration: 2.1697958
-      minDuration: 1.2177567
+      maxDuration: 0
+      minDuration: 0
     - name: EnemyKilled
       guid: 71adc08a9c93bc4989f5f9e43d0933e7
       id: 465333688
@@ -281,13 +475,16 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
       - ElementName: EnemyKilled
         ObjectType: 3
         guid: 71adc08a9c93bc4989f5f9e43d0933e7
-      Path: Events\Default Work Unit\EnemyKilled
+      Path: Events\Default Work Unit\Enemy\EnemyKilled
       maxAttenuation: 0
       maxDuration: 3.016738
-      minDuration: 1.693087
+      minDuration: 1.1180989
     - name: EnemySpawn
       guid: dc3bad515a73114c8c00e44fb04ff2c7
       id: 3453203440
@@ -298,13 +495,76 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
       - ElementName: EnemySpawn
         ObjectType: 3
         guid: dc3bad515a73114c8c00e44fb04ff2c7
-      Path: Events\Default Work Unit\EnemySpawn
+      Path: Events\Default Work Unit\Enemy\EnemySpawn
       maxAttenuation: 0
       maxDuration: 2.3346379
       minDuration: 1.3102713
+    - name: EssenceDrop
+      guid: 940c7b525fcd794dafdaeeaec44105c2
+      id: 1829648494
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Items
+        ObjectType: 4
+        guid: 8e1c8528b940f647ba57353bd86014ba
+      - ElementName: EssenceDrop
+        ObjectType: 3
+        guid: 940c7b525fcd794dafdaeeaec44105c2
+      Path: Events\Default Work Unit\Items\EssenceDrop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: EssencePickup
+      guid: 93e3d3cb51d2b04d865488849e51315f
+      id: 471973337
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Items
+        ObjectType: 4
+        guid: 8e1c8528b940f647ba57353bd86014ba
+      - ElementName: EssencePickup
+        ObjectType: 3
+        guid: 93e3d3cb51d2b04d865488849e51315f
+      Path: Events\Default Work Unit\Items\EssencePickup
+      maxAttenuation: 0
+      maxDuration: 0.866875
+      minDuration: 0.866875
+    - name: EssenceStop
+      guid: 0374d7e4d07d3c44ab76615b16e6d701
+      id: 3309808761
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Items
+        ObjectType: 4
+        guid: 8e1c8528b940f647ba57353bd86014ba
+      - ElementName: EssenceStop
+        ObjectType: 3
+        guid: 0374d7e4d07d3c44ab76615b16e6d701
+      Path: Events\Default Work Unit\Items\EssenceStop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Flower_Harvest
       guid: 0481f539725ddb4fa6e3aeb6bc1cc232
       id: 2696148806
@@ -315,13 +575,76 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Player
+        ObjectType: 4
+        guid: f2911ed9c711e14883ec3bd95d4a0013
       - ElementName: Flower_Harvest
         ObjectType: 3
         guid: 0481f539725ddb4fa6e3aeb6bc1cc232
-      Path: Events\Default Work Unit\Flower_Harvest
+      Path: Events\Default Work Unit\Player\Flower_Harvest
       maxAttenuation: 0
       maxDuration: 1.1747673
       minDuration: 0.9324134
+    - name: FlowerDialogue
+      guid: c7d4d4569e2a334cbaac6e780b933214
+      id: 15313714
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Dialogue
+        ObjectType: 4
+        guid: 8368dde35d1c2b479933ca9df99997df
+      - ElementName: FlowerDialogue
+        ObjectType: 3
+        guid: c7d4d4569e2a334cbaac6e780b933214
+      Path: Events\Default Work Unit\Dialogue\FlowerDialogue
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: FlowerStop
+      guid: 2ca721cd109b4f4db9e29f2496804dba
+      id: 3607269504
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Dialogue
+        ObjectType: 4
+        guid: 8368dde35d1c2b479933ca9df99997df
+      - ElementName: FlowerStop
+        ObjectType: 3
+        guid: 2ca721cd109b4f4db9e29f2496804dba
+      Path: Events\Default Work Unit\Dialogue\FlowerStop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Footstep
+      guid: 89f4fad73acbd948a92192d994de7792
+      id: 1866025847
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Player
+        ObjectType: 4
+        guid: f2911ed9c711e14883ec3bd95d4a0013
+      - ElementName: Footstep
+        ObjectType: 3
+        guid: 89f4fad73acbd948a92192d994de7792
+      Path: Events\Default Work Unit\Player\Footstep
+      maxAttenuation: 0
+      maxDuration: 0.31383175
+      minDuration: 0.31310743
     - name: GameplayMusic
       guid: 58d9da2d8842c6488af13e7e56221f59
       id: 2275179450
@@ -402,6 +725,63 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Items
+      guid: 8e1c8528b940f647ba57353bd86014ba
+      id: 2151963051
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Items
+        ObjectType: 4
+        guid: 8e1c8528b940f647ba57353bd86014ba
+      Path: Events\Default Work Unit\Items
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: JillDialogue
+      guid: cafad5fc80d53146b6bad54642c2425b
+      id: 2224161712
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Dialogue
+        ObjectType: 4
+        guid: 8368dde35d1c2b479933ca9df99997df
+      - ElementName: JillDialogue
+        ObjectType: 3
+        guid: cafad5fc80d53146b6bad54642c2425b
+      Path: Events\Default Work Unit\Dialogue\JillDialogue
+      maxAttenuation: 0
+      maxDuration: 45.45474
+      minDuration: 45.45474
+    - name: JillStop
+      guid: ca9298a1f89a0648b8e16514335de670
+      id: 1513742270
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Dialogue
+        ObjectType: 4
+        guid: 8368dde35d1c2b479933ca9df99997df
+      - ElementName: JillStop
+        ObjectType: 3
+        guid: ca9298a1f89a0648b8e16514335de670
+      Path: Events\Default Work Unit\Dialogue\JillStop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Music
       guid: bcff0956841eed4296df01fed98b2219
       id: 3991942870
@@ -419,6 +799,211 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
+    - name: PageTurn
+      guid: 4abc5240ca748f468b4abec35ef2c7e1
+      id: 2536509721
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Buttons
+        ObjectType: 4
+        guid: 6e84003f5461b64285b5cd7be42d216c
+      - ElementName: PageTurn
+        ObjectType: 3
+        guid: 4abc5240ca748f468b4abec35ef2c7e1
+      Path: Events\Default Work Unit\Buttons\PageTurn
+      maxAttenuation: 0
+      maxDuration: 1.035375
+      minDuration: 0.73675
+    - name: PhoneRing
+      guid: 3e5d1335f2fefc47bcd8a4219e08dcb7
+      id: 3074298065
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: PhoneRing
+        ObjectType: 3
+        guid: 3e5d1335f2fefc47bcd8a4219e08dcb7
+      Path: Events\Default Work Unit\PhoneRing
+      maxAttenuation: 0
+      maxDuration: 1.5855417
+      minDuration: 1.5855417
+    - name: PhoneStop
+      guid: 14c5e757d1563f4d8e106d0a050e44ed
+      id: 1268780255
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: PhoneStop
+        ObjectType: 3
+        guid: 14c5e757d1563f4d8e106d0a050e44ed
+      Path: Events\Default Work Unit\PhoneStop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Player
+      guid: f2911ed9c711e14883ec3bd95d4a0013
+      id: 1069431850
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Player
+        ObjectType: 4
+        guid: f2911ed9c711e14883ec3bd95d4a0013
+      Path: Events\Default Work Unit\Player
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: PlayerDeath
+      guid: 86ea56453f9bae4483d935c72d4a7bcf
+      id: 1656947812
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Player
+        ObjectType: 4
+        guid: f2911ed9c711e14883ec3bd95d4a0013
+      - ElementName: PlayerDeath
+        ObjectType: 3
+        guid: 86ea56453f9bae4483d935c72d4a7bcf
+      Path: Events\Default Work Unit\Player\PlayerDeath
+      maxAttenuation: 0
+      maxDuration: 0.37297052
+      minDuration: 0.37297052
+    - name: PointCharge
+      guid: 5aa18e7951cf0a4495e768f2ede63198
+      id: 785487965
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: PointCharge
+        ObjectType: 3
+        guid: 5aa18e7951cf0a4495e768f2ede63198
+      Path: Events\Default Work Unit\Enemy\PointCharge
+      maxAttenuation: 0
+      maxDuration: 1.5947666
+      minDuration: 1.5910859
+    - name: PointPoint
+      guid: 7b24c0a4dda871419d3bbbc9fb6681b0
+      id: 1305230485
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: PointPoint
+        ObjectType: 3
+        guid: 7b24c0a4dda871419d3bbbc9fb6681b0
+      Path: Events\Default Work Unit\Enemy\PointPoint
+      maxAttenuation: 0
+      maxDuration: 1.3134214
+      minDuration: 1.31039
+    - name: ProjSplit
+      guid: 4395192da69bf146a9702f6bdaadd307
+      id: 1336447716
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: ProjSplit
+        ObjectType: 3
+        guid: 4395192da69bf146a9702f6bdaadd307
+      Path: Events\Default Work Unit\ProjSplit
+      maxAttenuation: 0
+      maxDuration: 0.34985417
+      minDuration: 0.34985417
+    - name: Repellent
+      guid: 1d4fd1451cde3d459330f9198667831b
+      id: 614192430
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Repellent
+        ObjectType: 4
+        guid: 1d4fd1451cde3d459330f9198667831b
+      Path: Events\Default Work Unit\Repellent
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: RepellentShake
+      guid: be8380d0bce8de42a120b79313f322ec
+      id: 1115079948
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Repellent
+        ObjectType: 4
+        guid: 1d4fd1451cde3d459330f9198667831b
+      - ElementName: RepellentShake
+        ObjectType: 3
+        guid: be8380d0bce8de42a120b79313f322ec
+      Path: Events\Default Work Unit\Repellent\RepellentShake
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: RepellentSpray
+      guid: f01e27f3902e6047a23e0a709590c2e4
+      id: 3787428913
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Repellent
+        ObjectType: 4
+        guid: 1d4fd1451cde3d459330f9198667831b
+      - ElementName: RepellentSpray
+        ObjectType: 3
+        guid: f01e27f3902e6047a23e0a709590c2e4
+      Path: Events\Default Work Unit\Repellent\RepellentSpray
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: ResearchInvest
       guid: 35c94eb59912ad49b701811e29628bbc
       id: 2982833173
@@ -429,10 +1014,13 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Buttons
+        ObjectType: 4
+        guid: 6e84003f5461b64285b5cd7be42d216c
       - ElementName: ResearchInvest
         ObjectType: 3
         guid: 35c94eb59912ad49b701811e29628bbc
-      Path: Events\Default Work Unit\ResearchInvest
+      Path: Events\Default Work Unit\Buttons\ResearchInvest
       maxAttenuation: 0
       maxDuration: 1.7847147
       minDuration: 1.4165289
@@ -446,13 +1034,76 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Buttons
+        ObjectType: 4
+        guid: 6e84003f5461b64285b5cd7be42d216c
       - ElementName: ResearchUnlock
         ObjectType: 3
         guid: 51734578a80f09418aaf98fa6c1311a6
-      Path: Events\Default Work Unit\ResearchUnlock
+      Path: Events\Default Work Unit\Buttons\ResearchUnlock
       maxAttenuation: 0
       maxDuration: 2.5
       minDuration: 2.5
+    - name: ShakeStop
+      guid: b9eef98e52cbe74eb7c3b4cb218f0bba
+      id: 1265012641
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Repellent
+        ObjectType: 4
+        guid: 1d4fd1451cde3d459330f9198667831b
+      - ElementName: ShakeStop
+        ObjectType: 3
+        guid: b9eef98e52cbe74eb7c3b4cb218f0bba
+      Path: Events\Default Work Unit\Repellent\ShakeStop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: SprayStop
+      guid: fd9d0d96c830c84da72c6851ec30b78d
+      id: 2811868096
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Repellent
+        ObjectType: 4
+        guid: 1d4fd1451cde3d459330f9198667831b
+      - ElementName: SprayStop
+        ObjectType: 3
+        guid: fd9d0d96c830c84da72c6851ec30b78d
+      Path: Events\Default Work Unit\Repellent\SprayStop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Sprint
+      guid: 7871adb377ef2045a52d5dac45420453
+      id: 1296465089
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: Sprint
+        ObjectType: 3
+        guid: 7871adb377ef2045a52d5dac45420453
+      Path: Events\Default Work Unit\Enemy\Sprint
+      maxAttenuation: 0
+      maxDuration: 1.4529248
+      minDuration: 1.4495715
     - name: Throw
       guid: 90229252940c3648aea5fe88a4146e08
       id: 745179803
@@ -463,10 +1114,13 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Player
+        ObjectType: 4
+        guid: f2911ed9c711e14883ec3bd95d4a0013
       - ElementName: Throw
         ObjectType: 3
         guid: 90229252940c3648aea5fe88a4146e08
-      Path: Events\Default Work Unit\Throw
+      Path: Events\Default Work Unit\Player\Throw
       maxAttenuation: 0
       maxDuration: 1.2445805
       minDuration: 1.2445805
@@ -480,10 +1134,13 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Buttons
+        ObjectType: 4
+        guid: 6e84003f5461b64285b5cd7be42d216c
       - ElementName: UpgradePurchase
         ObjectType: 3
         guid: efcf0df20e85704da2f706447c9c26ee
-      Path: Events\Default Work Unit\UpgradePurchase
+      Path: Events\Default Work Unit\Buttons\UpgradePurchase
       maxAttenuation: 0
       maxDuration: 2.4928074
       minDuration: 1.9785426
@@ -544,7 +1201,7 @@ MonoBehaviour:
     m_lastTime: -8584646396414333128
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 010000000500000011000000190000001a000000
+  ExpandedWaapiItemIds: 010000000500000006000000070000000a0000000b0000000c0000000e0000000f0000001000000011000000120000001400000015000000190000001a0000003b000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0
