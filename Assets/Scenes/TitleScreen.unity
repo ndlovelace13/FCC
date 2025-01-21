@@ -693,9 +693,9 @@ Transform:
   m_Children:
   - {fileID: 996063012}
   - {fileID: 1246453621}
+  - {fileID: 1505062894}
   - {fileID: 228944090}
   - {fileID: 1907202636}
-  - {fileID: 1505062894}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &271687011
@@ -2374,6 +2374,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1428b320551f0ed45b59ce6403e9481c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titleMusic:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e5efef1262475d54b864d7be01d50189, type: 2}
+  titleMusicStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 44071e9d7fc52ca4c982a9338906066b, type: 2}
   menuMusic:
     idInternal: 0
     valueGuidInternal: 
@@ -2390,6 +2398,7 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 1181414baa3bc0a49a46a2e45bdd3530, type: 2}
+  songPlaying: 0
 --- !u!114 &1505062896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2402,7 +2411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: f7e1664c
+  triggerList: ae8d9d44f7e1664c
   useOtherObject: 0
   data:
     idInternal: 0

@@ -57,6 +57,32 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="TitleMusic" ID="{D1C9F673-CD2B-4E0B-BFC5-9D0D6374EEE0}">
+							<ChildrenList>
+								<Action Name="" ID="{2764FACB-2383-49D9-8650-B4D38FFB25A1}" ShortID="647892587">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="TitlePlaylist" ID="{78007E84-A625-4489-9189-C818E0748784}" WorkUnitID="{0070BC87-CF85-45EC-9C2C-7B483F5BB79B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="TitleMusicStop" ID="{2B9FAF10-91C8-4066-99FF-C13C0534EDBE}">
+							<ChildrenList>
+								<Action Name="" ID="{3B2E8210-B4D1-4668-B1FF-47D2BBC4BA7E}" ShortID="132231962">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="1.5"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="TitlePlaylist" ID="{78007E84-A625-4489-9189-C818E0748784}" WorkUnitID="{0070BC87-CF85-45EC-9C2C-7B483F5BB79B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Dialogue" ID="{E3DD6883-1C5D-472B-9933-CA9DF99997DF}" ShortID="810623748">
@@ -168,6 +194,7 @@
 								<Action Name="" ID="{E7B8F453-D921-4E1F-BC18-1D419575D9A4}" ShortID="431910337">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
 										<Property Name="Scope" Type="int16" Value="1"/>
 									</PropertyList>
 									<ReferenceList>
@@ -183,6 +210,7 @@
 								<Action Name="" ID="{FACCD03A-1E18-41B7-82AF-05E0E1E29351}" ShortID="95360159">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
 										<Property Name="Scope" Type="int16" Value="1"/>
 									</PropertyList>
 									<ReferenceList>
@@ -198,6 +226,7 @@
 								<Action Name="" ID="{CA7A272F-6D99-461D-BD0B-7AA7E171A15E}" ShortID="28880560">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
 										<Property Name="Scope" Type="int16" Value="1"/>
 									</PropertyList>
 									<ReferenceList>
@@ -295,6 +324,17 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="craftCancel" ID="{D2F2E2C6-2950-4587-8462-FEE46232BCDF}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="PlayerGasp" ID="{CA6C5F2C-9518-4471-8D8C-59301FB1EB7E}">
+							<ChildrenList>
+								<Action Name="" ID="{87C14CF2-AA9C-4416-93B0-36531632F230}" ShortID="840112449">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="playerGasp" ID="{77D00215-E21D-4BF7-99A6-4B3C489C4345}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -436,6 +476,123 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Folder Name="Bully" ID="{31370331-8CE4-4DB4-93BE-1860EA02262D}" ShortID="733845417">
+							<ChildrenList>
+								<Event Name="Growth" ID="{A0CA186B-9975-4DA9-978E-EB40138614A9}">
+									<ChildrenList>
+										<Action Name="" ID="{94C4F035-BA37-4BE4-B4F8-86B67BEB0874}" ShortID="231795554">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="growth" ID="{B1D89896-C4E6-4C40-9194-77B51B8EBA01}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Insult" ID="{094E4929-1D16-40C5-88E3-CE7793788173}">
+									<ChildrenList>
+										<Action Name="" ID="{ED35F05C-A774-4DCA-840E-6400C315402B}" ShortID="410595126">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="insult" ID="{41557BCE-245C-4F91-8DB3-756373BED582}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="BullySprintCharge" ID="{FFD2E095-8F38-4BB1-9B02-EB9B03219B34}">
+									<ChildrenList>
+										<Action Name="" ID="{528A9CA5-A7FC-4AC2-A6BD-07E28D4EF4EF}" ShortID="85547826">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="bullySprintCharge" ID="{91911DD2-0D94-4CEF-84DD-D811BBC04BAE}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="BullySprint" ID="{B2C1ECEB-5E25-468B-B7B1-8F4F720E3E1D}">
+									<ChildrenList>
+										<Action Name="" ID="{2FD61474-8F4E-453C-916F-0E6EF631203A}" ShortID="225149011">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="bullySprint" ID="{30311B08-8428-4BFF-951A-FE3EBB52910C}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="BullyPunchCharge" ID="{C0D07032-8452-4A83-9B80-60FB1FFE771B}">
+									<ChildrenList>
+										<Action Name="" ID="{FDBAC7D4-DB3E-4F70-9298-23AAFA6509F8}" ShortID="174029760">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="bullyCharge" ID="{B4839AB4-BE27-43F0-810E-E77B915610D4}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="BullyPunch" ID="{44FB2644-DFE8-4FB8-A5D4-BE146FCF8725}">
+									<ChildrenList>
+										<Action Name="" ID="{B17C3101-A726-4060-BDDB-F84EB16ABC5F}" ShortID="886842223">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="bullyPunch" ID="{80B5CD32-0C80-4698-9DC3-D82BD899B0C3}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Sacrifice" ID="{489E0E76-36F4-430F-B1CC-9865A9BA064A}">
+									<ChildrenList>
+										<Action Name="" ID="{8348D718-CA86-4B69-9638-83D1F0A50684}" ShortID="979072403">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sacrifice" ID="{3DACFE6D-297A-4E21-91EF-3B69E7B4B527}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="BullySpawn" ID="{B40E8BD6-7F10-4A36-8B92-F96E47195AF3}">
+									<ChildrenList>
+										<Action Name="" ID="{450BDE97-E5C8-4E39-ACC1-5871E8EAD2C1}" ShortID="399422165">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="bullySpawn" ID="{9EC3D623-FF75-4677-B527-750AB0FBD180}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="BullySpawnStop" ID="{2297C987-78FF-4C41-9F8D-AC2244CA4B50}">
+									<ChildrenList>
+										<Action Name="" ID="{7E7ED4B7-90B4-4ADE-922A-D74C8F7C3E44}" ShortID="83315966">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="bullySpawn" ID="{9EC3D623-FF75-4677-B527-750AB0FBD180}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="BullyDeath" ID="{D7917DFA-9B25-4738-BE20-2DF1B6311FF4}">
+									<ChildrenList>
+										<Action Name="" ID="{3BB15312-2B55-49BF-988E-F5A56C25FA1C}" ShortID="818217745">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="bullyDeath" ID="{3184B60A-8969-4D05-8079-D9911E024497}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Buttons" ID="{3F00846E-6154-42B6-85B5-CD7BE42D216C}" ShortID="206533042">
@@ -501,6 +658,17 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="buttonClick" ID="{2664F2AB-3B30-47FE-961A-BA4234423A7E}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Signing" ID="{05D323B4-8EDA-4CE4-8BA7-953F7C48845B}">
+							<ChildrenList>
+								<Action Name="" ID="{C58D1C32-CED3-48CD-84C5-773BB9006571}" ShortID="746418469">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="signature" ID="{380CAD20-01C7-4FF3-BEF6-8E5B01EAC56D}" WorkUnitID="{56364086-E3A8-4E7B-8FB3-B1893E059182}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -678,6 +846,7 @@
 								<Action Name="" ID="{161E7C5A-2E70-4C5D-9ED7-A71594869491}" ShortID="895078644">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
@@ -703,6 +872,7 @@
 								<Action Name="" ID="{08DD8DE1-1DD6-415F-88A2-F168CD405AFA}" ShortID="529317873">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">

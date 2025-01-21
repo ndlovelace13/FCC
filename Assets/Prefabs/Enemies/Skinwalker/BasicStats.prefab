@@ -46,9 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1003814786078272635, guid: 68ef06de361cafb49979cd312a75bbf1, type: 3}
   maxInterval: 0.35
-  minInterval: 0.2
+  minInterval: 0.25
   maxSpeed: 2
-  minSpeed: 1
+  minSpeed: 1.25
   speedCap: 5
   maxHealth: 30
   healthInterval: 10

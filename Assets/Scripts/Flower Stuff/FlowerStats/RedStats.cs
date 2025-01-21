@@ -89,6 +89,7 @@ public class RedStats : FlowerStats
 
     IEnumerator BurnHandler(GameObject enemy, int power)
     {
+        Debug.Log("reached burn handler");
         float burnTimer = 0f;
         //TODO - fuck this system, foul ass particle system needs to go
         GameObject part = enemy.GetComponent<EnemyBehavior>().nextParticle();

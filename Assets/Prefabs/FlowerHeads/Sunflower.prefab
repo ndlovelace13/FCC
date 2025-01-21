@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 205156303763729483}
   - component: {fileID: -5071946681003261559}
   - component: {fileID: 2255835752330509818}
+  - component: {fileID: 1505724751577897391}
   m_Layer: 0
   m_Name: Sunflower
   m_TagString: FlowerHead
@@ -172,10 +173,15 @@ MonoBehaviour:
     WwiseObjectReference: {fileID: 0}
   headSprite2: {fileID: 21300000, guid: 4cad8ff8191559d4dbebbb96ebfa78fe, type: 3}
   headSprite3: {fileID: 21300000, guid: 22867fb918a1416448f3825a316215db, type: 3}
-  headOffsetSprite2: {fileID: 0}
-  headOffsetSprite3: {fileID: 0}
+  headOffsetSprite1: {fileID: 21300000, guid: 583e9d4886b59f6409f28d6b52b25202, type: 3}
+  headOffsetSprite2: {fileID: 21300000, guid: d4a5456d39d6cdf448e460d7ce0281c7, type: 3}
+  headOffsetSprite3: {fileID: 21300000, guid: f23443144f12d61448f88df75d15a8ac, type: 3}
   stem2: {fileID: -333095599, guid: f48144af38cbed6448d065c9e88882b6, type: 3}
   stem3: {fileID: 2079372141, guid: f48144af38cbed6448d065c9e88882b6, type: 3}
+  growthSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e044f0390c854e14e8a7f4d1a7c13ea6, type: 2}
 --- !u!58 &-5071946681003261559
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -238,3 +244,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1505724751577897391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956063438138374131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 22d95ef50bd5b3549a4dd1095709e9ba, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 

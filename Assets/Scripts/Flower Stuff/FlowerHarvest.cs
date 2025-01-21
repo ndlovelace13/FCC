@@ -56,11 +56,11 @@ public class FlowerHarvest : MonoBehaviour
                         int slotPos = nextSlot();
                         if (slotPos != -1)
                         {
-                            AkSoundEngine.PostEvent("Flower_Harvest", transform.parent.gameObject);
+                            harvestSound.Post(transform.root.gameObject);
                             //TODO: PUll from the pool instead
-                            GameObject newHead = Instantiate(head, slots[slotPos].transform);
+                            GameObject newHead = Instantiate(head);
                             newHead.GetComponent<SpriteRenderer>().sortingLayerName = "Midground";
-                            newHead.GetComponent<SpriteRenderer>().sortingOrder = 6;
+                            newHead.GetComponent<SpriteRenderer>().sortingOrder = 5 + slotPos;
                             newHead.GetComponent<SpriteRenderer>().spriteSortPoint = SpriteSortPoint.Center;
                             //retrieve the headSprite without an offset based on the current tier
                             newHead.GetComponent<SpriteRenderer>().sprite = newHead.GetComponent<FlowerStats>().GetHeadSprite(newHead.GetComponent<FlowerBehavior>().tier);
@@ -69,6 +69,7 @@ public class FlowerHarvest : MonoBehaviour
                             //newHead.transform.position = slots[slotPos].transform.position;
                             //Debug.Log("WHAT THE FUCK IS HAPPENING: " + crown.gameObject.name);
                             newHead.transform.SetParent(crown.transform);
+                            newHead.transform.position = slots[slotPos].transform.position;
 
                             newHead.GetComponent<FlowerBehavior>().position = slotPos;
                             //Debug.Log("slot Position assigned: " + slotPos);

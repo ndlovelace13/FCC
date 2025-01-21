@@ -32,7 +32,7 @@ public class LocationHandler : MonoBehaviour
     {
         GameObject blackout = Instantiate(GameControl.PlayerData.BlackoutPrefab);
         //stop music and play car sound
-        GameObject.FindWithTag("music").GetComponent<MusicHandler>().MenuMusicStop();
+        MusicHandler.MusicControl.MenuMusicStop();
 
         blackout.GetComponent<BlackoutBehavior>().BeginBlackout("", " ", "Gameplay", 2f);
     }

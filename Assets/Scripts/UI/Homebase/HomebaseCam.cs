@@ -41,6 +41,8 @@ public class HomebaseCam : MonoBehaviour
     [SerializeField] AK.Wwise.Event flowerStart;
     [SerializeField] AK.Wwise.Event flowerStop;
 
+    [SerializeField] AK.Wwise.Event playerGasp;
+
     string[] introDialogue = new string[]
             {
                 "Uhhhh....Hello?",
@@ -355,7 +357,9 @@ public class HomebaseCam : MonoBehaviour
     IEnumerator InitialMove()
     {
         //start the menu music
-        GameObject.FindWithTag("music").GetComponent<MusicHandler>().MenuMusicStart();
+        MusicHandler.MusicControl.MenuMusicStart();
+        playerGasp.Post(gameObject);
+
         yield return new WaitForSeconds(2f);
         float time = 0f;
         float startingSize = mainCam.orthographicSize;

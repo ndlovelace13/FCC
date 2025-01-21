@@ -755,7 +755,7 @@ public class GameControl : MonoBehaviour
     public void ResetRun()
     {
         //start the gameplay music
-        GetComponentInChildren<MusicHandler>().GameplayMusicStart();
+        MusicHandler.MusicControl.GameplayMusicStart();
 
         gameOver = false;
         gameWin = false;
@@ -1068,7 +1068,7 @@ public class GameControl : MonoBehaviour
         unlockDone = false;
 
         //stop the music
-        GetComponentInChildren<MusicHandler>().GameplayMusicStop();
+        MusicHandler.MusicControl.GameplayMusicStop();
         yield return null;
     }
 }

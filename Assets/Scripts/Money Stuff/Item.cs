@@ -61,6 +61,11 @@ public class Item : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         AssignValue();
+
+        //stop sound effect
+        if (activeStop != null)
+            activeStop.Post(gameObject);
+
         gameObject.SetActive(false);
     }
 

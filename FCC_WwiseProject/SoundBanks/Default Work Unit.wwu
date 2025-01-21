@@ -6,6 +6,7 @@
 				<SoundBank Name="Player" ID="{2BAF42A9-DD15-4CB9-805C-735BB49074B6}">
 					<ObjectInclusionList>
 						<ObjectRef Name="CraftingDone" ID="{93E922B6-5A58-40D5-9F14-9A80FD6DCFE4}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="PlayerGasp" ID="{CA6C5F2C-9518-4471-8D8C-59301FB1EB7E}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="PlayerDeath" ID="{4556EA86-9B3F-44AE-83D9-35C72D4A7BCF}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Throw" ID="{52922290-0C94-4836-AEA5-FE88A4146E08}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="CraftStart" ID="{29AC8C7B-BFA4-483B-9FAE-0536F542EDE9}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
@@ -41,6 +42,7 @@
 						<ObjectRef Name="PageTurn" ID="{4052BC4A-74CA-468F-8B4A-BEC35EF2C7E1}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="ResearchInvest" ID="{B54EC935-1299-49AD-B701-811E29628BBC}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="CarStart" ID="{F6335BA7-1442-4C39-907A-7A0FF12B19CD}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Signing" ID="{05D323B4-8EDA-4CE4-8BA7-953F7C48845B}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="UpgradePurchase" ID="{F20DCFEF-850E-4D70-A2F7-06447C9C26EE}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
@@ -60,10 +62,12 @@
 				</SoundBank>
 				<SoundBank Name="Music" ID="{4A3A0934-DE9B-482D-B6E6-3EFA3E5F2DC1}">
 					<ObjectInclusionList>
+						<ObjectRef Name="TitleMusicStop" ID="{2B9FAF10-91C8-4066-99FF-C13C0534EDBE}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="HomebaseMusicStop" ID="{5697AA27-948D-439A-88E0-C4E1B91E781B}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="GameplayMusic" ID="{2DDAD958-4288-48C6-8AF1-3E7E56221F59}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="HomebaseMusic" ID="{E754B373-13E8-4A07-9655-17B597768FB1}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="GameplayMusicStop" ID="{E07DEC6C-A48E-4D34-AA6D-D9881396EFF5}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="TitleMusic" ID="{D1C9F673-CD2B-4E0B-BFC5-9D0D6374EEE0}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>
@@ -111,6 +115,30 @@
 						<ObjectRef Name="Poison" ID="{1A09F38F-4286-4C1C-86A2-8EBBE6EECD59}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Fire" ID="{A6AE31FF-CB71-4C9E-AFC0-17E987346C5A}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="PoisonStop" ID="{4227FBBF-E8E0-4E24-A2A5-A294BB5E8C63}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="BullyBoss" ID="{17323F32-0A41-4B75-A4B0-48A592A91C1D}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Insult" ID="{094E4929-1D16-40C5-88E3-CE7793788173}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="HitSounds" ID="{62C8A9BC-389E-4168-B480-69D9D441298E}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Sacrifice" ID="{489E0E76-36F4-430F-B1CC-9865A9BA064A}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BullySprint" ID="{B2C1ECEB-5E25-468B-B7B1-8F4F720E3E1D}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BullyDeath" ID="{D7917DFA-9B25-4738-BE20-2DF1B6311FF4}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BullySpawn" ID="{B40E8BD6-7F10-4A36-8B92-F96E47195AF3}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BullyPunchCharge" ID="{C0D07032-8452-4A83-9B80-60FB1FFE771B}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BullySprintCharge" ID="{FFD2E095-8F38-4BB1-9B02-EB9B03219B34}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BullySpawnStop" ID="{2297C987-78FF-4C41-9F8D-AC2244CA4B50}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Growth" ID="{A0CA186B-9975-4DA9-978E-EB40138614A9}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BullyPunch" ID="{44FB2644-DFE8-4FB8-A5D4-BE146FCF8725}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="Sunflower" ID="{500FA245-5101-44C9-9FBA-37A5B43095BB}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Growth" ID="{A0CA186B-9975-4DA9-978E-EB40138614A9}" WorkUnitID="{DB7FED48-F316-4188-8594-CF5CE384C227}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

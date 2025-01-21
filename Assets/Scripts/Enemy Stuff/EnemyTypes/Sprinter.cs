@@ -14,6 +14,7 @@ public class Sprinter : EnemyBehavior
     float currentTimer = 0f;
 
     //audio cues
+    [SerializeField] AK.Wwise.Event sprintCharge;
     [SerializeField] AK.Wwise.Event sprintSound;
 
     //Vector2 direction;
@@ -116,6 +117,9 @@ public class Sprinter : EnemyBehavior
             {
                 if (currentTimer >= realStats.sprintCooldown)
                 {
+                    //play charging sound
+                    sprintCharge.Post(gameObject);
+
                     currentTimer = 0f;
                     isCharging = true;
                     isResting = false;
@@ -129,7 +133,7 @@ public class Sprinter : EnemyBehavior
             {
                 if (currentTimer >= realStats.chargeTime)
                 {
-                    //play pointing sound
+                    //play sprinting sound
                     sprintSound.Post(gameObject);
                     Debug.Log(sprintSound);
 
@@ -176,8 +180,7 @@ public class Sprinter : EnemyBehavior
 
     IEnumerator DirectionHandle()
     {
-        Vector2 direction = GetComponent<Rigidbody2D>().velocity;
-        if (direction.x < 0f)
+        if (direction.x > 0f)
             transform.localScale = new Vector3(-1, 1);
         else
             transform.localScale = Vector3.one;

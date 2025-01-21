@@ -1,0 +1,37 @@
+Event	ID	Name			Wwise Object Path	Notes
+	524526084	FireHit			\Default Work Unit\Enemy\HitSounds\FireHit	
+	621005312	Sacrifice			\Default Work Unit\Enemy\Bully\Sacrifice	
+	692491073	BaseHit			\Default Work Unit\Enemy\HitSounds\BaseHit	
+	985095993	BullyPunchCharge			\Default Work Unit\Enemy\Bully\BullyPunchCharge	
+	1901357644	PoisonHit			\Default Work Unit\Enemy\HitSounds\PoisonHit	
+	2149128921	BullyPunch			\Default Work Unit\Enemy\Bully\BullyPunch	
+	2352574039	FreezeHit			\Default Work Unit\Enemy\HitSounds\FreezeHit	
+	2360484640	Growth			\Default Work Unit\Enemy\Bully\Growth	
+	2443837079	BullyDeath			\Default Work Unit\Enemy\Bully\BullyDeath	
+	2497534315	ElectricHit			\Default Work Unit\Enemy\HitSounds\ElectricHit	
+	2942130275	BullySprintCharge			\Default Work Unit\Enemy\Bully\BullySprintCharge	
+	3146155728	Insult			\Default Work Unit\Enemy\Bully\Insult	
+	3224839631	BullySprint			\Default Work Unit\Enemy\Bully\BullySprint	
+	3532457280	BullySpawn			\Default Work Unit\Enemy\Bully\BullySpawn	
+	4258519624	BullySpawnStop			\Default Work Unit\Enemy\Bully\BullySpawnStop	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	78482138	enemyDeath1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\7F\{7F844DAE-07DB-D3E6-9F31-F343B837BE76}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\Bully\bullyDeath\enemyDeath1		398760
+	221546367	growth3	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\53\{5307183E-CDA7-439E-9099-47E0358F1F23}.wem		\Actor-Mixer Hierarchy\Default Work Unit\growth\growth3		154304
+	274004080	pointPoint	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\EB\{EBF45A8D-32A9-02AF-B928-C1652DCDE5B3}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\Bully\bullyPunch\pointPoint		231516
+	327686566	growth1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\59\{59F8629F-F3B9-875F-3BDB-84E0BA09B276}.wem		\Actor-Mixer Hierarchy\Default Work Unit\growth\growth1		252044
+	379456823	catchFire	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\A4\{A4D0232A-09E8-8C8D-34A6-B67AC272D20E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\FireHit\catchFire		114824
+	509118957	freeze	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\C1\{C10234FB-F033-6490-EF76-92D6C01D06F6}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\freeze		95588
+	509325829	sacrifice	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\0B\{0B985250-0852-2CB4-7B6B-75FB322A3EEE}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\Bully\sacrifice		166536
+	569057702	insult	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\69\{69B143E9-6281-8407-7503-2F4B4CC26B6F}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\Bully\insult		204896
+	584750280	zap	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\F3\{F3E2439E-3720-79E5-A49E-724D868AFD30}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\zap		93660
+	665255929	bullySprintCharge	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\6D\{6D164C49-8282-F1C1-46C8-2CB4A942D086}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\Bully\bullySprintCharge		305368
+	696225861	burnTick	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\39\{390D9BDC-DA7E-9DBF-2C82-AACF1B9062A5}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\FireHit\burnTick		60608
+	750543515	replicantMoan	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\1D\{1D190EB2-BD68-854B-2FE3-4FB145D75F30}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\Bully\bullyDeath\replicantMoan		264284
+	769994105	basicHit	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\E0\{E0CE7077-46D1-F90C-E34E-C449C5D529DC}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\basicHit		38484
+	799505877	bullySpawn	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\26\{26654297-75B2-45A3-04CD-83558CB65340}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\Bully\bullySpawn		578012
+	873878954	enemyHit1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\9D\{9D88FA8F-9701-B86B-6411-9083B7A90390}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\Bully\bullyDeath\enemyHit1		286836
+	889623693	growth2	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\6C\{6CC351A8-2885-2D06-7BAF-3626637BCCBD}.wem		\Actor-Mixer Hierarchy\Default Work Unit\growth\growth2		179560
+	901136481	sprinterDash	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\A7\{A7CF7E31-ADD9-88A4-A093-3C16C45F2C49}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\Bully\bullySprint\sprinterDash		256096
+	941451151	pointCharge	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\5B\{5B6FCDA9-C26C-0557-6C3D-B370FB957EBA}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\Bully\bullyCharge\pointCharge		281088
+

@@ -46,10 +46,12 @@ public class PhoneLerp : MonoBehaviour
     IEnumerator LerpUp()
     {
         phoneRing.Post(gameObject);
-
+        
         float time = 0f;
         Vector2 finalPos = GetComponent<RectTransform>().position;
         Vector2 startingPos = new Vector2(finalPos.x, -Screen.height * 1.5f);
+        GetComponent<RectTransform>().position = startingPos;
+        yield return new WaitForSeconds(0.5f);
 
         while (time < 1f)
         {

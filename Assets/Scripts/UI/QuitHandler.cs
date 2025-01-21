@@ -24,6 +24,7 @@ public class QuitHandler : MonoBehaviour
     {
         Time.timeScale = 1f;
         GameControl.SaveHandler.SaveGame();
+        MusicHandler.MusicControl.MenuMusicStop();
         SceneManager.LoadScene("TitleScreen");
     }
 

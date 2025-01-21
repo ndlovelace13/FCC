@@ -26,7 +26,8 @@ public class MoneyCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameControl.PlayerData.gameOver)
+            textObj.alpha = 0f;
     }
 
     //call this whenever money is added to the total

@@ -14,11 +14,22 @@ public class Fist : BossExtension
     float passedTime = 0f;
     float stateTime = 0f;
 
+    bool fistDir;
+
+    //audio cue
+    [SerializeField] AK.Wwise.Event growthSound;
+
     // Start is called before the first frame update
     void Start()
     {
         activeBoss = GameObject.FindWithTag("boss").GetComponent<EnemyBehavior>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerStatus>().transform;
+
+        if (player.transform.position.x - transform.position.x > 0)
+            fistDir = true;
+        else
+            fistDir = false;
+
 
         //Debug.Log(activeBoss.gameObject.name);
         StartCoroutine(Grow());
@@ -41,12 +52,15 @@ public class Fist : BossExtension
 
     IEnumerator Grow()
     {
+        //play growth sound
+        growthSound.Post(transform.parent.gameObject);
+
         //reset the time vars
         stateTime = 0.5f;
         passedTime = 0f;
         
         float finalRot;
-        if (direction.x > 0f)
+        if (fistDir)
             finalRot = -90f;
         else
             finalRot = 90f;
@@ -81,7 +95,7 @@ public class Fist : BossExtension
         passedTime = 0f;
 
         int dir;
-        if (direction.x > 0)
+        if (fistDir)
             dir = 1;
         else
             dir = -1;
@@ -124,12 +138,13 @@ public class Fist : BossExtension
 
     IEnumerator Return()
     {
+
         //reset the time vars
         stateTime = 1f;
         passedTime = 0f;
 
         int dir;
-        if (direction.x > 0)
+        if (fistDir)
             dir = 1;
         else
             dir = -1;
@@ -157,6 +172,9 @@ public class Fist : BossExtension
 
     IEnumerator Despawn()
     {
+        //play growth sound
+        growthSound.Post(transform.parent.gameObject);
+
         //reset the time vars
         stateTime = 0.5f;
         passedTime = 0f;

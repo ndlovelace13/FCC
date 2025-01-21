@@ -24,6 +24,16 @@ public class StartScreenTransition : MonoBehaviour
         canTransition = false;
         StartCoroutine(TransitionEnabler());
         loadButton.SetActive(GameControl.SaveHandler.FileFind());
+
+        //start music if music not already playing
+        if (!MusicHandler.MusicControl.songPlaying)
+        {
+            MusicHandler.MusicControl.TitleMusicStart();
+            Debug.Log("Now starting title screen music");
+        }
+        else
+            Debug.Log("Title Screen Music already playing");
+            //MusicHandler.MusicControl.TitleMusicStart();
     }
 
     // Update is called once per frame
@@ -88,6 +98,7 @@ public class StartScreenTransition : MonoBehaviour
                 SceneManager.LoadScene("Tutorial");
             else
                 SceneManager.LoadScene("Gameplay");*/
+            MusicHandler.MusicControl.TitleMusicStop();
             GameObject blackout = Instantiate(GameControl.PlayerData.BlackoutPrefab);
             blackout.GetComponent<BlackoutBehavior>().BeginBlackout("", " ", "Homebase", 1.5f);
             //SceneManager.LoadScene("Homebase");
@@ -105,6 +116,7 @@ public class StartScreenTransition : MonoBehaviour
             }
             else if (GameControl.SaveData.firstRun)
                 SceneManager.LoadScene("Tutorial");*/
+            MusicHandler.MusicControl.TitleMusicStop();
             GameObject blackout = Instantiate(GameControl.PlayerData.BlackoutPrefab);
             blackout.GetComponent<BlackoutBehavior>().BeginBlackout("", " ", "Homebase", 1.5f);
             //SceneManager.LoadScene("Homebase");

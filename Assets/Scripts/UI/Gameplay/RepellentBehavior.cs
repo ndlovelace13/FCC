@@ -135,6 +135,8 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
         Vector3 finalPos = Camera.main.WorldToScreenPoint(docket.position);
         Vector3 currentPos = rect.position;
 
+        
+
         //Shrink, spin, and lerp to the player
         float currentTime = 0f;
         while (currentTime < 1f)
@@ -147,8 +149,13 @@ public class RepellentBehavior : MonoBehaviour, IPointerEnterHandler, IPointerDo
         }
 
         rect.position = finalPos;
-        //player recieve anim plays here
+
+        //start anim
+        player.GetComponentInChildren<Animator>().SetBool("repellentActive", true);
         yield return new WaitForSeconds(0.5f);
+
+        //stop anim
+        player.GetComponentInChildren<Animator>().SetBool("repellentActive", false);
 
         //call the repellent active script here
         player.GetComponent<CrownThrowing>().RepellentActivate();

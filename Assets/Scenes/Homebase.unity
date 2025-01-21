@@ -2571,6 +2571,7 @@ GameObject:
   - component: {fileID: 675801332}
   - component: {fileID: 675801331}
   - component: {fileID: 675801333}
+  - component: {fileID: 675801334}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2734,6 +2735,35 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: f4ae3162059066b4394fc04fe66044b0, type: 2}
+  playerGasp:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 3cab2aef71209ee44a2c3aafbb07cab3, type: 2}
+--- !u!114 &675801334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675801327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e514a76d61368b446966a6e615b69072, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &723893524
 GameObject:
   m_ObjectHideFlags: 0
@@ -3725,6 +3755,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7968417699458215389, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
+      propertyPath: triggerList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968417699458215389, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
+      propertyPath: triggerList.Array.data[0]
+      value: 1151176110
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968417699458215389, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
+      propertyPath: triggerList.Array.data[1]
+      value: 1281810935
+      objectReference: {fileID: 0}
     - target: {fileID: 8198613178812958571, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -3737,6 +3779,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button
       objectReference: {fileID: 0}
+    - target: {fileID: 8685631897130184464, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
+      propertyPath: buttonSound.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: bdf64f8c7460bf24381d018f36a41677, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6945209148061734228, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
@@ -5594,6 +5640,18 @@ PrefabInstance:
     - target: {fileID: 7606947396466448987, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
       propertyPath: m_fontSizeBase
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968417699458215389, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
+      propertyPath: triggerList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968417699458215389, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
+      propertyPath: triggerList.Array.data[0]
+      value: 1151176110
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968417699458215389, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
+      propertyPath: triggerList.Array.data[1]
+      value: 1281810935
       objectReference: {fileID: 0}
     - target: {fileID: 8631345519509988510, guid: 1e6fe84ab6c47d146b7487f8a7b025f8, type: 3}
       propertyPath: m_Name

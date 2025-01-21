@@ -1,0 +1,8 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2360484640	Growth			\Default Work Unit\Enemy\Bully\Growth	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	221546367	growth3	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\53\{5307183E-CDA7-439E-9099-47E0358F1F23}.wem		\Actor-Mixer Hierarchy\Default Work Unit\growth\growth3		154304
+	327686566	growth1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\59\{59F8629F-F3B9-875F-3BDB-84E0BA09B276}.wem		\Actor-Mixer Hierarchy\Default Work Unit\growth\growth1		252044
+	889623693	growth2	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\6C\{6CC351A8-2885-2D06-7BAF-3626637BCCBD}.wem		\Actor-Mixer Hierarchy\Default Work Unit\growth\growth2		179560
+

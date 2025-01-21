@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class SunnyStats : FlowerStats
 {
-    Vector3 startingPos = new Vector3(-0.061f, 0.44f);
+    Vector3 startingPos = new Vector3(-0.034f, -0.465f);
     float firstTierTime = 5f;
-    Vector3 secondTierPos = new Vector3(0, 0.25f);
+    Vector3 secondTierPos = new Vector3(-0.061f, -0.183f);
     float secondTierTime = 10f;
-    Vector3 thirdTierPos = new Vector3(0, 0.5f);
+    Vector3 thirdTierPos = new Vector3(0, 0.25f);
 
     List<GameObject> growingFlowers;
 
@@ -23,6 +23,7 @@ public class SunnyStats : FlowerStats
     [SerializeField] Sprite headSprite2;
     [SerializeField] Sprite headSprite3;
 
+    [SerializeField] Sprite headOffsetSprite1;
     [SerializeField] Sprite headOffsetSprite2;
     [SerializeField] Sprite headOffsetSprite3;
 
@@ -33,6 +34,8 @@ public class SunnyStats : FlowerStats
     float baseBlindTime = 1f;
     //float blindTime;
     float additionalBlindTime = 0.5f;
+
+    [SerializeField] AK.Wwise.Event growthSound;
 
     // Start is called before the first frame update
     void Start()
@@ -172,6 +175,12 @@ public class SunnyStats : FlowerStats
             behavior.growing = true;
         float time = 0f;
         shadow.GetComponent<SizeLerp>().Execute(true);
+
+        //apply headSpriteOne
+        headSprite.sprite = headOffsetSprite1;
+        headSprite.transform.localPosition = startingPos;
+        growthSound.Post(gameObject);
+
         if (behavior.tier == 1)
         {
             
@@ -182,13 +191,15 @@ public class SunnyStats : FlowerStats
                 if (!flower.activeSelf)
                     yield break;
                 //lerping the flowerHead
-                headSprite.transform.localPosition = Vector3.Lerp(startingPos, startingPos + secondTierPos, time / firstTierTime);
+                headSprite.transform.localPosition = Vector3.Lerp(startingPos, secondTierPos, time / firstTierTime);
                 time += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
             Debug.Log("tier 2 reached");
             behavior.tier++;
-            headSprite.sprite = headSprite2;
+            headSprite.sprite = headOffsetSprite2;
+            headSprite.transform.localPosition = startingPos;
+            growthSound.Post(gameObject);
         }
         if (behavior.tier == 2)
         {
@@ -199,12 +210,14 @@ public class SunnyStats : FlowerStats
                 if (!flower.activeSelf)
                     yield break;
                 //lerping the flowerHead
-                headSprite.transform.localPosition = Vector3.Lerp(startingPos + secondTierPos, startingPos + thirdTierPos, time / secondTierTime);
+                headSprite.transform.localPosition = Vector3.Lerp(startingPos, secondTierPos, time / secondTierTime);
                 time += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
             behavior.tier++;
-            headSprite.sprite = headSprite3;
+            headSprite.sprite = headOffsetSprite3;
+            headSprite.transform.localPosition = secondTierPos;
+            growthSound.Post(gameObject);
             Debug.Log("tier 3 reached");
         }
         shadow.GetComponent<SizeLerp>().Execute(false);

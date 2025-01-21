@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5783538252221588449}
   - component: {fileID: 587589528798761079}
   - component: {fileID: 6281657018037334065}
+  - component: {fileID: 5304592508332621639}
   m_Layer: 0
   m_Name: Fist
   m_TagString: bossPart
@@ -155,11 +156,22 @@ MonoBehaviour:
   poppyCount: 0
   wasKilled: 0
   isBoss: 0
+  enemySpawn:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  enemyDeath:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   activeBoss: {fileID: 0}
   forearm: {fileID: 4881918544727071357}
   fist: {fileID: 9057239711540526829}
   fistShadow: {fileID: 7878533662500981034}
-  direction: 0
+  growthSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e044f0390c854e14e8a7f4d1a7c13ea6, type: 2}
 --- !u!95 &6281657018037334065
 Animator:
   serializedVersion: 5
@@ -181,6 +193,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5304592508332621639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003814786078272635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 5d52dd343cb9ea846beda199dc721183, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &2186241190138067228
 GameObject:
   m_ObjectHideFlags: 0

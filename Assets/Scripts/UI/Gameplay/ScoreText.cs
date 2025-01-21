@@ -18,8 +18,13 @@ public class ScoreText : MonoBehaviour
     void Update()
     {
         scoreText.text = "Earnings: " + string.Format("{0:C}", GameControl.PlayerData.score / 100f);
-        if (GameControl.SaveData.firstSeed)
+        if (GameControl.PlayerData.shiftSeeds > 0 || GameControl.SaveData.firstSeed)
+        {
+            if (!essenceText.enabled)
+                essenceText.enabled = true;
             essenceText.text = "Essence: " + GameControl.SaveData.essenceCount + " <sprite=1>";
+            
+        }
         else
             essenceText.enabled = false;
         //transition this to images instead at some point

@@ -51,7 +51,7 @@ public class CrownAttack : MonoBehaviour
 
     public void CollisionCheck(Collider2D collision)
     {
-        if (collision.gameObject.tag == "enemy" && crownArmed)
+        if ((collision.transform.root.gameObject.tag == "enemy" || collision.transform.root.gameObject.tag == "boss")&& crownArmed)
         {
             Debug.Log("triggered from collision");
             CrownAttacking();

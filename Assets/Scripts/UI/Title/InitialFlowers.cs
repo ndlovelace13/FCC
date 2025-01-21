@@ -38,6 +38,7 @@ public class InitialFlowers : MonoBehaviour
             {
                 StartCoroutine(Spawn());
             }
+            spawnCooldown = Random.Range(0.5f, 3f);
             yield return new WaitForSeconds(spawnCooldown); // one second
         }
     }
@@ -70,6 +71,9 @@ public class InitialFlowers : MonoBehaviour
         head.GetComponent<FlowerBehavior>().picked = false;
         head.GetComponent<FlowerBehavior>().growing = false;
         head.GetComponent<FlowerStats>().SetStem(head, stemAnim.gameObject);
+
+        //should hopefully turn on the shadows
+        newFlower.GetComponentInChildren<ShadowCollision>().gameObject.SetActive(true);
         flowerCount++;
 
     }

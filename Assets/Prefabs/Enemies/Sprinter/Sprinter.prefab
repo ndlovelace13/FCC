@@ -275,6 +275,18 @@ MonoBehaviour:
   poppyCount: 0
   wasKilled: 0
   isBoss: 0
+  enemySpawn:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a12ae85b2e136d54bbb934eb81021bc8, type: 2}
+  enemyDeath:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a757710ff5f5d5e4594f68725a10de78, type: 2}
+  sprintCharge:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 0356814ecc356434492d583b23265e86, type: 2}
   sprintSound:
     idInternal: 0
     valueGuidInternal: 
@@ -293,6 +305,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notif: {fileID: 0}
   coinPool: {fileID: 0}
+  coinSpawn:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!250 &1972809715602474962
 PointEffector2D:
   m_ObjectHideFlags: 0

@@ -63,7 +63,7 @@ public class Pointdexter : EnemyBehavior
                 //move away from the target
                 if (isRetreating)
                 {
-                    direction = new Vector2(target.position.x - shadow.position.x, target.position.y - shadow.position.y);
+                    direction = new Vector2(shadow.position.x - target.position.x, shadow.position.y - target.position.y);
                     direction.Normalize();
                     //gameObject.GetComponent<Rigidbody2D>().velocity = -direction * moveSpeed;
                 }

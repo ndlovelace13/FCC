@@ -14,6 +14,13 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID BASEHIT = 692491073U;
+        static const AkUniqueID BULLYDEATH = 2443837079U;
+        static const AkUniqueID BULLYPUNCH = 2149128921U;
+        static const AkUniqueID BULLYPUNCHCHARGE = 985095993U;
+        static const AkUniqueID BULLYSPAWN = 3532457280U;
+        static const AkUniqueID BULLYSPAWNSTOP = 4258519624U;
+        static const AkUniqueID BULLYSPRINT = 3224839631U;
+        static const AkUniqueID BULLYSPRINTCHARGE = 2942130275U;
         static const AkUniqueID BUTTONCLICK = 4051332235U;
         static const AkUniqueID CARSTART = 836532927U;
         static const AkUniqueID CLARKDIALOGUE = 1689025738U;
@@ -40,14 +47,17 @@ namespace AK
         static const AkUniqueID FREEZEHIT = 2352574039U;
         static const AkUniqueID GAMEPLAYMUSIC = 2275179450U;
         static const AkUniqueID GAMEPLAYMUSICSTOP = 545868898U;
+        static const AkUniqueID GROWTH = 2360484640U;
         static const AkUniqueID HOMEBASEMUSIC = 3375575032U;
         static const AkUniqueID HOMEBASEMUSICSTOP = 311417904U;
+        static const AkUniqueID INSULT = 3146155728U;
         static const AkUniqueID JILLDIALOGUE = 2224161712U;
         static const AkUniqueID JILLSTOP = 1513742270U;
         static const AkUniqueID PAGETURN = 2536509721U;
         static const AkUniqueID PHONERING = 3074298065U;
         static const AkUniqueID PHONESTOP = 1268780255U;
         static const AkUniqueID PLAYERDEATH = 1656947812U;
+        static const AkUniqueID PLAYERGASP = 666447703U;
         static const AkUniqueID POINTCHARGE = 785487965U;
         static const AkUniqueID POINTPOINT = 1305230485U;
         static const AkUniqueID POISON = 1413156513U;
@@ -58,11 +68,15 @@ namespace AK
         static const AkUniqueID REPELLENTSPRAY = 3787428913U;
         static const AkUniqueID RESEARCHINVEST = 2982833173U;
         static const AkUniqueID RESEARCHUNLOCK = 668166534U;
+        static const AkUniqueID SACRIFICE = 621005312U;
         static const AkUniqueID SHAKESTOP = 1265012641U;
+        static const AkUniqueID SIGNING = 782824770U;
         static const AkUniqueID SPRAYSTOP = 2811868096U;
         static const AkUniqueID SPRINT = 1296465089U;
         static const AkUniqueID SPRINTCHARGE = 1525902545U;
         static const AkUniqueID THROW = 745179803U;
+        static const AkUniqueID TITLEMUSIC = 2191159630U;
+        static const AkUniqueID TITLEMUSICSTOP = 661331142U;
         static const AkUniqueID UPGRADEPURCHASE = 2834561310U;
     } // namespace EVENTS
 
@@ -70,6 +84,7 @@ namespace AK
     {
         static const AkUniqueID INIT = 1355168291U;
         static const AkUniqueID BASICENEMY = 2360806359U;
+        static const AkUniqueID BULLYBOSS = 427184716U;
         static const AkUniqueID BUTTON = 977454165U;
         static const AkUniqueID CROWN = 2848349022U;
         static const AkUniqueID DIALOGUE = 3930136735U;
@@ -79,6 +94,7 @@ namespace AK
         static const AkUniqueID PLAYER = 1069431850U;
         static const AkUniqueID PROJECTILES = 4275850663U;
         static const AkUniqueID REPELLENT = 614192430U;
+        static const AkUniqueID SUNFLOWER = 1922697424U;
     } // namespace BANKS
 
     namespace BUSSES

@@ -1,4 +1,5 @@
 Event	ID	Name			Wwise Object Path	Notes
+	666447703	PlayerGasp			\Default Work Unit\Player\PlayerGasp	
 	745179803	Throw			\Default Work Unit\Player\Throw	
 	975214911	CraftCancel			\Default Work Unit\Player\CraftCancel	
 	1656947812	PlayerDeath			\Default Work Unit\Player\PlayerDeath	
@@ -11,10 +12,11 @@ Event	ID	Name			Wwise Object Path	Notes
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	24292098	crownCraft	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\F6\{F693BF0F-B57D-4DE4-8C68-F12D7240C38B}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\crownCraft		441096
 	69574967	crownThrow	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\98\{98F2F31D-B2D3-BC11-7948-71CFB568BBB4}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\crownThrow		219640
-	451419760	footstep	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\CE\{CE7EE408-7D31-A09F-4F61-89ED15945738}.wem		\Actor-Mixer Hierarchy\Default Work Unit\footsteps\footstep		55392
+	451419760	footstep	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\CE\{CE7EE408-7D31-A09F-4F61-89ED15945738}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\footsteps\footstep		55392
+	498590062	playerGasp	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\FC\{FC88FDBE-9287-4E1D-E26C-990FC0469A25}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\playerGasp		816844
 	777347406	craftStart	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\0D\{0D59963F-08F0-C7D5-C47A-05237F6FB55C}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\craftStart		9830496
 	806856628	harvest2	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\83\{8300B8D4-A2B9-1DA4-F3BC-A54732F06145}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\harvest2		184716
 	816351686	craftCancel	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\3A\{3A3DE136-DCC0-8047-C6D7-A5288CCD8C46}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\craftCancel		9830496
-	883663682	playerDeath	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\94\{949FDDD3-B015-3B7C-5503-0E33017A01B6}.wem		\Actor-Mixer Hierarchy\Default Work Unit\playerDeath		65888
+	883663682	playerDeath	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\94\{949FDDD3-B015-3B7C-5503-0E33017A01B6}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\playerDeath		65888
 	917800238	craft1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\76\{7636A956-31CD-C905-6BD3-9B0D38ADDAA0}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\crafting\craft1		22844
 

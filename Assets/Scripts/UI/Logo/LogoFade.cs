@@ -15,6 +15,7 @@ public class LogoFade : MonoBehaviour
         //PlayerPrefs.SetInt("firstRun", 0);
         logoImage = logo.GetComponent<Image>();
         StartCoroutine(LogoControl());
+        MusicHandler.MusicControl.TitleMusicStart();
     }
 
     // Update is called once per frame

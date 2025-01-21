@@ -18,6 +18,8 @@ public class CrownThrowing : MonoBehaviour
     public float range;
     public float speed;
 
+    [SerializeField] AK.Wwise.Event ThrowSound;
+
     [SerializeField] AK.Wwise.Event sprayStart;
     [SerializeField] AK.Wwise.Event sprayStop;
     
@@ -48,7 +50,7 @@ public class CrownThrowing : MonoBehaviour
                     finalCrown.GetComponent<CrownAttack>().CrownActive();
                     gameObject.GetComponent<CrownConstruction>().CrownThrown();
                     StartCoroutine(CrownThrow());
-                    AkSoundEngine.PostEvent("Throw", gameObject);
+                    ThrowSound.Post(gameObject);
                 }
             }
         }

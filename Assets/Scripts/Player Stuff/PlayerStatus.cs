@@ -13,8 +13,8 @@ public class PlayerStatus : MonoBehaviour
     public bool inDanger = false;
     public bool repelling = false;
     public bool repellentMoment = false;
-    public float repellentLerpTime = 0.25f;
-    public float repellentModeTimeScale = 0.2f;
+    public float repellentLerpTime = 0.025f;
+    public float repellentModeTimeScale = 0.05f;
     public float repellentModeZoom = 0.5f;
     [SerializeField] GameObject repellentObj;
 
@@ -142,7 +142,7 @@ public class PlayerStatus : MonoBehaviour
                 }
                 //add a check here for using repellent - or start a coroutine after repellent begin
             }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
 
     }
@@ -155,16 +155,17 @@ public class PlayerStatus : MonoBehaviour
         repellentObj.SetActive(true);
         
         //get the current values of everything
-        float currentTimeScale = Time.timeScale;
+        //float currentTimeScale = Time.timeScale;
         float currentCamZoom = Camera.main.orthographicSize;
         float currentTime = 0f;
+        Time.timeScale = repellentModeTimeScale;
+
         while (currentTime < repellentLerpTime)
         {
-            Time.timeScale = Mathf.Lerp(currentTimeScale, repellentModeTimeScale, currentTime / repellentLerpTime);
             Camera.main.orthographicSize = Mathf.Lerp(currentCamZoom, repMaxZoom, currentTime / repellentLerpTime);
             currentTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
-            if (!inDanger)
+            if (!inDanger || GameControl.PlayerData.gameOver)
             {
                 yield break;
             }
@@ -181,16 +182,16 @@ public class PlayerStatus : MonoBehaviour
         Debug.Log("no more repelling");
 
         //get the current values of everything
-        float currentTimeScale = Time.timeScale;
+        Time.timeScale = ogTimeScale;
         float currentCamZoom = Camera.main.orthographicSize;
         float currentTime = 0f;
         while (currentTime < repellentLerpTime)
         {
-            Time.timeScale = Mathf.Lerp(currentTimeScale, ogTimeScale, currentTime / repellentLerpTime);
+            //Time.timeScale = Mathf.Lerp(currentTimeScale, ogTimeScale, currentTime / repellentLerpTime);
             Camera.main.orthographicSize = Mathf.Lerp(currentCamZoom, ogZoom, currentTime / repellentLerpTime);
             currentTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
-            if (inDanger && !repelling)
+            if ((inDanger && !repelling) || GameControl.PlayerData.gameOver)
             {
                 yield break;
             }

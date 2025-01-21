@@ -92,7 +92,7 @@ public class TutorialBehavior : MonoBehaviour
         "Pick up five flowers and press E to craft your first flower crown",
         "Drag the flowers to their correct slot using the mouse", 
         "Use the mouse to aim and click the left mouse button to toss your first crown",
-        "Create and throw a crown with the unnatural flower in its center"
+        "Create and throw a crown with the unusual flower in its center"
     };
     bool conditionMet = true;
     // Start is called before the first frame update
@@ -151,7 +151,7 @@ public class TutorialBehavior : MonoBehaviour
         GameControl.PlayerData.tutorialState = 0;
         GameControl.SaveData.tutorialComplete = true;
         GameObject blackout = Instantiate(GameControl.PlayerData.BlackoutPrefab);
-        GameObject.FindWithTag("music").GetComponent<MusicHandler>().MenuMusicStop();
+        //GameObject.FindWithTag("music").GetComponent<MusicHandler>().MenuMusicStop();
         blackout.GetComponent<BlackoutBehavior>().BeginBlackout("", " ", "Homebase", 1.5f);
     }
 

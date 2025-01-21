@@ -112,14 +112,14 @@ PrefabInstance:
     - target: {fileID: 3632531936994161102, guid: 02f42b7acc18a5b4a8c8fd4982515757, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d8baefe4eb7937541b08e38fe7ab5a2a, type: 3}
+      objectReference: {fileID: 21300000, guid: f23443144f12d61448f88df75d15a8ac, type: 3}
     - target: {fileID: 6675446099740889203, guid: 02f42b7acc18a5b4a8c8fd4982515757, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.026
+      value: -0.034
       objectReference: {fileID: 0}
     - target: {fileID: 6675446099740889203, guid: 02f42b7acc18a5b4a8c8fd4982515757, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.471
+      value: -0.183
       objectReference: {fileID: 0}
     - target: {fileID: 6675446099740889203, guid: 02f42b7acc18a5b4a8c8fd4982515757, type: 3}
       propertyPath: m_LocalPosition.z
@@ -171,6 +171,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7674615344065777240}
     m_Modifications:
+    - target: {fileID: 1167388063577121091, guid: 972753dddfcb89f409d33efa3e7b1be9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2079372141, guid: f48144af38cbed6448d065c9e88882b6, type: 3}
     - target: {fileID: 8363042057920448042, guid: 972753dddfcb89f409d33efa3e7b1be9, type: 3}
       propertyPath: m_Name
       value: FlowerBase

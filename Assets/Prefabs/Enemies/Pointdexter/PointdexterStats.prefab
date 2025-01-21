@@ -50,10 +50,10 @@ MonoBehaviour:
   maxSpeed: 3
   minSpeed: 2
   speedCap: 6
-  maxHealth: 50
+  maxHealth: 40
   healthInterval: 15
   startingEnemies: 1
-  enemyScaleAmt: 0
+  enemyScaleAmt: 1
   killScore: 20
   scoreIncrease: 3
   countScaleTime: 30
@@ -67,7 +67,7 @@ MonoBehaviour:
   description: 
   behavior: 
   weakness: 
-  pointCharge: 3
+  pointCharge: 1.5
   retreatTime: 2
   pointCooldown: 3
   buffRange: 1.5

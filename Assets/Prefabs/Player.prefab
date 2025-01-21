@@ -887,6 +887,10 @@ MonoBehaviour:
   repellent: {fileID: 0}
   range: 0
   speed: 0
+  ThrowSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: af23707fea9ce3b4b9ec0d87008ccc3b, type: 2}
   sprayStart:
     idInternal: 0
     valueGuidInternal: 
@@ -1222,7 +1226,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
 --- !u!114 &3193702057912636553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1676,7 +1680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8880611383415660848, guid: 567d68a296293d747b8a2b698895238c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6
+      value: 0.34
       objectReference: {fileID: 0}
     - target: {fileID: 8880611383415660848, guid: 567d68a296293d747b8a2b698895238c, type: 3}
       propertyPath: m_LocalPosition.z

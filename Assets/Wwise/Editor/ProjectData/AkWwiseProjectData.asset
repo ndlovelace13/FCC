@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: c38583b8445d944cb8872fb7c1f3ac8f
     GuidInternal: 
-    m_lastTime: -8584642817291677761
+    m_lastTime: -8584641711996377544
     List:
     - name: BasicEnemy
       guid: f6793cf0e940344b9353fff7d4861b6a
@@ -82,6 +82,20 @@ MonoBehaviour:
         ObjectType: 7
         guid: f6793cf0e940344b9353fff7d4861b6a
       Path: SoundBanks\Default Work Unit\BasicEnemy
+    - name: BullyBoss
+      guid: 323f3217410a754ba4b048a592a91c1d
+      id: 427184716
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c38583b8445d944cb8872fb7c1f3ac8f
+      - ElementName: BullyBoss
+        ObjectType: 7
+        guid: 323f3217410a754ba4b048a592a91c1d
+      Path: SoundBanks\Default Work Unit\BullyBoss
     - name: Button
       guid: 3aeba9b7ef41d34482f3e34bbbe6cd34
       id: 977454165
@@ -152,6 +166,20 @@ MonoBehaviour:
         ObjectType: 7
         guid: 34093a4a9bde2d48b6e63efa3e5f2dc1
       Path: SoundBanks\Default Work Unit\Music
+    - name: Phone
+      guid: 50143ca8045ea6409588c356e2824f44
+      id: 3104856687
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c38583b8445d944cb8872fb7c1f3ac8f
+      - ElementName: Phone
+        ObjectType: 7
+        guid: 50143ca8045ea6409588c356e2824f44
+      Path: SoundBanks\Default Work Unit\Phone
     - name: Player
       guid: a942af2b15ddb94c805c735bb49074b6
       id: 1069431850
@@ -166,6 +194,20 @@ MonoBehaviour:
         ObjectType: 7
         guid: a942af2b15ddb94c805c735bb49074b6
       Path: SoundBanks\Default Work Unit\Player
+    - name: Projectiles
+      guid: f433af6f94cc0448a614373fa07b3167
+      id: 4275850663
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c38583b8445d944cb8872fb7c1f3ac8f
+      - ElementName: Projectiles
+        ObjectType: 7
+        guid: f433af6f94cc0448a614373fa07b3167
+      Path: SoundBanks\Default Work Unit\Projectiles
     - name: Repellent
       guid: 3c9ff34c6c0d184b95c3f3b71e23af61
       id: 614192430
@@ -180,6 +222,20 @@ MonoBehaviour:
         ObjectType: 7
         guid: 3c9ff34c6c0d184b95c3f3b71e23af61
       Path: SoundBanks\Default Work Unit\Repellent
+    - name: Sunflower
+      guid: 45a20f500151c9449fba37a5b43095bb
+      id: 1922697424
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c38583b8445d944cb8872fb7c1f3ac8f
+      - ElementName: Sunflower
+        ObjectType: 7
+        guid: 45a20f500151c9449fba37a5b43095bb
+      Path: SoundBanks\Default Work Unit\Sunflower
   EventWwu:
   - PhysicalPath: Events\Default Work Unit.wwu
     PathAndIcons:
@@ -192,8 +248,229 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 48ed7fdb16f388418594cf5ce384c227
     GuidInternal: 
-    m_lastTime: -8584642817291687753
+    m_lastTime: -8584641711996397518
     List:
+    - name: AOE
+      guid: 2f1e3748d87324429be1415099cf0815
+      id: 1083976202
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: AOE
+        ObjectType: 4
+        guid: 2f1e3748d87324429be1415099cf0815
+      Path: Events\Default Work Unit\AOE
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: BaseHit
+      guid: a399ce85c6a8ec47bcd781173d172070
+      id: 692491073
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: HitSounds
+        ObjectType: 4
+        guid: bca9c8629e386841b48069d9d441298e
+      - ElementName: BaseHit
+        ObjectType: 3
+        guid: a399ce85c6a8ec47bcd781173d172070
+      Path: Events\Default Work Unit\Enemy\HitSounds\BaseHit
+      maxAttenuation: 0
+      maxDuration: 0.20016861
+      minDuration: 0.19970663
+    - name: Bully
+      guid: 31033731e48cb44d93be1860ea02262d
+      id: 3317471519
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: Bully
+        ObjectType: 4
+        guid: 31033731e48cb44d93be1860ea02262d
+      Path: Events\Default Work Unit\Enemy\Bully
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: BullyDeath
+      guid: fa7d91d7259b3847be202df1b6311ff4
+      id: 2443837079
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: Bully
+        ObjectType: 4
+        guid: 31033731e48cb44d93be1860ea02262d
+      - ElementName: BullyDeath
+        ObjectType: 3
+        guid: fa7d91d7259b3847be202df1b6311ff4
+      Path: Events\Default Work Unit\Enemy\Bully\BullyDeath
+      maxAttenuation: 0
+      maxDuration: 4.026862
+      minDuration: 1.3342674
+    - name: BullyPunch
+      guid: 4426fb44e8dfb84fa5d4be146fcf8725
+      id: 2149128921
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: Bully
+        ObjectType: 4
+        guid: 31033731e48cb44d93be1860ea02262d
+      - ElementName: BullyPunch
+        ObjectType: 3
+        guid: 4426fb44e8dfb84fa5d4be146fcf8725
+      Path: Events\Default Work Unit\Enemy\Bully\BullyPunch
+      maxAttenuation: 0
+      maxDuration: 1.654807
+      minDuration: 1.6509881
+    - name: BullyPunchCharge
+      guid: 3270d0c05284834a9b8060fb1ffe771b
+      id: 985095993
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: Bully
+        ObjectType: 4
+        guid: 31033731e48cb44d93be1860ea02262d
+      - ElementName: BullyPunchCharge
+        ObjectType: 3
+        guid: 3270d0c05284834a9b8060fb1ffe771b
+      Path: Events\Default Work Unit\Enemy\Bully\BullyPunchCharge
+      maxAttenuation: 0
+      maxDuration: 2.0162556
+      minDuration: 2.0162556
+    - name: BullySpawn
+      guid: d68b0eb4107f364a8b92f96e47195af3
+      id: 3532457280
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: Bully
+        ObjectType: 4
+        guid: 31033731e48cb44d93be1860ea02262d
+      - ElementName: BullySpawn
+        ObjectType: 3
+        guid: d68b0eb4107f364a8b92f96e47195af3
+      Path: Events\Default Work Unit\Enemy\Bully\BullySpawn
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: BullySpawnStop
+      guid: 87c99722ff78414c9f8dac2244ca4b50
+      id: 4258519624
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: Bully
+        ObjectType: 4
+        guid: 31033731e48cb44d93be1860ea02262d
+      - ElementName: BullySpawnStop
+        ObjectType: 3
+        guid: 87c99722ff78414c9f8dac2244ca4b50
+      Path: Events\Default Work Unit\Enemy\Bully\BullySpawnStop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: BullySprint
+      guid: ebecc1b2255e8b46b7b18f4f720e3e1d
+      id: 3224839631
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: Bully
+        ObjectType: 4
+        guid: 31033731e48cb44d93be1860ea02262d
+      - ElementName: BullySprint
+        ObjectType: 3
+        guid: ebecc1b2255e8b46b7b18f4f720e3e1d
+      Path: Events\Default Work Unit\Enemy\Bully\BullySprint
+      maxAttenuation: 0
+      maxDuration: 1.7278285
+      minDuration: 1.723841
+    - name: BullySprintCharge
+      guid: 95e0d2ff388fb14b9b02eb9b03219b34
+      id: 2942130275
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: Bully
+        ObjectType: 4
+        guid: 31033731e48cb44d93be1860ea02262d
+      - ElementName: BullySprintCharge
+        ObjectType: 3
+        guid: 95e0d2ff388fb14b9b02eb9b03219b34
+      Path: Events\Default Work Unit\Enemy\Bully\BullySprintCharge
+      maxAttenuation: 0
+      maxDuration: 2.0603814
+      minDuration: 2.0556264
     - name: ButtonClick
       guid: a21234c169f1d841a4c15c2a85d23a04
       id: 4051332235
@@ -269,8 +546,8 @@ MonoBehaviour:
         guid: d8d62315be336d41ba0acdaa4a9c12b9
       Path: Events\Default Work Unit\Dialogue\ClarkDialogue
       maxAttenuation: 0
-      maxDuration: 47.093582
-      minDuration: 47.093582
+      maxDuration: 0
+      minDuration: 0
     - name: ClarkStop
       guid: 7a2e4e095467c843b26f004be1bc8de3
       id: 2595137528
@@ -329,7 +606,7 @@ MonoBehaviour:
         guid: 8f018961d760e24f805d92009f2749ab
       Path: Events\Default Work Unit\Items\CoinSpawn
       maxAttenuation: 0
-      maxDuration: 0.42640492
+      maxDuration: 0.7264049
       minDuration: 0.42492965
     - name: CraftCancel
       guid: 85b76d1f4ed70e4e9bb482fadc7d55d4
@@ -428,6 +705,29 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
+    - name: ElectricHit
+      guid: 9f8efdd9bce0244084529638f7290938
+      id: 2497534315
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: HitSounds
+        ObjectType: 4
+        guid: bca9c8629e386841b48069d9d441298e
+      - ElementName: ElectricHit
+        ObjectType: 3
+        guid: 9f8efdd9bce0244084529638f7290938
+      Path: Events\Default Work Unit\Enemy\HitSounds\ElectricHit
+      maxAttenuation: 0
+      maxDuration: 0.974625
+      minDuration: 0.974625
     - name: Enemy
       guid: 0616c64a94aa3e4485b71103d99fba2c
       id: 2299321487
@@ -445,26 +745,6 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
-    - name: EnemyHit
-      guid: 26aa58c22dfafc47904f0eea9a81d1b0
-      id: 391172934
-      PathAndIcons:
-      - ElementName: Events
-        ObjectType: 5
-        guid: 00000000000000000000000000000000
-      - ElementName: Default Work Unit
-        ObjectType: 12
-        guid: 48ed7fdb16f388418594cf5ce384c227
-      - ElementName: Enemy
-        ObjectType: 4
-        guid: 0616c64a94aa3e4485b71103d99fba2c
-      - ElementName: EnemyHit
-        ObjectType: 3
-        guid: 26aa58c22dfafc47904f0eea9a81d1b0
-      Path: Events\Default Work Unit\Enemy\EnemyHit
-      maxAttenuation: 0
-      maxDuration: 0
-      minDuration: 0
     - name: EnemyKilled
       guid: 71adc08a9c93bc4989f5f9e43d0933e7
       id: 465333688
@@ -565,6 +845,69 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Fire
+      guid: ff31aea671cb9e4cafc017e987346c5a
+      id: 2678880713
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: AOE
+        ObjectType: 4
+        guid: 2f1e3748d87324429be1415099cf0815
+      - ElementName: Fire
+        ObjectType: 3
+        guid: ff31aea671cb9e4cafc017e987346c5a
+      Path: Events\Default Work Unit\AOE\Fire
+      maxAttenuation: 0
+      maxDuration: 5.81975
+      minDuration: 5.81975
+    - name: FireHit
+      guid: 8d6ef25c175d61419863fac722865498
+      id: 524526084
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: HitSounds
+        ObjectType: 4
+        guid: bca9c8629e386841b48069d9d441298e
+      - ElementName: FireHit
+        ObjectType: 3
+        guid: 8d6ef25c175d61419863fac722865498
+      Path: Events\Default Work Unit\Enemy\HitSounds\FireHit
+      maxAttenuation: 0
+      maxDuration: 0.6503855
+      minDuration: 0.6503855
+    - name: FireStop
+      guid: c8258c0c53dd4445aa9c118e6e3b4a62
+      id: 1158554481
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: AOE
+        ObjectType: 4
+        guid: 2f1e3748d87324429be1415099cf0815
+      - ElementName: FireStop
+        ObjectType: 3
+        guid: c8258c0c53dd4445aa9c118e6e3b4a62
+      Path: Events\Default Work Unit\AOE\FireStop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Flower_Harvest
       guid: 0481f539725ddb4fa6e3aeb6bc1cc232
       id: 2696148806
@@ -645,6 +988,29 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.31383175
       minDuration: 0.31310743
+    - name: FreezeHit
+      guid: daa59a9fc187044a923c3c8f396fec58
+      id: 2352574039
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: HitSounds
+        ObjectType: 4
+        guid: bca9c8629e386841b48069d9d441298e
+      - ElementName: FreezeHit
+        ObjectType: 3
+        guid: daa59a9fc187044a923c3c8f396fec58
+      Path: Events\Default Work Unit\Enemy\HitSounds\FreezeHit
+      maxAttenuation: 0
+      maxDuration: 0.99470836
+      minDuration: 0.99470836
     - name: GameplayMusic
       guid: 58d9da2d8842c6488af13e7e56221f59
       id: 2275179450
@@ -685,6 +1051,49 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Growth
+      guid: 6b18caa07599a94d978eeb40138614a9
+      id: 2360484640
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: Bully
+        ObjectType: 4
+        guid: 31033731e48cb44d93be1860ea02262d
+      - ElementName: Growth
+        ObjectType: 3
+        guid: 6b18caa07599a94d978eeb40138614a9
+      Path: Events\Default Work Unit\Enemy\Bully\Growth
+      maxAttenuation: 0
+      maxDuration: 1.3122292
+      minDuration: 0.8031667
+    - name: HitSounds
+      guid: bca9c8629e386841b48069d9d441298e
+      id: 927218396
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: HitSounds
+        ObjectType: 4
+        guid: bca9c8629e386841b48069d9d441298e
+      Path: Events\Default Work Unit\Enemy\HitSounds
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: HomebaseMusic
       guid: 73b354e7e813074a965517b597768fb1
       id: 3375575032
@@ -725,6 +1134,29 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Insult
+      guid: 29494e09161dc54088e3ce7793788173
+      id: 3146155728
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: Bully
+        ObjectType: 4
+        guid: 31033731e48cb44d93be1860ea02262d
+      - ElementName: Insult
+        ObjectType: 3
+        guid: 29494e09161dc54088e3ce7793788173
+      Path: Events\Default Work Unit\Enemy\Bully\Insult
+      maxAttenuation: 0
+      maxDuration: 1.3967093
+      minDuration: 1.3967093
     - name: Items
       guid: 8e1c8528b940f647ba57353bd86014ba
       id: 2151963051
@@ -760,8 +1192,8 @@ MonoBehaviour:
         guid: cafad5fc80d53146b6bad54642c2425b
       Path: Events\Default Work Unit\Dialogue\JillDialogue
       maxAttenuation: 0
-      maxDuration: 45.45474
-      minDuration: 45.45474
+      maxDuration: 0
+      minDuration: 0
     - name: JillStop
       guid: ca9298a1f89a0648b8e16514335de670
       id: 1513742270
@@ -890,6 +1322,26 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.37297052
       minDuration: 0.37297052
+    - name: PlayerGasp
+      guid: 2c5f6cca189571448d8c59301fb1eb7e
+      id: 666447703
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Player
+        ObjectType: 4
+        guid: f2911ed9c711e14883ec3bd95d4a0013
+      - ElementName: PlayerGasp
+        ObjectType: 3
+        guid: 2c5f6cca189571448d8c59301fb1eb7e
+      Path: Events\Default Work Unit\Player\PlayerGasp
+      maxAttenuation: 0
+      maxDuration: 4.6300907
+      minDuration: 4.6300907
     - name: PointCharge
       guid: 5aa18e7951cf0a4495e768f2ede63198
       id: 785487965
@@ -930,6 +1382,69 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 1.3134214
       minDuration: 1.31039
+    - name: Poison
+      guid: 8ff3091a86421c4c86a28ebbe6eecd59
+      id: 1413156513
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: AOE
+        ObjectType: 4
+        guid: 2f1e3748d87324429be1415099cf0815
+      - ElementName: Poison
+        ObjectType: 3
+        guid: 8ff3091a86421c4c86a28ebbe6eecd59
+      Path: Events\Default Work Unit\AOE\Poison
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: PoisonHit
+      guid: 193bb95a8abacb4196c40e2e74235df1
+      id: 1901357644
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: HitSounds
+        ObjectType: 4
+        guid: bca9c8629e386841b48069d9d441298e
+      - ElementName: PoisonHit
+        ObjectType: 3
+        guid: 193bb95a8abacb4196c40e2e74235df1
+      Path: Events\Default Work Unit\Enemy\HitSounds\PoisonHit
+      maxAttenuation: 0
+      maxDuration: 2.1697958
+      minDuration: 1.2177567
+    - name: PoisonStop
+      guid: bffb2742e0e8244ea2a5a294bb5e8c63
+      id: 1118768633
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: AOE
+        ObjectType: 4
+        guid: 2f1e3748d87324429be1415099cf0815
+      - ElementName: PoisonStop
+        ObjectType: 3
+        guid: bffb2742e0e8244ea2a5a294bb5e8c63
+      Path: Events\Default Work Unit\AOE\PoisonStop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: ProjSplit
       guid: 4395192da69bf146a9702f6bdaadd307
       id: 1336447716
@@ -1044,6 +1559,29 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 2.5
       minDuration: 2.5
+    - name: Sacrifice
+      guid: 760e9e48f4360f43b1cc9865a9ba064a
+      id: 621005312
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: Bully
+        ObjectType: 4
+        guid: 31033731e48cb44d93be1860ea02262d
+      - ElementName: Sacrifice
+        ObjectType: 3
+        guid: 760e9e48f4360f43b1cc9865a9ba064a
+      Path: Events\Default Work Unit\Enemy\Bully\Sacrifice
+      maxAttenuation: 0
+      maxDuration: 1.0921941
+      minDuration: 0.866875
     - name: ShakeStop
       guid: b9eef98e52cbe74eb7c3b4cb218f0bba
       id: 1265012641
@@ -1064,6 +1602,26 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Signing
+      guid: b423d305da8ee44c8ba7953f7c48845b
+      id: 782824770
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Buttons
+        ObjectType: 4
+        guid: 6e84003f5461b64285b5cd7be42d216c
+      - ElementName: Signing
+        ObjectType: 3
+        guid: b423d305da8ee44c8ba7953f7c48845b
+      Path: Events\Default Work Unit\Buttons\Signing
+      maxAttenuation: 0
+      maxDuration: 1.512
+      minDuration: 1.512
     - name: SprayStop
       guid: fd9d0d96c830c84da72c6851ec30b78d
       id: 2811868096
@@ -1104,6 +1662,26 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 1.4529248
       minDuration: 1.4495715
+    - name: SprintCharge
+      guid: 40a01f54d3e9f04fad46b9b74d1a40de
+      id: 1525902545
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 0616c64a94aa3e4485b71103d99fba2c
+      - ElementName: SprintCharge
+        ObjectType: 3
+        guid: 40a01f54d3e9f04fad46b9b74d1a40de
+      Path: Events\Default Work Unit\Enemy\SprintCharge
+      maxAttenuation: 0
+      maxDuration: 1.7325673
+      minDuration: 1.7285687
     - name: Throw
       guid: 90229252940c3648aea5fe88a4146e08
       id: 745179803
@@ -1124,6 +1702,46 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 1.2445805
       minDuration: 1.2445805
+    - name: TitleMusic
+      guid: 73f6c9d12bcd0b4ebfc59d0d6374eee0
+      id: 2191159630
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Music
+        ObjectType: 4
+        guid: bcff0956841eed4296df01fed98b2219
+      - ElementName: TitleMusic
+        ObjectType: 3
+        guid: 73f6c9d12bcd0b4ebfc59d0d6374eee0
+      Path: Events\Default Work Unit\Music\TitleMusic
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: TitleMusicStop
+      guid: 10af9f2bc891664099ffc13c0534edbe
+      id: 661331142
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 48ed7fdb16f388418594cf5ce384c227
+      - ElementName: Music
+        ObjectType: 4
+        guid: bcff0956841eed4296df01fed98b2219
+      - ElementName: TitleMusicStop
+        ObjectType: 3
+        guid: 10af9f2bc891664099ffc13c0534edbe
+      Path: Events\Default Work Unit\Music\TitleMusicStop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: UpgradePurchase
       guid: efcf0df20e85704da2f706447c9c26ee
       id: 2834561310
@@ -1201,7 +1819,7 @@ MonoBehaviour:
     m_lastTime: -8584646396414333128
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 010000000500000006000000070000000a0000000b0000000c0000000e0000000f0000001000000011000000120000001400000015000000190000001a0000003b000000
+  ExpandedWaapiItemIds: 01000000050000000600000007000000090000000a0000000b0000000c0000000e0000000f0000001000000011000000120000001400000015000000190000001a0000003a0000003b000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0

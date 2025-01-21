@@ -35,8 +35,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 2076137635964546776}
   - {fileID: 8640903129868547134}
+  - {fileID: 2076137635964546776}
   - {fileID: 1389098257366031348}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -131,12 +131,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75927c29b4734724bb78af1c217d462e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: f7e1664c
+  triggerList: ae8d9d44
   useOtherObject: 0
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 5d52dd343cb9ea846beda199dc721183, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: e1a7d3f5ed8873d4a8c559740b6f38a1, type: 2}
   decodeBank: 0
   overrideLoadSetting: 0
   loadAsynchronous: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   rb2D: {fileID: 228346828096061805}
   type: bully
   health: 0
-  maxHealth: 400
+  maxHealth: 500
   isActive: 0
   target: {fileID: 0}
   mySpawner: {fileID: 0}
@@ -182,11 +182,55 @@ MonoBehaviour:
   poppyCount: 0
   wasKilled: 0
   isBoss: 1
+  enemySpawn:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e044f0390c854e14e8a7f4d1a7c13ea6, type: 2}
+  enemyDeath:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a39b2215272dd0d4d9e9e76230451323, type: 2}
   spawnTime: 30
   bulb: {fileID: 2393034926782418146}
   fistPrefab: {fileID: 1003814786078272635, guid: 97c51102c91226c4eaaf5c8b9890f0df, type: 3}
   healthbarPrefab: {fileID: 9136698399812099878, guid: b72098d3ce56d584cbcfa9435b631068, type: 3}
   poppyHead: {fileID: 1936280616163390971, guid: cfa86b2a3a63ae7429f4fda57ffb2284, type: 3}
+  bullySpawn:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a39b2215272dd0d4d9e9e76230451323, type: 2}
+  bullySpawnStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 3df3f09b945b28345acf303cda106c45, type: 2}
+  sacrificeSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6d2fb3d6cad0eb34e8878153bcd67d65, type: 2}
+  insultSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7b5e94c3a8bceca48bb0f57c6a52b07c, type: 2}
+  punchCharge:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c18d88eca78ea1c46aa1d4de2604a36e, type: 2}
+  punchSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: f2f212fa6305d1a44a5181cc908c1137, type: 2}
+  sprintCharge:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7453ba753bc4bb64287699842dcc42a5, type: 2}
+  sprintSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: fbbdb4ae42cca9f498a7d1086b5cbaca, type: 2}
+  growthSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e044f0390c854e14e8a7f4d1a7c13ea6, type: 2}
 --- !u!95 &5826295114471604450
 Animator:
   serializedVersion: 5
@@ -222,6 +266,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notif: {fileID: 0}
   coinPool: {fileID: 0}
+  coinSpawn:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!1 &2186241190138067228
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,8 +333,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2393034926782418146}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.099999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

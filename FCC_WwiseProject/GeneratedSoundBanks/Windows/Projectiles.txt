@@ -7,6 +7,6 @@ Event	ID	Name			Wwise Object Path	Notes
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	360174088	flame	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\DF\{DF2BCE24-161B-3C07-0CC5-D2DAEEC7586E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\flame		558792
-	483265675	poisonCloud	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\B9\{B99D057A-75D0-C14D-37CA-6BC4D1F280AF}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\poisonCloud		350788
+	483265675	poisonCloud	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\C5\{C519ABEE-62D5-6FBB-DEAC-73B68A0D0678}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\poisonCloud		350836
 	593297646	crownSplit	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\69\{697E7B27-1047-767E-86A3-6BC20EE697C4}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Crown\crownSplit		33682
 

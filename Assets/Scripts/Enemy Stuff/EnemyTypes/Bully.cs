@@ -46,6 +46,18 @@ public class Bully : EnemyBehavior
     //poppy stuff
     [SerializeField] GameObject poppyHead;
 
+    //audio cues
+    [SerializeField] AK.Wwise.Event bullySpawn;
+    [SerializeField] AK.Wwise.Event bullySpawnStop;
+    [SerializeField] AK.Wwise.Event sacrificeSound;
+
+    [SerializeField] AK.Wwise.Event insultSound;
+    [SerializeField] AK.Wwise.Event punchCharge;
+    [SerializeField] AK.Wwise.Event punchSound;
+    [SerializeField] AK.Wwise.Event sprintCharge;
+    [SerializeField] AK.Wwise.Event sprintSound;
+    [SerializeField] AK.Wwise.Event growthSound;
+
     // Start is called before the first frame update
     /*void Start()
     {
@@ -122,8 +134,7 @@ public class Bully : EnemyBehavior
     //right when the boss spawns do all this shit
     public override void Activate()
     {
-        //Play boss spawn sound here
-        AkSoundEngine.PostEvent("EnemySpawn", gameObject);
+
         //initialize variables
         StartCoroutine(HealthEst());
         isActive = true;
@@ -184,6 +195,7 @@ public class Bully : EnemyBehavior
             health = maxHealth;
         //size should grow here
         bulb.GetComponent<SizeLerp>().Execute(false);
+        sacrificeSound.Post(gameObject);
     }
 
     public override IEnumerator StateUpdate()
@@ -299,6 +311,9 @@ public class Bully : EnemyBehavior
     //Approach Coroutine
     IEnumerator Approach()
     {
+        //sound effect
+        punchCharge.Post(gameObject);
+
         Debug.Log("Approach Called");
         //max approach time is 3 seconds - if not there in time, just punch anyways
         passedTime = 0f;
@@ -330,6 +345,9 @@ public class Bully : EnemyBehavior
     //Punch Coroutine
     IEnumerator Punch()
     {
+        //sound effect
+        punchSound.Post(gameObject);
+
         Debug.Log("Punch Called");
         //get punch direction
         Vector2 direction = shadow.position - target.position;
@@ -367,14 +385,17 @@ public class Bully : EnemyBehavior
     //Charge Coroutine
     IEnumerator Charge()
     {
+        //sound effect
+        sprintCharge.Post(gameObject);
+
         Debug.Log("Charge Called");
         //reset time vars
         passedTime = 0f;
-        stateTime = 4f;
+        stateTime = 3.5f;
         //slow while charging up charge
         Vector2 direction = shadow.position - target.position;
         SpeedDown(0.25f);
-        while (passedTime < 1f)
+        while (passedTime < 0.5f)
         {
             GetComponentInChildren<Rigidbody2D>().velocity = -direction.normalized * moveSpeed;
             if (isFrozen || isElectrified) { stateCancel = true; break; }
@@ -384,6 +405,8 @@ public class Bully : EnemyBehavior
         //speed back to normal
         SpeedUp(0.25f);
         //speed up to charge speed & get final direction
+        //sound effect
+        sprintSound.Post(gameObject);
         SpeedUp(2 / 3f);
         while (passedTime < 3f && !stateCancel)
         {
@@ -412,6 +435,7 @@ public class Bully : EnemyBehavior
     //Hook Coroutine
     IEnumerator Hook()
     {
+
         Debug.Log("Hook Called");
         //TODO - Spawn a fist obj here on a random side of the player
         //reset time vals
@@ -443,6 +467,8 @@ public class Bully : EnemyBehavior
         {
             yield return new WaitForFixedUpdate();
         }
+        //sound effect
+        //growthSound.Post(gameObject);
         GetComponent<Animator>().SetTrigger("finish");
         Destroy(fist);
         passedTime = 0f;
@@ -470,6 +496,9 @@ public class Bully : EnemyBehavior
         }    
         if (!stateCancel)
         {
+            //sound effect
+            insultSound.Post(gameObject);
+
             //proj spawn here
             Vector2 direction = player.transform.position - transform.position;
             //radian conversion (idk what this does tbh)
@@ -517,6 +546,10 @@ public class Bully : EnemyBehavior
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<Animator>().enabled = false;
 
+        //Play boss spawn sound here
+        growthSound.Post(gameObject);
+        bullySpawn.Post(gameObject);
+
         float timer = 0f;
         Debug.Log("Boss Spawn Initiated");
         healthBar = Instantiate(healthbarPrefab);
@@ -536,6 +569,7 @@ public class Bully : EnemyBehavior
 
         //do the bulb anim
         bulb.GetComponent<Animator>().SetTrigger("BullySpawn");
+        growthSound.Post(gameObject);
 
         //enable the sprite renderer and animator
         GetComponent<SpriteRenderer>().enabled = true;
@@ -549,6 +583,8 @@ public class Bully : EnemyBehavior
 
         Debug.Log("Boss Spawning Complete");
 
+        //play birth sound and stop spawn sound
+        bullySpawnStop.Post(gameObject);
 
         //Now start all the regular routines
         stats = (BullyStats)myStats;
@@ -561,7 +597,7 @@ public class Bully : EnemyBehavior
     //Death Behavior
     protected override void Deactivate()
     {
-        AkSoundEngine.PostEvent("EnemyKilled", gameObject);
+        enemyDeath.Post(gameObject);
         scoreNotif.GetComponent<ScoreNotification>().newFeed("Great Enemy Defeated | ", mySpawner.killScore);
         GameControl.PlayerData.enemyScore += mySpawner.killScore;
         GameControl.PlayerData.shiftEnemies++;

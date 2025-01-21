@@ -7,7 +7,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3607269504	FlowerStop			\Default Work Unit\Dialogue\FlowerStop	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	159120534	clarkDialogue	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\E7\{E7AE37D9-D978-4C05-426A-B5E02896C402}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\clarkDialogue		8307404
-	173318764	jillDialogue	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\71\{71909E79-1A49-9052-FAC0-5587B9747D3F}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\jillDialogue		8018312
+	159120534	clarkDialogue	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\D5\{D582BBE8-070D-6ED1-E5B2-2F42A8014BEC}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\clarkDialogue		8307404
+	173318764	jillDialogue	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\BB\{BB811143-DE26-6328-6175-86BBD0A8412C}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\jillDialogue		8018312
 	339031925	flowerGuyTalk	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\67\{67272CE9-C4A4-DCA6-EF48-FD6112435D13}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dialogue\flowerGuyTalk		6713968
 

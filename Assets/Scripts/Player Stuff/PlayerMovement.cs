@@ -123,12 +123,12 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("what the sigma");
-        if (other.gameObject.tag == "shadow" && other.transform.root.tag == "enemy")
+        if (other.gameObject.tag == "shadow" && (other.transform.root.tag == "enemy" || other.transform.root.tag == "boss"))
         {
             //Debug.Log(other.gameObject.transform.position);
             //Debug.Log(transform.position);
             GameControl.PlayerData.savedEnemyDict[other.transform.root.GetComponent<EnemyBehavior>().type].deathCount++;
-            GameObject.FindWithTag("music").GetComponent<MusicHandler>().GameplayMusicStop();
+            MusicHandler.MusicControl.GameplayMusicStop();
             deathSound.Post(transform.root.gameObject);
             GameOver();
         }

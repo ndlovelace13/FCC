@@ -1,12 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.U2D;
-using UnityEngine.UI;
 
 public abstract class EnemyBehavior : MonoBehaviour
 {
@@ -86,6 +82,11 @@ public abstract class EnemyBehavior : MonoBehaviour
 
     //Seed Stuff
     protected GameObject seedPool;
+
+
+    //audio cues
+    [SerializeField] protected AK.Wwise.Event enemySpawn;
+    [SerializeField] protected AK.Wwise.Event enemyDeath;
 
     // Start is called before the first frame update
     protected void Start()
@@ -288,7 +289,7 @@ public abstract class EnemyBehavior : MonoBehaviour
 
     public virtual void DealDamage(int damage, Color color)
     {
-        AkSoundEngine.PostEvent("EnemyHit", gameObject);
+        //AkSoundEngine.PostEvent("EnemyHit", gameObject);
         health -= damage;
         if (health < maxHealth / 2 && GetComponentInChildren<HatBehavior>() != null)
             GetComponentInChildren<HatBehavior>().HatFall();
@@ -313,7 +314,7 @@ public abstract class EnemyBehavior : MonoBehaviour
 
     public virtual void Activate()
     {
-        AkSoundEngine.PostEvent("EnemySpawn", gameObject);
+        enemySpawn.Post(gameObject);
         //initialize variables
         health = mySpawner.currentHealth;
         maxHealth = health;
@@ -352,7 +353,7 @@ public abstract class EnemyBehavior : MonoBehaviour
     protected virtual void Deactivate()
     {
         StartCoroutine(StateReset());
-        AkSoundEngine.PostEvent("EnemyKilled", gameObject);
+        enemyDeath.Post(gameObject);
         scoreNotif.GetComponent<ScoreNotification>().newFeed("Enemy Defeated | ", mySpawner.killScore);
 
         //Spawn coins
@@ -431,7 +432,7 @@ public abstract class EnemyBehavior : MonoBehaviour
             direction = new Vector2(target.position.x - shadow.position.x, target.position.y - shadow.position.y);
             direction.Normalize();
             rb2D.MovePosition(rb2D.position + direction * moveSpeed * Time.deltaTime);
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
     }
 

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ddc2ada48f038a4ba4473b20048105e, type: 3}
+  m_Name: D1C9F673-CD2B-4E0B-BFC5-9D0D6374EEE0
+  m_EditorClassIdentifier: 
+  objectName: TitleMusic
+  id: 2191159630
+  guid: D1C9F673-CD2B-4E0B-BFC5-9D0D6374EEE0
+  IsInUserDefinedSoundBank: 1
+  IsAutoBankLoaded: 0

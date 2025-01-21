@@ -15,7 +15,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	78482138	enemyDeath1	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\7F\{7F844DAE-07DB-D3E6-9F31-F343B837BE76}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\enemyDeath\enemyDeath1		398760
 	274004080	pointPoint	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\EB\{EBF45A8D-32A9-02AF-B928-C1652DCDE5B3}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\pointerPoint\pointPoint		231516
 	379456823	catchFire	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\A4\{A4D0232A-09E8-8C8D-34A6-B67AC272D20E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\FireHit\catchFire		114824
-	509118957	freeze	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\64\{6411F508-7E55-F40A-730A-A2C0D28B33FE}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\freeze		95588
+	509118957	freeze	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\C1\{C10234FB-F033-6490-EF76-92D6C01D06F6}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\freeze		95588
 	584750280	zap	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\F3\{F3E2439E-3720-79E5-A49E-724D868AFD30}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\zap		93660
 	665255929	sprintCharge	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\6D\{6D164C49-8282-F1C1-46C8-2CB4A942D086}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemy\sprintCharge		305368
 	696225861	burnTick	C:\Users\ndlov\Documents\Game Projects\FCC\FCC_WwiseProject\.cache\39\{390D9BDC-DA7E-9DBF-2C82-AACF1B9062A5}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Status\FireHit\burnTick		60608
