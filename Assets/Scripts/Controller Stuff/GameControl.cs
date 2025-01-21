@@ -776,6 +776,7 @@ public class GameControl : MonoBehaviour
 
         Debug.Log("resetting repellents to: " + SaveData.repellentCount);
         remainingRepellent = SaveData.repellentCount;
+        repellentMode = false;
 
         crosshairActive = true;
 

@@ -50,12 +50,12 @@ MonoBehaviour:
   maxSpeed: 2
   minSpeed: 1.25
   speedCap: 5
-  maxHealth: 30
-  healthInterval: 10
+  maxHealth: 25
+  healthInterval: 12
   startingEnemies: 6
   enemyScaleAmt: 3
-  killScore: 10
-  scoreIncrease: 2
+  killScore: 15
+  scoreIncrease: 3
   countScaleTime: 45
   statsScaleTime: 30
   type: basic

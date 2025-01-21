@@ -50,7 +50,7 @@ MonoBehaviour:
   maxSpeed: 3
   minSpeed: 2
   speedCap: 6
-  maxHealth: 60
+  maxHealth: 50
   healthInterval: 15
   startingEnemies: 1
   enemyScaleAmt: 1

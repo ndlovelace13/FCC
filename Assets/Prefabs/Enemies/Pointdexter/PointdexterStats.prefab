@@ -54,8 +54,8 @@ MonoBehaviour:
   healthInterval: 15
   startingEnemies: 1
   enemyScaleAmt: 1
-  killScore: 20
-  scoreIncrease: 3
+  killScore: 25
+  scoreIncrease: 5
   countScaleTime: 30
   statsScaleTime: 45
   type: point
